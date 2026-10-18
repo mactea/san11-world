@@ -58,6 +58,7 @@ struct Config {
     int getterCheck = 0;         // debug: log gate / port getter calls with an out-of-range index and their call sites
     int unitFirst = 0;           // debug (M9 tests): new units take the first free id from this one on
     int astarStats = 0;          // debug: time every A* call (0x567520) and log the slow ones
+    int astarEnter = 0;          // debug: log every A* call as it starts (the last one before a freeze is stuck)
     int astarMode = 3;           // A*: 0 original, 1 binary heap (same results), 2 + 2x heuristic, 3 + search window
     int astarMargin = 100;       // A* mode 3: search window margin in hexes
     int astarBenchSlow = 0;      // debug: replay slow A* calls with every variant
@@ -94,6 +95,7 @@ static void loadConfig() {
     g_cfg.watchRead = GetPrivateProfileIntW(g_section, L"watch_read", 0, ini);
     g_cfg.heapCheck = GetPrivateProfileIntW(g_section, L"heap_check", 0, ini);
     g_cfg.astarStats = GetPrivateProfileIntW(g_section, L"astar_stats", 0, ini);
+    g_cfg.astarEnter = GetPrivateProfileIntW(g_section, L"astar_enter", 0, ini);
     g_cfg.astarMode = GetPrivateProfileIntW(g_section, L"astar", 3, ini);
     g_cfg.astarMargin = GetPrivateProfileIntW(g_section, L"astar_margin", 100, ini);
     g_cfg.astarBenchSlow = GetPrivateProfileIntW(g_section, L"astar_bench_slow", 0, ini);
@@ -1684,7 +1686,7 @@ static void installHooks() {
     if (g_cfg.unitFirst > 0) logf("unit_first=%d: %s", g_cfg.unitFirst, installUnitFirst() ? "installed" : "NOT installed (unexpected code)");
     logf("hooks installed (hexCtor, shex=%s, hex28 dirty-page clear=%s)", g_shexOrig ? "yes" : "no", clear ? "yes" : "no");
     PathfindConfig pf = {};
-    pf.mode = g_cfg.astarMode; pf.margin = g_cfg.astarMargin; pf.benchSlow = g_cfg.astarBenchSlow; pf.benchGoal = g_cfg.astarBenchGoal; pf.stats = g_cfg.astarStats; pf.verify = g_cfg.astarVerify; pf.benchable = g_cfg.automation;
+    pf.mode = g_cfg.astarMode; pf.margin = g_cfg.astarMargin; pf.benchSlow = g_cfg.astarBenchSlow; pf.benchGoal = g_cfg.astarBenchGoal; pf.stats = g_cfg.astarStats; pf.enterLog = g_cfg.astarEnter; pf.verify = g_cfg.astarVerify; pf.benchable = g_cfg.automation;
     pf.chinaLo = g_cfg.Y0; pf.chinaHi = g_cfg.X0; pf.hex28 = g_hex28Alloc; pf.hex28Size = g_hex28AllocSize;
     pf.clear28 = clear ? clearHex28Dirty : clearHex28All;
     pathfindInstall(pf, logf);
@@ -1782,7 +1784,7 @@ static void init() {
         hookIat(0x74e2a8, (void*)createFileAHook);
     }
     if (g_cfg.automation) automationInit(g_dir, logf);
-    if (g_cfg.autoSkip) autoSkipInit(logf);
+    if (g_cfg.autoSkip) autoSkipInit(g_dir, logf);
     if (!g_cfg.enable) return;
     if (!configValid()) {
         logf("ERROR: invalid [map] settings (width/height must be multiples of 200, <= 8000; china_x/china_y inside, china_y even). Patches disabled.");
