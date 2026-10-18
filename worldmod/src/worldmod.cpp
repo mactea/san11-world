@@ -1277,6 +1277,8 @@ void automationCamera(float* x, float* z) {     // the scene camera's look-at (o
 }
 void automationGoto(float x, float z) { g_gotoX = x; g_gotoZ = z; InterlockedExchange(&g_gotoPending, 1); }
 
+static void installViewTweaks();
+
 static void installTerrainHooks() {
     static const uint8_t clampHead[] = { 0x83, 0xEC, 0x1C, 0xA1, 0xA0, 0x9F, 0x1B, 0x09 };
     g_clampOrig = (CameraClamp)makeTrampoline(0x5714a0, sizeof clampHead, clampHead);
@@ -1292,6 +1294,27 @@ static void installTerrainHooks() {
     if (mm) writeJmp(0x40fba0, (void*)minimapWorldToMap);
     logf("terrain hooks: k3st, gcol replaced; objs=%s; camera=%s; radar follows the camera=%s",
          g_objsOrig ? "yes" : "no", g_clampOrig ? "yes" : "no", mm ? "yes" : "no");
+    installViewTweaks();
+}
+
+// 视图增强：缩放上限放大、远景云海禁用（雾范围在 worldmod_patches.txt 里改立即数）。
+// 让相机能缩到整个世界而不被远处的云/雾遮挡。
+static void installViewTweaks() {
+    // 缩放距离表 0x84b36c（3 档 400/500/600）→ 更远；0x8b95ec 只是缓存，进图时 0x5a0b90 会从表写回
+    float* zt = (float*)0x84b36c;
+    DWORD oldz; VirtualProtect(zt, 12, PAGE_READWRITE, &oldz);
+    zt[0] = 10000.0f; zt[1] = 20000.0f; zt[2] = 40000.0f;
+    VirtualProtect(zt, 12, oldz, &oldz);
+    *(float*)0x8b95ec = 40000.0f;                  // 立即生效（当前档）
+    static const uint8_t distHead[] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF0, 0x81, 0xEC };
+    uint8_t* p = (uint8_t*)0x4040d0;               // 远景 DIST 云海：thiscall，带 1 个栈参数（ret 4）
+    if (!memcmp(p, distHead, sizeof distHead)) {
+        DWORD old; VirtualProtect(p, 8, PAGE_EXECUTE_READWRITE, &old);
+        p[0] = 0xC2; p[1] = 0x04; p[2] = 0x00;      // ret 4
+        for (int i = 3; i < 8; i++) p[i] = 0x90;    // nop x5
+        VirtualProtect(p, 8, old, &old);
+    }
+    logf("view tweaks: zoom table %g/%g/%g, distant cloud disabled", zt[0], zt[1], zt[2]);
 }
 
 // ---------------------------------------------------------------- 中地圖 (midmap.cpp, research/midmap_re.md)

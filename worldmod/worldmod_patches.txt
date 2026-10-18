@@ -1521,3 +1521,5 @@
 00597f5a 3 4 8b8c24649c0000 W*H+36 ; security cookie slot (after push)
 0059829a 3 4 8b8c24649c0000 W*H+36 ; security cookie slot (epilogue)
 00598144 1 4 b910270000 W*H/4 ; rep stosd count clearing the W*H byte map
+00441fa2 6 4 c786d001000000004843 f:40000 ; 雾起始距离 200→40000（世界单位，约 2000 格），配合 installViewTweaks
+00441fac 6 4 c786d401000000007a44 f:80000 ; 雾结束距离 1000→80000（约 4000 格）
