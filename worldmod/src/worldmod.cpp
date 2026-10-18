@@ -1278,6 +1278,7 @@ void automationCamera(float* x, float* z) {     // the scene camera's look-at (o
 void automationGoto(float x, float z) { g_gotoX = x; g_gotoZ = z; InterlockedExchange(&g_gotoPending, 1); }
 
 static void installViewTweaks();
+static void installEnvFxGuard();
 
 static void installTerrainHooks() {
     static const uint8_t clampHead[] = { 0x83, 0xEC, 0x1C, 0xA1, 0xA0, 0x9F, 0x1B, 0x09 };
@@ -1295,26 +1296,59 @@ static void installTerrainHooks() {
     logf("terrain hooks: k3st, gcol replaced; objs=%s; camera=%s; radar follows the camera=%s",
          g_objsOrig ? "yes" : "no", g_clampOrig ? "yes" : "no", mm ? "yes" : "no");
     installViewTweaks();
+    installEnvFxGuard();
 }
 
-// 视图增强：缩放上限放大、远景云海禁用（雾范围在 worldmod_patches.txt 里改立即数）。
-// 让相机能缩到整个世界而不被远处的云/雾遮挡。
+// 0x4d2d90「在可见格包围盒内随机选格放环境特效」里 div ecx 会因行跨度截断成 0 而除零崩溃。
+// 原版地图可见范围小不会触发；worldmod 世界 + 远缩放会让包围盒跨度超 16 位。加保护：跨度=0 就跳过。
+static void installEnvFxGuard() {
+    static const uint8_t head[] = { 0x0F, 0xBF, 0xCE, 0x33, 0xD2 };   // movsx ecx, si; xor edx, edx
+    // 行跨度 div @0x4d2de2（前面无 FPU 压栈）
+    uint8_t* at1 = (uint8_t*)0x4d2ddd;
+    if (!memcmp(at1, head, sizeof head)) {
+        uint8_t* c = (uint8_t*)VirtualAlloc(nullptr, 64, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+        uint8_t* p = c;
+        *p++ = 0x66; *p++ = 0x85; *p++ = 0xF6;                           // test si, si
+        *p++ = 0x0F; *p++ = 0x84; *(int32_t*)p = (int32_t)(0x4d2ea3 - ((uintptr_t)p + 4)); p += 4;  // jz 0x4d2ea3
+        *p++ = 0x0F; *p++ = 0xBF; *p++ = 0xCE;                           // movsx ecx, si
+        *p++ = 0x33; *p++ = 0xD2;                                        // xor edx, edx
+        *p++ = 0xE9; *(int32_t*)p = (int32_t)(0x4d2de2 - ((uintptr_t)p + 4)); p += 4;  // jmp 0x4d2de2
+        writeJmp(0x4d2ddd, c);
+    } else logf("env-fx guard @4d2ddd: unexpected bytes, not hooked");
+    // 列跨度 div @0x4d2e0d（前面 0x4d2e04 fild 压了 FPU 栈，跳转前要弹掉）
+    uint8_t* at2 = (uint8_t*)0x4d2e08;
+    if (!memcmp(at2, head, sizeof head)) {
+        uint8_t* c = (uint8_t*)VirtualAlloc(nullptr, 64, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+        uint8_t* p = c;
+        *p++ = 0x66; *p++ = 0x85; *p++ = 0xF6;                           // test si, si
+        uint8_t* jz = p; *p++ = 0x0F; *p++ = 0x84; p += 4;               // jz cleanup（占位，下面回填）
+        *p++ = 0x0F; *p++ = 0xBF; *p++ = 0xCE;                           // movsx ecx, si
+        *p++ = 0x33; *p++ = 0xD2;                                        // xor edx, edx
+        *p++ = 0xE9; *(int32_t*)p = (int32_t)(0x4d2e0d - ((uintptr_t)p + 4)); p += 4;  // jmp 0x4d2e0d
+        *(int32_t*)(jz + 2) = (int32_t)((uintptr_t)p - (uintptr_t)(jz + 6));           // jz -> cleanup
+        *p++ = 0xDD; *p++ = 0xD8;                                        // fstp st(0)（清理 fild）
+        *p++ = 0xE9; *(int32_t*)p = (int32_t)(0x4d2ea3 - ((uintptr_t)p + 4)); p += 4;  // jmp 0x4d2ea3
+        writeJmp(0x4d2e08, c);
+    } else logf("env-fx guard @4d2e08: unexpected bytes, not hooked");
+    logf("env-fx guard installed (div-by-zero protection x2)");
+}
+
+// 视图增强：缩放上限放大。
+// 让相机能缩到整个世界。
 static void installViewTweaks() {
-    // 缩放距离表 0x84b36c（3 档 400/500/600）→ 更远；0x8b95ec 只是缓存，进图时 0x5a0b90 会从表写回
     float* zt = (float*)0x84b36c;
     DWORD oldz; VirtualProtect(zt, 12, PAGE_READWRITE, &oldz);
-    zt[0] = 10000.0f; zt[1] = 20000.0f; zt[2] = 40000.0f;
+    zt[0] = 20000.0f; zt[1] = 40000.0f; zt[2] = 80000.0f;
     VirtualProtect(zt, 12, oldz, &oldz);
-    *(float*)0x8b95ec = 40000.0f;                  // 立即生效（当前档）
-    static const uint8_t distHead[] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF0, 0x81, 0xEC };
-    uint8_t* p = (uint8_t*)0x4040d0;               // 远景 DIST 云海：thiscall，带 1 个栈参数（ret 4）
-    if (!memcmp(p, distHead, sizeof distHead)) {
-        DWORD old; VirtualProtect(p, 8, PAGE_EXECUTE_READWRITE, &old);
-        p[0] = 0xC2; p[1] = 0x04; p[2] = 0x00;      // ret 4
-        for (int i = 3; i < 8; i++) p[i] = 0x90;    // nop x5
-        VirtualProtect(p, 8, old, &old);
-    }
-    logf("view tweaks: zoom table %g/%g/%g, distant cloud disabled", zt[0], zt[1], zt[2]);
+    *(float*)0x8b95ec = 80000.0f;                  // 立即生效（当前档）
+    logf("view tweaks: zoom table %g/%g/%g", zt[0], zt[1], zt[2]);
+    // 第二表 0x84b378（整数，0x5a0b90 读入 0x8a5a40，疑似视野格数上限）150/300/500 -> 1500/3000/6000
+    DWORD oldg; VirtualProtect((void*)0x84b378, 12, PAGE_READWRITE, &oldg);
+    *(int*)0x84b378 = 2000;
+    *(int*)(0x84b378 + 4) = 4000;
+    *(int*)(0x84b378 + 8) = 8000;
+    VirtualProtect((void*)0x84b378, 12, oldg, &oldg);
+    logf("view tweaks: 第二表 %d/%d/%d", *(int*)0x84b378, *(int*)(0x84b378 + 4), *(int*)(0x84b378 + 8));
 }
 
 // ---------------------------------------------------------------- 中地圖 (midmap.cpp, research/midmap_re.md)
