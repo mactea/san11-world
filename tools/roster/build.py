@@ -1,12 +1,13 @@
 """组装最终名单：build/merged.jsonl（+ 光荣 850 人）→ data/persons/roster.json 等
 
-    python build.py [--total 15000]
+    python build.py                       # 只收史料人物（默认）
+    python build.py --total 15000 --fiction   # 不足 15000 时用虚构补位
 
 1. 年代筛选：在世时间要与 170..370 年有交集
 2. 姓名：繁体、Big5、姓名各 1~2 字（超长的名截成 2 字，全名留在 name_full）
 3. 出身城：中国人按籍贯（gazetteer），海外人按经纬度最近城，都没有就按所属政权的默认城
 4. 属性：五维（来源给的，没有就按身份估）、适性、特技、性格类、相性等（attrs.py）
-5. 编号：光荣 0..849 不变；扩展武将 850..total-1；人数不足用虚构补位（fiction.py，可信度 D）
+5. 编号：光荣 0..849 不变；扩展武将从 850 起连续编号；加 --fiction 时人数不足用虚构补位（fiction.py，可信度 D）
 6. 关系：父母、配偶、义兄弟、血缘、亲近 5、厌恶 5 解析成编号（可以指向光荣武将）"""
 import argparse
 import collections
@@ -210,9 +211,10 @@ def fallback_bio(p, city):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--total", type=int, default=15000)
+    ap.add_argument("--total", type=int, default=None, help="武将表总数（含光荣 850）；不写就收全部史料人物")
+    ap.add_argument("--fiction", action="store_true", help="史料人物不足 --total 时用虚构补位（可信度 D）")
     args = ap.parse_args()
-    NEW = args.total - 850
+    NEW = args.total - 850 if args.total else 10 ** 9
     koei = load_json(SRC / "koei.json")
     cities = load_json(SRC / "cities.json")
     city_by = {c["full"]: c for c in cities}
@@ -253,7 +255,7 @@ def main():
     # ---- 虚构补位：按城平均，人数最少的城先补
     per_city = collections.Counter(p["city"] for p in real)
     fic, used = [], {p["name"] for p in real} | {k["sei"] + k["mei"] for k in koei}
-    need = NEW - len(real)
+    need = NEW - len(real) if args.fiction and args.total else 0
     overseas = [c for c in cities if c["id"] >= 42 and c["id"] < 500]
     serial = collections.Counter()
     while len(fic) < need:
