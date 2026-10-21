@@ -1,0 +1,244 @@
+{"addr": "0x5bf45b", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id [x+8] (fallback [x+4]) range-checked 0..1099 then passed to getter 0x490b00"}
+{"addr": "0x5bf4a6", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id [x+8] (fallback [x+4]) range-checked 0..1099 then passed to getter 0x490b00"}
+{"addr": "0x5bf6d0", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer ids [x+8] (fallback [x+4]) clamped 0..1099, same idiom as 0x5bf45b, passed to 0x491310-based formula"}
+{"addr": "0x5bf6ea", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer ids [x+8] (fallback [x+4]) clamped 0..1099, same idiom as 0x5bf45b, passed to 0x491310-based formula"}
+{"addr": "0x5bfae2", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "merit 150 given via 0x4a6d50(person, amount)"}
+{"addr": "0x5bfeae", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "merit 150 given via 0x4a6d50(person, amount)"}
+{"addr": "0x5c0752", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop counter [esp+0x10] over 0..1099 fed to getter 0x490b00"}
+{"addr": "0x5c1a19", "value": "0x2bc", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5c1c2c", "value": "0x2bc", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5c2e1b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5c2fa2", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "0x5c2f90 returns a gold cost: 1000 (500 if the force has tech 0x2b)"}
+{"addr": "0x5c2fda", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "0x5c2f90 returns a gold cost: 1000 - 500*hasTech(0x2b)"}
+{"addr": "0x5c36d9", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5c36e8", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "formula: 1000 + stat-sum*(x+20)/20 for an amount"}
+{"addr": "0x5c4ec8", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id returned by 0x4897b0 (slot of +0x140 id list) range-checked 0..1099"}
+{"addr": "0x5c5030", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id from 0x489d40 checked 0..1099 then passed to 0x489f80 (which calls 0x490b00)"}
+{"addr": "0x5c5138", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5c7de7", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "rep stosd count: clears stack array of 1100 officer pointers filled by the following 0x490b00 loop (frame 0x226c/0x2274 and 2nd array at esp+0x1148/0x1150 also scale with P)"}
+{"addr": "0x5c7e70", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id field person+0x60 checked 0..1099"}
+{"addr": "0x5c7eb0", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5c7ee8", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "rep stosd count: clears 2nd stack array of 1100 dwords (per collected officer) at esp+0x1148/0x1150; frame size depends on P too"}
+{"addr": "0x5c8356", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id field person+0x60 checked 0..1099"}
+{"addr": "0x5c8bd7", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "rep stosd count: clears stack array of 1100 officer pointers filled by the following 0x490b00 loop (frame 0x226c/0x2274 and 2nd array at esp+0x1148/0x1150 also scale with P)"}
+{"addr": "0x5c8c60", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id field person+0x64 checked 0..1099"}
+{"addr": "0x5c8ca0", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5c8cd7", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "rep stosd count: clears 2nd stack array of 1100 dwords (per collected officer) at esp+0x1148/0x1150; frame size depends on P too"}
+{"addr": "0x5c8d60", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id field person+0x5c checked 0..1099"}
+{"addr": "0x5c8ef3", "value": "0x44c", "verdict": "PERSON", "role": "OTHER", "patch": "P", "encoding": "imm32", "note": "1100 - officerId(0x491310) used as a priority (prefers lower id); harmless either way but P keeps it positive"}
+{"addr": "0x5c8f05", "value": "0x44c", "verdict": "PERSON", "role": "OTHER", "patch": "P", "encoding": "imm32", "note": "1100 - officerId(0x491310) used as a priority (prefers lower id); harmless either way but P keeps it positive"}
+{"addr": "0x5c97ed", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "rep stosd count: stack flag array of 1100 dwords indexed by position in an officer list (count [list+0xbc]); frame 0x1164 also scales"}
+{"addr": "0x5cad70", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5cb3dc", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5cb765", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5cb76e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5cc46f", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(dx^2+dy^2)/400 distance formula"}
+{"addr": "0x5cc4ad", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(dx^2+dy^2)/400 distance formula"}
+{"addr": "0x5cc79e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "merit 1000 given to a person via 0x4a6d50(person, amount)"}
+{"addr": "0x5ccbbd", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "arg4 of 0x5b85f0 = gold cost 1000 compared with the building's gold"}
+{"addr": "0x5cd922", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "command amount [esi+0x14] (gold) capped at 1000 in a success-chance formula"}
+{"addr": "0x5cd93e", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5cda5d", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "command amount (gold) capped at 1000 in a success-chance formula"}
+{"addr": "0x5cda65", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "command amount (gold) capped at 1000 in a success-chance formula"}
+{"addr": "0x5cf6b6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5cf8c6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5cf8d0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5d0698", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id [edi+8] checked 0..1099 (else fallback validated by 0x412390)"}
+{"addr": "0x5d11db", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "merit 150 given via 0x4a6d50(person, amount)"}
+{"addr": "0x5d149b", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "merit 150 given via 0x4a6d50(person, amount)"}
+{"addr": "0x5d16ea", "value": "0x95", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "149 - compatibility byte (0x489f80) in a score formula"}
+{"addr": "0x5d1aa6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "building max troops (0x47b330) - 1000 compared with current troops +0x40"}
+{"addr": "0x5d23ec", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "number 1000 stored into message parameter slot 0 via 0x49c980 (text formatting)"}
+{"addr": "0x5d245a", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "number 1000 stored into message parameter slot 0 via 0x49c980 (text formatting)"}
+{"addr": "0x5d2b0d", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5d509b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "per-side value 1000 in a person-vs-person event struct passed to 0x520680 (persons at +0/+0xc)"}
+{"addr": "0x5d53b9", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "per-side value 1000 in a person-vs-person event struct passed to 0x520680 (persons at +0/+0xc)"}
+{"addr": "0x5d615d", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5d6501", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5d795c", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "infinite path-length sentinel for a route over region ids 0..35 (getter 0x490c70)"}
+{"addr": "0x5d7d05", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5d9f6b", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5dc145", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "new-unit parameter [ebp+0x14] (gold to carry) = 1000 when base gold >= 2000"}
+{"addr": "0x5dc349", "value": "0x2bc", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "base gold (0x486c80) < 700"}
+{"addr": "0x5dc42c", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: 0x5dc420 adds a unit id into the first free of 16 slots of an AI group record (planner+0x2164+k*0x44); slot used i)"}
+{"addr": "0x5dc467", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: 0x5dc450 counts valid unit ids (0..999) in the 16 slots of an AI group record)"}
+{"addr": "0x5dc476", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: 0x5dc450 counts valid unit ids (0..999) in the 16 slots of an AI group record)"}
+{"addr": "0x5dc486", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: 0x5dc450 counts valid unit ids (0..999) in the 16 slots of an AI group record)"}
+{"addr": "0x5dc496", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: 0x5dc450 counts valid unit ids (0..999) in the 16 slots of an AI group record)"}
+{"addr": "0x5dca5b", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5e0665", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "troop amount returned by 0x5f80d0 compared with 1000"}
+{"addr": "0x5e07b9", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(6 - person[+0xfc]) * 1000 troops"}
+{"addr": "0x5e0e43", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: rep stosd dword count: clears the per-unit dword array embedded in the global AI planner object 0x99c78a8 at +0x11)"}
+{"addr": "0x5e0f96", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: inlined 0x5dc420: free-slot test (unit id 0..999) in an AI group record while inserting unit id [esp+0x14] from th)"}
+{"addr": "0x5e0ff6", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: inlined 0x5dc420: free-slot test (unit id 0..999) in a new AI group record, inserting unit id [esp+0x14])"}
+{"addr": "0x5e183a", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "troop amount rounded down to thousands ((x/1000)*1000)"}
+{"addr": "0x5e19a0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: rep stosd dword count: planner reset 0x5e1900 clears the per-unit dword array at AI planner (0x99c78a8)+0x11c4, 10)"}
+{"addr": "0x5e2085", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5e3121", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5e37d6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "troops + 1000, capped at 20000"}
+{"addr": "0x5e417f", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "vt+0x5c(0x54) returns an officer id (holder of skill 0x54), checked 0..1099"}
+{"addr": "0x5e56e6", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5e57f0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: loop bound: [esp+0x18]=0..999 passed to unit getter 0x490e70 at 0x5e56ff)"}
+{"addr": "0x5e61ba", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: loop bound: ebx=0..999 passed to unit getter 0x490e70 at 0x5e6166)"}
+{"addr": "0x5e6b6f", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5e767e", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5e7a1f", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: loop bound: edi=0..999 passed to unit getter 0x490e70 at 0x5e77a6)"}
+{"addr": "0x5e7ea6", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id [[plan+8]+4] checked 0..1099 then passed to getter 0x490b00"}
+{"addr": "0x5e8014", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: loop bound: ebp=0..999 passed to unit getter 0x490e70 at 0x5e7f56 (also indexes per-unit 0x73f9fc0[ebp*4]))"}
+{"addr": "0x5e81e9", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "object vtable+0x50 troop count < 1000"}
+{"addr": "0x5e933d", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Score weight added to a per-city stack array inside a loop over 42 cities (esi<0x2a); gameplay score."}
+{"addr": "0x5e947f", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "score increment 1100 in a switch of 1100..2000 weights"}
+{"addr": "0x5e94c5", "value": "0x6a4", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "score increment 1700 in a switch of 1100..2000 weights"}
+{"addr": "0x5e9bbc", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5ea223", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "eax = max city gold ([city+0x44]+[edi+0x14]) from loop over 42 bases; gold threshold."}
+{"addr": "0x5ea8fd", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5eb99c", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5ebe1c", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5ec440", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Loop ebx=0..999 calling unit getter 0x490e70(ebx) at 0x5ec3d9.)"}
+{"addr": "0x5ed061", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(troops+999)/1000*1000 round-up of [obj vt+0x50] troops; rounding."}
+{"addr": "0x5ed07a", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "*1000 of the same round-up; troops rounded to thousands (min 5000)."}
+{"addr": "0x5ed377", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Round-up (x+999)/1000*1000 of computed troop share; rounding."}
+{"addr": "0x5ed392", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "*1000 of the same round-up; rounding."}
+{"addr": "0x5eddca", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "byte stat (0x4890a0) + 400 compared with 450; formula"}
+{"addr": "0x5ee04c", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "byte stat (0x4890a0) + 400 compared with 450; formula"}
+{"addr": "0x5ee82a", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "eax = troops of base param (vt+0x50); skip if troops < 1000."}
+{"addr": "0x5eead4", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Loop edi=0..999 calling unit getter 0x490e70(edi) at 0x5eea97, collects units of a force.)"}
+{"addr": "0x5eec2c", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id [[plan+8]+4] checked 0..1099 then passed to getter 0x490b00"}
+{"addr": "0x5eecda", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(troop sum/2)/1000*1000 rounding of summed unit troops."}
+{"addr": "0x5eecf1", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "ebp = summed unit troops ([esp+0x34] sum of vt+0x50) + 1000; troop formula."}
+{"addr": "0x5eefc4", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "ecx = troop count clamped against base troops (vt+0x50); >= 1000 check."}
+{"addr": "0x5eeff8", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "ecx = troop count (half of base troops); >= 1000 check."}
+{"addr": "0x5ef046", "value": "0x351", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x5ef0e5", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "AI plan field [+0x328c] (gold/troops) compared with 1000"}
+{"addr": "0x5ef217", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: esi = new unit id returned by [ecx]->vt+0x20 (unit create); 0..999 check then 0x490e70(esi) and per-unit AI array )"}
+{"addr": "0x5ef297", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: edx = unit id slot in AI plan list [plan+0x2168+i*4] (16 slots, read via 0x490e70 at 0x5eeba9); valid-id test 0..9)"}
+{"addr": "0x5ef582", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer id [[plan+8]+4] checked 0..1099 then passed to getter 0x490b00"}
+{"addr": "0x5ef64c", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "esi = random count (0x472150) * 1000 -> troop amount."}
+{"addr": "0x5ef676", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5ef6f9", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5efacb", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "0x486950(type) value /1000*1000 rounding, summed and compared to troop need."}
+{"addr": "0x5efc10", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5f0310", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "ecx = troop count to send (clamped to half base troops); >= 1000 check."}
+{"addr": "0x5f0945", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: edi = new unit id from [esi+4]->vt+0x20 (unit create); 0..999 check then writes 0x73f9fc0[edi*4] (per-unit AI arra)"}
+{"addr": "0x5f0e29", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "count * 400 gold compared with plan gold [+0x328c]"}
+{"addr": "0x5f1582", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "count * 400 gold compared with plan gold [+0x328c]"}
+{"addr": "0x5f2b00", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5f2e84", "value": "0x44c", "verdict": "PERSON", "role": "OTHER", "patch": "P", "encoding": "imm32", "note": "default/upper cap 1100 for the number of officers to pick (min with list count 0x99c7894); acts as 'all officers'"}
+{"addr": "0x5f30e0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "eax = base gold from 0x486c80 (city+0x44 / gate,port+0x28); gold >= 1000."}
+{"addr": "0x5f36d0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "eax = base gold 0x486c80; gold >= 1000."}
+{"addr": "0x5f3b2b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "eax = base gold 0x486c80; gold >= 1000."}
+{"addr": "0x5f40aa", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5f4178", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "+1000 bonus to person score from 0x5de300 when value >= 100; score."}
+{"addr": "0x5f428c", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/25 arithmetic on a squared value"}
+{"addr": "0x5f4414", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5f5c10", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Loop ebx=0..999 calling unit getter 0x490e70(ebx) at 0x5f5b98.)"}
+{"addr": "0x5f6dbe", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(value*byte[+0x56])/1000*1000 rounding of an amount; permille/rounding."}
+{"addr": "0x5f6e87", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "[obj+0x60] (object from 0x490c50) *1000 added to amount; quantity scale."}
+{"addr": "0x5f6e96", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Same [obj+0x60]*1000 added to second amount; quantity scale."}
+{"addr": "0x5f748f", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5f74ee", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5f74fd", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "lea = random-based value + 1000, clamped to 1000..2500; gameplay amount."}
+{"addr": "0x5f7507", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Lower clamp 1000 of the same 1000..2500 value."}
+{"addr": "0x5f750e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Returns 1000 as default/min of the 1000..2500 value."}
+{"addr": "0x5f810f", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "(6-[obj+0xfc])*1000 troop threshold."}
+{"addr": "0x5f8223", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x5f87c8", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Loop edi=0..999 calling unit getter 0x490e70(edi) at 0x5f8766.)"}
+{"addr": "0x5f8858", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5f88e8", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x5f9b0a", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Loop edi=0..999 calling unit getter 0x490e70(edi) at 0x5f9aa7, sums troops.)"}
+{"addr": "0x5fb04d", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "sum of two officer stat bytes >= 150; threshold"}
+{"addr": "0x603c59", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x606f89", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "struct offset +0x190 inside a UI object"}
+{"addr": "0x607fa2", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "struct offset +0x190 inside a UI object (field holding an id)"}
+{"addr": "0x60819c", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "struct offset +0x190 inside a UI object"}
+{"addr": "0x6082f6", "value": "0xd48", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x60eabf", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "struct offset +0x190 inside a UI object"}
+{"addr": "0x60fb2e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x60fb3e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x60fb82", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x60fbc2", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x610748", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "struct offset +0x190 inside a UI object"}
+{"addr": "0x6137df", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x61454e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x6152d4", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x615e6f", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Display percentage (x*200/y) clamped to 999 before formatting text; UI number clamp."}
+{"addr": "0x615e77", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Clamped display value 999 (with color); UI number clamp."}
+{"addr": "0x6167bc", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "struct offset +0x320 inside a UI object"}
+{"addr": "0x618d1e", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x61a693", "value": "0x2260", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "message/string id 0x2260"}
+{"addr": "0x61dcc9", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "operator new(0x44c) of a UI object (ctor 0x437d10)"}
+{"addr": "0x61e4dd", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61e502", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61e527", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61e58e", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61e5be", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61e5ee", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61ef0f", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61ef70", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61f24f", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61f911", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61fc7d", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61fca2", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61fcc7", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61fd2e", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61fd5e", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x61fd8e", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6202af", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x620310", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6205f0", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6208fc", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x620ac5", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x621c56", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "x*8/400 arithmetic on a coordinate"}
+{"addr": "0x621d0d", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "/100 (or /400 by sar 7 on a non-pointer value) arithmetic, not pointer->officer id"}
+{"addr": "0x621d33", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "coordinate arithmetic (*200/512)"}
+{"addr": "0x621e92", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "[rec+0x40] of a 100x0x54 record (0x490b30) with type 1 checked 0..1099 and compared to an officer id; officer id range check"}
+{"addr": "0x622c28", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "id returned by selection dialog 0x69ae90 checked 0..1099 then passed to getter 0x490b00"}
+{"addr": "0x6243b5", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame for a 0x898-byte UI object (ctor 0x627cd0)"}
+{"addr": "0x624404", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x624448", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x624486", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x624775", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame for a 0x190-byte UI object (ctor 0x626b90, vtable 0x855440), not an officer record"}
+{"addr": "0x6248b5", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame for a 0x190-byte UI object, not an officer record"}
+{"addr": "0x6249f5", "value": "0x190", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame for a 0x190-byte UI object, not an officer record"}
+{"addr": "0x624d78", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: eax = unit id picked by unit-list dialog 0x6a4640; 0..999 check then 0x490e70(eax).)"}
+{"addr": "0x62561d", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x625642", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x625667", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6256ce", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6256fe", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62572e", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x625cef", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x625d50", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6260f0", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62682e", "value": "0x898", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6288c7", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6288df", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62890f", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62893f", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6289c0", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x6289e2", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x628a1d", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x628a58", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62960e", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x629a4e", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x629b00", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x629ed1", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x629f50", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62a1e8", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "member offset of a UI dialog object (widget sub-object), not a count"}
+{"addr": "0x62ca81", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "stack frame offset / size, not a count"}
+{"addr": "0x62eb10", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: eax = unit id from 0x4917c0(unit ptr); 0..999 check then +0x57 (N) to make a location id compared to person+0x9c.)"}
+{"addr": "0x62eb25", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x63115f", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop bound: counter 0..1099 passed to officer getter 0x490b00 at loop head"}
+{"addr": "0x63123c", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Loop edi=0..999 calling unit getter 0x490e70(edi) at 0x631206.)"}
+{"addr": "0x632f53", "value": "0x2bb", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "resource/font id 699 (0x433a70)"}
+{"addr": "0x632f7e", "value": "0x2bb", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "UI resource id 699 with 0xce2"}
+{"addr": "0x633244", "value": "0x2bb", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "resource id 699/0xb26 passed to 0x4d7100"}
+{"addr": "0x633b90", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "push 1000 as arg to text/message vcall [0x9c20468]->vt+0x18 (with ftol value); UI parameter."}
+{"addr": "0x634edf", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "internal offset inside a UI object (91 entries init loop)"}
+{"addr": "0x635de7", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: ebx = unit id param (arg2, passed from 0x638520 kind 0xb); 0..999 check then 0x490e70(ebx).)"}
+{"addr": "0x635fda", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: Same unit id param ebx re-checked 0..999 to enable the dialog.)"}
+{"addr": "0x6385b2", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "unit id (M9: ebx = picked object id for kind 0xb (unit; kind 5 uses 0x3fff), 0..999 check, passed to 0x635d80 which calls 0x490)"}
+{"addr": "0x63bf59", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "Portrait/face id from 0x48a450 taken mod 1000 (table 0x6fae8bb, 0..0x95f); not a unit."}
+{"addr": "0x63d32f", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "screen coordinate scaling (*800/...)"}
+{"addr": "0x63d354", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "screen coordinate scaling (*800/...)"}
+{"addr": "0x63d464", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "", "note": "First threshold of a 1000..100000 level table (0x85963c) for a quantity; display level."}
