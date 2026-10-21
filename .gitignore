@@ -11,6 +11,10 @@ data/raw/
 data/etopo60s_i16.npy
 data/world_hexcache.npz
 
+# ---- 武将名单：下载的数据集、史书全文和从光荣剧本导出的武将（tools/roster 重新生成）
+data/persons/_cache/
+data/persons/src/
+
 # ---- 生成的世界数据（san11kit.py world 重新生成）
 data/world*/
 !data/world_template/
