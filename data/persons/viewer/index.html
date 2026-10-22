@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>扩展武将名单查看</title>
+<style>
+:root {
+  --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a64; --line: #e2e0d8; --accent: #8a3b12;
+  --accent-soft: #f3e5dc; --warn: #a8540a; --warn-soft: #fbecd9; --bad: #a3201d; --good: #2f6b3a;
+  --bar: #c96f3b; --hover: #f0eee7; --sel: #ead8cc;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17171a; --panel: #1f1f23; --ink: #e8e6e1; --muted: #9b9991; --line: #34343a; --accent: #e3925f;
+    --accent-soft: #3a2a20; --warn: #e8a450; --warn-soft: #3a2e1c; --bad: #ef7a72; --good: #7fc28b;
+    --bar: #d9824e; --hover: #28282d; --sel: #3d2f27;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.55 system-ui, "Microsoft JhengHei", "PingFang TC", "Noto Sans CJK TC", sans-serif; }
+header { padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+header h1 { font-size: 17px; margin: 0; }
+header .sum { color: var(--muted); font-size: 13px; }
+main { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; padding: 12px 16px; height: calc(100vh - 52px); }
+.col { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; min-height: 0; }
+.filters { padding: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filters input[type=search] { flex: 1 1 220px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font-size: 14px; }
+select, button { padding: 5px 7px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font-size: 13px; }
+button { cursor: pointer; }
+label.chk { font-size: 13px; color: var(--muted); display: inline-flex; gap: 4px; align-items: center; }
+.listinfo { padding: 6px 10px; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); gap: 8px; flex-wrap: wrap; }
+.tablewrap { overflow: auto; flex: 1; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { position: sticky; top: 0; background: var(--panel); text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line); padding: 6px 8px; white-space: nowrap; }
+td { padding: 5px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--hover); }
+tbody tr.sel { background: var(--sel); }
+td.num { font-variant-numeric: tabular-nums; color: var(--muted); }
+.st { font-variant-numeric: tabular-nums; letter-spacing: -0.2px; }
+.badge { display: inline-block; padding: 0 6px; border-radius: 9px; font-size: 11px; line-height: 18px; background: var(--accent-soft); color: var(--accent); margin-right: 3px; }
+.badge.A { background: #dcefe0; color: #24603a; } .badge.B { background: #e4ebf7; color: #2b4d82; } .badge.C { background: var(--warn-soft); color: var(--warn); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .badge.A { background: #203a28; color: #8fd0a0; } :root:not([data-theme="light"]) .badge.B { background: #1f2a3d; color: #9cb8e8; } }
+.warn { color: var(--warn); }
+.detail { overflow: auto; padding: 14px 16px; flex: 1; }
+.detail h2 { margin: 0 0 2px; font-size: 22px; }
+.detail .sub { color: var(--muted); margin-bottom: 8px; }
+.sec { margin-top: 14px; }
+.sec h3 { font-size: 13px; color: var(--muted); font-weight: 600; margin: 0 0 6px; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+.kv { display: grid; grid-template-columns: 104px 1fr; gap: 3px 10px; }
+.kv .k { color: var(--muted); }
+.bars { display: grid; grid-template-columns: 42px 1fr 30px; gap: 4px 8px; align-items: center; max-width: 380px; }
+.bar { height: 9px; background: var(--hover); border-radius: 5px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--bar); }
+.apt { display: flex; gap: 6px; flex-wrap: wrap; }
+.apt span { border: 1px solid var(--line); border-radius: 5px; padding: 1px 7px; font-size: 13px; }
+.apt b { margin-left: 3px; }
+a.p { color: var(--accent); text-decoration: none; cursor: pointer; }
+a.p:hover { text-decoration: underline; }
+.koei { color: var(--muted); }
+.bio { white-space: pre-wrap; line-height: 1.75; }
+.rec { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; font-size: 13px; }
+.rec .key { font-family: ui-monospace, Consolas, monospace; font-size: 11px; color: var(--muted); }
+.issues li { color: var(--warn); }
+.empty { color: var(--muted); padding: 40px 10px; text-align: center; }
+.pager button { padding: 2px 8px; }
+.tiny { font-size: 12px; color: var(--muted); }
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; height: auto; }
+  .col { max-height: none; }
+  .tablewrap { max-height: 60vh; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>三国志11 扩展武将名单</h1>
+  <span class="sum" id="sum"></span>
+  <span class="sum">数据：roster_data.js（tools/roster/viewer.py 生成）</span>
+</header>
+<main>
+  <section class="col">
+    <div class="filters">
+      <input type="search" id="q" placeholder="搜索：姓名、字、原文名、编号、政权、城、官职、列传关键字…" autofocus>
+      <select id="f-conf"><option value="">可信度：全部</option><option>A</option><option>B</option><option>C</option></select>
+      <select id="f-sphere"><option value="">中外：全部</option><option value="中">中国（含周边）</option><option value="外">海外</option></select>
+      <select id="f-region"><option value="">地区：全部</option></select>
+      <select id="f-src"><option value="">来源：全部</option></select>
+      <select id="f-role"><option value="">身份：全部</option></select>
+      <select id="f-basis"><option value="">出身城依据：全部</option></select>
+      <select id="f-skill"><option value="">特技：全部</option><option value="有">有特技</option><option value="无">无特技</option></select>
+      <select id="f-issue"><option value="">审计：全部</option><option value="有">有审计问题</option></select>
+      <select id="f-sex"><option value="">性别：全部</option><option value="0">男</option><option value="1">女</option></select>
+      <select id="sort">
+        <option value="id">排序：编号</option><option value="birth">生年</option><option value="sum">五维合计↓</option>
+        <option value="s0">统率↓</option><option value="s1">武力↓</option><option value="s2">智力↓</option>
+        <option value="s3">政治↓</option><option value="s4">魅力↓</option><option value="iss">审计问题↓</option>
+      </select>
+      <button id="reset">清除</button>
+    </div>
+    <div class="listinfo"><span id="count"></span><span class="pager" id="pager"></span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>编号</th><th>姓名</th><th>生卒</th><th>政权</th><th>出身城</th><th>身份</th><th>统 武 智 政 魅</th><th>特技</th><th>信</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="col">
+    <div class="detail" id="detail"><div class="empty">点左边的人物查看详细内容</div></div>
+  </section>
+</main>
+<script src="roster_data.js"></script>
+<script>
+(() => {
+  if (!window.ROSTER) {
+    document.getElementById("detail").innerHTML = '<div class="empty">找不到 roster_data.js。先运行 <code>cd tools/roster; python audit.py; python viewer.py</code></div>';
+    return;
+  }
+  const D = window.ROSTER, P = D.people, K = D.koei;
+  const byId = new Map(P.map(p => [p.id, p]));
+  const SRC = { zhsan: "中华三国志", qxz: "三国群雄志", cbdb: "CBDB", gl: "名人库(Wikidata)", wk: "英文维基百科", tj: "资治通鉴",
+    sg: "三国志", js: "晋书", hhs: "后汉书", hj: "后汉纪", sl: "十六国春秋", hy: "华阳国志", ssxy: "世说新语", gs: "高僧传",
+    sk: "三国史记", hdn: "希罗狄安", ha: "罗马君王传", eus: "优西比乌", zos: "佐西默斯", amm: "阿米阿努斯" };
+  const CHINA = new Set(["幽州","冀州","青州","并州","徐州","揚州","兗州","豫州","司隸","荊州","涼州","益州","南中","交州","鮮卑","西域","東夷","倭","匈奴","西羌","夷洲","南海"]);
+  const HOME = ["幽州","冀州","青徐","兗豫","司隸","關中","涼州","揚州","荊北","荊南","益州","南中"];
+  const APT = ["槍","戟","弩","騎","兵器","水軍"], GRADE = ["C","B","A","S"];
+  const STAT = ["統率","武力","智力","政治","魅力"];
+  const LV = ["很低","低","普通","高","很高"];
+  const SEIKAKU = ["小心","冷靜","剛膽","莽撞"], KAN = ["無視","普通","重視"], SENRYAKU = ["中華統一","地方統一","州統一","維持現狀"];
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // ---- 预处理：来源前缀、中外、反向关系、搜索文本
+  const kids = new Map(), likedBy = new Map(), hatedBy = new Map(), spouseOf = new Map();
+  const push = (m, k, v) => { if (!m.has(k)) m.set(k, []); m.get(k).push(v); };
+  for (const p of P) {
+    p._src = [...new Set(p.keys.map(k => k.split(":")[0]))];
+    p._sphere = CHINA.has(p.region) ? "中" : "外";
+    p._name = p.sei + p.mei;
+    p._sum = p.stats.reduce((a, b) => a + b, 0);
+    if (p.father >= 0) push(kids, p.father, p.id);
+    if (p.mother >= 0) push(kids, p.mother, p.id);
+    if (p.spouse >= 0) push(spouseOf, p.spouse, p.id);
+    for (const t of p.liked) push(likedBy, t, p.id);
+    for (const t of p.disliked) push(hatedBy, t, p.id);
+    p._text = [p.id, p._name, p.azana, p.name_full, p.name_orig, p.polity, p.city, p.region, p.role, p.skill_name,
+      (p.offices || []).join(" "), p.bio, (p.src || []).join(" "), p.qid].join(" ").toLowerCase();
+  }
+  const fillSelect = (id, values) => {
+    const sel = document.getElementById(id);
+    for (const [v, n] of values) { const o = document.createElement("option"); o.value = v; o.textContent = `${v}（${n}）`; sel.appendChild(o); }
+  };
+  const count = f => { const m = new Map(); for (const p of P) for (const v of [].concat(f(p))) m.set(v, (m.get(v) || 0) + 1); return [...m].sort((a, b) => b[1] - a[1]); };
+  fillSelect("f-region", count(p => p.region));
+  fillSelect("f-role", count(p => p.role));
+  fillSelect("f-basis", count(p => p.city_basis || "（无）"));
+  const srcSel = document.getElementById("f-src");
+  for (const [v, n] of count(p => p._src)) { const o = document.createElement("option"); o.value = v; o.textContent = `${SRC[v] || v}（${n}）`; srcSel.appendChild(o); }
+  const skSel = document.getElementById("f-skill");
+  for (const [v, n] of count(p => p.skill_name || [])) { const o = document.createElement("option"); o.value = "s:" + v; o.textContent = `${v}（${n}）`; skSel.appendChild(o); }
+  const issues = P.filter(p => p.issues.length).length;
+  document.getElementById("sum").textContent =
+    `武将表 ${D.stats.total} 人：光荣 ${D.stats.koei} + 扩展 ${D.stats.new}；可信度 A ${D.stats.conf.A || 0} / B ${D.stats.conf.B || 0} / C ${D.stats.conf.C || 0}；有审计问题 ${issues} 人`;
+
+  // ---- 列表
+  const $ = id => document.getElementById(id);
+  const PAGE = 200;
+  let page = 0, list = [], selId = null;
+  const ctrls = ["q", "f-conf", "f-sphere", "f-region", "f-src", "f-role", "f-basis", "f-skill", "f-issue", "f-sex", "sort"];
+  function apply() {
+    const q = $("q").value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const conf = $("f-conf").value, sph = $("f-sphere").value, reg = $("f-region").value, src = $("f-src").value,
+      role = $("f-role").value, basis = $("f-basis").value, sk = $("f-skill").value, iss = $("f-issue").value, sex = $("f-sex").value;
+    list = P.filter(p => (!conf || p.conf === conf) && (!sph || p._sphere === sph) && (!reg || p.region === reg)
+      && (!src || p._src.includes(src)) && (!role || p.role === role) && (!basis || (p.city_basis || "（无）") === basis)
+      && (!sk || (sk === "有" ? p.skill !== 255 : sk === "无" ? p.skill === 255 : p.skill_name === sk.slice(2)))
+      && (!iss || p.issues.length) && (!sex || String(p.sex) === sex) && q.every(w => p._text.includes(w)));
+    const s = $("sort").value;
+    const key = s === "birth" ? p => p.birth : s === "sum" ? p => -p._sum : s === "iss" ? p => -p.issues.length
+      : s[0] === "s" && s.length === 2 ? p => -p.stats[+s[1]] : p => p.id;
+    list.sort((a, b) => key(a) - key(b) || a.id - b.id);
+    page = 0;
+    render();
+  }
+  function render() {
+    $("count").textContent = `${list.length} 人`;
+    const pages = Math.max(1, Math.ceil(list.length / PAGE));
+    $("pager").innerHTML = pages > 1 ? `<button data-pg="-1">‹</button> ${page + 1} / ${pages} <button data-pg="1">›</button>` : "";
+    $("rows").innerHTML = list.slice(page * PAGE, page * PAGE + PAGE).map(p => `<tr data-id="${p.id}" class="${p.id === selId ? "sel" : ""}">
+      <td class="num">${p.id}</td><td>${esc(p._name)}${p.azana ? `<span class="tiny"> ${esc(p.azana)}</span>` : ""}</td>
+      <td class="num">${p.birth}–${p.death}</td><td>${esc(p.polity)}</td><td>${esc(p.city)}</td><td>${esc(p.role)}</td>
+      <td class="st">${p.stats.map(x => String(x).padStart(3, " ")).join(" ")}</td><td>${esc(p.skill_name)}</td>
+      <td><span class="badge ${p.conf}">${p.conf}</span></td><td class="warn">${p.issues.length ? "⚠" + p.issues.length : ""}</td></tr>`).join("")
+      || `<tr><td colspan="10" class="empty">没有符合条件的人</td></tr>`;
+  }
+  $("pager").addEventListener("click", e => {
+    const d = +e.target.dataset.pg; if (!d) return;
+    page = Math.min(Math.max(0, page + d), Math.ceil(list.length / PAGE) - 1); render(); document.querySelector(".tablewrap").scrollTop = 0;
+  });
+  $("rows").addEventListener("click", e => { const tr = e.target.closest("tr[data-id]"); if (tr) location.hash = tr.dataset.id; });
+  let t = null;
+  for (const id of ctrls) $(id).addEventListener(id === "q" ? "input" : "change", () => { clearTimeout(t); t = setTimeout(apply, id === "q" ? 180 : 0); });
+  $("reset").addEventListener("click", () => { for (const id of ctrls) $(id).value = id === "sort" ? "id" : ""; apply(); });
+
+  // ---- 详细
+  const who = i => {
+    if (i < 0 || i === undefined || i === null) return "—";
+    const p = byId.get(i);
+    if (p) return `<a class="p" href="#${i}">${esc(p._name)}</a><span class="tiny"> ${p.birth}–${p.death}</span>`;
+    const k = K[i];
+    return k ? `<span class="koei">${esc(k[0])}（光荣 ${i} 号，${k[1]}–${k[2]}）</span>` : `#${i}`;
+  };
+  const whoList = a => (a && a.length) ? a.map(who).join("、") : "—";
+  const kv = rows => `<div class="kv">${rows.filter(r => r[1] !== undefined && r[1] !== "").map(([k, v]) => `<div class="k">${k}</div><div>${v}</div>`).join("")}</div>`;
+  const srcLink = (p, s) => {
+    let h = esc(s);
+    h = h.replace(/(Q\d+)/g, '<a class="p" target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/$1">$1</a>');
+    const m = s.match(/English Wikipedia「(.+?)」/);
+    if (m) h = h.replace(esc(m[1]), `<a class="p" target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/${encodeURIComponent(m[1].replace(/ /g, "_"))}">${esc(m[1])}</a>`);
+    return h;
+  };
+  const recHtml = r => {
+    const f = (k, v) => v === undefined ? "" : `<div><span class="tiny">${k}</span> ${v}</div>`;
+    const j = v => Array.isArray(v) ? v.map(x => Array.isArray(x) ? x.join("：") : x).join("、") : v;
+    return `<div class="rec"><div class="key">${esc(r.key)}　${esc(SRC[r.key.split(":")[0]] || "")}</div>
+      ${f("名", esc(r.name) + (r.azana ? "　字 " + esc(r.azana) : "") + (r.name_orig ? "　" + esc(r.name_orig) : ""))}
+      ${f("年份", r.years || r.birth || r.death ? esc(`活动 ${j(r.years || []) || "—"}　生 ${r.birth ?? "—"}　卒 ${r.death ?? "—"}`) : undefined)}
+      ${f("籍贯/地", r.origin || r.place ? esc(r.origin || r.place) : undefined)}
+      ${f("所属", r.polity ? esc(r.polity) + (r.role ? "　" + esc(r.role) : "") : undefined)}
+      ${f("官职", r.offices ? esc(j(r.offices)) : undefined)}
+      ${f("亲属", r.kin ? esc(j(r.kin)) : undefined)}
+      ${f("友/敌", r.friends || r.foes ? esc(`友 ${j(r.friends || []) || "—"}　敌 ${j(r.foes || []) || "—"}`) : undefined)}
+      ${f("五维", r.stats ? esc(j(r.stats)) : undefined)}
+      ${f("事迹", r.bio ? esc(r.bio) : undefined)}
+      ${f("出处", r.src ? esc(j(r.src)) : undefined)}</div>`;
+  };
+  function show(id) {
+    const p = byId.get(id);
+    if (!p) return;
+    selId = id;
+    document.querySelectorAll("#rows tr.sel").forEach(tr => tr.classList.remove("sel"));
+    const tr = document.querySelector(`#rows tr[data-id="${id}"]`); if (tr) tr.classList.add("sel");
+    const apt = p.apt.map((a, i) => `<span>${APT[i]}<b>${GRADE[a]}</b></span>`).join("");
+    const bars = p.stats.map((v, i) => `<div>${STAT[i]}</div><div class="bar"><i style="width:${v}%"></i></div><div class="num">${v}</div>`).join("");
+    const names = [p.name_full && p.name_full !== p._name ? esc(p.name_full) : "", p.name_orig ? esc(p.name_orig) : ""].filter(Boolean).join("　");
+    $("detail").innerHTML = `
+      <h2>${esc(p._name)} ${p.azana ? `<span class="tiny">字 ${esc(p.azana)}</span>` : ""}</h2>
+      <div class="sub">${names ? names + "<br>" : ""}编号 ${p.id}　<span class="badge ${p.conf}">可信度 ${p.conf}</span>
+        ${p.romance ? '<span class="badge C">只见于演义</span>' : ""}<span class="badge">${p.sex ? "女" : "男"}</span><span class="badge">${esc(p.role)}</span></div>
+      ${p.issues.length ? `<div class="sec"><h3>审计问题</h3><ul class="issues">${p.issues.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
+      <div class="sec"><h3>基本</h3>${kv([
+        ["生 / 登场 / 卒", `${p.birth} / ${p.appear} / ${p.death}（${p.death - p.birth} 岁）`],
+        ["死法", p.death_type ? "横死" : "天寿"],
+        ["出身城", `${esc(p.city)}（${esc(p.region)}）　<span class="tiny">依据：${esc(p.city_basis || "—")}</span>`],
+        ["出身地方", HOME[p.home] || p.home],
+        ["所属政权", esc(p.polity || "—")],
+        ["官职", esc((p.offices || []).join("、") || "—")],
+        ["头像分类", esc(p.face_class)]])}</div>
+      <div class="sec"><h3>能力</h3><div class="bars">${bars}</div>
+        <div style="margin-top:8px">${kv([["适性", `<div class="apt">${apt}</div>`], ["兵种倾向", esc(p.lean)],
+          ["特技", p.skill === 255 ? "无" : `${esc(p.skill_name)} <span class="tiny">（${p.skill} 号）</span>`]])}</div></div>
+      <div class="sec"><h3>性格</h3>${kv([
+        ["义理", `${LV[p.giri]}（${p.giri}）`], ["野望", `${LV[p.yabou]}（${p.yabou}）`], ["起用", `${p.kiyou}`],
+        ["性格", SEIKAKU[p.seikaku] || p.seikaku], ["汉室", KAN[p.kanshitsu] || p.kanshitsu], ["战略倾向", SENRYAKU[p.senryaku] || p.senryaku],
+        ["相性", `${p.aishou}　<span class="tiny">（0..149 环，曹操 25、刘备 75、孙权 125）</span>`],
+        ["声音 / 口调", `${p.voice} / ${p.tone}`]])}</div>
+      <div class="sec"><h3>关系</h3>${kv([
+        ["父", who(p.father)], ["母", who(p.mother)], ["配偶", who(p.spouse)],
+        ["配偶（反向）", whoList((spouseOf.get(p.id) || []).filter(x => x !== p.spouse))],
+        ["子女", whoList(kids.get(p.id))], ["义兄弟", who(p.sworn)],
+        ["亲近", whoList(p.liked)], ["厌恶", whoList(p.disliked)],
+        ["被亲近", whoList(likedBy.get(p.id))], ["被厌恶", whoList(hatedBy.get(p.id))],
+        ["世代 / 血缘", `${p.generation} / ${p.blood === p.id ? "本人一系" : who(p.blood)}`]])}</div>
+      <div class="sec"><h3>列传</h3><div class="bio">${esc(p.bio)}</div></div>
+      <div class="sec"><h3>出处</h3><ul>${(p.src || []).map(s => `<li>${srcLink(p, s)}</li>`).join("") || "<li>—</li>"}</ul></div>
+      <div class="sec"><h3>原始抽取记录（${p.srcrec.length}）</h3>
+        <div class="tiny" style="margin-bottom:6px">合并前各来源对此人的记录；名单字段由这些合并、换算而来</div>
+        ${p.srcrec.map(recHtml).join("") || "—"}</div>`;
+    $("detail").scrollTop = 0;
+  }
+  window.addEventListener("hashchange", () => show(+location.hash.slice(1)));
+  apply();
+  if (location.hash.length > 1) show(+location.hash.slice(1));
+})();
+</script>
+</body>
+</html>

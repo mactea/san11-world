@@ -26,8 +26,10 @@ def main():
     by = {e["id"]: e for e in roster}
     sk = skills()
     out = collections.OrderedDict()
+    per = collections.defaultdict(list)                  # 编号 → [问题, …]（给 viewer 用）
 
     def add(cat, e, msg):
+        per[e["id"]].append(f"{cat}：{msg}" if msg else cat)
         d = out.setdefault(cat, {"n": 0, "samples": []})
         d["n"] += 1
         if len(d["samples"]) < 25:
@@ -244,6 +246,7 @@ def main():
     srcs = collections.Counter(s.split("·")[0].split(" ")[0].split("（")[0] for e in roster for s in e["src"][:1])
     out["出处·首要出处分布"] = dict(srcs.most_common(25))
     save_json(PERSONS / "audit.json", out, indent=1)
+    save_json(PERSONS / "build" / "audit_by_id.json", per)
     for k, v in out.items():
         if isinstance(v, dict) and "n" in v:
             print(f"{v['n']:6d}  {k}")

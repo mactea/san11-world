@@ -41,6 +41,7 @@
 |---|---|
 | `roster.json` | 扩展武将 850..12178（列表，按编号） |
 | `audit.json` | 审计结果：每类不合理之处的数量和样例 |
+| `viewer/index.html` | 查看网页：搜索、筛选、每人的全部字段、关系跳转、原始抽取记录、审计问题。双击打开；数据 `viewer/roster_data.js` 由 `tools/roster/viewer.py` 生成（不进版本库） |
 | `roster_stats.json` | 总数、按可信度/地区/来源统计、校验结果 |
 | `raw/tj_*.jsonl` 等 | 子代理从史书原文逐块抽取的人物（资治通鉴 tj、三国志 sg、晋书 js、后汉书 hhs、后汉纪 hj、十六国春秋 sl、华阳国志 hy、世说新语 ssxy、高僧传 gs） |
 | `raw/sk_*.jsonl` | 《三国史记》（新罗、高句丽、百济本纪 170–370 年段，列传五、八、九），规格同 SPEC_TEXT |
@@ -107,5 +108,5 @@ python split_texts.py 25000; python split_books.py 40000; python batch_global.py
 python split_classic.py 30000                                       # 希腊拉丁史书、三国史记
 python fetch_wiki.py; python scan_wiki.py; python known_world.py; python batch_wiki.py 60   # 英文维基百科（约 27GB）
 （子代理按 raw/SPEC_*.md 把结果写进 raw/）
-python cands.py; python merge.py; python build.py; python validate.py; python audit.py
+python cands.py; python merge.py; python build.py; python validate.py; python audit.py; python viewer.py
 ```
