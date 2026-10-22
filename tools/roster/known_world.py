@@ -14,7 +14,7 @@ for f in sorted(glob.glob(str(RAW / "gl_*.jsonl"))) + sorted(glob.glob(str(RAW /
         en = e.get("title") or names.get(e.get("qid"), "")
         rows.add(" | ".join(str(x if x is not None else "") for x in
                             [en, e["zh"], e.get("zh_full", ""), e.get("birth"), e.get("death"), e.get("polity", "")]))
-for p in ("hdn", "ha", "eus", "zos", "amm"):                      # 希腊、拉丁史书抽出的人（SPEC_CLASSIC）
+for p in ("dio", "hdn", "ha", "eus", "zos", "amm"):                      # 希腊、拉丁史书抽出的人（SPEC_CLASSIC）
     for f in sorted(glob.glob(str(RAW / f"{p}_*.jsonl"))):
         for e in load_jsonl(f):
             if e.get("zh") and e.get("name_en"):

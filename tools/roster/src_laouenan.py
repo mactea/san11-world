@@ -1,6 +1,6 @@
 """Laouenan 等「全球知名人物交叉核实数据库」(Wikidata/Wikipedia 派生, 2022) → data/persons/src/laouenan.json
 
-取在世时间与 185..355 年重叠的人（生卒年缺一项时按活 60 年估）。"""
+取在世时间与 170..370 年重叠的人（生卒年缺一项时按活 60 年估；370 年时至少 15 岁）。"""
 import csv
 import gzip
 from common import CACHE, SRC, save_json
@@ -30,7 +30,7 @@ with gzip.open(CACHE / "laouenan.csv.gz", "rt", encoding="utf-8", errors="replac
             continue
         b2 = b if b is not None else d - 60
         d2 = d if d is not None else b + 60
-        if b2 <= 355 and d2 >= 185:
+        if b2 <= 355 and d2 >= 170:
             e = {k: r.get(k, "") for k in KEEP}
             e["b"], e["d"] = b, d
             out.append(e)

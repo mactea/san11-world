@@ -1,5 +1,6 @@
 """希腊、拉丁史书原文和《三国史记》→ 子代理用的块 data/persons/_cache/chunks/<前缀>_NN.txt
 
+  dio  卡西乌斯·狄奥《罗马史》卷 71–80（Cary 英译 1927，LacusCurtius）  170–229 年
   hdn  希罗狄安《马可之后的罗马史》（希腊文，First1KGreek）              180–238 年
   ha   《罗马君王传》马可·奥勒留传起（拉丁文，Perseus）                  161–285 年
   eus  优西比乌《教会史》卷 5–10（英译，First1KGreek）                    170–324 年
@@ -8,8 +9,10 @@
   sk   三国史记（殆知阁本）新罗、高句丽、百济本纪 170–370 年段和列传
 
     python split_classic.py [每块字数，默认 30000]"""
+import html as html_mod
 import re
 import sys
+import urllib.parse
 import urllib.request
 from common import CACHE
 
@@ -59,6 +62,23 @@ def tei_text(xml):
     return re.sub(r"\n\s*\n+", "\n", t).strip()
 
 
+LACUS = "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/{}*.html"
+
+
+def lacus_text(html):
+    """LacusCurtius 页面 → 纯文本：章标记写成「[72-4]」，脚注、页码去掉"""
+    body = html[html.find("<P CLASS"):]
+    end = body.find('<A NAME="notes"')
+    body = body[:end] if end > 0 else body
+    body = re.sub(r'<A CLASS="ref"[^>]*>.*?</A>', "", body, flags=re.S | re.I)
+    body = re.sub(r'<SPAN CLASS="pagenum">.*?</SPAN>', "", body, flags=re.S | re.I)
+    body = re.sub(r'<A CLASS="chapter" NAME="([^"]+)">.*?</A>', r"\n[\1] ", body, flags=re.S | re.I)
+    body = re.sub(r"<(P|BR|DIV|H\d)\b[^>]*>", "\n", body, flags=re.I)
+    t = html_mod.unescape(re.sub(r"<[^>]+>", "", body)).replace("⁠", "")
+    t = re.sub(r"[ \t]+", " ", t)
+    return re.sub(r"\n\s*\n+", "\n", t).strip()
+
+
 def cut(prefix, title, text):
     for f in OUT.glob(f"{prefix}_*.txt"):
         f.unlink()
@@ -103,6 +123,13 @@ def main():
             m = re.search(r"^\[Book 5\]", text, flags=re.M)
             text = text[:m.start()] if m else text
         cut(prefix, TITLE[prefix], text)
+    parts = []
+    for book in range(71, 81):
+        try:
+            parts.append(f"\n[Book {book}]\n" + lacus_text(get(LACUS.format(book), T / f"dio_{book}.html")))
+        except urllib.error.HTTPError as e:
+            print("dio book", book, e)
+    cut("dio", "Cassius Dio, Roman History (tr. Cary)", "\n".join(parts))
     sk = get(DZG, T / "三国史记.txt")
     cut("sk", "三国史记", sk_period(sk))
 

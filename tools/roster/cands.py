@@ -148,11 +148,14 @@ def from_global():
                 fame = float(s.get("sum_visib_ln_5criteria") or 0)
             except ValueError:
                 fame = 0
+            yrs = [e.get("birth"), e.get("death")]
+            if yrs == [None, None]:                    # 子代理没给年份：用名人库里的生卒（常是估计值）
+                yrs = [round(s["b"]) if s.get("b") else None, round(s["d"]) if s.get("d") else None]
             out.append({
                 "key": f"gl:{e['qid']}", "qid": e["qid"], "name": e["zh"], "sei": e.get("sei"), "mei": e.get("mei"),
                 "name_full": e.get("zh_full", ""), "name_orig": s.get("name", "").replace("_", " "),
                 "sex": 1 if e.get("sex") == "f" else 0, "birth": e.get("birth"), "death": e.get("death"),
-                "years": [e.get("birth"), e.get("death")], "death_violent": bool(e.get("death_violent")),
+                "years": yrs, "death_violent": bool(e.get("death_violent")),
                 "polity": e.get("polity", ""), "role": e.get("role", "其他"), "place": e.get("place", ""),
                 "lat": e.get("lat"), "lon": e.get("lon"), "offices": e.get("offices") or [],
                 "kin": [[x.get("rel", ""), ("gl:" + x["qid"]) if x.get("qid") else x.get("name", "")] for x in e.get("kin") or []],
@@ -164,7 +167,7 @@ def from_global():
 
 
 # 希腊、拉丁史书（raw/SPEC_CLASSIC.md）：希罗狄安、罗马君王传、优西比乌、佐西默斯、阿米阿努斯
-CLASSIC = {"hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
+CLASSIC = {"dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
 
 
 def en_key(s):

@@ -12,7 +12,7 @@ from cands import BUILD
 
 TOL = 35
 PRI = {"zhsan": 0, "tj": 1, "js": 1, "hhs": 1, "sl": 1, "hy": 1, "sg": 1, "ss": 1, "sk": 1, "gl": 2, "wk": 2,
-       "hdn": 2, "ha": 2, "eus": 2, "zos": 2, "amm": 2, "qxz": 3, "cbdb": 4}
+       "dio": 2, "hdn": 2, "ha": 2, "eus": 2, "zos": 2, "amm": 2, "qxz": 3, "cbdb": 4}
 _t2s = None
 
 

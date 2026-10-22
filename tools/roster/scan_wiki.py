@@ -68,7 +68,8 @@ def in_window(b, d, cent, act=None):
         return b[1] >= LO - 60 and b[0] <= HI - 15
     if act:
         return act[1] >= LO and act[0] <= HI
-    return bool(cent & {3, 4})           # 只有世纪：3、4 世纪都收（4 世纪后期的人由子代理按年份 skip）
+    return bool(cent & {2, 3, 4})        # 只有世纪：2–4 世纪都收（2 世纪的由 batch_wiki 按导言里的年份再筛，
+                                         # 4 世纪后期的人由子代理按年份 skip）
 
 
 INFO_KEYS = r"birth_date|death_date|reign|term_start|term_end|years_active|term|office_term|era"
