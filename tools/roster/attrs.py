@@ -55,61 +55,81 @@ STEPPE = {"匈奴", "鮮卑", "康居", "薩爾馬提亞", "伏爾加", "烏拉�
           "撒哈拉", "阿拉伯"}
 
 
-# ---- 特技
-def pick_skill(key, stats, lean, role, tier):
-    """tier: 0 普通 1 名人 2 一流（史书公认）；约一半人有特技，和光荣原版比例相当"""
-    ld, st, it, po, ch = stats
+# ---- 特技（规则取自光荣原版 0..669 号的持有者）
+# 有没有特技：光荣原版按最高能力分档的持有率（<60 几乎没有，60–69 约 8%，70–79 约 33%，80–89 约 80%，90 以上 94%）
+HAS_RATE = [(90, 92), (80, 78), (70, 33), (60, 9), (0, 3)]
+# 只给特定人群的特技
+SKILL_ONLY = {
+    91: lambda c: c["region"] in ("幽州", "鮮卑") or c["ethnic"] in ("乌桓", "烏桓", "鲜卑", "鮮卑"),     # 亲乌
+    92: lambda c: c["region"] in ("涼州", "西羌") or c["ethnic"] in ("羌", "氐"),                        # 亲羌
+    93: lambda c: c["region"] == "揚州" or c["ethnic"] == "山越",                                         # 亲越
+    94: lambda c: c["region"] in ("南中", "交州") or c["ethnic"] in ("蛮", "蠻", "夷"),                    # 亲蛮
+    31: lambda c: c["region"] == "南中",                                                                 # 藤甲
+    99: lambda c: c["sex"] == 1, 69: lambda c: c["sex"] == 1,                                            # 内助、倾国
+    70: lambda c: c["role"] in ("方士", "僧道", "宗教", "叛军首领"),                                       # 妖术
+    98: lambda c: c["role"] in ("方士", "僧道", "宗教"), 88: lambda c: c["role"] in ("方士", "僧道", "宗教"),  # 祈願、米道
+    32: lambda c: False,                                                                                 # 强运（刘禅专属）
+}
+_holders = None
+
+
+def skill_table():
+    """特技 → (光荣持有人数, 关键能力下限 {能力序号: 下限}, 兵种适用 'OOOOXX')"""
+    global _holders
+    if _holders is None:
+        hold = {}
+        for k in load_json(SRC / "koei.json"):
+            if k["koei_id"] < 670 and k["sei"] and k["skill"] in skills():
+                hold.setdefault(k["skill"], []).append(k["stats"])
+        _holders = {}
+        for s, hs in hold.items():
+            mean = [sum(h[i] for h in hs) / len(hs) for i in range(5)]
+            top = max(range(5), key=lambda i: mean[i])
+            keys = [i for i in range(5) if mean[i] >= 65] or [top]
+            _holders[s] = (len(hs), {i: max(45, min(h[i] for h in hs) - 3) for i in keys},
+                           (skills()[s].get("raw_compat_string") or "XXXXXX")[:6])
+    return _holders
+
+
+def pick_skill(key, stats, lean, role, tier, region="", sex=0, ethnic="", world=False, used=None):
+    """tier: 0 普通 1 名人 2 一流（史书公认）。先按最高能力决定有没有特技，再在「能力够得上光荣同特技持有者」的特技里
+    按光荣持有人数加权抽一个；只有 1~2 人持有的稀有特技只给一流人物。
+    used（特技 → 已发人数）：同一特技发得越多权重越低，免得门槛低的几种特技扎堆"""
+    m = max(stats)
+    rate = next(r for lo, r in HAS_RATE if m >= lo)
+    if rnd(key, "hasskill", 100) >= rate:
+        return 0xff
     t = LEAN.get(lean)
-    # 能力一般的人也能有的常见特技（光荣原版里普通武将、文官常见的那些）
-    if max(ld, st) >= max(it, po):
-        cands = [(2, 9), (2, 27), (1, 11), (1, 21), (2, 7), (1, 6), (1, 8), (1, 51), (1, 33), (1, 13), (1, 30), (1, 72)]
-    else:
-        cands = [(2, 72), (2, 73), (1, 84), (2, 85), (2, 86), (2, 80), (1, 81), (2, 77), (2, 78), (1, 97), (1, 98),
-                 (1, 95), (1, 96), (1, 75), (1, 76)]
-    if st >= 75 and ld >= 60:
-        cands += [(3, {0: 34, 1: 35, 2: 36, 3: 37, 5: 38}.get(t, 51)), (1, 11), (1, 12), (1, 27), (1, 30)]
-        if t == 3:
-            cands += [(2, 3), (1, 49), (1, 25)]
-        if t == 2:
-            cands += [(2, 50)]
-        if t == 5:
-            cands += [(2, 4), (2, 5), (1, 14)]
-    if ld >= 70:
-        cands += [(1, 9), (1, 29), (1, 18), (1, 26), (1, 13), (1, 33), (1, 19), (1, 16)]
-        if t == 4:
-            cands += [(3, 17), (2, 24), (2, 77)]
-    if it >= 75:
-        cands += [(2, 53), (2, 54), (2, 55), (2, 56), (1, 59), (2, 64), (2, 65), (1, 68), (2, 72), (2, 73), (1, 74)]
-    if po >= 70:
-        cands += [(2, 80), (2, 81), (2, 82), (2, 83), (2, 84), (2, 85), (2, 86), (1, 87), (1, 88), (2, 77), (2, 78),
-                  (1, 95), (1, 96), (1, 97)]
-    if ch >= 75:
-        cands += [(3, 79), (1, 96), (1, 10), (1, 86)]
-    if role in ("后妃",) or (role == "名士" and ch >= 70):
-        cands += [(2, 99), (1, 75), (1, 76), (1, 69)]
-    if role in ("方士", "僧道", "宗教"):
-        cands += [(3, 98), (2, 97), (1, 8), (1, 70)]
-    if role in ("外族首领",):
-        cands += [(2, 91), (2, 92), (2, 93), (2, 94), (2, 6), (1, 15)]
-    if tier >= 2:                                      # 稀有特技
-        if st >= 92:
-            cands += [(3, 39), (2, 40), (2, 45 if t == 3 else 42 if t == 0 else 43 if t == 1 else 44 if t == 2 else 47 if t == 5 else 41)]
-        if it >= 92:
-            cands += [(3, 57), (2, 58), (2, 61), (2, 63), (2, 66), (2, 67), (1, 62)]
-        if po >= 92:
-            cands += [(2, 89), (2, 90), (2, 87), (2, 88)]
-        if ld >= 92:
-            cands += [(2, 23), (2, 22), (1, 2), (1, 32)]
-    has = 36 + 10 * tier + max(0, max(stats) - 60) // 2   # 有特技的概率（%），总体约四成半，和光荣原版相当
-    if not cands or rnd(key, "hasskill", 100) >= has:
+    c = {"region": region, "sex": sex, "ethnic": ethnic or "", "role": role}
+    cands = []
+    for s, (n, need, compat) in skill_table().items():
+        if n <= 2 and tier < 2:
+            continue
+        if s in SKILL_ONLY and not SKILL_ONLY[s](c):
+            continue
+        if world and s in (91, 92, 93, 94):
+            continue
+        if any(stats[i] < v for i, v in need.items()):
+            continue
+        if "O" in compat and t is not None and compat[t] != "O":
+            continue
+        w = n * (3 if t is not None and compat[t] == "O" and compat.count("O") <= 2 else 1)
+        if used is not None:
+            w = max(1, round(w * 100 / (20 + used[s])))
+        cands.append((w, s))
+    if not cands:
         return 0xff
     total = sum(w for w, _ in cands)
     r = rnd(key, "skill", total)
+    pick = cands[-1][1]
     for w, s in cands:
         if r < w:
-            return s
+            pick = s
+            break
         r -= w
-    return cands[-1][1]
+    if used is not None:
+        used[pick] += 1
+    return pick
 
 
 # ---- 性格类

@@ -18,6 +18,7 @@ from common import PERSONS, SRC, big5_ok, load_json, load_jsonl, save_json, save
 from fiction import make as make_fiction, REGION_CULTURE
 from gazetteer import origin_city, nearest_city
 from merge import nkey, compatible
+from eras import ad_years, era_years, polity_span
 
 YEAR_LO, YEAR_HI = 170, 370
 
@@ -106,6 +107,29 @@ VARIANT = {"堃": "坤", "喆": "哲", "峯": "峰", "羣": "群", "衆": "眾",
            "秊": "年", "邨": "村", "蒐": "搜", "匄": "丐", "隂": "陰", "庻": "庶", "旹": "時", "蔵": "藏", "琎": "璡"}
 
 
+def fill_years(p):
+    """来源没给任何年份的人：从列传、出处里的公元年和年号推活动年份，再没有就取所属政权存续期的中段；
+    来源给了活动年份、没给卒年的，列传里更晚的年份也算进活动年份。记下哪些是估的（_b_est / _d_est）"""
+    p["_b_est"], p["_d_est"] = p.get("birth") is None, p.get("death") is None
+    y0, y1 = (p.get("years") or [None, None]) + [None] * (2 - len(p.get("years") or []))
+    text = (p.get("bio") or "") + " " + " ".join(p.get("src") or [])
+    found = ad_years(text) + era_years(text, p.get("polity") or "")
+    if y0 is None and y1 is None and p.get("birth") is None and p.get("death") is None:
+        if found:
+            p["years"], p["_yr_basis"] = [min(found), max(found)], "列传年份"
+        elif (sp := polity_span(p.get("polity"))):
+            mid = (sp[0] + sp[1]) // 2
+            p["years"], p["_yr_basis"] = [mid - 5, mid + 5], "政权年代"
+        else:
+            p["_yr_basis"] = "默认"
+        return
+    if found and p.get("death") is None:
+        hi = max(found)
+        lo = (y0 or p.get("birth") or hi)
+        if hi > (y1 or 0) and hi - lo <= 60:
+            p["years"] = [y0, hi]
+
+
 def life(p):
     """补齐生年、登场、卒年（光荣习惯：登场 ≈ 生年 + 16）"""
     y0, y1 = p.get("years") or [None, None]
@@ -132,7 +156,7 @@ def in_period(p):
     if len(p["name"]) < 2:
         return False
     b, a, d = life(p)
-    return d >= YEAR_LO and b <= YEAR_HI - 15
+    return d >= YEAR_LO and b <= YEAR_HI - 15 and d - b >= 14      # 幼年夭折的宗室子弟登场不了，不收
 
 
 def fix_role(p, stats):
@@ -145,9 +169,11 @@ def fix_role(p, stats):
 
 
 def names(p):
-    name = s2t(p["name"])
+    # CBDB 里有「卞氏(三國魏)」这种带注的名字、个别来源有「俞A」：只留汉字
+    name = re.sub(r"[^㐀-鿿]", "", re.sub(r"[（(].*$", "", s2t(p["name"])))
     full = p.get("name_full") or name
     sei, mei = p.get("sei") or "", p.get("mei") or ""
+    sei, mei = re.sub(r"[^㐀-鿿]", "", sei), re.sub(r"[^㐀-鿿]", "", mei)
     if not sei or not mei or sei + mei != name or len(sei) > 2 or len(mei) > 2:
         sei, mei = split_name(name)
     if len(mei) > 2:
@@ -261,12 +287,25 @@ def lift(x):
 
 def est_stats(p):
     s = p.get("stats")
-    if s and len(s) == 5 and all(isinstance(x, (int, float)) for x in s):
+    if s and len(s) == 5 and all(isinstance(x, (int, float)) for x in s) and len(set(s)) > 1:   # 五项全同的是没估的占位值
         src = p["keys"][0].split(":")[0]
         return [clamp(lift(x) if src not in ("zhsan", "qxz") else x) for x in s]
     base = ROLE_STATS.get(p.get("role") or "其他", ROLE_STATS["其他"])
     bump = min(15, len(p.get("offices") or []) * 2)
     return [clamp(b + bump * (i in (0, 3)) + rnd(p["keys"][0], f"st{i}", 15) - 7) for i, b in enumerate(base)]
+
+
+# 列传写的是本人横死（「為某所殺」「被誅」「戰死」「殉道」）；只写「殺某」「斬首數千」的不算
+VIOLENT_SELF = re.compile(r"被殺|被害|遇害|戰死|陣亡|戰歿|力戰而死|自殺|自刎|自盡|自縊|飲鴆|伏誅|被誅|被斬|被處死|被處決|賜死|"
+                          r"殉道|殉教|殉難|為[^。，；]{1,12}所(?:殺|害|斬|誅|弒|擒殺)|見殺|遭害|棄市|梟首|被俘殺|被毒殺|被鴆殺")
+CALM_DEATH = re.compile(r"病卒|病逝|病死|壽終|善終|老死|卒於家|以疾卒|疾卒|病亡|病歿")
+
+
+def violent_bio(bio):
+    """列传最后提到的死法是横死（先病卒后被追戮这类按最后一句的死法）"""
+    v = [m.end() for m in VIOLENT_SELF.finditer(bio or "")]
+    c = [m.end() for m in CALM_DEATH.finditer(bio or "")]
+    return bool(v) and (not c or max(v) > max(c))
 
 
 def fallback_bio(p, city):
@@ -277,8 +316,8 @@ def fallback_bio(p, city):
         parts.append(f"{city.split('(')[0]}出身。")
     if p.get("offices"):
         parts.append("歷任" + "、".join(p["offices"][:4]) + "。")
-    if p.get("polity"):
-        parts.append(f"仕於{p['polity']}。")
+    if p.get("polity") and "未詳" not in p["polity"] and "未详" not in p["polity"]:
+        parts.append(f"仕於{p['polity'].strip('()（）')}。")
     return "".join(parts) or "事蹟不詳。"
 
 
@@ -292,7 +331,10 @@ def main():
     cities = load_json(SRC / "cities.json")
     city_by = {c["full"]: c for c in cities}
     region_of = {c["full"]: c["region"] for c in cities}
-    merged = [p for p in load_jsonl(BUILD / "merged.jsonl") if in_period(p) and all(names(p)[:2])]
+    merged = load_jsonl(BUILD / "merged.jsonl")
+    for p in merged:
+        fill_years(p)
+    merged = [p for p in merged if in_period(p) and all(names(p)[:2])]
     # 最后再查一遍「其实是光荣武将」：繁简、异体统一后同名，且生卒相差不到 10 年
     kidx = collections.defaultdict(list)
     for k in koei:
@@ -372,24 +414,64 @@ def main():
                 by_en[n].append(p["id"])
 
     kinfo = {k["koei_id"]: (k["birth"], k["death"], k["sex"]) for k in koei}
-    pinfo = {p["id"]: (p["_life"][0], p["_life"][2], p["sex"]) for p in allp}
+    kspouse = {k["koei_id"]: k["spouse"] for k in koei}
+    byid = {p["id"]: p for p in allp}
 
     def info(i):
-        return pinfo.get(i) or kinfo.get(i)
+        """(生, 卒, 性别)；扩展武将读当前的 _life（连父母子女时可能调整过估算的生年）"""
+        if i in byid:
+            q = byid[i]
+            return q["_life"][0], q["_life"][2], q["sex"]
+        return kinfo.get(i)
+
+    def candidates(ref, near):
+        """名字/键 → 可能的编号（同名的按年代粗筛）"""
+        if ref in by_key:
+            return [by_key[ref]]
+        if ":" in ref:
+            return []
+        if re.fullmatch(r"[A-Za-z .'\-]+", ref):
+            hits = by_en.get(re.sub(r"\s*\(.*?\)", "", ref).strip().lower(), [])
+            return hits if len(hits) == 1 else []
+        return [i for i, s in by_name.get(nkey(s2t(ref)), []) if compatible(s, near)]
 
     def resolve(ref, near, pred=None):
-        """名字/键 → 编号；pred 过滤不合年龄、性别的同名者"""
-        ok = (lambda t: t is not None and info(t) and (pred is None or pred(info(t))))
-        if ref in by_key:
-            t = by_key[ref]
-            return t if ok(t) else None
-        if ":" in ref:
-            return None
-        if re.fullmatch(r"[A-Za-z .'\-]+", ref):
-            hits = [t for t in by_en.get(re.sub(r"\s*\(.*?\)", "", ref).strip().lower(), []) if ok(t)]
-            return hits[0] if len(hits) == 1 else None
-        hits = [i for i, s in by_name.get(nkey(s2t(ref)), []) if compatible(s, near) and ok(i)]
-        return hits[0] if hits else None
+        """pred 过滤不合年龄、性别的同名者"""
+        for t in candidates(ref, near):
+            if info(t) and (pred is None or pred(info(t))):
+                return t
+        return None
+
+    def set_birth(i, nb):
+        q = byid[i]
+        b0, a0, d0 = q["_life"]
+        nb = int(nb)
+        if d0 - nb > 90 or nb + 14 > d0:
+            return False
+        q["_life"] = (nb, min(max(a0, nb + 14), d0), d0)
+        return True
+
+    def first_act(i):
+        q = byid[i]
+        return (q.get("years") or [None])[0] or q["_life"][1]
+
+    def parent_fit(c, t, f):
+        """t 能否是 c 的父（f=father）/母：年龄差 14–60、性别对、孩子出生时还活着。
+        年龄差不对、而其中一方的生年是估的（来源没写），就把估的那个挪到合理的位置再连"""
+        C, T = info(c), info(t)
+        if not C or not T or c == t or T[2] != (0 if f == "father" else 1):
+            return False
+        cb = C[0]
+        if T[1] < cb - (1 if f == "father" else 0):
+            return False
+        if 14 <= cb - T[0] <= 60:
+            return True
+        if t in byid and byid[t]["_b_est"] and first_act(t) >= cb - 15 and set_birth(t, cb - 25):
+            return True
+        if c in byid and byid[c]["_b_est"] and T[0] + 25 <= first_act(c) - 8 and T[0] + 25 <= T[1] + 1 \
+                and set_birth(c, T[0] + 25):
+            return True
+        return False
 
     rel = {p["id"]: {"father": -1, "mother": -1, "spouse": -1, "sworn": -1, "liked": [], "disliked": []} for p in allp}
     clan = collections.defaultdict(set)                       # 同宗亲属（父系，籍贯相同）
@@ -401,16 +483,29 @@ def main():
         for kind, ref in p.get("kin") or []:
             f = REL.get(kind)
             if f in ("father", "mother"):
-                pred = lambda t, f=f: b - 60 <= t[0] <= b - 14 and t[1] >= b - 1 and t[2] == (0 if f == "father" else 1)
-            elif f == "spouse":
-                pred = lambda t: t[2] != p["sex"] and abs(t[0] - b) <= 35
+                t = next((t for t in candidates(ref, (b - 80, d)) if parent_fit(p["id"], t, f)), None)
             elif kind in CHILD:
-                pred = lambda t: b + 14 <= t[0] <= min(b + 60, d + 1)
+                pf = "mother" if p["sex"] == 1 else "father"
+                t = next((t for t in candidates(ref, (b, d + 80)) if parent_fit(t, p["id"], pf)), None)
+            elif f == "spouse":
+                # 配偶：异性、年龄相近；对方已有别的配偶时，女方（一夫一妻）和光荣武将（光荣已设配偶）不再连
+                def ok_sp(t):
+                    T = info(t)
+                    if not T or T[2] == p["sex"] or abs(T[0] - b) > 35 or T[1] < b + 12 or T[0] > d - 12:
+                        return False
+                    if t < 850:
+                        return kspouse.get(t, -1) < 0
+                    other = rel[t]["spouse"]
+                    return other in (-1, p["id"]) or T[2] == 0
+                cs = candidates(ref, near)
+                if s2t(ref).endswith("氏") and len(cs) > 1:                 # 「王氏」同名太多：不唯一就不连
+                    cs = []
+                t = next((t for t in cs if ok_sp(t)), None)
             elif kind in SIBLING:
-                pred = lambda t: abs(t[0] - b) <= 25
+                t = resolve(ref, near, lambda t: abs(t[0] - b) <= 25)
             else:
-                pred = alive
-            t = resolve(ref, near, pred)
+                t = resolve(ref, near, alive)
+            b, _, d = p["_life"]                                  # 连父母时自己的估算生年可能变了
             if t is None or t == p["id"]:
                 continue
             if f and r[f] == -1:
@@ -434,7 +529,22 @@ def main():
             t = resolve(ref, near, alive)
             if t is not None and t != p["id"] and t not in r["disliked"] and t not in r["liked"] and len(r["disliked"]) < 5:
                 r["disliked"].append(t)
-    byid = {p["id"]: p for p in allp}
+    # ---- 生年调整过之后再查一遍：父母（为连某个孩子挪过生年，可能和另一个孩子对不上了）、配偶、
+    #      亲近、厌恶（在世时间重叠 5 年以上）
+    for p in allp:
+        b, _, d = p["_life"]
+        r = rel[p["id"]]
+        for f in ("father", "mother"):
+            T = info(r[f]) if r[f] >= 0 else None
+            if T and not (14 <= b - T[0] <= 60 and T[1] >= b - (1 if f == "father" else 0)):
+                r[f] = -1
+        S = info(r["spouse"]) if r["spouse"] >= 0 else None
+        if S and (abs(S[0] - b) > 35 or S[1] < b + 12 or S[0] > d - 12):
+            if r["spouse"] in rel and rel[r["spouse"]]["spouse"] == p["id"]:
+                rel[r["spouse"]]["spouse"] = -1
+            r["spouse"] = -1
+        for f in ("liked", "disliked"):
+            rel[p["id"]][f] = [t for t in rel[p["id"]][f] if info(t) and info(t)[1] >= b + 5 and info(t)[0] <= d - 5]
     # ---- 没有籍贯的人：同宗亲属（父、子、兄弟、叔侄、祖孙……，含光荣武将）有籍贯就跟他们走（可传两代）
     for i, r in rel.items():
         if r["father"] >= 0:
@@ -482,6 +592,7 @@ def main():
 
     # ---- 属性和输出记录
     sk = skills()
+    skill_used = collections.Counter()
     out = []
     for p in allp:
         i = p["id"]
@@ -509,13 +620,14 @@ def main():
                 pers[f] = p[f]
         military = max(stats[:2]) >= max(stats[2:4])
         raw = raw_defaults(pk, p["sex"], tier, military)
-        skill = pick_skill(pk, stats, lean, p["role"], tier)
+        skill = pick_skill(pk, stats, lean, p["role"], tier, region=region, sex=p["sex"], ethnic=p.get("ethnic") or "",
+                           world=bool(p.get("world")), used=skill_used)
         bio = p.get("bio") or fallback_bio(p, p["city"])
         r = rel[i]
         out.append({
             "id": i, "sei": sei, "mei": mei, "azana": big5_fix((p.get("azana") or "")[:2]), "name_full": full,
             "name_orig": p.get("name_orig", ""), "sex": p["sex"], "birth": b, "appear": appear, "death": d,
-            "death_type": 1 if p.get("death_violent") else 0,
+            "death_type": 1 if p.get("death_violent") or violent_bio(bio) else 0,
             "city": p["city"], "city_id": city_by[p["city"]]["id"] if p["city"] in city_by else None, "region": region,
             "city_basis": p.get("city_basis", ""), "home": HOME.get(region, 11 if p.get("world") else 4), "polity": pol, "role": p["role"],
             "offices": p.get("offices") or [], "stats": stats, "apt": aptitude(pk, stats, lean, region),
@@ -531,6 +643,21 @@ def main():
     for e in out:
         e["generation"] = gen_of(e["id"])
         e["blood"] = blood_of(e["id"])
+    # ---- 相性：同一政权的人都在基准附近，互相厌恶的对手也会挨在一起（光荣原版里厌恶的两人相性差 <10 的约三成）。
+    #      来源没给相性的一方，和厌恶对象相差不到 6 就往外挪 8~15
+    oid = {e["id"]: e for e in out}
+    moved = set()
+    for e in out:
+        if byid[e["id"]].get("aishou") is not None or e["id"] in moved:
+            continue
+        for t in e["disliked"]:
+            if t in oid:
+                diff = (e["aishou"] - oid[t]["aishou"]) % 150
+                if min(diff, 150 - diff) < 6:
+                    step = 8 + rnd(e["keys"][0], "aishou_foe", 8)
+                    e["aishou"] = (oid[t]["aishou"] + (step if diff < 75 else -step)) % 150
+                    moved.add(e["id"])
+                    break
     save_json(PERSONS / "roster.json", out)
     save_jsonl(BUILD / "dropped.jsonl", dropped) if dropped else None
     report(out, koei, len(merged), len(dropped))

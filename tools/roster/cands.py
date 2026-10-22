@@ -21,6 +21,8 @@ H = re.compile(r"[一-鿿]")
 # 中华三国志五维 → 光荣尺度（用两边都有的 670 人校出来的众数差）
 ZH_OFF = [1, 2, -1, 4, -1]
 ZH_SEIKAKU = {1: 3, 2: 0, 4: 2, 6: 1}
+# 中华三国志剧本里给剧情用的泛称角色，不是人物
+ZH_NOT_PERSON = {"傳令官", "旁白", "童子", "農民", "盜賊", "士兵", "百姓", "使者", "商人", "刺客", "山賊", "侍女"}
 
 
 def norm_bio(s, limit=150):
@@ -40,7 +42,7 @@ def from_zhsan():
     out = []
     for e in load_json(SRC / "zhsan.json"):
         name = (e["SurName"] or "") + (e["GivenName"] or "")
-        if not name or not H.search(name):
+        if not name or not H.search(name) or name in ZH_NOT_PERSON:
             continue
         stats = [max(1, min(100, e[f] + o)) for f, o in zip(
             ["BaseCommand", "BaseStrength", "BaseIntelligence", "BasePolitics", "BaseGlamour"], ZH_OFF)]
@@ -216,11 +218,18 @@ def from_wiki():
             if e.get("skip") or not e.get("zh"):
                 continue
             s = src.get(e.get("title"), {})
+            yrs = [e.get("birth"), e.get("death")]
+            if yrs == [None, None]:                    # 子代理没给年份：用分类、信息框里的年代
+                rb, rd, act = s.get("b"), s.get("d"), s.get("act")
+                if act:
+                    yrs = list(act)
+                elif rb or rd:
+                    yrs = [(rb[0] + rb[1]) // 2 + 20 if rb else None, (rd[0] + rd[1]) // 2 if rd else None]
             out.append({
                 "key": f"wk:{e.get('qid') or e.get('title')}", "qid": e.get("qid") or s.get("qid", ""), "name": e["zh"],
                 "sei": e.get("sei"), "mei": e.get("mei"), "name_full": e.get("zh_full", ""), "name_orig": e.get("title", ""),
                 "sex": 1 if e.get("sex") == "f" else 0, "birth": e.get("birth"), "death": e.get("death"),
-                "years": [e.get("birth"), e.get("death")], "death_violent": bool(e.get("death_violent")),
+                "years": yrs, "death_violent": bool(e.get("death_violent")),
                 "polity": e.get("polity", ""), "role": e.get("role", "其他"), "place": e.get("place", ""),
                 "lat": e.get("lat"), "lon": e.get("lon"), "offices": e.get("offices") or [],
                 "kin": [[x.get("rel", ""), x.get("name", "")] for x in e.get("kin") or [] if x.get("name")],
