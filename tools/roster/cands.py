@@ -167,7 +167,7 @@ def from_global():
 
 
 # 希腊、拉丁史书（raw/SPEC_CLASSIC.md）：希罗狄安、罗马君王传、优西比乌、佐西默斯、阿米阿努斯
-CLASSIC = {"wl": "Wikipedia（综述、列表条目）", "dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
+CLASSIC = {"rg": "按地区查找", "wl": "Wikipedia（综述、列表条目）", "dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
 
 
 def en_key(s):
