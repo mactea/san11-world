@@ -167,7 +167,13 @@ def from_global():
 
 
 # 希腊、拉丁史书（raw/SPEC_CLASSIC.md）：希罗狄安、罗马君王传、优西比乌、佐西默斯、阿米阿努斯
-CLASSIC = {"rg": "按地区查找", "wl": "Wikipedia（综述、列表条目）", "dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
+CLASSIC = {"rg": "按地区查找", "wl": "Wikipedia（综述、列表条目）", "dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus",
+           # 公版/开放网站上的史料（raw/SPEC_OPEN.md，split_open.py）
+           "fau": "Faustus of Byzantium", "moi": "Moses of Khoren", "mhv": "Mahavamsa/Dipavamsa",
+           "niya": "Niya Kharosthi documents (tr. Burrow)", "cth": "Codex Theodosianus", "je": "Jewish Encyclopedia",
+           "soc": "Socrates, HE", "soz": "Sozomen, HE", "thd": "Theodoret, HE", "phs": "Philostorgius, HE",
+           "vc": "Eusebius, Vita Constantini"}
+LOOSE = {"wl", "fau", "moi", "mhv", "niya", "cth", "je", "soc", "soz", "thd", "phs", "vc"}       # 各块分给不同子代理、同一人会在几块里重复出现的书
 
 
 def en_key(s):
@@ -182,6 +188,7 @@ def known_zh():
         for line in f.read_text(encoding="utf-8").splitlines():
             parts = [x.strip() for x in line.split("|")]
             if len(parts) >= 2 and parts[0]:
+                out.setdefault(parts[0].lower(), parts[1])
                 out.setdefault(en_key(parts[0]), parts[1])
     return out
 
@@ -193,10 +200,11 @@ def from_classic(prefix, known):
     for f in sorted(glob.glob(str(RAW / f"{prefix}_*.jsonl"))):
         for n, e in enumerate(load_jsonl(f)):
             en = e.get("name_en") or ""
-            zh = known.get(en_key(en)) or known.get(en.lower()) or e.get("zh") or ""
+            # 带括注的名字（「Basil of Ancyra (martyr)」）是子代理有意和同名者分开的，只按全名对
+            zh = known.get(en.lower()) or ("(" not in en and known.get(en_key(en))) or e.get("zh") or ""
             if not zh:
                 continue
-            if prefix == "wl":
+            if prefix in LOOSE:
                 lk = re.sub(r"^(mar|saint|st\.?)\s+", "", en_key(en))
                 ys = [y for y in (e.get("years") or []) + [e.get("birth"), e.get("death")] if isinstance(y, int)]
                 for (k2, lo, hi), z2 in loose.items():
