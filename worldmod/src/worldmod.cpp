@@ -1580,12 +1580,14 @@ typedef int(__thiscall* HeaderIoFn)(void* hdr, void* stream);
 static HeaderIoFn g_hdrReadOrig = nullptr, g_hdrWriteOrig = nullptr;
 // M8: streams for more than 42 regular forces carry "WF" + u16 R instead (also wide).
 // M9: streams for more than 1000 units carry 'U' + u8 R + u16 U (also wide; R <= 249 fits the byte).
-// M10: streams for more than 850 scenario officers carry "PS" + u16 PS in the unused dword at file offset 0x20
-// (header +0x24, read and written as is; 0 in Koei's files).
-static const uint32_t PS_MARK = 'P' | 'S' << 8;
-static uint32_t streamMarkPS() {
+// M10: streams for more than 850 scenario officers carry u8 v + 'P' + u16 PS in the dword at file offset 0x20
+// (header +0x24): Koei's value v there is small (0 in scenarios, 1 in saves); the game sees v again after the read
+// and after the write.
+static uint32_t streamMarkPS(uint32_t v) {
     int PS = g_persons ? g_persons->PS : 850;
-    return PS != 850 ? PS_MARK | (uint32_t)PS << 16 : 0;
+    if (PS == 850) return v;
+    if (v > 0xff) { logf("ERROR: header dword 0x20 = %#x does not leave room for the officer count", v); return v; }
+    return v | 'P' << 8 | (uint32_t)PS << 16;
 }
 static uint32_t streamMark() {
     int R = g_forces ? g_forces->R : 42, U = g_units ? g_units->U : 1000;
@@ -1611,11 +1613,13 @@ static int __fastcall hdrRead(uint8_t* hdr, void*, uint8_t* stream) {
     }
     if (g_persons) {
         uint32_t mp = *(uint32_t*)(hdr + 0x24);
-        int PS = g_persons->PS, streamPS = (mp & 0xffff) == PS_MARK ? (int)(mp >> 16) : 850;
+        bool marked = (mp >> 8 & 0xff) == 'P';
+        int PS = g_persons->PS, streamPS = marked ? (int)(mp >> 16) : 850;
+        if (marked) *(uint32_t*)(hdr + 0x24) = mp & 0xff;
         // a scenario (kind 0x16) may hold fewer officers (the rest stay empty); elsewhere the new / special officer
         // ids follow PS, so a different count cannot load
         if (streamPS > PS || (streamPS != PS && kind != 0x16 && !master))
-            logf("ERROR: this file was made for %d scenario officers, the game runs %d (worldmod.ini persons=): it will not load correctly", streamPS, PS);
+            logf("ERROR: this file (kind %#x) was made for %d scenario officers, the game runs %d (worldmod.ini persons=): it will not load correctly", kind, streamPS, PS);
         *g_persons->PSTREAM = streamPS < PS ? streamPS : PS;
     }
     return r;
@@ -1624,8 +1628,11 @@ static int __fastcall hdrWrite(uint8_t* hdr, void*, uint8_t* stream) {
     *(uint32_t*)(hdr + 0x30) = streamMark();
     if (g_bases && g_bases->IDWIDE) InterlockedExchange((LONG*)g_bases->IDWIDE, 1);
     if (g_units) *g_units->USTREAM = g_units->U;
-    if (g_persons) { *(uint32_t*)(hdr + 0x24) = streamMarkPS(); *g_persons->PSTREAM = g_persons->PS; }
-    return g_hdrWriteOrig(hdr, stream);
+    uint32_t v = *(uint32_t*)(hdr + 0x24);
+    if (g_persons) { *(uint32_t*)(hdr + 0x24) = streamMarkPS(v); *g_persons->PSTREAM = g_persons->PS; }
+    int r = g_hdrWriteOrig(hdr, stream);
+    *(uint32_t*)(hdr + 0x24) = v;
+    return r;
 }
 
 // M8 (forces.cpp): with more than 42 regular forces the two u8[47] force x force members live in side tables
