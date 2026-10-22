@@ -94,6 +94,11 @@ if M9_UNIT_SITES:                     # MapUI: the unit markers move to the end 
         if r['va'] == '0x6375e6':
             assert r['expr'] == '0x8afb4+(N-87)*0x8c', r['expr']
             r['expr'] += '+U*0x20'
+M10_PERSON_SITES = True               # M10 (below); 0x590490: the officer array grows a frame M7 grows too
+if M10_PERSON_SITES:
+    import m10_stack
+    for r in struct_rows:
+        r['expr'] += m10_stack.M7_GROW.get(int(r['va'], 16), '')
 
 # fields replaced by structural rows
 overridden = set()
@@ -183,6 +188,35 @@ if M9_UNIT_SITES:
         add_field(va, locate(va, old, size), size, norm(expr), f'[M9] {comment}')
     for start, length, text, comment in m9_sites.REWRITE:
         rewrites.append((start, length, text, None, f'[M9] {comment}'))
+# ---- M10 (M10_PERSONS.md): officer count constants (m10_review, all imm32 / disp32) and the relocation of the
+# officer storage (m10_sites.py). The reviewers wrote S (scenario officers) and P (all officers); in patch expressions
+# those letters are the terrain stage and the port count, so they become PS and PT.
+if M10_PERSON_SITES:
+    import m10_sites
+    import m10_orders
+    import m10_code
+
+    def m10_expr(e):
+        return re.sub(r'\bP\b', 'PT', re.sub(r'\bS\b', 'PS', e))
+    for f in sorted(glob.glob(f'{PROJ}/m10_review/result_*.jsonl')):
+        for l in open(f, encoding='utf-8'):
+            if not l.strip():
+                continue
+            r = json.loads(l)
+            va = int(r['addr'], 16)
+            if r['verdict'] != 'PERSON' or not r.get('patch') or va in m10_sites.SKIP | m10_orders.SKIP | m10_code.SKIP:
+                continue
+            expr = norm(m10_expr(r['patch']))
+            if r['encoding'] not in ('imm32', 'disp32'):
+                raise SystemExit(f'M10 site {r["addr"]}: encoding {r["encoding"]}')
+            v = int(str(r['value']), 0) & 0xffffffff
+            if r['encoding'] == 'disp32' and struct.pack('<I', v) not in insn[va][0]:
+                v = -v & 0xffffffff          # lea r, [r - k]: the review wrote k
+            add_field(va, locate(va, v, 4), 4, expr, f"[M10 {r['role']}] {insn[va][1]} {insn[va][2]}")
+    for va, old, size, expr, comment in m10_sites.FIELD + m10_stack.FIELD + m10_orders.FIELD + m10_code.FIELD:
+        add_field(va, locate(va, old, size) if va in insn else 0, size, norm(expr), f'[M10] {comment}')
+    for start, length, text, comment in m10_sites.REWRITE + m10_stack.REWRITE + m10_code.REWRITE:
+        rewrites.append((start, length, text, None, f'[M10] {comment}'))
 # found in testing (an officer marched out of a new city): unit index <-> person location (+0x9c = N + unit)
 # sites the review missed. Encoders and decoders must all use N, or a marching officer reads as being in city 87+k.
 WIDEN_TEXT = {0x4a1c47: ('N', 'lea esi, [eax + {N}]'),        # unit formation 0x4a1bd0: officers' location
@@ -235,6 +269,11 @@ for va, text in PHASE_C_TEXT.items():
     WIDEN_TEXT[va] = (None, text)
 if M9_UNIT_SITES:                               # M9 stream record counts (re-encoded in caves)
     for va, old, new in m9_sites.CAVE_TEXT:
+        assert f'{insn[va][1]} {insn[va][2]}' == old, (hex(va), old)
+        widen[va] = 'TEXT'
+        WIDEN_TEXT[va] = (None, new)
+if M10_PERSON_SITES:                            # M10 entry swaps of the officer snapshot (re-encoded in caves)
+    for va, old, new in m10_sites.CAVE_TEXT + m10_stack.CAVE_TEXT + m10_orders.CAVE_TEXT + m10_code.CAVE_TEXT:
         assert f'{insn[va][1]} {insn[va][2]}' == old, (hex(va), old)
         widen[va] = 'TEXT'
         WIDEN_TEXT[va] = (None, new)
@@ -318,9 +357,10 @@ rewrites.append((0x4839f0, 16, 'mov eax, dword ptr [esp + 4]; movzx eax, word pt
 
 # ---- found in testing (not in the review): 0x492990 sorts the names of all persons and bases into
 # heap buffers sized for 1100 + 87 entries (0x104-byte names, two pointer arrays)
-EXTRA = [(0x49299f, 1, 4, '(1100+N)*0x104', 'person+base name buffer (0x492990)'),
-         (0x4929b2, 1, 4, '(1100+N)*4', 'person+base name pointers (0x492990)'),
-         (0x4929c0, 1, 4, '(1100+N)*4', 'person+base name pointers (0x492990)')]
+PERSONS = 'PT' if M10_PERSON_SITES else '1100'
+EXTRA = [(0x49299f, 1, 4, f'({PERSONS}+N)*0x104', 'person+base name buffer (0x492990)'),
+         (0x4929b2, 1, 4, f'({PERSONS}+N)*4', 'person+base name pointers (0x492990)'),
+         (0x4929c0, 1, 4, f'({PERSONS}+N)*4', 'person+base name pointers (0x492990)')]
 EXTRA += [
     # found in testing: members after the embedded per-city widget (ScreenE, NewGameK) read in other forms
     (0x54ce29, 2, 4, '0x5d78+((C-42)*0xc0)', 'ScreenE: add edi,0x5d78 (16 scenario buttons after the widget)'),

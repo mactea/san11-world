@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "units.h"
+#include "persons.h"
 
 namespace {
 
@@ -76,12 +77,12 @@ int unitsClone(int src, const char* path) {
     FILE* f = nullptr;
     if (fopen_s(&f, path, "r") || !f) return -2;
     const uint8_t* s = g_u->UNITARR + (size_t)src * UNIT_SIZE;
-    const uint32_t PERS = 0x720DA14, PSIZE = 0x190;
+    const uint32_t PSIZE = 0x190;
     int n = 0, dst, leader, copyFrom, corps, home, status, lo, hi, loc;
     while (fscanf_s(f, "%d %d %d %d %d %d %d %d %d", &dst, &leader, &copyFrom, &corps, &home, &status, &lo, &hi, &loc) == 9) {
-        if (dst < 0 || dst >= g_u->U || dst == src || leader < 0 || leader >= 1100) continue;
-        uint8_t* p = (uint8_t*)(uintptr_t)(PERS + leader * PSIZE);
-        if (copyFrom >= 0) memcpy(p + 4, (void*)(uintptr_t)(PERS + copyFrom * PSIZE + 4), PSIZE - 4);
+        uint8_t* p = personPtr(leader);
+        if (dst < 0 || dst >= g_u->U || dst == src || !p) continue;
+        if (copyFrom >= 0 && personPtr(copyFrom)) memcpy(p + 4, personPtr(copyFrom) + 4, PSIZE - 4);
         if (corps >= 0) { *(int*)(p + 0x94) = corps; *(int*)(p + 0x98) = home; *(int*)(p + 0xa0) = status; }
         uint8_t* d = g_u->UNITARR + (size_t)dst * UNIT_SIZE;
         memcpy(d + 4, s + 4, UNIT_SIZE - 4);                   // the vtable stays
