@@ -159,10 +159,14 @@ def in_period(p):
     return d >= YEAR_LO and b <= YEAR_HI - 15 and d - b >= 14      # 幼年夭折的宗室子弟登场不了，不收
 
 
+ROLE_T2S = {"學者": "学者", "武將": "武将", "謀士": "谋士", "後妃": "后妃", "宦官": "宦官", "隱士": "隐士",
+            "叛軍首領": "叛军首领", "外族首領": "外族首领"}
+
+
 def fix_role(p, stats):
-    """中华三国志、CBDB 没有身份字段：按五维推断"""
+    """中华三国志、CBDB 没有身份字段：按五维推断；海外子代理写的繁体身份名统一成简体（身份规则按简体名匹配）"""
     if p.get("role") not in (None, "", "其他"):
-        return p["role"]
+        return ROLE_T2S.get(p["role"], p["role"])
     if p.get("sex") == 1:
         return "后妃" if max(stats[:2]) < 50 else "武将"
     return "武将" if max(stats[:2]) >= max(stats[2:4]) else "文臣"

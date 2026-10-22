@@ -167,7 +167,7 @@ def from_global():
 
 
 # 希腊、拉丁史书（raw/SPEC_CLASSIC.md）：希罗狄安、罗马君王传、优西比乌、佐西默斯、阿米阿努斯
-CLASSIC = {"dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
+CLASSIC = {"wl": "Wikipedia（综述、列表条目）", "dio": "Cassius Dio", "hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
 
 
 def en_key(s):
@@ -189,12 +189,22 @@ def known_zh():
 def from_classic(prefix, known):
     """known：英文名 → 中文名，会随读随记，不同块、不同子代理给同一个英文名的人用同一个中文名"""
     out = []
+    loose = {}                                   # 综述条目（wl）各块之间：去掉括注、「Mar」后同名且年代重叠的算一人
     for f in sorted(glob.glob(str(RAW / f"{prefix}_*.jsonl"))):
         for n, e in enumerate(load_jsonl(f)):
             en = e.get("name_en") or ""
             zh = known.get(en_key(en)) or known.get(en.lower()) or e.get("zh") or ""
             if not zh:
                 continue
+            if prefix == "wl":
+                lk = re.sub(r"^(mar|saint|st\.?)\s+", "", en_key(en))
+                ys = [y for y in (e.get("years") or []) + [e.get("birth"), e.get("death")] if isinstance(y, int)]
+                for (k2, lo, hi), z2 in loose.items():
+                    if k2 == lk and (not ys or lo is None or (min(ys) <= hi + 20 and max(ys) >= lo - 20)):
+                        zh = z2
+                        break
+                else:
+                    loose[(lk, min(ys) if ys else None, max(ys) if ys else None)] = zh
             known.setdefault(en.lower(), zh)
             yrs = e.get("years") or [None, None]
             out.append({
