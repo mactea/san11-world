@@ -50,7 +50,8 @@ POLITY = {
 }
 ETHNIC_CITY = {"匈奴": "晉陽", "南匈奴": "晉陽", "鲜卑": "龍城", "乌桓": "北平", "羌": "天水", "氐": "天水", "羯": "晉陽",
                "賨": "江州", "巴": "江州", "蛮": "武陵", "山越": "會稽", "高句丽": "丸都", "夫余": "扶餘", "倭": "邪馬台",
-               "西域": "龜茲"}
+               "西域": "龜茲", "高句麗": "丸都", "百济": "馬韓", "百濟": "馬韓", "新罗": "斯盧", "新羅": "斯盧",
+               "靺鞨": "扶餘", "夫餘": "扶餘"}
 ROLE_STATS = {"君主": [70, 60, 65, 65, 75], "宗室": [50, 45, 55, 55, 60], "后妃": [10, 10, 55, 45, 70],
               "武将": [65, 68, 45, 35, 50], "文臣": [35, 30, 62, 68, 55], "谋士": [45, 30, 72, 60, 55],
               "宦官": [15, 15, 55, 45, 30], "外戚": [45, 40, 45, 45, 50], "名士": [20, 15, 70, 55, 70],
@@ -61,6 +62,7 @@ REL = {"父": "father", "母": "mother", "妻": "spouse", "夫": "spouse", "配�
        "義兄弟": "sworn"}
 CHILD = {"子", "女", "长子", "長子", "次子", "少子", "嗣子", "养子", "養子"}
 SIBLING = {"兄", "弟", "姊", "妹", "姐", "从兄", "從兄", "从弟", "從弟", "兄弟", "族兄", "族弟"}
+NOT_CLAN = re.compile(r"母|妻|夫|舅|甥|婿|岳|外|姑|妾|配偶|嫂|媳|養|养|繼|继|義|义|友|師|师|主|臣|^$")
 
 
 POLITY_KW = [("晉", "西晉"), ("晋", "西晋"), ("魏", "曹魏"), ("吳", "孫吳"), ("吴", "孙吴"), ("蜀", "蜀漢"),
@@ -155,25 +157,96 @@ def names(p):
     return big5_fix(sei), big5_fix(mei), full
 
 
+# 州 → 州治（郡名表里的「益州」是益州郡，州要单独查）；括号里是孙吴、东晋时的州治
+ZHOU = {"司隸": "洛陽", "司州": "洛陽", "冀州": "鄴", "幽州": "薊", "并州": "晉陽", "青州": "齊", "徐州": "下邳",
+        "兗州": "濮陽", "豫州": "許昌", "揚州": ("壽春", "建業"), "荊州": ("襄陽", "江陵"), "益州": "成都",
+        "涼州": "武威", "雍州": "長安", "交州": "交趾", "秦州": "天水", "梁州": "漢中", "寧州": "建寧", "廣州": "番禺",
+        "江州": "豫章", "湘州": "長沙", "平州": "襄平", "營州": "昌黎", "南兗州": "廣陵", "南徐州": "京口", "司隷": "洛陽"}
+EXTRA_PLACE = {"許昌": (34.03, 113.85), "許": (34.03, 113.85), "濮陽": (35.70, 115.03), "京口": (32.20, 119.45),
+               "南皮": (38.05, 116.70), "小沛": (34.70, 116.93), "柴桑": (29.70, 116.00), "尋陽": (29.70, 116.00),
+               "新野": (32.52, 112.36), "永安": (31.05, 109.50), "白帝": (31.05, 109.50), "合肥": (31.86, 117.28),
+               "濡須": (31.60, 117.90), "夏口": (30.55, 114.30), "樊城": (32.05, 112.15), "官渡": (34.72, 114.00),
+               "陳倉": (34.35, 107.20), "祁山": (34.15, 105.30), "街亭": (34.80, 106.00), "五丈原": (34.25, 107.60),
+               "赤壁": (29.85, 113.62), "夷陵": (30.70, 111.30), "西陵": (30.70, 111.30), "閬中": (31.58, 105.97),
+               "陽平關": (33.10, 106.10), "劍閣": (32.20, 105.50), "雒": (30.99, 104.25), "綿竹": (31.33, 104.20),
+               "臨淄": (36.85, 118.30), "平城": (40.08, 113.30), "盛樂": (40.40, 111.60), "龍城": (41.57, 120.43),
+               "中山": (38.50, 115.00), "襄國": (37.07, 114.50), "離石": (37.52, 111.13), "左國城": (37.52, 111.13),
+               "蒲阪": (34.85, 110.35), "潼關": (34.60, 110.25), "壺關": (36.10, 113.20), "姑臧": (37.93, 102.63)}
+# 和年号、封号同形的地名不从列传里认（建安、永嘉是年号）；单字郡国（魯、齊、趙……）在正文里歧义太大也不认
+BIO_SKIP = {"建安", "永嘉", "建寧", "永昌", "章武", "永安", "建平", "興平", "太平", "建興", "黃龍", "太和", "咸寧",
+            "義熙", "興古", "新城", "南安", "益州"}
+_place_re = None
+
+
+def _places():
+    global _place_re
+    if _place_re is None:
+        from gazetteer import JUN
+        names = {k for k in JUN if len(k) >= 2} | set(EXTRA_PLACE) | set(ZHOU)
+        _place_re = re.compile("|".join(sorted(map(re.escape, names), key=len, reverse=True)))
+    return _place_re
+
+
+def place_city(name, pol=""):
+    """地名（郡、州、要地）→ 地图上的城"""
+    if name in ZHOU:
+        z = ZHOU[name]
+        if isinstance(z, tuple):
+            z = z[1] if re.search(r"吳|吴|東晉|东晋|蜀", pol or "") else z[0]
+        name = z
+    if name in EXTRA_PLACE:
+        return nearest_city(*EXTRA_PLACE[name], china_only=True)[0]
+    return origin_city(name, china_only=True)
+
+
+def activity_city(p):
+    """没有籍贯时按任职地、事迹地点估计：官职里的地名记 2 分、列传里的记 1 分，取最高（同分取先出现的）"""
+    score, first = collections.Counter(), {}
+    pol = p.get("polity") or ""
+    texts = [(s2t(o), 2) for o in p.get("offices") or []] + [(s2t(p.get("bio") or ""), 1)]
+    n = 0
+    for text, w in texts:
+        text = text.replace("幷", "并").replace("建鄴", "建業")
+        if w == 2 and not _places().search(text):           # 郡名表里没有的：按 CBDB 县名查（「始平太守」）
+            m = re.match(r"(.{2,3}?)(太守|刺史|內史|相|令|長|都尉|牧|校尉|護軍)$", text)
+            if m and (c := origin_city(m.group(1), china_only=True)):
+                score[c] += w
+                first.setdefault(c, n)
+                n += 1
+            continue
+        for m in _places().finditer(text):
+            name = m.group(0)
+            after = text[m.end():m.end() + 1]
+            if after in "王公侯伯" or (w == 1 and name in BIO_SKIP):    # 「陳留王」「東海王越」是封号
+                continue
+            c = place_city(name, pol)
+            if c:
+                score[c] += w
+                first.setdefault(c, n)
+                n += 1
+    if not score:
+        return None
+    return max(score, key=lambda c: (score[c], -first[c]))
+
+
 def home_city(p, region_of):
+    """出身城和依据：籍贯 > 坐标 > 任职地/事迹地 > 民族 > 所属政权的都城"""
     if p.get("city"):
-        return p["city"]
+        return p["city"], "指定"
     if p.get("world") and p.get("lat") is not None and p.get("lon") is not None:
-        return nearest_city(p["lat"], p["lon"])[0]
+        return nearest_city(p["lat"], p["lon"])[0], "坐标"
     c = origin_city(p.get("origin") or "")
     if c:
-        return c
-    for o in reversed(p.get("offices") or []):          # 没有籍贯：按任职的郡（「北地太守」「荊州刺史」→ 治所）
-        m = re.match(r"(.{1,3}?)(太守|刺史|內史|内史|相|令|長|都尉|牧|校尉|護軍)$", s2t(o))
-        if m and (c := origin_city(m.group(1))):
-            return c
+        return c, "籍贯"
+    if not p.get("world") and (c := activity_city(p)):
+        return c, "任职地/事迹地"
     eth = p.get("ethnic")
     if eth in ETHNIC_CITY and ETHNIC_CITY[eth]:
-        return ETHNIC_CITY[eth]
+        return ETHNIC_CITY[eth], "民族"
     for pol in [p.get("polity")] + list(reversed(p.get("polity_path") or [])):
         if polity_info(pol)[0]:
-            return polity_info(pol)[0]
-    return "洛陽" if not p.get("world") else None
+            return polity_info(pol)[0], "政权都城"
+    return ("洛陽", "默认") if not p.get("world") else (None, "")
 
 
 def tier_of(p, stats):
@@ -242,9 +315,9 @@ def main():
     dropped = merged[NEW:]
     # ---- 出身城
     for p in real:
-        p["city"] = home_city(p, region_of)
+        p["city"], p["city_basis"] = home_city(p, region_of)
         if p["city"] and p["city"] not in city_by:
-            p["city"] = "洛陽" if not p.get("world") else None
+            p["city"], p["city_basis"] = ("洛陽", "默认") if not p.get("world") else (None, "")
     nocity = [p for p in real if not p["city"]]
     for p in nocity:                                   # 海外又没坐标：按联合国分区给一个城
         p["city"] = {"Southern Europe": "羅馬", "Western Europe": "盧格杜努姆(里昂)", "North Africa": "亞歷山大",
@@ -252,6 +325,7 @@ def main():
                      "Eastern Europe": "錫爾米烏姆"}.get(p.get("region_un"), "羅馬")
         if p["city"] not in city_by:
             p["city"] = "羅馬"
+        p["city_basis"] = "地区"
     # ---- 虚构补位：按城平均，人数最少的城先补
     per_city = collections.Counter(p["city"] for p in real)
     fic, used = [], {p["name"] for p in real} | {k["sei"] + k["mei"] for k in koei}
@@ -318,6 +392,7 @@ def main():
         return hits[0] if hits else None
 
     rel = {p["id"]: {"father": -1, "mother": -1, "spouse": -1, "sworn": -1, "liked": [], "disliked": []} for p in allp}
+    clan = collections.defaultdict(set)                       # 同宗亲属（父系，籍贯相同）
     for p in allp:
         b, _, d = p["_life"]
         near = (b - 10, d + 10)
@@ -348,6 +423,9 @@ def main():
                     rel[t][parent] = p["id"]
             elif kind in SIBLING and len(r["liked"]) < 5 and t not in r["liked"]:
                 r["liked"].append(t)
+            if not NOT_CLAN.search(kind) and not (p["sex"] == 1 and re.search(r"子|女|孫", kind)):   # 女子的子孫随夫家
+                clan[p["id"]].add(t)
+                clan[t].add(p["id"])
         for ref in p.get("friends") or []:
             t = resolve(ref, near, alive)
             if t is not None and t != p["id"] and t not in r["liked"] and len(r["liked"]) < 5:
@@ -356,8 +434,31 @@ def main():
             t = resolve(ref, near, alive)
             if t is not None and t != p["id"] and t not in r["disliked"] and t not in r["liked"] and len(r["disliked"]) < 5:
                 r["disliked"].append(t)
-    gen, blood = {}, {}
     byid = {p["id"]: p for p in allp}
+    # ---- 没有籍贯的人：同宗亲属（父、子、兄弟、叔侄、祖孙……，含光荣武将）有籍贯就跟他们走（可传两代）
+    for i, r in rel.items():
+        if r["father"] >= 0:
+            clan[i].add(r["father"])
+            clan[r["father"]].add(i)
+    koei_city = {}
+    for m in in_koei:
+        if not m.get("world") and (c := origin_city(m.get("origin") or "")):
+            koei_city.setdefault(m["koei_id"], c)
+    strong = {"籍贯", "亲属籍贯"}
+
+    def known(t):
+        if t in byid:
+            q = byid[t]
+            return q["city"] if q.get("city_basis") in strong and not q.get("world") else None
+        return koei_city.get(t)
+    for _ in range(2):
+        for p in allp:
+            if p.get("world") or p.get("city_basis") in strong:
+                continue
+            hit = next((c for t in sorted(clan[p["id"]]) if (c := known(t))), None)
+            if hit:
+                p["city"], p["city_basis"] = hit, "亲属籍贯"
+    gen, blood = {}, {}
     kblood = {k["koei_id"]: k["blood"] for k in koei}
     kgen = {k["koei_id"]: k["generation"] for k in koei}
 
@@ -416,7 +517,7 @@ def main():
             "name_orig": p.get("name_orig", ""), "sex": p["sex"], "birth": b, "appear": appear, "death": d,
             "death_type": 1 if p.get("death_violent") else 0,
             "city": p["city"], "city_id": city_by[p["city"]]["id"] if p["city"] in city_by else None, "region": region,
-            "home": HOME.get(region, 11 if p.get("world") else 4), "polity": pol, "role": p["role"],
+            "city_basis": p.get("city_basis", ""), "home": HOME.get(region, 11 if p.get("world") else 4), "polity": pol, "role": p["role"],
             "offices": p.get("offices") or [], "stats": stats, "apt": aptitude(pk, stats, lean, region),
             "growth": raw["growth"], "lean": lean, "skill": skill, "skill_name": sk[skill]["name"] if skill in sk else "",
             **pers, "aishou": int(aishou), "generation": 0, "father": r["father"], "mother": r["mother"],

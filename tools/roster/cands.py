@@ -161,13 +161,90 @@ def from_global():
     return out
 
 
+# 希腊、拉丁史书（raw/SPEC_CLASSIC.md）：希罗狄安、罗马君王传、优西比乌、佐西默斯、阿米阿努斯
+CLASSIC = {"hdn": "Herodian", "ha": "Historia Augusta", "eus": "Eusebius, HE", "zos": "Zosimus", "amm": "Ammianus"}
+
+
+def en_key(s):
+    return re.sub(r"\s*\(.*?\)", "", s or "").strip().lower()
+
+
+def known_zh():
+    """已收海外人物 英文名 → 中文名（统一子代理给的译名，好让合并认出同一人）"""
+    f = PERSONS / "_cache" / "known_world.tsv"
+    out = {}
+    if f.exists():
+        for line in f.read_text(encoding="utf-8").splitlines():
+            parts = [x.strip() for x in line.split("|")]
+            if len(parts) >= 2 and parts[0]:
+                out.setdefault(en_key(parts[0]), parts[1])
+    return out
+
+
+def from_classic(prefix, known):
+    """known：英文名 → 中文名，会随读随记，不同块、不同子代理给同一个英文名的人用同一个中文名"""
+    out = []
+    for f in sorted(glob.glob(str(RAW / f"{prefix}_*.jsonl"))):
+        for n, e in enumerate(load_jsonl(f)):
+            en = e.get("name_en") or ""
+            zh = known.get(en_key(en)) or known.get(en.lower()) or e.get("zh") or ""
+            if not zh:
+                continue
+            known.setdefault(en.lower(), zh)
+            yrs = e.get("years") or [None, None]
+            out.append({
+                "key": f"{prefix}:{Path(f).stem}:{n}:{en}", "name": zh, "sei": e.get("sei") if zh == e.get("zh") else None,
+                "mei": e.get("mei") if zh == e.get("zh") else None, "name_full": e.get("zh_full", ""), "name_orig": en,
+                "sex": 1 if e.get("sex") == "f" else 0, "birth": e.get("birth"), "death": e.get("death"),
+                "years": yrs, "death_violent": bool(e.get("death_violent")), "polity": e.get("polity", ""),
+                "role": e.get("role", "其他"), "place": e.get("place", ""), "lat": e.get("lat"), "lon": e.get("lon"),
+                "offices": e.get("offices") or [],
+                "kin": [[x.get("rel", ""), x.get("name", "")] for x in e.get("kin") or [] if x.get("name")],
+                "friends": e.get("friends") or [], "foes": e.get("foes") or [], "bio": norm_bio(e.get("bio", "")),
+                "stats": e.get("stats"), "lean": e.get("lean", "無"), "src": f"{CLASSIC[prefix]} {e.get('src', '')}".strip(),
+                "conf": e.get("conf") if e.get("conf") in ("B", "C") else "B",
+                "fame": 15 + 3 * len(e.get("offices") or []) + len(e.get("bio") or "") // 15, "world": True})
+    return out
+
+
+def from_wiki():
+    """英文维基百科条目（scan_wiki.py → batch_wiki.py → 子代理 raw/wk_*.jsonl，规格同 SPEC_GLOBAL）"""
+    out = []
+    src = {e["title"]: e for e in (load_json(SRC / "wiki.json") if (SRC / "wiki.json").exists() else [])}
+    for f in sorted(glob.glob(str(RAW / "wk_*.jsonl"))):
+        for e in load_jsonl(f):
+            if e.get("skip") or not e.get("zh"):
+                continue
+            s = src.get(e.get("title"), {})
+            out.append({
+                "key": f"wk:{e.get('qid') or e.get('title')}", "qid": e.get("qid") or s.get("qid", ""), "name": e["zh"],
+                "sei": e.get("sei"), "mei": e.get("mei"), "name_full": e.get("zh_full", ""), "name_orig": e.get("title", ""),
+                "sex": 1 if e.get("sex") == "f" else 0, "birth": e.get("birth"), "death": e.get("death"),
+                "years": [e.get("birth"), e.get("death")], "death_violent": bool(e.get("death_violent")),
+                "polity": e.get("polity", ""), "role": e.get("role", "其他"), "place": e.get("place", ""),
+                "lat": e.get("lat"), "lon": e.get("lon"), "offices": e.get("offices") or [],
+                "kin": [[x.get("rel", ""), x.get("name", "")] for x in e.get("kin") or [] if x.get("name")],
+                "friends": e.get("friends") or [], "foes": e.get("foes") or [], "bio": norm_bio(e.get("bio", "")),
+                "stats": e.get("stats"), "lean": e.get("lean", "無"),
+                "src": f"English Wikipedia「{e.get('title')}」" + (f"（{s['qid']}）" if s.get("qid") else ""),
+                "conf": "B" if e.get("known", True) and not s.get("legend") else "C",
+                "fame": 20 + 2 * len(s.get("langs") or {}) + len(s.get("lead") or "") // 60, "world": True})
+    return out
+
+
 if __name__ == "__main__":
     BUILD.mkdir(parents=True, exist_ok=True)
-    for name, fn in [("zhsan", from_zhsan), ("qxz", from_qxz), ("cbdb", from_cbdb), ("global", from_global)]:
+    for name, fn in [("zhsan", from_zhsan), ("qxz", from_qxz), ("cbdb", from_cbdb), ("global", from_global),
+                     ("wiki", from_wiki)]:
         rows = fn()
         save_jsonl(BUILD / f"cands_{name}.jsonl", rows)
         print(name, len(rows))
-    for prefix in sorted({Path(f).stem.split("_")[0] for f in glob.glob(str(RAW / "*_*.jsonl"))} - {"gl"}):
+    known = known_zh()
+    for prefix in CLASSIC:
+        rows = from_classic(prefix, known)
+        save_jsonl(BUILD / f"cands_{prefix}.jsonl", rows)
+        print(prefix, len(rows))
+    for prefix in sorted({Path(f).stem.split("_")[0] for f in glob.glob(str(RAW / "*_*.jsonl"))} - {"gl", "wk"} - set(CLASSIC)):
         rows = from_text(prefix)
         save_jsonl(BUILD / f"cands_{prefix}.jsonl", rows)
         print(prefix, len(rows))
