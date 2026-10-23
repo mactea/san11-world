@@ -148,7 +148,7 @@ def from_global():
                 fame = float(s.get("sum_visib_ln_5criteria") or 0)
             except ValueError:
                 fame = 0
-            yrs = [e.get("birth"), e.get("death")]
+            yrs = e.get("years") or [e.get("birth"), e.get("death")]      # years：手工校正的活动年份
             if yrs == [None, None]:                    # 子代理没给年份：用名人库里的生卒（常是估计值）
                 yrs = [round(s["b"]) if s.get("b") else None, round(s["d"]) if s.get("d") else None]
             out.append({
