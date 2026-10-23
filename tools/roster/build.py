@@ -147,6 +147,11 @@ def life(p):
     d = int(d)
     if d <= b:
         d = b + 30
+    if d - b > 95:                                     # 活动年份跨度过大（多半是同名两人的记录并在了一起）：估的那头收回来
+        if p.get("birth") is None:
+            b = d - 80
+        elif p.get("death") is None:
+            d = b + 80
     appear = p.get("appear") or b + 16
     appear = int(min(max(appear, b + 12), d))
     return b, appear, d
@@ -631,7 +636,8 @@ def main():
         out.append({
             "id": i, "sei": sei, "mei": mei, "azana": big5_fix((p.get("azana") or "")[:2]), "name_full": full,
             "name_orig": p.get("name_orig", ""), "sex": p["sex"], "birth": b, "appear": appear, "death": d,
-            "death_type": 1 if p.get("death_violent") or violent_bio(bio) else 0,
+            # 来源标了横死、列传却只写病卒善终的，以列传为准
+            "death_type": 1 if violent_bio(bio) or (p.get("death_violent") and not CALM_DEATH.search(bio)) else 0,
             "city": p["city"], "city_id": city_by[p["city"]]["id"] if p["city"] in city_by else None, "region": region,
             "city_basis": p.get("city_basis", ""),
             "year_basis": p.get("_yr_basis") or ("来源" if not (p["_b_est"] and p["_d_est"]) else "来源活动年份"), "home": HOME.get(region, 11 if p.get("world") else 4), "polity": pol, "role": p["role"],

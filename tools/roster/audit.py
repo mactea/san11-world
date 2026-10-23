@@ -14,6 +14,9 @@ from common import PERSONS, SRC, load_json, save_json
 CHINA_REG = {"幽州", "冀州", "青州", "并州", "徐州", "揚州", "兗州", "豫州", "司隸", "荊州", "涼州", "益州", "南中", "交州",
              "鮮卑", "西域", "東夷", "倭", "匈奴", "西羌", "夷洲", "南海"}
 from build import VIOLENT_SELF as VIOLENT, CALM_DEATH as CALM          # 和建表用同一套判断
+from cands import CLASSIC
+# 海外人物的出处要能查回去：维基编号/条目，或史书原文抽取（cands.CLASSIC 的书名，后面带卷章）
+TRACEABLE = re.compile(r"Q\d+|Wikipedia|三國史記|三国史记|" + "|".join(re.escape(v) for k, v in CLASSIC.items() if k != "rg"))
 
 
 def sphere(e):
@@ -206,6 +209,13 @@ def main():
         f"{sk[s]['name']}({s}) 扩展 {n}、光荣 {koei_cnt.get(s, 0)}" for s, n in ext_cnt.items()
         if koei_cnt.get(s, 0) <= 2 and n > max(3, koei_cnt.get(s, 0) * ratio * 2)]
     WAR = {"戰鬥", "战斗", "行军", "攻擊", "攻击"}
+    # 门槛以光荣原版同特技持有者的最低值为准（搬运、射程在光荣里也有统率武力只有二三十的持有者）
+    kmin = {}
+    for k in koei_main:
+        if k["skill"] in sk:
+            ld, wu, it, po, ch = k["stats"]
+            m = kmin.get(k["skill"], (99, 99, 99))
+            kmin[k["skill"]] = (min(m[0], max(ld, wu)), min(m[1], po), min(m[2], it))
     for e in roster:
         s = e["skill"]
         if s == 0xff:
@@ -213,15 +223,16 @@ def main():
         info = sk.get(s, {})
         cat = info.get("category", "")
         ld, wu, it, po, ch = e["stats"]
-        if cat in WAR and max(ld, wu) < 55:
+        war_min, po_min, it_min = kmin.get(s, (55, 50, 55))
+        if cat in WAR and max(ld, wu) < min(55, war_min):
             add("特技·统率武力都低却有战斗/行军特技", e, f"{info.get('name')} {e['stats']}")
-        if cat in ("内政", "內政") and po < 50:
+        if cat in ("内政", "內政") and po < min(50, po_min):
             add("特技·政治低却有内政特技", e, f"{info.get('name')} {e['stats']}")
-        if cat in ("计略", "計略") and it < 55:
+        if cat in ("计略", "計略") and it < min(55, it_min):
             add("特技·智力低却有计略特技", e, f"{info.get('name')} {e['stats']}")
         compat = info.get("bing_zhong_compat") or {}
         lean = {"槍": "枪", "騎": "骑"}.get(e["lean"], e["lean"])
-        if lean in compat and not compat[lean] and cat in WAR:
+        if lean in compat and not compat[lean] and any(compat.values()) and cat in WAR:     # 不限兵种的特技不算
             add("特技·和兵种倾向不合", e, f"{info.get('name')}，倾向 {e['lean']}")
     out["特技·各类别数量"] = dict(collections.Counter(sk[e["skill"]]["category"] for e in roster if e["skill"] in sk))
 
@@ -237,8 +248,7 @@ def main():
             add("出处·列传里混入了整理说明", e, e["bio"][:50])
         if e["conf"] == "A" and all(s.startswith(("三國群雄志", "CBDB")) for s in e["src"]):
             add("出处·可信度 A 但只有群雄志/CBDB", e, "；".join(e["src"]))
-        if sphere(e) == "外" and not any(re.search(r"Q\d+|Wikipedia|Herodian|Augusta|Eusebius|Zosimus|Ammianus|三國史記|三国史记", s)
-                                        for s in e["src"]):
+        if sphere(e) == "外" and not any(TRACEABLE.search(s) for s in e["src"]):
             add("出处·海外人物出处不可追溯", e, "；".join(e["src"])[:60])
         years = [int(y) for y in re.findall(r"(?<!\d)(\d{3})年", e["bio"])]
         if years and (max(years) > e["death"] + 2 or min(years) < e["birth"] - 1):
