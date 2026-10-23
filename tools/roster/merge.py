@@ -15,7 +15,7 @@ PRI = {"zhsan": 0, "tj": 1, "js": 1, "hhs": 1, "sl": 1, "hy": 1, "sg": 1, "ss": 
        "rg": 2, "wl": 2, "dio": 2, "hdn": 2, "ha": 2, "eus": 2, "zos": 2, "amm": 2,
        "fau": 2, "moi": 2, "mhv": 2, "niya": 2, "cth": 2, "je": 2,
        "soc": 2, "soz": 2, "thd": 2, "phs": 2, "vc": 2,
-       "c354": 2, "eun": 2, "jor": 2, "lat": 2, "qxz": 3, "cbdb": 4}
+       "c354": 2, "eun": 2, "jor": 2, "lat": 2, "lib": 2, "syr": 2, "qxz": 3, "cbdb": 4}
 _t2s = None
 
 

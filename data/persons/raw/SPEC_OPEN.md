@@ -65,6 +65,20 @@
 * 2–4 世纪皇帝、篡位者、将领、禁卫军长官、总督；人大多已收，先查表。src `Aurelius Victor 39.20` / `Eutropius 9.22` /
   `Lactantius DMP 12`。
 
+## lib 利巴尼乌斯书信（希腊文）
+* 每封信开头是「编号. 收信人（与格）. (编者推定的年份)」。收：**收信人**和信里有具体事迹的人（被推荐的学生、打官司的人、
+  官员、亲属）；年份取信的推定年份（「356 vel 353/54?」取前一个）。只收 370 年以前已经活动的。
+* 收信人多是东方各省总督、东方伯、禁卫军长官、安条克元老、修辞家——**先查表**，PLRE 里那些人很多已经收过
+  （Anatolius、Strategius Musonianus、Datianus、Modestus、Themistius……）。同一人在多封信里出现合并成一条，offices、years 取全。
+* 只在一封问候信里出现、看不出身份的人不收；只知道是某人的学生、送信人、有一件具体事的写 `"conf": "C"`。
+  src `Libanius Ep. 356`；role 多为文臣/学者；polity 羅馬帝國；place 按任职地（多在安条克、君士坦丁堡、巴勒斯坦、阿拉伯、卡帕多西亚）。
+
+## syr Syriaca.org 人物库
+* 每条是一个人：编号、英文名、叙利亚文名、类别（作者、圣徒）、活动年代、生卒、性别、地点、简介。资料只有这些，
+  bio 按简介写；简介为空的按你确知的事写，确知不多的写 `"conf": "C"`。**纯传说的圣徒**（只见于晚出圣徒传、年代矛盾）不收。
+* name_en 用英文名；polity 按所在地（羅馬帝國、薩珊波斯、奧斯若恩、亞美尼亞……，教会人物可写 羅馬教會 / 東方教會）；
+  src `Syriaca.org person 10`。
+
 ## je 犹太百科「Amora」「Tannaim and Amoraim」
 * 收列表里 170–370 年活动的坦拿（最后一代）和阿摩拉（第 1–5 代）：巴比伦（Rav、Samuel、Rav Huna、Rav Judah、Rabbah、
   Rav Joseph、Abaye、Rava……）和巴勒斯坦（Judah ha-Nasi、Johanan bar Nappaha、Resh Lakish、Ammi、Assi……）。

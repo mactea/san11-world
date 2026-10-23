@@ -173,8 +173,10 @@ CLASSIC = {"rg": "按地区查找", "wl": "Wikipedia（综述、列表条目）"
            "niya": "Niya Kharosthi documents (tr. Burrow)", "cth": "Codex Theodosianus", "je": "Jewish Encyclopedia",
            "soc": "Socrates, HE", "soz": "Sozomen, HE", "thd": "Theodoret, HE", "phs": "Philostorgius, HE",
            "vc": "Eusebius, Vita Constantini", "c354": "Chronography of 354", "eun": "Eunapius, Lives",
-           "jor": "Jordanes, Getica", "lat": "Aurelius Victor / Eutropius / Lactantius"}
-LOOSE = {"wl", "fau", "moi", "mhv", "niya", "cth", "je", "soc", "soz", "thd", "phs", "vc", "c354", "eun", "jor", "lat"}       # 各块分给不同子代理、同一人会在几块里重复出现的书
+           "jor": "Jordanes, Getica", "lat": "Aurelius Victor / Eutropius / Lactantius",
+           "lib": "Libanius, Letters", "syr": "Syriaca.org"}
+LOOSE = {"wl", "fau", "moi", "mhv", "niya", "cth", "je", "soc", "soz", "thd", "phs", "vc", "c354", "eun", "jor", "lat",
+         "lib", "syr"}       # 各块分给不同子代理、同一人会在几块里重复出现的书
 
 
 def en_key(s):

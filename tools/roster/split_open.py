@@ -16,7 +16,9 @@
   jor  约达尼斯《哥特史》（Mierow 英译 1915，Gutenberg）
   lat  奥勒留·维克托《诸恺撒传》、欧特罗皮乌斯卷 8–10、拉克坦提乌斯《迫害者之死》（拉丁文，thelatinlibrary.com）
 
-    python split_open.py [每块字数，默认 30000] [church / late：只切这一组]"""
+  lib  利巴尼乌斯书信（希腊文，Foerster 本，First1KGreek），只留 370 年以前的信
+
+    python split_open.py [每块字数，默认 30000] [church / late / lib：只切这一组]"""
 import html as html_mod
 import re
 import sys
@@ -76,6 +78,8 @@ def main():
         return church()
     if "late" in sys.argv:
         return late()
+    if "lib" in sys.argv:
+        return libanius()
     cut("fau", "Faustus of Byzantium, History of Armenia (tr. Langlois, French)",
         remacle(read("faustus", "histoire.htm")))
     cut("moi", "Moses of Khoren, History of Armenia, books II-III (tr. Langlois, French)",
@@ -91,6 +95,7 @@ def main():
         "\n".join(clean(read("je", f)) for f in ("1421-amora", "14240-tannaim-and-amoraim")))
     church()
     late()
+    libanius()
 
 
 def late():
@@ -109,6 +114,23 @@ def late():
     cut("lat", "Aurelius Victor, De Caesaribus; Eutropius, Breviarium 8-10; Lactantius, De mortibus persecutorum (Latin)",
         "\n".join([f"\n[{f}]\n" + clean(read("latin", f)) for f in
                    ("victor.caes.html", "eutropius8.shtml", "eutropius9.shtml", "eutropius10.shtml", "demort.shtml")]))
+
+
+def libanius():
+    """利巴尼乌斯书信（Foerster 本，First1KGreek）：每封信抬头是「收信人与格. (编者推定的年份)」；
+    只留年份 ≤ 370 的，没标年份的按 Foerster 编号 19–839（多为 355–365 年）留"""
+    path = "tlg2200/tlg001/tlg2200.tlg001.1st1K-grc1.xml"
+    x = get(GH + "OpenGreekAndLatin/First1KGreek/master/data/" + path, T / "classic" / path.split("/")[-1])
+    x = re.sub(r"<note\b[^>]*>.*?</note>", " ", x, flags=re.S)
+    keep = []
+    for m in re.finditer(r'<div type="textpart" subtype="letter" n="(\d+)">(.*?)(?=<div type="textpart" subtype="letter"|</body>)',
+                         x, flags=re.S):
+        n, body = int(m.group(1)), re.sub(r"<[^>]+>", " ", m.group(2))
+        body = re.sub(r"\s+", " ", html_mod.unescape(body)).strip()
+        ys = [int(y) for y in re.findall(r"\b(3[0-9]{2})\b", body[:120])]
+        if (ys and min(ys) <= 370) or (not ys and 19 <= n <= 839):
+            keep.append(f"[Ep. {n}] {body}")
+    cut("lib", "Libanius, Letters (Greek, ed. Foerster; heading = addressee + editor's date)", "\n".join(keep))
 
 
 def church():
