@@ -11,7 +11,12 @@
   soc / soz / thd / phs  苏格拉底卷 1–4、索佐门卷 1–6、狄奥多勒卷 1–4、腓罗斯托尔吉乌斯《教会史》（希腊文，First1KGreek）
   vc   优西比乌《君士坦丁传》（希腊文，First1KGreek）
 
-    python split_open.py [每块字数，默认 30000] [church：只切教会史家]"""
+  c354 罗马城历书（354 年）：执政官表（170 年起）、罗马城市长官表、教宗与殉道者纪念日、利伯里乌斯教宗表、罗马城编年
+  eun  欧纳皮乌斯《智者传》（Wright 英译 1921，tertullian.org）
+  jor  约达尼斯《哥特史》（Mierow 英译 1915，Gutenberg）
+  lat  奥勒留·维克托《诸恺撒传》、欧特罗皮乌斯卷 8–10、拉克坦提乌斯《迫害者之死》（拉丁文，thelatinlibrary.com）
+
+    python split_open.py [每块字数，默认 30000] [church / late：只切这一组]"""
 import html as html_mod
 import re
 import sys
@@ -69,6 +74,8 @@ def main():
     split_classic.CHUNK = int(sys.argv[1]) if len(sys.argv) > 1 else 30000
     if "church" in sys.argv:
         return church()
+    if "late" in sys.argv:
+        return late()
     cut("fau", "Faustus of Byzantium, History of Armenia (tr. Langlois, French)",
         remacle(read("faustus", "histoire.htm")))
     cut("moi", "Moses of Khoren, History of Armenia, books II-III (tr. Langlois, French)",
@@ -83,6 +90,25 @@ def main():
     cut("je", "Jewish Encyclopedia (1906): Amora; Tannaim and Amoraim",
         "\n".join(clean(read("je", f)) for f in ("1421-amora", "14240-tannaim-and-amoraim")))
     church()
+    late()
+
+
+def late():
+    """罗马城历书（354）的名单、欧纳皮乌斯《智者传》、约达尼斯《哥特史》、维克托/欧特罗皮乌斯卷 8–10/拉克坦提乌斯"""
+    fasti = clean(read("c354", "chronography_of_354_08_fasti.htm"))
+    fasti = fasti[fasti.find("\n 923\n"):]                    # 建城纪年 923 = 公元 170
+    fasti = re.sub(r"\n\s*", " ", fasti)                      # 一格一行 → 连成一行
+    c354 = [f"[Fasti consulares, from AUC 923 = AD 170]\n{fasti}"] + \
+           [f"\n[{f}]\n" + clean(read("c354", f"chronography_of_354_{f}.htm")) for f in
+            ("10_prefects_of_rome", "11_depositions", "12_depositions_martyrs", "13_bishops_of_rome",
+             "16_chronicle_of_the_city_of_rome")]
+    cut("c354", "Chronography of 354 (Latin, with English notes; tertullian.org)", "\n".join(c354))
+    cut("eun", "Eunapius, Lives of the Philosophers and Sophists (tr. Wright)", clean(read("eunapius", "eunapius_02_text.htm")))
+    jor = clean(read("jordanes", "pg14809-images.html"))
+    cut("jor", "Jordanes, The Origin and Deeds of the Goths (tr. Mierow)", jor[:jor.find("*** END")])
+    cut("lat", "Aurelius Victor, De Caesaribus; Eutropius, Breviarium 8-10; Lactantius, De mortibus persecutorum (Latin)",
+        "\n".join([f"\n[{f}]\n" + clean(read("latin", f)) for f in
+                   ("victor.caes.html", "eutropius8.shtml", "eutropius9.shtml", "eutropius10.shtml", "demort.shtml")]))
 
 
 def church():
