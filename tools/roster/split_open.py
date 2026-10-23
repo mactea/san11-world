@@ -84,6 +84,8 @@ def main():
         return libanius()
     if "nld" in sys.argv:
         return noldeke()
+    if "pir" in sys.argv:
+        return pir()
     cut("fau", "Faustus of Byzantium, History of Armenia (tr. Langlois, French)",
         remacle(read("faustus", "histoire.htm")))
     cut("moi", "Moses of Khoren, History of Armenia, books II-III (tr. Langlois, French)",
@@ -145,6 +147,35 @@ def noldeke():
     d = fitz.open(next((T / "noldeke").glob("*.pdf")))
     cut("nld", "Tabari, Geschichte der Perser und Araber zur Zeit der Sasaniden (tr. Nöldeke 1879, OCR), pp. 1-79",
         "\n".join(f"[PDF p. {i}]\n" + d[i].get_text() for i in range(32, 111)))
+
+
+# PIR 条目里表明 170–284 年的线索：这时期的皇帝、狄奥卷 72–80、希罗狄安、《罗马君王传》、2 世纪末到 3 世纪的年份
+PIR_LATE = re.compile(r"Commod|Pertinac|Didi(us|o) Iulian|Pescenn|Clodi(us|o) Albin|Septimi(us|o|i) Sever|Severo|Severi|"
+                      r"Caracall|Getae?\b|Macrin|Elagabal|Heliogabal|Alexandr(o|i) imp|Severo Alexandro|Maximin|Gordian|"
+                      r"Philipp(o|i|us) imp|Deci(us|o|i)\b|Trebonian|Valerian|Gallien|Postum|Claudi(o|i|us) Gothic|Aurelian|"
+                      r"Tacit(o|i) imp|Prob(o|i|us) imp|Car(o|i|us) imp|Carin|Numerian|Diocletian|divo Marco|Marco et (Vero|Commodo)|"
+                      r"Dio 7[2-9]|Dio 80|Herodian|vit\. [A-Z]|a\. (1[7-9]\d|2[0-8]\d)\b")
+
+
+def pir():
+    """PIR 第一版（Klebs/Dessau/Rohden 1897–98，公版；archive.org 的 OCR 全文，用户手动下载到 texts/pir/）：
+    条目以「编号 名字」起行；只留有 170–284 年线索的条目（「— NAME.」是互见，不留）。
+    每卷一个前缀 pir1/pir2/pir3（按文件名里的卷号 im01/im02/im03），后补的卷不打乱已抽完的块号"""
+    import gzip
+    for f in sorted((T / "pir").glob("*")):
+        vol = re.search(r"im0?(\d)", f.name)
+        if not vol:
+            print("PIR: 认不出卷号，跳过", f.name)
+            continue
+        t = gzip.open(f, "rt", encoding="utf-8", errors="replace").read() if f.suffix == ".gz" else \
+            f.read_text(encoding="utf-8", errors="replace")
+        parts = []
+        for m in re.finditer(r"\n(\d{1,4}) +([A-Z][^\n]*(?:\n(?!\d{1,4} +[A-Z]|— )[^\n]*)*)", t):
+            body = re.sub(r"\s+", " ", m.group(2))
+            if PIR_LATE.search(body):
+                parts.append(f"[PIR {vol.group(1)}.{m.group(1)}] {body}")
+        cut(f"pir{vol.group(1)}", f"Prosopographia Imperii Romani, 1st ed., pars {vol.group(1)} (Latin, OCR); "
+            "entries with 170-284 markers", "\n".join(parts))
 
 
 def church():

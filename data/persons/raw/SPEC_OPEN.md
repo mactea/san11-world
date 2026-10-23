@@ -88,6 +88,15 @@
   Jadhima、Amr ibn Adi、Imru al-Qays ibn Amr、al-Daizan、Papak、Sasan……）。
 * polity：薩珊波斯 / 帕提亞 / 拉赫姆王朝（希拉）/ 哈特拉 / 阿拉伯諸部；src `Tabari (Nöldeke) p. 25`（译文页码，块里「[PDF p. N]」减 31）。
 
+## pir1 / pir2 / pir3 《罗马帝国人物志》第一版（PIR¹，拉丁文，1897–98，OCR）
+* 每行是一个条目：[PIR 卷 编号] 姓名（全名、大写是元老/骑士家族）+ 官职、事迹 + 出处（铭文编号 CIL「VI 2086」、Dio、vit.=罗马君王传……）。
+  脚本只按关键词粗筛过（提到 170–284 年的皇帝、年份或史料），**有不少误收的 1–2 世纪的人，你要按内容判断**：
+  只收活动与 170–284 年有交集的人（「a. 1xx」是年份；「sub Severo」= 塞维鲁时；「Pii」=安敦宁，138–161，不收）。
+* 只有一个铭文名字、没有官职和事迹的不收；只有官职（「praeses Daciae」「consul a. 205」）的收，写 `"conf": "C"`。
+  希腊文部分是 OCR 乱码，忽略。查重先 Grep known_world.tsv（按 cognomen 和 nomen 查，PIR 用全名，表里多用通行名）。
+* name_en 用通行拉丁全名（如 Lucius Fabius Cilo）；src `PIR¹ A 1186`（条目字头 + 编号）；polity 羅馬帝國。
+  五维：只任一官的 30–55，多任要职的政治 60–75，带兵的统率 55–75。
+
 ## je 犹太百科「Amora」「Tannaim and Amoraim」
 * 收列表里 170–370 年活动的坦拿（最后一代）和阿摩拉（第 1–5 代）：巴比伦（Rav、Samuel、Rav Huna、Rav Judah、Rabbah、
   Rav Joseph、Abaye、Rava……）和巴勒斯坦（Judah ha-Nasi、Johanan bar Nappaha、Resh Lakish、Ammi、Assi……）。
