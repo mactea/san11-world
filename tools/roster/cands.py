@@ -174,9 +174,9 @@ CLASSIC = {"rg": "按地区查找", "wl": "Wikipedia（综述、列表条目）"
            "soc": "Socrates, HE", "soz": "Sozomen, HE", "thd": "Theodoret, HE", "phs": "Philostorgius, HE",
            "vc": "Eusebius, Vita Constantini", "c354": "Chronography of 354", "eun": "Eunapius, Lives",
            "jor": "Jordanes, Getica", "lat": "Aurelius Victor / Eutropius / Lactantius",
-           "lib": "Libanius, Letters", "syr": "Syriaca.org"}
+           "lib": "Libanius, Letters", "syr": "Syriaca.org", "nld": "Tabari (tr. Nöldeke)"}
 LOOSE = {"wl", "fau", "moi", "mhv", "niya", "cth", "je", "soc", "soz", "thd", "phs", "vc", "c354", "eun", "jor", "lat",
-         "lib", "syr"}       # 各块分给不同子代理、同一人会在几块里重复出现的书
+         "lib", "syr", "nld"}       # 各块分给不同子代理、同一人会在几块里重复出现的书
 
 
 def en_key(s):

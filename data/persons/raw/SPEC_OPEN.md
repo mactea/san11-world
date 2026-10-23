@@ -79,6 +79,15 @@
 * name_en 用英文名；polity 按所在地（羅馬帝國、薩珊波斯、奧斯若恩、亞美尼亞……，教会人物可写 羅馬教會 / 東方教會）；
   src `Syriaca.org person 10`。
 
+## nld 塔巴里《历代先知和帝王史》萨珊部分（Nöldeke 德译 1879，扫描本 OCR）
+* 德文，OCR 有错字（ä/a、ü/u 常混）。阿尔达希尔一世到伊嗣俟一世：萨珊诸王、王子、王后、大臣、将领、祭司，
+  被阿尔达希尔征服的地方诸王（帕提亚末王阿尔达班、各地「王」），希拉的拉赫姆王朝（贾济玛、阿慕尔·本·阿迪、伊姆鲁·盖斯……）、
+  哈特拉王达伊赞与其女，摩尼等。只收 370 年以前已经活动的；正文是塔巴里的转述，脚注是 Nöldeke 的考证，两者都可以用。
+* 塔巴里里明显的传说（天使托梦、神话化的英雄事迹）照录但写 `"conf": "C"`；查表时用英文通行写法
+  （Ardashir I、Artabanus IV、Shapur I、Hormizd I、Bahram I、Narseh、Hormizd II、Adur Narseh、Shapur II、Ardashir II、
+  Jadhima、Amr ibn Adi、Imru al-Qays ibn Amr、al-Daizan、Papak、Sasan……）。
+* polity：薩珊波斯 / 帕提亞 / 拉赫姆王朝（希拉）/ 哈特拉 / 阿拉伯諸部；src `Tabari (Nöldeke) p. 25`（译文页码，块里「[PDF p. N]」减 31）。
+
 ## je 犹太百科「Amora」「Tannaim and Amoraim」
 * 收列表里 170–370 年活动的坦拿（最后一代）和阿摩拉（第 1–5 代）：巴比伦（Rav、Samuel、Rav Huna、Rav Judah、Rabbah、
   Rav Joseph、Abaye、Rava……）和巴勒斯坦（Judah ha-Nasi、Johanan bar Nappaha、Resh Lakish、Ammi、Assi……）。

@@ -18,7 +18,9 @@
 
   lib  利巴尼乌斯书信（希腊文，Foerster 本，First1KGreek），只留 370 年以前的信
 
-    python split_open.py [每块字数，默认 30000] [church / late / lib：只切这一组]"""
+  nld  Nöldeke 译塔巴里（1879 德译，公版扫描本 OCR；PDF 需手动从哈勒大学下载到 _cache/texts/noldeke/）
+
+    python split_open.py [每块字数，默认 30000] [church / late / lib / nld：只切这一组]"""
 import html as html_mod
 import re
 import sys
@@ -80,6 +82,8 @@ def main():
         return late()
     if "lib" in sys.argv:
         return libanius()
+    if "nld" in sys.argv:
+        return noldeke()
     cut("fau", "Faustus of Byzantium, History of Armenia (tr. Langlois, French)",
         remacle(read("faustus", "histoire.htm")))
     cut("moi", "Moses of Khoren, History of Armenia, books II-III (tr. Langlois, French)",
@@ -96,6 +100,7 @@ def main():
     church()
     late()
     libanius()
+    noldeke()
 
 
 def late():
@@ -131,6 +136,15 @@ def libanius():
         if (ys and min(ys) <= 370) or (not ys and 19 <= n <= 839):
             keep.append(f"[Ep. {n}] {body}")
     cut("lib", "Libanius, Letters (Greek, ed. Foerster; heading = addressee + editor's date)", "\n".join(keep))
+
+
+def noldeke():
+    """Nöldeke 译塔巴里（1879，公版扫描本，用户从哈勒大学手动下载到 texts/noldeke/*.pdf，带 OCR 文字层）：
+    PDF 第 32–110 页 = 译文第 1–79 页，阿尔达希尔一世到伊嗣俟一世，含希拉的拉赫姆王朝"""
+    import fitz
+    d = fitz.open(next((T / "noldeke").glob("*.pdf")))
+    cut("nld", "Tabari, Geschichte der Perser und Araber zur Zeit der Sasaniden (tr. Nöldeke 1879, OCR), pp. 1-79",
+        "\n".join(f"[PDF p. {i}]\n" + d[i].get_text() for i in range(32, 111)))
 
 
 def church():
