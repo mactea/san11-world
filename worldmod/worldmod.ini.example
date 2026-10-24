@@ -52,6 +52,9 @@ cities=210
 ; ---- debugging
 ; trace: which game code creates/draws Direct3D resources (worldmod_trace_<section>.log)
 ; trace=1
+; diag: per-call Direct3D diagnostic lines in the main log (BIG DIP, Clear, SetRS, PROJ, ...); on with trace=1.
+; Very verbose (thousands of lines per second): only for a short look
+; diag=1
 ; heap_check: validate all heaps every 20 ms, log where the main/loader threads are when one breaks
 ; heap_check=1
 ; forces: regular forces (= regular corps), 42..249 and at most the city count (M8_FORCES.md); the data directory
@@ -85,4 +88,5 @@ auto_skip=1
 ; san11pk_test.exe: a copy used for automated tests (tools/gamectl.py): fake mouse/keyboard, screenshots
 ; [san11pk_test]
 ; automation=1
+; memlog=1   ; with automation=1: process memory + free address space in the log every 30 s (same as the "mem" command)
 ; ...same keys as [san11pk_world]

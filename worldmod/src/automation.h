@@ -4,6 +4,7 @@
 struct IDirect3DDevice9;
 void automationInit(const wchar_t* dir, TraceLogFn log);
 void automationOnEndScene(IDirect3DDevice9* device);
+void automationReleaseSurfaces(const char* why);   // before Reset / CreateDevice: drop the cached readback surfaces
 void commandInit(const wchar_t* dir, TraceLogFn log);   // command channel only (no window/input hooks)
 void autoSkipInit(const wchar_t* dir, TraceLogFn log);  // auto_skip=1 in normal play
 void autoSkipOnStageLoad();                  // a map stage was loaded: click through the opening dialogs

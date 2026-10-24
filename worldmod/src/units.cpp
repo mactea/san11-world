@@ -37,10 +37,15 @@ Units* g_u = nullptr;
 extern "C" uint8_t* __cdecl snapShadow(uint8_t* self) {
     for (int i = 0; i < g_nshadow; i++)
         if (g_shadow[i].self == self || g_shadow[i].buf == self) return g_shadow[i].buf;
+    if (g_nshadow == 16) {                                   // table full: reuse the evicted slot's buffer (same size)
+        int k = g_nextShadow++ % 16;
+        memset(g_shadow[k].buf, 0, g_shadowSize);
+        g_shadow[k].self = self;
+        return g_shadow[k].buf;
+    }
     uint8_t* b = alloc(g_shadowSize);
     if (!b) { if (g_log) g_log("ERROR: units: snapshot buffer allocation failed"); return self; }
-    int k = g_nshadow < 16 ? g_nshadow++ : g_nextShadow++ % 16;   // old buffers stay allocated (still in use?)
-    g_shadow[k] = { self, b };
+    g_shadow[g_nshadow++] = { self, b };
     return b;
 }
 

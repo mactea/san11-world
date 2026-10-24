@@ -13,6 +13,8 @@
 //   key <vk>                 press and release a virtual key (decimal or 0x hex)
 //   wait <ms>                sleep
 //   mem <hexaddr> <len>      hex dump of game memory
+//   mem                      process memory (private / working set / pagefile), free address space (total, largest
+//                            block, blocks >= 16 MB), current device and render target; memlog=1: same line in the log every 30 s
 //   pixel <x> <y>            colour of the next frame at (x, y)
 //   skip [ms]                click through dialogs and event scenes until the map is idle (see skipDialogs)
 //
@@ -28,12 +30,14 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <psapi.h>
 #include "automation.h"
 #include "persons.h"
 #include "profiler.h"
 #include "pathfind.h"
 #include "radar.h"
 #include "units.h"
+#pragma comment(lib, "psapi.lib")
 
 namespace {
 
@@ -107,8 +111,77 @@ void key(int vk) {
     g_keys[vk & 255] = 0; post(WM_KEYUP, vk, 1 | (sc << 16) | 0xC0000000); Sleep(40);
 }
 
-// ---- screenshot (runs on the render thread from EndScene)
-bool writeBmp(const wchar_t* path, const uint8_t* bgrx, int w, int h, int pitch) {
+// ---- frame readback (render thread, from EndScene)
+// The render target is copied into a system-memory surface; a multisampled one is first resolved with
+// StretchRect into a single-sampled render target, because GetRenderTargetData cannot read multisampled
+// surfaces. Both surfaces are kept for the next readback (screenshots and the pixel probe share them) and
+// dropped when the device changes, before Reset (a default-pool render target makes Reset fail) and before
+// CreateDevice (they would keep the previous device and its resources alive).
+IDirect3DDevice9* g_dev = nullptr;               // device of the last EndScene (the cached surfaces belong to it)
+IDirect3DSurface9* g_rbRt = nullptr;             // single-sampled copy of a multisampled render target
+IDirect3DSurface9* g_rbSys = nullptr;            // system-memory copy of the render target
+volatile LONG g_rtW = 0, g_rtH = 0, g_rtFmt = 0, g_rtMs = -1;   // last render target seen
+volatile LONG g_rtStale = 1;                     // re-read the render target description at the next EndScene
+int g_probeFails = 0;
+
+void releaseSurfaces() {
+    if (g_rbRt) { g_rbRt->Release(); g_rbRt = nullptr; }
+    if (g_rbSys) { g_rbSys->Release(); g_rbSys = nullptr; }
+}
+
+void noteTarget(const D3DSURFACE_DESC& desc) {
+    g_rtW = desc.Width; g_rtH = desc.Height; g_rtFmt = desc.Format; g_rtMs = desc.MultiSampleType;
+}
+
+bool knownFormat(D3DFORMAT f) {
+    return f == D3DFMT_X8R8G8B8 || f == D3DFMT_A8R8G8B8 || f == D3DFMT_R5G6B5 || f == D3DFMT_X1R5G5B5 || f == D3DFMT_A1R5G5B5;
+}
+
+// 0xRRGGBB of pixel x of a row
+uint32_t pixelRGB(const uint8_t* row, int x, D3DFORMAT f) {
+    if (f == D3DFMT_X8R8G8B8 || f == D3DFMT_A8R8G8B8) return ((const uint32_t*)row)[x] & 0xffffff;
+    uint32_t v = ((const uint16_t*)row)[x], R, G, B;
+    if (f == D3DFMT_R5G6B5) { R = (v >> 11) & 31; G = (v >> 5) & 63; B = v & 31; G = G * 255 / 63; }
+    else { R = (v >> 10) & 31; G = (v >> 5) & 31; B = v & 31; G = G * 255 / 31; }
+    return ((R * 255 / 31) << 16) | (G << 8) | (B * 255 / 31);
+}
+
+// Copies render target 0 into g_rbSys. On failure *step names the call that failed and *hr its result.
+bool readback(IDirect3DDevice9* d, D3DSURFACE_DESC& desc, const char** step, HRESULT* hr) {
+    IDirect3DSurface9* rt = nullptr;
+    if (FAILED(*hr = d->GetRenderTarget(0, &rt))) { *step = "GetRenderTarget"; return false; }
+    bool ok = false;
+    do {
+        if (FAILED(*hr = rt->GetDesc(&desc))) { *step = "GetDesc"; break; }
+        noteTarget(desc);
+        if (!knownFormat(desc.Format)) { *step = "render target format"; *hr = E_FAIL; break; }
+        D3DSURFACE_DESC sd;
+        IDirect3DSurface9* src = rt;
+        if (desc.MultiSampleType != D3DMULTISAMPLE_NONE) {
+            if (g_rbRt && (FAILED(g_rbRt->GetDesc(&sd)) || sd.Width != desc.Width || sd.Height != desc.Height || sd.Format != desc.Format)) {
+                g_rbRt->Release(); g_rbRt = nullptr;
+            }
+            if (!g_rbRt && FAILED(*hr = d->CreateRenderTarget(desc.Width, desc.Height, desc.Format, D3DMULTISAMPLE_NONE, 0, FALSE, &g_rbRt, nullptr))) {
+                g_rbRt = nullptr; *step = "CreateRenderTarget"; break;
+            }
+            if (FAILED(*hr = d->StretchRect(rt, nullptr, g_rbRt, nullptr, D3DTEXF_NONE))) { *step = "StretchRect"; break; }
+            src = g_rbRt;
+        }
+        if (g_rbSys && (FAILED(g_rbSys->GetDesc(&sd)) || sd.Width != desc.Width || sd.Height != desc.Height || sd.Format != desc.Format)) {
+            g_rbSys->Release(); g_rbSys = nullptr;
+        }
+        if (!g_rbSys && FAILED(*hr = d->CreateOffscreenPlainSurface(desc.Width, desc.Height, desc.Format, D3DPOOL_SYSTEMMEM, &g_rbSys, nullptr))) {
+            g_rbSys = nullptr; *step = "CreateOffscreenPlainSurface"; break;
+        }
+        if (FAILED(*hr = d->GetRenderTargetData(src, g_rbSys))) { *step = "GetRenderTargetData"; break; }
+        ok = true;
+    } while (0);
+    rt->Release();
+    return ok;
+}
+
+// ---- screenshot
+bool writeBmp(const wchar_t* path, const uint8_t* bits, int w, int h, int pitch, D3DFORMAT fmt) {
     FILE* f = nullptr; _wfopen_s(&f, path, L"wb");
     if (!f) return false;
     int row = (w * 3 + 3) & ~3;
@@ -118,31 +191,37 @@ bool writeBmp(const wchar_t* path, const uint8_t* bgrx, int w, int h, int pitch)
     fwrite(&fh, sizeof fh, 1, f); fwrite(&ih, sizeof ih, 1, f);
     uint8_t* line = (uint8_t*)calloc(row, 1);
     for (int y = h - 1; y >= 0; y--) {
-        const uint8_t* s = bgrx + (size_t)y * pitch;
-        for (int x = 0; x < w; x++) { line[x * 3] = s[x * 4]; line[x * 3 + 1] = s[x * 4 + 1]; line[x * 3 + 2] = s[x * 4 + 2]; }
+        const uint8_t* s = bits + (size_t)y * pitch;
+        for (int x = 0; x < w; x++) {
+            uint32_t c = pixelRGB(s, x, fmt);
+            line[x * 3] = (uint8_t)c; line[x * 3 + 1] = (uint8_t)(c >> 8); line[x * 3 + 2] = (uint8_t)(c >> 16);
+        }
         fwrite(line, row, 1, f);
     }
-    free(line); fclose(f);
-    return true;
+    free(line);
+    bool ok = !ferror(f);
+    fclose(f);
+    return ok;
 }
 
 void capture(IDirect3DDevice9* d) {
-    IDirect3DSurface9* rt = nullptr; IDirect3DSurface9* sys = nullptr;
-    D3DSURFACE_DESC desc;
+    D3DSURFACE_DESC desc = {};
+    const char* step = "";
+    HRESULT hr = S_OK;
     bool ok = false;
-    if (SUCCEEDED(d->GetRenderTarget(0, &rt)) && SUCCEEDED(rt->GetDesc(&desc)) &&
-        (desc.Format == D3DFMT_X8R8G8B8 || desc.Format == D3DFMT_A8R8G8B8) &&
-        SUCCEEDED(d->CreateOffscreenPlainSurface(desc.Width, desc.Height, desc.Format, D3DPOOL_SYSTEMMEM, &sys, nullptr)) &&
-        SUCCEEDED(d->GetRenderTargetData(rt, sys))) {
+    if (readback(d, desc, &step, &hr)) {
         D3DLOCKED_RECT lr;
-        if (SUCCEEDED(sys->LockRect(&lr, nullptr, D3DLOCK_READONLY))) {
-            ok = writeBmp(g_shotPath, (const uint8_t*)lr.pBits, desc.Width, desc.Height, lr.Pitch);
-            sys->UnlockRect();
+        if (FAILED(hr = g_rbSys->LockRect(&lr, nullptr, D3DLOCK_READONLY))) step = "LockRect";
+        else {
+            ok = writeBmp(g_shotPath, (const uint8_t*)lr.pBits, desc.Width, desc.Height, lr.Pitch, desc.Format);
+            if (!ok) step = "writing the file";
+            g_rbSys->UnlockRect();
         }
     }
-    if (sys) sys->Release();
-    if (rt) rt->Release();
-    if (g_log) g_log("automation: screenshot %s", ok ? "written" : "FAILED");
+    if (!g_log) return;
+    if (ok) g_log("automation: screenshot written (%ux%u format=%d multisample=%d)", desc.Width, desc.Height, (int)desc.Format, (int)desc.MultiSampleType);
+    else g_log("automation: screenshot FAILED at %s hr=%#lx (device %p, render target %ux%u format=%d multisample=%d)",
+               step, hr, d, desc.Width, desc.Height, (int)desc.Format, (int)desc.MultiSampleType);
 }
 
 // ---- dialog skipper
@@ -150,56 +229,31 @@ void capture(IDirect3DDevice9* d) {
 // the map is idle; under a dialog, a menu or a list it is grey, during event scenes and loading black.
 // The skipper clicks near the top of the screen until the button has been in colour for a while.
 HANDLE g_probeDone = nullptr;
-volatile LONG g_probePending = 0, g_probeRGB = 0, g_rtW = 0, g_rtH = 0;
+volatile LONG g_probePending = 0, g_probeRGB = 0;
 volatile LONG g_probeX = -1, g_probeY = -1;      // pixel to read (-1: the end-turn button)
-IDirect3DSurface9* g_probeSys = nullptr;
 volatile LONG g_skipping = 0;
 bool g_automation = false, g_autoSkipOn = false;
 
-IDirect3DSurface9* g_probeRt = nullptr;      // single-sampled copy of a multisampled render target
-
 void probe(IDirect3DDevice9* d) {     // render thread
-    IDirect3DSurface9* rt = nullptr;
-    D3DSURFACE_DESC desc;
+    D3DSURFACE_DESC desc = {};
+    const char* step = "";
+    HRESULT hr = S_OK;
     LONG rgb = -1;
-    bool known = false;
-    if (SUCCEEDED(d->GetRenderTarget(0, &rt)) && SUCCEEDED(rt->GetDesc(&desc))) {
-        known = desc.Format == D3DFMT_X8R8G8B8 || desc.Format == D3DFMT_A8R8G8B8 || desc.Format == D3DFMT_R5G6B5 ||
-                desc.Format == D3DFMT_X1R5G5B5 || desc.Format == D3DFMT_A1R5G5B5;
-        g_rtW = desc.Width; g_rtH = desc.Height;
-    }
-    if (known && desc.Height > 40) {
-        IDirect3DSurface9* src = rt;
-        D3DSURFACE_DESC sd;
-        if (desc.MultiSampleType != D3DMULTISAMPLE_NONE) {          // GetRenderTargetData needs a single-sampled source
-            if (g_probeRt && (FAILED(g_probeRt->GetDesc(&sd)) || sd.Width != desc.Width || sd.Height != desc.Height || sd.Format != desc.Format)) {
-                g_probeRt->Release(); g_probeRt = nullptr;
-            }
-            if (!g_probeRt) d->CreateRenderTarget(desc.Width, desc.Height, desc.Format, D3DMULTISAMPLE_NONE, 0, FALSE, &g_probeRt, nullptr);
-            src = (g_probeRt && SUCCEEDED(d->StretchRect(rt, nullptr, g_probeRt, nullptr, D3DTEXF_NONE))) ? g_probeRt : nullptr;
-        }
-        if (g_probeSys && (FAILED(g_probeSys->GetDesc(&sd)) || sd.Width != desc.Width || sd.Height != desc.Height || sd.Format != desc.Format)) {
-            g_probeSys->Release(); g_probeSys = nullptr;
-        }
-        if (!g_probeSys) d->CreateOffscreenPlainSurface(desc.Width, desc.Height, desc.Format, D3DPOOL_SYSTEMMEM, &g_probeSys, nullptr);
-        D3DLOCKED_RECT lr;
-        if (src && g_probeSys && SUCCEEDED(d->GetRenderTargetData(src, g_probeSys))) {
+    if (readback(d, desc, &step, &hr)) {
+        if (desc.Height > 40) {
             LONG x = g_probeX >= 0 ? g_probeX : 30, y = g_probeY >= 0 ? g_probeY : (LONG)desc.Height - 30;
             x = min(x, (LONG)desc.Width - 1); y = min(y, (LONG)desc.Height - 1);
             RECT r = { x, y, x + 1, y + 1 };
-            if (SUCCEEDED(g_probeSys->LockRect(&lr, &r, D3DLOCK_READONLY))) {
-                if (desc.Format == D3DFMT_X8R8G8B8 || desc.Format == D3DFMT_A8R8G8B8) rgb = *(const uint32_t*)lr.pBits & 0xffffff;
-                else {
-                    uint32_t v = *(const uint16_t*)lr.pBits, R, G, B;
-                    if (desc.Format == D3DFMT_R5G6B5) { R = (v >> 11) & 31; G = (v >> 5) & 63; B = v & 31; G = G * 255 / 63; }
-                    else { R = (v >> 10) & 31; G = (v >> 5) & 31; B = v & 31; G = G * 255 / 31; }
-                    rgb = (LONG)(((R * 255 / 31) << 16) | (G << 8) | (B * 255 / 31));
-                }
-                g_probeSys->UnlockRect();
+            D3DLOCKED_RECT lr;
+            if (SUCCEEDED(g_rbSys->LockRect(&lr, &r, D3DLOCK_READONLY))) {
+                rgb = (LONG)pixelRGB((const uint8_t*)lr.pBits, 0, desc.Format);
+                g_rbSys->UnlockRect();
             }
         }
+    } else if (g_log && g_probeFails++ < 5) {
+        g_log("automation: pixel probe failed at %s hr=%#lx (device %p, render target %ux%u format=%d multisample=%d)",
+              step, hr, d, desc.Width, desc.Height, (int)desc.Format, (int)desc.MultiSampleType);
     }
-    if (rt) rt->Release();
     g_probeRGB = rgb;
 }
 
@@ -314,6 +368,37 @@ DWORD WINAPI startupSkipThread(void*) {
 }
 
 // ---- command channel
+// "mem" without arguments: process memory and the largest free blocks of the 32-bit address space
+void memStats(char* s, size_t n) {
+    PROCESS_MEMORY_COUNTERS_EX pm = { sizeof pm };
+    GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pm, sizeof pm);
+    uint64_t freeTotal = 0, freeMax = 0;
+    int big = 0;
+    MEMORY_BASIC_INFORMATION mi;
+    for (uintptr_t a = 0; a < 0xFFFF0000u && VirtualQuery((void*)a, &mi, sizeof mi); ) {
+        uintptr_t next = (uintptr_t)mi.BaseAddress + mi.RegionSize;
+        if (mi.State == MEM_FREE) {
+            freeTotal += mi.RegionSize;
+            if (mi.RegionSize > freeMax) freeMax = mi.RegionSize;
+            if (mi.RegionSize >= (16u << 20)) big++;
+        }
+        if (next <= a) break;
+        a = next;
+    }
+    snprintf(s, n, "mem: private=%u MB working set=%u MB pagefile=%u MB | address space free=%u MB largest=%u MB blocks>=16MB=%d"
+             " | device %p render target %ldx%ld format=%ld multisample=%ld",
+             (unsigned)(pm.PrivateUsage >> 20), (unsigned)(pm.WorkingSetSize >> 20), (unsigned)(pm.PagefileUsage >> 20),
+             (unsigned)(freeTotal >> 20), (unsigned)(freeMax >> 20), big, g_dev, g_rtW, g_rtH, g_rtFmt, g_rtMs);
+}
+
+DWORD WINAPI memLogThread(void*) {        // memlog=1 (with automation=1): the "mem" line in the log every 30 s
+    for (;;) {
+        Sleep(30000);
+        char s[512]; memStats(s, sizeof s);
+        if (g_log) g_log("%s", s);
+    }
+}
+
 void dumpMem(FILE* out, uint32_t addr, int len) {
     fprintf(out, "mem %08x:", addr);
     for (int i = 0; i < len; i++) {
@@ -373,6 +458,7 @@ void run(char* line, FILE* out) {
                 window(), rc.right, rc.bottom, g_nCursor, g_nAsync, g_nKeyState, g_nFg);
     }
     else if (!strcmp(cmd, "mem") && sscanf_s(line, "%*s %x %d", (unsigned*)&a, &b) == 2) dumpMem(out, (uint32_t)a, b > 4096 ? 4096 : b);
+    else if (!strcmp(cmd, "mem")) { char s[512]; memStats(s, sizeof s); fprintf(out, "%s\n", s); }
     else if (!strcmp(cmd, "unitclone") && sscanf_s(line, "%*s %d %259[^\r\n]", &a, arg, (unsigned)sizeof arg) == 2)
         fprintf(out, "unitclone: %d\n", unitsClone(a, arg));       // debug (M9 tests): units.cpp
     else if (!strcmp(cmd, "wild") && sscanf_s(line, "%*s %d", &a) == 1) {   // wild <city>: 在野/未登场/未发现武将都去这个城市
@@ -498,11 +584,41 @@ void automationInit(const wchar_t* dir, TraceLogFn log) {
     hookIat(IAT_SetForegroundWindow, (void*)hSetForegroundWindow);
     hookIat(IAT_IsIconic, (void*)hIsIconic);
     if (g_log) g_log("automation enabled");
+    wchar_t ini[MAX_PATH], exe[MAX_PATH], section[64];      // [<exe name without extension>] of worldmod.ini, as in worldmod.cpp
+    swprintf_s(ini, L"%s\\worldmod.ini", dir);
+    GetModuleFileNameW(nullptr, exe, MAX_PATH);
+    const wchar_t* name = wcsrchr(exe, L'\\'); wcsncpy_s(section, name ? name + 1 : exe, _TRUNCATE);
+    if (wchar_t* dot = wcsrchr(section, L'.')) *dot = 0;
+    if (GetPrivateProfileIntW(section, L"memlog", 0, ini)) {
+        CreateThread(nullptr, 1 << 16, memLogThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr);
+        if (g_log) g_log("automation: memory log every 30 s (memlog=1)");
+    }
 }
 
 void automationOnEndScene(IDirect3DDevice9* d) {
+    if (d != g_dev) {                                        // the game created a new device: the cached surfaces belong to the old one
+        bool had = g_rbRt || g_rbSys;
+        releaseSurfaces();
+        if (g_log && g_dev) g_log("automation: device changed %p -> %p%s", g_dev, d, had ? ", readback surfaces released" : "");
+        g_dev = d; g_probeFails = 0;
+        InterlockedExchange(&g_rtStale, 1);
+    }
+    if (g_rtStale && InterlockedExchange(&g_rtStale, 0)) {   // render target size / multisampling for "mem"
+        IDirect3DSurface9* rt = nullptr; D3DSURFACE_DESC desc;
+        if (SUCCEEDED(d->GetRenderTarget(0, &rt))) {
+            if (SUCCEEDED(rt->GetDesc(&desc))) noteTarget(desc);
+            rt->Release();
+        }
+    }
     if (g_shotPending && InterlockedExchange(&g_shotPending, 0)) { capture(d); SetEvent(g_shotDone); }
     if (g_probePending && InterlockedExchange(&g_probePending, 0)) { probe(d); SetEvent(g_probeDone); }
+}
+
+void automationReleaseSurfaces(const char* why) {           // render thread, from the Reset / CreateDevice hooks
+    bool had = g_rbRt || g_rbSys;
+    releaseSurfaces();
+    InterlockedExchange(&g_rtStale, 1);
+    if (had && g_log) g_log("automation: %s: readback surfaces released", why);
 }
 
 // auto_skip in normal play: only the cursor and button queries are hooked, and they pass through to

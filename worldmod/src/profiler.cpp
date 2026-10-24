@@ -78,14 +78,19 @@ bool profilerStart() {
 int profilerStop(const char* path) {
     if (!g_on) return -1;
     g_on = 0;
-    WaitForSingleObject(g_thread, 5000);
+    bool stopped = WaitForSingleObject(g_thread, 5000) == WAIT_OBJECT_0;
     CloseHandle(g_thread); g_thread = nullptr;
     FILE* f = nullptr; fopen_s(&f, path, "wb");
-    if (!f) return -1;
-    uint32_t h[3] = { 'FRPW', 1, (uint32_t)g_samples };
-    fwrite(h, 4, 3, f);
-    fwrite(g_buf, 4, g_len, f);
-    fclose(f);
-    if (g_log) g_log("profiler: %zu samples over %lu ms -> %s", g_samples, timeGetTime() - g_t0, path);
-    return (int)g_samples;
+    if (f) {
+        uint32_t h[3] = { 'FRPW', 1, (uint32_t)g_samples };
+        fwrite(h, 4, 3, f);
+        fwrite(g_buf, 4, g_len, f);
+        fclose(f);
+        if (g_log) g_log("profiler: %zu samples over %lu ms -> %s", g_samples, timeGetTime() - g_t0, path);
+    }
+    if (stopped) {                  // give the 128 MB back (address space is tight); profilerStart allocates it again
+        VirtualFree(g_buf, 0, MEM_RELEASE);
+        g_buf = nullptr; g_cap = g_len = 0;
+    }
+    return f ? (int)g_samples : -1;
 }
