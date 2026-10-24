@@ -22,6 +22,7 @@
 #include "forces.h"
 #include "units.h"
 #include "persons.h"
+#include "cityshape.h"
 
 // ---------------------------------------------------------------- logging
 static FILE* g_log = nullptr;
@@ -69,6 +70,8 @@ struct Config {
     int heapCheck = 0;           // debug: validate all heaps every 20 ms; log where the main thread is when one breaks
     int watchRead = 0;           // debug: 1 = also break on reads; distinct code addresses are logged once each
     int watchLo = -1, watchHi = -1, watchMirror = 1;   // debug: watch HEX20 dword+4 of this hex; 0 = no area mirror
+    int cityShapes = 1;          // 1 = 3-hex / 1-hex cities from city_shapes.bin (cityshape.cpp, M11_MAP.md)
+    float cityScaleMid = 0.75f, cityScaleSmall = 0.5f;   // model scale of tier 2 / tier 3 cities
 } g_cfg;
 
 static wchar_t g_section[64] = L"map";   // [<exe name without extension>], so each launcher exe has its own map settings
@@ -125,6 +128,14 @@ static void loadConfig() {
     }
     g_cfg.autoSkip = GetPrivateProfileIntW(g_section, L"auto_skip", 0, ini);
     g_cfg.worldTerrain = GetPrivateProfileIntW(g_section, L"world_terrain", 0, ini);
+    g_cfg.cityShapes = GetPrivateProfileIntW(g_section, L"city_shapes", 1, ini);
+    {
+        wchar_t v[32];
+        GetPrivateProfileStringW(g_section, L"city_scale_mid", L"0.75", v, 32, ini); g_cfg.cityScaleMid = (float)_wtof(v);
+        GetPrivateProfileStringW(g_section, L"city_scale_small", L"0.5", v, 32, ini); g_cfg.cityScaleSmall = (float)_wtof(v);
+        if (g_cfg.cityScaleMid <= 0.0f || g_cfg.cityScaleMid > 4.0f) g_cfg.cityScaleMid = 0.75f;
+        if (g_cfg.cityScaleSmall <= 0.0f || g_cfg.cityScaleSmall > 4.0f) g_cfg.cityScaleSmall = 0.5f;
+    }
     wchar_t sub[MAX_PATH] = L"";
     GetPrivateProfileStringW(g_section, L"data_dir", L"", sub, MAX_PATH, ini);
     if (sub[0]) swprintf_s(g_cfg.dataDir, L"%s\\%s", g_dir, sub); else wcscpy_s(g_cfg.dataDir, g_dir);
@@ -1933,10 +1944,17 @@ static void init() {
         bad += loadCaves(L"worldmod_terrain_caves.txt", true);
     }
     if (bad) { logf("ERROR: rejected entries; nothing written"); return; }
-    if (g_cfg.verifyOnly) { logf("verify_only: nothing written"); return; }
+    // 3-hex / 1-hex cities (cityshape.cpp): hooks after the patches and caves, whose code they must find unchanged
+    CityShapeSetup cs = { g_cfg.dataDir, g_cfg.C, g_cfg.C + 45, g_cfg.W, g_cfg.H, g_area20,
+                          g_bases ? (const int32_t*)g_bases->AREA2BASE : nullptr, g_cfg.cityScaleMid, g_cfg.cityScaleSmall, false };
+    if (g_cfg.verifyOnly) {
+        if (g_cfg.bases && g_cfg.cityShapes) cityShapesInstall(cs, logf);
+        logf("verify_only: nothing written"); return;
+    }
     commitPatches();
     commitCaves();
     installHooks();
+    if (g_cfg.bases && g_cfg.cityShapes) { cs.write = true; cityShapesInstall(cs, logf); }
 }
 
 BOOL WINAPI DllMain(HINSTANCE, DWORD reason, LPVOID) {

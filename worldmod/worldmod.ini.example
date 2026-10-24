@@ -42,6 +42,12 @@ cities=210
 ; model_guard=1
 ; fast_clear: clear only the HEX28 pages the previous search wrote
 ; fast_clear=1
+; city_shapes: 3-hex / 1-hex new cities from city_shapes.bin in data_dir (M11_MAP.md); without the file, or with 0,
+; every city keeps Koei's 7 hexes
+; city_shapes=1
+; city_scale_mid / city_scale_small: model scale of tier 2 (3-hex) and tier 3 (1-hex) cities
+; city_scale_mid=0.75
+; city_scale_small=0.5
 
 ; ---- debugging
 ; trace: which game code creates/draws Direct3D resources (worldmod_trace_<section>.log)
