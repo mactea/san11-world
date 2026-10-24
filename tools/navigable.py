@@ -7,7 +7,8 @@ The channel is the cheapest hex path from next to the city's footprint (the hexe
 own neighbours for a 3- or 1-hex one, which then touches it whichever triangle gen_bases.py chooses) to sea that
 is connected to the ocean (a water body with at least OCEAN_SEA sea hexes, not a lake): 川 is cheap, existing 河
 cheaper, land expensive (gaps in the rasterized river are filled), and the path keeps off every other city's
-7 hexes, Koei's bases, facility plots and dikes. On it 川 and land become 河; roads (主徑 10) become ferries (12)
+7 hexes, Koei's bases, facility plots and dikes. A channel found earlier in the list counts as open sea for the
+later ones (so a tributary may end in it). On it 川 and land become 河; roads (主徑 10) become ferries (12)
 so they stay walkable; ferries stay. In Koei's block only his patch (make_world.py china_patch) and his 川 are
 changed (his own 3D stage is drawn there otherwise).
 
@@ -145,6 +146,8 @@ def courses(tb, new, tiers, spec, patch=None):
             rec["road"] = sum(1 for y, x, k in hexes if k == BRIDGE)
             rec["land"] = len(hexes) - rec["stream"] - rec["road"]
             rec["length"] = len(seen)
+            for h in seen:                                # a later river may end in this channel (博羅 -> 番禺's)
+                ocean[h] = True
         out.append(rec)
     return out
 

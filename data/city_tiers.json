@@ -1606,8 +1606,8 @@
   "region": "南海",
   "identified_as": "Pyu city-states (Beikthano, Halin, early Sri Ksetra), central Burma",
   "tier": 2,
-  "port": false,
-  "reason": "驃人城邦（毗濕奴城等大型城牆城市）（用户确认）",
+  "port": true,
+  "reason": "驃人城邦（毗濕奴城等大型城牆城市）（用户确认）（用户确认为港口城市）",
   "pop": 7200
  },
  {
@@ -3656,8 +3656,8 @@
   "region": "南海",
   "identified_as": "Dvaravati (墮羅缽底), Chao Phraya basin Mon kingdom 6th-11th c.",
   "tier": 3,
-  "port": false,
-  "reason": "200年尚未成城（後世城市/聚落）",
+  "port": true,
+  "reason": "200年尚未成城（後世城市/聚落）（用户确认为港口城市）",
   "pop": 3000
  },
  {
@@ -3676,8 +3676,8 @@
   "region": "南海",
   "identified_as": "Sumatra (island-wide; dispersed chiefdoms)",
   "tier": 3,
-  "port": false,
-  "reason": "部族或地區聚落，無城市",
+  "port": true,
+  "reason": "部族或地區聚落，無城市（用户确认为港口城市）",
   "pop": 24000
  },
  {
@@ -4306,8 +4306,8 @@
   "region": "南海",
   "identified_as": "Jambi (Malayu/末羅瑜 port, 7th c.)",
   "tier": 3,
-  "port": false,
-  "reason": "200年尚未成城（後世城市/聚落）",
+  "port": true,
+  "reason": "200年尚未成城（後世城市/聚落）（用户确认为港口城市）",
   "pop": 600
  },
  {
@@ -4326,8 +4326,8 @@
   "region": "南海",
   "identified_as": "Aceh (Lamuri 9th c.+, Aceh sultanate 15th c.)",
   "tier": 3,
-  "port": false,
-  "reason": "200年尚未成城（後世城市/聚落）",
+  "port": true,
+  "reason": "200年尚未成城（後世城市/聚落）（用户确认为港口城市）",
   "pop": 600
  },
  {
@@ -4406,8 +4406,8 @@
   "region": "南海",
   "identified_as": "Arakan / Rakhine, Dhanyawadi kingdom",
   "tier": 3,
-  "port": false,
-  "reason": "部族或地區聚落，無城市",
+  "port": true,
+  "reason": "部族或地區聚落，無城市（用户确认为港口城市）",
   "pop": 2400
  },
  {
@@ -4796,8 +4796,8 @@
   "region": "交州",
   "identified_as": "揭陽（南海郡属县）",
   "tier": 3,
-  "port": false,
-  "reason": "南海郡屬縣",
+  "port": true,
+  "reason": "南海郡屬縣（用户确认为港口城市）",
   "pop": 3000
  },
  {
@@ -4806,8 +4806,8 @@
   "region": "交州",
   "identified_as": "博羅（南海郡属县）",
   "tier": 3,
-  "port": false,
-  "reason": "南海郡屬縣",
+  "port": true,
+  "reason": "南海郡屬縣（用户确认为港口城市）",
   "pop": 3000
  },
  {
@@ -4856,8 +4856,8 @@
   "region": "揚州",
   "identified_as": "東安（南安，泉州一带）",
   "tier": 3,
-  "port": false,
-  "reason": "200年僅為縣",
+  "port": true,
+  "reason": "200年僅為縣（用户确认为港口城市）",
   "pop": 3000
  },
  {
@@ -4866,8 +4866,8 @@
   "region": "揚州",
   "identified_as": "永寧/東甌（温州）",
   "tier": 3,
-  "port": false,
-  "reason": "200年僅為縣",
+  "port": true,
+  "reason": "200年僅為縣（用户确认为港口城市）",
   "pop": 4000
  },
  {
@@ -4876,8 +4876,8 @@
   "region": "揚州",
   "identified_as": "章安（台州）",
   "tier": 3,
-  "port": false,
-  "reason": "200年僅為縣（章安）",
+  "port": true,
+  "reason": "200年僅為縣（章安）（用户确认为港口城市）",
   "pop": 4000
  }
 ]
