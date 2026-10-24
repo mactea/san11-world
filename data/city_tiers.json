@@ -1,0 +1,4883 @@
+[
+ {
+  "id": 42,
+  "name": "羅馬",
+  "region": "意大利",
+  "identified_as": "Roma (Rome, Italy)",
+  "tier": 1,
+  "port": true,
+  "reason": "羅馬帝國首都，百萬級大都會",
+  "pop": 900000
+ },
+ {
+  "id": 43,
+  "name": "米蘭",
+  "region": "意大利",
+  "identified_as": "Mediolanum (Milan, Italy)",
+  "tier": 1,
+  "port": false,
+  "reason": "意大利北部要城，200年尚未成為帝都（用户确认改档）",
+  "pop": 30000
+ },
+ {
+  "id": 44,
+  "name": "阿奎",
+  "region": "意大利",
+  "identified_as": "Aquileia (Aquileia, NE Italy)",
+  "tier": 1,
+  "port": true,
+  "reason": "意大利北部第一大城，多瑙河前線補給與貿易樞紐",
+  "pop": 50000
+ },
+ {
+  "id": 45,
+  "name": "拿坡",
+  "region": "意大利",
+  "identified_as": "Neapolis (Naples, Italy)",
+  "tier": 2,
+  "port": true,
+  "reason": "坎帕尼亞希臘名城、港口",
+  "pop": 30000
+ },
+ {
+  "id": 46,
+  "name": "敘拉",
+  "region": "西西里",
+  "identified_as": "Syracusae (Syracuse, Sicily)",
+  "tier": 2,
+  "port": true,
+  "reason": "西西里行省首府、港口",
+  "pop": 30000
+ },
+ {
+  "id": 47,
+  "name": "塔拉",
+  "region": "西班牙",
+  "identified_as": "Tarraco (Tarragona, Spain)",
+  "tier": 1,
+  "port": true,
+  "reason": "近西班牙行省（帝國最大行省）首府",
+  "pop": 25000
+ },
+ {
+  "id": 48,
+  "name": "科爾",
+  "region": "西班牙",
+  "identified_as": "Corduba (Córdoba, Spain)",
+  "tier": 1,
+  "port": true,
+  "reason": "貝提卡行省首府，西班牙最富庶城市",
+  "pop": 30000
+ },
+ {
+  "id": 49,
+  "name": "梅里",
+  "region": "西班牙",
+  "identified_as": "Augusta Emerita (Mérida, Spain)",
+  "tier": 2,
+  "port": false,
+  "reason": "盧西塔尼亞行省首府，大型殖民市（用户确认改档）",
+  "pop": 30000
+ },
+ {
+  "id": 50,
+  "name": "里昂",
+  "region": "高盧",
+  "identified_as": "Lugdunum (Lyon, France)",
+  "tier": 1,
+  "port": true,
+  "reason": "高盧三省首府、帝國造幣廠所在，高盧第一城",
+  "pop": 35000
+ },
+ {
+  "id": 51,
+  "name": "納博",
+  "region": "高盧",
+  "identified_as": "Narbo Martius (Narbonne, France)",
+  "tier": 2,
+  "port": true,
+  "reason": "納博高盧行省首府、港口",
+  "pop": 30000
+ },
+ {
+  "id": 52,
+  "name": "馬賽",
+  "region": "高盧",
+  "identified_as": "Massilia (Marseille, France)",
+  "tier": 2,
+  "port": true,
+  "reason": "希臘古港、自由同盟城市",
+  "pop": 25000
+ },
+ {
+  "id": 53,
+  "name": "波爾",
+  "region": "高盧",
+  "identified_as": "Burdigala (Bordeaux, France)",
+  "tier": 2,
+  "port": true,
+  "reason": "阿基坦行省首府，加龍河港",
+  "pop": 20000
+ },
+ {
+  "id": 54,
+  "name": "蘭斯",
+  "region": "高盧",
+  "identified_as": "Durocortorum (Reims, France)",
+  "tier": 2,
+  "port": false,
+  "reason": "比利時高盧行省首府",
+  "pop": 30000
+ },
+ {
+  "id": 55,
+  "name": "特里",
+  "region": "高盧",
+  "identified_as": "Augusta Treverorum (Trier, Germany)",
+  "tier": 1,
+  "port": false,
+  "reason": "比利時高盧財政長官駐地，摩澤爾河大城（用户确认改档）",
+  "pop": 25000
+ },
+ {
+  "id": 56,
+  "name": "倫丁",
+  "region": "不列顛",
+  "identified_as": "Londinium (London, UK)",
+  "tier": 2,
+  "port": true,
+  "reason": "不列顛行省（197年後上不列顛）首府，島上最大城市（用户确认改档）",
+  "pop": 25000
+ },
+ {
+  "id": 57,
+  "name": "約克",
+  "region": "不列顛",
+  "identified_as": "Eboracum (York, UK)",
+  "tier": 2,
+  "port": true,
+  "reason": "第六軍團大營，下不列顛首府（塞維魯晚年駐此）",
+  "pop": 10000
+ },
+ {
+  "id": 58,
+  "name": "美因",
+  "region": "日耳曼",
+  "identified_as": "Mainz, Germany = Mogontiacum, legionary fortress (Legio XXII Primigenia) + canabae/vicus, capital of Germania Superior",
+  "tier": 2,
+  "port": true,
+  "reason": "上日耳曼行省首府、第二十二軍團大營",
+  "pop": 20000
+ },
+ {
+  "id": 59,
+  "name": "奧格",
+  "region": "日耳曼",
+  "identified_as": "Augsburg, Germany = Augusta Vindelicum, capital of Raetia",
+  "tier": 2,
+  "port": false,
+  "reason": "雷蒂亞行省首府",
+  "pop": 12000
+ },
+ {
+  "id": 60,
+  "name": "卡農",
+  "region": "潘諾尼亞",
+  "identified_as": "Carnuntum (Petronell, Austria)",
+  "tier": 2,
+  "port": true,
+  "reason": "上潘諾尼亞首府，193年塞維魯在此稱帝（用户确认改档）",
+  "pop": 35000
+ },
+ {
+  "id": 61,
+  "name": "阿昆",
+  "region": "潘諾尼亞",
+  "identified_as": "Aquincum (Budapest, Hungary)",
+  "tier": 2,
+  "port": true,
+  "reason": "下潘諾尼亞行省首府、軍團大營",
+  "pop": 30000
+ },
+ {
+  "id": 62,
+  "name": "西爾",
+  "region": "潘諾尼亞",
+  "identified_as": "Sirmium (Sremska Mitrovica, Serbia)",
+  "tier": 2,
+  "port": true,
+  "reason": "潘諾尼亞重鎮、多瑙河防線樞紐",
+  "pop": 20000
+ },
+ {
+  "id": 63,
+  "name": "薩洛",
+  "region": "達爾馬提亞",
+  "identified_as": "Salona (Solin near Split, Croatia)",
+  "tier": 1,
+  "port": true,
+  "reason": "達爾馬提亞行省首府，亞得里亞海東岸最大城",
+  "pop": 40000
+ },
+ {
+  "id": 64,
+  "name": "薩米",
+  "region": "達契亞",
+  "identified_as": "Colonia Ulpia Traiana Sarmizegetusa (Hunedoara, Romania)",
+  "tier": 2,
+  "port": false,
+  "reason": "達契亞首府（大都會殖民市）",
+  "pop": 15000
+ },
+ {
+  "id": 65,
+  "name": "塞爾",
+  "region": "色雷斯",
+  "identified_as": "Serdica (Sofia, Bulgaria)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 12000
+ },
+ {
+  "id": 66,
+  "name": "拜占",
+  "region": "色雷斯",
+  "identified_as": "Byzantium (Istanbul, Turkey)",
+  "tier": 1,
+  "port": true,
+  "reason": "博斯普魯斯海峽要港（196年被塞維魯降格）（用户确认改档）",
+  "pop": 25000
+ },
+ {
+  "id": 67,
+  "name": "潘提",
+  "region": "博斯普魯斯",
+  "identified_as": "Panticapaeum (Kerch, Crimea)",
+  "tier": 2,
+  "port": true,
+  "reason": "博斯普魯斯王國首都",
+  "pop": 12000
+ },
+ {
+  "id": 68,
+  "name": "雅典",
+  "region": "希臘",
+  "identified_as": "Athenae (Athens, Greece)",
+  "tier": 1,
+  "port": true,
+  "reason": "希臘文化與學術中心，帝國第一流名城（用户确认）",
+  "pop": 25000
+ },
+ {
+  "id": 69,
+  "name": "帖撒",
+  "region": "馬其頓",
+  "identified_as": "Thessalonica (Thessaloniki, Greece)",
+  "tier": 1,
+  "port": true,
+  "reason": "馬其頓行省首府，愛琴海北岸大港",
+  "pop": 40000
+ },
+ {
+  "id": 70,
+  "name": "以弗",
+  "region": "亞細亞",
+  "identified_as": "Ephesus (Selçuk, Turkey)",
+  "tier": 1,
+  "port": true,
+  "reason": "亞細亞行省首府，帝國東部第一流大都會",
+  "pop": 100000
+ },
+ {
+  "id": 71,
+  "name": "安卡",
+  "region": "加拉太",
+  "identified_as": "Ancyra (Ankara, Turkey)",
+  "tier": 2,
+  "port": false,
+  "reason": "加拉太行省首府",
+  "pop": 30000
+ },
+ {
+  "id": 72,
+  "name": "馬薩",
+  "region": "卡帕多奇亞",
+  "identified_as": "Mazaca / Caesarea (Kayseri, Turkey)",
+  "tier": 2,
+  "port": false,
+  "reason": "卡帕多奇亞行省首府",
+  "pop": 30000
+ },
+ {
+  "id": 73,
+  "name": "塔爾",
+  "region": "奇里乞亞",
+  "identified_as": "Tarsus (Mersin Province, Turkey)",
+  "tier": 1,
+  "port": true,
+  "reason": "奇里乞亞行省首府，東方大城",
+  "pop": 50000
+ },
+ {
+  "id": 74,
+  "name": "安都",
+  "region": "敘利亞",
+  "identified_as": "Antiochia ad Orontem (Antakya, Turkey)",
+  "tier": 1,
+  "port": true,
+  "reason": "敘利亞首府，帝國第三大城",
+  "pop": 200000
+ },
+ {
+  "id": 75,
+  "name": "大馬",
+  "region": "敘利亞",
+  "identified_as": "Damascus (Syria)",
+  "tier": 2,
+  "port": false,
+  "reason": "敘利亞大城，商隊與宗教中心（用户确认改档）",
+  "pop": 35000
+ },
+ {
+  "id": 76,
+  "name": "帕爾",
+  "region": "敘利亞",
+  "identified_as": "Palmyra (Tadmur, Syria)",
+  "tier": 1,
+  "port": false,
+  "reason": "絲路商隊大城，東西貿易樞紐（用户确认）",
+  "pop": 40000
+ },
+ {
+  "id": 77,
+  "name": "耶城",
+  "region": "猶太",
+  "identified_as": "Aelia Capitolina (Jerusalem)",
+  "tier": 2,
+  "port": false,
+  "reason": "埃利亞殖民市、第十軍團駐地，宗教聖城（用户确认）",
+  "pop": 12000
+ },
+ {
+  "id": 78,
+  "name": "埃德",
+  "region": "奧斯若恩",
+  "identified_as": "Edessa (Şanlıurfa, Turkey)",
+  "tier": 2,
+  "port": false,
+  "reason": "奧斯若恩王國首都",
+  "pop": 25000
+ },
+ {
+  "id": 79,
+  "name": "尼西",
+  "region": "美索不達米亞",
+  "identified_as": "Nisibis (Nusaybin, Turkey)",
+  "tier": 2,
+  "port": false,
+  "reason": "美索不達米亞新行省首府（195年）",
+  "pop": 25000
+ },
+ {
+  "id": 80,
+  "name": "黎軒",
+  "region": "埃及",
+  "identified_as": "Alexandria (Egypt)",
+  "tier": 1,
+  "port": true,
+  "reason": "埃及首府，帝國第二大城",
+  "pop": 450000
+ },
+ {
+  "id": 81,
+  "name": "孟菲",
+  "region": "埃及",
+  "identified_as": "Memphis (Mit Rahina, Egypt)",
+  "tier": 2,
+  "port": true,
+  "reason": "埃及古都、尼羅河港",
+  "pop": 25000
+ },
+ {
+  "id": 82,
+  "name": "底比",
+  "region": "埃及",
+  "identified_as": "Thebes / Diospolis Magna (Luxor, Egypt)",
+  "tier": 3,
+  "port": true,
+  "reason": "底比斯已衰落為州郡小城",
+  "pop": 6000
+ },
+ {
+  "id": 83,
+  "name": "迦太",
+  "region": "阿非利加",
+  "identified_as": "Carthago (Tunis, Tunisia)",
+  "tier": 1,
+  "port": true,
+  "reason": "阿非利加行省首府，西地中海第一大城",
+  "pop": 100000
+ },
+ {
+  "id": 84,
+  "name": "錫爾",
+  "region": "努米底亞",
+  "identified_as": "Cirta (Constantine, Algeria)",
+  "tier": 2,
+  "port": false,
+  "reason": "努米底亞錫爾塔四殖民市聯盟首府",
+  "pop": 25000
+ },
+ {
+  "id": 85,
+  "name": "約爾",
+  "region": "茅利塔尼亞",
+  "identified_as": "Iol Caesarea (Cherchell, Algeria)",
+  "tier": 2,
+  "port": true,
+  "reason": "凱撒茅利塔尼亞行省首府、港口",
+  "pop": 25000
+ },
+ {
+  "id": 86,
+  "name": "丁吉",
+  "region": "茅利塔尼亞",
+  "identified_as": "Tingis (Tangier, Morocco)",
+  "tier": 2,
+  "port": true,
+  "reason": "廷吉塔納茅利塔尼亞行省首府、港口",
+  "pop": 8000
+ },
+ {
+  "id": 87,
+  "name": "萊普",
+  "region": "阿非利加",
+  "identified_as": "Leptis Magna (Khoms, Libya)",
+  "tier": 1,
+  "port": true,
+  "reason": "塞維魯皇帝故鄉，正大興土木，北非巨城（用户确认）",
+  "pop": 40000
+ },
+ {
+  "id": 88,
+  "name": "昔蘭",
+  "region": "昔蘭尼加",
+  "identified_as": "Cyrene (Shahhat, Libya)",
+  "tier": 2,
+  "port": false,
+  "reason": "昔蘭尼加古都",
+  "pop": 15000
+ },
+ {
+  "id": 89,
+  "name": "亞塔",
+  "region": "亞美尼亞",
+  "identified_as": "Artaxata (Artashat), capital of Armenia",
+  "tier": 2,
+  "port": false,
+  "reason": "亞美尼亞王國首都（用户确认改档）",
+  "pop": 25000
+ },
+ {
+  "id": 90,
+  "name": "斯賓",
+  "region": "安息",
+  "identified_as": "Ctesiphon (with Seleucia/Vologesocerta), Parthian capital",
+  "tier": 1,
+  "port": true,
+  "reason": "安息帝國首都（含塞琉西亞），西亞第一大城",
+  "pop": 100000
+ },
+ {
+  "id": 91,
+  "name": "哈特",
+  "region": "安息",
+  "identified_as": "Hatra (al-Hadr), Arab client kingdom",
+  "tier": 2,
+  "port": false,
+  "reason": "阿拉伯附庸王國首都，兩度擊退塞維魯",
+  "pop": 25000
+ },
+ {
+  "id": 92,
+  "name": "查拉",
+  "region": "安息",
+  "identified_as": "Charax Spasinou, capital of Characene/Mesene",
+  "tier": 1,
+  "port": true,
+  "reason": "查拉塞尼王國首都、波斯灣大港（用户确认改档）",
+  "pop": 20000
+ },
+ {
+  "id": 93,
+  "name": "蘇薩",
+  "region": "安息",
+  "identified_as": "Susa (Seleucia on the Eulaeus)",
+  "tier": 2,
+  "port": false,
+  "reason": "埃蘭古都，安息西南重鎮",
+  "pop": 15000
+ },
+ {
+  "id": 94,
+  "name": "阿蠻",
+  "region": "安息",
+  "identified_as": "Ecbatana (Hamadan), Parthian summer capital (Hou Hanshu 阿蠻)",
+  "tier": 1,
+  "port": false,
+  "reason": "安息夏都、米底舊都",
+  "pop": 25000
+ },
+ {
+  "id": 95,
+  "name": "拉蓋",
+  "region": "安息",
+  "identified_as": "Rhagae / Arsacia (Rey, near Tehran)",
+  "tier": 2,
+  "port": false,
+  "reason": "安息米底東部大城",
+  "pop": 15000
+ },
+ {
+  "id": 96,
+  "name": "波斯",
+  "region": "安息",
+  "identified_as": "Istakhr (Persis), seat of Persid sub-kings",
+  "tier": 2,
+  "port": false,
+  "reason": "波斯（法爾斯）附屬王國都城",
+  "pop": 10000
+ },
+ {
+  "id": 97,
+  "name": "赫卡",
+  "region": "安息",
+  "identified_as": "Hecatompylos (Shahr-e Qumis)",
+  "tier": 2,
+  "port": false,
+  "reason": "安息舊都（百門城）",
+  "pop": 10000
+ },
+ {
+  "id": 98,
+  "name": "木鹿",
+  "region": "安息",
+  "identified_as": "Merv (Gyaur Kala / Antiochia Margiana)",
+  "tier": 2,
+  "port": false,
+  "reason": "安息東方重鎮馬爾吉亞納首府，絲路大城（用户确认改档）",
+  "pop": 30000
+ },
+ {
+  "id": 99,
+  "name": "丸都",
+  "region": "東夷",
+  "identified_as": "Wandu (Hwando) fortress, Goguryeo capital (Ji'an, Jilin)",
+  "tier": 2,
+  "port": false,
+  "reason": "高句麗王都",
+  "pop": 9000
+ },
+ {
+  "id": 100,
+  "name": "大和",
+  "region": "倭",
+  "identified_as": "Yamato (Nara basin, Makimuku site area)",
+  "tier": 3,
+  "port": false,
+  "reason": "纏向遺址，倭國中心政權所在（用户确认改档）",
+  "pop": 2100
+ },
+ {
+  "id": 101,
+  "name": "扶南",
+  "region": "南海",
+  "identified_as": "Funan (lower Mekong delta; ports Oc Eo, Angkor Borei)",
+  "tier": 1,
+  "port": true,
+  "reason": "扶南王國都城，東南亞第一強國",
+  "pop": 15000
+ },
+ {
+  "id": 102,
+  "name": "師子",
+  "region": "天竺",
+  "identified_as": "Anuradhapura (Sri Lanka, early Anuradhapura period)",
+  "tier": 1,
+  "port": false,
+  "reason": "錫蘭阿努拉德普勒王國首都",
+  "pop": 30000
+ },
+ {
+  "id": 103,
+  "name": "罽賓",
+  "region": "天竺",
+  "identified_as": "Kapisa (Begram), Kushan summer capital",
+  "tier": 2,
+  "port": false,
+  "reason": "貴霜夏都迦畢試（用户确认改为迦毕试）",
+  "pop": 70000,
+  "relocate": "迦畢試：約北緯35.0°、東經69.3°（巴格拉姆）"
+ },
+ {
+  "id": 104,
+  "name": "優禪",
+  "region": "天竺",
+  "identified_as": "Ujjayini (Ujjain), Western Kshatrapa capital",
+  "tier": 1,
+  "port": false,
+  "reason": "西部薩特拉普（西克沙特拉帕）王國首都",
+  "pop": 30000
+ },
+ {
+  "id": 105,
+  "name": "案達",
+  "region": "天竺",
+  "identified_as": "Andhra / Satavahana eastern capital Dhanyakataka (Dharanikota-Amaravati)",
+  "tier": 1,
+  "port": true,
+  "reason": "娑多婆訶那王朝東都",
+  "pop": 20000
+ },
+ {
+  "id": 106,
+  "name": "烏孫",
+  "region": "西域",
+  "identified_as": "Wusun state (capital Chigu 赤谷城, Issyk-Kul)",
+  "tier": 2,
+  "port": false,
+  "reason": "烏孫國都赤谷城",
+  "pop": 24000
+ },
+ {
+  "id": 107,
+  "name": "高附",
+  "region": "貴霜",
+  "identified_as": "Gaofu = Kabul region (Kushan)",
+  "tier": 2,
+  "port": false,
+  "reason": "貴霜高附（喀布爾）地區中心",
+  "pop": 10000
+ },
+ {
+  "id": 108,
+  "name": "康居",
+  "region": "西域",
+  "identified_as": "Kangju state (Syr Darya / Tashkent oasis)",
+  "tier": 2,
+  "port": false,
+  "reason": "康居國中心",
+  "pop": 36000
+ },
+ {
+  "id": 109,
+  "name": "藍氏",
+  "region": "貴霜",
+  "identified_as": "Bactra (Balkh), 藍氏城 of Hou Hanshu",
+  "tier": 1,
+  "port": false,
+  "reason": "大夏故都、貴霜巴克特里亞大城",
+  "pop": 30000
+ },
+ {
+  "id": 110,
+  "name": "大宛",
+  "region": "西域",
+  "identified_as": "Dayuan / Ferghana (capital 貴山城)",
+  "tier": 2,
+  "port": false,
+  "reason": "大宛國都貴山城",
+  "pop": 18000
+ },
+ {
+  "id": 111,
+  "name": "疏勒",
+  "region": "西域",
+  "identified_as": "Shule = Kashgar",
+  "tier": 2,
+  "port": false,
+  "reason": "西域大國疏勒國都",
+  "pop": 3600
+ },
+ {
+  "id": 112,
+  "name": "于闐",
+  "region": "西域",
+  "identified_as": "Yutian = Khotan",
+  "tier": 2,
+  "port": false,
+  "reason": "西域大國于闐國都",
+  "pop": 4980
+ },
+ {
+  "id": 113,
+  "name": "龜茲",
+  "region": "西域",
+  "identified_as": "Qiuci = Kucha",
+  "tier": 2,
+  "port": false,
+  "reason": "西域大國龜茲國都",
+  "pop": 4879
+ },
+ {
+  "id": 114,
+  "name": "高昌",
+  "region": "西域",
+  "identified_as": "Gaochang (Karakhoja, Turfan), Han garrison 高昌壁",
+  "tier": 3,
+  "port": false,
+  "reason": "漢戊己校尉駐地高昌壁（用户确认改档）",
+  "pop": 4000
+ },
+ {
+  "id": 115,
+  "name": "敦煌",
+  "region": "西域",
+  "identified_as": "Dunhuang (Han commandery seat)",
+  "tier": 2,
+  "port": false,
+  "reason": "敦煌郡治、西域門戶",
+  "pop": 12000
+ },
+ {
+  "id": 116,
+  "name": "富樓",
+  "region": "貴霜",
+  "identified_as": "Purushapura (Peshawar), Kushan capital",
+  "tier": 1,
+  "port": false,
+  "reason": "貴霜帝國首都",
+  "pop": 70000
+ },
+ {
+  "id": 117,
+  "name": "秣菟",
+  "region": "天竺",
+  "identified_as": "Mathura, Kushan southern capital",
+  "tier": 1,
+  "port": true,
+  "reason": "貴霜南都，北印度大城",
+  "pop": 50000
+ },
+ {
+  "id": 118,
+  "name": "華氏",
+  "region": "天竺",
+  "identified_as": "Pataliputra (Patna)",
+  "tier": 1,
+  "port": true,
+  "reason": "摩揭陀古都，恆河流域最大城市",
+  "pop": 80000
+ },
+ {
+  "id": 119,
+  "name": "番禺",
+  "region": "南海",
+  "identified_as": "Panyu, seat of Nanhai commandery (Guangzhou)",
+  "tier": 2,
+  "port": true,
+  "reason": "南海郡治、嶺南大港",
+  "pop": 15017
+ },
+ {
+  "id": 120,
+  "name": "交趾",
+  "region": "南海",
+  "identified_as": "Jiaozhi commandery (Red River delta, Hanoi area)",
+  "tier": 2,
+  "port": true,
+  "reason": "交州州治（士燮治下），嶺南第一大郡（用户确认改档）",
+  "pop": 44774
+ },
+ {
+  "id": 121,
+  "name": "樂浪",
+  "region": "東夷",
+  "identified_as": "Lelang commandery (Pyongyang area)",
+  "tier": 2,
+  "port": false,
+  "reason": "樂浪郡治",
+  "pop": 15423
+ },
+ {
+  "id": 122,
+  "name": "斯盧",
+  "region": "東夷",
+  "identified_as": "Saro (斯盧國), one of the 12 Jinhan statelets, Gyeongju; precursor of Silla",
+  "tier": 2,
+  "port": false,
+  "reason": "辰韓十二國之一，200年規模尚小（用户确认改档）",
+  "pop": 1200
+ },
+ {
+  "id": 123,
+  "name": "邪馬",
+  "region": "倭",
+  "identified_as": "Yamatai (邪馬壹/邪馬臺國), Queen Himiko's state",
+  "tier": 2,
+  "port": false,
+  "reason": "卑彌呼女王都城，倭國盟主",
+  "pop": 21000
+ },
+ {
+  "id": 124,
+  "name": "扶餘",
+  "region": "東夷",
+  "identified_as": "Buyeo (夫餘) state (Songhua plain, Jilin)",
+  "tier": 2,
+  "port": false,
+  "reason": "夫餘國都",
+  "pop": 24000
+ },
+ {
+  "id": 125,
+  "name": "龍城",
+  "region": "鮮卑",
+  "identified_as": "Longcheng 蘢城, Xiongnu ritual assembly site, central Mongolia",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 126,
+  "name": "拉文",
+  "region": "意大利",
+  "identified_as": "Ravenna (Ravenna, Italy) incl. Classis",
+  "tier": 2,
+  "port": true,
+  "reason": "意大利艦隊基地克拉西斯所在",
+  "pop": 20000
+ },
+ {
+  "id": 127,
+  "name": "布林",
+  "region": "意大利",
+  "identified_as": "Brundisium (Brindisi, Italy)",
+  "tier": 2,
+  "port": true,
+  "reason": "通往希臘的主要港口",
+  "pop": 15000
+ },
+ {
+  "id": 128,
+  "name": "巴勒",
+  "region": "西西里",
+  "identified_as": "Panormus (Palermo, Sicily)",
+  "tier": 2,
+  "port": true,
+  "reason": "西西里北岸殖民市、港口",
+  "pop": 15000
+ },
+ {
+  "id": 129,
+  "name": "都靈",
+  "region": "意大利",
+  "identified_as": "Augusta Taurinorum (Turin, Italy)",
+  "tier": 3,
+  "port": false,
+  "reason": "都靈：已議定為小",
+  "pop": 7000
+ },
+ {
+  "id": 130,
+  "name": "佛羅",
+  "region": "意大利",
+  "identified_as": "Florentia (Florence, Italy)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 131,
+  "name": "卡利",
+  "region": "撒丁",
+  "identified_as": "Carales (Cagliari, Sardinia)",
+  "tier": 2,
+  "port": true,
+  "reason": "撒丁行省首府、港口",
+  "pop": 15000
+ },
+ {
+  "id": 132,
+  "name": "新迦",
+  "region": "西班牙",
+  "identified_as": "Carthago Nova (Cartagena, Spain)",
+  "tier": 2,
+  "port": true,
+  "reason": "司法區首府、古迦太基殖民港",
+  "pop": 10000
+ },
+ {
+  "id": 133,
+  "name": "加的",
+  "region": "西班牙",
+  "identified_as": "Gades (Cádiz, Spain)",
+  "tier": 2,
+  "port": true,
+  "reason": "西班牙最富商港",
+  "pop": 20000
+ },
+ {
+  "id": 134,
+  "name": "薩拉",
+  "region": "西班牙",
+  "identified_as": "Caesaraugusta (Zaragoza, Spain)",
+  "tier": 2,
+  "port": true,
+  "reason": "埃布羅河畔殖民市、司法區首府",
+  "pop": 15000
+ },
+ {
+  "id": 135,
+  "name": "里斯",
+  "region": "西班牙",
+  "identified_as": "Olisipo (Lisbon, Portugal)",
+  "tier": 2,
+  "port": true,
+  "reason": "塔古斯河口港口自治市",
+  "pop": 15000
+ },
+ {
+  "id": 136,
+  "name": "布拉",
+  "region": "西班牙",
+  "identified_as": "Bracara Augusta (Braga, Portugal)",
+  "tier": 2,
+  "port": false,
+  "reason": "司法區首府，西北西班牙中心",
+  "pop": 10000
+ },
+ {
+  "id": 137,
+  "name": "阿斯",
+  "region": "西班牙",
+  "identified_as": "Asturica Augusta (Astorga, Spain)",
+  "tier": 3,
+  "port": false,
+  "reason": "司法區首府、金礦管理中心",
+  "pop": 8000
+ },
+ {
+  "id": 138,
+  "name": "巴黎",
+  "region": "高盧",
+  "identified_as": "Lutetia (Paris, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "巴黎：已議定為小",
+  "pop": 8000
+ },
+ {
+  "id": 139,
+  "name": "普瓦",
+  "region": "高盧",
+  "identified_as": "Lemonum (Poitiers, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 140,
+  "name": "貝桑",
+  "region": "高盧",
+  "identified_as": "Vesontio (Besançon, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 141,
+  "name": "斯特",
+  "region": "高盧",
+  "identified_as": "Argentoratum (Strasbourg, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "第八奧古斯塔軍團大營，萊茵河上游要塞（用户确认改档）",
+  "pop": 10000
+ },
+ {
+  "id": 142,
+  "name": "切斯",
+  "region": "不列顛",
+  "identified_as": "Deva Victrix (Chester, UK)",
+  "tier": 3,
+  "port": false,
+  "reason": "軍團營地，僅地方重要",
+  "pop": 7000
+ },
+ {
+  "id": 143,
+  "name": "卡迪",
+  "region": "不列顛",
+  "identified_as": "Cardiff Roman fort/vicus (Cardiff, Wales); alt. Caerleon/Caerwent nearby",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 500
+ },
+ {
+  "id": 144,
+  "name": "雷根",
+  "region": "日耳曼",
+  "identified_as": "Regensburg, Germany = Castra Regina, legionary fortress of Legio III Italica (built 179) + canabae",
+  "tier": 3,
+  "port": false,
+  "reason": "第三意大利軍團大營，雷蒂亞唯一軍團（用户确认改档）",
+  "pop": 10000
+ },
+ {
+  "id": 145,
+  "name": "馬科",
+  "region": "日耳曼",
+  "identified_as": "Marcomanni (Bohemia, Czech Republic) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "日耳曼大部族，但無城市",
+  "pop": 4200
+ },
+ {
+  "id": 146,
+  "name": "森農",
+  "region": "日耳曼",
+  "identified_as": "Semnones (between Elbe and Oder, Brandenburg) — Suebic tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3000
+ },
+ {
+  "id": 147,
+  "name": "維魯",
+  "region": "諾里庫姆",
+  "identified_as": "Virunum (Zollfeld near Klagenfurt, Austria)",
+  "tier": 2,
+  "port": false,
+  "reason": "諾里庫姆行省首府",
+  "pop": 12000
+ },
+ {
+  "id": 148,
+  "name": "都拉",
+  "region": "馬其頓",
+  "identified_as": "Dyrrachium (Durrës, Albania)",
+  "tier": 2,
+  "port": true,
+  "reason": "亞得里亞海東岸要港、埃格納提亞大道起點",
+  "pop": 15000
+ },
+ {
+  "id": 149,
+  "name": "納伊",
+  "region": "默西亞",
+  "identified_as": "Naissus (Niš, Serbia)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，4世紀後方興",
+  "pop": 8000
+ },
+ {
+  "id": 150,
+  "name": "菲利",
+  "region": "色雷斯",
+  "identified_as": "Philippopolis (Plovdiv, Bulgaria)",
+  "tier": 1,
+  "port": false,
+  "reason": "色雷斯第一大城，色雷斯聯盟大都會（用户确认改档）",
+  "pop": 30000
+ },
+ {
+  "id": 151,
+  "name": "哈德",
+  "region": "色雷斯",
+  "identified_as": "Hadrianopolis (Edirne, Turkey)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，4世紀後方興",
+  "pop": 12000
+ },
+ {
+  "id": 152,
+  "name": "馬爾",
+  "region": "默西亞",
+  "identified_as": "Marcianopolis (Devnya, Bulgaria)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，3世紀末方成行省首府",
+  "pop": 12000
+ },
+ {
+  "id": 153,
+  "name": "托米",
+  "region": "默西亞",
+  "identified_as": "Tomis (Constanța, Romania)",
+  "tier": 2,
+  "port": true,
+  "reason": "黑海西岸五城聯盟大都會、港口",
+  "pop": 10000
+ },
+ {
+  "id": 154,
+  "name": "奧比",
+  "region": "博斯普魯斯",
+  "identified_as": "Olbia Pontica (Parutyne, Ukraine)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 155,
+  "name": "克森",
+  "region": "博斯普魯斯",
+  "identified_as": "Chersonesus Taurica (Sevastopol, Crimea)",
+  "tier": 2,
+  "port": true,
+  "reason": "克里米亞自由城市、羅馬駐軍港口",
+  "pop": 10000
+ },
+ {
+  "id": 156,
+  "name": "塔奈",
+  "region": "博斯普魯斯",
+  "identified_as": "Tanais (near Rostov-on-Don, Russia)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 157,
+  "name": "克里",
+  "region": "希臘",
+  "identified_as": "Gortyn (Crete, Greece) — island name, taken as its capital",
+  "tier": 2,
+  "port": false,
+  "reason": "克里特與昔蘭尼加行省首府",
+  "pop": 20000
+ },
+ {
+  "id": 158,
+  "name": "羅德",
+  "region": "亞細亞",
+  "identified_as": "Rhodus (Rhodes town, Greece)",
+  "tier": 2,
+  "port": true,
+  "reason": "東地中海海上強城",
+  "pop": 30000
+ },
+ {
+  "id": 159,
+  "name": "塞浦",
+  "region": "塞浦路斯",
+  "identified_as": "Nea Paphos (Paphos, Cyprus) — island name; alt. Salamis",
+  "tier": 2,
+  "port": true,
+  "reason": "塞浦路斯行省首府、港口",
+  "pop": 20000
+ },
+ {
+  "id": 160,
+  "name": "錫諾",
+  "region": "本都",
+  "identified_as": "Sinope (Sinop, Turkey)",
+  "tier": 2,
+  "port": true,
+  "reason": "本都黑海第一大港",
+  "pop": 20000
+ },
+ {
+  "id": 161,
+  "name": "特拉",
+  "region": "本都",
+  "identified_as": "Trapezus (Trabzon, Turkey)",
+  "tier": 2,
+  "port": true,
+  "reason": "黑海東部艦隊基地與港口",
+  "pop": 12000
+ },
+ {
+  "id": 162,
+  "name": "阿塔",
+  "region": "呂基亞",
+  "identified_as": "Attalia (Antalya, Turkey)",
+  "tier": 3,
+  "port": true,
+  "reason": "潘菲利亞主要港口（用户确认改档）",
+  "pop": 15000
+ },
+ {
+  "id": 163,
+  "name": "科尼",
+  "region": "加拉太",
+  "identified_as": "Iconium (Konya, Turkey)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 15000
+ },
+ {
+  "id": 164,
+  "name": "梅利",
+  "region": "卡帕多奇亞",
+  "identified_as": "Melitene (Malatya, Turkey)",
+  "tier": 3,
+  "port": false,
+  "reason": "第十二閃電軍團大營，幼發拉底河防線要塞（用户确认改档）",
+  "pop": 10000
+ },
+ {
+  "id": 165,
+  "name": "佩特",
+  "region": "阿拉伯",
+  "identified_as": "Petra, Roman Arabia Petraea",
+  "tier": 2,
+  "port": false,
+  "reason": "阿拉伯行省大都會、商隊古都",
+  "pop": 20000
+ },
+ {
+  "id": 166,
+  "name": "埃米",
+  "region": "敘利亞",
+  "identified_as": "Emesa (Homs, Syria)",
+  "tier": 2,
+  "port": false,
+  "reason": "埃米薩祭司王家舊都，皇后尤利婭·多姆娜故鄉",
+  "pop": 25000
+ },
+ {
+  "id": 167,
+  "name": "杜拉",
+  "region": "敘利亞",
+  "identified_as": "Dura-Europos (Salhiyah, Syria)",
+  "tier": 3,
+  "port": false,
+  "reason": "幼發拉底河羅馬邊防重鎮（用户确认改档）",
+  "pop": 7000
+ },
+ {
+  "id": 168,
+  "name": "佩魯",
+  "region": "埃及",
+  "identified_as": "Pelusium (Tell el-Farama, Egypt)",
+  "tier": 2,
+  "port": true,
+  "reason": "埃及東大門、尼羅河口港",
+  "pop": 15000
+ },
+ {
+  "id": 169,
+  "name": "賽伊",
+  "region": "埃及",
+  "identified_as": "Syene (Aswan, Egypt)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 170,
+  "name": "麥羅",
+  "region": "庫施",
+  "identified_as": "Meroe, capital of Kush (Meroitic period)",
+  "tier": 2,
+  "port": true,
+  "reason": "庫施（麥羅埃）王國首都（用户确认改档）",
+  "pop": 20000
+ },
+ {
+  "id": 171,
+  "name": "阿克",
+  "region": "阿克蘇姆",
+  "identified_as": "Aksum (early, before 4th-c. monumental peak)",
+  "tier": 1,
+  "port": false,
+  "reason": "新興的阿克蘇姆王國都城（用户确认改档）",
+  "pop": 10000
+ },
+ {
+  "id": 172,
+  "name": "希波",
+  "region": "努米底亞",
+  "identified_as": "Hippo Regius (Annaba, Algeria)",
+  "tier": 2,
+  "port": true,
+  "reason": "努米底亞沿海大港",
+  "pop": 20000
+ },
+ {
+  "id": 173,
+  "name": "沃呂",
+  "region": "茅利塔尼亞",
+  "identified_as": "Volubilis (near Meknes, Morocco)",
+  "tier": 3,
+  "port": false,
+  "reason": "廷吉塔納內陸最大城、實際行政中心之一（用户确认改档）",
+  "pop": 12000
+ },
+ {
+  "id": 174,
+  "name": "姆茨",
+  "region": "伊比利亞",
+  "identified_as": "Mtskheta / Armazi, capital of Caucasian Iberia",
+  "tier": 2,
+  "port": false,
+  "reason": "高加索伊比利亞王國首都",
+  "pop": 10000
+ },
+ {
+  "id": 175,
+  "name": "卡巴",
+  "region": "阿爾巴尼亞",
+  "identified_as": "Kabala (Qabala), capital of Caucasian Albania",
+  "tier": 2,
+  "port": false,
+  "reason": "高加索阿爾巴尼亞王國首都",
+  "pop": 8000
+ },
+ {
+  "id": 176,
+  "name": "阿貝",
+  "region": "安息",
+  "identified_as": "Arbela (Erbil), capital of Adiabene",
+  "tier": 2,
+  "port": false,
+  "reason": "阿迪亞貝內王國首都",
+  "pop": 15000
+ },
+ {
+  "id": 177,
+  "name": "伊斯",
+  "region": "安息",
+  "identified_as": "Aspadana (Isfahan)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 178,
+  "name": "克爾",
+  "region": "安息",
+  "identified_as": "Carmana (Kerman region)",
+  "tier": 3,
+  "port": false,
+  "reason": "卡爾馬尼亞地區中心，規模小",
+  "pop": 5000
+ },
+ {
+  "id": 179,
+  "name": "尼薩",
+  "region": "安息",
+  "identified_as": "Nisa (Mithradatkert / New Nisa), Turkmenistan",
+  "tier": 3,
+  "port": false,
+  "reason": "安息王室祖陵舊都，200年已非政治中心",
+  "pop": 5000
+ },
+ {
+  "id": 180,
+  "name": "赫拉",
+  "region": "安息",
+  "identified_as": "Artacoana / Alexandria Ariana (Herat)",
+  "tier": 2,
+  "port": false,
+  "reason": "阿里亞地區首府",
+  "pop": 15000
+ },
+ {
+  "id": 181,
+  "name": "花剌",
+  "region": "康居",
+  "identified_as": "Khwarezm (Toprak-kala, Chorasmia)",
+  "tier": 2,
+  "port": false,
+  "reason": "花剌子模王國都城",
+  "pop": 5000
+ },
+ {
+  "id": 182,
+  "name": "馬里",
+  "region": "阿拉伯",
+  "identified_as": "Marib, capital of Saba",
+  "tier": 2,
+  "port": false,
+  "reason": "示巴王國首都（用户确认改档）",
+  "pop": 25000
+ },
+ {
+  "id": 183,
+  "name": "里加",
+  "region": "波羅的",
+  "identified_as": "Riga, Latvia (founded 1201); AD 200: Baltic/Finnic (Liv ancestors) farmsteads on lower Daugava",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 184,
+  "name": "塔林",
+  "region": "波羅的",
+  "identified_as": "Tallinn, Estonia (first recorded 1154); AD 200: Estonian Roman Iron Age farms (tarand-grave culture)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 480
+ },
+ {
+  "id": 185,
+  "name": "維紐",
+  "region": "波羅的",
+  "identified_as": "Vilnius, Lithuania (14th c.); AD 200: Baltic hillfort/brushed-pottery culture area",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 186,
+  "name": "明斯",
+  "region": "羅斯",
+  "identified_as": "Minsk, Belarus (first recorded 1067); AD 200: Baltic forest settlements (late brushed-pottery / Kiev-culture fringe)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 420
+ },
+ {
+  "id": 187,
+  "name": "克拉",
+  "region": "維斯瓦",
+  "identified_as": "Kraków, Poland (town 10th c.); AD 200: Przeworsk-culture settlements incl. Nowa Huta pottery/iron production centre",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1800
+ },
+ {
+  "id": 188,
+  "name": "斯摩",
+  "region": "羅斯",
+  "identified_as": "Smolensk, Russia (first recorded 863); AD 200: Baltic forest dwellers (Dnieper-Dvina / Tushemlya precursors)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 189,
+  "name": "莫斯",
+  "region": "羅斯",
+  "identified_as": "Moscow, Russia (founded 1147); AD 200: Dyakovo-culture hillforts (type site Dyakovo, now in Moscow), Finnic",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 190,
+  "name": "諾夫",
+  "region": "羅斯",
+  "identified_as": "Veliky Novgorod, Russia (10th c.); AD 200: sparse Finnic/Baltic forest population",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 120
+ },
+ {
+  "id": 191,
+  "name": "下諾",
+  "region": "羅斯",
+  "identified_as": "Nizhny Novgorod, Russia (founded 1221); AD 200: Gorodets-culture (proto-Mordvin/Finnic) area",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 192,
+  "name": "喀山",
+  "region": "伏爾加",
+  "identified_as": "Kazan, Russia (c. 11th c.); AD 200: Azelino/Pyanobor-culture Finno-Ugric settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 193,
+  "name": "堅昆",
+  "region": "西伯利亞",
+  "identified_as": "Jiankun / Gekun (Yenisei Kyrgyz)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3600
+ },
+ {
+  "id": 194,
+  "name": "丁零",
+  "region": "西伯利亞",
+  "identified_as": "Dingling (South Siberian/Baikal peoples)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 6000
+ },
+ {
+  "id": 195,
+  "name": "狼居",
+  "region": "匈奴",
+  "identified_as": "Khan Khentii / Langjuxu Mountain",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 196,
+  "name": "燕然",
+  "region": "匈奴",
+  "identified_as": "Yanran Mountain (Khangai range)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 197,
+  "name": "挹婁",
+  "region": "東夷",
+  "identified_as": "Yilou (挹婁) people, Primorye / lower Amur forests",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 2400
+ },
+ {
+  "id": 198,
+  "name": "馬韓",
+  "region": "東夷",
+  "identified_as": "Mahan confederation (54 statelets, SW Korea)",
+  "tier": 2,
+  "port": false,
+  "reason": "馬韓五十四國聯盟（目支國辰王）（用户确认）",
+  "pop": 30000
+ },
+ {
+  "id": 199,
+  "name": "出雲",
+  "region": "倭",
+  "identified_as": "Izumo (Shimane), Yayoi regional polity (Arakadani/Kojindani bronze hoards)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1080
+ },
+ {
+  "id": 200,
+  "name": "九真",
+  "region": "南海",
+  "identified_as": "Jiuzhen commandery (Thanh Hoa, Vietnam)",
+  "tier": 2,
+  "port": false,
+  "reason": "九真郡治",
+  "pop": 12594
+ },
+ {
+  "id": 201,
+  "name": "日南",
+  "region": "南海",
+  "identified_as": "Rinan commandery (central Vietnam); Linyi/Champa broke away from its south c.192",
+  "tier": 2,
+  "port": false,
+  "reason": "日南郡治",
+  "pop": 6041
+ },
+ {
+  "id": 202,
+  "name": "驃國",
+  "region": "南海",
+  "identified_as": "Pyu city-states (Beikthano, Halin, early Sri Ksetra), central Burma",
+  "tier": 2,
+  "port": false,
+  "reason": "驃人城邦（毗濕奴城等大型城牆城市）（用户确认）",
+  "pop": 7200
+ },
+ {
+  "id": 203,
+  "name": "木爾",
+  "region": "天竺",
+  "identified_as": "Multan (Mulasthana)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 204,
+  "name": "信度",
+  "region": "天竺",
+  "identified_as": "Sindh; taken as Minnagara (Indo-Scythian/Parthian capital in Periplus) / Barbarikon port",
+  "tier": 2,
+  "port": true,
+  "reason": "印度河口大港巴巴里孔/敏納加拉",
+  "pop": 15000
+ },
+ {
+  "id": 205,
+  "name": "婆盧",
+  "region": "天竺",
+  "identified_as": "Bharukaccha / Barygaza (Bharuch), Western Kshatrapa port",
+  "tier": 1,
+  "port": true,
+  "reason": "西印度第一大港，印度洋貿易樞紐（用户确认）",
+  "pop": 25000
+ },
+ {
+  "id": 206,
+  "name": "曲女",
+  "region": "天竺",
+  "identified_as": "Kanyakubja (Kannauj)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 207,
+  "name": "舍衛",
+  "region": "天竺",
+  "identified_as": "Shravasti (Saheth-Maheth)",
+  "tier": 3,
+  "port": false,
+  "reason": "佛教古城，200年已不及從前",
+  "pop": 15000
+ },
+ {
+  "id": 208,
+  "name": "憍賞",
+  "region": "天竺",
+  "identified_as": "Kaushambi (Kosam)",
+  "tier": 2,
+  "port": true,
+  "reason": "摩伽王朝都城，恆河流域古大城（用户确认改档）",
+  "pop": 30000
+ },
+ {
+  "id": 209,
+  "name": "多摩",
+  "region": "天竺",
+  "identified_as": "Tamralipti (Tamluk), Bengal port",
+  "tier": 2,
+  "port": true,
+  "reason": "恆河口大港",
+  "pop": 15000
+ },
+ {
+  "id": 210,
+  "name": "羯陵",
+  "region": "天竺",
+  "identified_as": "Kalinga; capital Tosali = Sisupalgarh",
+  "tier": 2,
+  "port": false,
+  "reason": "羯陵伽國都",
+  "pop": 25000
+ },
+ {
+  "id": 211,
+  "name": "建志",
+  "region": "天竺",
+  "identified_as": "Kanchipuram",
+  "tier": 2,
+  "port": false,
+  "reason": "南印度古都、宗教學術中心",
+  "pop": 12000
+ },
+ {
+  "id": 212,
+  "name": "摩頭",
+  "region": "天竺",
+  "identified_as": "Madurai, Pandya capital",
+  "tier": 1,
+  "port": false,
+  "reason": "潘地亞王國首都",
+  "pop": 20000
+ },
+ {
+  "id": 213,
+  "name": "缽底",
+  "region": "天竺",
+  "identified_as": "Pratishthana (Paithan), Satavahana capital",
+  "tier": 1,
+  "port": true,
+  "reason": "娑多婆訶那王朝首都",
+  "pop": 20000
+ },
+ {
+  "id": 214,
+  "name": "因陀",
+  "region": "天竺",
+  "identified_as": "Indraprastha (Purana Qila, Delhi)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 215,
+  "name": "邏些",
+  "region": "西羌",
+  "identified_as": "Lhasa (Rasa)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 216,
+  "name": "莎車",
+  "region": "西域",
+  "identified_as": "Shache = Yarkand",
+  "tier": 2,
+  "port": false,
+  "reason": "西域莎車國都（用户确认）",
+  "pop": 982
+ },
+ {
+  "id": 217,
+  "name": "焉耆",
+  "region": "西域",
+  "identified_as": "Yanqi = Karashahr",
+  "tier": 2,
+  "port": false,
+  "reason": "西域焉耆國都",
+  "pop": 3120
+ },
+ {
+  "id": 218,
+  "name": "樓蘭",
+  "region": "西域",
+  "identified_as": "Loulan / Shanshan (Lop Nor, capital Yuni 扜泥)",
+  "tier": 2,
+  "port": false,
+  "reason": "鄯善（樓蘭）國都",
+  "pop": 846
+ },
+ {
+  "id": 219,
+  "name": "車師",
+  "region": "西域",
+  "identified_as": "Jushi (Front Kingdom, Jiaohe near Turfan)",
+  "tier": 2,
+  "port": false,
+  "reason": "車師前國都交河城",
+  "pop": 360
+ },
+ {
+  "id": 220,
+  "name": "伊吾",
+  "region": "西域",
+  "identified_as": "Yiwu = Hami (Han 宜禾都尉 colony)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 221,
+  "name": "石國",
+  "region": "康居",
+  "identified_as": "Chach / Tashkent oasis (Kanka site)",
+  "tier": 3,
+  "port": false,
+  "reason": "石國（赭時）綠洲聚落",
+  "pop": 8000
+ },
+ {
+  "id": 222,
+  "name": "烏弋",
+  "region": "貴霜",
+  "identified_as": "Wuyishanli = Alexandria Arachosia (Kandahar)",
+  "tier": 2,
+  "port": false,
+  "reason": "阿拉霍西亞首府（亞歷山大城）",
+  "pop": 15000
+ },
+ {
+  "id": 223,
+  "name": "塔瑞",
+  "region": "不列顛",
+  "identified_as": "Tara (Hill of Tara, Co. Meath, Ireland)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 300
+ },
+ {
+  "id": 224,
+  "name": "安科",
+  "region": "意大利",
+  "identified_as": "Ancona (Ancona, Italy)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 225,
+  "name": "雷焦",
+  "region": "意大利",
+  "identified_as": "Rhegium (Reggio Calabria, Italy)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 226,
+  "name": "阿萊",
+  "region": "科西嘉",
+  "identified_as": "Aleria (Aléria, Corsica)",
+  "tier": 3,
+  "port": true,
+  "reason": "科西嘉行省首府（用户确认改档）",
+  "pop": 5000
+ },
+ {
+  "id": 227,
+  "name": "盧戈",
+  "region": "西班牙",
+  "identified_as": "Lucus Augusti (Lugo, Spain)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 228,
+  "name": "托萊",
+  "region": "西班牙",
+  "identified_as": "Toletum (Toledo, Spain)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 229,
+  "name": "瓦倫",
+  "region": "西班牙",
+  "identified_as": "Valentia (Valencia, Spain)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 230,
+  "name": "克盧",
+  "region": "西班牙",
+  "identified_as": "Clunia (Peñalba de Castro, Spain)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 15000
+ },
+ {
+  "id": 231,
+  "name": "潘普",
+  "region": "西班牙",
+  "identified_as": "Pompelo (Pamplona, Spain)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 232,
+  "name": "貝哈",
+  "region": "西班牙",
+  "identified_as": "Pax Julia (Beja, Portugal)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 233,
+  "name": "科英",
+  "region": "西班牙",
+  "identified_as": "Aeminium (Coimbra, Portugal)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 234,
+  "name": "帕馬",
+  "region": "西班牙",
+  "identified_as": "Palma (Palma de Mallorca, Spain)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 235,
+  "name": "奧爾",
+  "region": "高盧",
+  "identified_as": "Cenabum (Orléans, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 236,
+  "name": "利摩",
+  "region": "高盧",
+  "identified_as": "Augustoritum (Limoges, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 237,
+  "name": "克萊",
+  "region": "高盧",
+  "identified_as": "Augustonemetum (Clermont-Ferrand, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 15000
+ },
+ {
+  "id": 238,
+  "name": "魯昂",
+  "region": "高盧",
+  "identified_as": "Rotomagus (Rouen, France)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 239,
+  "name": "雷恩",
+  "region": "高盧",
+  "identified_as": "Condate (Rennes, France)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 240,
+  "name": "南特",
+  "region": "高盧",
+  "identified_as": "Condevincum / Portus Namnetum (Nantes, France)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 241,
+  "name": "布洛",
+  "region": "高盧",
+  "identified_as": "Gesoriacum / Bononia (Boulogne-sur-Mer, France)",
+  "tier": 3,
+  "port": true,
+  "reason": "不列顛艦隊基地",
+  "pop": 5000
+ },
+ {
+  "id": 242,
+  "name": "弗雷",
+  "region": "高盧",
+  "identified_as": "Forum Julii (Fréjus, France)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 243,
+  "name": "通格",
+  "region": "高盧",
+  "identified_as": "Atuatuca Tungrorum (Tongeren, Belgium)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 244,
+  "name": "卡萊",
+  "region": "不列顛",
+  "identified_as": "Luguvalium (Carlisle, UK)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 245,
+  "name": "溫徹",
+  "region": "不列顛",
+  "identified_as": "Venta Belgarum (Winchester, UK)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 246,
+  "name": "喀里",
+  "region": "不列顛",
+  "identified_as": "Caledonia (Scottish Highlands; Caledonii tribal area)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 247,
+  "name": "桑滕",
+  "region": "日耳曼",
+  "identified_as": "Xanten, Germany = Colonia Ulpia Traiana (Vetera II fortress of Legio XXX Ulpia nearby)",
+  "tier": 3,
+  "port": false,
+  "reason": "烏爾皮亞·圖拉真殖民市＋第三十軍團大營（用户确认改档）",
+  "pop": 10000
+ },
+ {
+  "id": 248,
+  "name": "奧古",
+  "region": "日耳曼",
+  "identified_as": "Augusta Raurica (Augst near Basel, Switzerland), Roman colonia — identified from repo map coordinates 47.53N 7.72E",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 12000
+ },
+ {
+  "id": 249,
+  "name": "帕紹",
+  "region": "日耳曼",
+  "identified_as": "Passau, Germany = Batavis (auxiliary cohort fort) / Boiodurum, small fort + vicus",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 1500
+ },
+ {
+  "id": 250,
+  "name": "夸迪",
+  "region": "日耳曼",
+  "identified_as": "Quadi (Moravia/SW Slovakia) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3600
+ },
+ {
+  "id": 251,
+  "name": "赫爾",
+  "region": "日耳曼",
+  "identified_as": "Hermunduri (Thuringia/upper Main) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 2400
+ },
+ {
+  "id": 252,
+  "name": "卡蒂",
+  "region": "日耳曼",
+  "identified_as": "Chatti (Hesse, Germany) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3000
+ },
+ {
+  "id": 253,
+  "name": "弗里",
+  "region": "日耳曼",
+  "identified_as": "Frisii (coastal Netherlands, terp region) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1800
+ },
+ {
+  "id": 254,
+  "name": "卡烏",
+  "region": "日耳曼",
+  "identified_as": "Chauci (Lower Saxony coast, Weser-Elbe) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 2400
+ },
+ {
+  "id": 255,
+  "name": "倫巴",
+  "region": "日耳曼",
+  "identified_as": "Langobardi (lower Elbe) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 900
+ },
+ {
+  "id": 256,
+  "name": "汪達",
+  "region": "日耳曼",
+  "identified_as": "Vandals (Silingi + Hasdingi; Przeworsk culture, Silesia/upper Vistula/upper Tisza) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3000
+ },
+ {
+  "id": 257,
+  "name": "魯吉",
+  "region": "日耳曼",
+  "identified_as": "Rugii (Pomeranian coast, Poland) — tribe",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1200
+ },
+ {
+  "id": 258,
+  "name": "哥特",
+  "region": "日耳曼",
+  "identified_as": "Goths (Wielbark culture, lower Vistula, migrating toward Ukraine c. 200) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 6000
+ },
+ {
+  "id": 259,
+  "name": "斯維",
+  "region": "北歐",
+  "identified_as": "Svear / Suiones (Malaren valley, central Sweden) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1800
+ },
+ {
+  "id": 260,
+  "name": "哥塔",
+  "region": "北歐",
+  "identified_as": "Gotaland (Gautar / Ptolemy's Goutai), southern Sweden — region/people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3600
+ },
+ {
+  "id": 261,
+  "name": "丹人",
+  "region": "北歐",
+  "identified_as": "Danes — inhabitants of Zealand/Scania/Danish isles (name first attested 6th c.; Himlingoje elite centre c. 200)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3600
+ },
+ {
+  "id": 262,
+  "name": "日德",
+  "region": "北歐",
+  "identified_as": "Jutland peninsula, Denmark — region (Roman Iron Age villages such as Vorbasse, Hodde)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 4800
+ },
+ {
+  "id": 263,
+  "name": "挪威",
+  "region": "北歐",
+  "identified_as": "Norway — whole country (Roman Iron Age farms mainly on coasts and in the southeast)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 6000
+ },
+ {
+  "id": 264,
+  "name": "艾斯",
+  "region": "薩爾馬提亞",
+  "identified_as": "Aestii (Sambia / Old Prussia, amber coast) — Baltic people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 2400
+ },
+ {
+  "id": 265,
+  "name": "維內",
+  "region": "薩爾馬提亞",
+  "identified_as": "Venedi/Venethi (Tacitus, Ptolemy; east of the Vistula, possibly proto-Slavic) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 4800
+ },
+ {
+  "id": 266,
+  "name": "巴斯",
+  "region": "薩爾馬提亞",
+  "identified_as": "Bastarnae (Carpathian foothills / Moldavia) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3000
+ },
+ {
+  "id": 267,
+  "name": "卡皮",
+  "region": "薩爾馬提亞",
+  "identified_as": "Carpi (Moldavia, Dacian-related) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 4800
+ },
+ {
+  "id": 268,
+  "name": "雅濟",
+  "region": "薩爾馬提亞",
+  "identified_as": "Iazyges (Sarmatians in the Tisza plain, Hungary) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 7200
+ },
+ {
+  "id": 269,
+  "name": "阿蘭",
+  "region": "薩爾馬提亞",
+  "identified_as": "Alans (Don-Kuban steppe and North Caucasus) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 9000
+ },
+ {
+  "id": 270,
+  "name": "布迪",
+  "region": "薩爾馬提亞",
+  "identified_as": "Budini (Herodotus; Ptolemy lists Boudinoi; forest-steppe, middle Dnieper/Don, location uncertain) — people",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1800
+ },
+ {
+  "id": 271,
+  "name": "梅亞",
+  "region": "薩爾馬提亞",
+  "identified_as": "Merya (Rostov-Yaroslavl area; attested 6th c.) — here their Dyakovo-culture Finnic ancestors",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1500
+ },
+ {
+  "id": 272,
+  "name": "莫爾",
+  "region": "薩爾馬提亞",
+  "identified_as": "Mordvins (Mordovia; attested 6th c. as Mordens) — here Gorodets-culture / early Mordvin ancestors",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1500
+ },
+ {
+  "id": 273,
+  "name": "波埃",
+  "region": "潘諾尼亞",
+  "identified_as": "Poetovio (Ptuj, Slovenia)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 274,
+  "name": "穆爾",
+  "region": "潘諾尼亞",
+  "identified_as": "Mursa (Osijek, Croatia)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 275,
+  "name": "因斯",
+  "region": "雷蒂亞",
+  "identified_as": "Veldidena (Wilten, Innsbruck, Austria)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 500
+ },
+ {
+  "id": 276,
+  "name": "庫爾",
+  "region": "雷蒂亞",
+  "identified_as": "Curia Raetorum (Chur, Switzerland)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 1000
+ },
+ {
+  "id": 277,
+  "name": "維米",
+  "region": "默西亞",
+  "identified_as": "Viminacium (Kostolac, Serbia)",
+  "tier": 2,
+  "port": true,
+  "reason": "上默西亞行省首府、第七軍團大營",
+  "pop": 30000
+ },
+ {
+  "id": 278,
+  "name": "波洛",
+  "region": "達契亞",
+  "identified_as": "Porolissum (Moigrad, Romania)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 279,
+  "name": "羅穆",
+  "region": "達契亞",
+  "identified_as": "Romula (Reșca, Romania)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 280,
+  "name": "佩林",
+  "region": "色雷斯",
+  "identified_as": "Perinthus / Heraclea (Marmara Ereğlisi, Turkey)",
+  "tier": 2,
+  "port": true,
+  "reason": "色雷斯行省首府、馬爾馬拉海港",
+  "pop": 20000
+ },
+ {
+  "id": 281,
+  "name": "帕特",
+  "region": "希臘",
+  "identified_as": "Patrae (Patras, Greece)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 20000
+ },
+ {
+  "id": 282,
+  "name": "阿馬",
+  "region": "本都",
+  "identified_as": "Amasia (Amasya, Turkey)",
+  "tier": 2,
+  "port": false,
+  "reason": "本都地區大都會、古本都王都",
+  "pop": 15000
+ },
+ {
+  "id": 283,
+  "name": "塞巴",
+  "region": "卡帕多奇亞",
+  "identified_as": "Sebastea (Sivas, Turkey)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 284,
+  "name": "特洛",
+  "region": "亞細亞",
+  "identified_as": "Ilium (Hisarlik, Çanakkale, Turkey); alt. Alexandria Troas",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 285,
+  "name": "安提",
+  "region": "埃及",
+  "identified_as": "Antinoopolis (Sheikh Ibada, Egypt)",
+  "tier": 3,
+  "port": false,
+  "reason": "哈德良新建城，規模中等",
+  "pop": 15000
+ },
+ {
+  "id": 286,
+  "name": "托勒",
+  "region": "埃及",
+  "identified_as": "Ptolemais Hermiou (El-Mansha, Egypt)",
+  "tier": 3,
+  "port": true,
+  "reason": "上埃及最大希臘城邦，上埃及行政中心（用户确认改档）",
+  "pop": 15000
+ },
+ {
+  "id": 287,
+  "name": "貝列",
+  "region": "埃及",
+  "identified_as": "Berenice Troglodytica (Red Sea coast, Egypt)",
+  "tier": 2,
+  "port": true,
+  "reason": "紅海通印度的貿易港",
+  "pop": 1500
+ },
+ {
+  "id": 288,
+  "name": "錫瓦",
+  "region": "埃及",
+  "identified_as": "Ammonium (Siwa Oasis, Egypt)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 289,
+  "name": "納帕",
+  "region": "庫施",
+  "identified_as": "Napata / Jebel Barkal",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 290,
+  "name": "塞蒂",
+  "region": "茅利塔尼亞",
+  "identified_as": "Sitifis (Sétif, Algeria)",
+  "tier": 3,
+  "port": false,
+  "reason": "293年後方為行省首府",
+  "pop": 10000
+ },
+ {
+  "id": 291,
+  "name": "波馬",
+  "region": "茅利塔尼亞",
+  "identified_as": "Pomaria (Tlemcen, Algeria)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2500
+ },
+ {
+  "id": 292,
+  "name": "塔卡",
+  "region": "阿非利加",
+  "identified_as": "Tacape (Gabès, Tunisia)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 293,
+  "name": "貝倫",
+  "region": "昔蘭尼加",
+  "identified_as": "Berenice / Euesperides (Benghazi, Libya)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 294,
+  "name": "加拉",
+  "region": "利比亞",
+  "identified_as": "Garama (Germa, Fezzan, Libya), Garamantian capital",
+  "tier": 2,
+  "port": false,
+  "reason": "加拉曼特王國首都",
+  "pop": 4000
+ },
+ {
+  "id": 295,
+  "name": "蘇菲",
+  "region": "阿非利加",
+  "identified_as": "Sufetula (Sbeitla, Tunisia)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 8000
+ },
+ {
+  "id": 296,
+  "name": "法西",
+  "region": "科爾基斯",
+  "identified_as": "Phasis (Poti), Colchis",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 297,
+  "name": "甘札",
+  "region": "米底",
+  "identified_as": "Ganzak (Gazaca), Atropatene",
+  "tier": 2,
+  "port": false,
+  "reason": "阿特羅帕特內（米底）王國首都",
+  "pop": 15000
+ },
+ {
+  "id": 298,
+  "name": "大不",
+  "region": "米底",
+  "identified_as": "Tabriz",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 299,
+  "name": "錫斯",
+  "region": "安息",
+  "identified_as": "Sistan / Drangiana (Zranka, Prophthasia)",
+  "tier": 3,
+  "port": false,
+  "reason": "德蘭吉亞納地區中心",
+  "pop": 8000
+ },
+ {
+  "id": 300,
+  "name": "霍爾",
+  "region": "安息",
+  "identified_as": "Harmozeia (Old Hormuz, mainland)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 301,
+  "name": "布哈",
+  "region": "康居",
+  "identified_as": "Bukhara oasis (early Bukhara citadel)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 302,
+  "name": "格拉",
+  "region": "阿拉伯",
+  "identified_as": "Gerrha (al-Hasa coast; Thaj?)",
+  "tier": 2,
+  "port": true,
+  "reason": "波斯灣古商城，200年已衰落（用户确认改档）",
+  "pop": 5000
+ },
+ {
+  "id": 303,
+  "name": "希木",
+  "region": "阿拉伯",
+  "identified_as": "Zafar, capital of Himyar",
+  "tier": 2,
+  "port": false,
+  "reason": "希木葉爾王國首都",
+  "pop": 15000
+ },
+ {
+  "id": 304,
+  "name": "沙布",
+  "region": "阿拉伯",
+  "identified_as": "Shabwa, capital of Hadramawt",
+  "tier": 2,
+  "port": false,
+  "reason": "哈德拉毛王國首都",
+  "pop": 8000
+ },
+ {
+  "id": 305,
+  "name": "雅特",
+  "region": "阿拉伯",
+  "identified_as": "Yathrib (Medina)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 306,
+  "name": "赫格",
+  "region": "阿拉伯",
+  "identified_as": "Hegra (Mada'in Salih)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 307,
+  "name": "麥加",
+  "region": "阿拉伯",
+  "identified_as": "Mecca",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 308,
+  "name": "杜邁",
+  "region": "阿拉伯",
+  "identified_as": "Dumat al-Jandal (Adummatu)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2500
+ },
+ {
+  "id": 309,
+  "name": "阿曼",
+  "region": "阿拉伯",
+  "identified_as": "Muscat area, Oman coast (coords 23.6N 58.4E)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 310,
+  "name": "卑爾",
+  "region": "北歐",
+  "identified_as": "Bergen, Norway (founded c. 1070); AD 200: coastal Iron Age farms of Hordaland",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 311,
+  "name": "特隆",
+  "region": "北歐",
+  "identified_as": "Trondheim, Norway (founded 997); AD 200: Trondelag Iron Age farms",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 312,
+  "name": "斯塔",
+  "region": "北歐",
+  "identified_as": "Stavanger, Norway (c. 1125); AD 200: Jaeren/Rogaland, densely farmed in the Roman Iron Age",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 480
+ },
+ {
+  "id": 313,
+  "name": "克斯",
+  "region": "北歐",
+  "identified_as": "Kristiansand, Norway (founded 1641; identified from repo map coordinates 58.15N 8.0E); AD 200: Agder coastal farms",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 240
+ },
+ {
+  "id": 314,
+  "name": "哥德",
+  "region": "北歐",
+  "identified_as": "Gothenburg, Sweden (founded 1621); AD 200: Bohuslan/Vastergotland coastal farms",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 480
+ },
+ {
+  "id": 315,
+  "name": "卡馬",
+  "region": "北歐",
+  "identified_as": "Kalmar, Sweden (12th c.); AD 200: Smaland coast / Oland farms",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 316,
+  "name": "維斯",
+  "region": "北歐",
+  "identified_as": "Visby, Gotland (medieval town); AD 200: Gotland Roman Iron Age farms (whole island c. 3,000 km2)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 480
+ },
+ {
+  "id": 317,
+  "name": "松茲",
+  "region": "北歐",
+  "identified_as": "Sundsvall, Sweden (1621); AD 200: sparse Norrland coastal farms/hunters",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 120
+ },
+ {
+  "id": 318,
+  "name": "于默",
+  "region": "北歐",
+  "identified_as": "Umea, Sweden (1622); AD 200: hunter-fishers, little farming",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 48
+ },
+ {
+  "id": 319,
+  "name": "呂勒",
+  "region": "北歐",
+  "identified_as": "Lulea, Sweden (1621); AD 200: hunter-fishers (Sami ancestors)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 30
+ },
+ {
+  "id": 320,
+  "name": "奧盧",
+  "region": "北歐",
+  "identified_as": "Oulu, Finland (1605); AD 200: hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 30
+ },
+ {
+  "id": 321,
+  "name": "圖庫",
+  "region": "北歐",
+  "identified_as": "Turku, Finland (13th c.); AD 200: SW Finland Roman Iron Age farming communities",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 322,
+  "name": "坦佩",
+  "region": "北歐",
+  "identified_as": "Tampere, Finland (1779); AD 200: Satakunta/Hame fringe, sparse farming and hunting",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 120
+ },
+ {
+  "id": 323,
+  "name": "庫奧",
+  "region": "北歐",
+  "identified_as": "Kuopio, Finland (1782); AD 200: hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 48
+ },
+ {
+  "id": 324,
+  "name": "維堡",
+  "region": "北歐",
+  "identified_as": "Vyborg, Russia (castle 1293); AD 200: Karelian Isthmus hunter-fishers, some farming",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 90
+ },
+ {
+  "id": 325,
+  "name": "法倫",
+  "region": "北歐",
+  "identified_as": "Falun, Sweden (medieval copper-mining town); AD 200: sparse Dalarna farms/hunters",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 90
+ },
+ {
+  "id": 326,
+  "name": "厄斯",
+  "region": "北歐",
+  "identified_as": "Ostersund, Sweden (1786); AD 200: sparse Jamtland farms/hunters",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 90
+ },
+ {
+  "id": 327,
+  "name": "博德",
+  "region": "北歐",
+  "identified_as": "Bodo, Norway (1816); AD 200: north Norwegian coastal farms + Sami",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 90
+ },
+ {
+  "id": 328,
+  "name": "特羅",
+  "region": "北歐",
+  "identified_as": "Tromso, Norway (1794); AD 200: northernmost Iron Age farms + Sami hunters",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 60
+ },
+ {
+  "id": 329,
+  "name": "基律",
+  "region": "北歐",
+  "identified_as": "Kiruna, Sweden (founded 1900); AD 200: Sami-ancestor hunters only, a few hundred at most",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 330,
+  "name": "羅瓦",
+  "region": "北歐",
+  "identified_as": "Rovaniemi, Finland (modern town); AD 200: Sami-ancestor hunters only",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 331,
+  "name": "約恩",
+  "region": "北歐",
+  "identified_as": "Joensuu, Finland (1848); AD 200: hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 30
+ },
+ {
+  "id": 332,
+  "name": "塔圖",
+  "region": "波羅的",
+  "identified_as": "Tartu, Estonia (hillfort from c. 5th c., first recorded 1030); AD 200: SE Estonian tarand-grave farming communities",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 420
+ },
+ {
+  "id": 333,
+  "name": "克佩",
+  "region": "波羅的",
+  "identified_as": "Klaipeda, Lithuania (1252); AD 200: Curonian / West Baltic coastal settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 480
+ },
+ {
+  "id": 334,
+  "name": "道加",
+  "region": "波羅的",
+  "identified_as": "Daugavpils, Latvia (1275; identified from repo map coordinates 55.87N 26.52E); AD 200: Baltic (Latgalian ancestors) hillforts",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 335,
+  "name": "格羅",
+  "region": "波羅的",
+  "identified_as": "Grodno, Belarus (1128); AD 200: Baltic (Yotvingian ancestors) settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 420
+ },
+ {
+  "id": 336,
+  "name": "珀洛",
+  "region": "羅斯",
+  "identified_as": "Polotsk, Belarus (862); AD 200: Baltic forest settlements (brushed-pottery / Dnieper-Dvina)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 337,
+  "name": "平斯",
+  "region": "羅斯",
+  "identified_as": "Pinsk, Belarus (1097); AD 200: Polesie marshland, Zarubintsy/Kiev-culture fringe",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 240
+ },
+ {
+  "id": 338,
+  "name": "布列",
+  "region": "羅斯",
+  "identified_as": "Brest, Belarus (1019); AD 200: Wielbark/Przeworsk-culture settlements (Goths/Vandals moving through)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 339,
+  "name": "戈梅",
+  "region": "羅斯",
+  "identified_as": "Gomel, Belarus (1142); AD 200: Kiev-culture / late Zarubintsy settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 340,
+  "name": "莫吉",
+  "region": "羅斯",
+  "identified_as": "Mogilev, Belarus (1267); AD 200: Baltic Dnieper-forest settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 341,
+  "name": "維捷",
+  "region": "羅斯",
+  "identified_as": "Vitebsk, Belarus (974); AD 200: Baltic forest settlements (Dnieper-Dvina culture)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 342,
+  "name": "盧布",
+  "region": "維斯瓦",
+  "identified_as": "Lublin, Poland (medieval town); AD 200: Przeworsk/Wielbark-culture farming settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1200
+ },
+ {
+  "id": 343,
+  "name": "托倫",
+  "region": "維斯瓦",
+  "identified_as": "Torun, Poland (1233); AD 200: Wielbark-culture (Gothic) settlements on the lower Vistula",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1200
+ },
+ {
+  "id": 344,
+  "name": "什切",
+  "region": "維斯瓦",
+  "identified_as": "Szczecin, Poland (8th-c. stronghold); AD 200: Germanic settlements at the Oder mouth",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 345,
+  "name": "羅茲",
+  "region": "維斯瓦",
+  "identified_as": "Lodz, Poland (1423); AD 200: Przeworsk-culture farming settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1200
+ },
+ {
+  "id": 346,
+  "name": "熱舒",
+  "region": "維斯瓦",
+  "identified_as": "Rzeszow, Poland (1354); AD 200: Przeworsk-culture settlements in the Carpathian foothills",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 900
+ },
+ {
+  "id": 347,
+  "name": "日托",
+  "region": "羅斯",
+  "identified_as": "Zhytomyr, Ukraine (medieval); AD 200: Wielbark/Przeworsk incomers and Kiev culture; Chernyakhov culture from c. 230",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 348,
+  "name": "哈爾",
+  "region": "羅斯",
+  "identified_as": "Kharkiv, Ukraine (1654); AD 200: forest-steppe/steppe border, Sarmatian-influenced settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 349,
+  "name": "波塔",
+  "region": "羅斯",
+  "identified_as": "Poltava, Ukraine (1174); AD 200: forest-steppe settlements (pre-Chernyakhov, Sarmatian contact)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 420
+ },
+ {
+  "id": 350,
+  "name": "扎波",
+  "region": "羅斯",
+  "identified_as": "Zaporizhzhia, Ukraine (1770; Khortytsia island); AD 200: Sarmatian (Roxolani) nomad pastures",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 351,
+  "name": "利沃",
+  "region": "羅斯",
+  "identified_as": "Lviv, Ukraine (1256); AD 200: Przeworsk/Lipitsa-culture settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 352,
+  "name": "盧茨",
+  "region": "羅斯",
+  "identified_as": "Lutsk, Ukraine (1085); AD 200: Wielbark/Przeworsk-culture settlements in Volhynia",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 353,
+  "name": "蘇梅",
+  "region": "羅斯",
+  "identified_as": "Sumy, Ukraine (1652); AD 200: Kiev-culture forest-steppe settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 354,
+  "name": "頓涅",
+  "region": "羅斯",
+  "identified_as": "Donetsk, Ukraine (1869; identified from repo map coordinates 48.0N 37.8E); AD 200: Sarmatian steppe nomads",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 240
+ },
+ {
+  "id": 355,
+  "name": "布良",
+  "region": "羅斯",
+  "identified_as": "Bryansk, Russia (985); AD 200: Baltic forest settlements (Kiev/Moshchiny precursors)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 240
+ },
+ {
+  "id": 356,
+  "name": "庫斯",
+  "region": "羅斯",
+  "identified_as": "Kursk, Russia (1032); AD 200: Kiev-culture forest-steppe settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 240
+ },
+ {
+  "id": 357,
+  "name": "沃羅",
+  "region": "羅斯",
+  "identified_as": "Voronezh, Russia (1586); AD 200: upper-Don forest-steppe, Sarmatian/Gorodets contacts",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 240
+ },
+ {
+  "id": 358,
+  "name": "圖拉",
+  "region": "羅斯",
+  "identified_as": "Tula, Russia (1146); AD 200: Baltic-Finnic forest settlements on the Dyakovo fringe",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 359,
+  "name": "梁贊",
+  "region": "羅斯",
+  "identified_as": "Ryazan, Russia (Old Ryazan 1095); AD 200: Oka valley Finnic settlements (Ryazan-Oka burials)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 360,
+  "name": "弗拉",
+  "region": "羅斯",
+  "identified_as": "Vladimir, Russia (1108); AD 200: Dyakovo-culture Finnic hillforts",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 361,
+  "name": "特爾",
+  "region": "羅斯",
+  "identified_as": "Tver, Russia (1135); AD 200: Dyakovo-culture Finnic hillforts",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 362,
+  "name": "普斯",
+  "region": "羅斯",
+  "identified_as": "Pskov, Russia (903); AD 200: sparse Finnic/Baltic forest population",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 363,
+  "name": "拉多",
+  "region": "羅斯",
+  "identified_as": "Staraya Ladoga, Russia (c. 753); AD 200: sparse Finnic hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 90
+ },
+ {
+  "id": 364,
+  "name": "沃洛",
+  "region": "羅斯",
+  "identified_as": "Vologda, Russia (1147); AD 200: Finnic (Vepsian ancestors) hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 48
+ },
+ {
+  "id": 365,
+  "name": "科斯",
+  "region": "羅斯",
+  "identified_as": "Kostroma, Russia (1152); AD 200: Finnic settlements (Merya ancestors)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 120
+ },
+ {
+  "id": 366,
+  "name": "薩馬",
+  "region": "伏爾加",
+  "identified_as": "Samara, Russia (1586); AD 200: Sarmatian nomads and forest-steppe settlements on the Volga bend",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 367,
+  "name": "薩托",
+  "region": "伏爾加",
+  "identified_as": "Saratov, Russia (1590); AD 200: Sarmatian nomad pastures on the lower Volga",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 368,
+  "name": "坦波",
+  "region": "羅斯",
+  "identified_as": "Tambov, Russia (1636); AD 200: Gorodets-culture / forest-steppe settlements (proto-Mordvin)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 369,
+  "name": "察里",
+  "region": "伏爾加",
+  "identified_as": "Tsaritsyn (Volgograd), Russia (1589); AD 200: Sarmatian (Alan-related) nomads",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 370,
+  "name": "埃利",
+  "region": "伏爾加",
+  "identified_as": "Elista, Kalmykia, Russia (1865); AD 200: Sarmatian/Alan nomad pastures",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 371,
+  "name": "庫班",
+  "region": "博斯普魯斯",
+  "identified_as": "Phanagoria (Taman Peninsula, Russia); alt. Gorgippia (Anapa)",
+  "tier": 3,
+  "port": true,
+  "reason": "博斯普魯斯王國亞洲部分首邑、港口（用户确认改档）",
+  "pop": 10000
+ },
+ {
+  "id": 372,
+  "name": "彼爾",
+  "region": "烏拉爾",
+  "identified_as": "Perm, Russia (1723); AD 200: Glyadenovo-culture Permian Finno-Ugric settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 120
+ },
+ {
+  "id": 373,
+  "name": "烏法",
+  "region": "烏拉爾",
+  "identified_as": "Ufa, Russia (1574); AD 200: Pyanobor/Bakhmutino-culture settlements, Sarmatian contacts",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 374,
+  "name": "奧倫",
+  "region": "烏拉爾",
+  "identified_as": "Orenburg, Russia (1743); AD 200: Sarmatian nomads of the southern Urals steppe",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 375,
+  "name": "基洛",
+  "region": "伏爾加",
+  "identified_as": "Kirov (Vyatka/Khlynov), Russia (14th c.); AD 200: Finno-Ugric (Udmurt ancestors) forest settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 120
+ },
+ {
+  "id": 376,
+  "name": "伊熱",
+  "region": "烏拉爾",
+  "identified_as": "Izhevsk, Russia (1760); AD 200: Pyanobor-culture Permian Finno-Ugric settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 377,
+  "name": "切博",
+  "region": "伏爾加",
+  "identified_as": "Cheboksary, Russia (1469); AD 200: Finno-Ugric (Mari ancestors) forest settlements",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 378,
+  "name": "烏里",
+  "region": "伏爾加",
+  "identified_as": "Ulyanovsk (Simbirsk), Russia (1648); AD 200: middle-Volga forest-steppe, Sarmatian contacts",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 379,
+  "name": "阿漢",
+  "region": "羅斯",
+  "identified_as": "Arkhangelsk, Russia (1584); AD 200: Arctic hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 18
+ },
+ {
+  "id": 380,
+  "name": "彼扎",
+  "region": "羅斯",
+  "identified_as": "Petrozavodsk, Russia (1703); AD 200: Finnic/Sami hunter-fishers on Lake Onega",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 30
+ },
+ {
+  "id": 381,
+  "name": "科特",
+  "region": "羅斯",
+  "identified_as": "Kotlas, Russia (1917); AD 200: taiga hunter-fishers",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 18
+ },
+ {
+  "id": 382,
+  "name": "葉卡",
+  "region": "烏拉爾",
+  "identified_as": "Yekaterinburg, Russia (1723); AD 200: Ural forest Ugrian/Finno-Ugric groups",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 90
+ },
+ {
+  "id": 383,
+  "name": "車里",
+  "region": "烏拉爾",
+  "identified_as": "Chelyabinsk, Russia (1736); AD 200: Sargat-culture forest-steppe hillforts / Sarmatian nomads",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 150
+ },
+ {
+  "id": 384,
+  "name": "秋明",
+  "region": "西伯利亞",
+  "identified_as": "Tyumen",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 385,
+  "name": "托博",
+  "region": "西伯利亞",
+  "identified_as": "Tobolsk",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 386,
+  "name": "鄂木",
+  "region": "西伯利亞",
+  "identified_as": "Omsk",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 387,
+  "name": "新西",
+  "region": "西伯利亞",
+  "identified_as": "Novosibirsk",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 388,
+  "name": "托木",
+  "region": "西伯利亞",
+  "identified_as": "Tomsk",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 389,
+  "name": "巴爾",
+  "region": "西伯利亞",
+  "identified_as": "Barnaul",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 390,
+  "name": "赤塔",
+  "region": "西伯利亞",
+  "identified_as": "Chita",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 391,
+  "name": "烏蘭",
+  "region": "西伯利亞",
+  "identified_as": "Ulan-Ude",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 392,
+  "name": "科布",
+  "region": "匈奴",
+  "identified_as": "Khovd (Kobdo)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 393,
+  "name": "烏雅",
+  "region": "匈奴",
+  "identified_as": "Uliastai",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 394,
+  "name": "呼倫",
+  "region": "鮮卑",
+  "identified_as": "Hulun Buir (Xianbei homeland)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 6000
+ },
+ {
+  "id": 395,
+  "name": "肅慎",
+  "region": "東夷",
+  "identified_as": "Sushen (肅慎), archaic name for the NE forest peoples (=Yilou in AD 200)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1800
+ },
+ {
+  "id": 396,
+  "name": "黑水",
+  "region": "東夷",
+  "identified_as": "Heishui Mohe (黑水靺鞨), lower Amur, 6th-7th c.",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1200
+ },
+ {
+  "id": 397,
+  "name": "室韋",
+  "region": "鮮卑",
+  "identified_as": "Shiwei (Greater Khingan / Argun peoples)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 3000
+ },
+ {
+  "id": 398,
+  "name": "沃沮",
+  "region": "東夷",
+  "identified_as": "Okjeo (東沃沮), NE Korean coast (Hamhung)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1500
+ },
+ {
+  "id": 399,
+  "name": "耽羅",
+  "region": "東夷",
+  "identified_as": "Tamna / Jeju island (三國志 州胡?)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 420
+ },
+ {
+  "id": 400,
+  "name": "吉備",
+  "region": "倭",
+  "identified_as": "Kibi (Okayama), Yayoi regional polity (Tatetsuki mound)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1500
+ },
+ {
+  "id": 401,
+  "name": "高志",
+  "region": "倭",
+  "identified_as": "Koshi (Hokuriku coast)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 900
+ },
+ {
+  "id": 402,
+  "name": "毛野",
+  "region": "倭",
+  "identified_as": "Kenu (毛野, Gunma/Tochigi, N. Kanto)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1500
+ },
+ {
+  "id": 403,
+  "name": "蝦夷",
+  "region": "倭",
+  "identified_as": "Emishi lands (Tohoku and Hokkaido; Epi-Jomon peoples)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 2700
+ },
+ {
+  "id": 404,
+  "name": "頓遜",
+  "region": "南海",
+  "identified_as": "Dunxun (頓遜), Malay Peninsula isthmus, Funan dependency",
+  "tier": 2,
+  "port": true,
+  "reason": "扶南屬國、馬來半島轉口貿易港（用户确认）",
+  "pop": 1200
+ },
+ {
+  "id": 405,
+  "name": "盤盤",
+  "region": "南海",
+  "identified_as": "Panpan (盤盤), Bay of Bandon, S. Thailand",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 406,
+  "name": "狼牙",
+  "region": "南海",
+  "identified_as": "Langkasuka (狼牙脩), Pattani / Kedah area",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1200
+ },
+ {
+  "id": 407,
+  "name": "墮羅",
+  "region": "南海",
+  "identified_as": "Dvaravati (墮羅缽底), Chao Phraya basin Mon kingdom 6th-11th c.",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 3000
+ },
+ {
+  "id": 408,
+  "name": "撣國",
+  "region": "南海",
+  "identified_as": "Shan state (撣國), upper Burma (Later Han tributary)",
+  "tier": 3,
+  "port": false,
+  "reason": "東漢朝貢的撣國，國都不詳",
+  "pop": 2400
+ },
+ {
+  "id": 409,
+  "name": "蘇門",
+  "region": "南海",
+  "identified_as": "Sumatra (island-wide; dispersed chiefdoms)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 24000
+ },
+ {
+  "id": 410,
+  "name": "呂宋",
+  "region": "南海",
+  "identified_as": "Luzon (Manila Bay placeholder; Iron Age villages)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 7200
+ },
+ {
+  "id": 411,
+  "name": "婆羅",
+  "region": "南海",
+  "identified_as": "Borneo (island-wide; riverine/coastal groups)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 7200
+ },
+ {
+  "id": 412,
+  "name": "奢羯",
+  "region": "天竺",
+  "identified_as": "Sakala (Sialkot)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 413,
+  "name": "波羅",
+  "region": "天竺",
+  "identified_as": "Varanasi (Rajghat mound)",
+  "tier": 2,
+  "port": true,
+  "reason": "恆河聖城、商貿大城",
+  "pop": 20000
+ },
+ {
+  "id": 414,
+  "name": "瞻波",
+  "region": "天竺",
+  "identified_as": "Champa (near Bhagalpur), old Anga capital",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 415,
+  "name": "迦摩",
+  "region": "天竺",
+  "identified_as": "Kamarupa / Pragjyotishpura (Guwahati area)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 2000
+ },
+ {
+  "id": 416,
+  "name": "穆濟",
+  "region": "天竺",
+  "identified_as": "Muziris (Pattanam), Chera port",
+  "tier": 2,
+  "port": true,
+  "reason": "哲羅國大港，羅馬胡椒貿易中心",
+  "pop": 10000
+ },
+ {
+  "id": 417,
+  "name": "跋那",
+  "region": "天竺",
+  "identified_as": "Vanavasi (Banavasi)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 418,
+  "name": "那私",
+  "region": "天竺",
+  "identified_as": "Nashik",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 6000
+ },
+ {
+  "id": 419,
+  "name": "毗舍",
+  "region": "天竺",
+  "identified_as": "Vidisha (Besnagar)",
+  "tier": 3,
+  "port": false,
+  "reason": "中印度古城，200年地位下降",
+  "pop": 15000
+ },
+ {
+  "id": 420,
+  "name": "薩他",
+  "region": "天竺",
+  "identified_as": "Sthanvishvara (Thanesar)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 421,
+  "name": "蘇剌",
+  "region": "天竺",
+  "identified_as": "Saurashtra; capital Girinagara (Junagadh)",
+  "tier": 3,
+  "port": false,
+  "reason": "西部薩特拉普在蘇剌侘的治所（魯陀羅達曼碑所在）（用户确认改档）",
+  "pop": 8000
+ },
+ {
+  "id": 422,
+  "name": "阿吉",
+  "region": "天竺",
+  "identified_as": "Ajmer (founded c.11th-12th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 423,
+  "name": "憍薩",
+  "region": "天竺",
+  "identified_as": "Kosala; taken as Saketa (Ayodhya) - could also mean Dakshina Kosala",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 10000
+ },
+ {
+  "id": 424,
+  "name": "尼波",
+  "region": "天竺",
+  "identified_as": "Nepal / Kathmandu Valley (pre-Licchavi)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 425,
+  "name": "象雄",
+  "region": "西羌",
+  "identified_as": "Zhangzhung (capital Khyunglung, W. Tibet)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 3600
+ },
+ {
+  "id": 426,
+  "name": "姑墨",
+  "region": "西域",
+  "identified_as": "Gumo = Aksu",
+  "tier": 3,
+  "port": false,
+  "reason": "西域姑墨國都（用户确认改档）",
+  "pop": 1470
+ },
+ {
+  "id": 427,
+  "name": "且末",
+  "region": "西域",
+  "identified_as": "Qiemo = Cherchen",
+  "tier": 3,
+  "port": false,
+  "reason": "西域小國且末，役屬鄯善",
+  "pop": 97
+ },
+ {
+  "id": 428,
+  "name": "精絕",
+  "region": "西域",
+  "identified_as": "Jingjue = Niya site",
+  "tier": 3,
+  "port": false,
+  "reason": "西域小國精絕，役屬鄯善",
+  "pop": 202
+ },
+ {
+  "id": 429,
+  "name": "呼揭",
+  "region": "匈奴",
+  "identified_as": "Hujie (Altai / Dzungaria people)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1800
+ },
+ {
+  "id": 430,
+  "name": "悅般",
+  "region": "康居",
+  "identified_as": "Yueban (N. Xiongnu remnant, Balkhash area)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 9000
+ },
+ {
+  "id": 431,
+  "name": "梵衍",
+  "region": "貴霜",
+  "identified_as": "Bamiyan",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 432,
+  "name": "拘謎",
+  "region": "貴霜",
+  "identified_as": "Kumedh (Karategin / Hisar valley, near Dushanbe)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 433,
+  "name": "怛羅",
+  "region": "康居",
+  "identified_as": "Talas (Taraz)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 2000
+ },
+ {
+  "id": 434,
+  "name": "碎葉",
+  "region": "西域",
+  "identified_as": "Suyab (Ak-Beshim)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 435,
+  "name": "伊列",
+  "region": "西域",
+  "identified_as": "Ili valley (伊列)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 1200
+ },
+ {
+  "id": 436,
+  "name": "塔城",
+  "region": "西域",
+  "identified_as": "Tacheng (Chuguchak)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 437,
+  "name": "卡干",
+  "region": "康居",
+  "identified_as": "Karaganda",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 438,
+  "name": "阿莫",
+  "region": "康居",
+  "identified_as": "Akmola (Astana)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 439,
+  "name": "阿托",
+  "region": "康居",
+  "identified_as": "Aktobe",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 440,
+  "name": "烏爾",
+  "region": "康居",
+  "identified_as": "Uralsk (Oral)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 441,
+  "name": "克孜",
+  "region": "康居",
+  "identified_as": "Kyzylorda",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 2000
+ },
+ {
+  "id": 442,
+  "name": "打耳",
+  "region": "高加索",
+  "identified_as": "Derbent",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 443,
+  "name": "巴庫",
+  "region": "高加索",
+  "identified_as": "Baku",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 444,
+  "name": "阿達",
+  "region": "安息",
+  "identified_as": "Ardabil",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 445,
+  "name": "加茲",
+  "region": "安息",
+  "identified_as": "Qazvin",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 446,
+  "name": "徒思",
+  "region": "安息",
+  "identified_as": "Tus",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 447,
+  "name": "亞茲",
+  "region": "安息",
+  "identified_as": "Yazd (Isatis?)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 448,
+  "name": "納季",
+  "region": "阿拉伯",
+  "identified_as": "Najran (Negrana / al-Ukhdud)",
+  "tier": 3,
+  "port": false,
+  "reason": "南阿拉伯商路城鎮",
+  "pop": 8000
+ },
+ {
+  "id": 449,
+  "name": "哈伊",
+  "region": "阿拉伯",
+  "identified_as": "Ha'il",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 450,
+  "name": "哈杰",
+  "region": "阿拉伯",
+  "identified_as": "Hajr al-Yamama (Riyadh; coords 24.7N 46.7E)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1500
+ },
+ {
+  "id": 451,
+  "name": "祖法",
+  "region": "阿拉伯",
+  "identified_as": "Dhofar (Sumhuram / Khor Rori)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 1500
+ },
+ {
+  "id": 452,
+  "name": "蘇哈",
+  "region": "阿拉伯",
+  "identified_as": "Sohar (Omana?)",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 453,
+  "name": "加圖",
+  "region": "茅利塔尼亞",
+  "identified_as": "Gaetuli (Gaetulian tribes, Saharan Atlas fringe)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 454,
+  "name": "瓦爾",
+  "region": "努米底亞",
+  "identified_as": "Ouargla oasis (Algeria)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1000
+ },
+ {
+  "id": 455,
+  "name": "卡舍",
+  "region": "不列顛",
+  "identified_as": "Cashel (Rock of Cashel, Co. Tipperary, Ireland)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 100
+ },
+ {
+  "id": 456,
+  "name": "克魯",
+  "region": "不列顛",
+  "identified_as": "Cruachan (Rathcroghan, Co. Roscommon, Ireland)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 200
+ },
+ {
+  "id": 457,
+  "name": "皮克",
+  "region": "不列顛",
+  "identified_as": "Pictland (N/E Scotland; Caledonii/Maeatae area)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 300
+ },
+ {
+  "id": 458,
+  "name": "摩臘",
+  "region": "天竺",
+  "identified_as": "Mandsaur = Dashapura (western Malwa)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 5000
+ },
+ {
+  "id": 459,
+  "name": "盧呼",
+  "region": "天竺",
+  "identified_as": "Ruhuna; capital Mahagama (Tissamaharama), Sri Lanka",
+  "tier": 3,
+  "port": false,
+  "reason": "錫蘭南部魯呼納附屬王國都城（用户确认改档）",
+  "pop": 8000
+ },
+ {
+  "id": 460,
+  "name": "喀奇",
+  "region": "天竺",
+  "identified_as": "Kutch (Kachchh), Western Kshatrapa territory",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 461,
+  "name": "毗羅",
+  "region": "天竺",
+  "identified_as": "Virata (Bairat, Rajasthan)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 462,
+  "name": "毗陀",
+  "region": "天竺",
+  "identified_as": "Vidarbha; town e.g. Pauni / Kaundinyapura",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 463,
+  "name": "果提",
+  "region": "天竺",
+  "identified_as": "Kotilingala (Telangana), early Satavahana site",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 3000
+ },
+ {
+  "id": 464,
+  "name": "維查",
+  "region": "天竺",
+  "identified_as": "Visakhapatnam (modern); c.200 only Buddhist sites (Thotlakonda, Bavikonda)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 465,
+  "name": "果阿",
+  "region": "天竺",
+  "identified_as": "Goa; predecessor Chandrapura (Chandor), later Bhoja seat",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 2000
+ },
+ {
+  "id": 466,
+  "name": "瓦里",
+  "region": "天竺",
+  "identified_as": "Wari-Bateshwar (Bangladesh), fortified early historic site",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 467,
+  "name": "吉大",
+  "region": "天竺",
+  "identified_as": "Chittagong (modern); no attested town c.200",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 468,
+  "name": "曼尼",
+  "region": "天竺",
+  "identified_as": "Manipur / Imphal (Kangla); no urban centre c.200",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 469,
+  "name": "奎達",
+  "region": "貴霜",
+  "identified_as": "Quetta (Shal)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 470,
+  "name": "吉爾",
+  "region": "貴霜",
+  "identified_as": "Gilgit",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 1000
+ },
+ {
+  "id": 471,
+  "name": "拉達",
+  "region": "西羌",
+  "identified_as": "Ladakh (Leh)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 1000
+ },
+ {
+  "id": 472,
+  "name": "占碑",
+  "region": "南海",
+  "identified_as": "Jambi (Malayu/末羅瑜 port, 7th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 473,
+  "name": "婆魯",
+  "region": "南海",
+  "identified_as": "Barus (婆魯師), camphor port, W. Sumatra",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 3000
+ },
+ {
+  "id": 474,
+  "name": "亞齊",
+  "region": "南海",
+  "identified_as": "Aceh (Lamuri 9th c.+, Aceh sultanate 15th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 475,
+  "name": "馬六",
+  "region": "南海",
+  "identified_as": "Malacca (founded c.1400)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 476,
+  "name": "淡馬",
+  "region": "南海",
+  "identified_as": "Temasek / Singapore (14th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 477,
+  "name": "古晉",
+  "region": "南海",
+  "identified_as": "Kuching (19th c. town; Sarawak)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 180
+ },
+ {
+  "id": 478,
+  "name": "蘇祿",
+  "region": "南海",
+  "identified_as": "Sulu archipelago (sultanate 15th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 479,
+  "name": "宿務",
+  "region": "南海",
+  "identified_as": "Cebu (Rajahnate 14th-16th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 3000
+ },
+ {
+  "id": 480,
+  "name": "民答",
+  "region": "南海",
+  "identified_as": "Mindanao (island-wide)",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 6000
+ },
+ {
+  "id": 481,
+  "name": "勃固",
+  "region": "南海",
+  "identified_as": "Bago / Pegu (Mon city, founded 9th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 1200
+ },
+ {
+  "id": 482,
+  "name": "若開",
+  "region": "南海",
+  "identified_as": "Arakan / Rakhine, Dhanyawadi kingdom",
+  "tier": 3,
+  "port": false,
+  "reason": "部族或地區聚落，無城市",
+  "pop": 2400
+ },
+ {
+  "id": 483,
+  "name": "蒲甘",
+  "region": "南海",
+  "identified_as": "Bagan (Pagan; walled city 9th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 484,
+  "name": "清邁",
+  "region": "南海",
+  "identified_as": "Chiang Mai (founded 1296)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 485,
+  "name": "南掌",
+  "region": "南海",
+  "identified_as": "Lan Xang / Luang Prabang (1353)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 486,
+  "name": "萬象",
+  "region": "南海",
+  "identified_as": "Vientiane (later Lao city)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 600
+ },
+ {
+  "id": 487,
+  "name": "真臘",
+  "region": "南海",
+  "identified_as": "Chenla (真臘), 6th c. Khmer state (Wat Phu / Sambor)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 3000
+ },
+ {
+  "id": 488,
+  "name": "東古",
+  "region": "庫施",
+  "identified_as": "Dongola (Old Dongola founded 5th c.); predecessor Kawa (Gematon)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 2000
+ },
+ {
+  "id": 489,
+  "name": "蘇亞",
+  "region": "庫施",
+  "identified_as": "Suakin; no attested town c.200",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 490,
+  "name": "摩加",
+  "region": "阿克蘇姆",
+  "identified_as": "Mogadishu (founded c.10th c.); predecessor possibly Periplus's Sarapion",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 800
+ },
+ {
+  "id": 491,
+  "name": "柏培",
+  "region": "阿克蘇姆",
+  "identified_as": "Berbera = Periplus's Malao",
+  "tier": 3,
+  "port": true,
+  "reason": "一般城鎮，地方性",
+  "pop": 1000
+ },
+ {
+  "id": 492,
+  "name": "吉布",
+  "region": "阿克蘇姆",
+  "identified_as": "Djibouti (founded 1888); predecessor Avalites (near Zeila)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": 800
+ },
+ {
+  "id": 493,
+  "name": "貢德",
+  "region": "阿克蘇姆",
+  "identified_as": "Gondar (founded 1636)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 494,
+  "name": "哈勒",
+  "region": "阿克蘇姆",
+  "identified_as": "Harar (founded c.7th-10th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 495,
+  "name": "加奧",
+  "region": "撒哈拉",
+  "identified_as": "Gao (urban from c.7th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 496,
+  "name": "廷巴",
+  "region": "撒哈拉",
+  "identified_as": "Timbuktu (founded c.1100)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 497,
+  "name": "傑內",
+  "region": "撒哈拉",
+  "identified_as": "Jenne-jeno (ancient Djenne)",
+  "tier": 3,
+  "port": false,
+  "reason": "一般城鎮，地方性",
+  "pop": 4000
+ },
+ {
+  "id": 498,
+  "name": "阿加",
+  "region": "撒哈拉",
+  "identified_as": "Agadez (founded c.15th c.)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 499,
+  "name": "加涅",
+  "region": "撒哈拉",
+  "identified_as": "Kanem (state from c.8th c., capital Njimi)",
+  "tier": 3,
+  "port": false,
+  "reason": "200年尚未成城（後世城市/聚落）",
+  "pop": null
+ },
+ {
+  "id": 500,
+  "name": "蒼梧",
+  "region": "交州",
+  "identified_as": "廣信（蒼梧郡治，梧州）",
+  "tier": 2,
+  "port": false,
+  "reason": "蒼梧郡治，交州舊治（用户确认）",
+  "pop": 20000
+ },
+ {
+  "id": 501,
+  "name": "鬱林",
+  "region": "交州",
+  "identified_as": "布山（鬱林郡治，贵港）",
+  "tier": 2,
+  "port": false,
+  "reason": "鬱林郡治",
+  "pop": 4000
+ },
+ {
+  "id": 502,
+  "name": "合浦",
+  "region": "交州",
+  "identified_as": "合浦（合浦郡治）",
+  "tier": 2,
+  "port": true,
+  "reason": "合浦郡治、海上絲路起點",
+  "pop": 8000
+ },
+ {
+  "id": 503,
+  "name": "珠崖",
+  "region": "交州",
+  "identified_as": "珠崖（海口一带）",
+  "tier": 3,
+  "port": false,
+  "reason": "珠崖郡早廢，200年僅為縣",
+  "pop": 2000
+ },
+ {
+  "id": 504,
+  "name": "臨賀",
+  "region": "荊州",
+  "identified_as": "臨賀（贺州）",
+  "tier": 3,
+  "port": false,
+  "reason": "臨賀郡為222年吳所設，200年僅為縣",
+  "pop": 4000
+ },
+ {
+  "id": 505,
+  "name": "始興",
+  "region": "荊州",
+  "identified_as": "曲江（韶关）",
+  "tier": 3,
+  "port": false,
+  "reason": "始興郡為265年所設，200年僅為縣",
+  "pop": 4000
+ },
+ {
+  "id": 506,
+  "name": "永昌",
+  "region": "南中",
+  "identified_as": "不韋（永昌郡治，保山）",
+  "tier": 2,
+  "port": false,
+  "reason": "永昌郡治，通天竺要道",
+  "pop": 8000
+ },
+ {
+  "id": 507,
+  "name": "興古",
+  "region": "南中",
+  "identified_as": "宛溫（砚山一带）",
+  "tier": 3,
+  "port": false,
+  "reason": "興古郡為225年蜀所設",
+  "pop": 3000
+ },
+ {
+  "id": 508,
+  "name": "越巂",
+  "region": "南中",
+  "identified_as": "邛都（越巂郡治，西昌）",
+  "tier": 2,
+  "port": false,
+  "reason": "越巂郡治",
+  "pop": 8000
+ },
+ {
+  "id": 509,
+  "name": "牂柯",
+  "region": "南中",
+  "identified_as": "且蘭（牂柯郡治）",
+  "tier": 2,
+  "port": false,
+  "reason": "牂柯郡治",
+  "pop": 5000
+ },
+ {
+  "id": 510,
+  "name": "巴西",
+  "region": "益州",
+  "identified_as": "閬中（巴西郡治）",
+  "tier": 2,
+  "port": false,
+  "reason": "巴西郡治（201年設郡，閬中為巴地重鎮）（用户确认）",
+  "pop": 15000
+ },
+ {
+  "id": 511,
+  "name": "建安",
+  "region": "揚州",
+  "identified_as": "建安（建瓯）",
+  "tier": 2,
+  "port": false,
+  "reason": "建安郡203年方設（用户确认改档）",
+  "pop": 5000
+ },
+ {
+  "id": 512,
+  "name": "豫章",
+  "region": "揚州",
+  "identified_as": "南昌（豫章郡治）",
+  "tier": 2,
+  "port": true,
+  "reason": "豫章郡治，江南大郡",
+  "pop": 20000
+ },
+ {
+  "id": 513,
+  "name": "臨川",
+  "region": "揚州",
+  "identified_as": "臨汝（臨川郡治，抚州）",
+  "tier": 3,
+  "port": false,
+  "reason": "臨川郡257年方設",
+  "pop": 5000
+ },
+ {
+  "id": 514,
+  "name": "南康",
+  "region": "揚州",
+  "identified_as": "雩都（南部都尉，赣州一带）",
+  "tier": 3,
+  "port": false,
+  "reason": "200年僅為雩都縣",
+  "pop": 4000
+ },
+ {
+  "id": 515,
+  "name": "丹陽",
+  "region": "揚州",
+  "identified_as": "宛陵（丹陽郡治，宣城）",
+  "tier": 2,
+  "port": false,
+  "reason": "丹陽郡治",
+  "pop": 15000
+ },
+ {
+  "id": 516,
+  "name": "東陽",
+  "region": "揚州",
+  "identified_as": "長山（東陽郡治，金华）",
+  "tier": 3,
+  "port": false,
+  "reason": "東陽郡266年方設",
+  "pop": 5000
+ },
+ {
+  "id": 517,
+  "name": "新都",
+  "region": "揚州",
+  "identified_as": "始新（淳安）",
+  "tier": 3,
+  "port": false,
+  "reason": "新都郡208年方設",
+  "pop": 3000
+ },
+ {
+  "id": 518,
+  "name": "衡陽",
+  "region": "荊州",
+  "identified_as": "湘鄉（衡陽郡治）",
+  "tier": 3,
+  "port": false,
+  "reason": "衡陽郡257年方設",
+  "pop": 5000
+ },
+ {
+  "id": 519,
+  "name": "昭陵",
+  "region": "荊州",
+  "identified_as": "昭陵（邵阳）",
+  "tier": 3,
+  "port": false,
+  "reason": "200年僅為縣",
+  "pop": 4000
+ },
+ {
+  "id": 520,
+  "name": "宜都",
+  "region": "荊州",
+  "identified_as": "夷道（宜都郡治）",
+  "tier": 3,
+  "port": false,
+  "reason": "宜都郡210年方設，200年為夷道縣",
+  "pop": 5000
+ },
+ {
+  "id": 521,
+  "name": "揭陽",
+  "region": "交州",
+  "identified_as": "揭陽（南海郡属县）",
+  "tier": 3,
+  "port": false,
+  "reason": "南海郡屬縣",
+  "pop": 3000
+ },
+ {
+  "id": 522,
+  "name": "博羅",
+  "region": "交州",
+  "identified_as": "博羅（南海郡属县）",
+  "tier": 3,
+  "port": false,
+  "reason": "南海郡屬縣",
+  "pop": 3000
+ },
+ {
+  "id": 523,
+  "name": "高涼",
+  "region": "交州",
+  "identified_as": "高涼（阳江一带）",
+  "tier": 3,
+  "port": false,
+  "reason": "高涼郡為吳所設，200年僅為縣",
+  "pop": 3000
+ },
+ {
+  "id": 524,
+  "name": "象林",
+  "region": "交州",
+  "identified_as": "象林（日南郡，林邑）",
+  "tier": 3,
+  "port": false,
+  "reason": "約192年已被林邑佔據",
+  "pop": 3000
+ },
+ {
+  "id": 525,
+  "name": "夷洲",
+  "region": "夷洲",
+  "identified_as": "台湾",
+  "tier": 3,
+  "port": false,
+  "reason": "200年無漢人城邑",
+  "pop": 1000
+ },
+ {
+  "id": 526,
+  "name": "侯官",
+  "region": "揚州",
+  "identified_as": "侯官/東冶（福州）",
+  "tier": 3,
+  "port": true,
+  "reason": "東冶港，會稽南部都尉治，海上交通要港（用户确认改档）",
+  "pop": 5000
+ },
+ {
+  "id": 527,
+  "name": "東安",
+  "region": "揚州",
+  "identified_as": "東安（南安，泉州一带）",
+  "tier": 3,
+  "port": false,
+  "reason": "200年僅為縣",
+  "pop": 3000
+ },
+ {
+  "id": 528,
+  "name": "永寧",
+  "region": "揚州",
+  "identified_as": "永寧/東甌（温州）",
+  "tier": 3,
+  "port": false,
+  "reason": "200年僅為縣",
+  "pop": 4000
+ },
+ {
+  "id": 529,
+  "name": "臨海",
+  "region": "揚州",
+  "identified_as": "章安（台州）",
+  "tier": 3,
+  "port": false,
+  "reason": "200年僅為縣（章安）",
+  "pop": 4000
+ }
+]
