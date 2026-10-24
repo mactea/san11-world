@@ -10,8 +10,9 @@ terrain, preferring existing roads, and turns it into road: cliffs become plank 
 ferries, banks and other land main roads. Sea is crossed by sailing (left as it is) only when no land route
 exists nearby, and the bank where the route lands is opened. Roads go into China's block too (make_world.py
 keeps them and paints them on Koei's stage), but never over Koei's bases, facility plots or dikes.
-The city hexes are those gen_bases.py chose by tier ("cells" in bases_cities.json, 7 hexes without), and the
-ways from port cities to the water it opened ("port_open") are laid into the terrain first.
+The city hexes are those gen_bases.py chose by tier ("cells" in bases_cities.json, 7 hexes without); the 河 channels
+of river ports (tools/navigable.py) and the ways from port cities to the water gen_bases.py opened ("port_open")
+are laid into the terrain first.
 Then it reports which cities are still unreachable on foot and by any route the game's A* accepts.
 
 Writes world_dir/world_types.npy (the previous one is kept once as world_types.before_roads.npy).
@@ -26,6 +27,7 @@ import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 from scipy.sparse.csgraph import connected_components, dijkstra
 
+import navigable
 from make_world import (BRIDGE, CITY, FORD, MOUNTAIN, PATH, PLANK, RIVER, ROAD, SEA, SHORE, STREAM, COVER,
                         china_box, dist_to_china, hex_ring, lonlat_to_hex, to_hex)
 from worldgeo import WorldGeo, WorldSpec
@@ -131,6 +133,13 @@ def main():
     border = dist_to_china(spec, R, C) <= 3
     border[s_lo, s_hi] = False
 
+    # river ports: the 河 channels to the open sea (tools/navigable.py, data/navigable_rivers.json), the same
+    # gen_bases.py found, derived from the terrain without roads; laid first, so roads cross them by ferry
+    tb = navigable.base_terrain(w, t, spec)
+    rivers = navigable.courses(tb, links["new"], {c["id"]: c.get("tier", 1) for c in links["new"]}, spec,
+                               np.load(w / "china_patch.npy") if (w / "china_patch.npy").exists() else None)
+    navigable.apply(t, tb, rivers)
+
     # the ways from port cities to the water gen_bases.py opened (banks, cliffs, streams -> road, plank road,
     # ferry): laid into the terrain here, so that make_world.py --types-from keeps them
     opened = 0
@@ -232,6 +241,13 @@ def main():
           f"plank road {made[PLANK]}, ferry {made[BRIDGE]}")
     for i, j in failed:
         print(f"  no route: {name[i]} - {name[j]}")
+    for r in rivers:
+        if r["hexes"] is None:
+            print(f"  navigable river {r['city']} {r['river']}: NO COURSE TO THE SEA")
+            continue
+        ferry = sum(1 for y, x, k in r["hexes"] if t[y, x] == BRIDGE)
+        print(f"  navigable river {r['city']} {r['river']}: {len(r['hexes'])} hexes (川 {r['stream']}, land "
+              f"{r['land']}, road {r['road']}), path {r['length']} hexes; crossed by roads (ferries): {ferry}")
     # reachability as the game sees it (footprints are city terrain in the game)
     tt = t.copy(); tt[footprint] = CITY
     for label, mask in (("on foot", ASTAR[tt] & ~np.isin(tt, (RIVER, SEA))), ("by any route the game's A* accepts", ASTAR[tt])):

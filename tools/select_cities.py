@@ -10,10 +10,12 @@ including Koei's 42. Each site is snapped to nearby passable land whose 7-hex fo
 Usage: python select_cities.py [world_dir] [--spacing 14] [--max N]   (--max: at most N new cities)
 Writes <world_dir>/cities_world.json: [{id, name, full, region, lo, hi, rank}], ids from 42.
 
-       python select_cities.py [world_dir] --move NAME [NAME ...]
+       python select_cities.py [world_dir] --move NAME [NAME ...] [--coast]
 Moves only the named cities of the existing cities_world.json to their (changed) coordinates in the candidate
 lists, keeping every id and every other city as it is (a full run would renumber the cities after a change).
 The site is snapped as above; instead of the spacing rule it keeps away from the other cities where it can.
+--coast: only sites whose centre hex touches the sea (8), so the city is a seaport whatever its footprint
+(searched up to 12 hexes from the coordinates when there is none within 6).
 """
 import argparse
 import json
@@ -34,6 +36,7 @@ def main():
     ap.add_argument("--spacing", type=float, default=14.0)
     ap.add_argument("--max", type=int, default=0, help="at most this many new cities (0 = all that fit)")
     ap.add_argument("--move", nargs="+", metavar="NAME", help="only move these cities of the existing cities_world.json")
+    ap.add_argument("--coast", action="store_true", help="with --move: snap to a site at the sea")
     a = ap.parse_args()
     w = Path(a.world)
     info = json.loads((w / "world_info.json").read_text())
@@ -69,7 +72,8 @@ def main():
     taken = np.zeros_like(passable)
     taken[spec.china_lo - 4:spec.china_lo + 204, spec.china_hi - 4:spec.china_hi + 204] = True
     if a.move:
-        return move_cities(w, a.move, cands, lo, x, placed, passable, land, taken, a.spacing)
+        return move_cities(w, a.move, cands, lo, x, placed, passable, land, taken, a.spacing,
+                           (t == 8) if a.coast else None)
     out, skipped = [], []
     for c, l, h in zip(cands, lo, x):
         if a.max and len(out) >= a.max:
@@ -112,8 +116,9 @@ def main():
         print(f"  skipped ({k}): {' '.join(v)}")
 
 
-def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing):
-    """re-snap the named cities of cities_world.json to their candidate coordinates (ids unchanged)"""
+def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing, sea=None):
+    """re-snap the named cities of cities_world.json to their candidate coordinates (ids unchanged); sea: only
+    sites whose centre touches it"""
     R, C = taken.shape
     cur = json.loads((w / "cities_world.json").read_text(encoding="utf-8"))
     where = {c["name"]: (l, h) for c, l, h in zip(cands, lo, x)}
@@ -129,22 +134,14 @@ def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing):
         l, h = where[nm]
         y0 = int(round(l)); x0 = int(round(h - 0.5 * (y0 & 1)))
         best = None
-        for dy in range(-6, 7):
-            for dx in range(-6, 7):
-                y, xx = y0 + dy, x0 + dx
-                cells = [(y, xx)] + hex_ring(y, xx)
-                if any(not (0 <= p < R and 0 <= q < C) or taken[p, q] for p, q in cells):
-                    continue
-                nland = sum(land[p, q] for p, q in cells)
-                if nland < 5:
-                    continue
-                d = min(np.hypot(y - p, xx + 0.5 * (y & 1) - q) for p, q in placed)
-                score = (nland * 10 + sum(passable[p, q] for p, q in cells) * 4 - (dy * dy + dx * dx) ** 0.5
-                         + (20 if passable[y, xx] else 0) + 0.5 * min(d, spacing))
-                if best is None or score > best[0]:
-                    best = (score, y, xx, d)
+        for reach in ((6, 12) if sea is not None else (6,)):
+            if best is not None:
+                break
+            for dy in range(-reach, reach + 1):
+                for dx in range(-reach, reach + 1):
+                    best = snap(y0 + dy, x0 + dx, dy, dx, best, R, C, taken, land, passable, placed, spacing, sea)
         if best is None:
-            raise SystemExit(f"{nm}: no free land site near its coordinates")
+            raise SystemExit(f"{nm}: no free land site near its coordinates" + (" at the sea" if sea is not None else ""))
         _, y, xx, d = best
         print(f"{nm} (id {c['id']}): ({c['lo']}, {c['hi']}) -> ({y}, {xx}), {d:.1f} hexes from the nearest city"
               + (f" (less than --spacing {spacing:g})" if d < spacing else ""))
@@ -153,6 +150,22 @@ def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing):
         for p, q in [(y, xx)] + hex_ring(y, xx):
             taken[p, q] = True
     (w / "cities_world.json").write_text(json.dumps(cur, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def snap(y, xx, dy, dx, best, R, C, taken, land, passable, placed, spacing, sea):
+    """score the site (y, xx) for move_cities; returns the better of it and best"""
+    cells = [(y, xx)] + hex_ring(y, xx)
+    if any(not (0 <= p < R and 0 <= q < C) or taken[p, q] for p, q in cells):
+        return best
+    if sea is not None and not any(sea[p, q] for p, q in cells[1:]):
+        return best
+    nland = sum(land[p, q] for p, q in cells)
+    if nland < (4 if sea is not None else 5):
+        return best
+    d = min(np.hypot(y - p, xx + 0.5 * (y & 1) - q) for p, q in placed)
+    score = (nland * 10 + sum(passable[p, q] for p, q in cells) * 4 - (dy * dy + dx * dx) ** 0.5
+             + (20 if passable[y, xx] else 0) + 0.5 * min(d, spacing))
+    return (score, y, xx, d) if best is None or score > best[0] else best
 
 
 if __name__ == "__main__":

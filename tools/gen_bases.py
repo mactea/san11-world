@@ -512,10 +512,28 @@ def main():
     # footprints by tier (M11_MAP.md); the triangles are chosen on the terrain without roads, so both of the
     # build's gen_bases.py runs (before and after connect_cities.py) choose the same ones
     tiers = load_tiers(new)
-    tb = t
+    tb = t.copy()
     if (w / "world_types.before_roads.npy").exists():
         tb = np.load(w / "world_types.before_roads.npy")
-        tb = tb if tb.shape == t.shape else t
+        tb = tb if tb.shape == t.shape else t.copy()
+    # river ports (data/navigable_rivers.json, tools/navigable.py): a 河 channel from the city to the open sea,
+    # derived from the terrain without roads (so connect_cities.py lays the same one), written into it and into
+    # t where t still has that terrain (after connect_cities.py and make_world.py it is there already)
+    import navigable
+    from worldgeo import WorldSpec
+    spec = WorldSpec(rows=R, cols=Cc, lon0=info["lon0"], lat0=info["lat0"], china_lo=clo, china_hi=chi)
+    tbase = navigable.base_terrain(w, t, spec)
+    rivers = navigable.courses(tbase, new, {k: v[0] for k, v in tiers.items()}, spec,
+                               np.load(w / "china_patch.npy") if (w / "china_patch.npy").exists() else None)
+    for r in rivers:
+        for y, x, k_ in r["hexes"] or []:
+            tb[y, x] = k_
+    river_blk = {}                                        # block hexes changed (block coordinates -> terrain)
+    for y, x, k_ in navigable.apply(t, tbase, rivers):
+        if clo <= y < clo + 200 and chi <= x < chi + 200:
+            river_blk[(y - clo, x - chi)] = k_
+        else:
+            rec[y, x, 0], rec[y, x, 4] = k_, 2 if k_ == 7 else 6
 
     def in_block(y, x):
         return clo <= y < clo + 200 and chi <= x < chi + 200
@@ -582,7 +600,7 @@ def main():
     # parts it from the water; banks, cliffs and streams on the way are opened (OPEN_AS), as connect_cities.py
     # opens the banks where a sea route lands. Koei's bases, plots, dikes and the city hexes stay as they are.
     foot_all = {h for cs in cells_of.values() for h in cs}
-    blk_edits = {}                                        # block hexes opened (block coordinates -> terrain)
+    blk_edits = dict(river_blk)                           # block hexes opened (block coordinates -> terrain)
 
     def open_ok(y, x):
         return (0 <= y < R and 0 <= x < Cc and (y, x) not in foot_all and t[y, x] not in (16, 17, 18)
@@ -794,9 +812,9 @@ def main():
                 a_ = renum(r[1] | (r[2] << 8))
                 r[1], r[2] = a_ & 0xff, a_ >> 8
                 ov[(lo_, hi_)] = r
-    for (lo_, hi_), k_ in blk_edits.items():             # ways to the water opened in the block
+    for (lo_, hi_), k_ in blk_edits.items():             # ways to the water opened, river channels in the block
         r = ov.get((lo_, hi_), bytearray(rec[clo + lo_, chi + hi_]))
-        r[0], r[4] = k_, 6
+        r[0], r[4] = k_, 2 if k_ == 7 else 6
         ov[(lo_, hi_)] = r
     for lo_, hi_ in zip(*np.nonzero(band_new >= 0)):
         r = ov.get((int(lo_), int(hi_)), bytearray(rec[clo + lo_, chi + hi_]))
@@ -882,6 +900,10 @@ def main():
           f"{PORT_REACH} hexes" + (f": {' '.join(port_fail)}" if port_fail else ""))
     print(f"other cities at the water: {other['direct']} touch it, {other['land']} one hex away, {other['open']} behind "
           f"a bank or cliff (opened); {len(port_open)} hexes opened; Koei's cities at the water: {sum(koei_port)}")
+    if rivers:
+        print(f"navigable rivers (navigable_rivers.json): " + "; ".join(
+            f"{r['city']} {r['river']} {len(r['hexes'])} hexes (川 {r['stream']}, land {r['land']}, road {r['road']})"
+            if r["hexes"] is not None else f"{r['city']} {r['river']}: NO COURSE TO THE SEA" for r in rivers))
     print(f"facility plots: {plots_made} for {dC} new cities"
           + (f"; fewer than planned (little land in the territory) for {len(plots_short)}: {', '.join(plots_short)}" if plots_short else ""))
 

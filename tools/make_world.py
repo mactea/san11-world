@@ -811,18 +811,24 @@ def main():
     if a.types_from:                            # keep the roads connect_cities.py laid in the block
         prev = np.load(a.types_from)[CL, CH]
         laid = np.isin(prev, (ROAD, PLANK, BRIDGE))
-        for (lo, hi), r in patch_ov.items():
-            if laid[lo, hi]:
-                r[0] = prev[lo, hi]
+        base = np.where(patch_types != 255, patch_types, china_shex[..., 0])
+        # and the 河 channels of river ports (tools/navigable.py): 川 or the patch's land made river; on Koei's
+        # own stage his 3D terrain stays (his 川 is drawn as water already)
+        laid |= (prev == RIVER) & (base != RIVER)
         kt = china_learn[..., 0]
         b4 = {k: int(np.bincount(china_learn[..., 4][kt == k]).argmax()) if (kt == k).any() else 6
-              for k in (ROAD, PLANK, BRIDGE)}
+              for k in (ROAD, PLANK, BRIDGE, RIVER)}
+        for (lo, hi), r in patch_ov.items():
+            if laid[lo, hi] and r[0] != prev[lo, hi]:
+                r[0] = prev[lo, hi]
+                if r[0] == RIVER:
+                    r[4] = b4[RIVER]
         for lo, hi in zip(*np.nonzero(laid & ~patch_hex & (china_shex[..., 0] != prev))):
             r = china_shex[lo, hi].copy()
             r[0] = prev[lo, hi]
             r[4] = b4[r[0]]
             patch_ov[(int(lo), int(hi))] = r
-            road_hex[lo, hi] = True
+            road_hex[lo, hi] = r[0] != RIVER
     for (lo, hi), r in patch_ov.items():
         china_shex[lo, hi] = r
     overrides.update(patch_ov)
