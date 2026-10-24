@@ -9,9 +9,11 @@
 // leftmost node is expanded next). Expansion order is therefore (f, insertion order). On a big map the
 // tree degenerates and every insert walks a long chain. The replacement below uses a binary heap keyed
 // by (f, insertion counter): the same expansion order, so every node ends with the same parent, g, f
-// and flags (mode 1). Mode 2 also doubles h: still admissible and consistent (a step costs at least 4,
-// a step changes |d row| + |d column| by at most 2), so the path cost stays optimal, but far fewer
-// hexes are expanded; among equally short paths it may pick a different one. Mode 3 adds a search
+// and flags (mode 1). Mode 2 raises h to |d row| + |d column| times half the smallest step cost in the
+// cost table 0x9549830 (minStepCost; Koei's table: 4, so h doubles; M12_MOVE.md's roads and 楼船 on the
+// sea: 3, so h x 1.5): still admissible and consistent (a step costs at least that, a step changes
+// |d row| + |d column| by at most 2), so the path cost stays optimal, but far fewer hexes are expanded;
+// among equally short paths it may pick a different one. Mode 3 adds a search
 // window: only hexes within max(margin, half the box's longer side) of the bounding box of the sources
 // and the goal are searched (margin default 100, half the original map); when the goal is not found
 // inside the window the search is repeated on the whole map, so "reachable" means the same as before.
@@ -83,6 +85,18 @@ static_assert(sizeof(Node) == 28, "HEX28 node");
 static inline Node* nodeAt(int lo, int hi) { return (Node*)(HEX28 + ((size_t)lo * W + hi) * 28); }
 static inline int manhattan(int lo, int hi, int glo, int ghi) { return abs(glo - lo) + abs(ghi - hi); }
 
+// Smallest passable step cost (0xff = impassable) of all 12 weapons x 22 terrains in the table 0x56dd00 reads.
+// Re-read on every call: the game refills the table on each map entry (0x57e910, movement.cpp may change it).
+static const uint8_t* COSTS = nullptr;     // 0x56dd4d mov al, [eax+esi+imm32]
+static int minStepCost() {
+    int m = 0xff;
+    for (int w = 0; w < 12; w++)
+        for (int t = 0; t < 22; t++) { int c = COSTS[w * 32 + t]; if (c < m) m = c; }
+    return m == 0xff ? 0 : m;
+}
+// heuristic h = (|d row| + |d column|) * hnum / 2: hnum 2 = Koei's h (modes 0/1), minStepCost() for modes 2/3
+static inline int heurNum(int mode) { return mode >= 2 ? minStepCost() : 2; }
+
 // ------------------------------------------------------------------ open list: binary heap on (f, seq)
 struct HeapItem { int32_t f; uint32_t seq; Node* n; };
 static std::vector<HeapItem> g_heap;
@@ -123,7 +137,7 @@ static void removeAt(size_t i) {
 static Node* popMin() { Node* n = g_heap[0].n; removeAt(0); return n; }
 
 // ------------------------------------------------------------------ replacement
-static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count, int hscale, int margin) {
+static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count, int hnum, int margin) {
     void* t = unitT(unit);
     uint32_t mf[4];
     moveFlags(mf, t);
@@ -150,7 +164,7 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
         Node* n = nodeAt(lo, hi);
         if (n->flags & 1) continue;                     // a repeated source (the original would corrupt its tree)
         n->coord = c;
-        n->f = manhattan(lo, hi, glo, ghi) * hscale;
+        n->f = manhattan(lo, hi, glo, ghi) * hnum >> 1;
         if (*(const uint32_t*)(HEX20 + ((size_t)lo * W + hi) * 20) & 3) n->f += 0x40;
         n->flags = 1;
         push(n);
@@ -195,7 +209,7 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
             if ((fl & 3) && nb->g <= ng) continue;
             fl &= ~2;
             nb->coord = nc; nb->parent = cur; nb->flags = fl;
-            int32_t h = manhattan(lo, hi, glo, ghi) * hscale;
+            int32_t h = manhattan(lo, hi, glo, ghi) * hnum >> 1;
             if (fl & 1) removeAt(nb->left - 1);
             nb->g = ng; nb->f = ng + h;
             push(nb);
@@ -203,7 +217,7 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
         }
         cur->flags = (cur->flags & ~1) | 2;
     }
-    if (windowed) return astarHeap(unit, goal, src, count, hscale, 0);   // not inside the window: whole map
+    if (windowed) return astarHeap(unit, goal, src, count, hnum, 0);   // not inside the window: whole map
     return nullptr;
 }
 
@@ -230,7 +244,7 @@ static Node* verifyCall(void* unit, uint32_t goal, const uint32_t* src, int coun
     pages.assign((uint8_t**)g_pages, (uint8_t**)g_pages + np);
     snap.resize(np * 4096);
     for (size_t i = 0; i < np; i++) memcpy(&snap[i * 4096], pages[i], 4096);
-    Node* b = astarHeap(unit, goal, src, count, 1, 0);
+    Node* b = astarHeap(unit, goal, src, count, 2, 0);
     size_t nb = dirtyPages(false);
     int diffs = 0; uint32_t firstAt = 0;
     std::vector<uint8_t*> all(pages); all.insert(all.end(), (uint8_t**)g_pages, (uint8_t**)g_pages + nb);
@@ -263,15 +277,15 @@ static void bench(void* unit, const uint32_t* src, int count, void* caller) {
     double ta = msSince(t0); size_t pa = dirtyPages(false);
     int32_t ga = a ? a->g : -1;
     QueryPerformanceCounter(&t0);
-    Node* b = astarHeap(unit, goal, src, count, 1, 0);
+    Node* b = astarHeap(unit, goal, src, count, 2, 0);
     double tb = msSince(t0); size_t pb = dirtyPages(false);
     int32_t gb = b ? b->g : -1;
     QueryPerformanceCounter(&t0);
-    Node* c = astarHeap(unit, goal, src, count, 2, 0);
+    Node* c = astarHeap(unit, goal, src, count, heurNum(2), 0);
     double tc = msSince(t0); size_t pc = dirtyPages(false);
     int32_t gc = c ? c->g : -1;
     QueryPerformanceCounter(&t0);
-    Node* e = astarHeap(unit, goal, src, count, 2, g_cfg.margin);
+    Node* e = astarHeap(unit, goal, src, count, heurNum(2), g_cfg.margin);
     double te = msSince(t0); size_t pe = dirtyPages(false);
     int32_t ge = e ? e->g : -1;
     uint32_t s = count > 0 ? src[0] : 0;
@@ -330,7 +344,7 @@ extern "C" static Node* __cdecl astarDispatch(void* unit, uint32_t goal, const u
     Node* r;
     if (g_cfg.verify) r = verifyCall(unit, goal, src, count);
     else if (g_cfg.mode == 0) r = ((AstarFn)(void*)g_tramp)(unit, goal, src, count);
-    else r = astarHeap(unit, goal, src, count, g_cfg.mode >= 2 ? 2 : 1, g_cfg.mode >= 3 ? g_cfg.margin : 0);
+    else r = astarHeap(unit, goal, src, count, heurNum(g_cfg.mode), g_cfg.mode >= 3 ? g_cfg.margin : 0);
     if (g_cfg.stats) {
         LARGE_INTEGER t1; QueryPerformanceCounter(&t1);
         uint64_t d = (uint64_t)(t1.QuadPart - t0.QuadPart);
@@ -349,7 +363,7 @@ extern "C" static Node* __cdecl astarDispatch(void* unit, uint32_t goal, const u
                 bench(unit, src, count, caller);
                 g_benchGoal = 0;
                 r = g_cfg.mode == 0 ? ((AstarFn)(void*)g_tramp)(unit, goal, src, count)
-                                    : astarHeap(unit, goal, src, count, g_cfg.mode >= 2 ? 2 : 1, g_cfg.mode >= 3 ? g_cfg.margin : 0);
+                                    : astarHeap(unit, goal, src, count, heurNum(g_cfg.mode), g_cfg.mode >= 3 ? g_cfg.margin : 0);
             }
         }
         if ((t1.QuadPart - g_lastSummary.QuadPart) > 10 * g_freq.QuadPart) {
@@ -381,6 +395,9 @@ bool pathfindInstall(const PathfindConfig& cfg, TraceLogFn log) {
     H = *(int*)(0x5676df + 1);
     int W2 = *(int*)(0x5676f2 + 2);
     BMGR = *(void**)(0x567809 + 1);
+    static const uint8_t costHead[3] = { 0x8a, 0x84, 0x30 };      // 0x56dd4d mov al, [eax+esi+COSTS]
+    if (memcmp((void*)0x56dd4d, costHead, 3)) { log("A*: unexpected code at 0x56dd4d (step cost table), not hooked"); return false; }
+    COSTS = *(const uint8_t**)(0x56dd4d + 3);
     if (W2 != W) { log("A*: row/column bounds disagree (%d vs %d), not hooked", W, W2); return false; }
     QueryPerformanceFrequency(&g_freq); QueryPerformanceCounter(&g_lastSummary);
     g_pages = (void**)VirtualAlloc(nullptr, cfg.hex28Size / 4096 * sizeof(void*), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);

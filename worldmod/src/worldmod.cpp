@@ -23,6 +23,7 @@
 #include "units.h"
 #include "persons.h"
 #include "cityshape.h"
+#include "movement.h"
 
 // ---------------------------------------------------------------- logging
 static FILE* g_log = nullptr;
@@ -1949,12 +1950,14 @@ static void init() {
                           g_bases ? (const int32_t*)g_bases->AREA2BASE : nullptr, g_cfg.cityScaleMid, g_cfg.cityScaleSmall, false };
     if (g_cfg.verifyOnly) {
         if (g_cfg.bases && g_cfg.cityShapes) cityShapesInstall(cs, logf);
+        movementInstall(g_dir, g_section, false, logf);
         logf("verify_only: nothing written"); return;
     }
     commitPatches();
     commitCaves();
     installHooks();
     if (g_cfg.bases && g_cfg.cityShapes) { cs.write = true; cityShapesInstall(cs, logf); }
+    movementInstall(g_dir, g_section, true, logf);     // per-weapon movement and terrain costs (M12_MOVE.md)
 }
 
 BOOL WINAPI DllMain(HINSTANCE, DWORD reason, LPVOID) {
