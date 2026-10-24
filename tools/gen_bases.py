@@ -6,13 +6,16 @@ Usage: python gen_bases.py [world_dir] --cities C
              tools/select_cities.py). C = total number of cities, 42..1000 (new cities = the first C-42 of
              cities_world.json, which is in importance order).
 Writes into --out (default world_dir; the world_dir inputs from make_world.py are read as they are):
-  world_shex.bin     area ids of the territories (u16) and the 7-hex city footprints (terrain 16)
+  world_shex.bin     area ids of the territories (u16) and the city footprints (terrain 16): 7, 3 or 1 hexes by
+                     the city's tier in data/city_tiers.json (M11_MAP.md), with ways to the water opened for ports
   china_overrides.bin  edits of Koei's China block in final numbering ("WCO2"): make_world's, plus the
                      outer band hexes new cities take (the seam with Koei's areas, see territories())
   bases_tables.bin   "WBTB", u32 C, then {u32 size, bytes} for AREAADJ, MAT87A, MAT87B, MATC, AREA2CITY,
                      AREA2BASE, CITYTAB844, DBGBASE (the order worldmod's bases.cpp reads)
-  bases_cities.json  the new cities (id, name, lo, hi, province, neighbours) for the scenario converter
+  bases_cities.json  the new cities (id, name, lo, hi, province, neighbours, tier, shape, cells) for the scenario
+                     converter and connect_cities.py, and "port_open" (hexes opened towards the water)
   bases_objs.bin     their 3D city models (OBJS records added by worldmod)
+  city_shapes.bin    "WCSH", u32 1, u32 C, C x {u8 shape, u8 tier, u8 variant, u8 flags} (M11_MAP.md, read by worldmod)
   world_height.npy   the vertex heights with the land around each new city levelled (Koei's cities stand
                      on plateaus at their model's height); only when the world directory has vertex data
   china_patch.bin    copied from the world directory (make_world.py): where worldmod draws China from it
@@ -47,6 +50,117 @@ def exe_bytes(va, n):
 def hex_nbrs(y, x):
     d = [(0, -1), (0, 1), (-1, -1), (-1, 0), (1, -1), (1, 0)] if y % 2 == 0 else [(0, -1), (0, 1), (-1, 0), (-1, 1), (1, 0), (1, 1)]
     return [(y + a, x + b) for a, b in d]
+
+
+# M11 (M11_MAP.md): a new city covers 7, 3 or 1 hexes by its tier in data/city_tiers.json (1 big, 2 middle,
+# 3 small; Koei's 42 keep 7). The 3-hex triangle k (0..5) is the centre and its neighbours ROT[k], ROT[k+1].
+ROT = (1, 5, 4, 0, 2, 3)            # hex_nbrs indices clockwise: E, lower right, lower left, W, upper left, upper right
+SHAPE_7, SHAPE_1 = 0, 7             # city_shapes.bin shape: 0 = 7 hexes, 1..6 = triangle k = shape - 1, 7 = 1 hex
+NAV = (7, 8)                        # navigable water: 河, 海 (川 6 is not)
+CELL_SCORE = {6: -60, 7: -100, 8: -100, 15: -8, 14: -2}     # choosing a triangle: avoid water, cliffs, banks
+TIER_FLAT = {1: (8, 12), 2: (6, 10), 3: (4, 7)}             # land levelled around the model, blended out to (vertices)
+LARGEST = ("羅馬", "黎軒", "安都", "斯賓", "迦太")           # Rome, Alexandria, Antioch, Ctesiphon, Carthage: model toL
+PORT_REACH = 6                      # a port (city_tiers.json "port") may get a way this many hexes long to the water
+OPEN_AS = {14: 10, 15: 11, 6: 12}   # opened like connect_cities.py: bank -> main road, cliff -> plank road, stream -> ferry
+
+
+def shape_cells(y, x, shape):
+    n = hex_nbrs(y, x)
+    if shape == SHAPE_7:
+        return [(y, x)] + n
+    if shape == SHAPE_1:
+        return [(y, x)]
+    k = shape - 1
+    return [(y, x), n[ROT[k]], n[ROT[(k + 1) % 6]]]
+
+
+def load_tiers(new):
+    """{city id: (tier, port)} of the new cities from data/city_tiers.json (tier 1 and no port without it)"""
+    f = DATA / "city_tiers.json"
+    rows = {r["id"]: r for r in json.loads(f.read_text(encoding="utf-8"))} if f.exists() else {}
+    out = {}
+    for c in new:
+        r = rows.get(c["id"])
+        if r and r["name"] != c["name"]:
+            raise SystemExit(f"city_tiers.json: id {c['id']} is {r['name']}, cities_world.json says {c['name']}")
+        out[c["id"]] = (int(r["tier"]), bool(r["port"])) if r else (1, False)
+    return out
+
+
+def nav_steps(t, cells, limit):
+    """hex steps from the cells to the nearest navigable water (1 = touching it), None beyond limit"""
+    seen = set(cells)
+    front = list(cells)
+    for d in range(1, limit + 1):
+        nxt = []
+        for c in front:
+            for n in hex_nbrs(*c):
+                if n in seen or not (0 <= n[0] < t.shape[0] and 0 <= n[1] < t.shape[1]):
+                    continue
+                if t[n] in NAV:
+                    return d
+                seen.add(n)
+                nxt.append(n)
+        front = nxt
+    return None
+
+
+def choose_shape(y, x, tier, port, tb, free, salt=0):
+    """tier 1: 7 hexes, tier 3: 1 hex; tier 2: the triangle that stands best on land (CELL_SCORE) and, for a
+    port, touches navigable water (or comes next to it), using only hexes free(y, x) allows; tb = the terrain
+    without roads (the same in both of the build's gen_bases.py runs); equal triangles: turned by salt (the
+    city id), so they do not all point the same way. None: no triangle fits."""
+    if tier <= 1:
+        return SHAPE_7
+    if tier >= 3:
+        return SHAPE_1
+    best = None
+    for k in range(6):
+        cells = shape_cells(y, x, 1 + k)
+        if not all(free(*c) for c in cells):
+            continue
+        s = sum(CELL_SCORE.get(int(tb[c]), 0) for c in cells[1:]) + 0.01 * ((k + salt) % 6)
+        if port:                                          # 40 touching the water, less the farther it is
+            d = nav_steps(tb, cells, PORT_REACH + 2)
+            s += 40 if d == 1 else max(0, 20 - 2 * d) if d else 0
+        if best is None or s > best[0]:
+            best = (s, k)
+    return None if best is None else 1 + best[1]
+
+
+def port_access(t, cells, reach, ok):
+    """how units leave the city by water: ("direct", []) when a city hex touches navigable water; else the
+    cheapest way of at most `reach` hexes over land ok(y, x) allows to a hex next to navigable water:
+    ("open", the banks/cliffs/streams on it, to open with OPEN_AS) or ("land", []) when it is already passable;
+    (None, []) when there is none"""
+    import heapq
+    if any(t[n] in NAV for c in cells for n in hex_nbrs(*c)):
+        return "direct", []
+    fp = set(cells)
+    step = {14: 1.5, 15: 3.0, 6: 3.0}
+    heap, prev = [], {}
+    for c in cells:
+        for n in hex_nbrs(*c):
+            if n not in fp and t[n] not in NAV and ok(*n):
+                heapq.heappush(heap, (step.get(int(t[n]), 1.0), 1, n, None))
+    while heap:
+        d, k, v, p = heapq.heappop(heap)
+        if v in prev:
+            continue
+        prev[v] = p
+        if any(t[m] in NAV for m in hex_nbrs(*v)):
+            path = []
+            while v is not None:
+                path.append(v)
+                v = prev[v]
+            opened = [h for h in path if int(t[h]) in OPEN_AS]
+            return ("open" if opened else "land"), opened
+        if k >= reach:
+            continue
+        for n in hex_nbrs(*v):
+            if n not in prev and n not in fp and t[n] not in NAV and ok(*n):
+                heapq.heappush(heap, (d + step.get(int(t[n]), 1.0), k + 1, n, v))
+    return None, []
 
 
 def wall_ou_cells(pack, clo, chi):
@@ -146,9 +260,11 @@ def place_plots(y0, x0, n, ok):
     return out
 
 
-def flatten_city_sites(w, out, new, clo, chi, patch, r_flat=8, r_blend=12):
+def flatten_city_sites(w, out, new, clo, chi, patch, sites=None):
     """Level the land around each new city to one height (Koei's cities stand on plateaus) and return
-    those heights. Reads w/world_height.npy and w/world_mat.npy (material 0 = water, left alone) and
+    those heights. sites: per city (vertex row, vertex col, r_flat, r_blend), the centre of its footprint (a
+    triangle's model stands on the triangle's centre) and the radii by tier (TIER_FLAT); default: the centre
+    hex, 8 and 12. Reads w/world_height.npy and w/world_mat.npy (material 0 = water, left alone) and
     writes out/world_height.npy; without vertex data (a --hex-only world) every city gets Koei's usual 20.
     A city inside Koei's block stands on his stage (the game draws his own there, which is not levelled):
     its height is his terrain height at the centre, so pick a flat site for it. The patch (make_world's
@@ -159,20 +275,22 @@ def flatten_city_sites(w, out, new, clo, chi, patch, r_flat=8, r_blend=12):
     dst = np.array(np.load(src))                     # in memory (~30 MB), so --out may equal the world directory
     mat = np.load(w / "world_mat.npy", mmap_mode="r")
     koei_v = np.load(DATA / "china_k3st_v.npy", mmap_mode="r")
-    yy, xx = np.mgrid[-r_blend:r_blend + 1, -r_blend:r_blend + 1]
-    d = np.hypot(yy, xx)
-    wgt = np.clip((r_blend - d) / (r_blend - r_flat), 0, 1)          # 1 inside r_flat, 0 beyond r_blend
     heights = []
-    for c in new:
+    for i, c in enumerate(new):
         vr = c["lo"] * 4 + 114
         vc = c["hi"] * 4 + 114 + 2 * (c["lo"] & 1)
         if clo <= c["lo"] < clo + 200 and chi <= c["hi"] < chi + 200 and not patch[c["lo"] - clo, c["hi"] - chi]:
             heights.append(int(koei_v[vr - 4 * clo, vc - 4 * chi, 0]))
             continue
-        sl = (slice(vr - r_blend, vr + r_blend + 1), slice(vc - r_blend, vc + r_blend + 1))
+        fr, fc, r_flat, r_blend = sites[i] if sites else (vr, vc, 8, 12)
+        r0, c0 = int(round(fr)), int(round(fc))
+        yy, xx = np.mgrid[r0 - r_blend:r0 + r_blend + 1, c0 - r_blend:c0 + r_blend + 1]
+        d = np.hypot(yy - fr, xx - fc)
+        wgt = np.clip((r_blend - d) / (r_blend - r_flat), 0, 1)      # 1 inside r_flat, 0 beyond r_blend
+        sl = (slice(r0 - r_blend, r0 + r_blend + 1), slice(c0 - r_blend, c0 + r_blend + 1))
         hw = dst[sl].astype(np.float32)
         land = mat[sl] != 0
-        near = land & (d <= 6)
+        near = land & (d <= min(6, r_flat))
         h = int(np.median(hw[near])) if near.any() else 20
         h = max(8, min(250, h))
         m = land & (wgt > 0)
@@ -387,12 +505,51 @@ def main():
     area = np.full((R, Cc), N + 3, np.int32)              # unclaimed world: the special area Koei used for its margins (90)
     china_area = rec[clo:clo + 200, chi:chi + 200, 1].astype(np.int32) | (rec[clo:clo + 200, chi:chi + 200, 2].astype(np.int32) << 8)
     seeds = [{**c, "id": 42 + k} for k, c in enumerate(new)]
+    for k, c in enumerate(new):
+        if c.get("id", 42 + k) != 42 + k:
+            raise SystemExit(f"cities_world.json: {c['name']} has id {c['id']}, expected {42 + k}")
+        c["id"] = 42 + k
+    # footprints by tier (M11_MAP.md); the triangles are chosen on the terrain without roads, so both of the
+    # build's gen_bases.py runs (before and after connect_cities.py) choose the same ones
+    tiers = load_tiers(new)
+    tb = t
+    if (w / "world_types.before_roads.npy").exists():
+        tb = np.load(w / "world_types.before_roads.npy")
+        tb = tb if tb.shape == t.shape else t
+
+    def in_block(y, x):
+        return clo <= y < clo + 200 and chi <= x < chi + 200
+    blocked = np.zeros((R, Cc), bool)                     # Koei's bases, facility plots, dikes; other footprints
+    kb = rec[clo:clo + 200, chi:chi + 200]
+    blocked[clo:clo + 200, chi:chi + 200] = (np.isin(t[clo:clo + 200, chi:chi + 200], (16, 17, 18))
+                                             | (kb[..., 5] != 0) | (kb[..., 3] != 0))
+    shape = {}
+    for c in new:
+        tier, _ = tiers[c["id"]]
+        if tier != 2:
+            shape[c["id"]] = choose_shape(c["lo"], c["hi"], tier, False, tb, None)
+            for y, x in shape_cells(c["lo"], c["hi"], shape[c["id"]]):
+                blocked[y, x] = True
+    no_triangle = []
+    for c in new:
+        tier, port = tiers[c["id"]]
+        if tier != 2:
+            continue
+        in0 = in_block(c["lo"], c["hi"])
+        blocked[c["lo"], c["hi"]] = False
+        s_ = choose_shape(c["lo"], c["hi"], tier, port, tb,
+                          lambda y, x: 0 <= y < R and 0 <= x < Cc and not blocked[y, x] and in_block(y, x) == in0, c["id"])
+        if s_ is None:
+            no_triangle.append(c["name"]); s_ = SHAPE_1
+        shape[c["id"]] = s_
+        for y, x in shape_cells(c["lo"], c["hi"], s_):
+            blocked[y, x] = True
+    cells_of = {c["id"]: shape_cells(c["lo"], c["hi"], shape[c["id"]]) for c in new}
     inside = []                                           # new cities inside Koei's block (on his own terrain)
     for c in new:
-        cells = [(c["lo"], c["hi"])] + hex_nbrs(c["lo"], c["hi"])
-        ins = [clo <= y < clo + 200 and chi <= x < chi + 200 for y, x in cells]
+        ins = [in_block(y, x) for y, x in cells_of[c["id"]]]
         if any(ins) and not all(ins):
-            raise SystemExit(f"{c['name']}: its 7 hexes cross the edge of Koei's China block; move it fully inside or outside")
+            raise SystemExit(f"{c['name']}: its {len(ins)} hexes cross the edge of Koei's China block; move it fully inside or outside")
         inside.append(ins[0])
     lab, won = territories(t, [s for s, i in zip(seeds, inside) if not i], clo, chi, china_area,
                            [(k["lo"] + clo, k["hi"] + chi) for k in koei])
@@ -412,7 +569,7 @@ def main():
     foot_blk = np.zeros((200, 200), bool)                 # city hexes of the new cities inside the block
     for k, c in enumerate(new):
         cid = 42 + k
-        for y, x in [(c["lo"], c["hi"])] + hex_nbrs(c["lo"], c["hi"]):
+        for y, x in cells_of[cid]:
             t[y, x] = CITY_T
             area[y, x] = cid
             rec[y, x, 0] = CITY_T
@@ -420,6 +577,40 @@ def main():
             if inside[k]:
                 band_new[y - clo, x - chi] = cid
                 foot_blk[y - clo, x - chi] = True
+    # ports: a way from the city to navigable water (河/海) so units can sail out. Cities flagged "port" in
+    # city_tiers.json get one up to PORT_REACH hexes long, every other city only when one bank or cliff hex
+    # parts it from the water; banks, cliffs and streams on the way are opened (OPEN_AS), as connect_cities.py
+    # opens the banks where a sea route lands. Koei's bases, plots, dikes and the city hexes stay as they are.
+    foot_all = {h for cs in cells_of.values() for h in cs}
+    blk_edits = {}                                        # block hexes opened (block coordinates -> terrain)
+
+    def open_ok(y, x):
+        return (0 <= y < R and 0 <= x < Cc and (y, x) not in foot_all and t[y, x] not in (16, 17, 18)
+                and not (in_block(y, x) and (rec[y, x, 5] or rec[y, x, 3])))
+    port_how, port_open, port_fail = {}, [], []
+    for c in new:
+        cid = c["id"]
+        tier, port = tiers[cid]
+        how, opened = port_access(t, cells_of[cid], PORT_REACH if port else 1, open_ok)
+        if not port and how == "open" and any(int(t[h]) == 6 for h in opened):
+            how, opened = None, []                         # not a port: no ferries over streams
+        port_how[cid] = how
+        if port and how is None:
+            port_fail.append(c["name"])
+        for y, x in opened:
+            k_ = OPEN_AS[int(t[y, x])]
+            t[y, x] = k_
+            port_open.append([int(y), int(x), int(k_)])
+            if in_block(y, x):
+                blk_edits[(y - clo, x - chi)] = k_
+            else:
+                rec[y, x, 0], rec[y, x, 4] = k_, 6
+    koei_port = []
+    for k in koei:
+        y, x = k["lo"] + clo, k["hi"] + chi
+        how, _ = port_access(t, [(y, x)] + hex_nbrs(y, x), 1, lambda y, x: t[y, x] not in (6, 14, 15, 16, 17, 18))
+        koei_port.append(how is not None)
+
     # facility plots: soil hexes flagged in SHEX byte 5, in the city's own territory
     pf = DATA / "city_population.json"
     pop = json.loads(pf.read_text(encoding="utf-8")) if pf.exists() else {}
@@ -603,6 +794,10 @@ def main():
                 a_ = renum(r[1] | (r[2] << 8))
                 r[1], r[2] = a_ & 0xff, a_ >> 8
                 ov[(lo_, hi_)] = r
+    for (lo_, hi_), k_ in blk_edits.items():             # ways to the water opened in the block
+        r = ov.get((lo_, hi_), bytearray(rec[clo + lo_, chi + hi_]))
+        r[0], r[4] = k_, 6
+        ov[(lo_, hi_)] = r
     for lo_, hi_ in zip(*np.nonzero(band_new >= 0)):
         r = ov.get((int(lo_), int(hi_)), bytearray(rec[clo + lo_, chi + hi_]))
         a_ = int(band_new[lo_, hi_])
@@ -625,27 +820,48 @@ def main():
     # new city gets the median land height near its centre, and the land within 8 vertices is levelled to it
     # (blended out to 12), in a copy of world_height.npy written to the output directory.
     patch = np.load(w / "china_patch.npy") if (w / "china_patch.npy").exists() else np.zeros((200, 200), bool)
-    heights = flatten_city_sites(w, out, new, clo, chi, patch)
+    sites = []
+    for c in new:
+        cs = cells_of[c["id"]] if shape[c["id"]] not in (SHAPE_7, SHAPE_1) else [(c["lo"], c["hi"])]
+        vr = np.mean([y * 4 + 114 for y, x in cs])
+        vc = np.mean([x * 4 + 114 + 2 * (y & 1) for y, x in cs])
+        sites.append((vr, vc) + TIER_FLAT[max(1, min(3, tiers[c["id"]][0]))])
+    heights = flatten_city_sites(w, out, new, clo, chi, patch, sites)
     if out.resolve() != w.resolve():                      # worldmod draws the patch from world_height.npy
         if (w / "china_patch.bin").exists():
             shutil.copy2(w / "china_patch.bin", out / "china_patch.bin")
         else:
             (out / "china_patch.bin").unlink(missing_ok=True)
+    # the record's variant byte picks the model: 0 toM (tier 1), 2 toL (the LARGEST metropolises), 1 toS
+    # (tiers 2 and 3; worldmod scales it further by tier, M11_MAP.md)
+    variant = {c["id"]: (2 if c["name"] in LARGEST else 0) if tiers[c["id"]][0] <= 1 else 1 for c in new}
     with open(out / "bases_objs.bin", "wb") as f:
         f.write(b"WBOB" + struct.pack("<I", len(new)))
         for k, c in enumerate(new):
             our = 2 * c["lo"] + 57
             ouc = 2 * c["hi"] + 57 + (c["lo"] & 1)
-            f.write(struct.pack("<H", 60000 + k) + struct.pack("<BHHHBfBB", 1, 0, our, ouc, heights[k], 0.0, 0, 0))
+            f.write(struct.pack("<H", 60000 + k) + struct.pack("<BHHHBfBB", 1, 0, our, ouc, heights[k], 0.0,
+                                                               variant[c["id"]], 0))
+    # city_shapes.bin (M11_MAP.md): "WCSH", u32 version 1, u32 C, C x {u8 shape, u8 tier, u8 variant, u8 flags};
+    # flags bit0 = port (a way to navigable water from the city)
+    with open(out / "city_shapes.bin", "wb") as f:
+        f.write(b"WCSH" + struct.pack("<II", 1, C))
+        for i in range(C):
+            if i < 42:
+                f.write(struct.pack("<4B", SHAPE_7, 0, 0, int(koei_port[i])))
+            else:
+                f.write(struct.pack("<4B", shape[i], tiers[i][0], variant[i], int(port_how[i] is not None)))
     # new city records for the scenario converter
     kpos = np.array([[k["lo"] + clo, k["hi"] + chi] for k in koei], float)
     cities = []
     for k, c in enumerate(new):
         j = int(np.argmin(np.hypot(kpos[:, 0] - c["lo"], kpos[:, 1] - c["hi"])))
         cities.append({"id": 42 + k, "name": c["name"], "full": c.get("full", c["name"]), "lo": c["lo"], "hi": c["hi"],
-                       "province": int(koei_prov[koei[j]["id"]]), "neighbours": city_nb[42 + k]})
+                       "province": int(koei_prov[koei[j]["id"]]), "neighbours": city_nb[42 + k],
+                       "tier": tiers[42 + k][0], "shape": shape[42 + k], "cells": [list(map(int, h)) for h in cells_of[42 + k]]})
     koei_changed = {i: city_nb[i] for i in range(42) if city_nb[i] != koei_nb[i]}
-    (out / "bases_cities.json").write_text(json.dumps({"C": C, "N": N, "new": cities, "koei_neighbours": koei_changed},
+    (out / "bases_cities.json").write_text(json.dumps({"C": C, "N": N, "new": cities, "koei_neighbours": koei_changed,
+                                                       "port_open": port_open},
                                                       ensure_ascii=False, indent=1), encoding="utf-8")
     area[clo:clo + 200, chi:chi + 200] = -1               # the block's hexes are counted from band_new
     owned = np.concatenate([area[(area >= 42) & (area < C)].ravel(), band_new[band_new >= 0].ravel()])
@@ -653,6 +869,19 @@ def main():
     print(f"C={C} N={N}: {dC} new cities, {added} border links + {extra} distance links, territory sizes "
           f"{(int(np.min(sizes)), int(np.median(sizes)), int(np.max(sizes))) if dC else '-'}; "
           f"unreachable city pairs {int((MATC == 255).sum())}, base pairs {int((MAT87B == 255).sum())}")
+    from collections import Counter
+    nt = Counter(tiers[c["id"]][0] for c in new)
+    print(f"footprints: {nt[1]} x 7 hexes, {nt[2] - len(no_triangle)} triangles (orientations k0..k5: "
+          f"{[sum(1 for c in new if shape[c['id']] == 1 + k) for k in range(6)]}), {nt[3] + len(no_triangle)} x 1 hex"
+          + (f"; no free triangle (1 hex instead): {', '.join(no_triangle)}" if no_triangle else ""))
+    flagged = [c for c in new if tiers[c["id"]][1]]
+    hw = Counter(port_how[c["id"]] for c in flagged)
+    other = Counter(port_how[c["id"]] for c in new if not tiers[c["id"]][1])
+    print(f"ports (city_tiers.json): {len(flagged)}: {hw['direct']} touch the water, {hw['land']} reach it over land, "
+          f"{hw['open']} through an opened bank/cliff/stream, {len(port_fail)} without navigable water within "
+          f"{PORT_REACH} hexes" + (f": {' '.join(port_fail)}" if port_fail else ""))
+    print(f"other cities at the water: {other['direct']} touch it, {other['land']} one hex away, {other['open']} behind "
+          f"a bank or cliff (opened); {len(port_open)} hexes opened; Koei's cities at the water: {sum(koei_port)}")
     print(f"facility plots: {plots_made} for {dC} new cities"
           + (f"; fewer than planned (little land in the territory) for {len(plots_short)}: {', '.join(plots_short)}" if plots_short else ""))
 

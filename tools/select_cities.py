@@ -9,6 +9,11 @@ including Koei's 42. Each site is snapped to nearby passable land whose 7-hex fo
 
 Usage: python select_cities.py [world_dir] [--spacing 14] [--max N]   (--max: at most N new cities)
 Writes <world_dir>/cities_world.json: [{id, name, full, region, lo, hi, rank}], ids from 42.
+
+       python select_cities.py [world_dir] --move NAME [NAME ...]
+Moves only the named cities of the existing cities_world.json to their (changed) coordinates in the candidate
+lists, keeping every id and every other city as it is (a full run would renumber the cities after a change).
+The site is snapped as above; instead of the spacing rule it keeps away from the other cities where it can.
 """
 import argparse
 import json
@@ -28,6 +33,7 @@ def main():
     ap.add_argument("world", nargs="?", default=str(DATA / "world"))
     ap.add_argument("--spacing", type=float, default=14.0)
     ap.add_argument("--max", type=int, default=0, help="at most this many new cities (0 = all that fit)")
+    ap.add_argument("--move", nargs="+", metavar="NAME", help="only move these cities of the existing cities_world.json")
     a = ap.parse_args()
     w = Path(a.world)
     info = json.loads((w / "world_info.json").read_text())
@@ -62,6 +68,8 @@ def main():
     land = ~np.isin(t, (6, 7, 8))                 # the city footprint is stamped over mountains too
     taken = np.zeros_like(passable)
     taken[spec.china_lo - 4:spec.china_lo + 204, spec.china_hi - 4:spec.china_hi + 204] = True
+    if a.move:
+        return move_cities(w, a.move, cands, lo, x, placed, passable, land, taken, a.spacing)
     out, skipped = [], []
     for c, l, h in zip(cands, lo, x):
         if a.max and len(out) >= a.max:
@@ -102,6 +110,49 @@ def main():
         by.setdefault(why.split(' ')[-1] if 'from' in why else why, []).append(n)
     for k, v in by.items():
         print(f"  skipped ({k}): {' '.join(v)}")
+
+
+def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing):
+    """re-snap the named cities of cities_world.json to their candidate coordinates (ids unchanged)"""
+    R, C = taken.shape
+    cur = json.loads((w / "cities_world.json").read_text(encoding="utf-8"))
+    where = {c["name"]: (l, h) for c, l, h in zip(cands, lo, x)}
+    for c in cur:
+        if c["name"] not in names:
+            placed.append((c["lo"], c["hi"] + 0.5 * (c["lo"] & 1)))
+            for p, q in [(c["lo"], c["hi"])] + hex_ring(c["lo"], c["hi"]):
+                taken[p, q] = True
+    for nm in names:
+        c = next((c for c in cur if c["name"] == nm), None)
+        if c is None or nm not in where:
+            raise SystemExit(f"{nm}: not in cities_world.json or in the candidate lists")
+        l, h = where[nm]
+        y0 = int(round(l)); x0 = int(round(h - 0.5 * (y0 & 1)))
+        best = None
+        for dy in range(-6, 7):
+            for dx in range(-6, 7):
+                y, xx = y0 + dy, x0 + dx
+                cells = [(y, xx)] + hex_ring(y, xx)
+                if any(not (0 <= p < R and 0 <= q < C) or taken[p, q] for p, q in cells):
+                    continue
+                nland = sum(land[p, q] for p, q in cells)
+                if nland < 5:
+                    continue
+                d = min(np.hypot(y - p, xx + 0.5 * (y & 1) - q) for p, q in placed)
+                score = (nland * 10 + sum(passable[p, q] for p, q in cells) * 4 - (dy * dy + dx * dx) ** 0.5
+                         + (20 if passable[y, xx] else 0) + 0.5 * min(d, spacing))
+                if best is None or score > best[0]:
+                    best = (score, y, xx, d)
+        if best is None:
+            raise SystemExit(f"{nm}: no free land site near its coordinates")
+        _, y, xx, d = best
+        print(f"{nm} (id {c['id']}): ({c['lo']}, {c['hi']}) -> ({y}, {xx}), {d:.1f} hexes from the nearest city"
+              + (f" (less than --spacing {spacing:g})" if d < spacing else ""))
+        c["lo"], c["hi"] = int(y), int(xx)
+        placed.append((y, xx + 0.5 * (y & 1)))
+        for p, q in [(y, xx)] + hex_ring(y, xx):
+            taken[p, q] = True
+    (w / "cities_world.json").write_text(json.dumps(cur, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":

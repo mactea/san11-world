@@ -10,6 +10,8 @@ terrain, preferring existing roads, and turns it into road: cliffs become plank 
 ferries, banks and other land main roads. Sea is crossed by sailing (left as it is) only when no land route
 exists nearby, and the bank where the route lands is opened. Roads go into China's block too (make_world.py
 keeps them and paints them on Koei's stage), but never over Koei's bases, facility plots or dikes.
+The city hexes are those gen_bases.py chose by tier ("cells" in bases_cities.json, 7 hexes without), and the
+ways from port cities to the water it opened ("port_open") are laid into the terrain first.
 Then it reports which cities are still unreachable on foot and by any route the game's A* accepts.
 
 Writes world_dir/world_types.npy (the previous one is kept once as world_types.before_roads.npy).
@@ -109,10 +111,11 @@ def main():
     name = {k["id"]: k["name"] for k in koei}
     for c in links["new"]:
         pos[c["id"]] = (c["lo"], c["hi"]); name[c["id"]] = c["name"]
-    footprint = np.zeros((R, C), bool)
+    footprint = np.zeros((R, C), bool)                     # the new cities' hexes (by tier: 7, 3 or 1, M11_MAP.md)
+    cells = {c["id"]: c.get("cells") for c in links["new"]}
     for cid, (y, x) in pos.items():
         if cid >= 42:
-            for p, q in [(y, x)] + hex_ring(y, x):
+            for p, q in cells.get(cid) or [(y, x)] + hex_ring(y, x):
                 footprint[p, q] = True
     # China's block: the patch (make_world.py china_patch()) is drawn like the world; on the rest of Koei's
     # block roads may be laid too (make_world.py paints them on his stage), except over his bases, facility
@@ -127,6 +130,15 @@ def main():
                         | (koei_shex[..., 3] != 0))
     border = dist_to_china(spec, R, C) <= 3
     border[s_lo, s_hi] = False
+
+    # the ways from port cities to the water gen_bases.py opened (banks, cliffs, streams -> road, plank road,
+    # ferry): laid into the terrain here, so that make_world.py --types-from keeps them
+    opened = 0
+    for y, x, k in links.get("port_open", []):
+        if not keep[y, x] and not footprint[y, x] and t[y, x] in (SHORE, MOUNTAIN, STREAM):
+            t[y, x] = k; opened += 1
+    if opened:
+        print(f"{opened} hexes opened between port cities and the water")
 
     def cost_fn(y0, y1, x0, x1, sea=True):
         tt = t[y0:y1, x0:x1]
