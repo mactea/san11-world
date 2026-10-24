@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <vector>
 #include "pathfind.h"
+#include "movement.h"
 
 static TraceLogFn g_log = nullptr;
 static PathfindConfig g_cfg = {};
@@ -85,13 +86,18 @@ static_assert(sizeof(Node) == 28, "HEX28 node");
 static inline Node* nodeAt(int lo, int hi) { return (Node*)(HEX28 + ((size_t)lo * W + hi) * 28); }
 static inline int manhattan(int lo, int hi, int glo, int ghi) { return abs(glo - lo) + abs(ghi - hi); }
 
-// Smallest passable step cost (0xff = impassable) of all 12 weapons x 22 terrains in the table 0x56dd00 reads.
-// Re-read on every call: the game refills the table on each map entry (0x57e910, movement.cpp may change it).
+// Smallest passable step cost (0xff = impassable) of all 12 weapons x 22 terrains in the tables 0x56dd00 reads
+// (0x9549830, and movement.cpp's 操舵 table). Re-read on every call: the game refills the table on each map entry
+// (0x57e910, movement.cpp may change it).
 static const uint8_t* COSTS = nullptr;     // 0x56dd4d mov al, [eax+esi+imm32]
 static int minStepCost() {
     int m = 0xff;
+    const uint8_t* steer = movementSteerCosts();
     for (int w = 0; w < 12; w++)
-        for (int t = 0; t < 22; t++) { int c = COSTS[w * 32 + t]; if (c < m) m = c; }
+        for (int t = 0; t < 22; t++) {
+            int c = COSTS[w * 32 + t]; if (c < m) m = c;
+            if (steer && steer[w * 32 + t] < m) m = steer[w * 32 + t];
+        }
     return m == 0xff ? 0 : m;
 }
 // heuristic h = (|d row| + |d column|) * hnum / 2: hnum 2 = Koei's h (modes 0/1), minStepCost() for modes 2/3
