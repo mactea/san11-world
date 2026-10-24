@@ -6,9 +6,11 @@ In Koei's map rivers (川 6), cliffs (崖 15) and banks (岸 14) stop land units
 main roads (主徑 10), plank roads (棧道 11) and ferries (渡所 12). The generated world has Koei's share of
 those obstacles, so a city link from gen_bases.py does not mean there is a way to walk. For each link with
 a new city (from city to city, Koei's cities included) this tool finds the cheapest route over the current
-terrain, preferring existing roads, and turns it into road: cliffs become plank roads, streams and rivers
-ferries, banks and other land main roads. Sea is crossed by sailing (left as it is) only when no land route
-exists nearby, and the bank where the route lands is opened. Roads go into China's block too (make_world.py
+terrain, preferring existing roads, and turns it into road: cliffs become plank roads, streams (川) ferries,
+banks and other land main roads. Big rivers (河 7) are crossed by boat and left as they are, like Koei's
+長江 and 黃河 (he never puts a ferry on 河), so they stay navigable from end to end: the road ends at both
+banks. Sea is crossed by sailing (left as it is) only when no land route exists nearby, and the bank where
+the route lands is opened. Roads go into China's block too (make_world.py
 keeps them and paints them on Koei's stage), but never over Koei's bases, facility plots or dikes.
 The city hexes are those gen_bases.py chose by tier ("cells" in bases_cities.json, 7 hexes without); the 河 channels
 of river ports (tools/navigable.py) and the ways from port cities to the water gen_bases.py opened ("port_open")
@@ -153,7 +155,7 @@ def main():
         tt = t[y0:y1, x0:x1]
         c = COST[tt].copy()
         if not sea:
-            c[tt == SEA] = np.inf                          # first try to walk
+            c[tt == SEA] = np.inf                          # first try to walk (河 crossed by boat)
         c[border[y0:y1, x0:x1]] *= 4                       # not along the outside of the block's edge
         kp = keep[y0:y1, x0:x1]
         c[kp] = np.where(FOOT[tt], c, np.inf)[kp]          # Koei's bases, plots, dikes: only as they are
@@ -167,8 +169,10 @@ def main():
             k = t[y, x]
             if k == MOUNTAIN:
                 t[y, x] = PLANK; made[PLANK] += 1
-            elif k in (STREAM, RIVER):
+            elif k == STREAM:
                 t[y, x] = BRIDGE; made[BRIDGE] += 1
+            elif k == RIVER:
+                made[RIVER] += 1                           # crossed by boat, left as it is
             elif k in COVER or k in (SHORE, FORD, PATH, 4):
                 t[y, x] = ROAD; made[ROAD] += 1
             # SEA: sailed across, left as it is
@@ -193,7 +197,7 @@ def main():
             via[(i, j)], via[(j, i)] = pts, pts[::-1]
     if not (w / "world_types.before_roads.npy").exists():
         shutil.copy2(w / "world_types.npy", w / "world_types.before_roads.npy")
-    made = {ROAD: 0, PLANK: 0, BRIDGE: 0}
+    made = {ROAD: 0, PLANK: 0, BRIDGE: 0, RIVER: 0}
     failed = []
     for e in order:
         pa, pb = pos[e[0]], pos[e[1]]
@@ -212,11 +216,12 @@ def main():
         if path is None:
             failed.append(e); continue
         lay(path)
-    # cities on the main landmass that are still cut off on foot (their links all cross water): one more
-    # land-only road to the nearest city that is reachable on foot. Islands keep their sea routes.
+    # cities on the main landmass that are still cut off over land (their links all cross the sea; crossing 河 by
+    # boat counts as land, as on Koei's 長江): one more road to the nearest city that is reachable that way.
+    # Islands keep their sea routes.
     def foot_labels():
         tt = t.copy(); tt[footprint] = CITY
-        return components(ASTAR[tt] & ~np.isin(tt, (RIVER, SEA)))
+        return components(ASTAR[tt] & (tt != SEA))
     land = components(t != SEA)                                    # landmasses (rivers, cliffs can be bridged)
     main_land = land[pos[1]]
     for _ in range(3):
@@ -238,19 +243,21 @@ def main():
                 break
     np.save(w / "world_types.npy", t)
     print(f"{len(edges)} links routed ({len(failed)} without any route); new road hexes: main road {made[ROAD]}, "
-          f"plank road {made[PLANK]}, ferry {made[BRIDGE]}")
+          f"plank road {made[PLANK]}, ferry {made[BRIDGE]}; 河 hexes crossed by boat {made[RIVER]}")
     for i, j in failed:
         print(f"  no route: {name[i]} - {name[j]}")
     for r in rivers:
         if r["hexes"] is None:
             print(f"  navigable river {r['city']} {r['river']}: NO COURSE TO THE SEA")
             continue
-        ferry = sum(1 for y, x, k in r["hexes"] if t[y, x] == BRIDGE)
+        broken = sum(1 for y, x in r["path"] if t[y, x] not in (RIVER, SEA))
         print(f"  navigable river {r['city']} {r['river']}: {len(r['hexes'])} hexes (川 {r['stream']}, land "
-              f"{r['land']}, road {r['road']}), path {r['length']} hexes; crossed by roads (ferries): {ferry}")
+              f"{r['land']}, road {r['road']}), path {r['length']} hexes; not 河/海 after the roads: {broken}")
     # reachability as the game sees it (footprints are city terrain in the game)
     tt = t.copy(); tt[footprint] = CITY
-    for label, mask in (("on foot", ASTAR[tt] & ~np.isin(tt, (RIVER, SEA))), ("by any route the game's A* accepts", ASTAR[tt])):
+    for label, mask in (("on foot", ASTAR[tt] & ~np.isin(tt, (RIVER, SEA))),
+                        ("over land, crossing 河 by boat", ASTAR[tt] & (tt != SEA)),
+                        ("by any route the game's A* accepts", ASTAR[tt])):
         lab = components(mask)
         main_c = lab[pos[1]]
         cut = [name[cid] for cid in sorted(pos) if cid < ncity and lab[pos[cid]] != main_c]

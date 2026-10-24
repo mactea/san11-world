@@ -227,15 +227,28 @@ def build_world(cfg, fresh=False, reselect=False, log=say):
         run("make_world.py", world, "--cache", cache, log=log)
         (world / "world_types.before_roads.npy").unlink(missing_ok=True)
         reselect = True
+    # data/terrain_patches.json (straits, valley floors): make_world.py applies it to a fresh terrain; a world made
+    # before a patch was added gets it here (applying it again changes nothing)
+    run("terrain_patches.py", world, "--cache", cache, log=log)
     if reselect or not (world / "cities_world.json").exists():
         run("select_cities.py", world, "--spacing", cfg["spacing"], "--max", C - 42, log=log)
     have = len(json.loads((world / "cities_world.json").read_text(encoding="utf-8")))
     if have < C - 42:
         raise StepError(f"城市表里只有 {have} 座新城，凑不够 {C} 座：减小 cities，或用 --reselect 重新选城（可以减小 spacing）")
     links = world / "_links"
+    # roads are always laid from the terrain without roads (Koei's block as make_world.py last patched it, where
+    # connect_cities.py starts too); the first gen_bases.py run sees it as well, so the ways to the water it opens
+    # for ports (port_open, laid by connect_cities.py) are not hidden by the last build's ones
+    if (world / "world_types.before_roads.npy").exists():
+        import numpy as np
+        t = np.load(world / "world_types.before_roads.npy")
+        if (world / "china_patch_types.npy").exists():
+            info = json.loads((world / "world_info.json").read_text())
+            blk = (slice(info["china_lo"], info["china_lo"] + 200), slice(info["china_hi"], info["china_hi"] + 200))
+            pt = np.load(world / "china_patch_types.npy")
+            t[blk] = np.where(pt != 255, pt, t[blk])
+        np.save(world / "world_types.npy", t)
     run("gen_bases.py", world, "--cities", C, "--out", links, "--game", g, log=log)
-    if (world / "world_types.before_roads.npy").exists():   # roads are always laid from the terrain without roads
-        shutil.copy2(world / "world_types.before_roads.npy", world / "world_types.npy")
     run("connect_cities.py", world, "--links", links / "bases_cities.json", log=log)
     run("make_world.py", world, "--types-from", world / "world_types.npy", "--cache", cache, log=log)
     dst.mkdir(parents=True, exist_ok=True)

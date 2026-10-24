@@ -50,6 +50,7 @@ from scipy import ndimage
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import dijkstra, minimum_spanning_tree
 
+import terrain_patches
 from worldgeo import WorldGeo, WorldSpec
 
 HERE = Path(__file__).resolve().parent
@@ -580,7 +581,8 @@ def china_gateways(t, spec, china_cities, reach=45):
 def build_roads(t, spec, nodes, footprint, n_gates, max_cost=900.0):
     """Koei-style road network: a spanning tree of cheapest land routes between the nodes plus each
     node's nearest neighbour, built one route at a time so later routes reuse earlier roads.
-    Mountains crossed become plank roads (11), rivers bridges (12). China itself is never modified.
+    Mountains crossed become plank roads (11), streams (川) ferries (12); 河 is crossed by boat and stays 河
+    (Koei never puts a ferry on 河). China itself is never modified.
     The last n_gates nodes are China gateways: already linked through China, so no roads between them."""
     R, C = t.shape
     s_lo, s_hi = china_box(spec)
@@ -625,7 +627,7 @@ def build_roads(t, spec, nodes, footprint, n_gates, max_cost=900.0):
                 k = t[y, x]
                 if k == MOUNTAIN:
                     t[y, x] = PLANK
-                elif k in (STREAM, RIVER):
+                elif k == STREAM:
                     t[y, x] = BRIDGE
                 elif k in COVER or k == SHORE:
                     t[y, x] = ROAD
@@ -894,6 +896,9 @@ def main():
         t[shore] = SHORE
         t[CL, CH] = china_t
         print(f"terrain classified ({time.time() - t0:.0f}s), {joined} China rivers joined")
+        # local corrections (data/terrain_patches.json): straits narrower than a hex, valley floors drawn as cliffs
+        for line in terrain_patches.apply(t, e0, geo, spec):
+            print("  " + line)
 
         # new cities: choose sites now; stamping them as city terrain needs the base-count expansion (M7)
         cities_json = DATA / "new_cities.json"

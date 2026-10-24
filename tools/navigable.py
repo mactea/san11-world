@@ -8,9 +8,10 @@ own neighbours for a 3- or 1-hex one, which then touches it whichever triangle g
 is connected to the ocean (a water body with at least OCEAN_SEA sea hexes, not a lake): 川 is cheap, existing 河
 cheaper, land expensive (gaps in the rasterized river are filled), and the path keeps off every other city's
 7 hexes, Koei's bases, facility plots and dikes. A channel found earlier in the list counts as open sea for the
-later ones (so a tributary may end in it). On it 川 and land become 河; roads (主徑 10) become ferries (12)
-so they stay walkable; ferries stay. In Koei's block only his patch (make_world.py china_patch) and his 川 are
-changed (his own 3D stage is drawn there otherwise).
+later ones (so a tributary may end in it). On it 川, land, roads and ferries (make_world.py's) all become 河, so the
+channel is continuous 河/海 from the city to the sea; roads that cross it end at its banks and units cross by boat,
+as on Koei's 長江 and 黃河 (connect_cities.py never turns 河 into a ferry). In Koei's block only his patch
+(make_world.py china_patch) and his 川 are changed (his own 3D stage is drawn there otherwise).
 
 The course is derived from the terrain without roads (base_terrain(): world_types.before_roads.npy with make_world's
 China patch), so gen_bases.py (both runs) and connect_cities.py get the same hexes; apply() writes them only where
@@ -73,7 +74,8 @@ def load():
 def courses(tb, new, tiers, spec, patch=None):
     """tb: terrain without roads; new: the new cities [{id, name, lo, hi}]; tiers: {id: tier}; spec: WorldSpec;
     patch: make_world's china_patch.npy (200x200, the patched part of Koei's block) or None.
-    Returns [{city, river, hexes: [[y, x, type], ...], stream, land, road, length}] (None hexes: no course found)."""
+    Returns [{city, river, hexes: [[y, x, type], ...] (the hexes made 河), path: [[y, x], ...] (the whole channel up to
+    the open sea), stream, land, road, length}] (None hexes: no course found)."""
     rows = load()
     if not rows:
         return []
@@ -136,14 +138,12 @@ def courses(tb, new, tiers, spec, patch=None):
                 if (y, x) in seen or ocean[y, x]:
                     continue
                 seen.add((y, x))
-                k = int(tb[y, x])
-                if k not in (RIVER, SEA, BRIDGE, ROAD, PLANK):
+                if int(tb[y, x]) not in (RIVER, SEA):
                     hexes.append([y, x, RIVER])
-                elif k in (ROAD, PLANK):
-                    hexes.append([y, x, BRIDGE])
             rec["hexes"] = hexes
+            rec["path"] = [list(h) for h in seen]
             rec["stream"] = sum(1 for y, x, k in hexes if tb[y, x] == STREAM)
-            rec["road"] = sum(1 for y, x, k in hexes if k == BRIDGE)
+            rec["road"] = sum(1 for y, x, k in hexes if tb[y, x] in (ROAD, PLANK, BRIDGE))
             rec["land"] = len(hexes) - rec["stream"] - rec["road"]
             rec["length"] = len(seen)
             for h in seen:                                # a later river may end in this channel (博羅 -> 番禺's)

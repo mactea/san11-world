@@ -15,7 +15,10 @@ Moves only the named cities of the existing cities_world.json to their (changed)
 lists, keeping every id and every other city as it is (a full run would renumber the cities after a change).
 The site is snapped as above; instead of the spacing rule it keeps away from the other cities where it can.
 --coast: only sites whose centre hex touches the sea (8), so the city is a seaport whatever its footprint
-(searched up to 12 hexes from the coordinates when there is none within 6).
+(searched up to 12 hexes from the coordinates when there is none within 6, distance weighted 6 times as much as
+without --coast, since the coordinates are the port itself; sites touching the sea within 2 hexes of the
+coordinates' hex win over all others); a big city (tier 1 in data/city_tiers.json, 7 hexes) instead needs all
+7 hexes on land and one of them touching the sea, so its footprint never covers sea (a strait, say).
 """
 import argparse
 import json
@@ -27,6 +30,7 @@ from make_world import COVER, ROAD, SHORE, hex_ring, lonlat_to_hex
 from worldgeo import WorldGeo, WorldSpec
 
 HERE = Path(__file__).resolve().parent
+SEA_NEAR = 2                    # --move --coast: the city touches the sea this close to its coordinates if it can
 DATA = HERE.parent / "data"
 
 
@@ -122,6 +126,8 @@ def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing, 
     R, C = taken.shape
     cur = json.loads((w / "cities_world.json").read_text(encoding="utf-8"))
     where = {c["name"]: (l, h) for c, l, h in zip(cands, lo, x)}
+    tf = DATA / "city_tiers.json"
+    tier = {r["id"]: r["tier"] for r in json.loads(tf.read_text(encoding="utf-8"))} if tf.exists() else {}
     for c in cur:
         if c["name"] not in names:
             placed.append((c["lo"], c["hi"] + 0.5 * (c["lo"] & 1)))
@@ -139,10 +145,11 @@ def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing, 
                 break
             for dy in range(-reach, reach + 1):
                 for dx in range(-reach, reach + 1):
-                    best = snap(y0 + dy, x0 + dx, dy, dx, best, R, C, taken, land, passable, placed, spacing, sea)
+                    best = snap(y0 + dy, x0 + dx, dy, dx, best, R, C, taken, land, passable, placed, spacing, sea,
+                                tier.get(c["id"], 1) <= 1, (y0, x0))
         if best is None:
             raise SystemExit(f"{nm}: no free land site near its coordinates" + (" at the sea" if sea is not None else ""))
-        _, y, xx, d = best
+        _, y, xx, d, _ = best
         print(f"{nm} (id {c['id']}): ({c['lo']}, {c['hi']}) -> ({y}, {xx}), {d:.1f} hexes from the nearest city"
               + (f" (less than --spacing {spacing:g})" if d < spacing else ""))
         c["lo"], c["hi"] = int(y), int(xx)
@@ -152,20 +159,40 @@ def move_cities(w, names, cands, lo, x, placed, passable, land, taken, spacing, 
     (w / "cities_world.json").write_text(json.dumps(cur, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
-def snap(y, xx, dy, dx, best, R, C, taken, land, passable, placed, spacing, sea):
-    """score the site (y, xx) for move_cities; returns the better of it and best"""
+def hex_dist(a, b):
+    (q0, r0), (q1, r1) = [(x - (y - (y & 1)) // 2, y) for y, x in (a, b)]
+    return max(abs(q0 - q1), abs(r0 - r1), abs(q0 + r0 - q1 - r1))
+
+
+def snap(y, xx, dy, dx, best, R, C, taken, land, passable, placed, spacing, sea, big=False, target=None):
+    """score the site (y, xx) for move_cities; returns the better of it and best (big: a 7-hex city; target: the
+    coordinates' hex, sea must be touched within SEA_NEAR hexes of it while one such site exists)"""
     cells = [(y, xx)] + hex_ring(y, xx)
     if any(not (0 <= p < R and 0 <= q < C) or taken[p, q] for p, q in cells):
         return best
-    if sea is not None and not any(sea[p, q] for p, q in cells[1:]):
-        return best
+    if sea is not None:
+        if big:
+            if not all(land[p, q] for p, q in cells):
+                return best
+            touch = {n for p, q in cells for n in hex_ring(p, q) if 0 <= n[0] < R and 0 <= n[1] < C and sea[n]}
+        else:
+            touch = {h for h in cells[1:] if sea[h]}
+        if not touch:
+            return best
+        near_port = min(hex_dist(h, target) for h in touch) <= SEA_NEAR
+        if best is not None and best[4] and not near_port:
+            return best
+        if best is not None and near_port and not best[4]:
+            best = None
     nland = sum(land[p, q] for p, q in cells)
     if nland < (4 if sea is not None else 5):
         return best
     d = min(np.hypot(y - p, xx + 0.5 * (y & 1) - q) for p, q in placed)
-    score = (nland * 10 + sum(passable[p, q] for p, q in cells) * 4 - (dy * dy + dx * dx) ** 0.5
+    # at the sea the coordinates are the port itself: staying close to them counts more than dry land around
+    near = 6.0 if sea is not None else 1.0
+    score = (nland * 10 + sum(passable[p, q] for p, q in cells) * 4 - near * (dy * dy + dx * dx) ** 0.5
              + (20 if passable[y, xx] else 0) + 0.5 * min(d, spacing))
-    return (score, y, xx, d) if best is None or score > best[0] else best
+    return (score, y, xx, d, sea is not None and near_port) if best is None or score > best[0] else best
 
 
 if __name__ == "__main__":
