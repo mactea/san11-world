@@ -21,6 +21,8 @@
 //   through 0x56dd00 too.
 // - A transport (unit +8 == 1) on water uses the 走舸 record; its base movement there is move_transport_water instead of
 //   走舸's (0x496a76), so 走舸's own movement can be large without pushing transports past the 52 buckets.
+// - Landing / boarding (move_shore_scale): a step onto land for a unit afloat, or onto water for a unit ashore, costs
+//   ceil(cost * its movement / the other weapon's movement) (0x56dd42; the other movement from 0x496dd0's entry hook).
 // - The range search 0x5a47e0 -> 0x5a4540 stops at depth 10; ships (current weapon unit +0xa8 >= 9) get
 //   move_cap_ship. Its node pool (obj +0xd0, 396 nodes) and visited list (obj +0x2720, 397 hexes) are sized for
 //   radius 10 / 11, so both move into DLL buffers (RANGE_CAP hexes).
@@ -194,37 +196,104 @@ static int __cdecl unitHasSteer(const uint8_t* unit) {
     return 0;
 }
 
-// 0x56dd42: mov ecx, [edi]; shl eax, 5 (5 bytes) -> steerThunk. Here ecx = the unit (0x495480 / 0x495490 keep it),
-// eax = weapon, esi = terrain, edi = the hex record. Water with 操舵: the rest of the function (test the fire bits,
-// load the cost) runs here on g_steer and goes on at 0x56dd54 (pop edi; pop esi; jbe: x4 when burning).
-static uint32_t g_costBack = 0x56dd47, g_costTail = 0x56dd54;
-__declspec(naked) static void steerThunk() {
+// ------------------------------------------------------------------ shore crossing: movement of the other weapon
+// A unit's movement (unit +0xcc, 0x56dce0) is the budget of its whole move this turn (nothing deducts from it; the
+// range search 0x5a47e0 and the AI get it as the start value), computed by 0x496dd0 for its current weapon
+// (unit +0xa8: the ship on water, else the land weapon). With move_shore_scale, a step onto the other kind of hex
+// (land for a unit afloat, water for a unit ashore) costs ceil(cost * movement / movement of the other weapon), so
+// the hexes left after landing / boarding are the matching fraction of what the other weapon gets in a whole turn.
+// The other weapon's movement (with every bonus) is computed by the game's own 0x496570 right after each 0x496dd0
+// (hook at its entry) and kept per unit with the kind (afloat or not) the unit's movement was computed for.
+typedef void (__cdecl* StatsFn)(uint8_t* stats, uint8_t** persons, int weapon, int a4, int transport, int a6, int water, int full);
+static const StatsFn unitStats = (StatsFn)0x496570;
+static int g_shoreScale = 1;
+static uint8_t* g_unit0 = nullptr;                 // unit 0 (0x490e70; M9 may relocate the array)
+static int g_units = 0;
+static uint8_t* g_alt = nullptr;                    // per unit: movement of the other weapon, 0 = unknown
+static uint8_t* g_afloat = nullptr;                 // per unit: 1 afloat, 0 ashore, 0xff unknown
+
+static inline int unitIndex(const uint8_t* unit) {
+    if (unit < g_unit0) return -1;
+    size_t d = (size_t)(unit - g_unit0);
+    if (d % 0xf4) return -1;
+    size_t i = d / 0xf4;
+    return i < (size_t)g_units ? (int)i : -1;
+}
+
+static void __cdecl afterRecalc(uint8_t* unit) {
+    int i = unitIndex(unit);
+    if (i < 0) return;
+    g_afloat[i] = 0xff; g_alt[i] = 0;
+    if (!unit[0xcc]) return;                        // not alive: 0x496dd0 left the stats zero
+    int w = *(const int*)(unit + 0xa8);
+    if (w < 0 || w > 11) return;
+    int afloat = w >= 9, transport = *(const int*)(unit + 8);
+    int alt = afloat ? (transport == 1 ? 0 : *(const int*)(unit + 0x48)) : (transport == 1 ? 9 : *(const int*)(unit + 0x50));
+    g_afloat[i] = (uint8_t)afloat;
+    if (alt < 0 || alt > 11) return;
+    // the members as 0x496dd0 collects them (0x490b00: 0 out of range)
+    static const int member[3] = { 0xc, 0x10, 0x14 };
+    uint8_t* ps[3];
+    for (int k = 0; k < 3; k++) {
+        int id = *(const int*)(unit + member[k]);
+        ps[k] = id < 0 ? nullptr : personRec(g_world, id);
+    }
+    uint8_t stats[0x24];
+    __try {
+        unitStats(stats, ps, alt, *(const uint16_t*)(unit + 0x18), transport, *(const int*)(unit + 0x24), !afloat, 1);
+        g_alt[i] = stats[0x20];
+    } __except (EXCEPTION_EXECUTE_HANDLER) {}
+}
+
+// 0x496dd0 entry: sub esp, 0x14; push esi; mov esi, ecx (6 bytes) -> recalcThunk: the original (copied prologue in
+// g_recalcTramp), then afterRecalc. 0x496dd0 takes no stack arguments (plain ret); 0x496f6b / 0x496f7d jump to it.
+static uint8_t* g_recalcTramp = nullptr;
+__declspec(naked) static void recalcThunk() {
     __asm {
-        cmp esi, 7
-        je water
-        cmp esi, 8
-        jne normal
-    water:
+        push ecx
+        call g_recalcTramp
+        pop ecx
+        push ecx
+        call afterRecalc
+        add esp, 4
+        ret
+    }
+}
+
+// ------------------------------------------------------------------ step cost (0x56dd00)
+// The table 0x9549830, or g_steer on 河 / 海 for a unit with 操舵; x4 when the hex burns (as Koei: a byte shift);
+// then the shore scaling above. Impassable (255) stays 255. The callers (0x5a4598, 0x567731, 0x5a5ed8, pathfind.cpp)
+// use only al.
+static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags) {
+    bool water = terr == 7 || terr == 8;
+    const uint8_t* tab = water && g_steerReady && unitHasSteer(unit) ? g_steer : (const uint8_t*)(uintptr_t)g_table;
+    uint8_t c = tab[weapon * 32 + terr];
+    int cost = hexFlags & 0x3800000 ? (uint8_t)(c << 2) : c;
+    if (g_shoreScale && c != 0xff) {
+        int i = unitIndex(unit);
+        if (i >= 0 && g_afloat[i] != 0xff && (g_afloat[i] != 0) != water) {
+            int cur = unit[0xcc], alt = g_alt[i];
+            if (cur && alt) { cost = (cost * cur + alt - 1) / alt; if (cost > 255) cost = 255; }
+        }
+    }
+    return cost;
+}
+
+// 0x56dd42: mov ecx, [edi]; shl eax, 5 (5 bytes) -> costThunk, which finishes the function (pop edi; pop esi;
+// ret 4). Here ecx = the unit (0x495480 / 0x495490 keep it), eax = weapon, esi = terrain, edi = the hex record.
+__declspec(naked) static void costThunk() {
+    __asm {
+        push edx
+        push dword ptr [edi]
+        push esi
         push eax
         push ecx
-        push edx
-        push ecx
-        call unitHasSteer
-        add esp, 4
-        test eax, eax
+        call stepCost
+        add esp, 16
         pop edx
-        pop ecx
-        pop eax
-        jz normal
-        mov ecx, [edi]
-        shl eax, 5
-        test ecx, 0x3800000
-        mov al, byte ptr g_steer[eax + esi]
-        jmp g_costTail
-    normal:
-        mov ecx, [edi]
-        shl eax, 5
-        jmp g_costBack
+        pop edi
+        pop esi
+        ret 4
     }
 }
 
@@ -287,7 +356,7 @@ __declspec(naked) static void depthThunk() {
 }
 
 // ------------------------------------------------------------------ install
-struct Site { uint32_t at; uint8_t len; uint8_t old[10]; };
+struct Site { uint32_t at; uint8_t len; uint8_t old[25]; };
 
 static bool same(const Site& s) { return !memcmp((void*)(uintptr_t)s.at, s.old, s.len); }
 
@@ -328,6 +397,9 @@ static const Site SITES[] = {
     { 0x56dd42,  5, { 0x8B, 0x0F, 0xC1, 0xE0, 0x05 } },                                          // step cost
     { 0x56dd47,  9, { 0xF7, 0xC1, 0x00, 0x00, 0x80, 0x03, 0x8A, 0x84, 0x30 } },                  // (table at 0x56dd50)
     { 0x56dd54,  4, { 0x5F, 0x5E, 0x76, 0x03 } },
+    { 0x496ee2, 25, { 0x6A, 0x01, 0x57, 0x50, 0x51, 0x8B, 0xCE, 0xFF, 0x52, 0x50, 0x50, 0x53, 0x8D, 0x44, 0x24, 0x2C,
+                      0x50, 0x8D, 0x86, 0xAC, 0x00, 0x00, 0x00, 0x50, 0xE8 } },                // 0x496dd0's call of 0x496570
+    { 0x496010,  5, { 0x0F, 0xB7, 0x41, 0x18, 0xC3 } },                                          // unit vfunc +0x50: word +0x18
     { 0x496a76,  7, { 0x8A, 0x4E, 0x57, 0x8B, 0x44, 0x24, 0x64 } },                              // transport base
     { 0x496b6f,  9, { 0x8B, 0x5C, 0x24, 0x54, 0x6A, 0x05, 0xE8, 0x56, 0xF0 } },                  // 操舵 check
     { 0x496b81,  4, { 0x80, 0x45, 0x20, 0x04 } },                                                // 操舵 +4
@@ -383,6 +455,7 @@ bool movementInstall(const wchar_t* dir, const wchar_t* section, bool write, Tra
     if (g_transportWater < 1 || g_transportWater > TRANSPORT_MAX) {
         log("movement: ERROR: move_transport_water=%d is not 1..%d", g_transportWater, TRANSPORT_MAX); bad++;
     }
+    g_shoreScale = GetPrivateProfileIntW(section, L"move_shore_scale", 1, ini) != 0;
     g_capShip = GetPrivateProfileIntW(section, L"move_cap_ship", 16, ini);
     if (g_capShip < LAND_CAP || g_capShip > CAP_MAX) {
         log("movement: ERROR: move_cap_ship=%d is not %d..%d", g_capShip, LAND_CAP, CAP_MAX); bad++;
@@ -398,10 +471,20 @@ bool movementInstall(const wchar_t* dir, const wchar_t* section, bool write, Tra
     g_world = *(uint32_t*)(uintptr_t)0x57ecc2;        // mov ecx, world (0x7201958)
     g_rec9 = weaponRec(g_world, 9);
     int U = *(const int*)(uintptr_t)0x490e79 + 1;
+    g_unit0 = unitRec(g_world, 0);
+    g_units = U;
     if (!write) { log("movement: verify_only: code checked (world %08x, table %08x, %d units), nothing written", g_world, g_table, U); return false; }
 
+    g_alt = (uint8_t*)VirtualAlloc(nullptr, 2 * (size_t)U, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    g_afloat = g_alt + U;
+    memset(g_afloat, 0xff, U);
     writeJmp(0x57ecb7, 5, entryThunk);
-    writeJmp(0x56dd42, 5, steerThunk);
+    writeJmp(0x56dd42, 5, costThunk);
+    // 0x496dd0: original prologue + jmp back, then the hook
+    g_recalcTramp = (uint8_t*)VirtualAlloc(nullptr, 16, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    memcpy(g_recalcTramp, (void*)(uintptr_t)0x496dd0, 6);
+    g_recalcTramp[6] = 0xE9; *(int32_t*)(g_recalcTramp + 7) = (int32_t)(0x496dd6 - (uintptr_t)(g_recalcTramp + 11));
+    writeJmp(0x496dd0, 6, recalcThunk);
     writeJmp(0x496a76, 7, transportThunk);
     static const uint8_t add0 = 0x00;                 // 操舵 on water: add byte ptr [ebp+0x20], 0
     writeCode(0x496b84, &add0, 1);
@@ -428,8 +511,9 @@ bool movementInstall(const wchar_t* dir, const wchar_t* section, bool write, Tra
     for (int w = 0; w < 12; w++) k += sprintf_s(list + k, sizeof list - k, " %d", g_move[w]);
     log("movement: map entry hook at 0x57ecb7 installed (world %08x, table %08x, %d units); movement%s", g_world, g_table, U, list);
     log("movement: ships: 操舵 costs at 0x56dd42 (w9..w11 河/海 %d/%d %d/%d %d/%d), no +4 at 0x496b81; transport on water %d (0x496a76); "
+        "shore scaling %d (0x496dd0); "
         "range search depth ships %d / land %d, pool and visited list %d hexes (pool %p, visited %p)",
         g_steerCost[9][7], g_steerCost[9][8], g_steerCost[10][7], g_steerCost[10][8], g_steerCost[11][7], g_steerCost[11][8],
-        g_transportWater, g_capShip, LAND_CAP, RANGE_CAP, g_pool, g_visited);
+        g_transportWater, g_shoreScale, g_capShip, LAND_CAP, RANGE_CAP, g_pool, g_visited);
     return true;
 }

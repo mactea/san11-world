@@ -70,6 +70,9 @@ move=1
 ; move_cap_ship: with move=1, the most hexes the movement range of a ship reaches in one turn (Koei: 10 for every
 ; unit; land units stay at 10), 10..25
 ; move_cap_ship=16
+; move_shore_scale: with move=1, a step from a ship onto land (or from land onto water) costs the cost times this
+; turn's movement / the other weapon's movement (rounded up), so landing / boarding keep the fraction of the turn; 0 = Koei's
+; move_shore_scale=1
 
 ; ---- debugging
 ; trace: which game code creates/draws Direct3D resources (worldmod_trace_<section>.log)
