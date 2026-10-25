@@ -4,18 +4,17 @@ from common import *
 
 F = []
 F.append({"name": "羅馬", "ruler": "Septimius Severus", "strategist": "Gaius Fulvius Plautianus", "stars": 1,
-  "intro": "塞普提米烏斯·塞維魯平定內戰後東征帕提亞，197年末攻陷泰西封，198年立長子卡拉卡拉為奧古斯都、次子蓋塔為凱撒，正圍攻哈特拉。帝國疆域西起不列顛、西班牙，東至美索不達米亞。",
-  "cities": [c if c not in ("尼西", "羅馬", "安都") else {"尼西": {"city": "尼西", "troops": 40000, "gold": 6000, "food": 60000},
-                                                       "羅馬": {"city": "羅馬", "troops": 30000, "gold": 10000, "food": 80000},
-                                                       "安都": {"city": "安都", "troops": 30000}}[c] for c in ROME_PROV],
-  "officers": [O("Septimius Severus", "尼西"), O("Caracalla", "尼西"), O("Geta (emperor)", "尼西"), O("Julia Domna", "尼西"),
-               O("Gaius Fulvius Plautianus", "尼西"), O("Probus (general of Severus)", "尼西"),
-               O("Valerianus (general of Severus)", "尼西"), O("Subatianus Aquila", "尼西"),
-               O("Castor (freedman of Severus)", "尼西", birth=160), O("Lucius Alfenus Senecio", "安都"),
+  "intro": "塞普提米烏斯·塞維魯平定內戰後東征帕提亞，197年末攻陷泰西封，198年立長子卡拉卡拉為奧古斯都、次子蓋塔為凱撒。本劇本中羅馬只保有意大利、西西里、撒丁、科西嘉、達爾馬提亞、諾里庫姆、納博高盧與阿非利加等核心之地，其餘行省無主。",
+  "cities": ROME_CITIES,
+  "officers": [O("Septimius Severus", "羅馬"), O("Caracalla", "羅馬"), O("Geta (emperor)", "羅馬"), O("Julia Domna", "羅馬"),
+               O("Gaius Fulvius Plautianus", "羅馬"), O("Castor (freedman of Severus)", "羅馬", birth=160),
+               # generals and governors: the core city nearest to where they were in 198
+               O("Probus (general of Severus)", near="尼西"), O("Valerianus (general of Severus)", near="尼西"),
+               O("Subatianus Aquila", near="尼西"), O("Lucius Alfenus Senecio", near="安都"),
                O("Cassius Dio", "羅馬"), O("Aemilius Papinianus", "羅馬"), O("Julia Maesa", "羅馬"), O("Julius Avitus", "羅馬"),
-               O("Publius Cornelius Anullinus", "羅馬"), O("Lucius Fabius Cilo", "卡農"), O("Tiberius Claudius Candidus", "塔拉"),
-               O("Quintus Caecilius Pudens", "奧格"), O("Quintus Aemilius Saturninus", "黎軒"), O("Macrinus", "約爾")],
-  "auto": ROME_AUTO,
+               O("Publius Cornelius Anullinus", "羅馬"), O("Lucius Fabius Cilo", near="卡農"), O("Tiberius Claudius Candidus", near="塔拉"),
+               O("Quintus Caecilius Pudens", near="奧格"), O("Quintus Aemilius Saturninus", near="黎軒"), O("Macrinus", near="約爾")],
+  "auto": dict(ROME_AUTO, from_cities=ROME_PROV),
   "relations": {"安息": 10, "哈特拉": 5, "奧斯若恩": 85, "博斯普魯斯": 85, "亞美尼亞": 65, "伊比利亞": 60, "喀里多尼亞": 20,
                 "夸迪": 55, "波斯": 40, "查拉塞涅": 40, "阿克蘇姆": 60, "庫施": 50, "貴霜": 60}})
 F.append({"name": "安息", "ruler": "Vologases V", "stars": 3,

@@ -122,7 +122,7 @@ def build(spec, scn, roster, data_dir):
     names, cinfo, cpos = city_table(data_dir)
     people = People(roster)
     tiers = {**DEFAULT_TIERS, **spec.get('tiers', {})}
-    rep = {'year': year, 'forces': [], 'fixes': [], 'auto': [], 'warnings': []}
+    rep = {'year': year, 'forces': [], 'fixes': [], 'auto': [], 'relocated': [], 'warnings': []}
     tc = bytes(D[at('city', TEMPLATE_CITY):at('city', TEMPLATE_CITY) + 81])
     live = scn.forces()
     used_kok = {D[at('force', f) + 4 + F + 1] for f in live}
@@ -239,9 +239,22 @@ def build(spec, scn, roster, data_dir):
             D[po + 104] = o.get('loyalty', fs.get('loyalty', 95))
             struct.pack_into('<H', D, po + 105, o.get('merit', 3000))
 
+        def nearest(c):
+            """the force's own city nearest to city c (by map position)"""
+            if c in own:
+                return c
+            p = cpos[c]
+            return min(own, key=lambda k: ((cpos[k][0] - p[0]) ** 2 + (cpos[k][1] - p[1]) ** 2, k))
+
         for o in fs.get('officers', []):
             pid, r = person(o, fname)
-            c = cid(o['city'], f'势力「{fname}」') if 'city' in o else cities[0][0]
+            if 'near' in o:                              # the nearest own city to a place (where the person really was)
+                c = nearest(cid(o['near'], f'势力「{fname}」'))
+                if c != cid(o['near'], fname):
+                    rep['relocated'].append({'force': fname, 'id': pid, 'name': scn.pname(pid), 'from': o['near'],
+                                             'to': cinfo[c][0], 'how': 'spec'})
+            else:
+                c = cid(o['city'], f'势力「{fname}」') if 'city' in o else cities[0][0]
             if c not in own:
                 raise BuildError(f'势力「{fname}」：「{o.get("p", o.get("koei"))}」所在的「{o.get("city")}」不是这个势力的城')
             place(pid, r, o, c, 'spec')
@@ -251,11 +264,13 @@ def build(spec, scn, roster, data_dir):
             pols, roles = set(au.get('polity', [])), set(au.get('roles', []))
             minc = CONF[au.get('min_conf', 'B')]
             exclude = set(au.get('exclude', []))
+            # people of these cities join too (the force's former lands), in the nearest own city
+            src = own | {cid(x, f'势力「{fname}」 auto.from_cities') for x in au.get('from_cities', [])}
             n = 0
             for r in roster:
                 if r['polity'] not in pols or (roles and r['role'] not in roles) or CONF.get(r['conf'], 0) < minc:
                     continue
-                if r['city_id'] not in own or r['id'] in taken or (r.get('name_orig') or r['name_full']) in exclude:
+                if r['city_id'] not in src or r['id'] in taken or (r.get('name_orig') or r['name_full']) in exclude:
                     continue
                 if not (r['appear'] <= year <= r['death'] and r['birth'] <= year - au.get('min_age', 16)):
                     continue
@@ -264,9 +279,13 @@ def build(spec, scn, roster, data_dir):
                 po = at('person', r['id'])
                 if D[po + 100] not in (ST_UNAPPEARED, ST_UNFOUND, ST_FREE):
                     continue
-                place(r['id'], r, {}, r['city_id'], 'auto')
+                c = nearest(r['city_id'])
+                place(r['id'], r, {}, c, 'auto')
                 rep['auto'].append({'force': fname, 'id': r['id'], 'name': scn.pname(r['id']),
-                                    'orig': r.get('name_orig', ''), 'city': cinfo[r['city_id']][0], 'conf': r['conf']})
+                                    'orig': r.get('name_orig', ''), 'city': cinfo[c][0], 'conf': r['conf']})
+                if c != r['city_id']:
+                    rep['relocated'].append({'force': fname, 'id': r['id'], 'name': scn.pname(r['id']),
+                                             'from': cinfo[r['city_id']][0], 'to': cinfo[c][0], 'how': 'auto'})
                 n += 1
         # ---- ruler
         rk = fs['ruler']
@@ -433,7 +452,7 @@ def main():
             Path(a.report).write_text(json.dumps(rep, ensure_ascii=False, indent=1), encoding='utf-8')
         n = sum(x['officers'] for x in rep['forces'])
         print(f'{Path(a.out).name}: {len(rep["forces"])} 个势力，{n} 名武将（自动 {len(rep["auto"])}），'
-              f'改了 {len(rep["fixes"])} 人的登场/生年，提示 {len(rep["warnings"])} 条')
+              f'挪到最近的本势力城 {len(rep["relocated"])} 人，改了 {len(rep["fixes"])} 人的登场/生年，提示 {len(rep["warnings"])} 条')
         for w in rep['warnings']:
             print('  提示：', w)
         return 0

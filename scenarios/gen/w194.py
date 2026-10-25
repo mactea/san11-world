@@ -9,19 +9,18 @@ NIGER = ["安都", "塔爾", "拜占", "黎軒", "大馬"]
 EAST_UNOWNED = ["帕爾", "埃米", "杜拉", "耶城", "孟菲", "底比", "佩魯", "賽伊", "安提", "托勒", "貝列", "錫瓦", "佩特", "赫格", "塞浦", "尼西"]
 ALBINUS = ["倫丁", "約克", "切斯", "卡萊", "溫徹"]
 BRIT_UNOWNED = ["卡迪"]
-sev = [c for c in ROME_PROV if c not in NIGER + EAST_UNOWNED + ALBINUS + BRIT_UNOWNED]
-sev = [{"city": "羅馬", "troops": 30000, "gold": 10000, "food": 80000} if c == "羅馬" else
-       {"city": "佩林", "troops": 40000, "gold": 6000, "food": 60000} if c == "佩林" else
-       {"city": "科尼", "troops": 30000} if c == "科尼" else c for c in sev]
+# Severus's realm in 194 (whose people serve him); the force itself holds only ROME_CORE
+SEV_REALM = [c for c in ROME_PROV if c not in NIGER + EAST_UNOWNED + ALBINUS + BRIT_UNOWNED]
 F = []
 F.append({"name": "羅馬", "ruler": "Septimius Severus", "stars": 1,
-  "intro": "193年佩蒂納克斯遇弒後，潘諾尼亞總督塞普提米烏斯·塞維魯稱帝入羅馬，以不列顛的阿爾比努斯為凱撒，率軍東討敘利亞的尼格爾。194年初其將坎迪杜斯已在基齊庫斯、尼西亞兩敗尼格爾，阿努利努斯正向奇里乞亞進軍。",
-  "cities": sev,
-  "officers": [O("Septimius Severus", "佩林"), O("Julia Domna", "佩林"), O("Gaius Fulvius Plautianus", "佩林"),
-               O("Publius Cornelius Anullinus", "科尼"), O("Valerianus (general of Severus)", "科尼"),
-               O("Tiberius Claudius Candidus", "科尼"), O("Lucius Fabius Cilo", "安卡"),
+  "intro": "193年佩蒂納克斯遇弒後，潘諾尼亞總督塞普提米烏斯·塞維魯稱帝入羅馬，以不列顛的阿爾比努斯為凱撒，率軍東討敘利亞的尼格爾，其將坎迪杜斯已在基齊庫斯、尼西亞兩敗尼格爾。本劇本中羅馬只保有意大利、西西里、撒丁、科西嘉、達爾馬提亞、諾里庫姆、納博高盧與阿非利加等核心之地。",
+  "cities": ROME_CITIES,
+  "officers": [O("Septimius Severus", "羅馬"), O("Julia Domna", "羅馬"), O("Gaius Fulvius Plautianus", "羅馬"),
+               # the generals of the eastern campaign: the core city nearest to the front (Cilician gates, Galatia)
+               O("Publius Cornelius Anullinus", near="科尼"), O("Valerianus (general of Severus)", near="科尼"),
+               O("Tiberius Claudius Candidus", near="科尼"), O("Lucius Fabius Cilo", near="安卡"),
                O("Cassius Dio", "羅馬"), O("Aemilius Papinianus", "羅馬"), O("Julia Maesa", "羅馬"), O("Julius Avitus", "羅馬")],
-  "auto": ROME_AUTO,
+  "auto": dict(ROME_AUTO, from_cities=SEV_REALM),
   "relations": {"尼格爾": 0, "阿爾比努斯": 80, "安息": 25, "哈特拉": 25, "奧斯若恩": 20, "博斯普魯斯": 85, "亞美尼亞": 50,
                 "伊比利亞": 55, "喀里多尼亞": 25, "夸迪": 55, "阿克蘇姆": 60, "庫施": 50, "貴霜": 60}})
 F.append({"name": "尼格爾", "kokugo": False, "ruler": "Pescennius Niger", "max_cities": 5, "stars": 3,
