@@ -66,6 +66,38 @@ static const UnitPairFn unitPair = (UnitPairFn)0x5673e0;
 static const BuildingFn building = (BuildingFn)0x490e70;
 static const int32_t* PASSABLE = (const int32_t*)0x8a5df8;      // per terrain type
 
+// A hex marked as holding a unit (flags & 3 == 2) whose object (+8) has no unit (objects[id] +0x64 == 0):
+// recUnit returns 0 and 0x487af0 (called right after, here and at 0x5677db, 0x5a4623, 0x5a64b2, 0x5a6a94,
+// 0x4bd78b) reads [0 + 8]. Seen in an AI turn on the world map; where the stale mark comes from is not known
+// yet, so both are logged: the hex here, the caller at the 0x487af0 guard (which returns 0 for no unit).
+static volatile LONG g_staleHexes = 0, g_nullUnitTests = 0;
+static void noteStaleUnitHex(int lo, int hi, const uint8_t* rec) {
+    LONG n = InterlockedIncrement(&g_staleHexes);
+    if (n <= 20 || (n & (n - 1)) == 0)
+        g_log("A*: hex (%d,%d) is marked as a unit but object %u has no unit (hex dword %08x), treated as empty, #%ld",
+              lo, hi, *(const uint16_t*)(rec + 8), *(const uint32_t*)rec, n);
+}
+extern "C" static void __cdecl noteNullUnitTest(uint32_t caller) {
+    LONG n = InterlockedIncrement(&g_nullUnitTests);
+    if (n <= 20 || (n & (n - 1)) == 0) g_log("0x487af0 called for no unit from %08x: returns 0, #%ld", caller, n);
+}
+__declspec(naked) static void unitTestGuard() {          // thiscall, no arguments
+    __asm {
+        test ecx, ecx
+        jz none
+        mov eax, [ecx + 8]                // the two instructions the jmp replaced
+        test eax, eax
+        push 0x487af5
+        ret
+    none:
+        push dword ptr [esp]
+        call noteNullUnitTest
+        add esp, 4
+        xor eax, eax
+        ret
+    }
+}
+
 // addresses and sizes as the patch tables left them in the original function
 static uint8_t* HEX20 = nullptr;   // 0x5676c3 mov ecx, imm32
 static uint8_t* HEX28 = nullptr;   // 0x567591 add eax, imm32
@@ -198,6 +230,7 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
             }
             case 2: {                                   // unit
                 void* u = recUnit(rec);
+                if (!u) { noteStaleUnitHex(lo, hi, rec); cost += 0x10; break; }   // marked, but its object has no unit
                 if (related(t, u)) cost += unitTestA(u) ? 0x100 : 0x80;
                 else if (unitTestB(u)) cost += unitPair(t, u) ? 0x100 : 0x40;
                 else cost += 0x10;
@@ -386,8 +419,19 @@ void pathfindBench(int lo, int hi) {
     InterlockedExchange(&g_benchPending, 1);
 }
 
+static void installUnitTestGuard(TraceLogFn log) {
+    static const uint8_t head[5] = { 0x8b, 0x41, 0x08, 0x85, 0xc0 };   // 0x487af0 mov eax,[ecx+8]; test eax,eax
+    uint8_t* site = (uint8_t*)0x487af0;
+    if (memcmp(site, head, 5)) { log("unexpected code at 0x487af0, no-unit guard not installed"); return; }
+    DWORD old; VirtualProtect(site, 5, PAGE_EXECUTE_READWRITE, &old);
+    site[0] = 0xE9; *(int32_t*)(site + 1) = (int32_t)((uintptr_t)unitTestGuard - (uintptr_t)(site + 5));
+    VirtualProtect(site, 5, old, &old);
+    FlushInstructionCache(GetCurrentProcess(), site, 5);
+}
+
 bool pathfindInstall(const PathfindConfig& cfg, TraceLogFn log) {
     g_cfg = cfg; g_log = log;
+    installUnitTestGuard(log);
     if (!cfg.mode && !cfg.stats && !cfg.enterLog && !cfg.verify && !cfg.benchable) return false;
     uint8_t* site = (uint8_t*)0x567520;
     static const uint8_t expect[7] = { 0x83, 0xec, 0x24, 0x8b, 0x4c, 0x24, 0x28 };   // sub esp,24h; mov ecx,[esp+28h]
