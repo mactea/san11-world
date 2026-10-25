@@ -30,7 +30,7 @@ china_y=1234
 bases=1
 ; cities: city count C, 42..210; the data directory must be built for the same C
 cities=210
-; move: per-weapon movement and terrain costs (M12_MOVE.md): roads / bridges and ships faster, every other terrain
+; move: per-weapon movement and terrain costs (M12_MOVE.md): roads / bridges and ships faster, fords (浅瀬) as slow as marsh, every other terrain
 ; keeps its hexes per turn. 0 (or no key) = Koei's values
 move=1
 
@@ -55,10 +55,10 @@ move=1
 ; 7 投石 8 木獣 9 走舸 10 楼船 11 闘艦): "<movement or - to keep>;<terrain>:<cost>,..." (movement 1..34, ships 1..51;
 ; terrain 0..21, cost 1..255, 255 = impassable). Terrains and costs not listed keep Koei's value. Built-in values
 ; (M12_MOVE.md):
-; move_w0=20;10:3,12:3
-; move_w1=20;10:3,12:3      (move_w2, move_w3 the same)
-; move_w4=30;0:6,2:6,5:11,10:3,12:3,13:6,19:11
-; move_w5=20;1:6,13:6,16:5,17:5,18:5,19:11      (move_w6..move_w8 the same)
+; move_w0=20;10:3,12:3,13:8
+; move_w1=20;10:3,12:3,13:8      (move_w2, move_w3 the same)
+; move_w4=30;0:6,2:6,5:11,10:3,12:3,13:8,19:11
+; move_w5=20;1:6,13:8,16:5,17:5,18:5,19:11      (move_w6..move_w8 the same)
 ; move_w9=42;7:6,8:5
 ; move_w10=50;7:8,8:4      (move_w11 the same)
 ; move_steer_w9..move_steer_w11: with move=1, the costs of a ship whose unit has 操舵 (instead of +4 movement):

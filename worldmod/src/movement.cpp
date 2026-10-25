@@ -55,14 +55,14 @@ static const ValidFn objValid = (ValidFn)0x47a630;
 static const RecalcFn unitRecalc = (RecalcFn)0x496dd0;
 static const UnitOfFn unitOf = (UnitOfFn)0x56dba0;
 
-// Defaults (M12_MOVE.md): roads (10) and bridges (12) faster, ships faster; every other terrain keeps its number
-// of hexes per turn at base movement (floor(movement / cost)).
+// Defaults (M12_MOVE.md): roads (10) and bridges (12) faster, ships faster, fords (浅瀬 13) cost what marsh (湿 3)
+// costs; every other terrain keeps its number of hexes per turn at base movement (floor(movement / cost)).
 static const char* const DEFAULTS[12] = {
-    "20;10:3,12:3",                                     // 剣
-    "20;10:3,12:3", "20;10:3,12:3", "20;10:3,12:3",     // 槍 戟 弩: 22 -> 20
-    "30;0:6,2:6,5:11,10:3,12:3,13:6,19:11",             // 軍馬: 28 -> 30
-    "20;1:6,13:6,16:5,17:5,18:5,19:11",                 // 衝車 井闌 投石 木獣: 18 -> 20 (大道 / 橋 stay 4)
-    "20;1:6,13:6,16:5,17:5,18:5,19:11", "20;1:6,13:6,16:5,17:5,18:5,19:11", "20;1:6,13:6,16:5,17:5,18:5,19:11",
+    "20;10:3,12:3,13:8",                                // 剣
+    "20;10:3,12:3,13:8", "20;10:3,12:3,13:8", "20;10:3,12:3,13:8",  // 槍 戟 弩: 22 -> 20
+    "30;0:6,2:6,5:11,10:3,12:3,13:8,19:11",             // 軍馬: 28 -> 30
+    "20;1:6,13:8,16:5,17:5,18:5,19:11",                 // 衝車 井闌 投石 木獣: 18 -> 20 (大道 / 橋 stay 4)
+    "20;1:6,13:8,16:5,17:5,18:5,19:11", "20;1:6,13:8,16:5,17:5,18:5,19:11", "20;1:6,13:8,16:5,17:5,18:5,19:11",
     "42;7:6,8:5",                                       // 走舸: 16 -> 42, 河 7 海 8 hexes
     "50;7:8,8:4", "50;7:8,8:4",                         // 楼船 闘艦: 20 -> 50, 河 6 海 12 hexes
 };
