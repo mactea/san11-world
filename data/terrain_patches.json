@@ -11,6 +11,12 @@
   {"name": "迦畢試—喀布爾河谷平原 Kapisa / Koh-i-Daman", "center": [35.0, 69.27], "radius": 13, "max_elev": 2300,
    "cover": {"0": 0.30, "1": 0.40, "9": 0.20, "5": 0.10}}
  ],
+ "passes": [
+  {"name": "居庸關 Juyong (steppe -> 薊)", "line": [[41.72, 116.76], [40.80, 116.53]]},
+  {"name": "雁門 Yanmen (steppe/平城 side -> 晉陽)", "line": [[41.95, 112.70], [39.59, 112.46]]},
+  {"name": "雲中—朔方 Yellow River gap (Hetao -> 晉陽's north)", "line": [[41.887, 111.704], [40.599, 111.603],
+   [40.484, 111.867], [40.378, 111.996], [39.923, 111.959], [39.888, 111.827]]}
+ ],
  "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4, "navigable_core_hexes": 1.5,
              "join_max_gap": 3, "join_lowland_max_gap": 10, "join_lowland_max_elev": 50}
 }

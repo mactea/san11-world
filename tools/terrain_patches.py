@@ -4,6 +4,7 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
     {"straits": [{"name": ..., "line": [[lat, lon], ...], "max_fill": 400}, ...],
      "plains":  [{"name": ..., "center": [lat, lon], "radius": 11, "max_elev": 2100,
                   "cover": {"0": 0.3, "1": 0.4, ...}}, ...],
+     "passes":  [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4,
                  "navigable_core_hexes": 1.5, "join_max_gap": 3, "join_lowland_max_gap": 10,
                  "join_lowland_max_elev": 50}}
@@ -35,12 +36,18 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
   no higher than "join_lowland_max_elev" metres (deltas and estuaries, where the centrelines stop short of the
   coast), else to another 河/海 body through at most "join_max_gap" hexes (the 1-2 hex banks and rasterisation gaps
   that cut rivers off). Repeated until nothing joins.
+* passes: a mountain pass through Koei's northern wall (his China block ends in about 20 hexes of 崖 along its
+  north edge, so the steppe reached China on foot only through Liaoxi and Hexi). The hexes along "line" (a path of
+  hex neighbours, as for straits) that are 崖 15 or 岸 14 become 桟道 11, a 1-hex plank road; other hexes stay.
+  This is the one patch that edits Koei's own block: only his margin (no base, facility plot or dike, Koei's
+  SHEX bytes 3 and 5), and make_world.py --types-from carries the 桟道 into china_overrides.bin and paints it on his
+  3D stage as it does for the roads connect_cities.py lays there.
 * (no data) 渡所 12 on 河 7: Koei never puts a ferry on 河 (his 長江 and 黃河 are crossed by boat; all 88 of his
   ferries are on 川 6). make_world.py's own road builder used to bridge 河 too; a ferry with at least two 河
   neighbours and no 川 or 浅瀬 one is turned back into 河 so the river stays navigable.
 
-Koei's China block is never changed. The result depends only on the data, the DEM and the terrain, and applying it
-again changes nothing, so it can run on a fresh classification (make_world.py, before the cities and roads) and on
+Koei's China block is never changed (except his margin under "passes"). The result depends only on the data, the
+DEM and the terrain, and applying it again changes nothing, so it can run on a fresh classification (make_world.py, before the cities and roads) and on
 an existing world directory:
 
     python terrain_patches.py [world_dir]     (world_types.before_roads.npy and world_types.npy, rewritten in place)
@@ -58,7 +65,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
-STREAM, RIVER, SEA, BRIDGE, FORD, MOUNTAIN, CITY = 6, 7, 8, 12, 13, 15, 16
+STREAM, RIVER, SEA, PLANK, BRIDGE, FORD, SHORE, MOUNTAIN, CITY = 6, 7, 8, 11, 12, 13, 14, 15, 16
 OCEAN_SEA = 5000                 # sea hexes a water body needs to count as open sea (as tools/navigable.py)
 
 
@@ -309,6 +316,27 @@ def apply(t, e0, geo, spec, avoid=None):
 
     if "streams" in data:
         out += streams(t, e0, geo, data["streams"], china, avoid)
+
+    if data.get("passes"):
+        koei = np.load(DATA / "china_shex.npy")
+        for p in data["passes"]:
+            line = hex_line(geo, p["line"])
+            made, kept = 0, []
+            for h in line:
+                if not (0 <= h[0] < R and 0 <= h[1] < C):
+                    continue
+                if china[h]:
+                    k = koei[h[0] - spec.china_lo, h[1] - spec.china_hi]
+                    if k[0] in (CITY, 17, 18) or k[3] or k[5]:
+                        raise SystemExit(f"terrain_patches.json: pass {p['name']} crosses Koei's base, plot or dike at {h}")
+                if t[h] in (MOUNTAIN, SHORE):
+                    t[h] = PLANK
+                    made += 1
+                elif t[h] != PLANK:
+                    kept.append(int(t[h]))
+            inside = sum(1 for h in line if china[h])
+            out.append(f"pass {p['name']}: line {len(line)} hexes ({inside} in Koei's block), {made} cliffs/banks made 桟道"
+                       + (f"; other terrain on it kept: {kept}" if kept else ""))
 
     # 渡所 on 河 (make_world.py's road builder): back to 河
     n = 0

@@ -2,6 +2,8 @@
 for each one a channel of 河 (7, navigable) is laid from the city to the open sea along the river's 川 (6).
 
     [{"city": "番禺", "river": "珠江", "via": [[lat, lon], ...]}, ...]      ("via": optional waypoints, in order)
+    {"river": "頓河", "from": [lat, lon], "via": [...]}     (no city: the river is navigable from "from", its
+                                                            historical head of navigation, down to the sea)
 
 The channel is the cheapest hex path from next to the city's footprint (the hexes around a 7-hex city, the city's
 own neighbours for a 3- or 1-hex one, which then touches it whichever triangle gen_bases.py chooses) to sea that
@@ -9,7 +11,9 @@ is connected to the ocean (a water body with at least OCEAN_SEA sea hexes, not a
 cheaper, land expensive (gaps in the rasterized river are filled), and the path keeps off every other city's
 7 hexes, Koei's bases, facility plots and dikes. A channel found earlier in the list counts as open sea for the
 later ones (so a tributary may end in it). On it 川, land, roads and ferries (make_world.py's) all become 河, so the
-channel is continuous 河/海 from the city to the sea; roads that cross it end at its banks and units cross by boat,
+channel is continuous 河/海 from the city to the sea; the river's other hexes beside it (浅瀬, 川 outside Koei's
+own stage, make_world's 渡所 on them, connected to the channel within WIDTH hexes) become 河 too, so the whole
+width is navigable water and land units cannot wade past the channel; roads that cross it end at its banks and units cross by boat,
 as on Koei's 長江 and 黃河 (connect_cities.py never turns 河 into a ferry). In Koei's block only his patch
 (make_world.py china_patch) and his 川 are changed (his own 3D stage is drawn there otherwise).
 
@@ -31,6 +35,7 @@ OCEAN_SEA = 5000                 # sea hexes a water body needs to count as open
 # still the river's course
 STEP = {RIVER: 0.4, SEA: 0.4, STREAM: 1.0, FORD: 1.0, BRIDGE: 1.0, MOUNTAIN: 16.0}   # other land: LAND
 LAND = 8.0
+WIDTH = 3                        # river hexes (浅瀬/川/渡所) up to this many hexes beside the channel become 河 too
 
 
 def nbrs(y, x):
@@ -98,33 +103,43 @@ def courses(tb, new, tiers, spec, patch=None):
     ocean = ocean_mask(tb)
     geo = None
     out = []
+    def on_river(lat, lon):
+        """hexes within 2 of the point that lie on a river (or all of them when none does)"""
+        nonlocal geo
+        if geo is None:
+            from worldgeo import WorldGeo
+            geo = WorldGeo(spec, DATA / "cities_georef.json")
+        from make_world import lonlat_to_hex, to_hex
+        lo, x = lonlat_to_hex(geo, np.array([lon]), np.array([lat]))
+        yy, xx = to_hex(lo, x)
+        gy, gx = int(yy[0]), int(xx[0])
+        disk = {(gy, gx)} | {n for h in nbrs(gy, gx) for n in nbrs(*h)}
+        return {h for h in disk if tb[h] in (STREAM, FORD, RIVER)} or disk
+
     for row in rows:
-        c = by_name.get(row["city"])
-        if c is None:
-            continue
-        name = c["name"]
         blocked = protect.copy()
-        for h, nm in near.items():
-            if nm != name:
+        if "city" in row:
+            c = by_name.get(row["city"])
+            if c is None:
+                continue
+            name = c["name"]
+            for h, nm in near.items():
+                if nm != name:
+                    blocked[h] = True
+            y0, x0 = c["lo"], c["hi"]
+            blocked[y0, x0] = True
+            tier = tiers.get(c["id"], 1)
+            if tier <= 1:
+                for h in ring(y0, x0, 1):
+                    blocked[h] = True
+            start = [h for h in ring(y0, x0, 2 if tier <= 1 else 1) if not blocked[h]]
+        else:                                             # a river's head of navigation, no city
+            name = row["river"]
+            for h in near:
                 blocked[h] = True
-        y0, x0 = c["lo"], c["hi"]
-        blocked[y0, x0] = True
-        tier = tiers.get(c["id"], 1)
-        if tier <= 1:
-            for h in ring(y0, x0, 1):
-                blocked[h] = True
-        start = [h for h in ring(y0, x0, 2 if tier <= 1 else 1) if not blocked[h]]
-        goals = []
-        for lat, lon in row.get("via", []):
-            if geo is None:
-                from make_world import lonlat_to_hex, to_hex
-                from worldgeo import WorldGeo
-                geo = WorldGeo(spec, DATA / "cities_georef.json")
-            lo, x = lonlat_to_hex(geo, np.array([lon]), np.array([lat]))
-            yy, xx = to_hex(lo, x)
-            gy, gx = int(yy[0]), int(xx[0])
-            disk = {(gy, gx)} | {n for h in nbrs(gy, gx) for n in nbrs(*h)}      # within 2 hexes, on the river
-            goals.append({h for h in disk if tb[h] in (STREAM, FORD, RIVER)} or disk)
+            start = sorted(h for h in on_river(*row["from"]) if not blocked[h])
+        goals = [on_river(lat, lon) for lat, lon in row.get("via", [])]
+        goals = [{h for h in g if not blocked[h]} or g for g in goals]
         path = []
         for g in goals + [None]:
             seg = search(tb, blocked, ocean, start, g)
@@ -142,9 +157,22 @@ def courses(tb, new, tiers, spec, patch=None):
                 seen.add((y, x))
                 if int(tb[y, x]) not in (RIVER, SEA):
                     hexes.append([y, x, RIVER])
+            on_path = set(seen)
+            ring_ = sorted(on_path)
+            for _ in range(WIDTH):                        # the rest of the river's width beside the channel
+                nxt = []
+                for h in ring_:
+                    for n in nbrs(*h):
+                        if (0 <= n[0] < R and 0 <= n[1] < C and n not in seen and not blocked[n] and not koei_own[n]
+                                and int(tb[n]) in (STREAM, FORD, BRIDGE) and not ocean[n]):
+                            seen.add(n)
+                            nxt.append(n)
+                            hexes.append([n[0], n[1], RIVER])
+                ring_ = nxt
             rec["hexes"] = hexes
             rec["path"] = [list(h) for h in seen]
             rec["stream"] = sum(1 for y, x, k in hexes if tb[y, x] in (STREAM, FORD))
+            rec["beside"] = len(seen) - len(on_path)
             rec["road"] = sum(1 for y, x, k in hexes if tb[y, x] in (ROAD, PLANK, BRIDGE))
             rec["land"] = len(hexes) - rec["stream"] - rec["road"]
             rec["length"] = len(seen)
