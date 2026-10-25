@@ -7,6 +7,7 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
      "passes":  [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "cuts":    [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "wetlands": [{"name": ..., "polygon": [[lat, lon], ...], "share": 0.6, "poison": 0.05}, ...],
+     "deltas":  [{"name": ..., "polygon": [[lat, lon], ...], "keep_sea": 0.3, "keep_river": 0.1, "marsh": 0.5}, ...],
      "rapids":  [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4,
                  "navigable_core_hexes": 1.5, "navigable_max_elev": 1500, "join_max_gap": 3,
@@ -45,6 +46,10 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
   instead (mountain rivers in gorges: the upper Mekong and Salween, the Yarlung Tsangpo). Rivers in hydrography.json
   "fords" count as scalerank 6 (浅瀬, not navigable; null: the whole river, a latitude: only north of it): the
   Salween, a gorge river never sailed, except its tidal mouth at Mawlamyine.
+* deltas: within "polygon", the banks (岸 14) of a delta laced with distributaries: make_world.py puts a bank on
+  most land touching water, which shreds a delta into strips of impassable 岸. Only the share "keep_sea" of the
+  banks touching the sea and "keep_river" of the others stay (by a noise field fixed per name, so applying it
+  again changes nothing); the rest become 湿 3 (share "marsh" of them) or 草 0.
 * rapids: falls and cataracts that break a navigable river (the Khone Falls of the Mekong). The 河/浅瀬/川 hexes
   along "line" (drawn across the river, bank to bank) become 崖 15 after the streams rule: ships cannot pass and
   land units cannot wade across there (they still walk round on the banks); both stretches stay navigable water.
@@ -398,6 +403,27 @@ def apply(t, e0, geo, spec, avoid=None):
         sub[cand & (rank < float(wl.get("share", 0.5)))] = 3
         sub[cand & (rank < float(wl.get("poison", 0)))] = 4
         out.append(f"wetland {wl['name']}: {int(cand.sum())} land cover hexes, 湿/毒 {before} -> {int(np.isin(sub[cand], (3, 4)).sum())}")
+
+    for dl in data.get("deltas", []):
+        from make_world import lonlat_to_hex, points_in_ring
+        ring = np.asarray(dl["polygon"], float)
+        lo, hi = lonlat_to_hex(geo, ring[:, 1], ring[:, 0])
+        y0, y1 = max(0, int(lo.min())), min(R - 1, int(lo.max()) + 1)
+        x0, x1 = max(0, int(hi.min())), min(C - 1, int(hi.max()) + 1)
+        Y, X = np.mgrid[y0:y1 + 1, x0:x1 + 1]
+        inpoly = points_in_ring(Y.ravel().astype(float), X.ravel() + 0.5 * (Y.ravel() & 1), np.stack([lo, hi], 1)).reshape(Y.shape)
+        sub = t[y0:y1 + 1, x0:x1 + 1]
+        bank = inpoly & (sub == SHORE) & ~china[y0:y1 + 1, x0:x1 + 1]
+        rng = np.random.default_rng(zlib.crc32(dl["name"].encode("utf-8")))
+        u, v = rng.random(Y.shape), rng.random(Y.shape)
+        sea = np.zeros(Y.shape, bool)
+        for yy, xx in zip(*np.nonzero(bank)):
+            sea[yy, xx] = any(0 <= h[0] < R and 0 <= h[1] < C and t[h] == SEA for h in nbrs(y0 + yy, x0 + xx))
+        go = bank & (u >= np.where(sea, float(dl.get("keep_sea", 0.3)), float(dl.get("keep_river", 0.1))))
+        n0 = int(bank.sum())
+        sub[go & (v < float(dl.get("marsh", 0.5)))] = 3
+        sub[go & (v >= float(dl.get("marsh", 0.5)))] = 0
+        out.append(f"delta {dl['name']}: 岸 {n0} -> {n0 - int(go.sum())} (touching the sea {int(sea.sum())})")
 
     if "streams" in data:
         out += streams(t, e0, geo, data["streams"], china, cut if avoid is None else (avoid | cut))
