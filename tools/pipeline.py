@@ -202,7 +202,8 @@ def download(log=say):
 # ---------------------------------------------------------------- 世界
 def build_world(cfg, fresh=False, reselect=False, log=say):
     """生成世界数据，写进 <game_dir>/<data_name>。
-    fresh：地形从头生成（之后也会重新选城）；reselect：按 cities_*.json 重新选城（会覆盖编辑器里改过的城市表）。
+    fresh：地形从头生成（已有城市表时每座城按坐标重新落位、编号不变：select_cities.py --replace）；
+    reselect：按 cities_*.json 重新选城（会覆盖编辑器里改过的城市表，编号会变）。
     平时（两个都不加）沿用 world_dir 里现有的地形和城市表，只重新划领地、修路、转换剧本。"""
     t0 = time.time()
     g = game_dir(cfg)
@@ -222,15 +223,20 @@ def build_world(cfg, fresh=False, reselect=False, log=say):
             raise StepError(f"缺少 data/{f}：先运行  python san11kit.py setup")
     world.mkdir(parents=True, exist_ok=True)
     cache = DATA / "world_hexcache.npz"
+    replace = False
     if fresh or not (world / "world_types.npy").exists():
         prepare_dem(log)
         run("make_world.py", world, "--cache", cache, log=log)
         (world / "world_types.before_roads.npy").unlink(missing_ok=True)
-        reselect = True
+        # a new terrain (or projection) keeps the cities' ids: each is snapped again to its coordinates
+        replace = (world / "cities_world.json").exists() and not reselect
+        reselect = not replace
     # data/terrain_patches.json (straits, valley floors): make_world.py applies it to a fresh terrain; a world made
     # before a patch was added gets it here (applying it again changes nothing)
     run("terrain_patches.py", world, "--cache", cache, log=log)
-    if reselect or not (world / "cities_world.json").exists():
+    if replace:
+        run("select_cities.py", world, "--replace", "--spacing", cfg["spacing"], log=log)
+    elif reselect or not (world / "cities_world.json").exists():
         run("select_cities.py", world, "--spacing", cfg["spacing"], "--max", C - 42, log=log)
     have = len(json.loads((world / "cities_world.json").read_text(encoding="utf-8")))
     if have < C - 42:
