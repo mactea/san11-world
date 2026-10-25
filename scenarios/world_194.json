@@ -1,0 +1,987 @@
+{
+ "base": 2,
+ "note": "194年（群雄割據）的世界：羅馬內戰（塞維魯、尼格爾、阿爾比努斯）、安息及其藩國、貴霜、印度諸國、阿拉伯、東非、黑海、高加索、鮮卑諸部、西域。",
+ "forces": [
+  {
+   "name": "羅馬",
+   "ruler": "Septimius Severus",
+   "stars": 1,
+   "intro": "193年佩蒂納克斯遇弒後，潘諾尼亞總督塞普提米烏斯·塞維魯稱帝入羅馬，以不列顛的阿爾比努斯為凱撒，率軍東討敘利亞的尼格爾。194年初其將坎迪杜斯已在基齊庫斯、尼西亞兩敗尼格爾，阿努利努斯正向奇里乞亞進軍。",
+   "cities": [
+    {
+     "city": "羅馬",
+     "troops": 30000,
+     "gold": 10000,
+     "food": 80000
+    },
+    "米蘭",
+    "阿奎",
+    "拿坡",
+    "敘拉",
+    "塔拉",
+    "科爾",
+    "梅里",
+    "里昂",
+    "納博",
+    "馬賽",
+    "波爾",
+    "蘭斯",
+    "特里",
+    "美因",
+    "奧格",
+    "卡農",
+    "阿昆",
+    "西爾",
+    "薩洛",
+    "薩米",
+    "塞爾",
+    "雅典",
+    "帖撒",
+    "以弗",
+    "安卡",
+    "馬薩",
+    "迦太",
+    "錫爾",
+    "約爾",
+    "丁吉",
+    "萊普",
+    "昔蘭",
+    "拉文",
+    "布林",
+    "巴勒",
+    "都靈",
+    "佛羅",
+    "卡利",
+    "新迦",
+    "加的",
+    "薩拉",
+    "里斯",
+    "布拉",
+    "阿斯",
+    "巴黎",
+    "普瓦",
+    "貝桑",
+    "斯特",
+    "雷根",
+    "維魯",
+    "都拉",
+    "納伊",
+    "菲利",
+    "哈德",
+    "馬爾",
+    "托米",
+    "奧比",
+    "克森",
+    "克里",
+    "羅德",
+    "錫諾",
+    "特拉",
+    "阿塔",
+    {
+     "city": "科尼",
+     "troops": 30000
+    },
+    "梅利",
+    "希波",
+    "沃呂",
+    "安科",
+    "雷焦",
+    "阿萊",
+    "盧戈",
+    "托萊",
+    "瓦倫",
+    "克盧",
+    "潘普",
+    "貝哈",
+    "科英",
+    "帕馬",
+    "奧爾",
+    "利摩",
+    "克萊",
+    "魯昂",
+    "雷恩",
+    "南特",
+    "布洛",
+    "弗雷",
+    "通格",
+    "桑滕",
+    "奧古",
+    "帕紹",
+    "波埃",
+    "穆爾",
+    "因斯",
+    "庫爾",
+    "維米",
+    "波洛",
+    "羅穆",
+    {
+     "city": "佩林",
+     "troops": 40000,
+     "gold": 6000,
+     "food": 60000
+    },
+    "帕特",
+    "阿馬",
+    "塞巴",
+    "特洛",
+    "塞蒂",
+    "波馬",
+    "塔卡",
+    "貝倫",
+    "蘇菲",
+    "法西"
+   ],
+   "officers": [
+    {
+     "p": "Septimius Severus",
+     "city": "佩林"
+    },
+    {
+     "p": "Julia Domna",
+     "city": "佩林"
+    },
+    {
+     "p": "Gaius Fulvius Plautianus",
+     "city": "佩林"
+    },
+    {
+     "p": "Publius Cornelius Anullinus",
+     "city": "科尼"
+    },
+    {
+     "p": "Valerianus (general of Severus)",
+     "city": "科尼"
+    },
+    {
+     "p": "Tiberius Claudius Candidus",
+     "city": "科尼"
+    },
+    {
+     "p": "Lucius Fabius Cilo",
+     "city": "安卡"
+    },
+    {
+     "p": "Cassius Dio",
+     "city": "羅馬"
+    },
+    {
+     "p": "Aemilius Papinianus",
+     "city": "羅馬"
+    },
+    {
+     "p": "Julia Maesa",
+     "city": "羅馬"
+    },
+    {
+     "p": "Julius Avitus",
+     "city": "羅馬"
+    }
+   ],
+   "auto": {
+    "polity": [
+     "羅馬帝國"
+    ],
+    "roles": [
+     "武将",
+     "文臣",
+     "宗室"
+    ],
+    "min_conf": "B",
+    "exclude": [
+     "Regalianus",
+     "Ragonius Venustus",
+     "Publius Cornelius Saecularis",
+     "Marcus Nummius Albinus",
+     "Marcus Pupienus Africanus Maximus",
+     "Gnaeus Domitius Philippus",
+     "Gaius Macrinius Decianus",
+     "Macedo (Osroene commander)",
+     "Marcus Bassaeus Rufus",
+     "Quintus Baienus Blassianus",
+     "Didia Clara",
+     "Annia Cornificia Faustina Minor",
+     "Vibia Aurelia Sabina"
+    ]
+   },
+   "relations": {
+    "尼格爾": 0,
+    "阿爾比努斯": 80,
+    "安息": 25,
+    "哈特拉": 25,
+    "奧斯若恩": 20,
+    "博斯普魯斯": 85,
+    "亞美尼亞": 50,
+    "伊比利亞": 55,
+    "喀里多尼亞": 25,
+    "夸迪": 55,
+    "阿克蘇姆": 60,
+    "庫施": 50,
+    "貴霜": 60
+   }
+  },
+  {
+   "name": "尼格爾",
+   "kokugo": false,
+   "ruler": "Pescennius Niger",
+   "max_cities": 5,
+   "stars": 3,
+   "intro": "敘利亞總督佩斯切尼烏斯·尼格爾，193年在安提阿被東方軍團擁立為帝，據有敘利亞、埃及與小亞細亞。193年末至194年初敗於基齊庫斯、尼西亞，退守陶魯斯山口；拜占庭仍為其堅守。帕提亞與哈特拉遣兵相助。",
+   "cities": [
+    {
+     "city": "安都",
+     "troops": 30000
+    },
+    "塔爾",
+    "拜占",
+    "黎軒",
+    "大馬"
+   ],
+   "officers": [
+    {
+     "p": "Pescennius Niger",
+     "city": "安都"
+    },
+    {
+     "p": "Aurelianus (adviser of Pescennius Niger)",
+     "city": "安都"
+    },
+    {
+     "p": "Antistius Capella",
+     "city": "拜占"
+    }
+   ],
+   "relations": {
+    "阿爾比努斯": 30,
+    "安息": 70,
+    "哈特拉": 75
+   }
+  },
+  {
+   "name": "阿爾比努斯",
+   "kokugo": false,
+   "ruler": "Clodius Albinus",
+   "max_cities": 5,
+   "stars": 4,
+   "intro": "不列顛總督克洛狄烏斯·阿爾比努斯，193年受塞維魯封為凱撒，名義上與之結盟，擁不列顛三個軍團坐觀東方戰事。",
+   "cities": [
+    "倫丁",
+    "約克",
+    "切斯",
+    "卡萊",
+    "溫徹"
+   ],
+   "officers": [
+    {
+     "p": "Clodius Albinus",
+     "city": "倫丁"
+    }
+   ],
+   "relations": {
+    "喀里多尼亞": 25
+   }
+  },
+  {
+   "name": "安息",
+   "ruler": "Vologases V",
+   "stars": 3,
+   "intro": "帕提亞國王沃洛吉斯五世，191年即位。羅馬內戰中支持尼格爾，奧斯若恩、阿迪亞貝尼諸王乘機起兵圍攻羅馬駐守的尼西比斯。",
+   "cities": [
+    {
+     "city": "斯賓",
+     "gold": 2000
+    },
+    "阿蠻",
+    "拉蓋",
+    "赫卡",
+    "阿貝"
+   ],
+   "officers": [
+    {
+     "p": "Vologases V",
+     "city": "斯賓"
+    },
+    {
+     "p": "Vologases VI",
+     "city": "斯賓",
+     "birth": 175
+    }
+   ],
+   "relations": {
+    "波斯": 70,
+    "查拉塞涅": 75,
+    "埃利邁斯": 75,
+    "哈特拉": 70,
+    "亞美尼亞": 60,
+    "奧斯若恩": 60,
+    "圖蘭": 60,
+    "薩卡斯坦": 65,
+    "貴霜": 40,
+    "伊比利亞": 50
+   }
+  },
+  {
+   "name": "步度根",
+   "kokugo": false,
+   "ruler": "步度根",
+   "stars": 4,
+   "intro": "檀石槐死後鮮卑分裂。魁頭死，弟步度根繼立，統檀石槐舊部，然眾稍衰弱，其兄扶羅韓別擁眾數萬為大人。",
+   "cities": [
+    "龍城",
+    "燕然"
+   ],
+   "officers": [
+    {
+     "p": "步度根",
+     "city": "龍城",
+     "born": 167
+    },
+    {
+     "p": "扶羅韓",
+     "city": "龍城",
+     "born": 165
+    }
+   ],
+   "relations": {
+    "軻比能": 40,
+    "素利": 50,
+    "曹操": 30,
+    "袁紹": 50,
+    "公孫瓚": 30,
+    "李傕": 40
+   }
+  },
+  {
+   "name": "軻比能",
+   "kokugo": false,
+   "ruler": "軻比能",
+   "stars": 4,
+   "intro": "小種鮮卑軻比能，以勇健、斷法平端被推為大人。袁紹據河北，中國人多亡歸之，教作兵器鎧楯，頗學文字。",
+   "cities": [
+    "狼居"
+   ],
+   "officers": [
+    {
+     "p": "軻比能",
+     "city": "狼居"
+    },
+    {
+     "p": "苴羅侯",
+     "city": "狼居",
+     "birth": 175
+    }
+   ],
+   "relations": {
+    "素利": 30,
+    "曹操": 30,
+    "袁紹": 50,
+    "公孫瓚": 20,
+    "李傕": 40
+   }
+  },
+  {
+   "name": "素利",
+   "kokugo": false,
+   "ruler": "素利",
+   "stars": 4,
+   "intro": "東部鮮卑大人素利、彌加、厥機，在遼西、右北平、漁陽塞外，種眾多於軻比能。建安中因閻柔通貢。",
+   "cities": [
+    "呼倫",
+    "室韋"
+   ],
+   "officers": [
+    {
+     "p": "素利",
+     "city": "呼倫"
+    },
+    {
+     "p": "彌加",
+     "city": "呼倫"
+    },
+    {
+     "p": "厥機",
+     "city": "室韋",
+     "born": 160
+    },
+    {
+     "p": "成律歸",
+     "city": "呼倫"
+    }
+   ],
+   "relations": {
+    "曹操": 40,
+    "袁紹": 60,
+    "公孫瓚": 10,
+    "公孫度": 40,
+    "李傕": 40
+   }
+  },
+  {
+   "name": "亞美尼亞",
+   "kokugo_name": "亞美",
+   "ruler": "Khosrov I of Armenia",
+   "stars": 4,
+   "intro": "亞美尼亞阿薩息斯王朝國王庫思老一世，約191年即位。羅馬內戰中保持中立。",
+   "cities": [
+    "亞塔"
+   ],
+   "officers": [
+    {
+     "p": "Khosrov I of Armenia",
+     "city": "亞塔",
+     "birth": 165
+    },
+    {
+     "p": "Tiridates (satrap)",
+     "city": "亞塔"
+    }
+   ],
+   "relations": {
+    "伊比利亞": 80
+   }
+  },
+  {
+   "name": "奧斯若恩",
+   "kokugo_name": "奧斯",
+   "ruler": "Abgar VIII",
+   "stars": 5,
+   "intro": "埃德薩的阿布加爾八世。194年羅馬內戰方酣，奧斯若恩與阿迪亞貝尼起兵反羅馬，圍攻尼西比斯。",
+   "cities": [
+    "埃德"
+   ],
+   "officers": [
+    {
+     "p": "Abgar VIII",
+     "city": "埃德",
+     "birth": 167
+    },
+    {
+     "p": "Bardaisan",
+     "city": "埃德"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "哈特拉",
+   "kokugo_name": "哈特",
+   "ruler": "Abdsamiya",
+   "stars": 5,
+   "intro": "沙漠城邦哈特拉之王阿卜德薩米亞，193年遣弓騎兵援助尼格爾。",
+   "cities": [
+    {
+     "city": "哈特",
+     "troops": 15000
+    }
+   ],
+   "officers": [
+    {
+     "p": "Abdsamiya",
+     "city": "哈特"
+    },
+    {
+     "p": "Sanatruq II",
+     "city": "哈特",
+     "birth": 175
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "波斯",
+   "ruler": "Gochihr",
+   "stars": 5,
+   "intro": "法爾斯（波西斯）巴茲蘭吉王朝的戈契赫爾，帕提亞的藩王，都伊斯塔赫爾。祭司薩珊之子帕佩克在其治下。",
+   "cities": [
+    "波斯"
+   ],
+   "officers": [
+    {
+     "p": "Gochihr",
+     "city": "波斯",
+     "birth": 155
+    },
+    {
+     "p": "Papak",
+     "city": "波斯"
+    },
+    {
+     "p": "Sasan",
+     "city": "波斯"
+    },
+    {
+     "p": "Tiri (argbed of Darabgerd)",
+     "city": "波斯"
+    },
+    {
+     "p": "Pasin of Gopanan",
+     "city": "波斯",
+     "birth": 165
+    },
+    {
+     "p": "Dara of Lurwir",
+     "city": "波斯",
+     "birth": 165
+    },
+    {
+     "p": "Manuchihr of Konus",
+     "city": "波斯"
+    }
+   ],
+   "relations": {
+    "查拉塞涅": 50,
+    "埃利邁斯": 55
+   }
+  },
+  {
+   "name": "查拉塞涅",
+   "kokugo_name": "梅珊",
+   "ruler": "Attambelos VIII",
+   "stars": 5,
+   "intro": "波斯灣頭的查拉塞涅（梅珊）王國，帕提亞的藩屬。國王阿坦貝洛斯八世約180年至195年在位，主要見於錢幣。",
+   "cities": [
+    "查拉"
+   ],
+   "officers": [
+    {
+     "p": "Attambelos VIII",
+     "city": "查拉"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "埃利邁斯",
+   "kokugo_name": "埃利",
+   "ruler": "Orodes V.",
+   "stars": 5,
+   "intro": "札格羅斯山中的埃利邁斯王國，帕提亞阿薩息斯王族的旁支，國王奧羅德五世。蘇薩的總督赫瓦薩克亦見於碑銘。",
+   "cities": [
+    "蘇薩"
+   ],
+   "officers": [
+    {
+     "p": "Orodes V.",
+     "city": "蘇薩"
+    },
+    {
+     "p": "Khwasak",
+     "city": "蘇薩"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "貴霜",
+   "ruler": "Vasudeva I",
+   "stars": 3,
+   "intro": "貴霜大王韋蘇提婆一世，繼胡維色迦即位，仍統有大夏、犍陀羅至秣菟羅的廣大疆土，是最後一位統治帝國全盛疆域的貴霜君主。",
+   "cities": [
+    "富樓",
+    "秣菟",
+    "藍氏",
+    "罽賓",
+    "高附"
+   ],
+   "officers": [
+    {
+     "p": "Vasudeva I",
+     "city": "富樓",
+     "birth": 165
+    }
+   ],
+   "relations": {
+    "西方總督": 50,
+    "那伽": 40,
+    "于闐": 60
+   }
+  },
+  {
+   "name": "西方總督",
+   "kokugo_name": "塞種",
+   "ruler": "Rudrasimha I",
+   "stars": 4,
+   "intro": "統治印度西部的塞種卡爾達馬卡王朝（西方總督）。魯陀羅辛哈一世曾於188年被阿毗羅人伊濕伐羅達多所逐，190年復位。",
+   "cities": [
+    "優禪",
+    "婆盧",
+    "蘇剌",
+    "喀奇",
+    "摩臘"
+   ],
+   "officers": [
+    {
+     "p": "Rudrasimha I",
+     "city": "優禪"
+    },
+    {
+     "p": "Jivadaman",
+     "city": "優禪",
+     "birth": 168
+    },
+    {
+     "p": "Satyadaman",
+     "city": "婆盧"
+    }
+   ],
+   "relations": {
+    "百乘": 15,
+    "那伽": 40
+   }
+  },
+  {
+   "name": "百乘",
+   "ruler": "Yajna Sri Satakarni",
+   "stars": 3,
+   "intro": "德干的百乘（娑多婆訶那）王朝，雅吉納·室利·薩塔卡尼在位，擊敗西方總督、收復西部失地，是王朝最後的強主。大乘論師龍樹與其交好。",
+   "cities": [
+    "缽底",
+    "案達",
+    "那私",
+    "毗陀",
+    "果提"
+   ],
+   "officers": [
+    {
+     "p": "Yajna Sri Satakarni",
+     "city": "缽底",
+     "birth": 145
+    },
+    {
+     "p": "Gautamiputra Vijaya Satakarni",
+     "city": "案達"
+    },
+    {
+     "p": "Nagarjuna",
+     "city": "案達"
+    }
+   ],
+   "relations": {
+    "那伽": 50
+   }
+  },
+  {
+   "name": "師子國",
+   "kokugo_name": "師子",
+   "ruler": "Siri Naga I",
+   "stars": 5,
+   "intro": "錫蘭島的阿努拉德普勒王國，斯里那伽一世於189年弒庫達那伽即位，修繕大塔，重建五層銅殿。",
+   "cities": [
+    "師子",
+    "盧呼"
+   ],
+   "officers": [
+    {
+     "p": "Siri Naga I",
+     "city": "師子"
+    }
+   ],
+   "relations": {
+    "潘地亞": 40
+   }
+  },
+  {
+   "name": "潘地亞",
+   "kokugo_name": "潘地",
+   "ruler": "Nedunjeliyan II",
+   "stars": 5,
+   "intro": "泰米爾地區的潘地亞王國，都馬杜賴。桑伽姆詩歌頌揚內頓傑利延於塔萊亞拉加南大破朱羅、哲羅聯軍（其年代學者說法不一）。",
+   "cities": [
+    "摩頭"
+   ],
+   "officers": [
+    {
+     "p": "Nedunjeliyan II",
+     "city": "摩頭",
+     "birth": 175
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "那伽",
+   "ruler": "Vrisha-naga",
+   "stars": 5,
+   "intro": "毗底沙一帶的那伽王族，錢幣上見弗利沙那伽之名。貴霜南方勢力衰退後，那伽諸王將崛起於印度中北部。",
+   "cities": [
+    "毗舍"
+   ],
+   "officers": [
+    {
+     "p": "Vrisha-naga",
+     "city": "毗舍"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "穆倫達",
+   "kokugo_name": "穆倫",
+   "ruler": "Gana (Murunda)",
+   "stars": 5,
+   "intro": "東印度羯陵伽、烏特卡拉一帶的穆倫達王朝，摩訶羅闍伽那見於跋陀羅迦銘文（年代約在二世紀）。",
+   "cities": [
+    "羯陵"
+   ],
+   "officers": [
+    {
+     "p": "Gana (Murunda)",
+     "city": "羯陵"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "圖蘭",
+   "ruler": "Pahares I",
+   "stars": 5,
+   "intro": "印度—帕提亞殘餘之一的圖蘭王國，帕哈雷斯一世在位，錢幣王像戴帕提亞式頭冠。",
+   "cities": [
+    "奎達"
+   ],
+   "officers": [
+    {
+     "p": "Pahares I",
+     "city": "奎達",
+     "birth": 160
+    }
+   ],
+   "relations": {
+    "薩卡斯坦": 70
+   }
+  },
+  {
+   "name": "薩卡斯坦",
+   "kokugo_name": "薩卡",
+   "ruler": "Farn-Sasan",
+   "stars": 5,
+   "intro": "錫斯坦的印度—帕提亞王國（薩卡斯坦）。194年的國王不詳，此處取年代最近的末代國王法恩·薩珊（約210年起在位，只見於錢幣）。",
+   "cities": [
+    "錫斯"
+   ],
+   "officers": [
+    {
+     "p": "Farn-Sasan",
+     "city": "錫斯",
+     "birth": 175
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "博斯普魯斯",
+   "kokugo_name": "博斯",
+   "ruler": "Tiberius Julius Sauromates II",
+   "stars": 5,
+   "intro": "黑海北岸的博斯普魯斯王國，羅馬的附庸。薩烏羅馬特斯二世174年即位，征討西徐亞、陶里諸族，保障黑海商路。",
+   "cities": [
+    "潘提",
+    "塔奈",
+    "庫班"
+   ],
+   "officers": [
+    {
+     "p": "Tiberius Julius Sauromates II",
+     "city": "潘提",
+     "birth": 155
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "伊比利亞",
+   "kokugo_name": "伊比",
+   "ruler": "Rev I of Iberia",
+   "stars": 5,
+   "intro": "高加索的伊比利亞（卡特利）王國。亞美尼亞王子雷夫一世189年應貴族之請攻殺舅父阿馬扎斯普二世即位，開阿薩息斯一系。",
+   "cities": [
+    "姆茨"
+   ],
+   "officers": [
+    {
+     "p": "Rev I of Iberia",
+     "city": "姆茨",
+     "birth": 165
+    },
+    {
+     "p": "Sephelia",
+     "city": "姆茨"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "喀里多尼亞",
+   "kokugo_name": "喀里",
+   "ruler": "Argentocoxos",
+   "stars": 5,
+   "intro": "哈德良長城以北的喀里多尼亞諸部。197年不列顛總督以重金向邁亞泰人買和。194年的首領不詳，此處取狄奧所記約210年的首領阿根托科索斯。",
+   "cities": [
+    "喀里",
+    "皮克"
+   ],
+   "officers": [
+    {
+     "p": "Argentocoxos",
+     "city": "喀里",
+     "birth": 165
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "夸迪",
+   "ruler": "Gabiomaro",
+   "stars": 5,
+   "intro": "多瑙河北岸的日耳曼夸迪人，馬科曼尼戰爭後為羅馬的附庸。194年的國王不詳，此處取狄奧所記、後被卡拉卡拉處死的蓋奧博馬魯斯。",
+   "cities": [
+    "夸迪"
+   ],
+   "officers": [
+    {
+     "p": "Gabiomaro",
+     "city": "夸迪",
+     "birth": 170
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "阿克蘇姆",
+   "kokugo_name": "阿克",
+   "ruler": "GDRT",
+   "stars": 4,
+   "intro": "紅海西岸的阿克蘇姆王國，國王葛達拉（GDRT）約200年與示巴王阿爾漢結盟，出兵渡海干預南阿拉伯。",
+   "cities": [
+    "阿克",
+    "貢德"
+   ],
+   "officers": [
+    {
+     "p": "GDRT",
+     "city": "阿克"
+    }
+   ],
+   "relations": {
+    "示巴": 80,
+    "希木葉爾": 30
+   }
+  },
+  {
+   "name": "庫施",
+   "ruler": "Amanitaraqide",
+   "stars": 5,
+   "intro": "尼羅河上游的庫施王國，都麥羅埃。二世紀末的君主次序不明，此處取約二世紀末在位的阿瑪尼塔拉基德。",
+   "cities": [
+    "麥羅",
+    "納帕",
+    "東古"
+   ],
+   "officers": [
+    {
+     "p": "Amanitaraqide",
+     "city": "麥羅"
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "示巴",
+   "ruler": "’Alhan Nahfan",
+   "stars": 4,
+   "intro": "南阿拉伯的示巴王國，都馬里布。國王阿爾漢·納赫凡與其子沙伊爾·奧塔爾共治，聯合阿克蘇姆對抗希木葉爾。",
+   "cities": [
+    "馬里"
+   ],
+   "officers": [
+    {
+     "p": "’Alhan Nahfan",
+     "city": "馬里"
+    },
+    {
+     "p": "Sha'ir Awtar",
+     "city": "馬里",
+     "birth": 170
+    }
+   ],
+   "relations": {
+    "希木葉爾": 15,
+    "哈德拉毛": 60
+   }
+  },
+  {
+   "name": "希木葉爾",
+   "kokugo_name": "希木",
+   "ruler": "Tharan Yaub Yuhanim",
+   "stars": 4,
+   "intro": "南阿拉伯高原的希木葉爾王國，都札法爾，國王自稱「薩巴與賴丹王」，與示巴爭奪葉門。",
+   "cities": [
+    "希木"
+   ],
+   "officers": [
+    {
+     "p": "Tharan Yaub Yuhanim",
+     "city": "希木",
+     "birth": 150
+    }
+   ],
+   "relations": {
+    "哈德拉毛": 40
+   }
+  },
+  {
+   "name": "哈德拉毛",
+   "kokugo_name": "哈德",
+   "ruler": "Il'azz Yalut",
+   "stars": 5,
+   "intro": "南阿拉伯東部的哈德拉毛王國，都沙布瓦，控制乳香產地。194年的國王不詳，此處取年代最近的伊勒阿茲·亞盧特。",
+   "cities": [
+    "沙布",
+    "祖法"
+   ],
+   "officers": [
+    {
+     "p": "Il'azz Yalut",
+     "city": "沙布",
+     "birth": 175
+    }
+   ],
+   "relations": {}
+  },
+  {
+   "name": "于闐",
+   "ruler": "山習",
+   "stars": 5,
+   "intro": "塔里木盆地南緣的于闐國。194年的國王不詳，此處取魏文帝時遣使獻馬的于闐王山習。",
+   "cities": [
+    "于闐"
+   ],
+   "officers": [
+    {
+     "p": "山習",
+     "city": "于闐",
+     "birth": 170
+    }
+   ],
+   "relations": {
+    "車師": 50
+   }
+  },
+  {
+   "name": "車師",
+   "ruler": "壹多雜",
+   "stars": 5,
+   "intro": "天山東部的車師後部。194年的國王不詳，此處取魏時受「守魏侍中」之號的車師後部王壹多雜。",
+   "cities": [
+    "車師"
+   ],
+   "officers": [
+    {
+     "p": "壹多雜",
+     "city": "車師",
+     "birth": 170
+    }
+   ],
+   "relations": {}
+  }
+ ]
+}
