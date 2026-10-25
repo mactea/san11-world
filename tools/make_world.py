@@ -499,16 +499,29 @@ def land_cover(shape, weights, dw, dmt, e0, rng, land, iters=3, driver=None):
     return np.asarray(COVER, np.uint8)[pick]
 
 
-MOUNTAIN_RAMP = (80, 450)   # regional relief (m) over which the mountain share rises from 4% to 92%
+MOUNTAIN_RAMP_LOW = (25, 300)    # regional relief (m) over which the mountain share rises from 4% to 92%, on low ground
+MOUNTAIN_RAMP_HIGH = (80, 450)   # the same on high plateaus (base elevation 1200 m and more)
+MOUNTAIN_BASE = (400, 1200)      # base elevation (50 km mean) over which the ramp goes from low to high
+SEA_DIST_WEIGHT = 3.0            # the sea counts as this many times farther than a river (dsea): islands keep their ranges
 
 
-def mountain_mask(e0, relief, dw, land, rng, ramp=MOUNTAIN_RAMP):
+def mountain_mask(e0, relief, dw, land, rng, ramp=None, dsea=None):
     """Koei-style impassable mountains. The target share rises with regional ruggedness (few hills on
     plains, about half of hilly land, most of high ranges). Inside that share mountains sit on local
     ridges and away from rivers, so valleys along rivers stay open like Koei's corridors.
-    ramp: the relief range of the rise. (30, 330) matched Koei's 48% on his own China, but made the world's
-    rolling plateaus (Mongolia, Iran, Anatolia) 40-60% cliffs; (80, 450) keeps the main ranges as barriers."""
+    ramp: the relief range of the rise. None: by base elevation (the elevation smoothed over about 50 km), from
+    MOUNTAIN_RAMP_LOW on low ground to MOUNTAIN_RAMP_HIGH on high plateaus: rolling plateaus (Mongolia, Iran,
+    Anatolia) are rugged at the hex scale without being mountain ranges, while low steep ranges (Japan, Korea,
+    Greece) are. (30, 330) matched Koei's 48% on his own China (used for his Fujian patch).
+    dw: distance to water (hexes); dsea: distance to the sea, if given dw is the distance to rivers and lakes only and
+    the sea counts SEA_DIST_WEIGHT times farther (the "away from water" preference made islands nearly flat)."""
     rr = ndimage.gaussian_filter(relief, 3)
+    if ramp is None:
+        tt = smoothstep(ndimage.gaussian_filter(np.maximum(e0, 0), 6), *MOUNTAIN_BASE)
+        ramp = (MOUNTAIN_RAMP_LOW[0] + (MOUNTAIN_RAMP_HIGH[0] - MOUNTAIN_RAMP_LOW[0]) * tt,
+                MOUNTAIN_RAMP_LOW[1] + (MOUNTAIN_RAMP_HIGH[1] - MOUNTAIN_RAMP_LOW[1]) * tt)
+    if dsea is not None:
+        dw = np.minimum(dw, SEA_DIST_WEIGHT * dsea)
     p = 0.04 + 0.88 * smoothstep(rr, *ramp) + 0.15 * smoothstep(e0, 2500, 4500)
     p = np.clip(p, 0, 0.93)
     tpi = (e0 - ndimage.gaussian_filter(e0, 3)) / (ndimage.gaussian_filter(relief, 4) + 40)
@@ -1053,7 +1066,9 @@ def main():
         dw = ndimage.distance_transform_edt(~water).astype(np.float32)
         land = ~water
         land[CL, CH] = False
-        mtn, p_mtn = mountain_mask(e0, relief, dw, land, rng)
+        drl = ndimage.distance_transform_edt(~np.isin(t, (STREAM, RIVER))).astype(np.float32)
+        dsea = ndimage.distance_transform_edt(t != SEA).astype(np.float32)
+        mtn, p_mtn = mountain_mask(e0, relief, drl, land, rng, dsea=dsea)
         cland = ~np.isin(china_t, WATER + (ROAD, 11, 12, 13, CITY, 17, 18, 19))
         print(f"mountain target share on China's own DEM: {p_mtn[CL, CH][cland].mean():.3f} (Koei: {(china_t[cland] == MOUNTAIN).mean():.3f})")
         t[mtn] = MOUNTAIN
