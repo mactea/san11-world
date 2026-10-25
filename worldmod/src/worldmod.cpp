@@ -501,6 +501,7 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
         static volatile LONG n = 0;
         if (InterlockedIncrement(&n) > 20) return EXCEPTION_CONTINUE_SEARCH;
         const char* type = "?";
+        char what[160] = "", thrower[MAX_PATH] = "?";
         EXCEPTION_RECORD* er = ep->ExceptionRecord;
         if (er->NumberParameters >= 3 && er->ExceptionInformation[2]) {     // ThrowInfo -> CatchableTypeArray -> [0] -> TypeDescriptor
             __try {
@@ -511,6 +512,12 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
             } __except (EXCEPTION_EXECUTE_HANDLER) { type = "?"; }
         }
         HMODULE self = nullptr;
+            HMODULE tm = nullptr;                    // the ThrowInfo lives in the module that threw
+            if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                                   (LPCSTR)er->ExceptionInformation[2], &tm)) {
+                char p[MAX_PATH]; GetModuleFileNameA(tm, p, MAX_PATH);
+                const char* b = strrchr(p, '\\'); strcpy_s(thrower, b ? b + 1 : p);
+            }
         GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)&onException, &self);
         uintptr_t wlo = (uintptr_t)self, whi = wlo + ((IMAGE_NT_HEADERS*)(wlo + ((IMAGE_DOS_HEADER*)wlo)->e_lfanew))->OptionalHeader.SizeOfImage;
         uint32_t* sp = (uint32_t*)(uintptr_t)cx->Esp;
@@ -527,8 +534,8 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
             if (mi.State == MEM_FREE) { freeAll += mi.RegionSize; if (mi.RegionSize > freeMax) freeMax = mi.RegionSize; }
             if ((uintptr_t)mi.BaseAddress + mi.RegionSize < (uintptr_t)mi.BaseAddress || (uintptr_t)mi.BaseAddress >= 0xfff00000) break;
         }
-        logf("C++ EXCEPTION %s thrown (thread %lu); address space free %zu MB, largest block %zu MB | stack:%s",
-             type, GetCurrentThreadId(), freeAll >> 20, freeMax >> 20, buf);
+        logf("C++ EXCEPTION %s \"%s\" thrown by %s (thread %lu); address space free %zu MB, largest block %zu MB | stack:%s",
+             type, what, thrower, GetCurrentThreadId(), freeAll >> 20, freeMax >> 20, buf);
         return EXCEPTION_CONTINUE_SEARCH;
     }
     CONTEXT* c = ep->ContextRecord;
