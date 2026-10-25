@@ -254,7 +254,9 @@ def build_world(cfg, fresh=False, reselect=False, log=say):
             pt = np.load(world / "china_patch_types.npy")
             t[blk] = np.where(pt != 255, pt, t[blk])
         np.save(world / "world_types.npy", t)
-    run("gen_bases.py", world, "--cities", C, "--out", links, "--game", g, log=log)
+    # the first run also makes cliffs land where a city is short of facility plots (into world_types), so the
+    # roads, the 3D heights and the second run see that farmland
+    run("gen_bases.py", world, "--cities", C, "--out", links, "--game", g, "--flatten-plots", log=log)
     run("connect_cities.py", world, "--links", links / "bases_cities.json", log=log)
     run("make_world.py", world, "--types-from", world / "world_types.npy", "--cache", cache, log=log)
     dst.mkdir(parents=True, exist_ok=True)

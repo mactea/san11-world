@@ -5,7 +5,12 @@ Usage: python gen_bases.py [world_dir] --cities C
   world_dir: data/world (world_types.npy, world_shex.bin, world_info.json, cities_world.json from
              tools/select_cities.py). C = total number of cities, 42..1000 (new cities = the first C-42 of
              cities_world.json, which is in importance order).
-Writes into --out (default world_dir; the world_dir inputs from make_world.py are read as they are):
+--flatten-plots (the build's first run, before connect_cities.py and make_world.py --types-from): a city still
+short of facility plots with PLOT_SHORT_SHARE gets the cliffs of its territory nearest it made land (FLATTEN_REACH),
+written into world_dir's world_types.npy (and world_types.before_roads.npy), so the terrain and the 3D heights
+built from it have the farmland the second run places plots on.
+Writes into --out (default world_dir; the world_dir inputs from make_world.py are read as they are, except with
+--flatten-plots):
   world_shex.bin     area ids of the territories (u16) and the city footprints (terrain 16): 7, 3 or 1 hexes by
                      the city's tier in data/city_tiers.json (M11_MAP.md), with ways to the water opened for ports
   china_overrides.bin  edits of Koei's China block in final numbering ("WCO2"): make_world's, plus the
@@ -200,11 +205,16 @@ def wall_ou_cells(pack, clo, chi):
 # own area, at most 26% of the flat land there (every Koei city has 76 or more such hexes). New cities get the
 # tier of their town's population about AD 200 (data/city_population.json, by name, "pop"); without one, of
 # their rank; places that did not exist then get PLOT_GONE. They go 3-14 hexes out on flat land of the city's
-# own territory, at most PLOT_LAND_SHARE of it, so cities with little land get fewer.
+# own territory, at most PLOT_LAND_SHARE of it, so cities with little land get fewer. A city short of its count
+# that way may use up to PLOT_SHORT_SHARE of it; with --flatten-plots the cliffs nearest the city in its territory
+# (FLATTEN_REACH hexes) become land until that share holds its count (FLATTEN_MARGIN more for the roads).
 PLOT_TIERS = ((250000, 22), (100000, 20), (40000, 18), (15000, 15), (5000, 12), (0, 10))
 RANK_PLOTS = {1: 15, 2: 12, 3: 10}
 PLOT_GONE = 6
 PLOT_LAND_SHARE = 0.25
+PLOT_SHORT_SHARE = 0.5
+FLATTEN_REACH = (3, 10)
+FLATTEN_MARGIN = 1.5          # the roads connect_cities.py lays next take some of the flat land
 PLOT_MIN = 2                                    # ... but this many wherever the land allows
 PLOT_TERRAIN = (0, 1, 2, 3, 5, 9, 14)           # flat cover and banks (no roads, water, mountains)
 
@@ -218,15 +228,23 @@ def plot_count(c, pop):
     return RANK_PLOTS.get(c.get("rank", 3), PLOT_TIERS[-1][1])
 
 
-def place_plots(y0, x0, n, ok):
-    """up to n plot hexes (and no more than PLOT_LAND_SHARE of the land that may hold one) for the city at
+def plot_dist(y0, x0, y, x):
+    return np.hypot((y - y0) * 0.866, x + 0.5 * (y & 1) - x0 - 0.5 * (y0 & 1))
+
+
+def plot_cands(y0, x0, ok):
+    return {(y, x) for y in range(y0 - 17, y0 + 18) for x in range(x0 - 15, x0 + 16)
+            if 3 <= plot_dist(y0, x0, y, x) <= 14 and ok(y, x)}
+
+
+def place_plots(y0, x0, n, ok, share=PLOT_LAND_SHARE):
+    """up to n plot hexes (and no more than the share of the land that may hold one) for the city at
     (y0, x0), in patches of about 7 grown around seeds spread round the city 4-9 hexes out; ok(y, x): the hex
     may be a plot of this city"""
     def dist(y, x):
-        return np.hypot((y - y0) * 0.866, x + 0.5 * (y & 1) - x0 - 0.5 * (y0 & 1))
-    cand = {(y, x) for y in range(y0 - 17, y0 + 18) for x in range(x0 - 15, x0 + 16)
-            if 3 <= dist(y, x) <= 14 and ok(y, x)}
-    n = min(n, max(PLOT_MIN, int(PLOT_LAND_SHARE * len(cand))), len(cand))
+        return plot_dist(y0, x0, y, x)
+    cand = plot_cands(y0, x0, ok)
+    n = min(n, max(PLOT_MIN, int(share * len(cand))), len(cand))
     if n <= 0:
         return []
     k = max(1, round(n / 7))
@@ -458,6 +476,8 @@ def main():
     ap.add_argument("--verify", action="store_true", help="with --cities 42: compare with the exe's tables")
     ap.add_argument("--out", help="output directory (default: the world directory); the inputs are never modified")
     ap.add_argument("--game", default=str(GAME), help="game directory (san11pk.exe and Media/scenario/Scenario.s11 are read)")
+    ap.add_argument("--flatten-plots", action="store_true",
+                    help="make cliffs land where a city is short of facility plots (into world_dir's world_types)")
     a = ap.parse_args()
     global EXE, SCENARIO
     EXE = Path(a.game) / "san11pk.exe"
@@ -644,10 +664,57 @@ def main():
         if clo <= y < clo + 200 and chi <= x < chi + 200:
             return band_new[y - clo, x - chi]
         return area[y, x]
+    flattened = []
+    if a.flatten_plots:
+        import heapq
+        made = {}
+        for k, c in enumerate(new):
+            cid, want = 42 + k, plot_count(c, pop)
+            y0, x0 = c["lo"], c["hi"]
+            have = len(plot_cands(y0, x0, lambda y, x: 0 <= y < R and 0 <= x < Cc and owner(y, x) == cid
+                                  and t[y, x] in PLOT_TERRAIN and not rec[y, x, 5] and plot_free(y, x)))
+            need = int(np.ceil(FLATTEN_MARGIN * want / PLOT_SHORT_SHARE)) - have
+            if need <= 0:
+                continue
+
+            def cliff(y, x):
+                return (0 <= y < R and 0 <= x < Cc and not in_block(y, x) and t[y, x] == 15 and owner(y, x) == cid
+                        and FLATTEN_REACH[0] <= plot_dist(y0, x0, y, x) <= FLATTEN_REACH[1])
+            # the cliffs nearest the city first
+            heap = [(plot_dist(y0, x0, y, x), y, x) for y in range(y0 - 12, y0 + 13) for x in range(x0 - 12, x0 + 13)
+                    if cliff(y, x)]
+            heapq.heapify(heap)
+            n = 0
+            while heap and n < need:
+                _, y, x = heapq.heappop(heap)
+                if t[y, x] != 15:
+                    continue
+                ks = [int(t[h]) for h in hex_nbrs(y, x) if 0 <= h[0] < R and 0 <= h[1] < Cc and t[h] in (0, 1, 2, 3, 5, 9)]
+                t[y, x] = max(set(ks), key=ks.count) if ks else 0
+                rec[y, x, 0] = t[y, x]
+                made[(y, x)] = int(t[y, x])
+                n += 1
+            if n:
+                flattened.append(f"{c['name']} {n}")
+        for name in ("world_types.npy", "world_types.before_roads.npy"):
+            f = w / name
+            if f.exists() and made:
+                tw = np.load(f)
+                for (y, x), k_ in made.items():
+                    if tw[y, x] == 15:
+                        tw[y, x] = k_
+                np.save(f, tw)
+        print(f"flatten-plots: {len(made)} cliffs made land for {len(flattened)} cities short of facility plots"
+              + (f": {', '.join(flattened)}" if flattened else ""))
     for k, c in enumerate(new):
         cid, want = 42 + k, plot_count(c, pop)
-        got = place_plots(c["lo"], c["hi"], want, lambda y, x: 0 <= y < R and 0 <= x < Cc and owner(y, x) == cid
-                          and t[y, x] in PLOT_TERRAIN and not rec[y, x, 5] and plot_free(y, x))
+
+        def ok(y, x):
+            return (0 <= y < R and 0 <= x < Cc and owner(y, x) == cid
+                    and t[y, x] in PLOT_TERRAIN and not rec[y, x, 5] and plot_free(y, x))
+        got = place_plots(c["lo"], c["hi"], want, ok)
+        if len(got) < want:
+            got = place_plots(c["lo"], c["hi"], want, ok, PLOT_SHORT_SHARE)
         for y, x in got:
             t[y, x] = 1
             if clo <= y < clo + 200 and chi <= x < chi + 200:
