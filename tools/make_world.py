@@ -468,7 +468,7 @@ def climate_weights(e0, kg, dchina, rng):
     return w
 
 
-def land_cover(shape, weights, dw, dmt, e0, rng, land, iters=3):
+def land_cover(shape, weights, dw, dmt, e0, rng, land, iters=3, driver=None):
     """Hex-scale mix of COVER types: argmax of log-weight + coherent noise (patches of ~2-6 hexes)."""
     K = len(COVER)
     wt = np.zeros((K,) + shape, np.float32)
@@ -478,6 +478,12 @@ def land_cover(shape, weights, dw, dmt, e0, rng, land, iters=3):
     near_water = np.exp(-(np.minimum(dw, 20) - 1) / 1.5)
     near_mtn = np.exp(-(np.minimum(dmt, 20) - 1) / 2.0)
     wt[COVER.index(MARSH)] *= 0.35 + 2.2 * near_water * (e0 < 900)
+    if driver is not None:                  # river floodplains (the Nile, Mesopotamia, the Indus): farmland, not sand
+        flood = np.exp(-(np.minimum(driver, 20) - 1) / 2.0)
+        wt[COVER.index(SAND)] *= 1 - 0.8 * flood
+        wt[COVER.index(WASTE)] *= 1 - 0.5 * flood
+        wt[COVER.index(SOIL)] *= 1 + 1.5 * flood
+        wt[COVER.index(GRASS)] *= 1 + 1.0 * flood
     wt[COVER.index(WASTE)] *= 0.6 + 1.0 * near_mtn + 0.8 * smoothstep(e0, 1200, 3000)
     wt[COVER.index(FOREST)] *= 0.7 + 0.7 * near_mtn
     wt /= wt.sum(0, keepdims=True)
@@ -1062,7 +1068,8 @@ def main():
             kg[r0:r0 + 200] = koppen.classes_at(lon_, lat_, grid).reshape(lo_.shape)
         weights = climate_weights(e0, kg, dchina, rng)
         cover_land = land & ~mtn
-        cover = land_cover((R, C), weights, dw, dmt, e0, rng, cover_land)
+        driver = ndimage.distance_transform_edt(~np.isin(t, (STREAM, RIVER))).astype(np.float32)
+        cover = land_cover((R, C), weights, dw, dmt, e0, rng, cover_land, driver=driver)
         t[cover_land] = cover[cover_land]
         joined = connect_china_rivers(t, spec)
         t = continue_china_edge(t, spec, rng)
