@@ -24,6 +24,7 @@
 #include "persons.h"
 #include "cityshape.h"
 #include "movement.h"
+#include "threads.h"
 
 // ---------------------------------------------------------------- logging
 static FILE* g_log = nullptr;
@@ -1796,6 +1797,8 @@ static void init() {
     g_log = _wfsopen(lp, L"w", _SH_DENYNO);   // shared so the log can be read while the game runs
     char ap[MAX_PATH]; GetModuleFileNameA(nullptr, ap, MAX_PATH);
     logf("worldmod loaded; [%ls] W=%d H=%d china=(%d,%d) enable=%d verify_only=%d", g_section, g_cfg.W, g_cfg.H, g_cfg.X0, g_cfg.Y0, g_cfg.enable, g_cfg.verifyOnly);
+    wchar_t prev[MAX_PATH]; swprintf_s(prev, L"%s\\worldmod_%s.prev.log", g_dir, g_section);
+    MoveFileExW(lp, prev, MOVEFILE_REPLACE_EXISTING);   // keep the last run's log (a crash report) across a restart
     logf("exe path as the game sees it (ANSI): %s", ap);
     if (strchr(ap, '?')) {
         g_pathBad = true;
@@ -1808,6 +1811,7 @@ static void init() {
     if (g_cfg.automation) profilerInit(logf);
     if (g_cfg.heapCheck) { CreateThread(nullptr, 1 << 18, heapCheckThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr); logf("heap check thread started"); }
     if (g_cfg.watch) { RaiseException(WATCH_ARM, 0, 0, nullptr); logf("watchpoint armed on %08x (main thread)", g_cfg.watch); g_watchTest = 1; }
+    if (!g_cfg.verifyOnly) threadStacksInstall(g_dir, g_section, logf);   // before the D3D drivers start their threads
     if (g_cfg.watchObjList) {
         if (!g_cfg.watch) RaiseException(WATCH_ARM, 0, 0, nullptr);
         CreateThread(nullptr, 1 << 16, objListThread, nullptr, 0, nullptr);
