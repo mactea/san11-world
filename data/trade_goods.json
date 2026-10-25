@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "about": "M13 trade goods (M13_TRADE.md). tools/trade_data.py turns this file into trade.bin: per city and good a base price (gold per load) and a producer level, plus city flags and market sizes. Prices: producer price * (1 + distance / per_hexes) ^ exp (capped at cap x), times the demand of the buyer's market group. Distance = hex distance to the nearest producer (cheaper producers count with their level factor).",
+
+  "price_model": {
+    "per_hexes": 100,
+    "level_factor": { "1": 1.2, "2": 1.0, "3": 0.85 },
+    "note": "1 hex is about 8-9 km on this map (Rome-Chang'an 1005 hexes ~ 8100 km); China is Koei's map and is denser (Luoyang-Chang'an 26 hexes)."
+  },
+
+  "market": {
+    "size_tier": { "1": 300, "2": 180, "3": 100 },
+    "size_koei": 250,
+    "hub_size_factor": 2.0,
+    "note": "Loads a market absorbs before its price moves by trade_impact percent (worldmod.ini). Koei's 42 Chinese cities count as tier 1-like."
+  },
+
+  "china_zhou": {
+    "about": "Koei's 42 cities (ids 0..41) are not in cities_world.json; their Han province (州) decides their producer region and market group.",
+    "0": "幽州", "1": "幽州", "2": "幽州", "3": "冀州", "4": "青州", "5": "并州", "6": "冀州", "7": "青州",
+    "8": "徐州", "9": "徐州", "10": "揚州", "11": "兗州", "12": "兗州", "13": "豫州", "14": "豫州", "15": "司隸",
+    "16": "荊州", "17": "司隸", "18": "荊州", "19": "涼州", "20": "涼州", "21": "涼州", "22": "揚州", "23": "揚州",
+    "24": "揚州", "25": "揚州", "26": "揚州", "27": "荊州", "28": "荊州", "29": "荊州", "30": "荊州", "31": "荊州",
+    "32": "荊州", "33": "荊州", "34": "荊州", "35": "益州", "36": "益州", "37": "益州", "38": "益州", "39": "益州",
+    "40": "南中", "41": "南中"
+  },
+  "koei_ports": [3, 7, 8, 22, 23, 24],
+
+  "groups": {
+    "about": "Market groups: the demand multiplier of a good applies to every city of the group. Regions not listed belong to no group (multiplier 1).",
+    "中國": ["幽州", "冀州", "青州", "并州", "徐州", "揚州", "兗州", "豫州", "司隸", "荊州", "涼州", "益州", "南中", "交州", "夷洲"],
+    "草原": ["西域", "康居", "匈奴", "鮮卑", "西羌"],
+    "東夷": ["東夷", "倭"],
+    "南海": ["南海"],
+    "天竺": ["天竺", "貴霜"],
+    "安息": ["安息", "米底", "美索不達米亞", "亞美尼亞", "伊比利亞", "阿爾巴尼亞", "高加索", "科爾基斯", "奧斯若恩"],
+    "阿拉伯": ["阿拉伯", "阿克蘇姆", "庫施"],
+    "羅馬": ["意大利", "西西里", "撒丁", "科西嘉", "西班牙", "高盧", "不列顛", "雷蒂亞", "諾里庫姆", "潘諾尼亞", "達爾馬提亞", "默西亞", "達契亞", "色雷斯", "馬其頓", "希臘", "亞細亞", "呂基亞", "加拉太", "卡帕多奇亞", "奇里乞亞", "本都", "敘利亞", "猶太", "塞浦路斯", "埃及", "昔蘭尼加", "阿非利加", "努米底亞", "茅利塔尼亞", "博斯普魯斯"],
+    "北方": ["日耳曼", "北歐", "波羅的", "維斯瓦", "羅斯", "伏爾加", "烏拉爾", "西伯利亞", "薩爾馬提亞"],
+    "沙漠": ["撒哈拉", "利比亞"]
+  },
+
+  "hubs": {
+    "about": "Entrepots: they buy and sell every good (others only sell what they produce), their prices recover faster (trade_revert_hub), transit tax is lower there (trade_tax_hub), their market is bigger. Silk road, incense road and the monsoon route.",
+    "cities": {
+      "15": "洛陽", "17": "長安", "115": "敦煌 (Dunhuang, gate of the Western Regions)", "111": "疏勒 (Kashgar)",
+      "110": "大宛 (Ferghana)", "109": "藍氏 (Bactra)", "116": "富樓 (Purushapura, Kushan capital)",
+      "98": "木鹿 (Merv)", "90": "斯賓 (Ctesiphon)", "76": "帕爾 (Palmyra)", "74": "安都 (Antioch)",
+      "165": "佩特 (Petra)", "302": "格拉 (Gerrha)", "80": "黎軒 (Alexandria)", "42": "羅馬 (Rome)",
+      "66": "拜占 (Byzantium)", "205": "婆盧 (Barygaza)", "416": "穆濟 (Muziris)", "101": "扶南 (Oc Eo)",
+      "120": "交趾 (Jiaozhi)", "119": "番禺 (Panyu)"
+    }
+  },
+
+  "goods": [
+    {
+      "key": "silk", "name": "絲", "base": 30, "exp": 1.40, "cap": 40,
+      "producers": [
+        { "zhou": "青州", "level": 3 }, { "zhou": "兗州", "level": 3 }, { "zhou": "豫州", "level": 2 },
+        { "zhou": "冀州", "level": 2 }, { "zhou": "徐州", "level": 2 }, { "zhou": "司隸", "level": 1 },
+        { "zhou": "揚州", "level": 1 }, { "zhou": "荊州", "level": 1 }
+      ],
+      "demand": { "羅馬": 1.3, "安息": 1.1, "中國": 0.8 },
+      "sources": "Han silk from 齊 (Qi, 臨淄 / 北海) and 兗豫 (襄邑 brocade at 陳留); Pliny NH 6.20, 12.84 (100 million sesterces a year to India, China and Arabia); silk in Rome sold for its weight in gold (late sources) - tens of times the Chinese price."
+    },
+    {
+      "key": "brocade", "name": "蜀錦", "base": 80, "exp": 1.35, "cap": 35,
+      "producers": [
+        { "city": 39, "level": 3 }, { "city": 38, "level": 1 }, { "city": 37, "level": 1 }, { "city": 35, "level": 1 }, { "city": 510, "level": 1 }
+      ],
+      "demand": { "羅馬": 1.2, "中國": 1.0 },
+      "sources": "成都 錦官城 (Huayang Guozhi); Shu brocade the luxury silk of the Three Kingdoms (諸葛亮: 今民貧國虛，決敵之資，唯仰錦耳)."
+    },
+    {
+      "key": "lacquer", "name": "漆器", "base": 30, "exp": 1.30, "cap": 20,
+      "producers": [
+        { "zhou": "益州", "level": 3 }, { "zhou": "荊州", "level": 2 }, { "zhou": "揚州", "level": 1 }
+      ],
+      "demand": { "草原": 1.3, "東夷": 1.4, "南海": 1.2 },
+      "sources": "蜀郡 / 廣漢 imperial lacquer workshops (inscribed cups found in Korea and Mongolia); 長沙 馬王堆 lacquer."
+    },
+    {
+      "key": "iron", "name": "鐵器", "base": 25, "exp": 1.10, "cap": 8,
+      "producers": [
+        { "zhou": "冀州", "level": 3 }, { "city": 16, "level": 3 }, { "zhou": "司隸", "level": 2 }, { "zhou": "青州", "level": 1 },
+        { "city": 147, "level": 2 }, { "city": 211, "level": 1 }, { "city": 213, "level": 1 }
+      ],
+      "demand": { "草原": 1.6, "東夷": 1.4, "北方": 1.3, "羅馬": 1.1 },
+      "sources": "Han iron offices (鐵官) in 河北 and 南陽 宛; Pliny NH 34.145 ranks Seric iron first, Parthian second; Noric steel (維魯 / Virunum); south Indian wootz."
+    },
+    {
+      "key": "horse", "name": "馬", "base": 60, "exp": 1.00, "cap": 5,
+      "producers": [
+        { "city": 21, "level": 3 }, { "city": 20, "level": 2 }, { "city": 19, "level": 2 },
+        { "city": 110, "level": 3 }, { "city": 106, "level": 2 }, { "region": "匈奴", "level": 2 }, { "region": "鮮卑", "level": 2 },
+        { "city": 297, "level": 2 }, { "city": 298, "level": 2 }, { "region": "阿拉伯", "level": 1 }
+      ],
+      "demand": { "中國": 1.6, "南海": 1.4, "天竺": 1.5, "羅馬": 0.9 },
+      "sources": "涼州 horses (涼州大馬，橫行天下); 大宛 汗血馬 (Shiji 123); 烏孫 天馬; Nisaean horses of Media."
+    },
+    {
+      "key": "jade", "name": "玉", "base": 40, "exp": 1.30, "cap": 25,
+      "producers": [
+        { "city": 112, "level": 3 }, { "city": 216, "level": 2 }, { "city": 427, "level": 1 }
+      ],
+      "demand": { "中國": 2.0, "草原": 1.0, "羅馬": 0.5, "安息": 0.6 },
+      "sources": "于闐 (Khotan) nephrite: Hanshu 96 (于闐 多玉石); the 'jade road' east into China."
+    },
+    {
+      "key": "pepper", "name": "胡椒", "base": 10, "exp": 1.20, "cap": 30,
+      "producers": [
+        { "city": 416, "level": 3 }, { "city": 105, "level": 2 }, { "city": 211, "level": 2 }, { "city": 213, "level": 2 },
+        { "city": 102, "level": 1 }, { "city": 465, "level": 1 }, { "city": 466, "level": 1 }
+      ],
+      "demand": { "羅馬": 1.4, "中國": 1.2, "安息": 1.1 },
+      "sources": "Muziris papyrus (2nd c., Vienna P. 40822): cargo of the Hermapollon; Periplus Maris Erythraei 56 (pepper shipped from Muziris and Nelcynda); Pliny NH 12.28: pepper 4 denarii a pound at Rome, long pepper 15."
+    },
+    {
+      "key": "cotton", "name": "棉布", "base": 15, "exp": 1.20, "cap": 15,
+      "producers": [
+        { "city": 205, "level": 3 }, { "city": 104, "level": 2 }, { "city": 204, "level": 2 }, { "city": 117, "level": 2 },
+        { "city": 118, "level": 1 }, { "city": 208, "level": 1 }, { "city": 421, "level": 2 }
+      ],
+      "demand": { "羅馬": 1.2, "阿拉伯": 1.3, "中國": 1.1 },
+      "sources": "Periplus 48-51: muslins and cotton cloth from Ozene (優禪 Ujjain) shipped at Barygaza (婆盧)."
+    },
+    {
+      "key": "glass", "name": "玻璃", "base": 20, "exp": 1.40, "cap": 35,
+      "producers": [
+        { "city": 80, "level": 3 }, { "city": 74, "level": 2 }, { "city": 75, "level": 2 }, { "city": 166, "level": 1 }, { "city": 42, "level": 1 }
+      ],
+      "demand": { "中國": 1.5, "天竺": 1.2, "東夷": 1.3 },
+      "sources": "Sidonian and Alexandrian glass (Pliny NH 36.190-193; Periplus lists glass for Barygaza and Muziris); Roman glass in Han tombs (廣州 / 洛陽); Weilue: 大秦 makes 琉璃 of ten colours."
+    },
+    {
+      "key": "coral", "name": "珊瑚", "base": 20, "exp": 1.40, "cap": 35,
+      "producers": [
+        { "city": 46, "level": 3 }, { "city": 128, "level": 3 }, { "city": 131, "level": 2 }, { "city": 45, "level": 2 }, { "city": 226, "level": 1 }
+      ],
+      "demand": { "天竺": 1.6, "中國": 1.4, "安息": 1.1 },
+      "sources": "Pliny NH 32.21-23: Indian men value coral as Romans value pearls; Mediterranean red coral from Sicily and Sardinia; Periplus lists coral among exports to Barbaricum and Barygaza."
+    },
+    {
+      "key": "incense", "name": "乳香", "base": 25, "exp": 1.20, "cap": 25,
+      "producers": [
+        { "city": 304, "level": 3 }, { "city": 451, "level": 3 }, { "city": 303, "level": 2 }, { "city": 450, "level": 1 }, { "city": 491, "level": 2 }
+      ],
+      "demand": { "羅馬": 1.4, "中國": 1.3, "安息": 1.1 },
+      "sources": "Pliny NH 12.51-65 (frankincense of the Sabaeans, carried by camel to Gaza; 688 denarii a camel load in costs); Periplus 27-29 (Cana, Moscha); Somali coast (柏培 Berbera)."
+    },
+    {
+      "key": "fur", "name": "皮毛", "base": 20, "exp": 1.20, "cap": 20,
+      "producers": [
+        { "region": "西伯利亞", "level": 3 }, { "city": 197, "level": 3 }, { "city": 395, "level": 2 }, { "city": 124, "level": 2 },
+        { "region": "羅斯", "level": 2 }, { "region": "北歐", "level": 2 }, { "region": "伏爾加", "level": 2 }, { "region": "烏拉爾", "level": 2 },
+        { "region": "鮮卑", "level": 2 }, { "region": "波羅的", "level": 1 }, { "region": "匈奴", "level": 1 }
+      ],
+      "demand": { "中國": 1.4, "羅馬": 1.3, "安息": 1.3, "天竺": 1.0 },
+      "sources": "挹婁 sable (挹婁貂, Sanguozhi 30); Scythian / Baltic fur routes (Herodotus 4); later Rus fur trade."
+    },
+    {
+      "key": "pearl", "name": "珍珠", "base": 50, "exp": 1.40, "cap": 30,
+      "producers": [
+        { "city": 502, "level": 3 }, { "city": 102, "level": 3 }, { "city": 212, "level": 2 }, { "city": 300, "level": 2 }, { "city": 302, "level": 2 }
+      ],
+      "demand": { "羅馬": 1.5, "中國": 1.1, "安息": 1.2 },
+      "sources": "合浦 珠還 (Hou Hanshu 76, 孟嘗); Pliny NH 9.106-123 (pearls of Taprobane and the Persian Gulf the most valued at Rome); Periplus 59 (pearl fishery at Colchi under the Pandya of Madurai 摩頭)."
+    },
+    {
+      "key": "salt", "name": "鹽", "base": 8, "exp": 0.80, "cap": 3,
+      "producers": [
+        { "zhou": "青州", "level": 3 }, { "city": 3, "level": 3 }, { "zhou": "徐州", "level": 2 }, { "city": 24, "level": 2 }, { "city": 23, "level": 2 },
+        { "city": 38, "level": 2 }, { "city": 218, "level": 2 }, { "zhou": "交州", "level": 1 }, { "city": 5, "level": 1 }
+      ],
+      "demand": { "草原": 1.5 },
+      "sources": "Han salt offices (鹽官): sea salt of 齊 / 渤海 and 吳會, well salt of 巴蜀 (江州 / 臨邛), lake salt of 河東 and 樓蘭 (Lop Nur)."
+    }
+  ]
+}
