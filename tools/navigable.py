@@ -25,9 +25,11 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
-STREAM, RIVER, SEA, ROAD, PLANK, BRIDGE, CITY, MOUNTAIN = 6, 7, 8, 10, 11, 12, 16, 15
+STREAM, RIVER, SEA, ROAD, PLANK, BRIDGE, FORD, CITY, MOUNTAIN = 6, 7, 8, 10, 11, 12, 13, 16, 15
 OCEAN_SEA = 5000                 # sea hexes a water body needs to count as open sea
-STEP = {RIVER: 0.4, SEA: 0.4, STREAM: 1.0, BRIDGE: 1.0, MOUNTAIN: 16.0}   # other land: LAND
+# 浅瀬: the generated 川 outside Koei's block became 浅瀬 or 河 (terrain_patches.py "streams"); a thin river is
+# still the river's course
+STEP = {RIVER: 0.4, SEA: 0.4, STREAM: 1.0, FORD: 1.0, BRIDGE: 1.0, MOUNTAIN: 16.0}   # other land: LAND
 LAND = 8.0
 
 
@@ -122,7 +124,7 @@ def courses(tb, new, tiers, spec, patch=None):
             yy, xx = to_hex(lo, x)
             gy, gx = int(yy[0]), int(xx[0])
             disk = {(gy, gx)} | {n for h in nbrs(gy, gx) for n in nbrs(*h)}      # within 2 hexes, on the river
-            goals.append({h for h in disk if tb[h] in (STREAM, RIVER)} or disk)
+            goals.append({h for h in disk if tb[h] in (STREAM, FORD, RIVER)} or disk)
         path = []
         for g in goals + [None]:
             seg = search(tb, blocked, ocean, start, g)
@@ -142,7 +144,7 @@ def courses(tb, new, tiers, spec, patch=None):
                     hexes.append([y, x, RIVER])
             rec["hexes"] = hexes
             rec["path"] = [list(h) for h in seen]
-            rec["stream"] = sum(1 for y, x, k in hexes if tb[y, x] == STREAM)
+            rec["stream"] = sum(1 for y, x, k in hexes if tb[y, x] in (STREAM, FORD))
             rec["road"] = sum(1 for y, x, k in hexes if tb[y, x] in (ROAD, PLANK, BRIDGE))
             rec["land"] = len(hexes) - rec["stream"] - rec["road"]
             rec["length"] = len(seen)

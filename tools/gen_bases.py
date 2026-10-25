@@ -57,7 +57,7 @@ def hex_nbrs(y, x):
 ROT = (1, 5, 4, 0, 2, 3)            # hex_nbrs indices clockwise: E, lower right, lower left, W, upper left, upper right
 SHAPE_7, SHAPE_1 = 0, 7             # city_shapes.bin shape: 0 = 7 hexes, 1..6 = triangle k = shape - 1, 7 = 1 hex
 NAV = (7, 8)                        # navigable water: 河, 海 (川 6 is not)
-CELL_SCORE = {6: -60, 7: -100, 8: -100, 15: -8, 14: -2}     # choosing a triangle: avoid water, cliffs, banks
+CELL_SCORE = {6: -60, 13: -60, 7: -100, 8: -100, 15: -8, 14: -2}   # choosing a triangle: avoid water, fords, cliffs, banks
 TIER_FLAT = {1: (8, 12), 2: (6, 10), 3: (4, 7)}             # land levelled around the model, blended out to (vertices)
 LARGEST = ("羅馬", "黎軒", "安都", "斯賓", "迦太")           # Rome, Alexandria, Antioch, Ctesiphon, Carthage: model toL
 PORT_REACH = 6                      # a port (city_tiers.json "port") may get a way this many hexes long to the water

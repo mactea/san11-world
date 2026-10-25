@@ -45,7 +45,7 @@ for k, c in {0: 1.0, 1: 1.0, 2: 1.4, 3: 2.2, 4: 3.0, 5: 1.6, 9: 1.3, SHORE: 1.2,
              17: 1.0, 18: 1.0}.items():
     COST[k] = c
 # the game's A* (0x567520) may enter these terrain types (table 0x8a5df8); 7/8 by boat
-ASTAR = np.zeros(256, bool); ASTAR[[0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 16, 17, 18]] = True
+ASTAR = np.zeros(256, bool); ASTAR[[0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19]] = True
 FOOT = ASTAR.copy(); FOOT[[RIVER, SEA]] = False
 
 
@@ -134,6 +134,8 @@ def main():
                         | (koei_shex[..., 3] != 0))
     border = dist_to_china(spec, R, C) <= 3
     border[s_lo, s_hi] = False
+    in_block = np.zeros((R, C), bool)
+    in_block[s_lo, s_hi] = True
 
     # river ports: the 河 channels to the open sea (tools/navigable.py, data/navigable_rivers.json), the same
     # gen_bases.py found, derived from the terrain without roads; laid first, so roads cross them by ferry
@@ -169,7 +171,7 @@ def main():
             k = t[y, x]
             if k == MOUNTAIN:
                 t[y, x] = PLANK; made[PLANK] += 1
-            elif k == STREAM:
+            elif k == STREAM or (k == FORD and not in_block[y, x]):   # 浅瀬 outside Koei's block: bridged
                 t[y, x] = BRIDGE; made[BRIDGE] += 1
             elif k == RIVER:
                 made[RIVER] += 1                           # crossed by boat, left as it is

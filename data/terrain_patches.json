@@ -10,5 +10,7 @@
    "cover": {"0": 0.35, "1": 0.25, "5": 0.30, "9": 0.10}},
   {"name": "迦畢試—喀布爾河谷平原 Kapisa / Koh-i-Daman", "center": [35.0, 69.27], "radius": 13, "max_elev": 2300,
    "cover": {"0": 0.30, "1": 0.40, "9": 0.20, "5": 0.10}}
- ]
+ ],
+ "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4, "navigable_core_hexes": 1.5,
+             "join_max_gap": 3, "join_lowland_max_gap": 10, "join_lowland_max_elev": 50}
 }

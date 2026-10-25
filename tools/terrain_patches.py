@@ -3,7 +3,10 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
 
     {"straits": [{"name": ..., "line": [[lat, lon], ...], "max_fill": 400}, ...],
      "plains":  [{"name": ..., "center": [lat, lon], "radius": 11, "max_elev": 2100,
-                  "cover": {"0": 0.3, "1": 0.4, ...}}, ...]}
+                  "cover": {"0": 0.3, "1": 0.4, ...}}, ...],
+     "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4,
+                 "navigable_core_hexes": 1.5, "join_max_gap": 3, "join_lowland_max_gap": 10,
+                 "join_lowland_max_elev": 50}}
 
 * straits: a sea strait narrower than a hex (Bosporus, Dardanelles, Messina, ...). The hexes along "line" become
   sea (8), a path of hex neighbours, so at least 1 hex of open water joins the two seas. Below-sea-level land
@@ -16,17 +19,36 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
   "max_elev" metres (and is not water) and that is connected to the centre through such hexes is the floor; its
   cliffs (15) become land cover drawn from "cover" (terrain type -> share) in patches of a few hexes,
   deterministic per patch name. Other terrain on the floor stays.
+* streams: the generated 川 6 (impassable to every unit and to ships) is replaced outside Koei's block. Koei's 川
+  are about 2 hexes wide; make_world.py draws Natural Earth's medium rivers up to 6-9 hexes wide near the sea, where
+  they look like (and should be) navigable water. Each 川 hex, and each 渡所 12 make_world.py's own roads put on one,
+  takes the class of the nearest Natural Earth centreline of scalerank <= "ford_max_scalerank" within "match_hexes":
+    - scalerank <= "navigable_max_scalerank" (also when such a line is within "navigable_core_hexes", the confluence
+      of a medium river and a thin one): 河 7, sailed by ships and crossed by land units by boat like 長江; its 渡所
+      become 河 too (roads end at the banks, as on every 河);
+    - else 浅瀬 13 (ford: land units wade, ships cannot); a 渡所 there stays 渡所 (roads cross fords by bridge);
+    - no centreline near (Koei's 川 carried a few hexes out of the block by make_world.py): 浅瀬, or 海 8 where the
+      DEM is below sea level (his coastal 川 strip continued into the sea).
+  Then each 河/海 body holding such new 河 that is not joined to the open sea (a body with at least OCEAN_SEA sea
+  hexes) is joined through land that becomes 河 (no cliffs, cities, the new cities' 7 hexes or Koei's block): to the
+  open sea through at most "join_max_gap" hexes, else to the open sea through at most "join_lowland_max_gap" hexes
+  no higher than "join_lowland_max_elev" metres (deltas and estuaries, where the centrelines stop short of the
+  coast), else to another 河/海 body through at most "join_max_gap" hexes (the 1-2 hex banks and rasterisation gaps
+  that cut rivers off). Repeated until nothing joins.
 * (no data) 渡所 12 on 河 7: Koei never puts a ferry on 河 (his 長江 and 黃河 are crossed by boat; all 88 of his
   ferries are on 川 6). make_world.py's own road builder used to bridge 河 too; a ferry with at least two 河
-  neighbours and no 川 one is turned back into 河 so the river stays navigable.
+  neighbours and no 川 or 浅瀬 one is turned back into 河 so the river stays navigable.
 
 Koei's China block is never changed. The result depends only on the data, the DEM and the terrain, and applying it
 again changes nothing, so it can run on a fresh classification (make_world.py, before the cities and roads) and on
 an existing world directory:
 
     python terrain_patches.py [world_dir]     (world_types.before_roads.npy and world_types.npy, rewritten in place)
+
+The streams step reads data/raw/ne_rivers/*.zip (the Natural Earth rivers make_world.py draws).
 """
 import argparse
+import heapq
 import json
 import zlib
 from collections import deque
@@ -36,7 +58,8 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
-STREAM, RIVER, SEA, BRIDGE, MOUNTAIN = 6, 7, 8, 12, 15
+STREAM, RIVER, SEA, BRIDGE, FORD, MOUNTAIN, CITY = 6, 7, 8, 12, 13, 15, 16
+OCEAN_SEA = 5000                 # sea hexes a water body needs to count as open sea (as tools/navigable.py)
 
 
 def nbrs(y, x):
@@ -100,9 +123,136 @@ def flood(mask, seeds, limit):
     return seen
 
 
-def apply(t, e0, geo, spec):
+_LINES = {}
+
+
+def river_lines(geo, R, C, max_rank):
+    """hexes on Natural Earth river centrelines: (R, C) uint8, the lowest scalerank through each hex (255: none)"""
+    key = (id(geo), R, C, max_rank)
+    if key not in _LINES:
+        _LINES[key] = _river_lines(geo, R, C, max_rank)
+    return _LINES[key]
+
+
+def _river_lines(geo, R, C, max_rank):
+    from make_world import lonlat_to_hex, read_shapes, to_hex
+    out = np.full((R, C), 255, np.uint8)
+    zips = sorted((DATA / "raw/ne_rivers").glob("*.zip"))
+    if not zips:
+        raise SystemExit("terrain_patches.json streams: data/raw/ne_rivers/*.zip is missing (python san11kit.py download)")
+    for sr in read_shapes(zips[0]).iterShapeRecords():
+        rank = int(sr.record["scalerank"])
+        if rank > max_rank:
+            continue
+        pts = np.asarray(sr.shape.points, dtype=float)
+        parts = list(sr.shape.parts) + [len(pts)]
+        for a, b in zip(parts[:-1], parts[1:]):
+            p = pts[a:b]
+            if len(p) < 2:
+                continue
+            seg = np.hypot(*np.diff(p, axis=0).T)
+            n = np.maximum(1, np.ceil(seg / 0.02).astype(int))
+            dense = np.concatenate([np.linspace(p[i], p[i + 1], n[i], endpoint=False) for i in range(len(seg))] + [p[-1:]])
+            lo, x = lonlat_to_hex(geo, dense[:, 0], dense[:, 1])
+            if lo.max() < -3 or lo.min() > R + 3 or x.max() < -3 or x.min() > C + 3:
+                continue
+            yl, yh = to_hex(lo, x)
+            ok = (yl >= 0) & (yl < R) & (yh >= 0) & (yh < C)
+            np.minimum.at(out, (yl[ok], yh[ok]), rank)
+    return out
+
+
+def water_bodies(t):
+    """(labels of the 河/海 bodies, -1 elsewhere; mask of the bodies joined to the open sea)"""
+    from connect_cities import components
+    lab = components(np.isin(t, (RIVER, SEA)))
+    n_sea = np.bincount(lab[t == SEA] + 1, minlength=lab.max() + 2)
+    big = np.flatnonzero(n_sea >= OCEAN_SEA) - 1
+    return lab, np.isin(lab, big[big >= 0])
+
+
+def join_gap(lab, ocean, comp, allowed, max_gap):
+    """fewest allowed hexes (at most max_gap) from water body comp to other water: {0: hexes to the open sea,
+    1: hexes to another 河/海 body} (the keys found)"""
+    R, C = lab.shape
+    ys, xs = np.nonzero(lab == comp)
+    heap, seen, found = [], set(), {}
+    for y, x in zip(ys.tolist(), xs.tolist()):
+        for n in nbrs(y, x):
+            if 0 <= n[0] < R and 0 <= n[1] < C and lab[n] < 0 and allowed[n]:
+                heapq.heappush(heap, (1, n, (n,)))
+    while heap and 0 not in found:
+        k, h, path = heapq.heappop(heap)
+        if h in seen:
+            continue
+        seen.add(h)
+        for n in nbrs(*h):
+            if not (0 <= n[0] < R and 0 <= n[1] < C) or n in seen:
+                continue
+            if lab[n] >= 0 and lab[n] != comp:
+                found.setdefault(0 if ocean[n] else 1, path)
+            elif lab[n] < 0 and allowed[n] and k < max_gap:
+                heapq.heappush(heap, (k + 1, n, path + (n,)))
+    return found
+
+
+def streams(t, e0, geo, cfg, china, avoid=None):
+    """the streams rule (module docstring) on t in place; returns report lines"""
+    from scipy import ndimage
+    R, C = t.shape
+    cand = np.isin(t, (STREAM, BRIDGE)) & ~china
+    if not (cand & (t == STREAM)).any():
+        return []                                          # applied before: nothing to do
+    nav_max, ford_max = int(cfg.get("navigable_max_scalerank", 5)), int(cfg.get("ford_max_scalerank", 8))
+    match, core = float(cfg.get("match_hexes", 4)), float(cfg.get("navigable_core_hexes", 1.5))
+    rank = river_lines(geo, R, C, ford_max)
+    d_nav = ndimage.distance_transform_edt(rank > nav_max)
+    d_any = ndimage.distance_transform_edt(rank > ford_max)
+    sourced = d_any <= match
+    nav = cand & sourced & ((d_nav <= d_any) | (d_nav <= core))
+    n = {"川": int((cand & (t == STREAM)).sum()), "渡所": int((cand & (t == BRIDGE)).sum()),
+         "渡所→河": int((nav & (t == BRIDGE)).sum())}
+    for key, mask, k in (("河", nav, RIVER), ("浅瀬", cand & sourced & ~nav & (t == STREAM), FORD),
+                         ("海 (no centreline, below sea level)", cand & ~sourced & (t == STREAM) & (e0 < 0), SEA),
+                         ("浅瀬 (no centreline)", cand & ~sourced & (t == STREAM), FORD)):
+        n[key] = int(mask.sum())
+        t[mask] = k
+    out = ["streams: " + ", ".join(f"{k} {v}" for k, v in n.items())]
+    # join the new 河 to the open sea through short gaps
+    allowed = ~china & ~np.isin(t, (RIVER, SEA, MOUNTAIN, CITY, 17, 18))
+    if avoid is not None:
+        allowed &= ~avoid
+    max_gap, low_gap = int(cfg.get("join_max_gap", 3)), int(cfg.get("join_lowland_max_gap", 10))
+    lowland = e0 <= float(cfg.get("join_lowland_max_elev", 50))     # deltas and estuaries
+    joined, gap = [], {}
+    while True:
+        lab, ocean = water_bodies(t)
+        todo = sorted({int(c) for c in np.unique(lab[nav]) if c >= 0} - set(np.unique(lab[ocean]).tolist()))
+        path = None
+        for comp in todo:
+            short = join_gap(lab, ocean, comp, allowed, max_gap)
+            path = short.get(0) or join_gap(lab, ocean, comp, allowed & lowland, low_gap).get(0) or short.get(1)
+            if path:
+                break
+        if not path:
+            break
+        for h in path:
+            gap[int(t[h])] = gap.get(int(t[h]), 0) + 1
+            t[h] = RIVER
+            allowed[h] = False
+        joined.append(len(path))
+    left = sorted({int(c) for c in np.unique(lab[nav]) if c >= 0} - set(np.unique(lab[ocean]).tolist()))
+    out.append(f"streams: {len(joined)} joins through {sum(joined)} land hexes made 河 (at most {max_gap} each, "
+               f"{low_gap} through lowland to the open sea; "
+               f"from {', '.join(f'{k}: {v}' for k, v in sorted(gap.items()))}); {len(left)} water bodies with new 河 "
+               f"still apart from the open sea, holding {int(sum((nav & (lab == c)).sum() for c in left))} of the new 河")
+    return out
+
+
+def apply(t, e0, geo, spec, avoid=None):
     """apply data/terrain_patches.json (and the 河 ferry rule) to t in place; e0: hex elevation (metres, the
-    make_world.py sample). Returns report lines."""
+    make_world.py sample); avoid: optional mask of hexes no river is joined through (the new cities' 7 hexes).
+    Returns report lines."""
     from make_world import COVER, noise
     data = load()
     R, C = t.shape
@@ -140,7 +290,7 @@ def apply(t, e0, geo, spec):
         d = np.hypot((Y - c0[0]) * 0.866, X + 0.5 * (Y & 1) - c0[1] - 0.5 * (c0[0] & 1))
         floor = np.zeros((R, C), bool)
         floor[y0:y1, x0:x1] = ((d <= p["radius"]) & (e0[y0:y1, x0:x1] <= p["max_elev"]) & ~china[y0:y1, x0:x1]
-                               & ~np.isin(t[y0:y1, x0:x1], (STREAM, RIVER, SEA)))
+                               & ~np.isin(t[y0:y1, x0:x1], (STREAM, FORD, RIVER, SEA)))
         if not floor[c0]:
             raise SystemExit(f"terrain_patches.json: plain {p['name']}: the centre {c0} is above max_elev")
         hexes = flood(floor, [c0], 10 ** 6)
@@ -157,11 +307,14 @@ def apply(t, e0, geo, spec):
                 n += 1
         out.append(f"plain {p['name']}: centre {c0}, floor {len(hexes)} hexes, {n} cliffs made land")
 
+    if "streams" in data:
+        out += streams(t, e0, geo, data["streams"], china, avoid)
+
     # 渡所 on 河 (make_world.py's road builder): back to 河
     n = 0
     for y, x in zip(*np.nonzero((t == BRIDGE) & ~china)):
         ks = [int(t[h]) for h in nbrs(y, x) if 0 <= h[0] < R and 0 <= h[1] < C]
-        if ks.count(RIVER) >= 2 and STREAM not in ks:
+        if ks.count(RIVER) >= 2 and STREAM not in ks and FORD not in ks:
             t[y, x] = RIVER
             n += 1
     if n:
@@ -186,13 +339,20 @@ def main():
         e0 = np.load(a.cache)["e0"]
     else:
         e0 = sample_hexes(geo, Dem(DATA / "etopo60s_i16.npy"), spec.rows, spec.cols)[0]
+    avoid = None
+    if (w / "cities_world.json").exists():                 # the new cities' 7 hexes: no river joined through them
+        avoid = np.zeros((spec.rows, spec.cols), bool)
+        for c in json.loads((w / "cities_world.json").read_text(encoding="utf-8")):
+            for y, x in [(c["lo"], c["hi"])] + nbrs(c["lo"], c["hi"]):
+                if 0 <= y < spec.rows and 0 <= x < spec.cols:
+                    avoid[y, x] = True
     for name in ("world_types.before_roads.npy", "world_types.npy"):
         f = w / name
         if not f.exists():
             continue
         t = np.load(f)
         old = t.copy()
-        rep = apply(t, e0, geo, spec)
+        rep = apply(t, e0, geo, spec, avoid)
         np.save(f, t)
         print(f"{name}: {int((t != old).sum())} hexes changed")
         for line in rep:

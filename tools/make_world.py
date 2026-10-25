@@ -519,7 +519,7 @@ def connect_china_rivers(t, spec, max_len=45):
 PASSABLE = COVER + (ROAD, PLANK, BRIDGE, FORD, SHORE, CITY, GATE, PORT, PATH)
 ROAD_COST = np.full(256, np.inf, np.float32)
 for _k, _c in {GRASS: 1.0, SOIL: 1.0, SAND: 1.4, MARSH: 2.2, FOREST: 1.6, WASTE: 1.3, SHORE: 1.2,
-               MOUNTAIN: 7.0, STREAM: 6.0, RIVER: 30.0, ROAD: 0.35, PLANK: 0.5, BRIDGE: 0.5, CITY: 1.0}.items():
+               MOUNTAIN: 7.0, STREAM: 6.0, RIVER: 30.0, ROAD: 0.35, PLANK: 0.5, BRIDGE: 0.5, FORD: 3.0, CITY: 1.0}.items():
     ROAD_COST[_k] = _c
 
 
@@ -581,7 +581,7 @@ def china_gateways(t, spec, china_cities, reach=45):
 def build_roads(t, spec, nodes, footprint, n_gates, max_cost=900.0):
     """Koei-style road network: a spanning tree of cheapest land routes between the nodes plus each
     node's nearest neighbour, built one route at a time so later routes reuse earlier roads.
-    Mountains crossed become plank roads (11), streams (川) ferries (12); 河 is crossed by boat and stays 河
+    Mountains crossed become plank roads (11), streams (川) and fords (浅瀬) ferries (12); 河 is crossed by boat and stays 河
     (Koei never puts a ferry on 河). China itself is never modified.
     The last n_gates nodes are China gateways: already linked through China, so no roads between them."""
     R, C = t.shape
@@ -627,7 +627,7 @@ def build_roads(t, spec, nodes, footprint, n_gates, max_cost=900.0):
                 k = t[y, x]
                 if k == MOUNTAIN:
                     t[y, x] = PLANK
-                elif k == STREAM:
+                elif k in (STREAM, FORD):
                     t[y, x] = BRIDGE
                 elif k in COVER or k == SHORE:
                     t[y, x] = ROAD
@@ -726,6 +726,7 @@ def hex_heights(t, e0, mtn, rng):
     h = np.where(t == MARSH, 20, h)
     h = np.where(t == SHORE, 16, h)
     h = np.where(t == STREAM, 2, h)
+    h = np.where(t == FORD, 11, h)                  # Koei's 浅瀬: about 11 (land 20), drawn half water, half sand
     h = np.where(np.isin(t, (RIVER, SEA)), 0, h)
     return np.clip(h, 0, 250).astype(np.float32)
 
