@@ -42,7 +42,9 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
   a river is level, a watershed is not). Repeated until nothing joins. Every other 河 body not joined to the open
   sea (a river whose rasterized mouth stops a hex short of the coast, the Amur) is joined to the sea itself (海) the
   same way, never to another river (so rivers parted at a watershed stay apart). Above "navigable_max_elev" metres the new 河 is 浅瀬
-  instead (mountain rivers in gorges: the upper Mekong and Salween, the Yarlung Tsangpo).
+  instead (mountain rivers in gorges: the upper Mekong and Salween, the Yarlung Tsangpo). Rivers in hydrography.json
+  "fords" count as scalerank 6 (浅瀬, not navigable; null: the whole river, a latitude: only north of it): the
+  Salween, a gorge river never sailed, except its tidal mouth at Mawlamyine.
 * rapids: falls and cataracts that break a navigable river (the Khone Falls of the Mekong). The 河/浅瀬/川 hexes
   along "line" (drawn across the river, bank to bank) become 崖 15 after the streams rule: ships cannot pass and
   land units cannot wade across there (they still walk round on the banks); both stretches stay navigable water.
@@ -166,10 +168,12 @@ def _river_lines(geo, R, C, max_rank):
     from make_world import hydro_rules
     rules = hydro_rules()
     excluded = set(rules.get("exclude_rivers", ()))
+    fords = rules.get("fords", {})
     for sr in read_shapes(zips[0]).iterShapeRecords():
         rank = int(rules.get("scalerank", {}).get(sr.record["name"], sr.record["scalerank"]))
         if rank > max_rank or sr.record["name"] in excluded:
             continue
+        ford_lat = fords.get(sr.record["name"], False)
         pts = np.asarray(sr.shape.points, dtype=float)
         parts = list(sr.shape.parts) + [len(pts)]
         for a, b in zip(parts[:-1], parts[1:]):
@@ -184,7 +188,10 @@ def _river_lines(geo, R, C, max_rank):
                 continue
             yl, yh = to_hex(lo, x)
             ok = (yl >= 0) & (yl < R) & (yh >= 0) & (yh < C)
-            np.minimum.at(out, (yl[ok], yh[ok]), rank)
+            rk = np.full(len(lo), rank, np.uint8)
+            if ford_lat is not False:
+                rk[(dense[:, 1] > ford_lat) if ford_lat is not None else slice(None)] = max(rank, 6)
+            np.minimum.at(out, (yl[ok], yh[ok]), rk[ok])
     return out
 
 
