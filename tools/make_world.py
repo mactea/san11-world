@@ -421,17 +421,32 @@ def rasterize_polygons(geo, shapes, rows, cols, rules=None):
     for lake in rules.get("add_lakes", ()):
         rings.append(np.asarray([[lo, la] for la, lo in lake["polygon"]], dtype=float))
     for ring in rings:
-        if len(ring) < 3:
-            continue
-        lo, hi = lonlat_to_hex(geo, ring[:, 0], ring[:, 1])
-        l0, l1 = int(max(0, lo.min())), int(min(rows - 1, lo.max() + 1))
-        h0, h1 = int(max(0, hi.min())), int(min(cols - 1, hi.max() + 1))
-        if l1 < l0 or h1 < h0 or (l1 - l0) * (h1 - h0) == 0:
-            continue
-        L, Hh = np.mgrid[l0:l1 + 1, h0:h1 + 1]
-        Lr, Hr = L.ravel(), Hh.ravel()
-        inside = points_in_ring(Lr.astype(float), Hr + 0.5 * (Lr & 1), np.stack([lo, hi], 1))
-        out[Lr[inside], Hr[inside]] ^= True     # rings toggle (holes/islands)
+        Lr, Hr = ring_hexes(geo, ring, rows, cols)
+        out[Lr, Hr] ^= True                     # rings toggle (holes/islands)
+    return out
+
+
+def ring_hexes(geo, ring, rows, cols):
+    """(lo, hi) arrays of the hexes whose centre is inside the ring ((lon, lat) points)"""
+    none = np.zeros(0, int)
+    if len(ring) < 3:
+        return none, none
+    lo, hi = lonlat_to_hex(geo, ring[:, 0], ring[:, 1])
+    l0, l1 = int(max(0, lo.min())), int(min(rows - 1, lo.max() + 1))
+    h0, h1 = int(max(0, hi.min())), int(min(cols - 1, hi.max() + 1))
+    if l1 < l0 or h1 < h0 or (l1 - l0) * (h1 - h0) == 0:
+        return none, none
+    L, Hh = np.mgrid[l0:l1 + 1, h0:h1 + 1]
+    Lr, Hr = L.ravel(), Hh.ravel()
+    inside = points_in_ring(Lr.astype(float), Hr + 0.5 * (Lr & 1), np.stack([lo, hi], 1))
+    return Lr[inside], Hr[inside]
+
+
+def polygon_mask(geo, polygon, rows, cols):
+    """hexes inside a [[lat, lon], ...] polygon"""
+    out = np.zeros((rows, cols), bool)
+    Lr, Hr = ring_hexes(geo, np.asarray([[lo, la] for la, lo in polygon], dtype=float), rows, cols)
+    out[Lr, Hr] = True
     return out
 
 
@@ -505,21 +520,53 @@ MOUNTAIN_BASE = (400, 1200)      # base elevation (50 km mean) over which the ra
 SEA_DIST_WEIGHT = 3.0            # the sea counts as this many times farther than a river (dsea): islands keep their ranges
 
 
-def mountain_mask(e0, relief, dw, land, rng, ramp=None, dsea=None):
+def mountain_rules():
+    """data/mountains.json (M11_MAP.md, 山地): regional exceptions to the mountain ramp and the flat lowland rule"""
+    f = DATA / "mountains.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+
+
+def mountain_ramp(geo, e0, rules):
+    """per-hex relief ramp of mountain_mask: by base elevation (MOUNTAIN_RAMP_LOW .. MOUNTAIN_RAMP_HIGH over
+    MOUNTAIN_BASE), then mountains.json "regions": inside each polygon the ramp is the region's "ramp" (blended out
+    over "feather_hexes" hexes around it). Low tropical coasts whose hills are drawn too steep by the low-ground ramp
+    (the Red River delta, central Luzon) get a higher one; high ranges the plateau ramp flattens (the Zagros, the
+    Ethiopian highlands) get the low-ground one."""
+    tt = smoothstep(ndimage.gaussian_filter(np.maximum(e0, 0), 6), *MOUNTAIN_BASE)
+    r0 = MOUNTAIN_RAMP_LOW[0] + (MOUNTAIN_RAMP_HIGH[0] - MOUNTAIN_RAMP_LOW[0]) * tt
+    r1 = MOUNTAIN_RAMP_LOW[1] + (MOUNTAIN_RAMP_HIGH[1] - MOUNTAIN_RAMP_LOW[1]) * tt
+    feather = float(rules.get("feather_hexes", 3))
+    for reg in rules.get("regions", ()):
+        m = polygon_mask(geo, reg["polygon"], *e0.shape)
+        w = 1 - smoothstep(ndimage.distance_transform_edt(~m), 0, feather)
+        r0 = r0 + w * (reg["ramp"][0] - r0)
+        r1 = r1 + w * (reg["ramp"][1] - r1)
+    return r0, r1
+
+
+def flat_lowland(e0, relief, rules):
+    """mountains.json "flat_lowland": hexes no higher than "max_elev" metres whose own relief is at most "max_relief"
+    (deltas, coastal plains) are never mountains, however rugged the hills around them"""
+    f = rules.get("flat_lowland")
+    if not f:
+        return None
+    return (e0 <= float(f["max_elev"])) & (relief <= float(f["max_relief"]))
+
+
+def mountain_mask(e0, relief, dw, land, rng, ramp=None, dsea=None, never=None):
     """Koei-style impassable mountains. The target share rises with regional ruggedness (few hills on
     plains, about half of hilly land, most of high ranges). Inside that share mountains sit on local
     ridges and away from rivers, so valleys along rivers stay open like Koei's corridors.
-    ramp: the relief range of the rise. None: by base elevation (the elevation smoothed over about 50 km), from
+    ramp: the relief range of the rise (mountain_ramp). None: by base elevation (the elevation smoothed over about 50 km), from
     MOUNTAIN_RAMP_LOW on low ground to MOUNTAIN_RAMP_HIGH on high plateaus: rolling plateaus (Mongolia, Iran,
     Anatolia) are rugged at the hex scale without being mountain ranges, while low steep ranges (Japan, Korea,
     Greece) are. (30, 330) matched Koei's 48% on his own China (used for his Fujian patch).
     dw: distance to water (hexes); dsea: distance to the sea, if given dw is the distance to rivers and lakes only and
-    the sea counts SEA_DIST_WEIGHT times farther (the "away from water" preference made islands nearly flat)."""
+    the sea counts SEA_DIST_WEIGHT times farther (the "away from water" preference made islands nearly flat).
+    never: mask of hexes that are never mountains (flat_lowland)."""
     rr = ndimage.gaussian_filter(relief, 3)
     if ramp is None:
-        tt = smoothstep(ndimage.gaussian_filter(np.maximum(e0, 0), 6), *MOUNTAIN_BASE)
-        ramp = (MOUNTAIN_RAMP_LOW[0] + (MOUNTAIN_RAMP_HIGH[0] - MOUNTAIN_RAMP_LOW[0]) * tt,
-                MOUNTAIN_RAMP_LOW[1] + (MOUNTAIN_RAMP_HIGH[1] - MOUNTAIN_RAMP_LOW[1]) * tt)
+        ramp = mountain_ramp(None, e0, {})
     if dsea is not None:
         dw = np.minimum(dw, SEA_DIST_WEIGHT * dsea)
     p = 0.04 + 0.88 * smoothstep(rr, *ramp) + 0.15 * smoothstep(e0, 2500, 4500)
@@ -543,7 +590,10 @@ def mountain_mask(e0, relief, dw, land, rng, ramp=None, dsea=None):
     wet[np.unique(lab[hex_neighbors(~land) & gaps])] = True
     fill = (sizes < 4) & ~wet
     fill[0] = False
-    return m | fill[lab], p
+    m = m | fill[lab]
+    if never is not None:
+        m &= ~never
+    return m, p
 
 
 def drop_small(mask, min_size):
@@ -1068,7 +1118,13 @@ def main():
         land[CL, CH] = False
         drl = ndimage.distance_transform_edt(~np.isin(t, (STREAM, RIVER))).astype(np.float32)
         dsea = ndimage.distance_transform_edt(t != SEA).astype(np.float32)
-        mtn, p_mtn = mountain_mask(e0, relief, drl, land, rng, dsea=dsea)
+        mrules = mountain_rules()
+        # its own random stream, so a change in the hydrography (a river more or less) does not reshuffle the
+        # mountains; the regional shares vary by several points between streams (the Alps 56-75%, the Pyrenees
+        # 34-87%): seed + 311 is the stream closest to the mean of 20 over the ranges in M11_MAP.md's table
+        mtn, p_mtn = mountain_mask(e0, relief, drl, land, np.random.default_rng(a.seed + 311),
+                                   ramp=mountain_ramp(geo, e0, mrules), dsea=dsea,
+                                   never=flat_lowland(e0, relief, mrules))
         cland = ~np.isin(china_t, WATER + (ROAD, 11, 12, 13, CITY, 17, 18, 19))
         print(f"mountain target share on China's own DEM: {p_mtn[CL, CH][cland].mean():.3f} (Koei: {(china_t[cland] == MOUNTAIN).mean():.3f})")
         t[mtn] = MOUNTAIN
