@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "李鹹",
+      "birth": 149,
+      "face": 2504,
+      "folder": "han_lixian_taiwei",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷056",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷057"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located. Roster courtesy/death conflict with Cai Yong's stele; roster left unchanged."
+    },
+    {
+      "name": "王越",
+      "birth": 149,
+      "face": 2505,
+      "folder": "han_wangyue_swordsman",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷02",
+        "https://ctext.org/taiping-yulan/592"
+      ],
+      "likeness": "Historical artistic reconstruction; sole contemporaneous notice in Cao Pi's Dianlun; later sword-saint legends excluded"
+    },
+    {
+      "name": "竺朔佛",
+      "birth": 149,
+      "face": 2506,
+      "folder": "monk_zhufoshuo",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/高僧傳/卷01",
+        "https://zh.wikisource.org/zh-hant/出三藏記集/卷07"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "董扶",
+      "birth": 149,
+      "face": 2507,
+      "folder": "han_dongfu",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷31",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷082下"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "董萌",
+      "birth": 149,
+      "face": 2508,
+      "folder": "han_dongmeng_eunuch",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷010下",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

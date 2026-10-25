@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "臧旻",
+      "birth": 137,
+      "face": 2418,
+      "folder": "han_zangmin",
+      "references": [
+        "https://zh.wikipedia.org/wiki/臧旻",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷58"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "檀石槐",
+      "birth": 138,
+      "face": 2419,
+      "folder": "xianbei_tanshihuai",
+      "references": [
+        "https://m.baike.com/wikiid/2688044500035996362",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷90"
+      ],
+      "likeness": "Historical artistic reconstruction using unverified later web depiction as visual reference"
+    },
+    {
+      "name": "劉寵",
+      "birth": 139,
+      "face": 2420,
+      "folder": "han_liuchong_admin",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷76",
+        "https://www.jcrb.com/zlpd/lianzhenggs/201204/t20120413_4652082.html"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "劉矩",
+      "birth": 139,
+      "face": 2421,
+      "folder": "han_liuju",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷76",
+        "https://ctext.org/datawiki.pl?if=gb&remap=gb&res=393117"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "士孫瑞",
+      "birth": 139,
+      "face": 2422,
+      "folder": "han_shisunrui",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷66",
+        "https://zh.wikisource.org/zh-hant/三國志/卷06"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

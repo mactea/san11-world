@@ -1,0 +1,52 @@
+[
+  {
+    "key": "han_huangfugui",
+    "name": "皇甫規",
+    "birth": 104,
+    "face": 2403,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷65"
+    ],
+    "prompt": "Create ONE finished original square officer portrait for Romance of the Three Kingdoms XI (三国志11). Reference 1 is STYLE ONLY: approved series painterly realism, modeled faces with sharp expressive eyes, brushworked cloth, warm controlled side light, subdued rich colors, dark smoky backdrop, 2006 historical strategy game illustration aesthetics. Invent a DISTINCT facial identity from reference; do not copy Wang Meng's face, nose, beard or expression. Compact upper chest bust, complete head and hat, generous 5% top margin, eyes about40% height; readable when reduced to240x240. Historical artistic reconstruction, not a verified contemporary likeness. No text, frame, UI, watermark, collage, hands, modern materials, photography, glossy3D, anime, Ming/Qing hats, fantasy armour. HUANGFU GUI 皇甫規, courtesy nameWeiming, Eastern Han Liangzhou scholar-commander104-174, about60, upright military administrator and teacher. A long substantial face, high angular cheekbones, slightly broad blunt nose, narrow alert eyes with heavy horizontal brows, deeply lined forehead, square medium salt-and-pepper beard with a dominant white chin stripe. Calm confrontational integrity, not fury, face three-quarter slightly right. Practical black Han military cloth cap with simple modest upright silhouette, dark lacquered lamellar upper shoulder armour, faded oxblood-red military mantle with beige inner collar. Weathered tawny skin, sturdy shoulders. Restrained earth-red/black palette, charcoal olive smoke background. Visually distinguish from Zhang Huan: longer face, heavier drooping gray brows, white chin stripe, no blue cloak."
+  },
+  {
+    "key": "han_yuankui",
+    "name": "袁隗",
+    "birth": 105,
+    "face": 2404,
+    "references": [
+      "https://zh.wikipedia.org/wiki/袁隗"
+    ],
+    "prompt": "Create ONE finished original square officer portrait for Romance of the Three Kingdoms XI (三国志11). Reference 1 is STYLE ONLY: approved series painterly realism, modeled faces with sharp expressive eyes, brushworked cloth, warm controlled side light, subdued rich colors, dark smoky backdrop, 2006 historical strategy game illustration aesthetics. Invent a DISTINCT facial identity from reference; do not copy Wang Meng's face, nose, beard or expression. Compact upper chest bust, complete head and hat, generous 5% top margin, eyes about40% height; readable when reduced to240x240. Historical artistic reconstruction, not a verified contemporary likeness. No text, frame, UI, watermark, collage, hands, modern materials, photography, glossy3D, anime, Ming/Qing hats, fantasy armour. YUAN KUI 袁隗, Eastern Han grand tutor and elder of the powerful Runan Yuan family, died190, depict around70. Broad oval substantial aged face with soft lower cheeks, small close-set observant eyes, gently arched thin gray brows, long straight fleshy nose, fine silvery drooping moustache and tidy long narrow white beard. Aristocratic reserve, dignified wary expression, frontal with slight turn left. Eastern Han formal black jinxian-style cap with three understated vertical ridges, deep muted plum-purple court robe with black collar and narrow dull bronze-gold geometric woven trim. No imperial crown or dragon embroidery. Full but dignified posture. Dark muted wine-brown smoke backdrop. Give a very different face from our rugged military reference, elderly cultivated high official."
+  },
+  {
+    "key": "han_fanran",
+    "name": "範冉",
+    "birth": 112,
+    "face": 2405,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷81"
+    ],
+    "prompt": "Create ONE finished original square officer portrait for Romance of the Three Kingdoms XI (三国志11). Reference 1 is STYLE ONLY: approved series painterly realism, modeled faces with sharp expressive eyes, brushworked cloth, warm controlled side light, subdued rich colors, dark smoky backdrop, 2006 historical strategy game illustration aesthetics. Invent a DISTINCT facial identity from reference; do not copy Wang Meng's face, nose, beard or expression. Compact upper chest bust, complete head and hat, generous 5% top margin, eyes about40% height; readable when reduced to240x240. Historical artistic reconstruction, not a verified contemporary likeness. No text, frame, UI, watermark, collage, hands, modern materials, photography, glossy3D, anime, Ming/Qing hats, fantasy armour. FAN RAN 範冉, also Fan Dan, Eastern Han poor recluse and scholar112-185, famous for upright poverty, lived wandering with family, refused corrupt official life. Depict about65, thin wiry long face, hollow cheeks, pronounced fine hooked nose, bright gentle deeply set eyes, sparse uneven gray moustache, long untrimmed wispy silver beard, sun-darkened weathered skin. Humble amused independence, small wry closed-mouth smile. Rough off-white linen headwrap low over tied gray hair, a few flyaway strands, plain patched faded brown hemp robe with loosely folded gray collar, visible subtle cloth texture; no court cap, gold, armour, religious halo or immortal symbols. Chest-up turn slightly left; smoky desaturated warm-gray backdrop. A convincing dignified impoverished human scholar, not a fantasy god of poverty."
+  },
+  {
+    "key": "han_chenqiu",
+    "name": "陳球",
+    "birth": 118,
+    "face": 2406,
+    "references": [
+      "https://ctext.org/dong-guan-han-ji/chen-qiu/zhs"
+    ],
+    "prompt": "Create ONE finished original square officer portrait for Romance of the Three Kingdoms XI (三国志11). Reference 1 is STYLE ONLY: approved series painterly realism, modeled faces with sharp expressive eyes, brushworked cloth, warm controlled side light, subdued rich colors, dark smoky backdrop, 2006 historical strategy game illustration aesthetics. Invent a DISTINCT facial identity from reference; do not copy Wang Meng's face, nose, beard or expression. Compact upper chest bust, complete head and hat, generous 5% top margin, eyes about40% height; readable when reduced to240x240. Historical artistic reconstruction, not a verified contemporary likeness. No text, frame, UI, watermark, collage, hands, modern materials, photography, glossy3D, anime, Ming/Qing hats, fantasy armour. CHEN QIU 陳球, courtesy nameBozhen, Eastern Han administrator118-179, defended Lingling, judicial official and conspirator against corrupt eunuchs. About55, compact rectangular lean face, flat broad chin, straight short prominent nose, eyes level and sharply focused under close straight brows, narrow neatly trimmed black-gray moustache and short squared pointed beard, salt gray concentrated on sideburns, a few fine forehead lines. Stern judicial honesty and controlled resolve, near-frontal gaze slightly to right. Restrained narrow Eastern Han black jinxian cap, dark desaturated green-brown official robe, heavy black collar edged ochre. No armour or emperor ornament. Smoky deep olive backdrop. Distinct from Wang Meng through shorter face, smaller close-cropped beard and steadier frontal judicial expression."
+  },
+  {
+    "key": "han_renan",
+    "name": "任安",
+    "birth": 124,
+    "face": 2407,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷79上"
+    ],
+    "prompt": "Create ONE finished original square officer portrait for Romance of the Three Kingdoms XI (三国志11). Reference 1 is STYLE ONLY: approved series painterly realism, modeled faces with sharp expressive eyes, brushworked cloth, warm controlled side light, subdued rich colors, dark smoky backdrop, 2006 historical strategy game illustration aesthetics. Invent a DISTINCT facial identity from reference; do not copy Wang Meng's face, nose, beard or expression. Compact upper chest bust, complete head and hat, generous 5% top margin, eyes about40% height; readable when reduced to240x240. Historical artistic reconstruction, not a verified contemporary likeness. No text, frame, UI, watermark, collage, hands, modern materials, photography, glossy3D, anime, Ming/Qing hats, fantasy armour. REN AN 任安, courtesy nameDingzu, Eastern Han scholar and teacher of Mianzhu124-202, repeatedly refused appointments, reputed learning in the classics. This is the Eastern Han scholar, not the Western Han official of same name. Around68, unusually tall narrow forehead, small delicately shaped nose, long narrow face with slightly protruding ears, quietly observant half-hooded eyes, low thin gray eyebrows, long soft flowing white beard and fine moustache. Compassionate intellectually alert expression without heroic scowl. Modest flat folded black scholar headcloth tied behind, pale stone-gray natural-fiber robe with dark muted blue collar, little ornament. Slight three-quarter turn right, neck and shoulders slender. Cool smoky muted slate background with warm face light. Give a refined older teacher's distinct face, not the reference warrior's jaw or brow."
+  }
+]

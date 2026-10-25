@@ -1,0 +1,56 @@
+[
+  {
+    "key": "han_zhangjian",
+    "name": "張儉",
+    "birth": 147,
+    "face": 2478,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷67",
+      "https://zh.wikipedia.org/wiki/張儉_(東漢)"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHANG JIAN 張儉, courtesy Yuanjie, Eastern Han scholar and persecuted official famous for seeking shelter during the factional purges, NOT Tang or Liao namesakes. Around55, distinct long gaunt face with high wide forehead, thin temples and narrow pointed jaw, high fine straight nose, large clear weary eyes with delicate crow's feet, thin long curved brows, narrow relaxed lips. Sparse medium long gray-black moustache and narrow soft gray-black beard, warm light brown weathered skin. Firm gentle courage and tired humane dignity, not a scowl. Modest black low scholar kerchief without ornament, plain faded gray-green coarse robe with offwhite collar and charcoal-brown shoulder wrap. Three-quarter left, dark smoky warm gray. Refugee-scholar bearing, no rich court silk, armour or emperor crown."
+  },
+  {
+    "key": "han_zhangkai_soldier",
+    "name": "張愷",
+    "birth": 147,
+    "face": 2479,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷65",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHANG KAI 張愷, Eastern Han field officer and sima in Duan Jiong's frontier army, NOT scholar Zhang Kai 張楷. Around35, distinct wide short pentagonal face, low broad forehead, thick strong jaw, large broad straight nose with rounded tip, small lively eyes under short coarse level brows, slightly prominent rounded ears and wide full-lipped mouth. Dense short black moustache with rough stubble on jaw, exposed chin center. Weathered copper-tan skin and energetic focused military attention with a restrained half smile. Practical rounded low black iron Han helmet with plain leather ties and no plume, dark brown leather lamellar shoulder armour over dull brick-red coarse tunic, slate gray neck scarf. Three-quarter right, smoky cool blue-black backdrop. Robust field soldier, no gold fantasy armour or generic elder beard."
+  },
+  {
+    "key": "han_jingyi",
+    "name": "景毅",
+    "birth": 126,
+    "face": 2480,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷86",
+      "https://m1.rw.ttdm.cn/history/jingyi.html"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. JING YI 景毅, courtesy Wenjian, Eastern Han administrator of Yizhou noted for benevolent governance and moral integrity. Around55, distinct softly broad pear-shaped face, high slightly receding forehead, full lower cheeks and rounded chin, small straight wide-tipped nose, calm widely spaced dark eyes with heavy lids, thin softly arched gray brows. Short fine gray-black moustache and a neat short rounded gray goatee, exposed cheeks. Warm light-tawny skin with subtle aged wrinkles, kind but firm direct gaze and a faint closed-mouth smile. Modest low formal black Han official cloth cap with unadorned dark band, muted dull blue robe with plain brown edging and light flax crossed inner collar. Almost frontal slight left turn, smoky muted olive-charcoal background. Humane older civil official, no armour, jewellery or heroic warlord scowl."
+  },
+  {
+    "key": "han_caoshao",
+    "name": "曹紹",
+    "birth": 147,
+    "face": 2481,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷57"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. CAO SHAO 曹紹, Eastern Han Dong commandery governor and relative of eunuch Cao Jie, NOT himself a eunuch. Around40, distinct narrow long rectangular face with high flat forehead, prominent high cheekbones, long thin hooked nose, small close-set attentive eyes under thick uneven brows, a broad thin-lipped mouth and small square chin. Neat thin black moustache and a narrow short black chin beard, bare cheeks. Warm medium-tan skin, light forehead lines. Guarded self-assured formal gaze without cartoon villain smirk. Plain low black ridged Han official cloth cap with narrow dark brown band, muted dark plum robe with restrained black collar edge and ivory inner collar. Three-quarter right, smoky desaturated deep green-gray background. Lean stern civil governor, no armour, imperial crown or shaved eunuch face."
+  },
+  {
+    "key": "han_maoqin",
+    "name": "毛欽",
+    "birth": 147,
+    "face": 2482,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷67",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. MAO QIN 毛欽, Eastern Han Waihuang magistrate who was persuaded to leave Zhang Jian unarrested. Around45, distinct compact broad oval face, high domed forehead, broad gentle cheekbones tapering to small rounded chin, short broad straight nose, large thoughtful dark eyes under level fine brows, slightly asymmetrical full lips. Thick short black-gray moustache and a small narrow black-gray goatee, exposed cheeks. Warm reddish tan skin with lines under eyes. Reserved humane conflicted expression, a soft exhaled thoughtful mouth, no rage. Simple dark gray low folded scholar-official headwrap with no ornament, muted slate-brown robe with dark indigo collar border and pale ivory inner collar. Slight left turn, smoky warm charcoal blue background. Thoughtful ordinary magistrate, individual natural face, no armour or rich noble ornament."
+  }
+]

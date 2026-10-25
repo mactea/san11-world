@@ -1,0 +1,1136 @@
+{
+ "batch": "0023-rotk11",
+ "people": [
+  {
+   "name": "黃衍",
+   "birth": 149,
+   "face": 2509,
+   "folder": "rotk23_001_963",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十八 傅燮傳",
+    "資治通鑑·孝靈皇帝中中平四年",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "仇須兮",
+   "birth": 150,
+   "face": 2510,
+   "folder": "rotk23_002_964",
+   "references": [
+    "三國史記·新羅本紀 阿達羅尼師今十九年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉寵",
+   "birth": 150,
+   "face": 2511,
+   "folder": "rotk23_003_965",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十七 謝弼傳",
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷七十五 袁術傳",
+    "資治通鑑·孝獻皇帝丁建安二年",
+    "後漢書·卷六十七 羊陟傳",
+    "華陽國志·卷十中 廣漢士女",
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉祐",
+   "birth": 150,
+   "face": 2512,
+   "folder": "rotk23_004_966",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉祥",
+   "birth": 150,
+   "face": 2513,
+   "folder": "rotk23_005_967",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·劉巴傳 裴注引《零陵先賢傳》"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉郃",
+   "birth": 150,
+   "face": 2514,
+   "folder": "rotk23_006_968",
+   "references": [
+    "後漢書·卷五十六 陳球傳",
+    "資治通鑑·孝靈皇帝上之下光和元年",
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷七十七 陽球傳",
+    "後漢書·志第十二 天文下",
+    "CBDB 中國哲學書電子化計劃 (ctext) 352572；英文維基百科 (Wikipedia) Liu Shao (Three Kingdoms)",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "司馬俱",
+   "birth": 150,
+   "face": 2515,
+   "folder": "rotk23_007_969",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·卷九 夏侯淵傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "周術",
+   "birth": 150,
+   "face": 2516,
+   "folder": "rotk23_008_970",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·諸葛亮傳 裴注引《獻帝春秋》"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "和得",
+   "birth": 150,
+   "face": 2517,
+   "folder": "rotk23_009_971",
+   "references": [
+    "後漢書·卷八十八 西域傳",
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "孔昱",
+   "birth": 150,
+   "face": 2518,
+   "folder": "rotk23_010_972",
+   "references": [
+    "後漢書·卷六十七 孔昱傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "康孟詳",
+   "birth": 150,
+   "face": 2519,
+   "folder": "rotk23_011_973",
+   "references": [
+    "出三藏記集·卷十三 安玄傳",
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "康巨",
+   "birth": 150,
+   "face": 2520,
+   "folder": "rotk23_012_974",
+   "references": [
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "廉忠",
+   "birth": 150,
+   "face": 2521,
+   "folder": "rotk23_013_975",
+   "references": [
+    "後漢書·卷五十五 章帝八王傳",
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張樂",
+   "birth": 150,
+   "face": 2522,
+   "folder": "rotk23_014_976",
+   "references": [
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張賢",
+   "birth": 150,
+   "face": 2523,
+   "folder": "rotk23_015_977",
+   "references": [
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張超",
+   "birth": 150,
+   "face": 2524,
+   "folder": "rotk23_016_978",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·武帝紀 裴注引《英雄記》"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "徐和",
+   "birth": 150,
+   "face": 2525,
+   "folder": "rotk23_017_979",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·卷九 夏侯淵傳",
+    "三國志·卷十八 臧霸傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "支曜",
+   "birth": 150,
+   "face": 2526,
+   "folder": "rotk23_018_980",
+   "references": [
+    "出三藏記集·卷十三 支讖傳",
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "曹寅",
+   "birth": 150,
+   "face": 2527,
+   "folder": "rotk23_019_981",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·孫堅傳 裴注引《吳錄》",
+    "資治通鑑·孝靈皇帝下初平元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "朱震",
+   "birth": 150,
+   "face": 2528,
+   "folder": "rotk23_020_982",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李應",
+   "birth": 150,
+   "face": 2529,
+   "folder": "rotk23_021_983",
+   "references": [
+    "中華三國志 192XDZX",
+    "三國志·董卓傳 裴注引《獻帝起居注》",
+    "資治通鑑·孝獻皇帝丙興平二年",
+    "後漢紀·卷二十八 孝獻皇帝紀三"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李暠",
+   "birth": 150,
+   "face": 2530,
+   "folder": "rotk23_022_984",
+   "references": [
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李相如",
+   "birth": 150,
+   "face": 2531,
+   "folder": "rotk23_023_985",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十二 董卓傳",
+    "資治通鑑·孝靈皇帝中中平四年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "杜密",
+   "birth": 150,
+   "face": 2532,
+   "folder": "rotk23_024_986",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "烏延",
+   "birth": 150,
+   "face": 2533,
+   "folder": "rotk23_025_988",
+   "references": [
+    "後漢書·卷九十 烏桓鮮卑列傳",
+    "資治通鑑·孝桓皇帝下建寧元年",
+    "資治通鑑·孝獻皇帝戊建安四年",
+    "三國志·魏志卷三十 烏丸傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "焦和",
+   "birth": 150,
+   "face": 2534,
+   "folder": "rotk23_026_989",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十八 臧洪傳",
+    "三國志·臧洪傳 裴注引《九州春秋》",
+    "資治通鑑·孝靈皇帝下初平元年",
+    "後漢紀·卷二十六 孝獻皇帝紀一"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "王國",
+   "birth": 150,
+   "face": 2535,
+   "folder": "rotk23_027_990",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十八 傅燮傳",
+    "後漢書·卷七十一 皇甫嵩傳",
+    "資治通鑑·孝靈皇帝中中平四年",
+    "晉書·卷七十五 荀崧傳",
+    "晉書·卷八十六 張軌傳",
+    "三國志·馬超傳 裴注引《典略》",
+    "三國群雄志扩容名单",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "王寓",
+   "birth": 150,
+   "face": 2536,
+   "folder": "rotk23_028_991",
+   "references": [
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "竇機",
+   "birth": 150,
+   "face": 2537,
+   "folder": "rotk23_029_992",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "竇靖",
+   "birth": 150,
+   "face": 2538,
+   "folder": "rotk23_030_993",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "竺大力",
+   "birth": 150,
+   "face": 2539,
+   "folder": "rotk23_031_994",
+   "references": [
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董騰",
+   "birth": 150,
+   "face": 2540,
+   "folder": "rotk23_032_995",
+   "references": [
+    "後漢書·卷五十五 章帝八王傳",
+    "資治通鑑·孝靈皇帝上之下熹平元年",
+    "後漢書·卷六十五 段熲傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蘇固",
+   "birth": 150,
+   "face": 2541,
+   "folder": "rotk23_033_996",
+   "references": [
+    "中華三國志 184DHZS",
+    "資治通鑑·孝獻皇帝乙初平二年",
+    "後漢書·卷七十五 劉焉傳",
+    "華陽國志·卷十下 漢中士女",
+    "三國志·卷八 張魯傳",
+    "三國群雄志扩容名单"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蘇馬",
+   "birth": 150,
+   "face": 2542,
+   "folder": "rotk23_034_997",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·吳志卷十一 朱治傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "許瑒",
+   "birth": 150,
+   "face": 2543,
+   "folder": "rotk23_035_998",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·蜀志卷八 許靖傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "趙嬈",
+   "birth": 150,
+   "face": 2544,
+   "folder": "rotk23_036_999",
+   "references": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷六十九 竇武傳",
+    "資治通鑑·孝桓皇帝下建寧元年",
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "趙祇",
+   "birth": 150,
+   "face": 2545,
+   "folder": "rotk23_037_1000",
+   "references": [
+    "中華三國志 184DHZS"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "酈炎",
+   "birth": 150,
+   "face": 2546,
+   "folder": "rotk23_038_1001",
+   "references": [
+    "後漢書·卷八十下 文苑列傳 酈炎傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "金仇道",
+   "birth": 150,
+   "face": 2547,
+   "folder": "rotk23_039_1002",
+   "references": [
+    "三國史記·新羅本紀 阿達羅尼師今十九年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳溫",
+   "birth": 150,
+   "face": 2548,
+   "folder": "rotk23_040_1003",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十五 袁術傳",
+    "三國志·卷一 武帝紀",
+    "三國志·卷六 袁術傳",
+    "三國志·卷九 曹洪傳",
+    "資治通鑑·孝獻皇帝乙初平三年",
+    "三國群雄志扩容名单",
+    "後漢紀·卷二十七 孝獻皇帝紀二"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "韋著",
+   "birth": 150,
+   "face": 2549,
+   "folder": "rotk23_041_1004",
+   "references": [
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉儒",
+   "birth": 151,
+   "face": 2550,
+   "folder": "rotk23_042_1005",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "唐珍",
+   "birth": 151,
+   "face": 2551,
+   "folder": "rotk23_043_1006",
+   "references": [
+    "三國志·董卓傳 裴注引《傅子》",
+    "資治通鑑·孝靈皇帝上之下熹平二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "夏馥",
+   "birth": 151,
+   "face": 2552,
+   "folder": "rotk23_044_1007",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年",
+    "後漢書·卷六十七 黨錮列傳 夏馥傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "孔褒",
+   "birth": 151,
+   "face": 2553,
+   "folder": "rotk23_045_1008",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "宗慈",
+   "birth": 151,
+   "face": 2554,
+   "folder": "rotk23_046_1009",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "尹端",
+   "birth": 151,
+   "face": 2555,
+   "folder": "rotk23_047_1010",
+   "references": [
+    "後漢書·卷七十一 朱儁傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "岑晊",
+   "birth": 151,
+   "face": 2556,
+   "folder": "rotk23_048_1011",
+   "references": [
+    "後漢書·卷六十七 岑晊傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "度尚",
+   "birth": 151,
+   "face": 2557,
+   "folder": "rotk23_049_1012",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "徐珪",
+   "birth": 151,
+   "face": 2558,
+   "folder": "rotk23_050_1013",
+   "references": [
+    "後漢書·卷七十一 朱儁傳",
+    "後漢紀·卷二十八 孝獻皇帝紀三"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "戲子然",
+   "birth": 151,
+   "face": 2559,
+   "folder": "rotk23_051_1014",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "景顧",
+   "birth": 151,
+   "face": 2560,
+   "folder": "rotk23_052_1015",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "朱並",
+   "birth": 151,
+   "face": 2561,
+   "folder": "rotk23_053_1016",
+   "references": [
+    "後漢書·卷六十七 張儉傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李篤",
+   "birth": 151,
+   "face": 2562,
+   "folder": "rotk23_054_1017",
+   "references": [
+    "後漢書·卷六十七 張儉傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "檀敷",
+   "birth": 151,
+   "face": 2563,
+   "folder": "rotk23_055_1018",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "王孝",
+   "birth": 151,
+   "face": 2564,
+   "folder": "rotk23_056_1019",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "申屠蟠",
+   "birth": 151,
+   "face": 2565,
+   "folder": "rotk23_057_1021",
+   "references": [
+    "後漢書·卷六十二 荀爽傳",
+    "資治通鑑·孝桓皇帝下建寧二年",
+    "資治通鑑·孝靈皇帝下中平六年",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "秦周",
+   "birth": 151,
+   "face": 2566,
+   "folder": "rotk23_058_1022",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "範滂",
+   "birth": 151,
+   "face": 2567,
+   "folder": "rotk23_059_1023",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "翟超",
+   "birth": 151,
+   "face": 2568,
+   "folder": "rotk23_060_1024",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "苑康",
+   "birth": 151,
+   "face": 2569,
+   "folder": "rotk23_061_1025",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董寵",
+   "birth": 151,
+   "face": 2570,
+   "folder": "rotk23_062_1026",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董重",
+   "birth": 151,
+   "face": 2571,
+   "folder": "rotk23_063_1027",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年",
+    "資治通鑑·孝靈皇帝下中平五年",
+    "後漢紀·卷二十三 孝靈皇帝紀上",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蔡衍",
+   "birth": 151,
+   "face": 2572,
+   "folder": "rotk23_064_1028",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蕃向",
+   "birth": 151,
+   "face": 2573,
+   "folder": "rotk23_065_1029",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "袁閎",
+   "birth": 151,
+   "face": 2574,
+   "folder": "rotk23_066_1030",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "趙典",
+   "birth": 151,
+   "face": 2575,
+   "folder": "rotk23_067_1031",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "郭泰",
+   "birth": 151,
+   "face": 2576,
+   "folder": "rotk23_068_1032",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳翔",
+   "birth": 151,
+   "face": 2577,
+   "folder": "rotk23_069_1033",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "丘力居",
+   "birth": 152,
+   "face": 2578,
+   "folder": "rotk23_070_1034",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷九十 烏桓鮮卑列傳",
+    "資治通鑑·孝桓皇帝下建寧元年",
+    "資治通鑑·孝靈皇帝中中平四年",
+    "後漢書·卷七十三 公孫瓚傳",
+    "三國志·卷八 公孫瓚傳",
+    "三國志·魏志卷三十 烏丸傳",
+    "三國群雄志扩容名单"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉固",
+   "birth": 152,
+   "face": 2579,
+   "folder": "rotk23_071_1035",
+   "references": [
+    "後漢書·志第二 律歷中",
+    "三國志·王昶傳 裴注引《任嘏別傳》"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "圈文生",
+   "birth": 152,
+   "face": 2580,
+   "folder": "rotk23_072_1036",
+   "references": [
+    "三國志·衛臻傳 裴注引《郭林宗傳》"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張機",
+   "birth": 152,
+   "face": 2581,
+   "folder": "rotk23_073_1037",
+   "references": [
+    "中華三國志 184DHZS"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張權",
+   "birth": 152,
+   "face": 2582,
+   "folder": "rotk23_074_1038",
+   "references": [
+    "三國志·卷十 荀攸傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張羨",
+   "birth": 152,
+   "face": 2583,
+   "folder": "rotk23_075_1039",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十四下 劉表傳",
+    "三國志·卷六 劉表傳",
+    "三國志·卷二十二 桓階傳",
+    "資治通鑑·孝獻皇帝丁建安三年",
+    "資治通鑑·孝獻皇帝戊建安五年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "荀衢",
+   "birth": 133,
+   "face": 2584,
+   "folder": "rotk23_076_1040",
+   "references": [
+    "三國志·卷十 荀攸傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蒲頭",
+   "birth": 152,
+   "face": 2585,
+   "folder": "rotk23_077_1041",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·魏志卷三十 鮮卑傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "衛茲",
+   "birth": 152,
+   "face": 2586,
+   "folder": "rotk23_078_1042",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·武帝紀 裴注引《世語》",
+    "三國志·卷七 張邈傳",
+    "三國志·卷二十二 衛臻傳",
+    "資治通鑑·孝靈皇帝下初平元年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "郭貢",
+   "birth": 152,
+   "face": 2587,
+   "folder": "rotk23_079_1043",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十 荀彧傳",
+    "三國志·卷十 荀彧傳",
+    "資治通鑑·孝獻皇帝丙興平元年",
+    "後漢紀·卷二十七 孝獻皇帝紀二"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳耽",
+   "birth": 152,
+   "face": 2588,
+   "folder": "rotk23_080_1044",
+   "references": [
+    "後漢書·卷五十七 劉陶傳",
+    "資治通鑑·孝靈皇帝上之下熹平三年",
+    "資治通鑑·孝靈皇帝中中平二年",
+    "後漢書·卷六十二 陳寔傳",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳諶",
+   "birth": 137,
+   "face": 2589,
+   "folder": "rotk23_081_1045",
+   "references": [
+    "三國志·卷二十二 陳群傳",
+    "後漢書·卷六十二 陳寔傳",
+    "世說新語·德行",
+    "世說新語·品藻"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳超",
+   "birth": 152,
+   "face": 2590,
+   "folder": "rotk23_082_1046",
+   "references": [
+    "中華三國志 184DHZS"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "馮恂",
+   "birth": 152,
+   "face": 2591,
+   "folder": "rotk23_083_1047",
+   "references": [
+    "後漢書·志第二 律歷中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "單揚",
+   "birth": 153,
+   "face": 2592,
+   "folder": "rotk23_084_1048",
+   "references": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷八十二下 單揚傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "堂溪典",
+   "birth": 153,
+   "face": 2593,
+   "folder": "rotk23_085_1049",
+   "references": [
+    "後漢書·卷六十下 蔡邕傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "宋酆",
+   "birth": 128,
+   "face": 2594,
+   "folder": "rotk23_086_1052",
+   "references": [
+    "資治通鑑·孝桓皇帝下建寧四年",
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "宗誠",
+   "birth": 153,
+   "face": 2595,
+   "folder": "rotk23_087_1053",
+   "references": [
+    "後漢書·志第二 律歷中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張馴",
+   "birth": 153,
+   "face": 2596,
+   "folder": "rotk23_088_1054",
+   "references": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷七十九上 儒林列傳 張馴傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李巡",
+   "birth": 153,
+   "face": 2597,
+   "folder": "rotk23_089_1055",
+   "references": [
+    "後漢書·卷七十八 宦者列傳 呂強傳",
+    "三國志·董卓傳 裴注引《獻帝記》",
+    "三國志·卷二十九 華佗傳",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "棗祗",
+   "birth": 153,
+   "face": 2598,
+   "folder": "rotk23_090_1056",
+   "references": [
+    "中華三國志 184DHZS",
+    "三國志·卷一 武帝紀",
+    "三國志·卷十四 程昱傳",
+    "三國志·卷十六 任峻傳",
+    "資治通鑑·孝獻皇帝丙興平元年",
+    "三國群雄志扩容名单"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "畢整",
+   "birth": 153,
+   "face": 2599,
+   "folder": "rotk23_091_1057",
+   "references": [
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董越",
+   "birth": 153,
+   "face": 2600,
+   "folder": "rotk23_092_1058",
+   "references": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十二 董卓傳",
+    "三國志·董卓傳 裴注引《魏書》",
+    "資治通鑑·孝獻皇帝乙初平二年",
+    "三國群雄志扩容名单",
+    "後漢紀·卷二十六 孝獻皇帝紀一"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "郭香",
+   "birth": 153,
+   "face": 2601,
+   "folder": "rotk23_093_1059",
+   "references": [
+    "後漢書·志第二 律歷中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳晃",
+   "birth": 153,
+   "face": 2602,
+   "folder": "rotk23_094_1060",
+   "references": [
+    "後漢書·志第二 律歷中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "韓說",
+   "birth": 153,
+   "face": 2603,
+   "folder": "rotk23_095_1061",
+   "references": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷六十四 盧植傳",
+    "後漢書·卷八十二下 韓說傳",
+    "後漢書·志第二 律歷中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "馮光",
+   "birth": 153,
+   "face": 2604,
+   "folder": "rotk23_096_1062",
+   "references": [
+    "後漢書·志第二 律歷中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "任岐",
+   "birth": 154,
+   "face": 2605,
+   "folder": "rotk23_097_1063",
+   "references": [
+    "中華三國志 184DHZS"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉寬",
+   "birth": 154,
+   "face": 2606,
+   "folder": "rotk23_098_1064",
+   "references": [
+    "後漢書·卷五十四 楊震傳",
+    "資治通鑑·孝靈皇帝上之下熹平五年",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉逸",
+   "birth": 154,
+   "face": 2607,
+   "folder": "rotk23_099_1065",
+   "references": [
+    "資治通鑑·孝靈皇帝上之下熹平五年"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "朱龜",
+   "birth": 154,
+   "face": 2608,
+   "folder": "rotk23_100_1066",
+   "references": [
+    "後漢書·卷八十六 南蠻西南夷列傳"
+   ],
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  }
+ ],
+ "generator": "codex-cli image_gen, ROTK11 dark-vignette style"
+}

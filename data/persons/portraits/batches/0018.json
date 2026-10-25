@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "羊陟",
+      "birth": 147,
+      "face": 2483,
+      "folder": "han_yangzhi",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷67",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷80下"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "耿臨",
+      "birth": 147,
+      "face": 2484,
+      "folder": "han_genglin",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷85",
+        "https://bkso.baidu.com/item/耿临/9409978"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "胡母班",
+      "birth": 147,
+      "face": 2485,
+      "folder": "han_humuban",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷06",
+        "https://w.atwiki.jp/kansangokushi/pages/311.html"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "虞放",
+      "birth": 147,
+      "face": 2486,
+      "folder": "han_yufang",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷67"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "袁赦",
+      "birth": 147,
+      "face": 2487,
+      "folder": "eunuch_yuanshe",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷77",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

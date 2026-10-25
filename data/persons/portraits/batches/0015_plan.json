@@ -1,0 +1,57 @@
+[
+  {
+    "key": "han_xunyi",
+    "name": "荀翌",
+    "birth": 146,
+    "face": 2468,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷67"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. XUN YI 荀翌, Eastern Han scholar-official listed among the Eight Eminent Men and targeted in the factional prosecutions, NOT Xun Yu 荀彧. Around45, distinct slim long oval face with broad high forehead, narrow delicate jaw and rounded chin, a small long straight nose, large thoughtful widely spaced dark eyes beneath softly curved fine brows. Fine black moustache and very small narrow chin goatee with a few gray hairs, bare cheeks. Warm light-brown skin, faint forehead and eye wrinkles. Serene self-possessed scholarly gaze with softly closed lips. Simple low black scholar kerchief folded modestly behind, muted light gray-blue robe with charcoal edging and pale beige crossed collar. Slight left turn, dark smoky moss background. Refined but grounded learned man, no military armour, gold crown or generic heroic jaw."
+  },
+  {
+    "key": "han_yuqi",
+    "name": "虞祁",
+    "birth": 146,
+    "face": 2469,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. YU QI 虞祁, Eastern Han Luoyang magistrate appointed during Chen Fan and Dou Wu's administration. Around40, distinct broad compact rectangular face, high flat forehead, full lower cheeks, strong small square chin, short wide straight nose with blunt tip, narrow slightly deep-set eyes beneath thick softly arched brows. Medium thin black moustache with short rounded stubble beard and bare upper cheeks. Warm tawny skin, a few fine lines and resolute practical attentive expression with firmly closed mouth. Plain low black Han official cloth cap tied with narrow brown band, faded dark green robe and muted brown border, offwhite crossed inner collar. Almost frontal slight right turn, smoky slate-blue gray. A capable local civic administrator, no soldier helmet, luxury court regalia or exaggerated furious face."
+  },
+  {
+    "key": "han_xuxu",
+    "name": "許栩",
+    "birth": 146,
+    "face": 2470,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/三國志/卷23",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. XU XU 許栩, Eastern Han senior minister who held Sikong and Situ after service as Dahonglu. Around60, distinct broad long face with very high slightly receding forehead, prominent bony cheekbones, large rounded ears, long strong aquiline nose, heavy-lidded large dark eyes under short white-gray brows, broad fine-lipped mouth and firm square chin. Neat substantial white-gray moustache and medium-long gray beard narrowing toward chest, warm light-ochre aged skin. Solemn patient formal dignity, relaxed brows with no generic warlord scowl. Modest black formal Han ridged cloth cap with a tiny dull bronze clasp, deep muted plum robe with narrow dark patterned trim and warm ivory collar. Three-quarter left, smoky cool charcoal background. An aging diplomatic and administrative official, no armour, jewels or magical sage features."
+  },
+  {
+    "key": "eunuch_zhengsa",
+    "name": "鄭颯",
+    "birth": 146,
+    "face": 2471,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷55",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷65"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHENG SA 鄭颯, Eastern Han palace eunuch and Changle shangshu involved in the168 crisis, later accused in the Bohai prince affair. Around45, distinct long narrow diamond face, high smooth forehead, sharp high cheekbones, small narrow pointed chin, fine slender nose with slight bend, large close-set watchful eyes under thin upward brows, narrow full lips with tense corners. Fully clean-shaven, no moustache, beard, goatee or stubble. Warm pale tan skin, fine eye creases. Alert guarded unsettled expression without caricature, naturally individual asymmetry. Simple low folded black Han palace cap with plain charcoal band, muted dark rust-brown silk robe with narrow black patterned collar trim and light cream inner collar. Slight right turn, smoky dark blue-gray background. Slender courtier proportions, no modern or later-dynasty headdress."
+  },
+  {
+    "key": "han_chenyi",
+    "name": "陳逸",
+    "birth": 146,
+    "face": 2472,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷66",
+      "https://zh.wikipedia.org/wiki/陈逸"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. CHEN YI 陳逸, son of Chen Fan, Eastern Han official who survived the168 persecution in hiding and later served as Lu chancellor. Depict around35, distinct broad youthful oval face with high domed forehead, soft high cheekbones, a narrow rounded chin, long fine straight nose with small wide tip, large dark thoughtful eyes under thick level brows, full modest lips. Neatly trimmed small black moustache, faint narrow chin tuft only, bare cheeks. Warm medium-light skin, subtle lines under eyes, quiet melancholy mixed with resolve, no angry expression. Modest black cloth scholar headwrap tied at rear, faded muted brown-gray outer robe over dusty indigo garment with ivory crossed collar, no armour or golden court ornaments. Three-quarter left, smoky olive charcoal background. A young-to-middle-aged survivor from a scholarly family with individual sensitive features."
+  }
+]

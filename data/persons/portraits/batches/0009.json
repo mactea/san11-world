@@ -1,0 +1,58 @@
+{
+  "people": [
+    {
+      "name": "白爵",
+      "birth": 142,
+      "face": 2438,
+      "folder": "heishan_baijue",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷71",
+        "https://zh.wikipedia.org/wiki/黑山軍"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "馬相",
+      "birth": 142,
+      "face": 2439,
+      "folder": "yellowturban_maxiang",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷31",
+        "https://wapbaike.baidu.com/item/马相/73203"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "侯覽",
+      "birth": 143,
+      "face": 2440,
+      "folder": "eunuch_houlan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+        "https://zh.wikipedia.org/wiki/侯覽"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "左校",
+      "birth": 143,
+      "face": 2441,
+      "folder": "heishan_zuoxiao",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷06",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷71"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "曲勝",
+      "birth": 143,
+      "face": 2442,
+      "folder": "liangzhou_qusheng",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷08"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

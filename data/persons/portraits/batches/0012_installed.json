@@ -1,0 +1,35 @@
+{
+  "people": [
+    {
+      "name": "共普",
+      "face": 2453,
+      "roster_id": 907
+    },
+    {
+      "name": "劉儵",
+      "face": 2454,
+      "roster_id": 908
+    },
+    {
+      "name": "劉猛",
+      "face": 2455,
+      "roster_id": 909
+    },
+    {
+      "name": "周靖",
+      "face": 2456,
+      "roster_id": 910
+    },
+    {
+      "name": "宣酆",
+      "face": 2457,
+      "roster_id": 911
+    }
+  ],
+  "banks": [
+    "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\UserData_kit\\Koei\\San11 Tc\\FaceData\\San11Face10.fce"
+  ],
+  "scenarios": 15,
+  "backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\portrait_backups\\batch-20261023-063911",
+  "verification": "All encoded payloads and scenario bytes read back; runtime scene pending"
+}

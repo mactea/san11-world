@@ -1,0 +1,57 @@
+{
+  "people": [
+    {
+      "name": "魏彪",
+      "birth": 146,
+      "face": 2473,
+      "folder": "eunuch_weibiao",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "劉囂",
+      "birth": 147,
+      "face": 2474,
+      "folder": "han_liuxiao",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷06",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "劉悝",
+      "birth": 147,
+      "face": 2475,
+      "folder": "han_liukui_bohai",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷55"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "吳導",
+      "birth": 147,
+      "face": 2476,
+      "folder": "han_wudao",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷67"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "夏靜",
+      "birth": 147,
+      "face": 2477,
+      "folder": "han_xiajing",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷67",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

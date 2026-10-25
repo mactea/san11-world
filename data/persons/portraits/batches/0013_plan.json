@@ -1,0 +1,54 @@
+[
+  {
+    "key": "eunuch_zhangliang",
+    "name": "張亮",
+    "birth": 146,
+    "face": 2458,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHANG LIANG 張亮, Eastern Han Changle palace eunuch involved with Gong Pu and Zhu Yu in168, NOT the Tang dynasty general. Around45, distinct broad soft oval face with high receding forehead, plump smooth cheeks, small wide chin, a long narrow straight nose, wide-set hooded eyes under fine short low brows, thin small lips with a reserved neutral smile. Fully clean-shaven, no beard, moustache, goatee or stubble. Warm pale yellow-brown complexion, subtle forehead lines and fine crow's feet. Modest black low folded Han palace cloth cap and dark muted brown-purple silk robe, narrow moss-gray collar edging and pale ivory inner collar. Three-quarter left, smoky blue-black background. A middle-aged court attendant with soft rounded but alert features, no theatrical villain grin or luxurious crown."
+  },
+  {
+    "key": "han_zhangchang_eastern",
+    "name": "張敞",
+    "birth": 146,
+    "face": 2459,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHANG CHANG 張敞, Eastern Han Nanyang clerical official who helped Hu Teng shelter Dou Wu's grandson Dou Fu, NOT the Western Han Jingzhao official of the same name. Around40, distinct compact round face, broad gentle forehead, small rounded nose with wide nostrils, large kindly observant eyes, soft thick horizontal eyebrows, full cheeks and firm rounded jaw. A short modest dark moustache and short dense rounded beard with some exposed cheeks. Warm lightly tanned skin and slight age lines, compassionate quietly brave expression with a small closed mouth. Simple small dark gray cloth scholar kerchief tied behind without crown, plain faded dark olive robe over light flax crossed collar, brown rough fabric shoulder wrap. Almost frontal with slight right turn, smoky warm charcoal background. A dependable practical low-ranking official, no ornate court silk or armour."
+  },
+  {
+    "key": "eunuch_caojie",
+    "name": "曹節",
+    "birth": 146,
+    "face": 2460,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+      "https://zh.wikipedia.org/wiki/曹節_(宦官)"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. CAO JIE 曹節, Eastern Han palace eunuch Hanfeng who held power under Emperor Ling, NOT the later empress of the same name. Around55, distinct long gaunt narrow face, very high angular forehead, bony cheekbones, thin hooked nose, close-set small deep dark eyes and very long fine gently arched brows, a long thin-lipped mouth and small pointed chin. No facial hair whatsoever, no moustache, beard, goatee or stubble. Warm pale skin with restrained fine forehead wrinkles, intense composed assessing gaze, lips firmly closed without evil smirk. Modest formal black Han palace cloth cap with low ridges and a tiny dull bronze clasp, fine muted dark blue robe with narrow faded bronze geometric trim and ivory inner collar. Slight right turn, smoky burgundy-charcoal background. Human politically experienced aging courtier, angular skeletal face distinct from a plump eunuch."
+  },
+  {
+    "key": "han_zhuyu_inspector",
+    "name": "朱寓",
+    "birth": 146,
+    "face": 2461,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHU YU 朱寓, Eastern Han Sili commandant selected by Chen Fan and Dou Wu, NOT the palace eunuch Zhu Yu 朱瑀. Around45, distinct wide pentagonal face with large high forehead, broad prominent cheekbones, small narrow chin, straight prominent nose with narrow bridge and rounded tip, large steady eyes with slight natural asymmetry beneath coarse angled brows. Neat fine moustache and short black pointed beard, bare cheeks. Weathered warm medium skin, stern conscientious thoughtful expression, no angry grimace. Plain upright low black Han official cloth cap with narrow dark band, muted deep green-gray official robe with dark brown border and light ivory crossed collar. Three-quarter left, dark smoky desaturated ochre. An upright investigator with individual sturdy features, no armour or imperial crown."
+  },
+  {
+    "key": "eunuch_zhuyu",
+    "name": "朱瑀",
+    "birth": 146,
+    "face": 2462,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷78"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHU YU 朱瑀, Eastern Han Changle palace eunuch who acted in the168 coup, NOT inspector Zhu Yu 朱寓. Around40, distinct broad compact square face, low broad forehead, wide blunt jaw and chin, short wide straight nose, large round watchful eyes beneath short dense level eyebrows, full wide lips. Clean-shaven cheeks and chin, absolutely no moustache, beard, goatee or stubble. Warm tawny skin, a few fine creases by eyes, energetic confident guarded expression with closed mouth rather than caricature. Plain close-fitting low black Han palace cap with small dark brown clasp, dark charcoal-blue silk crossed-collar robe with restrained dark red collar border and pale flax inner collar. Almost frontal with slight left turn, smoky muted olive gray background. Robust energetic male courtier with thick neck, not slender delicate generic eunuch."
+  }
+]

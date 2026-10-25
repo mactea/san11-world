@@ -1,0 +1,57 @@
+{
+  "people": [
+    {
+      "name": "楊賜",
+      "birth": 117,
+      "face": 2463,
+      "folder": "han_yangci",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷54"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "王暢",
+      "birth": 146,
+      "face": 2464,
+      "folder": "han_wangchang",
+      "references": [
+        "https://zh.wikipedia.org/wiki/王畅_(东汉)",
+        "https://www.bjmy.gov.cn/stmy/zjmy/lsrw/202607/t20260707_547721.html"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "祝瑨",
+      "birth": 146,
+      "face": 2465,
+      "folder": "han_zhujin",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "聞人襲",
+      "birth": 146,
+      "face": 2466,
+      "folder": "han_wenrenxi",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikipedia.org/wiki/闻人袭"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "胡騰",
+      "birth": 146,
+      "face": 2467,
+      "folder": "han_huteng",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+        "https://www.thecover.cn/news/2675106"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "people": [
+    {
+      "name": "士武",
+      "birth": 145,
+      "face": 2448,
+      "folder": "han_shiwu",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷49"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "張修",
+      "birth": 145,
+      "face": 2449,
+      "folder": "religious_zhangxiu",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷08",
+        "https://zh.daoinfo.org/index.php?title=張修"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "趙謙",
+      "birth": 145,
+      "face": 2450,
+      "folder": "han_zhaoqian",
+      "references": [
+        "https://zh.wikipedia.org/wiki/赵谦_(东汉)",
+        "https://zh.wikisource.org/zh-hant/三國志/卷06"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "陳敗",
+      "birth": 145,
+      "face": 2451,
+      "folder": "yellowturban_chenbai",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷56"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "公乘昕",
+      "birth": 146,
+      "face": 2452,
+      "folder": "eunuch_gongchengxin",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

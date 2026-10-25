@@ -1,0 +1,58 @@
+{
+  "people": [
+    {
+      "name": "萬秉",
+      "birth": 143,
+      "face": 2443,
+      "folder": "yellowturban_wanbing",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷56"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "趙忠",
+      "birth": 143,
+      "face": 2444,
+      "folder": "eunuch_zhaozhong",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+        "https://zh.wikipedia.org/wiki/赵忠_(东汉)"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "黃邵",
+      "birth": 143,
+      "face": 2445,
+      "folder": "yellowturban_huangshao",
+      "references": [
+        "https://m.baike.com/wikiid/1076368162886136696",
+        "https://zh.wikisource.org/zh-hant/三國志/卷01",
+        "https://zh.wikisource.org/zh-hant/三國志/卷17"
+      ],
+      "likeness": "Historical artistic reconstruction using unverified later illustration as visual reference"
+    },
+    {
+      "name": "史弼",
+      "birth": 144,
+      "face": 2446,
+      "folder": "han_shibi",
+      "references": [
+        "https://www.sohu.com/a/768994408_121218495",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷64"
+      ],
+      "likeness": "Historical artistic reconstruction using unverified later illustration as visual reference"
+    },
+    {
+      "name": "傅燮",
+      "birth": 145,
+      "face": 2447,
+      "folder": "han_fuxie",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷58"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

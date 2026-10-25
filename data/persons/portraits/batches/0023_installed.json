@@ -1,0 +1,510 @@
+{
+  "people": [
+    {
+      "name": "黃衍",
+      "face": 2509,
+      "roster_id": 963
+    },
+    {
+      "name": "仇須兮",
+      "face": 2510,
+      "roster_id": 964
+    },
+    {
+      "name": "劉寵",
+      "face": 2511,
+      "roster_id": 965
+    },
+    {
+      "name": "劉祐",
+      "face": 2512,
+      "roster_id": 966
+    },
+    {
+      "name": "劉祥",
+      "face": 2513,
+      "roster_id": 967
+    },
+    {
+      "name": "劉郃",
+      "face": 2514,
+      "roster_id": 968
+    },
+    {
+      "name": "司馬俱",
+      "face": 2515,
+      "roster_id": 969
+    },
+    {
+      "name": "周術",
+      "face": 2516,
+      "roster_id": 970
+    },
+    {
+      "name": "和得",
+      "face": 2517,
+      "roster_id": 971
+    },
+    {
+      "name": "孔昱",
+      "face": 2518,
+      "roster_id": 972
+    },
+    {
+      "name": "康孟詳",
+      "face": 2519,
+      "roster_id": 973
+    },
+    {
+      "name": "康巨",
+      "face": 2520,
+      "roster_id": 974
+    },
+    {
+      "name": "廉忠",
+      "face": 2521,
+      "roster_id": 975
+    },
+    {
+      "name": "張樂",
+      "face": 2522,
+      "roster_id": 976
+    },
+    {
+      "name": "張賢",
+      "face": 2523,
+      "roster_id": 977
+    },
+    {
+      "name": "張超",
+      "face": 2524,
+      "roster_id": 978
+    },
+    {
+      "name": "徐和",
+      "face": 2525,
+      "roster_id": 979
+    },
+    {
+      "name": "支曜",
+      "face": 2526,
+      "roster_id": 980
+    },
+    {
+      "name": "曹寅",
+      "face": 2527,
+      "roster_id": 981
+    },
+    {
+      "name": "朱震",
+      "face": 2528,
+      "roster_id": 982
+    },
+    {
+      "name": "李應",
+      "face": 2529,
+      "roster_id": 983
+    },
+    {
+      "name": "李暠",
+      "face": 2530,
+      "roster_id": 984
+    },
+    {
+      "name": "李相如",
+      "face": 2531,
+      "roster_id": 985
+    },
+    {
+      "name": "杜密",
+      "face": 2532,
+      "roster_id": 986
+    },
+    {
+      "name": "烏延",
+      "face": 2533,
+      "roster_id": 988
+    },
+    {
+      "name": "焦和",
+      "face": 2534,
+      "roster_id": 989
+    },
+    {
+      "name": "王國",
+      "face": 2535,
+      "roster_id": 990
+    },
+    {
+      "name": "王寓",
+      "face": 2536,
+      "roster_id": 991
+    },
+    {
+      "name": "竇機",
+      "face": 2537,
+      "roster_id": 992
+    },
+    {
+      "name": "竇靖",
+      "face": 2538,
+      "roster_id": 993
+    },
+    {
+      "name": "竺大力",
+      "face": 2539,
+      "roster_id": 994
+    },
+    {
+      "name": "董騰",
+      "face": 2540,
+      "roster_id": 995
+    },
+    {
+      "name": "蘇固",
+      "face": 2541,
+      "roster_id": 996
+    },
+    {
+      "name": "蘇馬",
+      "face": 2542,
+      "roster_id": 997
+    },
+    {
+      "name": "許瑒",
+      "face": 2543,
+      "roster_id": 998
+    },
+    {
+      "name": "趙嬈",
+      "face": 2544,
+      "roster_id": 999
+    },
+    {
+      "name": "趙祇",
+      "face": 2545,
+      "roster_id": 1000
+    },
+    {
+      "name": "酈炎",
+      "face": 2546,
+      "roster_id": 1001
+    },
+    {
+      "name": "金仇道",
+      "face": 2547,
+      "roster_id": 1002
+    },
+    {
+      "name": "陳溫",
+      "face": 2548,
+      "roster_id": 1003
+    },
+    {
+      "name": "韋著",
+      "face": 2549,
+      "roster_id": 1004
+    },
+    {
+      "name": "劉儒",
+      "face": 2550,
+      "roster_id": 1005
+    },
+    {
+      "name": "唐珍",
+      "face": 2551,
+      "roster_id": 1006
+    },
+    {
+      "name": "夏馥",
+      "face": 2552,
+      "roster_id": 1007
+    },
+    {
+      "name": "孔褒",
+      "face": 2553,
+      "roster_id": 1008
+    },
+    {
+      "name": "宗慈",
+      "face": 2554,
+      "roster_id": 1009
+    },
+    {
+      "name": "尹端",
+      "face": 2555,
+      "roster_id": 1010
+    },
+    {
+      "name": "岑晊",
+      "face": 2556,
+      "roster_id": 1011
+    },
+    {
+      "name": "度尚",
+      "face": 2557,
+      "roster_id": 1012
+    },
+    {
+      "name": "徐珪",
+      "face": 2558,
+      "roster_id": 1013
+    },
+    {
+      "name": "戲子然",
+      "face": 2559,
+      "roster_id": 1014
+    },
+    {
+      "name": "景顧",
+      "face": 2560,
+      "roster_id": 1015
+    },
+    {
+      "name": "朱並",
+      "face": 2561,
+      "roster_id": 1016
+    },
+    {
+      "name": "李篤",
+      "face": 2562,
+      "roster_id": 1017
+    },
+    {
+      "name": "檀敷",
+      "face": 2563,
+      "roster_id": 1018
+    },
+    {
+      "name": "王孝",
+      "face": 2564,
+      "roster_id": 1019
+    },
+    {
+      "name": "申屠蟠",
+      "face": 2565,
+      "roster_id": 1021
+    },
+    {
+      "name": "秦周",
+      "face": 2566,
+      "roster_id": 1022
+    },
+    {
+      "name": "範滂",
+      "face": 2567,
+      "roster_id": 1023
+    },
+    {
+      "name": "翟超",
+      "face": 2568,
+      "roster_id": 1024
+    },
+    {
+      "name": "苑康",
+      "face": 2569,
+      "roster_id": 1025
+    },
+    {
+      "name": "董寵",
+      "face": 2570,
+      "roster_id": 1026
+    },
+    {
+      "name": "董重",
+      "face": 2571,
+      "roster_id": 1027
+    },
+    {
+      "name": "蔡衍",
+      "face": 2572,
+      "roster_id": 1028
+    },
+    {
+      "name": "蕃向",
+      "face": 2573,
+      "roster_id": 1029
+    },
+    {
+      "name": "袁閎",
+      "face": 2574,
+      "roster_id": 1030
+    },
+    {
+      "name": "趙典",
+      "face": 2575,
+      "roster_id": 1031
+    },
+    {
+      "name": "郭泰",
+      "face": 2576,
+      "roster_id": 1032
+    },
+    {
+      "name": "陳翔",
+      "face": 2577,
+      "roster_id": 1033
+    },
+    {
+      "name": "丘力居",
+      "face": 2578,
+      "roster_id": 1034
+    },
+    {
+      "name": "劉固",
+      "face": 2579,
+      "roster_id": 1035
+    },
+    {
+      "name": "圈文生",
+      "face": 2580,
+      "roster_id": 1036
+    },
+    {
+      "name": "張機",
+      "face": 2581,
+      "roster_id": 1037
+    },
+    {
+      "name": "張權",
+      "face": 2582,
+      "roster_id": 1038
+    },
+    {
+      "name": "張羨",
+      "face": 2583,
+      "roster_id": 1039
+    },
+    {
+      "name": "荀衢",
+      "face": 2584,
+      "roster_id": 1040
+    },
+    {
+      "name": "蒲頭",
+      "face": 2585,
+      "roster_id": 1041
+    },
+    {
+      "name": "衛茲",
+      "face": 2586,
+      "roster_id": 1042
+    },
+    {
+      "name": "郭貢",
+      "face": 2587,
+      "roster_id": 1043
+    },
+    {
+      "name": "陳耽",
+      "face": 2588,
+      "roster_id": 1044
+    },
+    {
+      "name": "陳諶",
+      "face": 2589,
+      "roster_id": 1045
+    },
+    {
+      "name": "陳超",
+      "face": 2590,
+      "roster_id": 1046
+    },
+    {
+      "name": "馮恂",
+      "face": 2591,
+      "roster_id": 1047
+    },
+    {
+      "name": "單揚",
+      "face": 2592,
+      "roster_id": 1048
+    },
+    {
+      "name": "堂溪典",
+      "face": 2593,
+      "roster_id": 1049
+    },
+    {
+      "name": "宋酆",
+      "face": 2594,
+      "roster_id": 1052
+    },
+    {
+      "name": "宗誠",
+      "face": 2595,
+      "roster_id": 1053
+    },
+    {
+      "name": "張馴",
+      "face": 2596,
+      "roster_id": 1054
+    },
+    {
+      "name": "李巡",
+      "face": 2597,
+      "roster_id": 1055
+    },
+    {
+      "name": "棗祗",
+      "face": 2598,
+      "roster_id": 1056
+    },
+    {
+      "name": "畢整",
+      "face": 2599,
+      "roster_id": 1057
+    },
+    {
+      "name": "董越",
+      "face": 2600,
+      "roster_id": 1058
+    },
+    {
+      "name": "郭香",
+      "face": 2601,
+      "roster_id": 1059
+    },
+    {
+      "name": "陳晃",
+      "face": 2602,
+      "roster_id": 1060
+    },
+    {
+      "name": "韓說",
+      "face": 2603,
+      "roster_id": 1061
+    },
+    {
+      "name": "馮光",
+      "face": 2604,
+      "roster_id": 1062
+    },
+    {
+      "name": "任岐",
+      "face": 2605,
+      "roster_id": 1063
+    },
+    {
+      "name": "劉寬",
+      "face": 2606,
+      "roster_id": 1064
+    },
+    {
+      "name": "劉逸",
+      "face": 2607,
+      "roster_id": 1065
+    },
+    {
+      "name": "朱龜",
+      "face": 2608,
+      "roster_id": 1066
+    }
+  ],
+  "banks": [
+    "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\UserData_kit\\Koei\\San11 Tc\\FaceData\\San11Face10.fce"
+  ],
+  "scenarios": 15,
+  "backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\portrait_backups\\batch-20261023-174045",
+  "verification": "All encoded payloads and scenario bytes read back; runtime scene pending"
+}

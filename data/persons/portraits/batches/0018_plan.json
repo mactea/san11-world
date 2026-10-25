@@ -1,0 +1,57 @@
+[
+  {
+    "key": "han_yangzhi",
+    "name": "羊陟",
+    "birth": 147,
+    "face": 2483,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷67",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷80下"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. YANG ZHI 羊陟, courtesy Sizu, Eastern Han Henan governor and learned patron of Zhao Yi. Around50, distinct broad oval face with high smooth forehead, soft full cheeks, small rounded chin, long straight narrow nose with rounded tip, large gentle dark eyes beneath thin level gray-black brows, wide finely shaped lips. Neat fine black-gray moustache and small soft short goatee, bare cheeks. Warm pale ochre skin with fine smile lines, thoughtful reserved welcoming expression with a faint closed-mouth smile. Modest black low folded Han official scholar cap with no jewels, muted slate-blue robe with plain black edging and light cream inner collar. Slight right turn, smoky desaturated brown-green backdrop. Cultivated approachable minister, no warrior armour or exaggerated stern scowl."
+  },
+  {
+    "key": "han_genglin",
+    "name": "耿臨",
+    "birth": 147,
+    "face": 2484,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷85",
+      "https://bkso.baidu.com/item/耿临/9409978"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. GENG LIN 耿臨, Eastern Han Xuantu frontier governor and military commander active against Goguryeo around169. Around40, distinct long strong square face, broad high forehead, prominent broad jaw and chin, wide straight nose with slightly bent bridge, deeply set large vigilant eyes under thick short flat brows, broad closed mouth. Dense short straight black moustache and full short squared beard with little gray, sun-weathered warm bronze skin with fine eye creases. Calm alert command, not furious rage. Practical low round black iron Han helmet with plain leather cheek straps, no crest or plume; dark iron lamellar shoulder armour, faded deep burgundy inner tunic and slate-gray neck cloth. Three-quarter left, smoky cool blue-gray. Human northern frontier officer, no steppe imperial regalia, fantasy horns or ornate golden armour."
+  },
+  {
+    "key": "han_humuban",
+    "name": "胡母班",
+    "birth": 147,
+    "face": 2485,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/三國志/卷06",
+      "https://w.atwiki.jp/kansangokushi/pages/311.html"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. HU MU BAN 胡母班, Eastern Han court official and envoy killed during the coalition against Dong Zhuo, not a supernatural figure from later folktales. Around50, distinct long lean oval face with high broad forehead, high fine cheekbones and narrow rounded jaw, a prominent long straight nose, widely spaced observant eyes under long softly curved brows, thin full lips. Neat medium-long black-gray beard tapering to two soft fine points and thin gray-flecked moustache. Warm medium-brown skin with lines beside mouth. Sober humane diplomatic gaze with a touch of worry, restrained closed lips, no villain grin. Plain low folded black Han court cap with small brown clasp, muted dark green robe with narrow black geometric edging and light ivory inner collar. Three-quarter right, smoky warm gray-brown backdrop. A dignified middle-aged envoy, no mystical halo, ghost props or military armour."
+  },
+  {
+    "key": "han_yufang",
+    "name": "虞放",
+    "birth": 147,
+    "face": 2486,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷67"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. YU FANG 虞放, former Eastern Han Sikong targeted in the factional prosecutions of169. Around60, distinct short broad oval face, very high receding domed forehead, softly hollow temples, full lower cheeks and small broad rounded chin, short wide nose with rounded tip, long calm dark eyes beneath thin gently downward gray brows. Fine white-gray moustache and sparse soft medium-short white-gray goatee, bare cheeks. Warm light-brown deeply aged skin, serious weary but unbroken expression with relaxed closed mouth. Modest low ridged black Han official cloth cap, plain deep muted gray-purple robe with charcoal collar edging and ivory inner collar. Nearly frontal slight left turn, smoky blue-green charcoal backdrop. A retired elderly civic minister, no armour, luxury crown or giant sage eyebrows."
+  },
+  {
+    "key": "eunuch_yuanshe",
+    "name": "袁赦",
+    "birth": 147,
+    "face": 2487,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷77",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. YUAN SHE 袁赦, Eastern Han palace eunuch who cultivated connections with the Yuan family. Around45, distinct broad high forehead tapering to small round chin, softly full upper cheeks, a delicate long straight nose, large slightly hooded dark eyes with very fine arched brows, small full lips. Fully clean-shaven, absolutely no beard, moustache, goatee or stubble. Warm pale tan skin with fine crow's feet and smooth cheeks. Quiet socially confident assessing gaze with a faint polite closed-mouth smile, no grotesque evil caricature. Simple low black folded Han palace cap with tiny dull bronze clasp, muted dark brown-indigo fine woven robe with narrow faded burgundy collar border and cream inner collar. Slight right turn, smoky dark olive-charcoal. Refined middle-aged male courtier, distinct wide upper face and small chin, no extravagant jewellery or Ming wings."
+  }
+]

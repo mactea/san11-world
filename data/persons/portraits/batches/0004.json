@@ -1,0 +1,56 @@
+{
+  "people": [
+    {
+      "name": "段熲",
+      "birth": 134,
+      "face": 2413,
+      "folder": "han_duanjiong",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷65"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "趙戩",
+      "birth": 136,
+      "face": 2414,
+      "folder": "han_zhaojian",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷64"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "夏育",
+      "birth": 137,
+      "face": 2415,
+      "folder": "han_xiayu",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷65",
+        "https://zh.wikipedia.org/wiki/夏育_(东汉)"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "李燮",
+      "birth": 137,
+      "face": 2416,
+      "folder": "han_lixie",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷63"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "田晏",
+      "birth": 137,
+      "face": 2417,
+      "folder": "han_tianyan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷65",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷90"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

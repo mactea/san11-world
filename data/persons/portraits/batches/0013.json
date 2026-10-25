@@ -1,0 +1,56 @@
+{
+  "people": [
+    {
+      "name": "張亮",
+      "birth": 146,
+      "face": 2458,
+      "folder": "eunuch_zhangliang",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷69"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "張敞",
+      "birth": 146,
+      "face": 2459,
+      "folder": "han_zhangchang_eastern",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷69"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "曹節",
+      "birth": 146,
+      "face": 2460,
+      "folder": "eunuch_caojie",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+        "https://zh.wikipedia.org/wiki/曹節_(宦官)"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "朱寓",
+      "birth": 146,
+      "face": 2461,
+      "folder": "han_zhuyu_inspector",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "朱瑀",
+      "birth": 146,
+      "face": 2462,
+      "folder": "eunuch_zhuyu",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷78"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

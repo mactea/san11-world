@@ -1,0 +1,72 @@
+{
+  "alias": {
+    "name": "張晏",
+    "birth": 148,
+    "face": 2498,
+    "folder": "han_zhangyan_western_alias",
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "likeness": "Historical artistic reconstruction; same artwork as 張宴 (148), inferred textual variant from identical office and campaign; roster entries retained",
+    "artwork_source_folder": "han_zhangyan_western"
+  },
+  "new_portraits": [
+    {
+      "key": "han_caokuan",
+      "name": "曹寬",
+      "birth": 148,
+      "face": 2499,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. CAO KUAN 曹寬, Eastern Han military major in the Western Regions who joined the Shule campaign with Ren She and Zhang Yan, NOT an imperial court painter namesake. Around38, individual broad rectangular face with low broad forehead, wide cheekbones, angular long chin, broad flat-bridged nose with rounded tip, large heavy-lidded dark eyes beneath thick straight low eyebrows, full firm mouth. Deep weathered warm tawny skin, short thick black moustache and closely trimmed round black beard, bare high cheeks. Calm wary soldierly expression, not raging. Plain low black leather-covered Han helmet with cheek flaps tied back, no crest, worn dark iron lamellar shoulder armour over faded dark ochre robe and ivory collar, dull blue-gray cloak. Three-quarter left, smoky cool brown background. No fantasy ornament, no imperial crown, no weapons or hands."
+    },
+    {
+      "key": "han_guyong_yulin",
+      "name": "谷永",
+      "birth": 148,
+      "face": 2500,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷86",
+        "https://www.shidianguji.com/zh/book/HY0371/chapter/1k3t42bliibdn"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. GU YONG 谷永, Eastern Han governor of Yulin who peacefully drew Wuhu communities into Han allegiance around170, NOT the Western Han minister Gu Yong. Around50, distinct long pear-shaped face with high domed forehead, narrow temples, soft wide lower cheeks and a small rounded chin; long narrow straight nose, bright widely spaced eyes beneath thin almost horizontal eyebrows, broad gently smiling lips, prominent ears. Warm medium bronze skin with fine sun wrinkles, fine short black-gray moustache and sparse medium-long straight pointed goatee, bare cheeks. Gentle attentive mature local administrator with a restrained welcoming smile. Plain low dark brown Han scholar headcloth, lightweight faded gray-green robe with subtle dark edging and pale beige inner collar. Slight turn right, dark smoky blue-green backdrop. Refined practical southern provincial official, no armour or luxury jewellery."
+    },
+    {
+      "key": "han_laiyan",
+      "name": "來豔",
+      "birth": 149,
+      "face": 2501,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷42",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikipedia.org/wiki/来艳"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. LAI YAN 來豔 courtesy Jide, Eastern Han senior minister from Xinye, twice Excellency of Works, father of Lai Min. Around60, distinct very narrow oblong face, very high broad forehead, hollow cheeks, long prominent slightly aquiline nose, small almond eyes beneath thick white-gray gently curved eyebrows, narrow thin-lipped mouth, angular small chin. Fine warm light ochre aged skin with horizontal forehead lines. Neatly combed gray moustache and medium-length tapered white-gray beard, exposed cheeks, a little gray hair visible beside ears. Reserved austere courtly composure with a thoughtful level gaze, no smile. Low modest black formal ridged Han cloth cap with simple dull bronze clasp; deep desaturated maroon court robe with narrow black geometric trim and ivory crossed collar. Slight left turn, smoky olive-charcoal background. No fantasy crown, no oversized gold ornaments or armour."
+    },
+    {
+      "key": "han_zongju",
+      "name": "宗俱",
+      "birth": 149,
+      "face": 2502,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikipedia.org/wiki/宗俱"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZONG JU 宗俱 courtesy Boli, Eastern Han senior minister of Nanyang who served as minister of ceremonies and Excellency of Works around171. About58, distinctly broad rounded square face with a low full forehead, soft heavy cheeks and sturdy rounded jaw, short wide nose with a high root, deep-set medium dark eyes beneath short sparse gray-black brows, wide thin-lipped mouth. Warm tawny olive skin with visible forehead and cheek age lines. Modest short black-gray moustache and a compact squared gray-black chin beard, bare upper cheeks. Sober formal thoughtful expression with gently downturned lips, dignified human authority. Plain low folded black Han court cap with a narrow brown band, muted deep indigo court robe with discreet ochre geometric edging and pale cream inner collar. Almost frontal slight right turn, dark smoky warm burgundy-gray background. No armour, no giant gold crown or props."
+    },
+    {
+      "key": "han_zhangju_rebel",
+      "name": "張舉",
+      "birth": 149,
+      "face": 2503,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷73",
+        "https://zh.wikipedia.org/wiki/張舉_(東漢)"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHANG JU 張舉, Eastern Han former Taishan governor and rebel claimant who allied with Zhang Chun and Wuhuan forces in187, NOT Zhang Jiao or Zhang Yan. About45, distinctive broad angular pentagonal face with wide low forehead, high hard cheekbones, strong projecting jaw and broad squared chin, long slightly bent prominent nose, narrow intense deep-set dark eyes, thick straight brows with a slight furrow, wide firm full-lipped mouth. Deep warm bronze skin with sun lines, thick drooping black moustache and a broad short coarse black beard with a few gray strands, exposed high cheeks. Proud alert forceful expression with closed mouth, not a snarling villain. Low dark Han military cloth cap with simple bronze front clasp, worn dark iron lamellar shoulders over muted dark rust-red robe and ivory collar, subdued charcoal cloak. Three-quarter left, smoky cool olive-gray background. A practical ambitious human commander, no yellow headscarf, no Daoist symbols or fantasy emperor crown."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "李文侯",
+      "birth": 142,
+      "face": 2433,
+      "folder": "qiang_liwenhou",
+      "references": [
+        "https://zh.wikipedia.org/wiki/李文侯",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷72"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "楊彪",
+      "birth": 142,
+      "face": 2434,
+      "folder": "han_yangbiao",
+      "references": [
+        "https://lishiwenhua.snnu.edu.cn/info/1533/18054.htm",
+        "https://www.sohu.com/a/734243459_353840",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷54"
+      ],
+      "likeness": "Historical artistic reconstruction using unverified modern illustration as loose visual reference"
+    },
+    {
+      "name": "江宮",
+      "birth": 142,
+      "face": 2435,
+      "folder": "rebel_jianggong",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷18"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "王烈",
+      "birth": 142,
+      "face": 2436,
+      "folder": "han_wanglie",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷11",
+        "https://www.wz132.com/r/san-guo-wang-lie.html"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "甘始",
+      "birth": 142,
+      "face": 2437,
+      "folder": "fangshi_ganshi",
+      "references": [
+        "https://zh.wikipedia.org/wiki/甘始",
+        "https://zh.wikisource.org/zh-hant/三國志/卷29"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

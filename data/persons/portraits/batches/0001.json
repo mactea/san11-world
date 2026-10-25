@@ -1,0 +1,34 @@
+{
+  "people": [
+    {
+      "name": "曹鸞",
+      "birth": 87,
+      "face": 2400,
+      "folder": "han_caoluan",
+      "references": [
+        "https://longyang.gov.cn/info/16395/5562039.htm"
+      ],
+      "likeness": "Artistic reconstruction; no verified surviving portrait located"
+    },
+    {
+      "name": "胡廣",
+      "birth": 91,
+      "face": 2401,
+      "folder": "han_huguang",
+      "references": [
+        "https://ctext.org/dong-guan-han-ji/hu-guang/zhs"
+      ],
+      "likeness": "Artistic reconstruction; historical paintings are recorded, but no surviving identified likeness located; excludes Ming namesake"
+    },
+    {
+      "name": "張奐",
+      "birth": 104,
+      "face": 2402,
+      "folder": "han_zhanghuan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷65"
+      ],
+      "likeness": "Artistic reconstruction; no verified surviving portrait located"
+    }
+  ]
+}

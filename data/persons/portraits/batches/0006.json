@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "北宮伯玉",
+      "birth": 140,
+      "face": 2423,
+      "folder": "qiang_beigongboyu",
+      "references": [
+        "https://zh.wikipedia.org/wiki/北宫伯玉",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷72"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "孫嵩",
+      "birth": 140,
+      "face": 2424,
+      "folder": "han_sunsong",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷64",
+        "https://shandong-chorography.org/database/a/section/82/article/34/"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "蓋勳",
+      "birth": 140,
+      "face": 2425,
+      "folder": "han_gaixun",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷58",
+        "https://baike.so.com/doc/1099628-1163514.html"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "士壹",
+      "birth": 141,
+      "face": 2426,
+      "folder": "han_shiyi",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷49",
+        "https://zh.wikipedia.org/wiki/士壹"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "彭脫",
+      "birth": 141,
+      "face": 2427,
+      "folder": "yellowturban_pengtuo",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷71",
+        "https://wapbaike.baidu.com/item/彭脱/2074249"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

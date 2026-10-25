@@ -1,0 +1,57 @@
+{
+  "people": [
+    {
+      "name": "袁逢",
+      "birth": 130,
+      "face": 2488,
+      "folder": "han_yuanfeng",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷80下",
+        "https://zh.wikipedia.org/wiki/袁逢"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "許訓",
+      "birth": 147,
+      "face": 2489,
+      "folder": "han_xuxun",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://bkso.baidu.com/item/许训/6894044"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "郭揖",
+      "birth": 147,
+      "face": 2490,
+      "folder": "han_guoyi",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷67"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "郭禧",
+      "birth": 147,
+      "face": 2491,
+      "folder": "han_guoxi",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷60下",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "陳夤",
+      "birth": 147,
+      "face": 2492,
+      "folder": "han_chenyin",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷58"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

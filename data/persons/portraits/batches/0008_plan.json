@@ -1,0 +1,60 @@
+[
+  {
+    "key": "qiang_liwenhou",
+    "name": "李文侯",
+    "birth": 142,
+    "face": 2433,
+    "references": [
+      "https://zh.wikipedia.org/wiki/李文侯",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷72"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. LI WENHOU 李文侯, second-century Huangzhong frontier leader, allied with Beigong Boyu, about40. Distinct wide square head, short forehead, large broad straight nose, deep round vigilant dark eyes, low dense brows, wide jaw and blunt chin. Dense full short black beard around jaw with sparse gray at temples, broad upper lip. Weathered bronze skin, controlled alert political confidence rather than fury. Simple low rounded brown felt cap with narrow dark fur edging, loose black hair behind and two restrained braids near ears. Dull gray-green wool wrapped coat under rough dark brown leather lamellar shoulder pieces, a simple bronze circular fastener and tan collar. Three-quarter right, dark blue-black smoke. Individual rugged full-bearded broad face, no horns, imperial ornaments, Manchu queue or fantasy feathers."
+  },
+  {
+    "key": "han_yangbiao",
+    "name": "楊彪",
+    "birth": 142,
+    "face": 2434,
+    "references": [
+      "https://lishiwenhua.snnu.edu.cn/info/1533/18054.htm",
+      "https://www.sohu.com/a/734243459_353840",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷54"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. YANG BIAO 楊彪, eminent Eastern Han minister of the Hongnong Yang family, father of Yang Xiu, around60. Reference is a later unverified modern illustration, NOT a historical likeness. Use its dignified red official robe and long dark beard as loose inspiration, create a different aged face and restrained Han official cap rather than gold crown. Distinct tall narrow forehead and long rectangular face, prominent straight nose with thin bridge, drooping heavy-lidded eyes, naturally thin slightly curved brows, deeply lined mouth and lean cheeks. Long carefully kept gray-black beard and thin gray moustache, silver hair by ears. Serious weary humane dignity, quiet sorrow but unwavering integrity. Modest black ridged Han court cloth cap, muted dark crimson robe with narrow black geometric border and ivory crossed collar, no oversize gold. Slight left turn, smoky cool gray. Elderly scholarly high minister, no angry handsome-warrior template.",
+    "ref": [
+      "C:/Users/garib/Documents/Work/CMCode/san11world-persons/data/persons/portraits/han_yangbiao/references/later_web_image.jpg"
+    ]
+  },
+  {
+    "key": "rebel_jianggong",
+    "name": "江宮",
+    "birth": 142,
+    "face": 2435,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/三國志/卷18"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. JIANG GONG 江宮, late Eastern Han local armed leader in the Runan region, about40. Distinct short round broad face, full heavy lower cheeks, small slightly upturned nose, wide-set small dark eyes under thin uneven brows, a broad firm mouth, clean-shaven chin with a few short moustache hairs and faint stubble. Warm reddish brown outdoor complexion, tired wary assessing gaze and relaxed forehead, not a scowl. Black hair drawn back under short faded reddish-brown kerchief, no ceremonial headgear. Coarse dark navy robe under plain patched brown leather vest, light gray frayed inner collar and drab wool strip over shoulder. Three-quarter left, dark smoky muted green. Solid stocky local militia leader without official ornaments or fantasy armour."
+  },
+  {
+    "key": "han_wanglie",
+    "name": "王烈",
+    "birth": 142,
+    "face": 2436,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/三國志/卷11",
+      "https://www.wz132.com/r/san-guo-wang-lie.html"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. WANG LIE 王烈, courtesy name Yanfang, late Eastern Han moral teacher and recluse who settled in Liaodong, around65. Distinct very thin small face with a wide high domed forehead, receding silver-gray hairline, fine cheekbones, prominent ears, small pointed nose, kind long eyes with delicate crow's feet and short soft white brows. Sparse long white moustache and fine white beard ending at upper chest. Gentle genuine small closed-mouth smile, welcoming and thoughtful, softly wrinkled tawny skin. Plain gray-brown linen scholar headcloth folded modestly low with a simple knot at rear, light dusty offwhite coarse crossed-collar robe and faded moss-gray outer wrap, no rich silk or armour. Almost frontal tilted slightly right, dark warm gray smoke. A modest aging rural teacher, not an immortal with giant eyebrows, halo or supernatural effects."
+  },
+  {
+    "key": "fangshi_ganshi",
+    "name": "甘始",
+    "birth": 142,
+    "face": 2437,
+    "references": [
+      "https://zh.wikipedia.org/wiki/甘始",
+      "https://zh.wikisource.org/zh-hant/三國志/卷29"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. GAN SHI 甘始, late Eastern Han fangshi associated with Cao Cao, old in years but recorded as youthful-looking. Portray apparent age45 with silver-white eyebrows and white strands in otherwise black hair. Distinct slender inverted-triangle face, unusually high smooth forehead, small narrow straight nose, widely spaced shining dark eyes, short curved white eyebrows, delicate slightly smiling lips, fine black moustache and a very small pointed white-gray chin tuft. Calm self-possessed subtly enigmatic expression, not evil or magical. Hair tied in a plain small topknot secured by a simple wooden pin, no Daoist priest tall crown, no shaved forehead. Plain layered faded gray-blue robe with warm beige crossed collar, dark brown shawl edge. Three-quarter right, smoky moss-black background. Grounded human portrait of an unusual early Chinese practitioner, no halo, glowing eyes, talismans, supernatural energy or medicine props."
+  }
+]
