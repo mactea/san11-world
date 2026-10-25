@@ -355,14 +355,14 @@ def main():
     ap.add_argument("world", nargs="?", default=str(DATA / "world"))
     ap.add_argument("--cache", default=str(DATA / "world_hexcache.npz"), help="make_world.py's hex elevation cache")
     a = ap.parse_args()
-    from make_world import Dem, sample_hexes
+    from make_world import Dem, cache_key, sample_hexes
     from worldgeo import WorldGeo, WorldSpec
     w = Path(a.world)
     info = json.loads((w / "world_info.json").read_text())
     spec = WorldSpec(rows=info["rows"], cols=info["cols"], lon0=info["lon0"], lat0=info["lat0"],
                      china_lo=info["china_lo"], china_hi=info["china_hi"])
     geo = WorldGeo(spec, DATA / "cities_georef.json")
-    key = f"{spec.rows},{spec.cols},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi},{geo.VERSION}"
+    key = cache_key(spec, geo)
     if Path(a.cache).exists() and str(np.load(a.cache)["key"]) == key:
         e0 = np.load(a.cache)["e0"]
     else:

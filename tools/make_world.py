@@ -187,6 +187,11 @@ def hex_neighbors(mask):
 
 # ---------------------------------------------------------------- sampling
 
+def cache_key(spec, geo):
+    """key of the hex elevation cache (--cache): the grid, the projection and the sampling"""
+    return f"{spec.rows},{spec.cols},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi},{geo.VERSION},land-relief"
+
+
 def sample_hexes(geo, dem, R, C):
     e0 = np.zeros((R, C), np.float32)
     relief = np.zeros((R, C), np.float32)
@@ -202,6 +207,7 @@ def sample_hexes(geo, dem, R, C):
                 lat_c[r0:r0 + 200] = lat.reshape(lo.shape)
         v = np.stack(vals)
         e0[r0:r0 + 200] = v[0]
+        v = np.maximum(v, 0)            # land relief: the sea floor next to a coast is not a cliff
         relief[r0:r0 + 200] = v.max(0) - v.min(0)
     return e0, relief, lat_c
 
@@ -354,12 +360,17 @@ def land_cover(shape, weights, dw, dmt, e0, rng, land, iters=3):
     return np.asarray(COVER, np.uint8)[pick]
 
 
-def mountain_mask(e0, relief, dw, land, rng):
+MOUNTAIN_RAMP = (80, 450)   # regional relief (m) over which the mountain share rises from 4% to 92%
+
+
+def mountain_mask(e0, relief, dw, land, rng, ramp=MOUNTAIN_RAMP):
     """Koei-style impassable mountains. The target share rises with regional ruggedness (few hills on
     plains, about half of hilly land, most of high ranges). Inside that share mountains sit on local
-    ridges and away from rivers, so valleys along rivers stay open like Koei's corridors."""
+    ridges and away from rivers, so valleys along rivers stay open like Koei's corridors.
+    ramp: the relief range of the rise. (30, 330) matched Koei's 48% on his own China, but made the world's
+    rolling plateaus (Mongolia, Iran, Anatolia) 40-60% cliffs; (80, 450) keeps the main ranges as barriers."""
     rr = ndimage.gaussian_filter(relief, 3)
-    p = 0.04 + 0.88 * smoothstep(rr, 30, 330) + 0.15 * smoothstep(e0, 2500, 4500)
+    p = 0.04 + 0.88 * smoothstep(rr, *ramp) + 0.15 * smoothstep(e0, 2500, 4500)
     p = np.clip(p, 0, 0.93)
     tpi = (e0 - ndimage.gaussian_filter(e0, 3)) / (ndimage.gaussian_filter(relief, 4) + 40)
     dterm = np.minimum(dw, 12) / 12.0
@@ -456,7 +467,7 @@ def china_patch(china_shex, e0, relief, seed):
     streams = (t == STREAM) & (ndimage.distance_transform_edt(~patch) <= 2)
     water = np.isin(t, WATER)
     dw = ndimage.distance_transform_edt(~water).astype(np.float32)
-    mtn, _ = mountain_mask(e0, relief, dw, patch, rng)
+    mtn, _ = mountain_mask(e0, relief, dw, patch, rng, ramp=(30, 330))     # Koei's own ruggedness
     dmt = ndimage.distance_transform_edt(~mtn).astype(np.float32)
     cover = land_cover(t.shape, {"china": np.ones(t.shape, np.float32)}, dw, dmt, e0, rng, patch & ~mtn)
     new = np.where(mtn, MOUNTAIN, cover).astype(np.uint8)
@@ -816,7 +827,7 @@ def main():
     t0 = time.time()
 
     # ---- hex level: elevation
-    key = f"{R},{C},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi},{geo.VERSION}"
+    key = cache_key(spec, geo)
     if a.cache and Path(a.cache).exists() and str(np.load(a.cache)["key"]) == key:
         z = np.load(a.cache)
         e0, relief, lat_c = z["e0"], z["relief"], z["lat"]
