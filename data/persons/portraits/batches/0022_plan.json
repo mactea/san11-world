@@ -1,0 +1,59 @@
+{
+  "new_portraits": [
+    {
+      "key": "han_lixian_taiwei",
+      "name": "李鹹",
+      "birth": 149,
+      "face": 2504,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷056",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷057"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. LI XIAN 李咸, courtesy Yuanzhuo, Eastern Han Excellency of Works and Marshal (太尉) from Xiping in Runan, famous for austere integrity and for rising from a sickbed in 172 to force the empress dowager's proper burial. Around 72, tall spare elderly man with a long narrow weathered face, high vertical forehead, hollow cheeks, long straight nose with a slightly heavy bridge, deep-set calm dark eyes beneath sparse grizzled straight brows, thin compressed lips and a strong narrow chin. Warm pale ochre aged skin with deep forehead and nasolabial lines, prominent ears. Long full gray-white beard reaching the chest, matching gray-white moustache, receding temples. Unbending solemn expression, level gaze, no smile. Low black Han 进贤冠 with a dark red cord, deep charcoal-black court robe with narrow dark red edging and an ivory crossed collar, a plain dark bronze belt hook at the chest line. Three-quarter right, smoky dark olive background. No crown, no armour, no gold ornaments."
+    },
+    {
+      "key": "han_wangyue_swordsman",
+      "name": "王越",
+      "birth": 149,
+      "face": 2505,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷02",
+        "https://ctext.org/taiping-yulan/592"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. WANG YUE 王越, an Eastern Han 虎賁 imperial guardsman of Luoyang, renowned in the capital for swordsmanship under Emperors Huan and Ling and remembered as the teacher of Shi E in Cao Pi's Dianlun. Around 52, compact powerful build, broad angular square face with high flat cheekbones and a strong squared jaw, straight thick nose, narrow intense dark eyes with fine crow's feet, heavy straight black brows, firm closed mouth. Deeply weathered bronze skin with a faint old thin scar across one cheekbone, short coarse black beard along the jawline and a thick drooping black moustache, bare high cheeks. Disciplined watchful expression, calm and self-contained, not snarling. Low black lacquered Han 武冠 with a short dull red tassel, worn dark leather lamellar guardsman armour over a faded deep red robe and ivory collar, muted charcoal cloak. Three-quarter left, smoky cool gray-brown background. No fantasy helmet crest, no weapon, no hands."
+    },
+    {
+      "key": "monk_zhufoshuo",
+      "name": "竺朔佛",
+      "birth": 149,
+      "face": 2506,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/高僧傳/卷01",
+        "https://zh.wikisource.org/zh-hant/出三藏記集/卷07"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHU FOSHUO 竺佛朔, a monk from Tianzhu in India who carried the Daoxing Prajnaparamita sutra to Luoyang and recited it for the 179 translation with Lokaksema, praised for plain diction that preserved the meaning. Around 55, South Asian Indian features: elongated oval face, high cheekbones, deep-set large dark eyes, long straight prominent nose, full calm mouth, strong jaw. Warm dark brown skin with subtle weathering and fine lines around the eyes. Shaved head with faint stubble, completely beardless. Serene concentrated expression, quiet inward calm, not smiling. Simple draped dull saffron and earth-red cotton monastic robe over one shoulder with a plain dark brown outer wrap, no ornate Chinese silk, no jewellery, no sash ornament. Almost frontal slight left turn, smoky warm charcoal background. No halo, no gold, no Chinese Buddhist crown or later Chinese monastic hat."
+    },
+    {
+      "key": "han_dongfu",
+      "name": "董扶",
+      "birth": 149,
+      "face": 2507,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷31",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷082下"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. DONG FU 董扶, courtesy Mao'an, an Eastern Han scholar of Mianzhu in Guanghan who mastered apocryphal prophecy, served as Palace Attendant, and told Liu Yan that Yi province held an emperor's aura before accompanying him into Shu; he died at 82. Around 78, thin elderly scholar with a long oval face, high domed forehead, hollow cheeks, fine long nose, calm deep-set eyes beneath sparse white brows, thin lips and a narrow chin. Warm sallow aged skin with fine wrinkles and age spots. Long thin white beard and wispy white moustache, white hair at the temples, ears visible. Composed knowing expression, faintly severe and reserved, no smile. Low black lacquered Han 侍中 cap with a small dull-gold cicada ornament and a short dark marten tail at the side, deep gray-brown court robe with subdued dark red trim and an ivory collar. Three-quarter right, smoky dark blue-gray background. No armour, no Daoist ritual crown, no Buddhist insignia, no large gold jewellery."
+    },
+    {
+      "key": "han_dongmeng_eunuch",
+      "name": "董萌",
+      "birth": 149,
+      "face": 2508,
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷010下",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. DONG MENG 董萌, Eastern Han Yellow Gate Prefect (黃門令), a palace eunuch official favoured by Empress Dowager Dou who pleaded her grievances to Emperor Ling and was destroyed by Cao Jie and Wang Fu in 171. Around 45, soft full oval face with a high smooth forehead, rounded cheeks and a small rounded chin, short broad nose, clear narrow dark eyes beneath fine black brows, small firm mouth. Pale warm ivory skin, completely beardless and smooth-cheeked, eyebrows neatly shaped. Watchful cautious expression, composed and faintly anxious, no smile. Plain low black Han 武冠 with a small dull bronze clasp, dark maroon-purple palace robe with narrow black trim and a pale cream collar, no armour, no ornament. Three-quarter left, smoky dark brown background. No jewellery, no crown, no cosmetic makeup, no caricature."
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{"addr": "0x493422", "value": "0xc0bc", "verdict": "PERSON", "role": "OTHER", "patch": "PERSONARR-0x7201958", "encoding": "disp32", "note": "post-load 0x493400: lea of officer array world+0xC0BC, loop vtable+0x34 over officer records"}
+{"addr": "0x493428", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "post-load 0x493400: loop count of officer records (vtable+0x34) from world+0xC0BC"}
+{"addr": "0x493437", "value": "0x190", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "officer record stride 0x190 in post-load loop"}
+{"addr": "0x493643", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop count (M9 UNIT) in post-load 0x493400"}
+{"addr": "0x493814", "value": "0xc0bc", "verdict": "PERSON", "role": "OTHER", "patch": "PERSONARR-0x7201958", "encoding": "disp32", "note": "world serializer 0x4937b0: lea of officer array world+0xC0BC, loop vtable+0x30 serialize (save stores all officers)"}
+{"addr": "0x493831", "value": "0x190", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "officer record stride 0x190 in serializer loop"}
+{"addr": "0x493837", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "world serializer 0x4937b0: edi counts officer records serialized (save format: P records)"}
+{"addr": "0x493afe", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit serializer loop (M9 UNIT)"}
+{"addr": "0x493b63", "value": "0x96", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "serializer: 150 new-officer edit records (0x247) at world+0x1A5050; count stays 150"}
+{"addr": "0x495118", "value": "0x2bb", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "person-id validity predicate 0x495110: range 0..699 (historical sub-range; 700..799 excluded)"}
+{"addr": "0x49511f", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "validity predicate 0x495110: start of 800.. (gu wujiang) range"}
+{"addr": "0x495126", "value": "0x351", "verdict": "PERSON", "role": "SCEN_MAX", "patch": "S-1", "encoding": "imm32", "note": "validity predicate 0x495110: upper end of 800..849 scenario range must become S-1 so extended officers 850..S-1 are valid"}
+{"addr": "0x49512d", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "validity predicate 0x495110: first new officer 850"}
+{"addr": "0x495134", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "validity predicate 0x495110: last new officer 999 (M9 NOT only meant: not a unit)"}
+{"addr": "0x49513b", "value": "0x3e8", "verdict": "PERSON", "role": "SPECIAL_FIRST", "patch": "S+150", "encoding": "imm32", "note": "validity predicate 0x495110: first special officer 1000"}
+{"addr": "0x495142", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "validity predicate 0x495110: last special officer 1099"}
+{"addr": "0x495318", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id 0..1099 check (unit-member helper)"}
+{"addr": "0x495349", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id 0..1099 compared against unit member slots +0x10.."}
+{"addr": "0x495398", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id 0..1099 check (unit member lookup)"}
+{"addr": "0x4953d7", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit record member officer ids +0xc/+0x10/+0x14 counted if 0..1099"}
+{"addr": "0x4953f7", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit record member officer ids +0xc/+0x10/+0x14 counted if 0..1099"}
+{"addr": "0x495407", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit record member officer ids +0xc/+0x10/+0x14 counted if 0..1099"}
+{"addr": "0x4955ef", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id <=999 (M9 UNIT)"}
+{"addr": "0x4958a6", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer id slots (+0x10..+0x14) validity 0..1099"}
+{"addr": "0x4958df", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id 0..1099 (unit member set)"}
+{"addr": "0x495919", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer id +0x10 validity 0..1099"}
+{"addr": "0x495930", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer id +0x14 validity 0..1099"}
+{"addr": "0x495e7d", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer ids +0xc/+0x10/+0x14 counted if 0..1099"}
+{"addr": "0x495e9d", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer ids +0xc/+0x10/+0x14 counted if 0..1099"}
+{"addr": "0x495eac", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer ids +0xc/+0x10/+0x14 counted if 0..1099"}
+{"addr": "0x496079", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "unit deputy officer id [ecx] compared jge 1100 (invalid)"}
+{"addr": "0x496e5c", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit deputy officer id then passed to officer getter 0x490b00"}
+{"addr": "0x496fd0", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit leader officer id +0xc validity 0..1099"}
+{"addr": "0x497045", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit deputy officer id slot validity 0..1099"}
+{"addr": "0x497fc1", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "script interpreter iteration guard (M9)"}
+{"addr": "0x497fdd", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "script interpreter iteration guard (M9)"}
+{"addr": "0x499bc3", "value": "0x95", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm8", "note": "byte/char code range decoder (0x8c..0x95)"}
+{"addr": "0x499be7", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm8", "note": "byte/char code decoder (0x96)"}
+{"addr": "0x49cdfd", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "[0x720196c] (world+0x14, current officer id) checked then passed to getter 0x490b00"}
+{"addr": "0x49d6e4", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x49d6e0: gu wujiang 800..849 sub-range, index id-800 into 32-entry table 0x7e73e0"}
+{"addr": "0x49d6ea", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "disp32", "note": "0x49d6e0: id-800 index of gu wujiang table"}
+{"addr": "0x49d6f2", "value": "0x351", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x49d6e0: gu wujiang upper bound 849 (sub-range, table of 32 at 0x7e73e0)"}
+{"addr": "0x49e6ce", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 (sar 5) percent computation"}
+{"addr": "0x49e6e8", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 (sar 5) percent computation"}
+{"addr": "0x49e710", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 (sar 5) percent computation"}
+{"addr": "0x49e721", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 (sar 5) percent computation"}
+{"addr": "0x49e98a", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 (sar 5) percent computation"}
+{"addr": "0x49e9dc", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 (sar 5) percent computation"}
+{"addr": "0x4a0750", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x4a0740: object vtable+0x28 id in gu wujiang 800..849"}
+{"addr": "0x4a0757", "value": "0x351", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x4a0740: gu wujiang upper bound 849 (sub-range); extended 850..S-1 treated like regular officers"}
+{"addr": "0x4a075e", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "0x4a0740: new-officer range start 850 (person id via vtable+0x28)"}
+{"addr": "0x4a0765", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "0x4a0740: new-officer range end 999 (person id)"}
+{"addr": "0x4a087c", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x4a0870: gu wujiang sub-range 800..849"}
+{"addr": "0x4a0883", "value": "0x351", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x4a0870: gu wujiang sub-range upper 849"}
+{"addr": "0x4a095f", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id (or -1) 0..1099 stored via 0x47e110"}
+{"addr": "0x4a1316", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1328", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a13db", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4a1413", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1423", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1472", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1482", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1539", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a154b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a15ae", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4a15e6", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a15f6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1627", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1637", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a16d9", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a16eb", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a174e", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4a1786", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1796", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a17c7", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "round-up to thousands (M9 NOT)"}
+{"addr": "0x4a17d7", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "*1000 of round-up to thousands (M9 NOT)"}
+{"addr": "0x4a1c40", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id <=999 (M9 UNIT)"}
+{"addr": "0x4a261c", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "merit amount 1000 (M9)"}
+{"addr": "0x4a2649", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "officer death handler: person field +0x54 (officer id) checked 0..1099"}
+{"addr": "0x4a265b", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "death handler: person +0x60 (sworn-brother group id = an officer id) in new-officer range start 850"}
+{"addr": "0x4a2663", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "death handler: +0x60 group id new-officer range end 999"}
+{"addr": "0x4a266f", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "death handler: +0x60 group id in gu wujiang 800..849"}
+{"addr": "0x4a2677", "value": "0x351", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "death handler: +0x60 group id gu wujiang upper 849 (extended 850..S-1 fall to else branch: no group cleanup)"}
+{"addr": "0x4a268b", "value": "0x2bb", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "death handler: +0x60 group id 0..699 historical range (extended officers excluded; code change needed to include them)"}
+{"addr": "0x4a2706", "value": "0x2bb", "verdict": "UNSURE", "role": "", "patch": "", "encoding": "imm32", "note": "death handler: loop ebp=0..699 over getter clearing +0x60 of sworn brothers; only historical 0..699, extended 850..S-1 never scanned (not fixable by a constant)"}
+{"addr": "0x4a284a", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "person ptr->id (0x491310) in 850..999 then new-officer getter 0x490f00"}
+{"addr": "0x4a2851", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "person ptr->id in 850..999 then 0x490f00 (M9 NOT = not a unit)"}
+{"addr": "0x4a288e", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "relation officer id from 0x488890(person,i) checked 0..1099 then getter"}
+{"addr": "0x4a2903", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "relation officer id from 0x488950(person,i) checked 0..1099 then getter 0x490b00"}
+{"addr": "0x4a2986", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "rand(150) via 0x472150"}
+{"addr": "0x4a2d7c", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebx over all officers via getter 0x490b00"}
+{"addr": "0x4a4473", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "game-start setup: loop edi=800..849 over getter (gu wujiang sub-range)"}
+{"addr": "0x4a44b6", "value": "0x351", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "game-start setup: gu wujiang loop end 849"}
+{"addr": "0x4a44be", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "game-start setup: loop edi=850..999 over getter 0x490b00 (new officers) start"}
+{"addr": "0x4a452c", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "game-start setup: new-officer loop end 999 (getter 0x490b00)"}
+{"addr": "0x4a4638", "value": "0x2bb", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: person +0x60 group id in 0..699 historical (extended excluded)"}
+{"addr": "0x4a4669", "value": "0x2bb", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: person +0x64 group id in 0..699 historical (extended excluded)"}
+{"addr": "0x4a46f5", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "game-start: loop edi over all officers via getter (members with same +0x64)"}
+{"addr": "0x4a479c", "value": "0x2bb", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: relation id 0x488890 in 0..699 historical"}
+{"addr": "0x4a47dc", "value": "0x2bb", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: relation id 0x488950 in 0..699 historical"}
+{"addr": "0x4a480e", "value": "0x2bb", "verdict": "UNSURE", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: outer loop [esp+0x60]=0..699 over getter (historical officers only); extended 850..S-1 skipped, needs code change if wanted"}
+{"addr": "0x4a4869", "value": "0x2bb", "verdict": "UNSURE", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: loop esi=0..699 over getter (skips id 248), historical only; extended 850..S-1 skipped"}
+{"addr": "0x4a4931", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "rand(150) via 0x472150"}
+{"addr": "0x4a4b46", "value": "0x2bb", "verdict": "UNSURE", "role": "", "patch": "", "encoding": "imm32", "note": "game-start: loop edi=0..699 over getter (historical relocation); extended 850..S-1 skipped"}
+{"addr": "0x4a4d42", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "loop esi=0..1099 over getter 0x490b00"}
+{"addr": "0x4a4e61", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "person value 0x48a450 >= 1000 (M9 NOT)"}
+{"addr": "0x4a4e74", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop edi over all officers via getter"}
+{"addr": "0x4a4eb4", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop edi over all officers via getter"}
+{"addr": "0x4a4fad", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop edi over all officers via getter"}
+{"addr": "0x4a5c27", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4a5c6d", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4a66f3", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "person value < 1000 (M9 NOT)"}
+{"addr": "0x4a671f", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "+1000 to person value (M9 NOT)"}
+{"addr": "0x4a6739", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebp over all officers via getter 0x490b00"}
+{"addr": "0x4a71b5", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4a7793", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm8", "note": "person byte field +0xac clamped to >=150 (stat value)"}
+{"addr": "0x4a779b", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm8", "note": "stat value 150 store (same clamp)"}
+{"addr": "0x4a8c16", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id <=999 (M9 UNIT)"}
+{"addr": "0x4a9361", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person ptr->id (0x491310) checked 0..1099 then 0x484de0 (stores officer id at +0x40)"}
+{"addr": "0x4aa7d6", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person ptr->id (0x491310) checked 0..1099"}
+{"addr": "0x4ab888", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person ptr->id (0x491310) checked 0..1099"}
+{"addr": "0x4abaeb", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebx over all officers via getter 0x490b00"}
+{"addr": "0x4acbd1", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop esi over all officers via getter (clear +0xa8 match)"}
+{"addr": "0x4ad87c", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "wait 1000 ms (M9)"}
+{"addr": "0x4ada03", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "building vtable+0x54 (governor officer id, via 0x486890) checked 0..1099"}
+{"addr": "0x4adec8", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "sound id (M9)"}
+{"addr": "0x4af312", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "random amount *1000 (M9)"}
+{"addr": "0x4af336", "value": "0x320", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "rand(401)+800 gameplay amount"}
+{"addr": "0x4b0162", "value": "-0x1130", "verdict": "PERSON", "role": "ARRAY_SIZE", "patch": "-(P*4)", "encoding": "disp32", "note": "0x4b0140: object with two officer-indexed dword arrays (+0x10 state, +0x10+P*4 flags); pointer starts at +0x1140 and [esi-0x1130] reaches the first array, so disp = -(P*4)"}
+{"addr": "0x4b0198", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "0x4b0140: loop edi over all officers (getter 0x490b00) and the two officer-indexed arrays"}
+{"addr": "0x4b059a", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id (M9 UNIT)"}
+{"addr": "0x4b1f63", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id <=999 (M9 UNIT)"}
+{"addr": "0x4b21f8", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id <=999 (M9 UNIT)"}
+{"addr": "0x4b22d4", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "unit member officer id via 0x495270 checked 0..1099"}
+{"addr": "0x4b23df", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "person ptr->id checked <1100 then writes [esi+id*4+0x10] (officer-indexed dword array)"}
+{"addr": "0x4b29bf", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "rep stosd 1100 dwords: fills officer-indexed array at esp+0x1738 (stack object, frame 0x398c)"}
+{"addr": "0x4b2a0f", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "person ptr->id <1100 indexes stack array [esp+id*4+0x1738]"}
+{"addr": "0x4b2f10", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "experience amount (M9)"}
+{"addr": "0x4b32e3", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4b3315", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4b3347", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4b3391", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4b36cd", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4b4c32", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4b5418", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "0x4b5410: byte array indexed by officer id [ecx+id], bound <1100 (array built by 0x4b5430 with 0x113 dwords, on the stack of 0x4b7e70)"}
+{"addr": "0x4b5a8a", "value": "0x3e7", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit id (M9 UNIT)"}
+{"addr": "0x4b687d", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4b95bb", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4b9ddd", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id 0..1099 (with city id 0..41 arg)"}
+{"addr": "0x4b9ee0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4ba845", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4ba8ce", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4ba95a", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4baa46", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4baaf2", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4babee", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4bc5be", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person field +0x64 (officer id) checked 0..1099"}
+{"addr": "0x4bcb17", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebp over all officers via getter 0x490b00"}
+{"addr": "0x4bd96b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4be1da", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person field +0x58 (parent officer id) 0..1099"}
+{"addr": "0x4be1ed", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person field +0x5c (parent officer id) 0..1099"}
+{"addr": "0x4be561", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop [esp+0x64] over all officers via getter"}
+{"addr": "0x4bec87", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop [esp+0x10] over all officers via getter"}
+{"addr": "0x4c24c7", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop edi over all officers via getter (count matching)"}
+{"addr": "0x4c25a6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4c26c5", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4c3684", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "combined location/object code 0..150 (10..31, 32..63, 64..150 ranges)"}
+{"addr": "0x4c37f1", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "combined location code range 0x40..0x96"}
+{"addr": "0x4c38d9", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "combined location code range 0x40..0x96"}
+{"addr": "0x4c3985", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "combined location code range 0x40..0x96"}
+{"addr": "0x4c3cb7", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop edi over all officers via getter (count)"}
+{"addr": "0x4c3d9b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4c3eb5", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4c6761", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebx over all officers via getter"}
+{"addr": "0x4c67ff", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebx over all officers via getter"}
+{"addr": "0x4c7e8f", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "arg officer id 0..1099 (0x4c7e70)"}
+{"addr": "0x4c7e9e", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "0x4c7e70: arg officer id in new-officer range 850.. -> 0x490f00"}
+{"addr": "0x4c7eac", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "0x4c7e70: arg officer id new-officer range end 999"}
+{"addr": "0x4c7ec7", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "0x4c7e70: loop start 850 over new-officer getter 0x490f00"}
+{"addr": "0x4c7f0f", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "0x4c7e70: loop end 999 over new-officer getter 0x490f00"}
+{"addr": "0x4c8dd8", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "person ptr->id (0x491310) in new-officer range start 850"}
+{"addr": "0x4c8ddf", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "person ptr->id new-officer range end 999"}
+{"addr": "0x4c8dfd", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "person ptr->id in 800..999 (gu wujiang + new officers): start 800 stays"}
+{"addr": "0x4c8e04", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "person ptr->id 800..999 range end; the range 800..S+149 then also includes extended 850..S-1"}
+{"addr": "0x4cb5ef", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "loop ebp over all officers via getter"}
+{"addr": "0x4cdfe1", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "object (0x490b30) field +0x40 officer id checked 0..1099"}
+{"addr": "0x4ce573", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4ce5ee", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4ce65e", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4ce6ce", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4ce799", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "unit loop (M9 UNIT)"}
+{"addr": "0x4cf2d5", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4cf34c", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4cf46e", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4cf4ee", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4cf526", "value": "0x44b", "verdict": "PERSON", "role": "PERSON_MAX", "patch": "P-1", "encoding": "imm32", "note": "person field +0x64 officer id checked 0..1099"}
+{"addr": "0x4cf567", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4cf5e9", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop edi over all officers via getter 0x490b00"}
+{"addr": "0x4cf66e", "value": "0x2bc", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "officer list builder: skip 700..799 event/barbarian sub-range"}
+{"addr": "0x4cf676", "value": "0x31f", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "officer list builder: skip 700..799 sub-range end"}
+{"addr": "0x4cf7a8", "value": "0x44c", "verdict": "PERSON", "role": "PERSON_COUNT", "patch": "P", "encoding": "imm32", "note": "officer list builder: loop ebp over all officers via getter"}
+{"addr": "0x4cf7de", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "0x4cf7d0: loop edi=850..999 over new-officer getter 0x490f00"}
+{"addr": "0x4cf80d", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "0x4cf7d0: new-officer loop end 999"}
+{"addr": "0x4cf82e", "value": "0x320", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x4cf820: loop 800..849 gu wujiang (with 0x49d6e0)"}
+{"addr": "0x4cf858", "value": "0x351", "verdict": "KEEP", "role": "", "patch": "", "encoding": "imm32", "note": "0x4cf820: gu wujiang loop end 849"}
+{"addr": "0x4cf860", "value": "0x352", "verdict": "PERSON", "role": "SCEN_COUNT", "patch": "S", "encoding": "imm32", "note": "0x4cf820: second loop 850..999 over new-officer getter 0x490f00"}
+{"addr": "0x4cf88f", "value": "0x3e7", "verdict": "PERSON", "role": "NEW_MAX", "patch": "S+149", "encoding": "imm32", "note": "0x4cf820: new-officer loop end 999"}
+{"addr": "0x4d2fd0", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stack frame (M9)"}
+{"addr": "0x4d308b", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4d30ff", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stack frame (M9)"}
+{"addr": "0x4d3908", "value": "0x51eb851f", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "magic /100 percent computation"}
+{"addr": "0x4d6340", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "timer (M9)"}
+{"addr": "0x4d636f", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "timer (M9)"}
+{"addr": "0x4d7d52", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI widget parameter 150 (0x4db2c0)"}
+{"addr": "0x4d7e16", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI widget default 150 (0x4db2c0)"}
+{"addr": "0x4dd4c0", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "code 0xb5..0xbb minus 0x96 (command code offset)"}
+{"addr": "0x4dea8a", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "operator new(0x44c) of UI text object (ctor 0x437d10, 0x3ff buffer)"}
+{"addr": "0x4e09e0", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stack frame of text function (0x400 buffer)"}
+{"addr": "0x4e0b33", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack cookie offset of the same 0x44c frame"}
+{"addr": "0x4e0b40", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stack frame release 0x44c"}
+{"addr": "0x4ead70", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "operator new(0x44c) of UI text object"}
+{"addr": "0x4ec548", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "operator new(0x44c) of UI text object"}
+{"addr": "0x4ec981", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI (M9)"}
+{"addr": "0x4efdab", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "array ctor of 10 UI objects of size 0x44c (ctor 0x437d10)"}
+{"addr": "0x4f00d7", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "array ctor of 10 UI objects of size 0x44c"}
+{"addr": "0x4f0328", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stride 0x44c over 10 UI objects"}
+{"addr": "0x4f0369", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stride 0x44c over 10 UI objects"}
+{"addr": "0x4f0a9a", "value": "0x44c", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "stride 0x44c over 10 UI objects"}
+{"addr": "0x4f10d6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f1101", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f1b20", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "numeric input dialog digit/step logic"}
+{"addr": "0x4f1b65", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f1c17", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "numeric input dialog digit/step logic"}
+{"addr": "0x4f1c72", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f2b6d", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f2dc2", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f36c6", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f36e1", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f422c", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f46ec", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI/number/display-mode (M9 NOT)"}
+{"addr": "0x4f4f76", "value": "0x96", "verdict": "NOT", "role": "", "patch": "", "encoding": "imm32", "note": "UI widget parameter 150 (0x4db2c0)"}
+{"addr": "0x4f9fee", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x4fa08f", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}
+{"addr": "0x5042fe", "value": "0x3e8", "verdict": "NOT", "role": "", "patch": "", "encoding": "disp32", "note": "stack offset esp+0x3e8"}

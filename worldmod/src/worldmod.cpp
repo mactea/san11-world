@@ -21,6 +21,7 @@
 #include "midmap.h"
 #include "forces.h"
 #include "units.h"
+#include "persons.h"
 
 // ---------------------------------------------------------------- logging
 static FILE* g_log = nullptr;
@@ -41,6 +42,7 @@ struct Config {
     int bases = 0;               // 1 = base-count patch set (worldmod_bases*.txt, bases.cpp): cities = C
     int R = 42;                  // regular forces = regular corps (forces.cpp, M8_FORCES.md); forces = corps = R + 5
     int U = 1000;                // units (部队) on the map (units.cpp, M9_UNITS.md); locations N..N+U-1 are units
+    int PS = 850;                // scenario officers (persons.cpp, M10_PERSONS.md); all officers PT = PS + 250
     int X0 = 0, Y0 = 0;          // where the original 200x200 China map sits in the world (Y0 must be even)
     int enable = 1;              // 0 = proxy only, no patches
     int verifyOnly = 0;          // 1 = check patch table against exe bytes, write nothing
@@ -83,6 +85,7 @@ static void loadConfig() {
     g_cfg.bases = GetPrivateProfileIntW(g_section, L"bases", 0, ini);
     g_cfg.R = GetPrivateProfileIntW(g_section, L"forces", 42, ini);
     g_cfg.U = GetPrivateProfileIntW(g_section, L"units", 1000, ini);
+    g_cfg.PS = GetPrivateProfileIntW(g_section, L"persons", 850, ini);
     g_cfg.X0 = GetPrivateProfileIntW(g_section, L"china_x", 0, ini);
     g_cfg.Y0 = GetPrivateProfileIntW(g_section, L"china_y", 0, ini);
     g_cfg.enable = GetPrivateProfileIntW(L"mod", L"enable", 1, ini);
@@ -168,6 +171,9 @@ struct Eval {
         if (is("N")) return g_cfg.C + 45;
         if (is("R")) return g_cfg.R;
         if (is("U")) return g_cfg.U;
+        if (is("PS")) return g_cfg.PS;
+        if (is("PT")) return g_cfg.PS + 250;
+        if (is("VF")) return g_cfg.PS + 250 <= 2000 ? 2000 : 32000;
         if (is("B20")) return (int64_t)(uintptr_t)g_world.hex20;
         if (is("E20")) return (int64_t)(uintptr_t)g_world.hex20 + W * H * 20;
         if (is("B28")) return (int64_t)(uintptr_t)g_world.hex28;
@@ -700,6 +706,7 @@ static void* __fastcall portGetter(uint8_t* world, int, int idx) {
     return nullptr;
 }
 static Units* g_units = nullptr;
+static Persons* g_persons = nullptr;
 // debug (unit_first=N, M9 tests): the free unit search 0x491040 starts at id N (then wraps to 0), so new units use
 // ids beyond Koei's 1000 without a thousand units on the map
 typedef int(__thiscall* UnitBusyFn)(void*);
@@ -1573,6 +1580,15 @@ typedef int(__thiscall* HeaderIoFn)(void* hdr, void* stream);
 static HeaderIoFn g_hdrReadOrig = nullptr, g_hdrWriteOrig = nullptr;
 // M8: streams for more than 42 regular forces carry "WF" + u16 R instead (also wide).
 // M9: streams for more than 1000 units carry 'U' + u8 R + u16 U (also wide; R <= 249 fits the byte).
+// M10: streams for more than 850 scenario officers carry u8 v + 'P' + u16 PS in the dword at file offset 0x20
+// (header +0x24): Koei's value v there is small (0 in scenarios, 1 in saves); the game sees v again after the read
+// and after the write.
+static uint32_t streamMarkPS(uint32_t v) {
+    int PS = g_persons ? g_persons->PS : 850;
+    if (PS == 850) return v;
+    if (v > 0xff) { logf("ERROR: header dword 0x20 = %#x does not leave room for the officer count", v); return v; }
+    return v | 'P' << 8 | (uint32_t)PS << 16;
+}
 static uint32_t streamMark() {
     int R = g_forces ? g_forces->R : 42, U = g_units ? g_units->U : 1000;
     if (U != 1000) return 'U' | (uint32_t)R << 8 | (uint32_t)U << 16;
@@ -1595,13 +1611,28 @@ static int __fastcall hdrRead(uint8_t* hdr, void*, uint8_t* stream) {
             logf("ERROR: this file holds %d units, the game runs %d (worldmod.ini units=): it will not load correctly", streamU, U);
         *g_units->USTREAM = streamU < U ? streamU : U;    // older saves: 1000 records, the rest stay empty
     }
+    if (g_persons) {
+        uint32_t mp = *(uint32_t*)(hdr + 0x24);
+        bool marked = (mp >> 8 & 0xff) == 'P';
+        int PS = g_persons->PS, streamPS = marked ? (int)(mp >> 16) : 850;
+        if (marked) *(uint32_t*)(hdr + 0x24) = mp & 0xff;
+        // a scenario (kind 0x16) may hold fewer officers (the rest stay empty); elsewhere the new / special officer
+        // ids follow PS, so a different count cannot load
+        if (streamPS > PS || (streamPS != PS && kind != 0x16 && !master))
+            logf("ERROR: this file (kind %#x) was made for %d scenario officers, the game runs %d (worldmod.ini persons=): it will not load correctly", kind, streamPS, PS);
+        *g_persons->PSTREAM = streamPS < PS ? streamPS : PS;
+    }
     return r;
 }
 static int __fastcall hdrWrite(uint8_t* hdr, void*, uint8_t* stream) {
     *(uint32_t*)(hdr + 0x30) = streamMark();
     if (g_bases && g_bases->IDWIDE) InterlockedExchange((LONG*)g_bases->IDWIDE, 1);
     if (g_units) *g_units->USTREAM = g_units->U;
-    return g_hdrWriteOrig(hdr, stream);
+    uint32_t v = *(uint32_t*)(hdr + 0x24);
+    if (g_persons) { *(uint32_t*)(hdr + 0x24) = streamMarkPS(v); *g_persons->PSTREAM = g_persons->PS; }
+    int r = g_hdrWriteOrig(hdr, stream);
+    *(uint32_t*)(hdr + 0x24) = v;
+    return r;
 }
 
 // M8 (forces.cpp): with more than 42 regular forces the two u8[47] force x force members live in side tables
@@ -1835,6 +1866,15 @@ static void init() {
             { "UNITARR", un.UNITARR }, { "AIUREC", un.AIUREC }, { "USTREAM", un.USTREAM }, { "UWRAP", un.UWRAP },
             { "UPOOL", un.UPOOL }, { "SNAPSHADOW", (void*)snapShadow } };
         for (auto& e : usyms) Eval::add(e.n, e.v);
+        static Persons pe;
+        if (!personsSetup(g_cfg.PS, g_cfg.dataDir, pe, logf)) { logf("ERROR: officer arrays could not be set up. Patches disabled."); return; }
+        g_persons = &pe;
+        g_cfg.PS = pe.PS;                  // the patch expressions use the count personsSetup accepted
+        struct { const char* n; const void* v; } psyms[] = {
+            { "PERSONARR", pe.PERSONARR }, { "PPOOL", pe.PPOOL }, { "PSTREAM", pe.PSTREAM },
+            { "PSNAPSHADOW", (void*)personSnapShadow }, { "PBIO", (void*)personBio },
+            { "PORDERS", (void*)personsRebuildOrders } };
+        for (auto& e : psyms) Eval::add(e.n, e.v);
         static Bases b;
         if (!basesSetup(g_cfg.C, g_cfg.U, g_cfg.dataDir, b, logf)) { logf("ERROR: base arrays could not be set up. Patches disabled."); return; }
         g_bases = &b;

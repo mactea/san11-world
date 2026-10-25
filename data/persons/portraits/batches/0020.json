@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "陳敦",
+      "birth": 147,
+      "face": 2493,
+      "folder": "han_chendun",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷57"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "馮禪",
+      "birth": 147,
+      "face": 2494,
+      "folder": "han_fengchan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://www.shidianguji.com/zh/book/SBCK036/chapter/1j7424imfhp2v_48"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "任涉",
+      "birth": 148,
+      "face": 2495,
+      "folder": "han_renshe",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "孟佗",
+      "birth": 148,
+      "face": 2496,
+      "folder": "han_mengtuo",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+        "https://bkso.baidu.com/item/孟佗/6872500"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "張宴",
+      "birth": 148,
+      "face": 2497,
+      "folder": "han_zhangyan_western",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

@@ -1,0 +1,528 @@
+{
+  "backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\portrait_backups\\20261023-031209",
+  "original_backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\portrait_backups\\20261023-030535",
+  "small_image_layout": "interleaved: faceCount + faceId*2 + variant",
+  "archive": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\Media\\face\\San11Face00.fce",
+  "archive_sha256": "edfe1d8f704e97ea7e7eea9fdb611836f134d989af30fe272eb103a1deb2f0a6",
+  "image_entries_verified": 12,
+  "roster_people": [
+    {
+      "id": 9756,
+      "name": "王猛",
+      "face": 2196
+    },
+    {
+      "id": 10613,
+      "name": "馬可·奧勒留·安東尼努斯",
+      "face": 2197
+    },
+    {
+      "id": 10066,
+      "name": "龍樹菩薩",
+      "face": 2198
+    },
+    {
+      "id": 9465,
+      "name": "卑彌呼",
+      "face": 2199
+    }
+  ],
+  "scenarios": [
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen000.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN001.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN002.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN003.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN004.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN005.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN006.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN007.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen008.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen009.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen010.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen011.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen012.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\Scen013.s11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    },
+    {
+      "file": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN014.S11",
+      "people": [
+        {
+          "roster_id": 9649,
+          "game_id": 9611,
+          "name": "王猛",
+          "old_face": 2196,
+          "face": 2196
+        },
+        {
+          "roster_id": 10370,
+          "game_id": 10328,
+          "name": "奧勒留",
+          "old_face": 2197,
+          "face": 2197
+        },
+        {
+          "roster_id": 9879,
+          "game_id": 9841,
+          "name": "龍樹",
+          "old_face": 2198,
+          "face": 2198
+        },
+        {
+          "roster_id": 9387,
+          "game_id": 9366,
+          "name": "卑彌呼",
+          "old_face": 2199,
+          "face": 2199
+        }
+      ]
+    }
+  ],
+  "note": "Binary round-trip verified; runtime display not yet checked. Existing saves are unchanged."
+}

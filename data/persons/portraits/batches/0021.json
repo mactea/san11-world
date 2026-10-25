@@ -1,0 +1,72 @@
+{
+  "people": [
+    {
+      "name": "張晏",
+      "birth": 148,
+      "face": 2498,
+      "folder": "han_zhangyan_western_alias",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; same artwork as 張宴 (148), inferred textual variant from identical office and campaign; roster entries retained",
+      "artwork_source_folder": "han_zhangyan_western"
+    },
+    {
+      "name": "曹寬",
+      "birth": 148,
+      "face": 2499,
+      "folder": "han_caokuan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "谷永",
+      "birth": 148,
+      "face": 2500,
+      "folder": "han_guyong_yulin",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷86",
+        "https://www.shidianguji.com/zh/book/HY0371/chapter/1k3t42bliibdn"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "來豔",
+      "birth": 149,
+      "face": 2501,
+      "folder": "han_laiyan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷42",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikipedia.org/wiki/来艳"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "宗俱",
+      "birth": 149,
+      "face": 2502,
+      "folder": "han_zongju",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+        "https://zh.wikipedia.org/wiki/宗俱"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "張舉",
+      "birth": 149,
+      "face": 2503,
+      "folder": "han_zhangju_rebel",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷73",
+        "https://zh.wikipedia.org/wiki/張舉_(東漢)"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

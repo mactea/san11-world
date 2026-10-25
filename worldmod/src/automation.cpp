@@ -29,6 +29,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "automation.h"
+#include "persons.h"
 #include "profiler.h"
 #include "pathfind.h"
 #include "radar.h"
@@ -376,8 +377,8 @@ void run(char* line, FILE* out) {
         fprintf(out, "unitclone: %d\n", unitsClone(a, arg));       // debug (M9 tests): units.cpp
     else if (!strcmp(cmd, "wild") && sscanf_s(line, "%*s %d", &a) == 1) {   // wild <city>: 在野/未登场/未发现武将都去这个城市
         int moved = 0;
-        for (int i = 0; i < 1100; i++) {
-            uint8_t* p = (uint8_t*)(uintptr_t)(0x720DA14 + (size_t)i * 0x190);
+        for (int i = 0; personPtr(i); i++) {
+            uint8_t* p = personPtr(i);
             int status = *(int*)(p + 0xa0);
             if (status == 4 || status == 6 || status == 7) {       // 在野 / 未登场 / 未发现
                 *(int*)(p + 0x98) = a;                              // 所在
@@ -386,6 +387,18 @@ void run(char* line, FILE* out) {
             }
         }
         fprintf(out, "wild: %d officers moved to city %d\n", moved, a);
+    }
+    else if (!strcmp(cmd, "persons")) {         // persons: officer records by status (+0xa0) and how many have a name
+        int n = 0, named = 0, st[16] = {};
+        for (; personPtr(n); n++) {
+            uint8_t* p = personPtr(n);
+            int status = *(int*)(p + 0xa0);
+            if (status >= 0 && status < 16) st[status]++;
+            if (p[4] || p[9]) named++;
+        }
+        fprintf(out, "persons: %d records, %d named, by status:", n, named);
+        for (int i = 0; i < 16; i++) if (st[i]) fprintf(out, " %d=%d", i, st[i]);
+        fprintf(out, "\n");
     }
     else if (!strcmp(cmd, "radardump") && sscanf_s(line, "%*s %259[^\r\n]", arg, (unsigned)sizeof arg) == 1)
         fprintf(out, "radardump: %d\n", radarDump(arg));
@@ -460,6 +473,9 @@ DWORD WINAPI commandThread(void*) {
 
 // 命令通道（不碰窗口/输入）：automation 和 auto_skip 都用它，这样正常游戏也能收 worldmod_cmd.txt
 void commandInit(const wchar_t* dir, TraceLogFn log) {
+    static bool started = false;                             // automation=1 + auto_skip=1 both call this: one thread
+    if (started) return;                                     // (a second one would subclass the window again)
+    started = true;
     g_log = log;
     wcscpy_s(g_dir, dir);
     CreateThread(nullptr, 256 << 10, commandThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr);

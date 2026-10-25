@@ -1,0 +1,197 @@
+"""公版/开放网站上的史料 → 子代理用的块 data/persons/_cache/chunks/<前缀>_NN.txt
+（文件先用浏览器或下载脚本存到 data/persons/_cache/texts/<书>/）
+
+  fau  拜占庭的浮士德《亚美尼亚史》（Langlois 法译 1867，remacle.org）            330–387 年
+  moi  霍伦的摩西《亚美尼亚史》卷 2–3（Langlois 法译 1869，remacle.org）           帕提亚末至 5 世纪
+  mhv  《大史》第 33–37 章（Geiger 英译 1912，lakdiva.org）+《岛史》第 21–22 章
+       （Oldenberg 英译 1879，ancient-buddhist-texts.net）                          斯里兰卡诸王
+  niya 尼雅佉卢文书（Burrow 英译 1940，华盛顿大学丝路网站）                        3 世纪鄯善
+  cth  《狄奥多西法典》各条的受文人、日期（拉丁文，thelatinlibrary.com）            313–438 年
+  je   犹太百科「Amora」「Tannaim and Amoraim」（1906，公版）                       3–4 世纪拉比
+  soc / soz / thd / phs  苏格拉底卷 1–4、索佐门卷 1–6、狄奥多勒卷 1–4、腓罗斯托尔吉乌斯《教会史》（希腊文，First1KGreek）
+  vc   优西比乌《君士坦丁传》（希腊文，First1KGreek）
+
+  c354 罗马城历书（354 年）：执政官表（170 年起）、罗马城市长官表、教宗与殉道者纪念日、利伯里乌斯教宗表、罗马城编年
+  eun  欧纳皮乌斯《智者传》（Wright 英译 1921，tertullian.org）
+  jor  约达尼斯《哥特史》（Mierow 英译 1915，Gutenberg）
+  lat  奥勒留·维克托《诸恺撒传》、欧特罗皮乌斯卷 8–10、拉克坦提乌斯《迫害者之死》（拉丁文，thelatinlibrary.com）
+
+  lib  利巴尼乌斯书信（希腊文，Foerster 本，First1KGreek），只留 370 年以前的信
+
+  nld  Nöldeke 译塔巴里（1879 德译，公版扫描本 OCR；PDF 需手动从哈勒大学下载到 _cache/texts/noldeke/）
+
+    python split_open.py [每块字数，默认 30000] [church / late / lib / nld：只切这一组]"""
+import html as html_mod
+import re
+import sys
+from common import CACHE
+from split_classic import GH, cut, get, tei_text
+import split_classic
+
+T = CACHE / "texts"
+
+
+def clean(h):
+    """一般网页 → 纯文本"""
+    h = re.sub(r"<(script|style|head)\b.*?</\1>", " ", h, flags=re.S | re.I)
+    h = re.sub(r"<(p|br|div|h\d|li|tr)\b[^>]*>", "\n", h, flags=re.I)
+    t = html_mod.unescape(re.sub(r"<[^>]+>", "", h))
+    t = re.sub(r"[ \t\xa0]+", " ", t)
+    return re.sub(r"\n\s*\n+", "\n", t).strip()
+
+
+def read(book, name):
+    b = (T / book / name).read_bytes()
+    for enc in ("utf-8", "cp1252"):
+        try:
+            return b.decode(enc)
+        except UnicodeDecodeError:
+            pass
+
+
+def remacle(h):
+    """remacle.org：脚注区（第二次出现的 _ftn1 锚点之后）去掉，正文里的 [N] 脚注号去掉"""
+    marks = [m.start() for m in re.finditer(r'name="?_ftn1"?', h, flags=re.I)]
+    if marks:
+        h = h[:marks[-1]]
+    h = re.sub(r'<a[^>]+href="#_ftn\d+"[^>]*>.*?</a>', "", h, flags=re.S | re.I)
+    return clean(h)
+
+
+def cth():
+    """每条法令只留：编号、开头（皇帝 + 受文人 + 官职）、结尾的日期（dat./data/pp./acc. … coss.）"""
+    rows = []
+    for i in range(1, 17):
+        t = clean(read("theod", f"theod{i:02d}.shtml"))
+        for m in re.finditer(r"(CTh\.\d+\.\d+\.\d+[a-z]?)[^\n]*\n(.*?)(?=\nCTh\.|\Z)", t, flags=re.S):
+            body = m.group(2).split("\ninterpretatio")[0].replace("\n", " ").strip()
+            if not body or not re.search(r"\b(imp|idem|iidem|eadem)", body[:120], flags=re.I):    # 目录、标题行
+                continue
+            head = body[:130]
+            d = re.search(r"\b(dat|data|p\. ?p|pp|acc|lecta|proposita|recitata)\b\.?[^.]{0,20}\..{0,160}$", body)
+            tail = d.group(0) if d else body[-120:]
+            rows.append(f"{m.group(1)} | {head} || {tail}")
+    return "\n".join(rows)
+
+
+def main():
+    split_classic.CHUNK = int(sys.argv[1]) if len(sys.argv) > 1 else 30000
+    if "church" in sys.argv:
+        return church()
+    if "late" in sys.argv:
+        return late()
+    if "lib" in sys.argv:
+        return libanius()
+    if "nld" in sys.argv:
+        return noldeke()
+    if "pir" in sys.argv:
+        return pir()
+    cut("fau", "Faustus of Byzantium, History of Armenia (tr. Langlois, French)",
+        remacle(read("faustus", "histoire.htm")))
+    cut("moi", "Moses of Khoren, History of Armenia, books II-III (tr. Langlois, French)",
+        "\n".join(remacle(read("moise", f)) for f in ("histoire2.htm", "histoire3.htm")))
+    cut("mhv", "Mahavamsa ch. 33-37 (tr. Geiger) + Dipavamsa ch. 21-23 (tr. Oldenberg)",
+        "\n".join([f"\n[Mahavamsa {i}]\n" + clean(read("mahavamsa", f"chap{i:03d}.html")) for i in range(33, 38)]
+                  + [f"\n[Dipavamsa {f[:2]}]\n" + clean(read("dipavamsa", f))
+                     for f in ("21-Abhaya.htm", "22-Vasabha.htm", "23-Table-of-Kings.htm")]))
+    cut("niya", "Kharosthi documents from Niya / Chinese Turkestan (tr. Burrow 1940)",
+        clean(read("niya", "niyadocts.html")))
+    cut("cth", "Codex Theodosianus: law number | opening (emperors, addressee, office) || dating clause", cth())
+    cut("je", "Jewish Encyclopedia (1906): Amora; Tannaim and Amoraim",
+        "\n".join(clean(read("je", f)) for f in ("1421-amora", "14240-tannaim-and-amoraim")))
+    church()
+    late()
+    libanius()
+    noldeke()
+
+
+def late():
+    """罗马城历书（354）的名单、欧纳皮乌斯《智者传》、约达尼斯《哥特史》、维克托/欧特罗皮乌斯卷 8–10/拉克坦提乌斯"""
+    fasti = clean(read("c354", "chronography_of_354_08_fasti.htm"))
+    fasti = fasti[fasti.find("\n 923\n"):]                    # 建城纪年 923 = 公元 170
+    fasti = re.sub(r"\n\s*", " ", fasti)                      # 一格一行 → 连成一行
+    c354 = [f"[Fasti consulares, from AUC 923 = AD 170]\n{fasti}"] + \
+           [f"\n[{f}]\n" + clean(read("c354", f"chronography_of_354_{f}.htm")) for f in
+            ("10_prefects_of_rome", "11_depositions", "12_depositions_martyrs", "13_bishops_of_rome",
+             "16_chronicle_of_the_city_of_rome")]
+    cut("c354", "Chronography of 354 (Latin, with English notes; tertullian.org)", "\n".join(c354))
+    cut("eun", "Eunapius, Lives of the Philosophers and Sophists (tr. Wright)", clean(read("eunapius", "eunapius_02_text.htm")))
+    jor = clean(read("jordanes", "pg14809-images.html"))
+    cut("jor", "Jordanes, The Origin and Deeds of the Goths (tr. Mierow)", jor[:jor.find("*** END")])
+    cut("lat", "Aurelius Victor, De Caesaribus; Eutropius, Breviarium 8-10; Lactantius, De mortibus persecutorum (Latin)",
+        "\n".join([f"\n[{f}]\n" + clean(read("latin", f)) for f in
+                   ("victor.caes.html", "eutropius8.shtml", "eutropius9.shtml", "eutropius10.shtml", "demort.shtml")]))
+
+
+def libanius():
+    """利巴尼乌斯书信（Foerster 本，First1KGreek）：每封信抬头是「收信人与格. (编者推定的年份)」；
+    只留年份 ≤ 370 的，没标年份的按 Foerster 编号 19–839（多为 355–365 年）留"""
+    path = "tlg2200/tlg001/tlg2200.tlg001.1st1K-grc1.xml"
+    x = get(GH + "OpenGreekAndLatin/First1KGreek/master/data/" + path, T / "classic" / path.split("/")[-1])
+    x = re.sub(r"<note\b[^>]*>.*?</note>", " ", x, flags=re.S)
+    keep = []
+    for m in re.finditer(r'<div type="textpart" subtype="letter" n="(\d+)">(.*?)(?=<div type="textpart" subtype="letter"|</body>)',
+                         x, flags=re.S):
+        n, body = int(m.group(1)), re.sub(r"<[^>]+>", " ", m.group(2))
+        body = re.sub(r"\s+", " ", html_mod.unescape(body)).strip()
+        ys = [int(y) for y in re.findall(r"\b(3[0-9]{2})\b", body[:120])]
+        if (ys and min(ys) <= 370) or (not ys and 19 <= n <= 839):
+            keep.append(f"[Ep. {n}] {body}")
+    cut("lib", "Libanius, Letters (Greek, ed. Foerster; heading = addressee + editor's date)", "\n".join(keep))
+
+
+def noldeke():
+    """Nöldeke 译塔巴里（1879，公版扫描本，用户从哈勒大学手动下载到 texts/noldeke/*.pdf，带 OCR 文字层）：
+    PDF 第 32–110 页 = 译文第 1–79 页，阿尔达希尔一世到伊嗣俟一世，含希拉的拉赫姆王朝"""
+    import fitz
+    d = fitz.open(next((T / "noldeke").glob("*.pdf")))
+    cut("nld", "Tabari, Geschichte der Perser und Araber zur Zeit der Sasaniden (tr. Nöldeke 1879, OCR), pp. 1-79",
+        "\n".join(f"[PDF p. {i}]\n" + d[i].get_text() for i in range(32, 111)))
+
+
+# PIR 条目里表明 170–284 年的线索：这时期的皇帝、狄奥卷 72–80、希罗狄安、《罗马君王传》、2 世纪末到 3 世纪的年份
+PIR_LATE = re.compile(r"Commod|Pertinac|Didi(us|o) Iulian|Pescenn|Clodi(us|o) Albin|Septimi(us|o|i) Sever|Severo|Severi|"
+                      r"Caracall|Getae?\b|Macrin|Elagabal|Heliogabal|Alexandr(o|i) imp|Severo Alexandro|Maximin|Gordian|"
+                      r"Philipp(o|i|us) imp|Deci(us|o|i)\b|Trebonian|Valerian|Gallien|Postum|Claudi(o|i|us) Gothic|Aurelian|"
+                      r"Tacit(o|i) imp|Prob(o|i|us) imp|Car(o|i|us) imp|Carin|Numerian|Diocletian|divo Marco|Marco et (Vero|Commodo)|"
+                      r"Dio 7[2-9]|Dio 80|Herodian|vit\. [A-Z]|a\. (1[7-9]\d|2[0-8]\d)\b")
+
+
+def pir():
+    """PIR 第一版（Klebs/Dessau/Rohden 1897–98，公版；archive.org 的 OCR 全文，用户手动下载到 texts/pir/）：
+    条目以「编号 名字」起行；只留有 170–284 年线索的条目（「— NAME.」是互见，不留）。
+    每卷一个前缀 pir1/pir2/pir3（按文件名里的卷号 im01/im02/im03），后补的卷不打乱已抽完的块号"""
+    import gzip
+    for f in sorted((T / "pir").glob("*")):
+        vol = re.search(r"im0?(\d)", f.name)
+        if not vol:
+            print("PIR: 认不出卷号，跳过", f.name)
+            continue
+        t = gzip.open(f, "rt", encoding="utf-8", errors="replace").read() if f.suffix == ".gz" else \
+            f.read_text(encoding="utf-8", errors="replace")
+        parts = []
+        for m in re.finditer(r"\n(\d{1,4}) +([A-Z][^\n]*(?:\n(?!\d{1,4} +[A-Z]|— )[^\n]*)*)", t):
+            body = re.sub(r"\s+", " ", m.group(2))
+            if PIR_LATE.search(body):
+                parts.append(f"[PIR {vol.group(1)}.{m.group(1)}] {body}")
+        cut(f"pir{vol.group(1)}", f"Prosopographia Imperii Romani, 1st ed., pars {vol.group(1)} (Latin, OCR); "
+            "entries with 170-284 markers", "\n".join(parts))
+
+
+def church():
+    for prefix, (path, title, last) in CHURCH.items():
+        text = tei_text(get(GH + "OpenGreekAndLatin/First1KGreek/master/data/" + path, T / "classic" / path.split("/")[-1]))
+        m = re.search(rf"^\[Book {last + 1}\]", text, flags=re.M) if last else None
+        cut(prefix, title, text[:m.start()] if m else text)
+
+
+# 教会史家（希腊文，First1KGreek）：只取写到 370 年代为止的卷
+CHURCH = {"soc": ("tlg2057/tlg002/tlg2057.tlg002.1st1K-grc1.xml", "Socrates Scholasticus, Ecclesiastical History, books 1-4", 4),
+          "soz": ("tlg2048/tlg001/tlg2048.tlg001.1st1K-grc1.xml", "Sozomen, Ecclesiastical History, books 1-6", 6),
+          "thd": ("tlg4089/tlg003/tlg4089.tlg003.1st1K-grc1.xml", "Theodoret, Ecclesiastical History, books 1-4", 4),
+          "phs": ("tlg2058/tlg001/tlg2058.tlg001.1st1K-grc1.xml", "Philostorgius, Ecclesiastical History (epitome)", 0),
+          "vc": ("tlg2018/tlg020/tlg2018.tlg020.1st1K-grc1.xml", "Eusebius, Life of Constantine", 0)}
+
+
+if __name__ == "__main__":
+    main()

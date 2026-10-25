@@ -1,0 +1,78 @@
+{
+  "status": "research_started",
+  "people": [
+    {
+      "id": 958,
+      "name_full": "李鹹",
+      "birth": 149,
+      "role": "文臣",
+      "bio": "字元貞（碑作元卓），汝南西平人，太尉。熹平元年議竇太后葬，抱病扶輿而起，搗椒自隨，誓死爭之；見陳球辭正乃附議，又上疏請太后合葬宣陵，帝從之。",
+      "src": [
+        "後漢書·卷五十六 陳球傳",
+        "資治通鑑·卷五十七 孝靈皇帝上熹平元年",
+        "蔡邕《太尉李咸碑》（《藝文類聚》卷四十六、《全後漢文》卷七十六）"
+      ]
+    },
+    {
+      "id": 959,
+      "name_full": "王越",
+      "birth": 149,
+      "role": "武将",
+      "bio": "桓靈之間虎賁，以善擊劍稱於京師，河南史阿從其遊得其法，史阿又授曹丕。名單所列帝師、單挑呂布、十常侍之亂駕車等情節屬後世傳奇，不作史實。",
+      "src": [
+        "三國志·卷二 文帝紀 裴松之注引曹丕《典論·自敘》",
+        "太平御覽·卷五百九十二 文部八"
+      ]
+    },
+    {
+      "id": 960,
+      "name_full": "竺朔佛",
+      "birth": 149,
+      "role": "僧道",
+      "bio": "天竺沙門（一作竺佛朔）。漢桓帝時齎《道行經》來洛陽，光和二年與支婁迦讖共譯《般舟三昧經》，朔佛口宣梵文，支讖傳言，孟福、張蓮筆受。譯筆棄文存質。",
+      "src": [
+        "梁《高僧傳》卷一",
+        "《出三藏記集·道行經後記》",
+        "《開元釋教錄》卷一"
+      ]
+    },
+    {
+      "id": 961,
+      "name_full": "董扶",
+      "birth": 149,
+      "role": "方士",
+      "bio": "字茂安，廣漢綿竹人。少遊太學，與任安齊名，俱事楊厚學圖讖。靈帝時何進薦之，徵拜侍中。私謂劉焉京師將亂、益州有天子氣，焉遂求益州牧，扶為蜀郡屬國都尉同入蜀。去官還家，年八十二卒。",
+      "src": [
+        "三國志·卷三十一 劉二牧傳",
+        "後漢書·卷八十二下 方術傳",
+        "《益部耆舊傳》"
+      ]
+    },
+    {
+      "id": 962,
+      "name_full": "董萌",
+      "birth": 149,
+      "role": "宦官",
+      "bio": "黃門令。建寧四年承靈帝之意，數為竇太后訴怨，帝深納之，供養逾前。曹節、王甫共疾之，以「親附竇後，謗訕永樂」誣之，下獄死。",
+      "src": [
+        "後漢書·卷十下 皇后紀 孝仁董皇后",
+        "資治通鑑·卷五十六 孝靈皇帝上建寧四年",
+        "袁宏《後漢紀》卷二十三"
+      ]
+    }
+  ],
+  "notes": [
+    "李鹹 identity is the Taishu Li Xian of Runan, but roster fields conflict with the Cai Yong stele: roster has courtesy Yuanzhen and death 184; the stele gives courtesy Yuanzhuo, death Xiping 4 (175) at age 76. Do not edit roster; the portrait uses the historical age (about 72).",
+    "王越 roster biography is legendary (imperial tutor, rival of Lu Bu, driving Emperor Xian's carriage). Only the Dianlun notice is contemporaneous; the portrait is a grounded Han guardsman reconstruction.",
+    "竺朔佛 is attested as Zhu Foshuo (竺佛朔); the roster spelling reverses the last two characters. Active around 179; no reliable birth/death.",
+    "董扶 died aged 82; roster dates 149-197 are game-facing estimates, not historical birth/death.",
+    "董萌 is the Yellow Gate Prefect of 171, not the Yongyuan-era astronomer of 97 with the same name."
+  ],
+  "reference_searches": [
+    "https://zh.wikisource.org/zh-hant/後漢書/卷056",
+    "https://zh.wikisource.org/zh-hant/三國志/卷02",
+    "https://zh.wikisource.org/zh-hant/高僧傳/卷01",
+    "https://zh.wikisource.org/zh-hant/三國志/卷31",
+    "https://zh.wikisource.org/zh-hant/後漢書/卷010下"
+  ]
+}

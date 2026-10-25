@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "name": "何休",
+      "birth": 129,
+      "face": 2408,
+      "folder": "han_hexiu",
+      "references": [
+        "https://www.wul.waseda.ac.jp/kotenseki/html/ro12/ro12_03048/index.html",
+        "https://m.baike.com/wikiid/7223796668842950717"
+      ],
+      "likeness": "Historical artistic reconstruction using unverified later web depiction as visual reference"
+    },
+    {
+      "name": "居車兒",
+      "birth": 129,
+      "face": 2409,
+      "folder": "xiongnu_jucheer",
+      "references": [
+        "https://www.cnmuseum.com/cn/category/2509/0351-1.htm",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷89"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    },
+    {
+      "name": "安清",
+      "birth": 130,
+      "face": 2410,
+      "folder": "parthia_anqing",
+      "references": [
+        "https://www.daai.tv/eminent-monks/prog/6",
+        "https://m.baike.com/wikiid/8222897976168788832",
+        "https://zh.wikisource.org/zh-hant/高僧傳/卷一"
+      ],
+      "likeness": "Historical artistic reconstruction using unverified later web depiction as visual reference"
+    },
+    {
+      "name": "閻忠",
+      "birth": 130,
+      "face": 2411,
+      "folder": "han_yanzhong",
+      "references": [
+        "https://zh.wikipedia.org/wiki/閻忠",
+        "https://zh.wikisource.org/zh-hant/後漢書/卷71"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    },
+    {
+      "name": "駱曜",
+      "birth": 132,
+      "face": 2412,
+      "folder": "han_luoyao",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷08"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    }
+  ]
+}

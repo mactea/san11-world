@@ -1,0 +1,59 @@
+{
+  "scope": "Portrait identity review log. Pending entries remain in roster; resolved alias entries retain both records and document their portrait mapping.",
+  "people": [
+    {
+      "name": "李亮",
+      "birth": 108,
+      "key": "cbdb:192801",
+      "status": "pending_review",
+      "reason": "Roster cites Tang/Five Dynasties source while normalized dates fall in Eastern Han; confirm source identity before selecting era costume."
+    },
+    {
+      "name": "李敏",
+      "birth": 118,
+      "key": "cbdb:192800",
+      "status": "pending_review",
+      "reason": "Roster cites Tang/Five Dynasties source while normalized dates fall in Eastern Han; distinguish namesakes."
+    },
+    {
+      "name": "卞氏",
+      "birth": 143,
+      "key": "cbdb:135004",
+      "status": "pending_review",
+      "reason": "Short name and generic biography insufficient to distinguish Wei empress namesakes; confirm CBDB source and relation to Empress Dowager Bian before binding."
+    },
+    {
+      "name": "士黃有",
+      "birth": 143,
+      "key": "zhsan:9338",
+      "status": "pending_review",
+      "reason": "Biography corresponds to Shi Xie's brother Shi Wei (士䵋); verify whether current three-character name represents a game encoding substitute and check duplicate roster identity before binding."
+    },
+    {
+      "name": "張晏",
+      "birth": 148,
+      "status": "installed_alias_inferred",
+      "reason": "Same office, dates, colleagues and Shule campaign support textual variant of 張宴. Both roster entries retained; same artwork installed separately in batch0021, all15 scenario bindings verified.",
+      "related_name": "張宴",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+        "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+      ],
+      "face": 2498,
+      "related_face": 2497
+    },
+    {
+      "name": "竺朔佛",
+      "birth": 149,
+      "status": "held_scenario_stale",
+      "reason": "Roster revision 5 (12825) renamed the old 竺佛朔/161 record to 竺朔佛/149. All 15 deployed scenarios still hold the old record (竺佛朔, birth 161, person index 1362, generic face 2000), so the installer refused to bind. Same historical translator, but a birth/name revision rather than a same-revision alias; keep the roster fact and resolve through latest-roster migration, not an alias install.",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/高僧傳/卷01",
+        "https://zh.wikisource.org/zh-hant/出三藏記集/卷07"
+      ],
+      "face": 2506,
+      "artwork_folder": "monk_zhufoshuo",
+      "scenario_record": "竺佛朔 birth 161, 15/15 scenarios, person index 1362"
+    }
+  ]
+}

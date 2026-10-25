@@ -1,0 +1,62 @@
+[
+  {
+    "key": "yellowturban_wanbing",
+    "name": "萬秉",
+    "birth": 143,
+    "face": 2443,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/三國志/卷56"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. WAN BING 萬秉, a Yellow Turban remnant leader captured by Zhu Zhi, NOT Zhu Zhi himself. About45, a distinctly compact broad oval face, full cheeks tapering to blunt small chin, low wide forehead, large rounded ears, short thick nose, large clear eyes under thin low uneven brows, broad mouth with thick lower lip and a coarse short moustache. Bare chin with dark stubble at jawline, weathered tan skin with fine lines. Cautious resourceful self-possession rather than rage. Simple dusty ochre cloth tied around crown with short tucked tails, no noble hat or officer crest. Faded charcoal indigo rough crossed-collar tunic under patched dark brown leather vest and a coarse pale gray shoulder wrap. Slight right turn, smoky subdued green. Make broad soft features visibly different from sharp bearded warlords, no gold decorations."
+  },
+  {
+    "key": "eunuch_zhaozhong",
+    "name": "趙忠",
+    "birth": 143,
+    "face": 2444,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+      "https://zh.wikipedia.org/wiki/赵忠_(东汉)"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHAO ZHONG 趙忠, prominent Eastern Han palace eunuch, about50. Distinct long slender pear-shaped face with narrow high forehead and fuller lower cheeks, a small rounded chin, long thin slightly curved nose, hooded small eyes with very fine arching brows, narrow pursed lips. Pale warm complexion, faint age lines under eyes. Fully clean-shaven, NO beard, moustache, goatee or stubble. Reserved guarded courtly expression with a slight assessing tilt of head, human dignity, no grotesque villain. Modest black low ridged Han palace cap and dark blue-green fine silk robe with subtle brown-gold narrow geometric collar border and light cream inner collar. Head turned three-quarter left, smoky warm charcoal background. Refined lean aging face markedly unlike the plump round-faced eunuch Hou Lan."
+  },
+  {
+    "key": "yellowturban_huangshao",
+    "name": "黃邵",
+    "birth": 143,
+    "face": 2445,
+    "references": [
+      "https://m.baike.com/wikiid/1076368162886136696",
+      "https://zh.wikisource.org/zh-hant/三國志/卷01",
+      "https://zh.wikisource.org/zh-hant/三國志/卷17"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. HUANG SHAO 黃邵, Runan-Yingchuan Yellow Turban leader defeated by Cao Cao in196, around45. Reference is a modern game illustration, not historical evidence of likeness. Borrow its practical yellow wrapped cloth headwear, long dark beard and plain lamellar shoulder armour, but paint a new individual believable face with weathered skin. Long wedge-shaped face, wide high forehead, strong high cheekbones and tapering jaw, long straight broad nose, small steady eyes, flat long black brows, wide thin-lipped mouth. Long narrow black beard with a few gray strands and straight moustache. Resolute thoughtful military expression, no exaggerated scowl. Mustard yellow low cloth headwrap with short side tails, NO tall gilded crown. Worn dull iron and dark brown leather lamellar vest over burgundy coarse tunic, gray collar. Three-quarter right, smoky cool charcoal. Distinct lean older military face.",
+    "ref": [
+      "C:/Users/garib/Documents/Work/CMCode/san11world-persons/data/persons/portraits/yellowturban_huangshao/references/later_web_image.png"
+    ]
+  },
+  {
+    "key": "han_shibi",
+    "name": "史弼",
+    "birth": 144,
+    "face": 2446,
+    "references": [
+      "https://www.sohu.com/a/768994408_121218495",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷64"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. SHI BI 史弼, courtesy Gongqian, upright Eastern Han administrator and scholar who protected people during factional persecutions, about50. Reference is an unverified later newspaper illustration. Borrow its broad forehead, small neat moustache, small pointed goatee, refined black Han scholar cap and subdued red robe, but not its flat drawing style or later anachronistic ornaments. Distinct rounded pentagonal face with a broad domed forehead and narrow small chin, smooth warm ochre cheeks, slender delicately arched brows, long clear modest eyes, straight small nose, soft wide lips. Neat thin black-gray moustache and tiny narrow goatee, no full beard. Expression calm firm moral conviction and patience, relaxed eyebrows. Low formal folded black cloth Han official cap with narrow brown band, muted dark red robe with simple geometric black collar edging and ivory inner collar. Near frontal with slight left turn, dark smoky slate green. A modest determined human civil official.",
+    "ref": [
+      "C:/Users/garib/Documents/Work/CMCode/san11world-persons/data/persons/portraits/han_shibi/references/later_web_image.jpg"
+    ]
+  },
+  {
+    "key": "han_fuxie",
+    "name": "傅燮",
+    "birth": 145,
+    "face": 2447,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷58"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. FU XIE 傅燮, courtesy Nanrong, tall commanding Eastern Han officer and Hanyang governor noted for integrity and death defending his post, about40. Historical record describes imposing stature; show broad strong upright shoulders and a long square dignified face, prominent high forehead, widely spaced large observant eyes under thick naturally straight brows, high strong straight nose with broad tip, strong jaw and firm full lips. Dense short black moustache and carefully kept medium length squared black beard, dark warm tawny skin with light outdoor weathering. Calm fearless serious gaze and composed mouth, no snarling brute. Simple black Han military cap with a narrow plain bronze fastening, no fantasy crown, no helmet. Dark iron lamellar shoulder armour over muted crimson robe and cream collar, restrained slate blue cloak edge. Three-quarter left, smoky blue-gray background. Noble powerful presence with human thoughtful expression, not generic angry warrior."
+  }
+]

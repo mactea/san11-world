@@ -1,0 +1,54 @@
+{
+  "people": [
+    {
+      "name": "皇甫規",
+      "birth": 104,
+      "face": 2403,
+      "folder": "han_huangfugui",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷65"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    },
+    {
+      "name": "袁隗",
+      "birth": 105,
+      "face": 2404,
+      "folder": "han_yuankui",
+      "references": [
+        "https://zh.wikipedia.org/wiki/袁隗"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    },
+    {
+      "name": "範冉",
+      "birth": 112,
+      "face": 2405,
+      "folder": "han_fanran",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷81"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    },
+    {
+      "name": "陳球",
+      "birth": 118,
+      "face": 2406,
+      "folder": "han_chenqiu",
+      "references": [
+        "https://ctext.org/dong-guan-han-ji/chen-qiu/zhs"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    },
+    {
+      "name": "任安",
+      "birth": 124,
+      "face": 2407,
+      "folder": "han_renan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷79上"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness used"
+    }
+  ]
+}

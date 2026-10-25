@@ -1,0 +1,54 @@
+{
+  "people": [
+    {
+      "name": "瞿恭",
+      "birth": 141,
+      "face": 2428,
+      "folder": "han_qugong",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷18"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "羅市",
+      "birth": 141,
+      "face": 2429,
+      "folder": "rebel_luoshi",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷71"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "黃龍",
+      "birth": 141,
+      "face": 2430,
+      "folder": "heishan_huanglong",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷06"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "卜己",
+      "birth": 142,
+      "face": 2431,
+      "folder": "yellowturban_buji",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/後漢書/卷71"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    },
+    {
+      "name": "卞遠",
+      "birth": 142,
+      "face": 2432,
+      "folder": "han_bianyuan",
+      "references": [
+        "https://zh.wikisource.org/zh-hant/三國志/卷05"
+      ],
+      "likeness": "Historical artistic reconstruction; no vetted surviving likeness located"
+    }
+  ]
+}

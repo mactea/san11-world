@@ -1,0 +1,56 @@
+[
+  {
+    "key": "eunuch_gongpu",
+    "name": "共普",
+    "birth": 146,
+    "face": 2453,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷78"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. GONG PU 共普, Eastern Han palace eunuch and Changle attendant involved in the168 palace coup. Around35, distinct broad low square face with thick neck, small forehead, strong wide cheekbones and soft blunt jaw, broad short nose, large rounded ears, narrow watchful eyes under short dense straight brows, thick wide lips. Clean-shaven, absolutely no beard, moustache, goatee or stubble. Warm tan skin, alert physically robust palace attendant, sober guarded expression without villain caricature. Modest close-fitting black cloth Han palace cap with plain dark red band, short low folded top. Muted dark brown robe with slate-blue shoulder wrap and ivory crossed collar, simple dark leather strap at shoulder; no lavish noble regalia. Almost frontal slight left turn, dark smoky blue-gray. Robust practical human court attendant, distinct from delicate plump or slender eunuchs."
+  },
+  {
+    "key": "han_liushu",
+    "name": "劉儵",
+    "birth": 146,
+    "face": 2454,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+      "https://zh.wikipedia.org/wiki/劉儵"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. LIU SHU 劉儵, Eastern Han imperial censor and Hejian royal-clan member consulted in selecting Emperor Ling. Around45, distinct long oval head, wide smooth forehead, high fine cheekbones and narrow rounded chin, long slender straight nose with small pointed tip, clear slightly wide-set eyes and fine arching brows. Thin neatly trimmed moustache and short tidy pointed black goatee with a few gray hairs, exposed cheeks. Warm light brown skin with fine age creases. Quiet thoughtful discerning expression, lips gently closed. Modest formal black Han scholar-official cap with a low folded ridge, dark muted teal woven robe with fine charcoal edging and light flax inner collar. Three-quarter right, dark smoky warm gray. Refined intellectually attentive court official, no fantasy gold or armour."
+  },
+  {
+    "key": "han_liumeng_minister",
+    "name": "劉猛",
+    "birth": 146,
+    "face": 2455,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷65",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷78"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. LIU MENG 劉猛, Eastern Han shangshu minister who joined Zhang Huan in recommending Wang Chang and Li Ying, NOT the later Xiongnu leader of the same name. Around50, distinct broad pentagonal face with high wide forehead, deep narrow eyes under coarse gently curved brows, large prominent straight nose with slightly bulbous tip, full cheeks ending in broad blunt chin, fine firm wide lips. Thick short gray-black moustache and a dense rounded gray-black beard with exposed upper cheeks. Warm medium complexion, a few deep forehead lines. Serious principled patient expression with a hint of concern, no furious general face. Simple low formal black Han cloth court cap, muted dark burgundy robe with plain dark gray trim and ivory crossed inner collar. Slight left turn, smoky moss-green gray background. Solid middle-aged civil minister, no steppe regalia, military helmet or weapons."
+  },
+  {
+    "key": "han_zhoujing",
+    "name": "周靖",
+    "birth": 146,
+    "face": 2456,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷69",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHOU JING 周靖, Eastern Han shaofu temporarily appointed acting cavalry general during the168 struggle involving Dou Wu. Around45, distinct long strong rectangular face, broad forehead tapering slightly at temples, prominent ears, long slightly curved nose, large deep-set steady eyes with low horizontal dark brows, wide firm mouth. Neat strong black moustache with a short narrow black-gray goatee and bare cheeks. Weathered tawny skin, restrained tense responsible expression, not an angry grin. Practical plain low black Han court-military headwrap with small unornamented bronze clasp. Dull iron lamellar shoulder armour over dark olive-brown crossed-collar robe, light gray collar and muted maroon cloak edge. Three-quarter right, smoky cool charcoal background. Official pressed into military command, sober human features, no plume or ornate golden imperial crown."
+  },
+  {
+    "key": "han_xuanfeng",
+    "name": "宣酆",
+    "birth": 146,
+    "face": 2457,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. XUAN FENG 宣酆, Eastern Han high minister who held the office Sikong around168. Around60, distinct small broad oval face with very high domed receding forehead, large soft cheeks, small rounded chin, modest straight nose with wide tip, long drooping white-gray brows and calm dark eyes with deep crow's feet. Fine white-gray moustache and short soft white-gray chin beard, bare cheeks, naturally lined warm ochre skin. Weary composed scholarly expression with a slight frown of concentration, no generic heroic rage. Simple formal black folded Han cloth cap, modest low height, narrow plain band. Faded dark blue-gray layered robe with charcoal geometric collar edge and warm pale beige inner collar. Almost frontal slight left turn, smoky dark brown green background. An elderly human court administrator, no extravagant jewels, armour or supernatural elder motifs."
+  }
+]

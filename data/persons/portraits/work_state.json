@@ -1,0 +1,69 @@
+{
+ "objective": "Generate distinct researched ROTK11-style portrait sets for all roster people lacking portraits and apply them to game",
+ "status": "paused",
+ "completed_sets": 4212,
+ "pending_sets_at_last_snapshot": 9101,
+ "authoritative_roster": "data/persons/roster.json",
+ "queue": "data/persons/portraits/queue.json",
+ "important": "Roster is concurrently maintained: ids changed during work (11955 records ->12534). Match identity and birth, never old ids. Preserve other edits.",
+ "installed_profiles": {
+  "wang_meng": {
+   "face": 2196,
+   "game_person": 9611
+  },
+  "marcus_aurelius": {
+   "face": 2197,
+   "game_person": 10328
+  },
+  "nagarjuna": {
+   "face": 2198,
+   "game_person": 9841
+  },
+  "himiko": {
+   "face": 2199,
+   "game_person": 9366
+  }
+ },
+ "original_backup": "C:/Games/san11/Romance Of Three Kingdom 11 PK/portrait_backups/20261023-030535",
+ "validation": "4212 catalogued profiles, 12636 WFTX payloads and 63180 bindings in 15 scenarios read back successfully after batch 0026. Save000/Save001 were patched in place again (person records at 0x488a4, stride 203, face +53, world zlib-packed after an MWC header); the patch rewrote 1000 face slots per save and left the other 3208 already correct (matched 4208 = 4212 catalogued minus the four face-2196..2199 originals). Runtime rendering remains unverified.",
+ "next": "Batch 0026 added 1000 assets (faces 5609-6608) and is installed and verified by file read-back. San11Face13 now covers 5400-6399 fully; San11Face14 was created for 6400-7399 and holds 209 used faces (6400-6608). Next unused face 6609. Queue was refreshed against the 13313-person roster: 4212 installed, 9101 pending. Run the installer only while the world build and the game are stopped. The queue snapshot had gone stale (13040) before this refresh, so always run tools/roster/portrait_queue.py before selecting a batch.",
+ "generator": "Batch 0023 finals are Codex CLI built-in image_gen (codex exec 0.163.0), not the DashScope API. Three passes were made for the same 100 people: qwen23_* (DashScope qwen-image-2.0, original authorization), codex23_* (Codex, scenic backgrounds) and rotk23_* (Codex, ROTK11 dark-vignette style matching the reference set in ~/.codex/generated_images/01a164f2-4ed8-7a73-bbcc-fc95c3f6249a). rotk23_* is what is installed now; the other two sets stay on disk for comparison. Plans live in build/qwen_batch_0023, build/codex_batch_0023 and build/rotk11_batch_0023. Batch 0024 (faces 2609-3608) uses the same Codex CLI image_gen with the ROTK11 dark-vignette prompt blocks (build/rotk11_batch_0024/make_plan.py); 1001 runs, 0 errors.",
+ "reference_image": "data/persons/portraits/wang_meng/wang_meng_9649_master.png",
+ "capacity_findings": {
+  "archive": "Media/face/San11Face00.fce",
+  "archive_format": "FACE header20 bytes; version64 at+4, firstFace at+8, faceCount at+12,imageCount at+16. Metadata4 bytes each from20, table OFFSET,SIZE at20+4*faceCount. Large indices faceId-firstFace; small indices faceCount+2*(faceId-firstFace)+variant. Both small variants64x80.",
+  "metadata": "Global metadata at0x6fae8b8,2400 records x4; flag byte+3 bit1(valid), bit2(custom override). 57 direct references plus73be28 mov edi. Static init73be21 clears2400 DWORDS.",
+  "getter": "0x48a450 bounds0..2399 then valid metadata bit1; setter0x4892d0 bounds; serializer validation0x48abb6 checks2399; UI face widget0x4381c9 checks2399. 0x48a5b0 also reads metadata.",
+  "archive_manager": "Static object0x6ed84c8, ctor46dd60 caller73bdb5. Array7200 x8 at start; file descriptors20 x24 at+0xe100; file count+0xe2e0,customfileindex+0xe2e4. Generic resource byte load46e2e0(this,allocator,imageIndex,out) called430ee5. Internal46df30 loads raw bytes and46de40 resolves archive by index.46de40 maps index>=2400 to(index-2400)/2 before file-range lookup; metadata checks and file descriptors.",
+  "loader": "46e360 reads FACE header20 and metadata to global table.46e403 references metadata base.46e424 reads faceCount*8 large-image table into this[firstFace*8].46e444 second table target=this+(firstFace+1200)*16 = this+2400*8+firstFace*16. Need full reconstruction of small-table ordering and texture cache indexing.",
+  "limits": "57 direct metadata references;74 candidate capacity constants, not all portrait related. Do not blanket replace2400: stack allocation5d56bb and push7200 at644534 may be unrelated. Several inline face alternate arithmetic operations (face+1000)%2000 must be audited for extended faces.",
+  "source_exe": "backup/san11pk.exe.orig, raw offsets=VA-0x400000; use Capstone skipdata=True for full.text scan (otherwise stops early)."
+ },
+ "capacity_deployed": 16000,
+ "capacity_tests": "356 Unicorn cases passed at27 installed sets; native DLL2400/16000/32760 high id and fullworld16000 patch checks previously passed.",
+ "runtime_scene_issue": "2026-10-23: hidden san11pk_portrait_test exits at Direct3DCreate9/CreateDevice, before scene. Capacity2400/no extension bank and original pre-capacity DLL both reproduce same0xe06d7363 exit. Native image tests pass. Do not claim screen rendering verified; recheck display initialization conditions separately.",
+ "last_batches": [
+  "0025",
+  "0026"
+ ],
+ "roster_total_at_last_snapshot": 13313,
+ "roster_scenario_drift": "Deployed scenarios still have 12613 persons from roster revision4. Revision5 renamed 竺佛朔(birth161) to 竺朔佛(birth149); the installer asserts on name+birth and refused. tools/import_roster.py only accepts stock 850-person input, so migrating the extended scenarios requires a rebuild from scenario_base, not an in-place append.",
+ "identity_sync": "安清 source keys gs:gs_00:0:安清 and sz:sz_00:34:安清 confirmed current birth129 instead of130; roster portrait2410 restored and15 scenario birth fields synchronized, backup identity-sync-20261023-112751.",
+ "verification_performance": "Verifier now indexes scenario identities once per scenario and retains duplicate-match assertions;102 sets full check passed in about1.4seconds.",
+ "pause_reason": "Batch 0023 (100 portraits) generated, exported, installed and read back; paused before in-game rendering check.",
+ "handoff": "PORTRAITS_HANDS_OFF.md",
+ "in_flight_jobs": [],
+ "latest_batch_notes": {
+  "batch": "0026",
+  "faces": "5609-6608",
+  "count": 1000,
+  "installed_art": "rotk26_* (Codex CLI, ROTK11 dark-vignette style + per-person differentiation layer)",
+  "generation": "12 workers, 1000/1000 masters, 0 errors, 0 failures; median ~150 s per image",
+  "install_backup": "portrait_backups/batch-20261025-085234",
+  "save_backups": [
+   "portrait_backups/save-20261025-085338",
+   "portrait_backups/save-20261025-085343"
+  ],
+  "handoff_doc": "PORTRAITS_HANDS_OFF.md"
+ }
+}

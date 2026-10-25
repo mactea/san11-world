@@ -1,0 +1,57 @@
+[
+  {
+    "key": "han_chendun",
+    "name": "陳敦",
+    "birth": 147,
+    "face": 2493,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷57"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. CHEN DUN 陳敦, Eastern Han scholar from Donghai appointed gentleman of the palace after the 169 virtuous-scholars examination, NOT the later Jin minister of the same name. About35, distinctly long oval face with a narrow pointed chin, large open almond eyes, thin gently arching brows, straight long fine nose, wide slightly protruding ears, slim firm lips, smooth warm ivory-ochre skin. Small neat black moustache and a very short thin goatee, clear cheeks. Earnest intelligent young-midlife civil scholar with attentive serious gaze. Low modest folded dark brown Han scholar cap, plain muted sand-beige cross-collar robe with faded indigo edging, ivory inner collar. Slight turn right, dark smoky olive background. No armour, scroll, hand, grand crown or luxury ornaments."
+  },
+  {
+    "key": "han_fengchan",
+    "name": "馮禪",
+    "birth": 147,
+    "face": 2494,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+      "https://www.shidianguji.com/zh/book/SBCK036/chapter/1j7424imfhp2v_48"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. FENG CHAN 馮禪, Eastern Han imperial envoy who negotiated the surrender of scattered Qiang people in Hanyang in169. About45, distinct broad diamond face, high cheekbones and narrow chin, long hooked narrow nose, small warm deeply set eyes, high slanted straight brows, wide mouth with finely curled corners. Weathered medium bronze skin with fine crow feet and sun lines, short black moustache and a compact medium-short pointed black beard with a few gray hairs. Diplomatic calm, patient observant gaze and restrained friendly smile. Simple low black Han envoy cap tied by a plain cloth band, travel-worn muted dark teal robe over cream inner collar, faded ochre outer mantle. Three-quarter left, smoky desaturated brown-gray background. Practical civil emissary, not a monk or armored general; no ethnic caricature."
+  },
+  {
+    "key": "han_renshe",
+    "name": "任涉",
+    "birth": 148,
+    "face": 2495,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. REN SHE 任涉, Eastern Han Liangzhou military aide who led500 Dunhuang soldiers in a campaign against Shule. About32, distinct short broad square face, wide angular jaw, low forehead, thick neck, broad blunt nose with slightly uneven bridge, medium round dark eyes with thick almost horizontal brows, heavy full lips, small scar at outer left brow. Sun-browned warm russet skin, stubble along square jaw and short thick black moustache, no long beard. Focused alert restrained expression of a practical desert-frontier field officer. Low dark brown wrapped Han military cloth cap with leather band, battered dull dark iron lamellar shoulder plates over faded rust-red robe and beige collar, rough charcoal cloak at one shoulder. Turn left slightly, dark smoky blue-gray background. No giant helmet crest, gold armour or imperial symbols."
+  },
+  {
+    "key": "han_mengtuo",
+    "name": "孟佗",
+    "birth": 148,
+    "face": 2496,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷78",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷88",
+      "https://bkso.baidu.com/item/孟佗/6872500"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. MENG TUO 孟佗 courtesy Bolang, wealthy Eastern Han official from Fufeng and governor of Liangzhou, father of Meng Da. About50, individual plump pear-shaped face, broad fleshy cheeks and small rounded chin, high broad forehead, short fleshy rounded nose, narrow bright dark eyes beneath thin slightly raised black-gray brows, small full mouth with subtle confident closed-lip smile. Warm light tawny skin with faint forehead lines, carefully groomed short black-gray moustache and a small short tapered chin beard, smooth cheeks. Polished shrewd socially assured expression, human dignified rather than a villain caricature. Modest black folded Han official cloth cap with a small bronze fastening, rich muted wine-brown silk robe with discreet dark geometric border and warm ivory inner collar, no jewellery. Slight right turn, smoky warm olive-gray background. No armor or objects, no wine vessel, no theatrical scheming pose."
+  },
+  {
+    "key": "han_zhangyan_western",
+    "name": "張宴",
+    "birth": 148,
+    "face": 2497,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/資治通鑑/卷056",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷88"
+    ],
+    "prompt": "Create ONE finished SQUARE upper-chest portrait for Romance of the Three Kingdoms XI / 三国志11, classic Koei painted historical strategy-game officer art. Believable individual human anatomy, expressive readable eyes, richly hand-painted skin and cloth, restrained earth palette, warm directional side light against dark smoky painted background. Complete headwear inside frame with 6 percent margin at top, head centered horizontally for a 64x80 face crop, eyes around40 percent of square height. No writing, watermark, frame, hands, collage, anime, 3D, photographic camera look, fantasy armour, Ming winged hats or Qing clothing. An artistic historical reconstruction, not a verified surviving likeness. ZHANG YAN 張宴, also recorded Zhang Yan 張晏, Eastern Han Chief Official of the Western Regions who joined the expedition against Shule around170, NOT Yellow Turban leader Zhang Yan 張燕. About48, distinct tall rectangular gaunt face, high sloping forehead, angular sunken cheeks, strong projecting chin, long straight broad nose, narrow watchful eyes beneath long thick gray-black eyebrows with outer ends downward. Broad thin-lipped serious mouth, thick drooping black-gray moustache and a medium-length squared coarse beard. Deep sun-tanned brown-ochre skin, pronounced fine eye wrinkles. Experienced reserved tired but resolute frontier commander, no rage. Plain low charcoal Han military cloth cap, practical worn brown leather shoulder protection with small iron lamellar plates, faded slate-blue robe and cream crossed collar, dark sand-colored travel cloak. Three-quarter right, smoky desaturated burgundy background. No fantasy gold armor, nomadic stereotype or enormous crown."
+  }
+]

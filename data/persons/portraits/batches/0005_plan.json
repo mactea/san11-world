@@ -1,0 +1,60 @@
+[
+  {
+    "key": "han_zangmin",
+    "name": "臧旻",
+    "birth": 137,
+    "face": 2418,
+    "references": [
+      "https://zh.wikipedia.org/wiki/臧旻",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷58"
+    ],
+    "prompt": "Create ONE finished square officer bust for Romance of the Three Kingdoms XI / 三国志11, classic Koei hand-painted historical strategy portrait aesthetic. Believable individual anatomy, painterly skin and fabric, strong readable eyes, restrained earthen palette, warm side light, dark smoky painted backdrop. Upper chest composition, whole headwear within frame, five percent top margin, face centered for narrow 64x80 crop, eyes at forty percent height. No text, lettering, watermark, border, collage, hands, weapons across face, anime, 3D render, photographic camera look, fantasy spikes, Ming winged hat or Qing costumes. Historically inspired reconstruction, not an authentic surviving likeness. ZANG MIN 臧旻, learned Eastern Han frontier administrator and military officer, father of Zang Hong, around45. A distinct slightly heavy rounded face, full broad lower cheeks, large rounded ears, medium broad nose and wide nostrils, thick flat eyebrows above widely spaced alert intelligent eyes, close-trimmed black beard around mouth and jaw with some gray. Composed inquisitive expression, a small relaxed mouth, no angry scowl. Black low wrapped Han official headdress with a modest folded ridge; muted slate-blue civilian robe under plain brown lamellar shoulder armour, ivory collar. Upright head, subtle left turn, dark olive smoke. Capable scholarly soldier, not a handsome narrow-eyed warrior template."
+  },
+  {
+    "key": "xianbei_tanshihuai",
+    "name": "檀石槐",
+    "birth": 138,
+    "face": 2419,
+    "references": [
+      "https://m.baike.com/wikiid/2688044500035996362",
+      "https://zh.wikisource.org/zh-hant/後漢書/卷90"
+    ],
+    "prompt": "Create ONE finished square officer bust for Romance of the Three Kingdoms XI / 三国志11, classic Koei hand-painted historical strategy portrait aesthetic. Believable individual anatomy, painterly skin and fabric, strong readable eyes, restrained earthen palette, warm side light, dark smoky painted backdrop. Upper chest composition, whole headwear within frame, five percent top margin, face centered for narrow 64x80 crop, eyes at forty percent height. No text, lettering, watermark, border, collage, hands, weapons across face, anime, 3D render, photographic camera look, fantasy spikes, Ming winged hat or Qing costumes. Historically inspired reconstruction, not an authentic surviving likeness. TANSHIHUAI 檀石槐, second-century Xianbei confederation leader, about38, vigorous intelligent steppe political leader. Reference image is a later modern unverified depiction, borrow only red rounded felt cap with pale fur band, dark hair, short black beard and green wrapped outer garment, not its flat cartoon style. Paint a highly individual broad diamond-shaped East Asian face, pronounced cheekbones, wide straight nose, open dark eyes with firm upward outer brows, full lips and a short dense rounded beard, weathered tawny skin. Confident thoughtful gaze toward left, chin raised slightly, no savage caricature. Long dark hair with one narrow restrained braid, small bronze hoop earring, short practical red felt cap with narrow pale fur edging, dull green wool coat and brown leather trim. Remove fantasy tooth necklace, no horns, Mongol imperial crown or Manchu queue. Deep blue-gray smoke. Noble tough thoughtful face rather than furious generic general.",
+    "ref": [
+      "C:/Users/garib/Documents/Work/CMCode/san11world-persons/data/persons/portraits/xianbei_tanshihuai/references/later_web_image.png"
+    ]
+  },
+  {
+    "key": "han_liuchong_admin",
+    "name": "劉寵",
+    "birth": 139,
+    "face": 2420,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷76",
+      "https://www.jcrb.com/zlpd/lianzhenggs/201204/t20120413_4652082.html"
+    ],
+    "prompt": "Create ONE finished square officer bust for Romance of the Three Kingdoms XI / 三国志11, classic Koei hand-painted historical strategy portrait aesthetic. Believable individual anatomy, painterly skin and fabric, strong readable eyes, restrained earthen palette, warm side light, dark smoky painted backdrop. Upper chest composition, whole headwear within frame, five percent top margin, face centered for narrow 64x80 crop, eyes at forty percent height. No text, lettering, watermark, border, collage, hands, weapons across face, anime, 3D render, photographic camera look, fantasy spikes, Ming winged hat or Qing costumes. Historically inspired reconstruction, not an authentic surviving likeness. LIU CHONG 劉寵, the Eastern Han honest Kuaiji administrator known as the One Coin Governor, NOT the Prince of Chen. Around60, slender gentle elder with long oval face, high softly receding forehead, fine downward curved eyebrows, clear kindly eyes with crow's feet, a small straight nose, delicate mouth and fine long white-gray moustache with narrow soft white goatee ending at upper chest. Warm faint smile suggesting humility, deep but gentle age lines, no heroic scowl. Simple worn low black Han scholar cap, plain faded brown-gray robe with pale linen crossed collar and no jewels or armour. Head gently tilted right, gaze toward viewer, muted moss-green smoke. His individual face must feel approachable and modest, lived-in and elderly. No coins or hands in frame."
+  },
+  {
+    "key": "han_liuju",
+    "name": "劉矩",
+    "birth": 139,
+    "face": 2421,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷76",
+      "https://ctext.org/datawiki.pl?if=gb&remap=gb&res=393117"
+    ],
+    "prompt": "Create ONE finished square officer bust for Romance of the Three Kingdoms XI / 三国志11, classic Koei hand-painted historical strategy portrait aesthetic. Believable individual anatomy, painterly skin and fabric, strong readable eyes, restrained earthen palette, warm side light, dark smoky painted backdrop. Upper chest composition, whole headwear within frame, five percent top margin, face centered for narrow 64x80 crop, eyes at forty percent height. No text, lettering, watermark, border, collage, hands, weapons across face, anime, 3D render, photographic camera look, fantasy spikes, Ming winged hat or Qing costumes. Historically inspired reconstruction, not an authentic surviving likeness. LIU JU 劉矩, Eastern Han senior civil minister renowned as a virtuous chancellor, around55. Distinct broad square face with wide forehead and rounded chin, small close-set observant eyes, faint heavy eyelids, thin broad horizontal eyebrows, short blunt nose, very wide firm closed mouth. Neat substantial gray-black moustache, short blunt gray chin beard with separated bare cheeks, not long flowing beard. Expression calm stubborn integrity with a touch of fatigue. Simple formal black Han cloth official cap of modest height with two restrained longitudinal ridges, no gold or wings. Dull deep burgundy robe, charcoal border and cream collar. Nearly frontal facing slightly left; dark warm charcoal backdrop. Solid broad facial proportions markedly different from slender elder scholars."
+  },
+  {
+    "key": "han_shisunrui",
+    "name": "士孫瑞",
+    "birth": 139,
+    "face": 2422,
+    "references": [
+      "https://zh.wikisource.org/zh-hant/後漢書/卷66",
+      "https://zh.wikisource.org/zh-hant/三國志/卷06"
+    ],
+    "prompt": "Create ONE finished square officer bust for Romance of the Three Kingdoms XI / 三国志11, classic Koei hand-painted historical strategy portrait aesthetic. Believable individual anatomy, painterly skin and fabric, strong readable eyes, restrained earthen palette, warm side light, dark smoky painted backdrop. Upper chest composition, whole headwear within frame, five percent top margin, face centered for narrow 64x80 crop, eyes at forty percent height. No text, lettering, watermark, border, collage, hands, weapons across face, anime, 3D render, photographic camera look, fantasy spikes, Ming winged hat or Qing costumes. Historically inspired reconstruction, not an authentic surviving likeness. SHISUN RUI 士孫瑞, Eastern Han court strategist involved in the plot against Dong Zhuo, about55. Distinct long lean angular face with very high cheekbones, tall narrow forehead, deep nasolabial creases, long slightly curved nose, long almond-shaped attentive eyes, thin expressive arched brows. Fine thin drooping moustache and sparse narrow black-gray goatee split into two very fine tips. Restrained shrewd thoughtful expression with slightly parted lips, dignified rather than sinister. Black low folded Han court scholar kerchief with a narrow simple dark jade clasp, muted ochre-brown layered robe with dark plum edge and light gray inner collar, no armour. Three-quarter right, smoky violet charcoal background. Strongly intellectual countenance, individual asymmetry, fine aging texture."
+  }
+]

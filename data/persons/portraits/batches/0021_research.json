@@ -1,0 +1,73 @@
+{
+  "status": "research_started",
+  "people": [
+    {
+      "id": 953,
+      "name_full": "曹寬",
+      "birth": 148,
+      "role": "武将",
+      "bio": "戊司馬。建寧年間與從事任涉、西域長史張晏率焉耆、龜茲、車師前後部兵三萬餘人討疏勒，攻楨中城四十餘日不能下。",
+      "src": [
+        "後漢書·卷八十八 西域傳",
+        "資治通鑑·孝桓皇帝下建寧三年"
+      ]
+    },
+    {
+      "id": 954,
+      "name_full": "谷永",
+      "birth": 148,
+      "role": "文臣",
+      "bio": "鬱林太守。靈帝建寧三年以恩信招降烏滸人十餘萬內屬，皆受冠帶，開置七縣。",
+      "src": [
+        "後漢書·卷八十六 南蠻西南夷列傳",
+        "資治通鑑·孝桓皇帝下建寧三年"
+      ]
+    },
+    {
+      "id": 955,
+      "name_full": "來豔",
+      "birth": 149,
+      "role": "文臣",
+      "bio": "南陽人，以太常為司空，建寧四年免；光和元年復以太常為司空，同年薨。",
+      "src": [
+        "資治通鑑·孝桓皇帝下建寧四年",
+        "三國志·蜀志卷十二 來敏傳"
+      ]
+    },
+    {
+      "id": 956,
+      "name_full": "宗俱",
+      "birth": 149,
+      "role": "文臣",
+      "bio": "南陽人，建寧四年以太常為司空，熹平二年正月薨於位。",
+      "src": [
+        "資治通鑑·孝桓皇帝下建寧四年"
+      ]
+    },
+    {
+      "id": 957,
+      "name_full": "張舉",
+      "birth": 149,
+      "role": "叛军首领",
+      "bio": "前中山相張純私謂前太山太守張舉曰：「今烏桓既畔，皆願為亂，涼州賊起，朝廷不能禁。又洛陽人妻生子兩頭，此漢祚衰盡，天下有兩主之徵也。子若與吾共率烏桓之眾以起兵，庶幾可定大業。」舉因然之。",
+      "src": [
+        "中華三國志 184DHZS",
+        "後漢書·卷七十三 劉虞傳",
+        "資治通鑑·孝靈皇帝中中平四年",
+        "太平御覽·職官部六十五 引吳錄",
+        "太平御覽·火部四 引吳錄",
+        "後漢紀·卷二十五 孝靈皇帝紀下"
+      ]
+    }
+  ],
+  "notes": [
+    "張晏(148) remains in identity_review.json as a probable variant of 張宴(148); do not silently merge roster entries.",
+    "谷永 must be distinguished from the Western Han official of the same name.",
+    "曹寬 is the Western Regions military officer, not the court painter namesake."
+  ],
+  "reference_searches": [
+    "https://dsr.nii.ac.jp/toyobunko/III-2-G-22/V-1/page/0068.html.ja",
+    "https://zh.wikipedia.org/wiki/宗俱",
+    "https://zh.wikisource.org/zh-hant/資治通鑑/卷056"
+  ]
+}

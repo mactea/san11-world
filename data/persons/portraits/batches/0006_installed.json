@@ -1,0 +1,35 @@
+{
+  "people": [
+    {
+      "name": "北宮伯玉",
+      "face": 2423,
+      "roster_id": 875
+    },
+    {
+      "name": "孫嵩",
+      "face": 2424,
+      "roster_id": 876
+    },
+    {
+      "name": "蓋勳",
+      "face": 2425,
+      "roster_id": 877
+    },
+    {
+      "name": "士壹",
+      "face": 2426,
+      "roster_id": 878
+    },
+    {
+      "name": "彭脫",
+      "face": 2427,
+      "roster_id": 879
+    }
+  ],
+  "banks": [
+    "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\UserData_kit\\Koei\\San11 Tc\\FaceData\\San11Face10.fce"
+  ],
+  "scenarios": 15,
+  "backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\portrait_backups\\batch-20261023-042819",
+  "verification": "All encoded payloads and scenario bytes read back; runtime scene pending"
+}

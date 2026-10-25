@@ -1,0 +1,25 @@
+{
+  "people": [
+    {
+      "name": "曹鸞",
+      "face": 2400,
+      "roster_id": 850
+    },
+    {
+      "name": "胡廣",
+      "face": 2401,
+      "roster_id": 851
+    },
+    {
+      "name": "張奐",
+      "face": 2402,
+      "roster_id": 852
+    }
+  ],
+  "banks": [
+    "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\UserData_kit\\Koei\\San11 Tc\\FaceData\\San11Face10.fce"
+  ],
+  "scenarios": 15,
+  "backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\portrait_backups\\batch-20261023-033033",
+  "verification": "All encoded payloads and scenario bytes read back; runtime scene pending"
+}

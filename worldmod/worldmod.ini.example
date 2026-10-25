@@ -53,6 +53,9 @@ cities=210
 ; forces=200
 ; units: units (armies) on the map, 1000..30000 (M9_UNITS.md); saves made with fewer units still load
 ; units=5000
+; persons: scenario officers (武将), 850..31750 (M10_PERSONS.md); all officers = persons + 250. Saves only load with
+; the count they were made with; Koei's scenarios load with the extra officers empty
+; persons=15000
 ; unit_first: debug (M9 tests): new units take the first free id from this one on, so ids beyond 1000 get used
 ; unit_first=4500
 ; getter_check: log gate / port getter calls with an out-of-range index and their call sites (missed id-boundary patches)

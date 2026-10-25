@@ -1,0 +1,23 @@
+{
+ "batch": "0023_fixes",
+ "people": [
+  {
+   "name": "康孟詳",
+   "birth": 150,
+   "face": 2519,
+   "folder": "qwen23_011_973"
+  },
+  {
+   "name": "康巨",
+   "birth": 150,
+   "face": 2520,
+   "folder": "qwen23_012_974"
+  },
+  {
+   "name": "支曜",
+   "birth": 150,
+   "face": 2526,
+   "folder": "qwen23_018_980"
+  }
+ ]
+}

@@ -1,0 +1,1735 @@
+{
+ "batch": "0023",
+ "people": [
+  {
+   "name": "黃衍",
+   "birth": 149,
+   "death": 215,
+   "appear": 184,
+   "role": "文臣",
+   "region": "涼州",
+   "polity": "涼州叛軍",
+   "bio": "王國使故酒泉太守黃衍說燮曰：「成敗之事，已可知矣。先起，上有霸王之業，下成伊呂之勳。天下非復漢有，府君寧有意為吾屬師乎？」燮案劍叱衍曰：「若剖符之臣，反為賊說邪！」遂麾左右進兵，臨陣戰歿。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十八 傅燮傳",
+    "資治通鑑·孝靈皇帝中中平四年",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "仇須兮",
+   "birth": 150,
+   "death": 193,
+   "appear": 166,
+   "role": "武将",
+   "region": "東夷",
+   "polity": "新羅",
+   "bio": "阿達羅尼師今十九年拜一吉。伐休尼師今二年與波珍仇道同拜左右軍主（仇須兮為右軍主），領兵討伐召文國，新羅軍主之名自此始。",
+   "sources": [
+    "三國史記·新羅本紀 阿達羅尼師今十九年"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉寵",
+   "birth": 150,
+   "death": 197,
+   "appear": 184,
+   "role": "文臣",
+   "region": "益州",
+   "polity": "東漢",
+   "bio": "寵善弩射，十發十中，中皆同處。中平中，黃巾賊起，郡縣皆棄城走，寵有強弩數千張，出軍都亭。國人素聞王善射，不敢反叛，故陳獨得完，百姓歸之者眾十餘萬人。及獻帝初，義兵起，寵率眾屯陽夏，自稱輔漢大將軍。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十七 謝弼傳",
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷七十五 袁術傳",
+    "資治通鑑·孝獻皇帝丁建安二年",
+    "後漢書·卷六十七 羊陟傳",
+    "華陽國志·卷十中 廣漢士女",
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "age": 44,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉祐",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "陳蕃、竇武用事時任為河南尹；名列八俊，為天下士大夫所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "age": 45,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉祥",
+   "birth": 150,
+   "death": 190,
+   "appear": 184,
+   "role": "武将",
+   "region": "荊州",
+   "polity": "東漢",
+   "bio": "零陵先賢傳曰：巴祖父曜，蒼梧太守。父祥，江夏太守、蕩寇將軍。時孫堅舉兵討董卓，以南陽太守張諮不給軍糧，殺之。祥與同心，南陽士民由此怨祥，舉兵攻之，與戰，敗亡。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·劉巴傳 裴注引《零陵先賢傳》"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉郃",
+   "birth": 150,
+   "death": 179,
+   "appear": 166,
+   "role": "宗室",
+   "region": "冀州",
+   "polity": "東漢",
+   "bio": "大鴻臚，素與蔡邕不平，程璜誣蔡邕叔侄請託於郃。光和二年為司徒，出自宗室，陳球勸其表陽球為司隸以誅曹節，郃恐禍未敢，劉納激之乃許，事洩，與陳球、劉納、陽球下獄死。",
+   "sources": [
+    "後漢書·卷五十六 陳球傳",
+    "資治通鑑·孝靈皇帝上之下光和元年",
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷七十七 陽球傳",
+    "後漢書·志第十二 天文下",
+    "CBDB 中國哲學書電子化計劃 (ctext) 352572；英文維基百科 (Wikipedia) Liu Shao (Three Kingdoms)",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "age": 48,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "司馬俱",
+   "birth": 150,
+   "death": 192,
+   "appear": 190,
+   "role": "叛军首领",
+   "region": "青州",
+   "polity": "黃巾",
+   "bio": "濟南、樂安黃巾徐和、司馬俱等攻城，殺長吏，淵將泰山、齊、平原郡兵擊，大破之，斬和，平諸縣，收其糧谷以給軍士。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·卷九 夏侯淵傳"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "周術",
+   "birth": 150,
+   "death": 193,
+   "appear": 190,
+   "role": "文臣",
+   "region": "揚州",
+   "polity": "東漢",
+   "bio": "豫章太守，病卒，劉表遂上諸葛玄代之，漢朝另遣朱皓。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·諸葛亮傳 裴注引《獻帝春秋》"
+   ],
+   "age": 56,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "和得",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "君主",
+   "region": "涼州",
+   "polity": "疏勒",
+   "bio": "疏勒王漢大都尉的季父。建寧元年在狩獵中射殺疏勒王，自立為王。其後涼州刺史孟佗遣兵三萬餘人討疏勒，攻楨中城四十餘日不能下。",
+   "sources": [
+    "後漢書·卷八十八 西域傳",
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "孔昱",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "名士",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "孔霸七世孫，少習家學。大將軍梁冀闢不應，後遭黨事禁錮。靈帝即位，公車徵拜議郎，補洛陽令，以師喪棄官，卒於家。",
+   "sources": [
+    "後漢書·卷六十七 孔昱傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 43,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "康孟詳",
+   "birth": 150,
+   "death": 225,
+   "appear": 166,
+   "role": "僧道",
+   "region": "西域",
+   "polity": "東漢",
+   "bio": "沙門，漢靈帝、獻帝之間以慧學之譽馳名京洛，譯出中本起及修行本起；又與竺大力將曇果於迦維羅衛國所得梵本譯為漢文。道安稱其所出奕奕流便，足騰玄趣。",
+   "sources": [
+    "出三藏記集·卷十三 安玄傳",
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "age": 58,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "康巨",
+   "birth": 150,
+   "death": 225,
+   "appear": 166,
+   "role": "僧道",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "沙門，漢靈帝、獻帝之間以慧學之譽馳名京洛，譯出問地獄事經，言直理旨，不加潤飾。",
+   "sources": [
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "廉忠",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "尚書令，受王甫指使誣奏鄭颯等謀迎立渤海王悝，大逆不道，致悝被迫自殺。",
+   "sources": [
+    "後漢書·卷五十五 章帝八王傳",
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張樂",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "宦官",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "常侍，熹平元年與太僕侯覽專權驕恣，詔收其印綬，阿黨者皆免。",
+   "sources": [
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "age": 42,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張賢",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "司隸從事，段熲先以鴆酒脅其父，令賢必得蘇不韋；賢遂收捕蘇不韋，並其一門六十餘人盡誅之。",
+   "sources": [
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "age": 44,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張超",
+   "birth": 150,
+   "death": 191,
+   "appear": 184,
+   "role": "名士",
+   "region": "冀州",
+   "polity": "東漢",
+   "bio": "初平元年，紹遂以勃海起兵，以從弟後將軍術、冀州牧韓馥、豫州刺史孔骸、兗州刺史劉岱、陳留太守張邈、廣陵太守張超、河內太守王匡、山陽太守袁遺、東郡太守橋瑁、濟北相鮑信等同時俱起，眾各數萬，以討卓為名。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·武帝紀 裴注引《英雄記》"
+   ],
+   "age": 37,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "徐和",
+   "birth": 150,
+   "death": 192,
+   "appear": 190,
+   "role": "叛军首领",
+   "region": "青州",
+   "polity": "黃巾",
+   "bio": "濟南、樂安黃巾徐和、司馬俱等攻城，殺長吏，淵將泰山、齊、平原郡兵擊，大破之，斬和，平諸縣，收其糧谷以給軍士。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·卷九 夏侯淵傳",
+    "三國志·卷十八 臧霸傳"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "支曜",
+   "birth": 150,
+   "death": 225,
+   "appear": 166,
+   "role": "僧道",
+   "region": "西域",
+   "polity": "東漢",
+   "bio": "沙門，漢靈帝、獻帝之間以慧學之譽馳名京洛，譯出成具定意、小本起等經，言直理旨，不加潤飾。",
+   "sources": [
+    "出三藏記集·卷十三 支讖傳",
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "曹寅",
+   "birth": 150,
+   "death": 195,
+   "appear": 184,
+   "role": "文臣",
+   "region": "荊州",
+   "polity": "東漢",
+   "bio": "案王氏譜，叡字通耀，晉太保祥伯父也。吳錄曰：叡先與堅共擊零、桂賊，以堅武官，言頗輕之。及叡舉兵欲討卓，素與武陵太守曹寅不相能，楊言當先殺寅。寅懼，詐作案行使者光祿大夫溫毅檄，移堅，說叡罪過，令收行刑訖，以狀上。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·孫堅傳 裴注引《吳錄》",
+    "資治通鑑·孝靈皇帝下初平元年"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "朱震",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "名士",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "陳留人，陳蕃友人，收葬蕃屍，匿其子陳逸。事覺繫獄，合門桎梏，受考掠誓死不言，陳逸由是得免。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李應",
+   "birth": 150,
+   "death": 198,
+   "appear": 190,
+   "role": "文臣",
+   "region": "涼州",
+   "polity": "李傕",
+   "bio": "李傕之弟。司徒趙溫致書勸和，李傕大怒欲殺趙溫，李應勸諫，數日乃止。",
+   "sources": [
+    "中華三國志 192XDZX",
+    "三國志·董卓傳 裴注引《獻帝起居注》",
+    "資治通鑑·孝獻皇帝丙興平二年",
+    "後漢紀·卷二十八 孝獻皇帝紀三"
+   ],
+   "age": 51,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李暠",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "文臣",
+   "region": "冀州",
+   "polity": "東漢",
+   "bio": "魏郡人，為司隸校尉時以舊怨殺扶風蘇謙；遷大司農，蘇謙之子蘇不韋鑿地入其寢室殺其妾與幼子，又掘其父冢斷頭示市，暠求捕不獲，憤恚嘔血而死。",
+   "sources": [
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "age": 52,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李相如",
+   "birth": 150,
+   "death": 250,
+   "appear": 186,
+   "role": "叛军首领",
+   "region": "涼州",
+   "polity": "涼州叛軍",
+   "bio": "“韓遂乃殺邊章及伯玉、文侯，擁兵十餘萬，進圍隴西。太守李相如反，與遂連和，共殺涼州刺史耿鄙。”",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十二 董卓傳",
+    "資治通鑑·孝靈皇帝中中平四年"
+   ],
+   "age": 46,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "杜密",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名賢，被陳蕃、竇武徵召列於朝廷參政；名列八俊，與李膺齊名。建寧二年被曹節諷有司奏為鉤黨，請下州郡考治。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "age": 51,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "烏延",
+   "birth": 150,
+   "death": 207,
+   "appear": 166,
+   "role": "外族首领",
+   "region": "幽州",
+   "polity": "烏桓",
+   "bio": "右北平烏桓大人，靈帝初擁眾八百餘落，自稱汗魯王，勇健多計策。袁紹矯制賜其單于印綬。建安十二年曹操破蹋頓後，與袁尚、樓班等逃往遼東，被遼東太守公孫康斬殺送首。",
+   "sources": [
+    "後漢書·卷九十 烏桓鮮卑列傳",
+    "資治通鑑·孝桓皇帝下建寧元年",
+    "資治通鑑·孝獻皇帝戊建安四年",
+    "三國志·魏志卷三十 烏丸傳"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "焦和",
+   "birth": 150,
+   "death": 190,
+   "appear": 190,
+   "role": "文臣",
+   "region": "青州",
+   "polity": "東漢",
+   "bio": "前青州刺史，好立虛譽，能清談。黃巾蜂起時欲西赴京師，不理戎警，但列巫史禱神，作陷冰丸投河，眾遂潰散，病卒。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十八 臧洪傳",
+    "三國志·臧洪傳 裴注引《九州春秋》",
+    "資治通鑑·孝靈皇帝下初平元年",
+    "後漢紀·卷二十六 孝獻皇帝紀一"
+   ],
+   "age": 52,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "王國",
+   "birth": 150,
+   "death": 190,
+   "appear": 188,
+   "role": "叛军首领",
+   "region": "涼州",
+   "polity": "涼州叛軍",
+   "bio": "而鄙司馬扶風馬騰，亦擁兵反叛，又漢陽王國，自號「合眾將軍」，皆與韓遂合。共推王國為主，悉令領其眾，寇掠三輔。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷五十八 傅燮傳",
+    "後漢書·卷七十一 皇甫嵩傳",
+    "資治通鑑·孝靈皇帝中中平四年",
+    "晉書·卷七十五 荀崧傳",
+    "晉書·卷八十六 張軌傳",
+    "三國志·馬超傳 裴注引《典略》",
+    "三國群雄志扩容名单",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "age": 46,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "王寓",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "司隸校尉，依倚宦官，求薦於太常張奐被拒，遂陷張奐以黨罪禁錮。",
+   "sources": [
+    "資治通鑑·孝靈皇帝上之下熹平元年"
+   ],
+   "age": 41,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "竇機",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "外戚",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "竇武之子，以定策功封渭陽侯；王甫斥竇武兄弟父子並封三侯。竇武敗後，竇氏宗親賓客姻屬悉被誅。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "age": 50,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "竇靖",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "外戚",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "竇武兄子，以定策功封西鄉侯。竇武敗後，竇氏宗親賓客姻屬悉被誅。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧元年"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "竺大力",
+   "birth": 150,
+   "death": 225,
+   "appear": 166,
+   "role": "僧道",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "沙門，與康孟詳共將曇果於迦維羅衛國所得梵本譯為漢文（修行本起）。",
+   "sources": [
+    "高僧傳·卷一 支樓迦讖傳"
+   ],
+   "age": 50,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董騰",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "宦官",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "中黃門，任俠通剽輕，與鄭颯數與勃海王劉悝交通，被王甫以為有奸而告發。",
+   "sources": [
+    "後漢書·卷五十五 章帝八王傳",
+    "資治通鑑·孝靈皇帝上之下熹平元年",
+    "後漢書·卷六十五 段熲傳"
+   ],
+   "age": 30,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蘇固",
+   "birth": 150,
+   "death": 191,
+   "appear": 190,
+   "role": "文臣",
+   "region": "益州",
+   "polity": "東漢",
+   "bio": "沛人張魯，母有恣色，兼挾鬼道，往來焉家，遂任魯以為督義司馬，遂與別部司馬張修將兵掩殺漢中太守蘇固，斷絕斜谷，殺使者。魯既得漢中，遂復殺張修而並其眾。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "資治通鑑·孝獻皇帝乙初平二年",
+    "後漢書·卷七十五 劉焉傳",
+    "華陽國志·卷十下 漢中士女",
+    "三國志·卷八 張魯傳",
+    "三國群雄志扩容名单"
+   ],
+   "age": 44,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蘇馬",
+   "birth": 150,
+   "death": 188,
+   "appear": 188,
+   "role": "叛军首领",
+   "region": "荊州",
+   "polity": "",
+   "bio": "初為縣吏，後察孝廉，州闢從事，隨孫堅征伐。中平五年，拜司馬，從討長沙、零、桂等三郡賊周朝、蘇馬等，有功，堅表治行都尉。從破董卓於陽人，入洛陽。表治行督軍校尉，特將步騎，東助徐州牧陶謙討黃巾。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·吳志卷十一 朱治傳"
+   ],
+   "age": 35,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "許瑒",
+   "birth": 150,
+   "death": 200,
+   "appear": 190,
+   "role": "文臣",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "許靖從兄，為陳相，與豫州刺史孔胄合謀討董卓，許靖因此懼誅而奔孔胄。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·蜀志卷八 許靖傳"
+   ],
+   "age": 56,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "趙嬈",
+   "birth": 150,
+   "death": 186,
+   "appear": 166,
+   "role": "后妃",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "靈帝乳母，貴重天下，生則貲藏侔於天府，死則丘墓逾於園陵，兩子受封，兄弟典郡。蔡邕對災異時引以為婦人干政之戒。",
+   "sources": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷六十九 竇武傳",
+    "資治通鑑·孝桓皇帝下建寧元年",
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "趙祇",
+   "birth": 150,
+   "death": 188,
+   "appear": 188,
+   "role": "武将",
+   "region": "益州",
+   "polity": "",
+   "bio": "中平五年（公元188年）馬相、趙祗在綿竹（今四川德陽北）起義，以黃巾名義相號召，數日內即聚眾數千。",
+   "sources": [
+    "中華三國志 184DHZS"
+   ],
+   "age": 35,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "酈炎",
+   "birth": 150,
+   "death": 177,
+   "appear": 166,
+   "role": "名士",
+   "region": "幽州",
+   "polity": "東漢",
+   "bio": "酈食其之後，有文才，解音律，靈帝時州郡辟命皆不就，作詩二篇抒志。後患風病，遭母憂病發，妻產驚死，妻家訟之，繫獄不能理對，熹平六年死獄中，年二十八。尚書盧植為之誄讚。",
+   "sources": [
+    "後漢書·卷八十下 文苑列傳 酈炎傳"
+   ],
+   "age": 36,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "金仇道",
+   "birth": 150,
+   "death": 198,
+   "appear": 166,
+   "role": "武将",
+   "region": "東夷",
+   "polity": "新羅",
+   "bio": "阿達羅尼師今十九年拜波珍。伐休尼師今二年與仇須兮同拜左右軍主，伐召文國，軍主之名始於此。百濟攻母山城，出兵拒之，戰於狗壤勝之，殺獲五百餘級；後率勁騎五百追百濟兵至蛙山，中伏為百濟所敗，以失策貶為缶谷城主。子味鄒即位後封為葛文王。",
+   "sources": [
+    "三國史記·新羅本紀 阿達羅尼師今十九年"
+   ],
+   "age": 42,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳溫",
+   "birth": 150,
+   "death": 192,
+   "appear": 190,
+   "role": "文臣",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "術以餘眾奔九江，殺楊州刺史陳溫，領其州。臣松之案英雄記：「陳溫字符悌，汝南人。先為楊州刺史，自病死。袁紹遣袁遺領州，敗散，奔沛國，為兵所殺。袁術更用陳瑀為楊州。瑀字公瑋，下邳人。瑀既領州，而術敗於封丘，南向壽春，瑀拒術不納。術退保陰陵，更合軍攻瑀，瑀懼走歸下邳。」如此，則溫不為術所殺，與本傳不同。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十五 袁術傳",
+    "三國志·卷一 武帝紀",
+    "三國志·卷六 袁術傳",
+    "三國志·卷九 曹洪傳",
+    "資治通鑑·孝獻皇帝乙初平三年",
+    "三國群雄志扩容名单",
+    "後漢紀·卷二十七 孝獻皇帝紀二"
+   ],
+   "age": 58,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "韋著",
+   "birth": 150,
+   "death": 180,
+   "appear": 166,
+   "role": "名士",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "陳、竇誅後，曹節慾招禮名賢，就拜為東海相，詔書迫切，不得已解巾臨郡；為政任威刑，妻子放恣，為受罰家所告，論輸左校。刑滿歸鄉里，為奸人所殺。",
+   "sources": [
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "age": 41,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉儒",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "東郡人，名列八廚；建寧二年被曹節諷有司奏為鉤黨，請下州郡考治。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 39,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "唐珍",
+   "birth": 151,
+   "death": 197,
+   "appear": 167,
+   "role": "文臣",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "潁川人，唐衡之弟，熹平二年以太常為司空，三年罷。",
+   "sources": [
+    "三國志·董卓傳 裴注引《傅子》",
+    "資治通鑑·孝靈皇帝上之下熹平二年"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "夏馥",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "隐士",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "少為書生，言行質直，不與豪姓交通。以聲名為中官所憚，與範滂、張儉等被誣為黨魁。張儉亡命連累甚眾，馥嘆而自翦須變形入林慮山為冶家傭，二三年無人知。弟夏靜載縑帛追至涅陽，馥拒而別去。黨禁未解而卒。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年",
+    "後漢書·卷六十七 黨錮列傳 夏馥傳"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "孔褒",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "魯國人，張儉舊友。儉亡抵褒不遇，其弟孔融匿之。事洩，兄弟爭死，母亦請當其辜，郡縣疑不能決，詔書竟坐褒。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 51,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "宗慈",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "荊州",
+   "polity": "東漢",
+   "bio": "南陽人，名列八顧，言能以德行引人者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 42,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "尹端",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "文臣",
+   "region": "揚州",
+   "polity": "東漢",
+   "bio": "會稽太守，以朱俊為主簿。熹平二年討賊許昭失利，罪應棄市，朱俊賂吏刊定州奏，得輸作左校。",
+   "sources": [
+    "後漢書·卷七十一 朱儁傳"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "岑晊",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "荊州",
+   "polity": "東漢",
+   "bio": "少為宗慈所奇，入太學，與郭林宗、朱公叔為友，李膺、王暢稱其有幹國器。為南陽太守成晉功曹，勸收富賈張泛，誅其宗族賓客二百餘人，成晉坐死，晊亡匿齊魯。后辟舉皆不就，李、杜之誅復逃竄，終於江夏山中。",
+   "sources": [
+    "後漢書·卷六十七 岑晊傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 48,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "度尚",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名列八廚，言能以財救人者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 45,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "徐珪",
+   "birth": 151,
+   "death": 186,
+   "appear": 167,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "太守，為州刺史所誣奏，郡吏謀賂宦官；功曹朱俊勸阻，夜遣輕騎截得州書，上京告刺史之罪，徐珪之事得解，大悅。",
+   "sources": [
+    "後漢書·卷七十一 朱儁傳",
+    "後漢紀·卷二十八 孝獻皇帝紀三"
+   ],
+   "age": 43,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "戲子然",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "文臣",
+   "region": "青州",
+   "polity": "東漢",
+   "bio": "北海人，李篤導亡命的張儉經其家，遂入漁陽出塞。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 44,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "景顧",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "文臣",
+   "region": "益州",
+   "polity": "東漢",
+   "bio": "景毅之子，為李膺門徒，因未有錄牒不及於譴；其父慨然以為不可苟安，自表免歸。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 44,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "朱並",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "文臣",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "侯覽鄉人，素佞邪，為張儉所棄，承侯覽意旨上書告張儉與同鄉二十四人共為部黨、圖危社稷，興起黨獄。",
+   "sources": [
+    "後漢書·卷六十七 張儉傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李篤",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "青州",
+   "polity": "東漢",
+   "bio": "張儉流轉東萊止其家，外黃令毛欽操兵到門，篤以仁義說之，欽嘆息而去；篤導儉經北海戲子然家，入漁陽出塞。",
+   "sources": [
+    "後漢書·卷六十七 張儉傳",
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "檀敷",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "山陽人，名列八及，言能導人追宗者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 39,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "王孝",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名列八廚，言能以財救人者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 41,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "申屠蟠",
+   "birth": 151,
+   "death": 197,
+   "appear": 167,
+   "role": "隐士",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "見太學生爭慕範滂之風，獨嘆將有坑儒燒書之禍，乃絕跡於梁、碭之間，因樹為屋，自同傭人；二年後黨錮禍起，唯蟠超然免於評論。",
+   "sources": [
+    "後漢書·卷六十二 荀爽傳",
+    "資治通鑑·孝桓皇帝下建寧二年",
+    "資治通鑑·孝靈皇帝下中平六年",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "age": 47,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "秦周",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "陳留人，名列八廚，言能以財救人者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "範滂",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "名列八顧，曾非訐朝政，太學生爭慕其風。鉤黨之獄，汝南督郵吳導抱詔書而泣，滂自詣獄，拒縣令郭揖同逃，與母訣別，母言得與李、杜齊名死亦何恨。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "翟超",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名列八及，言能導人追宗者；建寧二年被曹節諷有司奏為鉤黨，請下州郡考治。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 36,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "苑康",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名列八及，言能導人追宗者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 45,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董寵",
+   "birth": 151,
+   "death": 170,
+   "appear": 167,
+   "role": "外戚",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "孝仁皇后之兄，建寧二年拜執金吾；三年坐矯永樂太后屬請，下獄死。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董重",
+   "birth": 151,
+   "death": 189,
+   "appear": 167,
+   "role": "外戚",
+   "region": "冀州",
+   "polity": "東漢",
+   "bio": "永樂太后兄子，以衛尉條侯任票騎將軍，與何進權勢相害，為宦官所倚；董太后揚言讓他斬何進頭，何進舉兵圍票騎府收之，免官自殺。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年",
+    "資治通鑑·孝靈皇帝下中平五年",
+    "後漢紀·卷二十三 孝靈皇帝紀上",
+    "後漢紀·卷二十五 孝靈皇帝紀下"
+   ],
+   "age": 44,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蔡衍",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "汝南人，名列八顧，言能以德行引人者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 43,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蕃向",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "魯國人，名列八廚，言能以財救人者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 39,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "袁閎",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "隐士",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "袁逢從兄子，少有操行，以耕學為業，不受袁逢、袁隗饋贈，嘆家門驕奢如晉之三郤。黨事起，築土室自牖納飲食，潛身十八年，卒於土室。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 60,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "趙典",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名列八俊，為黨人所標榜的天下英彥之一，與李膺、荀翌、杜密、王暢等並稱。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 42,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "郭泰",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "名列八顧。聞黨人已死，私為之慟，嘆漢室將滅。好臧否人倫而不為危言核論，故能處濁世而怨禍不及，司馬光稱其既明且哲以保其身。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 40,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳翔",
+   "birth": 151,
+   "death": 181,
+   "appear": 167,
+   "role": "名士",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "汝南人，名列八及，言能導人追宗者，為黨人所標榜。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧二年"
+   ],
+   "age": 52,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "丘力居",
+   "birth": 152,
+   "death": 194,
+   "appear": 190,
+   "role": "外族首领",
+   "region": "幽州",
+   "polity": "烏桓",
+   "bio": "靈帝初，烏桓大人上谷有難樓者，眾九千餘落，遼西有丘力居者，眾五千餘落，皆自稱王；又遼東蘇僕延，眾千餘落，自稱峭王；右北平烏延，眾八百餘落，自稱汗魯王：並勇建而多計策。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷九十 烏桓鮮卑列傳",
+    "資治通鑑·孝桓皇帝下建寧元年",
+    "資治通鑑·孝靈皇帝中中平四年",
+    "後漢書·卷七十三 公孫瓚傳",
+    "三國志·卷八 公孫瓚傳",
+    "三國志·魏志卷三十 烏丸傳",
+    "三國群雄志扩容名单"
+   ],
+   "age": 46,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉固",
+   "birth": 152,
+   "death": 183,
+   "appear": 168,
+   "role": "文臣",
+   "region": "冀州",
+   "polity": "東漢",
+   "bio": "太史治歷、太史部郎中。熹平三年受詔與馮恂課效劉洪七曜術，作月食術，其術與七曜術相同。熹平四年被馮光、陳晃指為意造妄說。",
+   "sources": [
+    "後漢書·志第二 律歷中",
+    "三國志·王昶傳 裴注引《任嘏別傳》"
+   ],
+   "age": 43,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "圈文生",
+   "birth": 152,
+   "death": 198,
+   "appear": 168,
+   "role": "名士",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "與衛茲同郡俱稱盛德；與郭林宗、衛茲至市，買物訾呵減價，林宗以為多情；後以穢貨見損。",
+   "sources": [
+    "三國志·衛臻傳 裴注引《郭林宗傳》"
+   ],
+   "age": 39,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張機",
+   "birth": 152,
+   "death": 218,
+   "appear": 184,
+   "role": "文臣",
+   "region": "荊州",
+   "polity": "",
+   "bio": "張仲景的《傷寒雜病論》，是中醫史上第一部理、法、方、藥具備的經典，元朝、明朝以後被奉為“醫聖”，甚至有廟供奉香火。相傳曾舉孝廉，做過長沙太守，所以有張長沙之稱。",
+   "sources": [
+    "中華三國志 184DHZS"
+   ],
+   "age": 52,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張權",
+   "birth": 152,
+   "death": 182,
+   "appear": 168,
+   "role": "武将",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "荀曇故吏，荀曇卒後求守其墓，年十三的荀攸疑其有奸，叔父荀衢推問，果為殺人亡命者。",
+   "sources": [
+    "三國志·卷十 荀攸傳"
+   ],
+   "age": 36,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張羨",
+   "birth": 152,
+   "death": 200,
+   "appear": 190,
+   "role": "文臣",
+   "region": "荊州",
+   "polity": "張羨",
+   "bio": "長沙太守張羨叛表，英雄記曰：張羨，南陽人。先作零陵、桂陽長，甚得江、湘間心，然性屈強不順。表薄其為人，不甚禮也。羨由是懷恨，遂叛表焉。表圍之連年不下。羨病死，長沙復立其子懌，表遂攻並懌，南收零、桂，北據漢川，地方數千裡，帶甲十餘萬。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十四下 劉表傳",
+    "三國志·卷六 劉表傳",
+    "三國志·卷二十二 桓階傳",
+    "資治通鑑·孝獻皇帝丁建安三年",
+    "資治通鑑·孝獻皇帝戊建安五年"
+   ],
+   "age": 55,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "荀衢",
+   "birth": 133,
+   "death": 182,
+   "appear": 168,
+   "role": "文臣",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "荀攸叔父，曾醉誤傷荀攸耳；依荀攸之言推問故吏張權，果為殺人亡命之徒，由此驚異荀攸夙智。",
+   "sources": [
+    "三國志·卷十 荀攸傳"
+   ],
+   "age": 50,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "蒲頭",
+   "birth": 152,
+   "death": 234,
+   "appear": 190,
+   "role": "外族首领",
+   "region": "幽州",
+   "polity": "鮮卑",
+   "bio": "其秋，豫將西部鮮卑蒲頭、洩歸泥出塞討鬱築鞬，大破之。還至馬城，比能自將三萬騎圍豫七日。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·魏志卷三十 鮮卑傳"
+   ],
+   "age": 42,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "衛茲",
+   "birth": 152,
+   "death": 190,
+   "appear": 189,
+   "role": "武将",
+   "region": "兗州",
+   "polity": "曹操",
+   "bio": "父茲，有大節，不應三公之闢。太祖之初至陳留，茲曰：「平天下者，必此人也。」太祖亦異之，數詣茲議大事。從討董卓，戰於熒陽而卒。太祖每涉郡境，輒遣使祠焉。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·武帝紀 裴注引《世語》",
+    "三國志·卷七 張邈傳",
+    "三國志·卷二十二 衛臻傳",
+    "資治通鑑·孝靈皇帝下初平元年"
+   ],
+   "age": 31,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "郭貢",
+   "birth": 152,
+   "death": 195,
+   "appear": 190,
+   "role": "武将",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "興平元年，曹公東擊陶謙，使彧守甄城，任以留事。會張邈、陳宮以兗州反，潛迎呂布。貢帥眾數萬來至城下，或言與呂布同謀，眾甚懼。貢求見彧，彧將往。東郡太守夏侯惇恐彧遭害，彧以貢與邈等分非素結，今來速者，計必未定，及其猶豫，宜時說之，縱不為用，可使中立。若先懷疑嫌，彼將怒而成謀，不如往也，遂往之。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十 荀彧傳",
+    "三國志·卷十 荀彧傳",
+    "資治通鑑·孝獻皇帝丙興平元年",
+    "後漢紀·卷二十七 孝獻皇帝紀二"
+   ],
+   "age": 36,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳耽",
+   "birth": 152,
+   "death": 185,
+   "appear": 168,
+   "role": "文臣",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "東海人，以忠正稱，歷位三司，為司徒。光和五年與議郎曹操上言公卿舉刺史黨私，帝以讓太尉許戫、司空張濟。宦官怨之，誣陷死獄中，與劉陶俱死。",
+   "sources": [
+    "後漢書·卷五十七 劉陶傳",
+    "資治通鑑·孝靈皇帝上之下熹平三年",
+    "資治通鑑·孝靈皇帝中中平二年",
+    "後漢書·卷六十二 陳寔傳",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "age": 56,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳諶",
+   "birth": 137,
+   "death": 188,
+   "appear": 168,
+   "role": "名士",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "陳寔之子，與兄陳紀齊德同行，父子並著高名，時號“三君”。每宰府辟召，常與兄同時旌命，當世榮之。早終。",
+   "sources": [
+    "三國志·卷二十二 陳群傳",
+    "後漢書·卷六十二 陳寔傳",
+    "世說新語·德行",
+    "世說新語·品藻"
+   ],
+   "age": 48,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳超",
+   "birth": 152,
+   "death": 188,
+   "appear": 184,
+   "role": "文臣",
+   "region": "益州",
+   "polity": "",
+   "bio": "英雄記曰：劉焉起兵，不與天下討董卓，保州自守。犍為太守任岐自稱將軍，與從事陳超舉兵擊焉，焉擊破之。董卓使司徒趙謙將兵向州，說校尉賈龍，使引兵還擊焉，焉出青羌與戰，故能破殺。岐、龍等皆蜀郡人。",
+   "sources": [
+    "中華三國志 184DHZS"
+   ],
+   "age": 43,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "馮恂",
+   "birth": 152,
+   "death": 188,
+   "appear": 168,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "太子舍人，部於太史。熹平中課校宗整九道術，亦自作九道術，較為接近；熹平三年後與劉固課效劉洪七曜術，作八元術。光和二年推月食，其術一度被施用，後經韓說、劉洪等平議改用宗誠術，馮恂被劾謾欺，以二月俸贖罪。",
+   "sources": [
+    "後漢書·志第二 律歷中"
+   ],
+   "age": 56,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "單揚",
+   "birth": 153,
+   "death": 228,
+   "appear": 169,
+   "role": "文臣",
+   "region": "徐州",
+   "polity": "東漢",
+   "bio": "孤特清苦，明天官、算術。舉孝廉，累遷太史令、侍中，出為漢中太守，後拜尚書卒官。熹平末黃龍現譙，答光祿大夫橋玄問，預言其國當有王者興，不及五十年龍當復見；建安二十五年果驗，其冬魏受禪。",
+   "sources": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷八十二下 單揚傳"
+   ],
+   "age": 56,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "堂溪典",
+   "birth": 153,
+   "death": 183,
+   "appear": 169,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "熹平四年以五官中郎將與蔡邕等奏求正定六經文字。",
+   "sources": [
+    "後漢書·卷六十下 蔡邕傳"
+   ],
+   "age": 48,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "宋酆",
+   "birth": 128,
+   "death": 178,
+   "appear": 169,
+   "role": "外戚",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "宋皇后之父，建寧四年女立為後，拜執金吾，封不期侯。光和元年宋後被廢憂死，父母兄弟皆被誅，後由常侍、小黃門葬於皋門亭宋氏舊塋。",
+   "sources": [
+    "資治通鑑·孝桓皇帝下建寧四年",
+    "後漢紀·卷二十三 孝靈皇帝紀上"
+   ],
+   "age": 50,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "宗誠",
+   "birth": 153,
+   "death": 188,
+   "appear": 169,
+   "role": "文臣",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "宗紺之孫，受祖父月食法。熹平四年上書預言當年十二月月食，應驗，拜舍人，詔行其法。光和二年推月食被廢，後經韓說、劉洪等平議複用其術；又因與馮恂互訟被劾，以二月俸贖罪。",
+   "sources": [
+    "後漢書·志第二 律歷中"
+   ],
+   "age": 50,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "張馴",
+   "birth": 153,
+   "death": 198,
+   "appear": 169,
+   "role": "文臣",
+   "region": "兗州",
+   "polity": "東漢",
+   "bio": "少遊太學，誦春秋左氏傳，以大夏侯尚書教授。闢公府，拜議郎，與蔡邕共奏定六經文字。擢侍中典領秘書，陳政得失。遷丹陽太守，有惠政。光和七年徵拜尚書，遷大司農，初平中卒於官。",
+   "sources": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷七十九上 儒林列傳 張馴傳"
+   ],
+   "age": 39,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "李巡",
+   "birth": 153,
+   "death": 190,
+   "appear": 169,
+   "role": "宦官",
+   "region": "豫州",
+   "polity": "東漢",
+   "bio": "號稱清忠的五宦者之一。以諸博士爭試第高下、行賂改蘭臺漆書經字，乃白帝與諸儒刻五經文於石，詔蔡邕等正其文字，自後五經一定，爭者用息。",
+   "sources": [
+    "後漢書·卷七十八 宦者列傳 呂強傳",
+    "三國志·董卓傳 裴注引《獻帝記》",
+    "三國志·卷二十九 華佗傳",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "age": 34,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "棗祗",
+   "birth": 153,
+   "death": 198,
+   "appear": 184,
+   "role": "文臣",
+   "region": "豫州",
+   "polity": "曹操",
+   "bio": "魏武故事載令曰：「故陳留太守棗祗，天性忠能。始共舉義兵，周旋征討。後袁紹在州，亦貪祗，欲得之。祗深附託於孤，使領東阿令。呂布之亂，兗州皆叛，惟範、東阿完在，由祗以兵據城之力也。後大軍糧乏，得東阿以繼，祗之功也。……其時歲則大收，後遂因此大田，豐足軍用，摧滅群逆，克定天下，以隆王室。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "三國志·卷一 武帝紀",
+    "三國志·卷十四 程昱傳",
+    "三國志·卷十六 任峻傳",
+    "資治通鑑·孝獻皇帝丙興平元年",
+    "三國群雄志扩容名单"
+   ],
+   "age": 57,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "畢整",
+   "birth": 153,
+   "death": 183,
+   "appear": 169,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "議郎，熹平四年上疏，言衝帝母虞大家、質帝母陳夫人誕育聖明而未有諡號，宜加爵贈；靈帝感其言，以虞大家為貴人，陳夫人為孝王妃。",
+   "sources": [
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "age": 43,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "董越",
+   "birth": 153,
+   "death": 192,
+   "appear": 190,
+   "role": "武将",
+   "region": "司隸",
+   "polity": "董卓",
+   "bio": "卓謂長史劉艾曰：「關東諸將數敗矣，無能為也。唯孫堅小戇，諸將軍宜慎之。」乃使東中郎將董越屯黽池，中郎將段煨屯華陰，中郎將牛輔屯安邑，其餘中郎將、校尉布在諸縣，以御山東。",
+   "sources": [
+    "中華三國志 184DHZS",
+    "後漢書·卷七十二 董卓傳",
+    "三國志·董卓傳 裴注引《魏書》",
+    "資治通鑑·孝獻皇帝乙初平二年",
+    "三國群雄志扩容名单",
+    "後漢紀·卷二十六 孝獻皇帝紀一"
+   ],
+   "age": 35,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "郭香",
+   "birth": 153,
+   "death": 183,
+   "appear": 169,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "太史治歷。熹平四年馮光、陳晃上言指其與劉固意造妄說、用庚申元，蔡邕議則為其辯護。",
+   "sources": [
+    "後漢書·志第二 律歷中"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "陳晃",
+   "birth": 153,
+   "death": 183,
+   "appear": 169,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "沛相上計掾（後稱司徒掾）。熹平四年與馮光上言歷應用甲寅元，指斥郭香、劉固妄說；被蔡邕駁斥，公卿劾其不敬當鬼薪，詔書免罪。",
+   "sources": [
+    "後漢書·志第二 律歷中"
+   ],
+   "age": 38,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "韓說",
+   "birth": 153,
+   "death": 193,
+   "appear": 169,
+   "role": "文臣",
+   "region": "揚州",
+   "polity": "東漢",
+   "bio": "議郎。與諫議大夫馬日磾、議郎蔡邕、楊彪及盧植等並在東觀，校訂中書五經記傳，補續《漢記》。",
+   "sources": [
+    "後漢書·卷六十下 蔡邕傳",
+    "後漢書·卷六十四 盧植傳",
+    "後漢書·卷八十二下 韓說傳",
+    "後漢書·志第二 律歷中"
+   ],
+   "age": 40,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "馮光",
+   "birth": 153,
+   "death": 183,
+   "appear": 169,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "五官郎中。熹平四年與陳晃上言曆元不正，應以甲寅為元而非庚申，指斥郭香、劉固意造妄說。蔡邕駁之，太尉等據此劾其不敬，當鬼薪，詔書免罪。",
+   "sources": [
+    "後漢書·志第二 律歷中"
+   ],
+   "age": 46,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "任岐",
+   "birth": 154,
+   "death": 188,
+   "appear": 184,
+   "role": "文臣",
+   "region": "益州",
+   "polity": "",
+   "bio": "焉欲立威刑以自尊大，乃託以佗事，殺州中豪強十餘人，士民皆怨。初平二年，犍為太守任岐及賈龍並反，攻焉。焉擊破，皆殺之。",
+   "sources": [
+    "中華三國志 184DHZS"
+   ],
+   "age": 52,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉寬",
+   "birth": 154,
+   "death": 185,
+   "appear": 170,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "太尉。與楊賜、司空張濟併入侍講靈帝，楊賜受封時上書願分戶邑予寬、濟，帝嘉嘆，復封寬。傅燮少時師事之。",
+   "sources": [
+    "後漢書·卷五十四 楊震傳",
+    "資治通鑑·孝靈皇帝上之下熹平五年",
+    "後漢紀·卷二十四 孝靈皇帝紀中"
+   ],
+   "age": 66,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "劉逸",
+   "birth": 154,
+   "death": 185,
+   "appear": 170,
+   "role": "文臣",
+   "region": "荊州",
+   "polity": "東漢",
+   "bio": "南陽人，熹平五年以太常為司空，熹平六年免，衛尉陳球代之。",
+   "sources": [
+    "資治通鑑·孝靈皇帝上之下熹平五年"
+   ],
+   "age": 56,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  },
+  {
+   "name": "朱龜",
+   "birth": 154,
+   "death": 184,
+   "appear": 170,
+   "role": "文臣",
+   "region": "司隸",
+   "polity": "東漢",
+   "bio": "御史中丞。熹平五年益州諸夷反叛、拘執太守雍陟，朱龜奉命討伐，未能攻克。",
+   "sources": [
+    "後漢書·卷八十六 南蠻西南夷列傳"
+   ],
+   "age": 40,
+   "age_basis": "Representative portrait age from role and career stage; roster birth/death years are not treated as exact.",
+   "likeness": "Historical artistic reconstruction from the roster biography and period-appropriate Eastern Han / regional dress; no vetted surviving likeness was used for this batch."
+  }
+ ]
+}
