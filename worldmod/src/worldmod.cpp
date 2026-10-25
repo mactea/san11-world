@@ -497,6 +497,40 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
     if (code != EXCEPTION_ACCESS_VIOLATION && code != EXCEPTION_ILLEGAL_INSTRUCTION &&
         code != EXCEPTION_INT_DIVIDE_BY_ZERO && code != EXCEPTION_STACK_OVERFLOW && code != EXCEPTION_ARRAY_BOUNDS_EXCEEDED)
         return EXCEPTION_CONTINUE_SEARCH;
+    if (code == 0xE06D7363) {             // a C++ throw (bad_alloc ends the game with 0xc0000409 when nobody catches it)
+        static volatile LONG n = 0;
+        if (InterlockedIncrement(&n) > 20) return EXCEPTION_CONTINUE_SEARCH;
+        const char* type = "?";
+        EXCEPTION_RECORD* er = ep->ExceptionRecord;
+        if (er->NumberParameters >= 3 && er->ExceptionInformation[2]) {     // ThrowInfo -> CatchableTypeArray -> [0] -> TypeDescriptor
+            __try {
+                uint32_t* ti = (uint32_t*)er->ExceptionInformation[2];
+                uint32_t* cta = (uint32_t*)(uintptr_t)ti[3];
+                uint32_t* ct = (uint32_t*)(uintptr_t)cta[1];
+                type = (const char*)(uintptr_t)ct[1] + 8;
+            } __except (EXCEPTION_EXECUTE_HANDLER) { type = "?"; }
+        }
+        HMODULE self = nullptr;
+        GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)&onException, &self);
+        uintptr_t wlo = (uintptr_t)self, whi = wlo + ((IMAGE_NT_HEADERS*)(wlo + ((IMAGE_DOS_HEADER*)wlo)->e_lfanew))->OptionalHeader.SizeOfImage;
+        uint32_t* sp = (uint32_t*)(uintptr_t)cx->Esp;
+        char buf[1600]; int k = 0;
+        for (int i = 0; i < 1024 && k < 1500; i++) {
+            if (IsBadReadPtr(sp + i, 4)) break;
+            uint32_t v = sp[i];
+            if (v >= 0x401000 && v < 0x74f000) k += sprintf_s(buf + k, sizeof buf - k, " %08x", v);
+            else if (v >= wlo && v < whi) k += sprintf_s(buf + k, sizeof buf - k, " wm+%x", (unsigned)(v - wlo));
+        }
+        buf[k] = 0;
+        size_t freeAll = 0, freeMax = 0; MEMORY_BASIC_INFORMATION mi;
+        for (uint8_t* a = nullptr; VirtualQuery(a, &mi, sizeof mi); a = (uint8_t*)mi.BaseAddress + mi.RegionSize) {
+            if (mi.State == MEM_FREE) { freeAll += mi.RegionSize; if (mi.RegionSize > freeMax) freeMax = mi.RegionSize; }
+            if ((uintptr_t)mi.BaseAddress + mi.RegionSize < (uintptr_t)mi.BaseAddress || (uintptr_t)mi.BaseAddress >= 0xfff00000) break;
+        }
+        logf("C++ EXCEPTION %s thrown (thread %lu); address space free %zu MB, largest block %zu MB | stack:%s",
+             type, GetCurrentThreadId(), freeAll >> 20, freeMax >> 20, buf);
+        return EXCEPTION_CONTINUE_SEARCH;
+    }
     CONTEXT* c = ep->ContextRecord;
     logf("EXCEPTION %08lx at EIP=%08lx  addr=%p", code, c->Eip,
          ep->ExceptionRecord->NumberParameters > 1 ? (void*)ep->ExceptionRecord->ExceptionInformation[1] : nullptr);
