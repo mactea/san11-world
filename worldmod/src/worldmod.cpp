@@ -25,6 +25,7 @@
 #include "cityshape.h"
 #include "movement.h"
 #include "threads.h"
+#include "dllblock.h"
 
 // ---------------------------------------------------------------- logging
 static FILE* g_log = nullptr;
@@ -1852,6 +1853,7 @@ static void init() {
     g_mainThreadId = GetCurrentThreadId();
     commitMainStack();
     if (!g_cfg.verifyOnly) threadStacksInstall(g_dir, g_section, logf);   // before the D3D drivers start their threads
+    if (!g_cfg.verifyOnly) dllBlockInstall(g_dir, g_section, logf);       // before the first window loads the input methods
     if (g_cfg.automation) profilerInit(logf);
     if (g_cfg.heapCheck) { CreateThread(nullptr, 1 << 18, heapCheckThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr); logf("heap check thread started"); }
     if (g_cfg.watch) { RaiseException(WATCH_ARM, 0, 0, nullptr); logf("watchpoint armed on %08x (main thread)", g_cfg.watch); g_watchTest = 1; }
