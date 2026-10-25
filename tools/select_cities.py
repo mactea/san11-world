@@ -23,8 +23,8 @@ coordinates' hex win over all others); a big city (tier 1 in data/city_tiers.jso
        python select_cities.py [world_dir] --replace
 Snaps every city of the existing cities_world.json again to its coordinates, keeping every id, name and order
 (after a change of the projection, tools/worldgeo.py, or of the terrain). A city keeps its hex when that is still a
-good site near the (new) target: a bonus of KEEP_BONUS for its current hex within 6 hexes of the target, so cities
-whose target did not move stay put. New cities inside Koei's China block, and cities not in the candidate lists
+valid site (enough land, free, and the rules below) within the search window around the (new) target, so a change of the terrain
+alone moves no city that still fits where it is. New cities inside Koei's China block, and cities not in the candidate lists
 (placed by hand), keep their hexes. Cities in the order of
 the list; the current footprints of cities not yet placed whose site can stay are reserved. Extra rules:
   * a port (data/city_tiers.json "port") whose coordinates lie within COAST_NEAR hexes of the sea is snapped to the
@@ -45,7 +45,6 @@ from worldgeo import WorldGeo, WorldSpec
 
 HERE = Path(__file__).resolve().parent
 SEA_NEAR = 2                    # --move --coast: the city touches the sea this close to its coordinates if it can
-KEEP_BONUS = 12.0               # --replace: score bonus of a city's current hex (within 6 hexes of its target)
 COAST_NEAR = 2.0                # --replace: a port whose coordinates are this close to the sea is snapped to it
 DATA = HERE.parent / "data"
 
@@ -257,6 +256,13 @@ def replace_cities(w, cands, lo, x, passable, land, taken, spacing, t, spec):
                 if side[3] == 0:
                     raise SystemExit(f"{c['name']}: its bank point is on water")
             best = None
+            reach0 = 12 if coast else 6                   # the search window below
+            if abs(old[0] - y0) <= reach0 and abs(old[1] - x0) <= reach0 and (side is None or (0 <= old[0] - side[1] < side[0].shape[0] and
+                                                                   0 <= old[1] - side[2] < side[0].shape[1] and
+                                                                   side[0][old[0] - side[1], old[1] - side[2]] == side[3])):
+                # the current hex is still a good site near the target (and keeps the rules): it stays
+                best = snap(old[0], old[1], old[0] - y0, old[1] - x0, None, R, C, done_taken, land, passable,
+                            others or [(-999, -999)], spacing, sea if coast else None, tier.get("tier", 1) <= 1, (y0, x0))
             for reach in ((6, 12) if coast else (6,)):
                 if best is not None:
                     break
@@ -273,8 +279,6 @@ def replace_cities(w, cands, lo, x, passable, land, taken, spacing, t, spec):
                                     spacing, sea if coast else None, tier.get("tier", 1) <= 1, (y0, x0))
                         if cand is None:
                             continue
-                        if (yy, xq) == old and hex_dist(old, (y0, x0)) <= 6:
-                            cand = (cand[0] + KEEP_BONUS,) + cand[1:]
                         if best is None or (cand[4], cand[0]) > (best[4], best[0]):
                             best = cand
             if best is None:
