@@ -494,9 +494,6 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
         }
         return EXCEPTION_CONTINUE_EXECUTION;
     }
-    if (code != EXCEPTION_ACCESS_VIOLATION && code != EXCEPTION_ILLEGAL_INSTRUCTION &&
-        code != EXCEPTION_INT_DIVIDE_BY_ZERO && code != EXCEPTION_STACK_OVERFLOW && code != EXCEPTION_ARRAY_BOUNDS_EXCEEDED)
-        return EXCEPTION_CONTINUE_SEARCH;
     if (code == 0xE06D7363) {             // a C++ throw (bad_alloc ends the game with 0xc0000409 when nobody catches it)
         static volatile LONG n = 0;
         if (InterlockedIncrement(&n) > 20) return EXCEPTION_CONTINUE_SEARCH;
@@ -509,15 +506,17 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
                 uint32_t* cta = (uint32_t*)(uintptr_t)ti[3];
                 uint32_t* ct = (uint32_t*)(uintptr_t)cta[1];
                 type = (const char*)(uintptr_t)ct[1] + 8;
+                const char* w = *(const char**)(er->ExceptionInformation[1] + 4);   // std::exception's message (MSVC layout)
+                if (w && !IsBadReadPtr(w, 1)) strncpy_s(what, w, _TRUNCATE);
             } __except (EXCEPTION_EXECUTE_HANDLER) { type = "?"; }
-        }
-        HMODULE self = nullptr;
             HMODULE tm = nullptr;                    // the ThrowInfo lives in the module that threw
             if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
                                    (LPCSTR)er->ExceptionInformation[2], &tm)) {
                 char p[MAX_PATH]; GetModuleFileNameA(tm, p, MAX_PATH);
                 const char* b = strrchr(p, '\\'); strcpy_s(thrower, b ? b + 1 : p);
             }
+        }
+        HMODULE self = nullptr;
         GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)&onException, &self);
         uintptr_t wlo = (uintptr_t)self, whi = wlo + ((IMAGE_NT_HEADERS*)(wlo + ((IMAGE_DOS_HEADER*)wlo)->e_lfanew))->OptionalHeader.SizeOfImage;
         uint32_t* sp = (uint32_t*)(uintptr_t)cx->Esp;
@@ -538,6 +537,9 @@ static LONG CALLBACK onException(EXCEPTION_POINTERS* ep) {
              type, what, thrower, GetCurrentThreadId(), freeAll >> 20, freeMax >> 20, buf);
         return EXCEPTION_CONTINUE_SEARCH;
     }
+    if (code != EXCEPTION_ACCESS_VIOLATION && code != EXCEPTION_ILLEGAL_INSTRUCTION &&
+        code != EXCEPTION_INT_DIVIDE_BY_ZERO && code != EXCEPTION_STACK_OVERFLOW && code != EXCEPTION_ARRAY_BOUNDS_EXCEEDED)
+        return EXCEPTION_CONTINUE_SEARCH;
     CONTEXT* c = ep->ContextRecord;
     logf("EXCEPTION %08lx at EIP=%08lx  addr=%p", code, c->Eip,
          ep->ExceptionRecord->NumberParameters > 1 ? (void*)ep->ExceptionRecord->ExceptionInformation[1] : nullptr);
@@ -1835,11 +1837,11 @@ static void init() {
     if (wchar_t* s = wcsrchr(g_dir, L'\\')) *s = 0;
     loadConfig();
     wchar_t lp[MAX_PATH]; swprintf_s(lp, L"%s\\worldmod_%s.log", g_dir, g_section);
+    wchar_t prev[MAX_PATH]; swprintf_s(prev, L"%s\\worldmod_%s.prev.log", g_dir, g_section);
+    MoveFileExW(lp, prev, MOVEFILE_REPLACE_EXISTING);   // keep the last run's log (a crash report) across a restart
     g_log = _wfsopen(lp, L"w", _SH_DENYNO);   // shared so the log can be read while the game runs
     char ap[MAX_PATH]; GetModuleFileNameA(nullptr, ap, MAX_PATH);
     logf("worldmod loaded; [%ls] W=%d H=%d china=(%d,%d) enable=%d verify_only=%d", g_section, g_cfg.W, g_cfg.H, g_cfg.X0, g_cfg.Y0, g_cfg.enable, g_cfg.verifyOnly);
-    wchar_t prev[MAX_PATH]; swprintf_s(prev, L"%s\\worldmod_%s.prev.log", g_dir, g_section);
-    MoveFileExW(lp, prev, MOVEFILE_REPLACE_EXISTING);   // keep the last run's log (a crash report) across a restart
     logf("exe path as the game sees it (ANSI): %s", ap);
     if (strchr(ap, '?')) {
         g_pathBad = true;
@@ -1849,10 +1851,10 @@ static void init() {
     AddVectoredExceptionHandler(1, onException);
     g_mainThreadId = GetCurrentThreadId();
     commitMainStack();
+    if (!g_cfg.verifyOnly) threadStacksInstall(g_dir, g_section, logf);   // before the D3D drivers start their threads
     if (g_cfg.automation) profilerInit(logf);
     if (g_cfg.heapCheck) { CreateThread(nullptr, 1 << 18, heapCheckThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr); logf("heap check thread started"); }
     if (g_cfg.watch) { RaiseException(WATCH_ARM, 0, 0, nullptr); logf("watchpoint armed on %08x (main thread)", g_cfg.watch); g_watchTest = 1; }
-    if (!g_cfg.verifyOnly) threadStacksInstall(g_dir, g_section, logf);   // before the D3D drivers start their threads
     if (g_cfg.watchObjList) {
         if (!g_cfg.watch) RaiseException(WATCH_ARM, 0, 0, nullptr);
         CreateThread(nullptr, 1 << 16, objListThread, nullptr, 0, nullptr);
