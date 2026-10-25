@@ -125,15 +125,35 @@ def read_shapes(zip_path):
     return r
 
 
-def lonlat_to_hex(geo: WorldGeo, lon, lat, iters=4):
-    """Inverse of WorldGeo.hex_to_lonlat by fixed-point iteration on the displacement field.
+def lonlat_to_hex(geo: WorldGeo, lon, lat, iters=8):
+    """Inverse of WorldGeo.hex_to_lonlat by fixed-point iteration on the displacement field, then Newton steps
+    where it converges slowly (strong strain at the China block's edge).
     Returns continuous (lo, x) where x = hi + 0.5*(lo & 1) is the geometric column."""
     s = geo.spec
     lo0, hi0 = s.lonlat_to_linear(lon, lat)
+    lo0, hi0 = np.atleast_1d(np.asarray(lo0, float)), np.atleast_1d(np.asarray(hi0, float))
+
+    disp = geo.disp
     lo, hi = lo0.copy(), hi0.copy()
     for _ in range(iters):
-        d = geo.rbf(np.stack([lo, hi], 1)) * geo._fade(lo, hi)[:, None]
+        d = disp(lo, hi)
         lo, hi = lo0 + d[:, 0], hi0 + d[:, 1]
+    e = 0.25
+    for _ in range(4):
+        d = disp(lo, hi)
+        rl, rh = lo - d[:, 0] - lo0, hi - d[:, 1] - hi0
+        bad = np.hypot(rl, rh) > 0.01
+        if not bad.any():
+            break
+        l, h = lo[bad], hi[bad]
+        dl = (disp(l + e, h) - d[bad]) / e
+        dh = (disp(l, h + e) - d[bad]) / e
+        a, b, c, dd = 1 - dl[:, 0], -dh[:, 0], -dl[:, 1], 1 - dh[:, 1]     # Jacobian of x - disp(x)
+        det = a * dd - b * c
+        ok = np.abs(det) > 1e-6
+        sl = np.where(ok, (dd * rl[bad] - b * rh[bad]) / np.where(ok, det, 1), 0)
+        sh = np.where(ok, (a * rh[bad] - c * rl[bad]) / np.where(ok, det, 1), 0)
+        lo[bad], hi[bad] = l - np.clip(sl, -20, 20), h - np.clip(sh, -20, 20)
     return lo, hi
 
 
@@ -796,7 +816,7 @@ def main():
     t0 = time.time()
 
     # ---- hex level: elevation
-    key = f"{R},{C},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi}"
+    key = f"{R},{C},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi},{geo.VERSION}"
     if a.cache and Path(a.cache).exists() and str(np.load(a.cache)["key"]) == key:
         z = np.load(a.cache)
         e0, relief, lat_c = z["e0"], z["relief"], z["lat"]

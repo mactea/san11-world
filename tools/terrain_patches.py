@@ -362,7 +362,7 @@ def main():
     spec = WorldSpec(rows=info["rows"], cols=info["cols"], lon0=info["lon0"], lat0=info["lat0"],
                      china_lo=info["china_lo"], china_hi=info["china_hi"])
     geo = WorldGeo(spec, DATA / "cities_georef.json")
-    key = f"{spec.rows},{spec.cols},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi}"
+    key = f"{spec.rows},{spec.cols},{spec.lon0},{spec.lat0},{spec.china_lo},{spec.china_hi},{geo.VERSION}"
     if Path(a.cache).exists() and str(np.load(a.cache)["key"]) == key:
         e0 = np.load(a.cache)["e0"]
     else:
