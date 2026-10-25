@@ -68,14 +68,17 @@ static const int32_t* PASSABLE = (const int32_t*)0x8a5df8;      // per terrain t
 
 // A hex marked as holding a unit (flags & 3 == 2) whose object (+8) has no unit (objects[id] +0x64 == 0):
 // recUnit returns 0 and 0x487af0 (called right after, here and at 0x5677db, 0x5a4623, 0x5a64b2, 0x5a6a94,
-// 0x4bd78b) reads [0 + 8]. Seen in an AI turn on the world map; where the stale mark comes from is not known
-// yet, so both are logged: the hex here, the caller at the 0x487af0 guard (which returns 0 for no unit).
+// 0x4bd78b) reads [0 + 8]. Found on the north passes cut through Koei's border mountains (M11_MAP.md: hexes
+// (1324,450) and (1355,437), dword 00300002): Koei's own objects on hexes that were never reachable. The mark
+// is cleared when A* meets it, so the rest of the game sees an empty hex; the 0x487af0 guard (returns 0 for
+// no unit) covers callers that get there first.
 static volatile LONG g_staleHexes = 0, g_nullUnitTests = 0;
 static void noteStaleUnitHex(int lo, int hi, const uint8_t* rec) {
     LONG n = InterlockedIncrement(&g_staleHexes);
     if (n <= 20 || (n & (n - 1)) == 0)
-        g_log("A*: hex (%d,%d) is marked as a unit but object %u has no unit (hex dword %08x), treated as empty, #%ld",
+        g_log("A*: hex (%d,%d) is marked as a unit but object %u has no unit (hex dword %08x): mark cleared, #%ld",
               lo, hi, *(const uint16_t*)(rec + 8), *(const uint32_t*)rec, n);
+    *(uint32_t*)rec &= ~3u;
 }
 extern "C" static void __cdecl noteNullUnitTest(uint32_t caller) {
     LONG n = InterlockedIncrement(&g_nullUnitTests);
