@@ -26,12 +26,16 @@ Officers (only when the save has PS = 850 and the roster gives PS' > 850; a save
   * header dword 0x20 -> v + 'P' + u16 PS'.
 Map (M11_MAP.md): terrain is not in the save (worldmod builds it from world_shex.bin + Koei's China block +
 china_overrides.bin at load; the per-hex block at the end of the save only keeps a few counter bits). What depends on it:
-  * base positions: cities whose centre moved (罽賓, 佩林) get the new centre in their building record (the game also
-    recomputes base positions from the 3D objects on entering the map, 0x57E910);
-  * facilities on 内政用地 (SHEX byte 5) that are no longer plots move to a free plot of the same city (nearest first);
-    any other facility whose hex changed terrain is an error;
-  * units on (or heading to) hexes whose terrain changed into something they cannot stand on move to the nearest
-    hex of the same kind (land / water) that is free.
+  * base positions: cities whose centre moved (罽賓, 佩林; after a new projection, hundreds of them) get the new centre
+    in their building record (the game also recomputes base positions from the 3D objects on entering the map,
+    0x57E910); a unit or facility on the new city hexes is moved by the rules below;
+  * facilities on 内政用地 (SHEX byte 5) whose hex is no longer a plot of the same city (the plot went, or its
+    territory went to another city) move to a free plot of that city (nearest first); with too few free plots, to
+    the nearest free land hex of the city's territory (reported in "facilities_off_plot");
+  * other facilities (陣、砦、関 ...) whose hex became water, cliff or a base move to the nearest free land hex; a
+    change between land types under them is kept;
+  * units on (or heading to) hexes whose terrain changed into something they cannot stand on (water / land, a base, a
+    cliff for a land unit) move to the nearest hex of the same kind (land / water) that is free.
 Everything else is kept byte for byte; the output is re-parsed and checked (verify()).
 """
 import argparse
@@ -397,9 +401,16 @@ def convert_officers(world, L, PS_from, roster, year, C):
 
 
 # ---------------------------------------------------------------- map
+CLIFF = 15
+LAND_OK = (0, 1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14, 19)     # land a facility or a land unit can stand on
+
+
 def unit_ok(t_old, t_new):
-    """can a unit that stood on terrain t_old stand on t_new? (bases never; land stays land, water stays water)"""
+    """can a unit that stood on terrain t_old stand on t_new? (bases never; land stays land, water stays water, a
+    land unit not on a cliff)"""
     if t_new in (CITY_T, GATE_T, PORT_T):
+        return False
+    if t_old not in WATER and t_new == CLIFF:
         return False
     return (t_old in WATER) == (t_new in WATER)
 
@@ -407,20 +418,25 @@ def unit_ok(t_old, t_new):
 def convert_map(world, L, old, new, C):
     B = bytearray(world)
     N = C + N_EXTRA
-    rep = {'cities_moved': [], 'facilities_moved': [], 'units_moved': [], 'unit_dest_moved': [], 'problems': []}
+    rep = {'cities_moved': [], 'facilities_moved': [], 'facilities_off_plot': [], 'units_moved': [],
+           'unit_dest_moved': [], 'problems': []}
     ob = L['building'][0]
-    occupied = {}
+    bld, unit_at = {}, {}                            # hex -> building id / unit index
     for i in range(L['building'][1]):
         r = B[ob + 18 * i: ob + 18 * i + 18]
         if r[0] != 0xff:
-            occupied[struct.unpack_from('<hh', r, B_POS)] = ('building', i)
+            bld[struct.unpack_from('<hh', r, B_POS)] = i
     ou, nu, su = L['unit']
     for k in range(nu):
         lo, hi = struct.unpack_from('<hh', B, ou + su * k + U_POS)
         if lo >= 0:
-            occupied[(lo, hi)] = ('unit', k)
+            unit_at[(lo, hi)] = k
+
+    def free(p):
+        return p not in bld and p not in unit_at
     moved_pos = {}                                   # old hex -> new hex of moved buildings
-    # 1. bases: new cities' centres
+    # 1. bases: new cities' centres (all moves first: a city may take a hex another city leaves)
+    moves = []
     for cid in range(42, C):
         a, b = old.cities[cid], new.cities[cid]
         if a['name'] != b['name']:
@@ -433,13 +449,17 @@ def convert_map(world, L, old, new, C):
             rep['problems'].append(f'city {cid} {a["name"]} at {pos} in the save, old data says {(a["lo"], a["hi"])}')
         want = (b['lo'], b['hi'])
         if pos != want:
-            if want in occupied and occupied[want] != ('building', cid):
-                raise ConvError(f'new centre {want} of city {cid} is occupied by {occupied[want]}')
-            struct.pack_into('<hh', B, o + B_POS, *want)
-            occupied.pop(pos, None)
-            occupied[want] = ('building', cid)
-            moved_pos[pos] = want
-            rep['cities_moved'].append({'id': cid, 'name': b['name'], 'from': list(pos), 'to': list(want)})
+            moves.append((cid, pos, want))
+    for cid, pos, want in moves:
+        bld.pop(pos, None)
+    for cid, pos, want in moves:
+        j = bld.get(want)
+        if j is not None and j < N:
+            raise ConvError(f'new centre {want} of city {cid} is base {j}')
+        struct.pack_into('<hh', B, ob + 18 * cid + B_POS, *want)
+        bld[want] = cid                              # a facility on the new centre is moved below
+        moved_pos[pos] = want
+        rep['cities_moved'].append({'id': cid, 'name': new.cities[cid]['name'], 'from': list(pos), 'to': list(want)})
     for i in range(N):                               # every base on its terrain in the new map
         o = ob + 18 * i
         lo, hi = struct.unpack_from('<hh', B, o + B_POS)
@@ -447,58 +467,75 @@ def convert_map(world, L, old, new, C):
         if want_t is None or not new.inside(lo, hi) or new.t[lo, hi] != want_t:
             raise ConvError(f'base {i} (type {B[o]}) at ({lo},{hi}) is not on terrain {want_t} in the new map')
     # 2. facilities
-    orphans = collections.defaultdict(list)
+    orphans, strays = collections.defaultdict(list), []
     for i in range(N, L['building'][1]):
         o = ob + 18 * i
         if B[o] == 0xff:
             continue
-        lo, hi = struct.unpack_from('<hh', B, o + B_POS)
-        if not new.inside(lo, hi):
-            raise ConvError(f'facility {i} at ({lo},{hi}) outside the map')
-        if old.plot[lo, hi] and not new.plot[lo, hi]:
-            orphans[int(old.area[lo, hi])].append(i)
-        elif old.t[lo, hi] != new.t[lo, hi] or old.plot[lo, hi] != new.plot[lo, hi]:
-            raise ConvError(f'facility {i} (type {B[o]}) at ({lo},{hi}): terrain {old.t[lo, hi]} -> {new.t[lo, hi]}, '
-                            'not a moved plot; no rule to fix it')
+        p = struct.unpack_from('<hh', B, o + B_POS)
+        if not new.inside(*p):
+            raise ConvError(f'facility {i} at {p} outside the map')
+        on_base = new.t[p] in (CITY_T, GATE_T, PORT_T)
+        if old.plot[p]:
+            if on_base or not new.plot[p] or new.area[p] != old.area[p]:
+                orphans[int(old.area[p])].append(i)
+        elif on_base or new.t[p] not in LAND_OK:
+            strays.append(i)
+        elif old.t[p] != new.t[p] and old.t[p] not in LAND_OK:
+            raise ConvError(f'facility {i} (type {B[o]}) at {p}: terrain {old.t[p]} -> {new.t[p]}; no rule to fix it')
+    for i in [i for ids in orphans.values() for i in ids] + strays:
+        p = struct.unpack_from('<hh', B, ob + 18 * i + B_POS)
+        if bld.get(p) == i:
+            bld.pop(p)
+
+    def place(i, f, how, city=None, dist=None):
+        o = ob + 18 * i
+        p = struct.unpack_from('<hh', B, o + B_POS)
+        struct.pack_into('<hh', B, o + B_POS, *f)
+        bld[f] = i
+        moved_pos[p] = f
+        nm = new.cities.get(city, {}).get('name', str(city)) if city is not None else None
+        rep[how].append({'id': i, 'type': B[o], 'city': city, 'city_name': nm, 'from': list(p), 'to': list(f),
+                         'steps': hex_dist(p, f)})
     for city, ids in sorted(orphans.items()):
-        free = [tuple(map(int, p)) for p in zip(*np.nonzero(new.plot & (new.area == city)))]
-        free = [p for p in free if p not in occupied]
-        if len(free) < len(ids):
-            raise ConvError(f'city {city}: {len(ids)} facilities lost their plots, only {len(free)} free new plots')
-        pairs = []
-        for i in ids:
-            p = struct.unpack_from('<hh', B, ob + 18 * i + B_POS)
-            for f in free:
-                pairs.append((hex_dist(p, f), i, f))
+        plots = [tuple(map(int, q)) for q in zip(*np.nonzero(new.plot & (new.area == city)))]
+        plots = [q for q in plots if free(q) and new.t[q] not in (CITY_T, GATE_T, PORT_T)]
+        pairs = sorted((hex_dist(struct.unpack_from('<hh', B, ob + 18 * i + B_POS), f), i, f) for i in ids for f in plots)
         done, used = set(), set()
-        for dist, i, f in sorted(pairs):
+        for dist, i, f in pairs:
             if i in done or f in used:
                 continue
-            o = ob + 18 * i
-            p = struct.unpack_from('<hh', B, o + B_POS)
-            struct.pack_into('<hh', B, o + B_POS, *f)
-            occupied.pop(p, None)
-            occupied[f] = ('building', i)
-            moved_pos[p] = f
+            place(i, f, 'facilities_moved', city)
             done.add(i)
             used.add(f)
-            nm = new.cities.get(city, {}).get('name', str(city))
-            rep['facilities_moved'].append({'id': i, 'type': B[o], 'city': city, 'city_name': nm, 'from': list(p),
-                                            'to': list(f), 'steps': dist})
+        for i in ids:
+            if i in done:
+                continue
+            p = struct.unpack_from('<hh', B, ob + 18 * i + B_POS)
+            f = nearest(p, lambda q: free(q) and new.t[q] in LAND_OK and new.area[q] == city and not new.plot[q], new, 80)
+            if f is None:
+                raise ConvError(f'city {city}: facility {i} lost its plot and there is no free plot or land in the city')
+            place(i, f, 'facilities_off_plot', city)
+    for i in strays:
+        p = struct.unpack_from('<hh', B, ob + 18 * i + B_POS)
+        f = nearest(p, lambda q: free(q) and new.t[q] in LAND_OK and not new.plot[q], new, 80)
+        if f is None:
+            raise ConvError(f'facility {i} at {p}: no free land hex nearby')
+        place(i, f, 'facilities_moved')
     # 3. units on / heading to hexes they can no longer use
     for k in range(nu):
         o = ou + su * k
         lo, hi = struct.unpack_from('<hh', B, o + U_POS)
         if lo < 0:
             continue
-        if not unit_ok(old.t[lo, hi], new.t[lo, hi]):
+        if not unit_ok(old.t[lo, hi], new.t[lo, hi]) or (lo, hi) in bld:
             to = old.t[lo, hi]
-            p = nearest((lo, hi), lambda q: q not in occupied and unit_ok(to, new.t[q]) and new.t[q] != 15, new)
+            p = nearest((lo, hi), lambda q: free(q) and unit_ok(to, new.t[q]), new)
             if p is None:
                 raise ConvError(f'unit {k} at ({lo},{hi}): no free hex nearby')
             struct.pack_into('<hh', B, o + U_POS, *p)
-            occupied.pop((lo, hi), None)
-            occupied[p] = ('unit', k)
+            unit_at.pop((lo, hi), None)
+            unit_at[p] = k
             rep['units_moved'].append({'unit': k, 'from': [lo, hi], 'to': list(p)})
         dlo, dhi = struct.unpack_from('<hh', B, o + U_DEST)
         if dlo >= 0:
@@ -506,7 +543,7 @@ def convert_map(world, L, old, new, C):
             if d in moved_pos:
                 nd = moved_pos[d]
             elif new.inside(*d) and old.t[d] != new.t[d] and not unit_ok(old.t[d], new.t[d]):
-                nd = nearest(d, lambda q: unit_ok(old.t[d], new.t[q]) and new.t[q] != 15, new)
+                nd = nearest(d, lambda q: unit_ok(old.t[d], new.t[q]), new)
             else:
                 continue
             struct.pack_into('<hh', B, o + U_DEST, *nd)
@@ -619,7 +656,7 @@ def verify(D, E, C, cells, roster, conv_rep, old, new):
     ob = Lo['building'][0]
     for x in conv_rep['map']['cities_moved']:
         allowed |= {('building', x['id'])}
-    for x in conv_rep['map']['facilities_moved']:
+    for x in conv_rep['map']['facilities_moved'] + conv_rep['map']['facilities_off_plot']:
         allowed |= {('building', x['id'])}
     for x in conv_rep['map']['units_moved'] + conv_rep['map']['unit_dest_moved']:
         allowed |= {('unit', x['unit'])}
@@ -661,8 +698,12 @@ def verify(D, E, C, cells, roster, conv_rep, old, new):
             if i >= 42 and i < C and p != (new.cities[i]['lo'], new.cities[i]['hi']):
                 raise ConvError(f'city {i} not at its new centre')
         else:
-            if old.plot[struct.unpack_from('<hh', X, Li['building'][0] + 18 * i + B_POS)] and not new.plot[p]:
-                raise ConvError(f'facility {i} still off the plots')
+            q = struct.unpack_from('<hh', X, Li['building'][0] + 18 * i + B_POS)
+            if new.t[p] in (CITY_T, GATE_T, PORT_T) or (not new.plot[p] and new.t[p] not in LAND_OK):
+                raise ConvError(f'facility {i} at {p} on a base, water or cliff')
+            if old.plot[q] and not (new.plot[p] and new.area[p] == old.area[q]) and \
+                    i not in {x['id'] for x in conv_rep['map']['facilities_off_plot']}:
+                raise ConvError(f'facility {i} not on a plot of its city {old.area[q]}')
     ou, nu, su = Lo['unit']
     for k in range(nu):
         lo, hi = struct.unpack_from('<hh', Bout, ou + su * k + U_POS)
@@ -671,7 +712,8 @@ def verify(D, E, C, cells, roster, conv_rep, old, new):
         if lo >= 0 and (lo, hi) in pos_seen:
             raise ConvError(f'unit {k} on building {pos_seen[(lo, hi)]}')
     v['map'] = 'bases on city/gate/port terrain of the new map, new-city centres match bases_cities.json, ' \
-               'no two buildings on one hex, no unit on a base or building, moved facilities on new plots'
+               'no two buildings on one hex, no unit on a base or building, facilities on plots of their own city ' \
+               '(or listed in facilities_off_plot) and never on a base, water or cliff'
     v['summary_out'] = summary(hout, Bout, Lo, PSo, PTo, C)
     v['size'] = {'file_in': len(D), 'file_out': len(E), 'world_in': len(Bin), 'world_out': len(Bout)}
     return v
@@ -731,7 +773,8 @@ def main():
         m = rep['map']
         print(f'{Path(a.inp).name} -> {a.out}: {len(D)} -> {len(E)} bytes; officers: '
               f'{rep["officers"] if isinstance(rep["officers"], str) else rep["officers"]["PS_to"]}; '
-              f'cities moved {len(m["cities_moved"])}, facilities moved {len(m["facilities_moved"])}, '
+              f'cities moved {len(m["cities_moved"])}, facilities moved {len(m["facilities_moved"])} '
+              f'(+{len(m["facilities_off_plot"])} off the plots), '
               f'units moved {len(m["units_moved"])}, unit destinations {len(m["unit_dest_moved"])}; verified')
         return 0
     except ConvError as e:
