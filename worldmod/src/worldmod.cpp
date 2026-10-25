@@ -24,6 +24,7 @@
 #include "persons.h"
 #include "cityshape.h"
 #include "movement.h"
+#include "trade.h"
 #include "threads.h"
 #include "dllblock.h"
 
@@ -1594,6 +1595,7 @@ static void installMidmapHooks() {
 // Saves written in world mode already hold world positions.
 static void __stdcall translateLoaded(uint8_t* stream) {
     g_loadThreadId = GetCurrentThreadId();
+    tradeStream(stream);                           // M13: the TRAD block of saves (trade.cpp; nothing unless trade=1)
     int rdKind = *(int*)(stream + 0x54);           // M9: unit records the stream did not hold (not master data 4 / 0x18)
     if (*(int*)(stream + 8) == 1 && g_units && rdKind != 4 && rdKind != 0x18) unitsResetTail(*g_units);
     if (*(int*)(stream + 8) != 1 || (!g_cfg.X0 && !g_cfg.Y0)) return;      // reading only
@@ -1997,9 +1999,11 @@ static void init() {
     // 3-hex / 1-hex cities (cityshape.cpp): hooks after the patches and caves, whose code they must find unchanged
     CityShapeSetup cs = { g_cfg.dataDir, g_cfg.C, g_cfg.C + 45, g_cfg.W, g_cfg.H, g_area20,
                           g_bases ? (const int32_t*)g_bases->AREA2BASE : nullptr, g_cfg.cityScaleMid, g_cfg.cityScaleSmall, false };
+    TradeSetup ts = { g_dir, g_section, g_cfg.dataDir, g_cfg.C, g_cfg.R, g_cfg.U, g_cfg.W, g_cfg.H, g_world.hex20, false };
     if (g_cfg.verifyOnly) {
         if (g_cfg.bases && g_cfg.cityShapes) cityShapesInstall(cs, logf);
         movementInstall(g_dir, g_section, false, logf);
+        tradeInstall(ts, logf);
         logf("verify_only: nothing written"); return;
     }
     commitPatches();
@@ -2007,6 +2011,7 @@ static void init() {
     installHooks();
     if (g_cfg.bases && g_cfg.cityShapes) { cs.write = true; cityShapesInstall(cs, logf); }
     movementInstall(g_dir, g_section, true, logf);     // per-weapon movement and terrain costs (M12_MOVE.md)
+    ts.write = true; tradeInstall(ts, logf);           // M13 trade (M13_TRADE.md): trade=0 installs nothing
 }
 
 BOOL WINAPI DllMain(HINSTANCE, DWORD reason, LPVOID) {

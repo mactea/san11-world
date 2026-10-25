@@ -73,6 +73,54 @@ move=1
 ; move_shore_scale: with move=1, a step from a ship onto land (or from land onto water) costs the cost times this
 ; turn's movement / the other weapon's movement (rounded up), so landing / boarding keep the fraction of the turn; 0 = Koei's
 ; move_shore_scale=1
+; trade: M13 trade (M13_TRADE.md): caravans are transport units, a price index per city and good, transit tax / robbery /
+; interception, AI caravans, a TRAD block in saves, automation "trade ..." commands. Needs trade.bin in data_dir
+; (python tools/trade_data.py --out <data_dir>\trade.bin) and bases=1 with the same city count. 0 (or no key) = nothing installed.
+; trade=1
+; trade_data=trade.bin
+; caravans led by a temporary 商 officer (special officer slot): at most trade_temp_max at a time, and only while at
+; least trade_temp_keep special slots stay free; trade_template: the officer copied for them (745: Koei's bandit leader)
+; trade_temp_max=30
+; trade_temp_keep=30
+; trade_template=745
+; AI caravans: monthly, at most trade_ai_month new ones, trade_ai_max per force, from a city with trade_ai_min_gold,
+; investing up to trade_ai_invest (keeping trade_ai_reserve), to a city within trade_ai_range hexes, for at least
+; trade_ai_margin percent profit; trade_ai_hook: the AI's unit planning (0x5def90) leaves caravans to trade.cpp
+; trade_ai=1
+; trade_ai_hook=1
+; trade_ai_month=6
+; trade_ai_max=2
+; trade_ai_min_gold=6000
+; trade_ai_invest=4000
+; trade_ai_reserve=2000
+; trade_ai_range=80
+; trade_ai_margin=25
+; prices: trade_impact percent change when a market takes / gives its size in loads, trade_spread between buy and sell,
+; trade_revert / trade_revert_hub percent of the gap to the base price recovered a month
+; trade_impact=50
+; trade_spread=10
+; trade_revert=10
+; trade_revert_hub=25
+; caravans: loads (both ends ports: trade_cap_sea), fee per caravan, escort troops and food of the transport unit,
+; arrival distance to the destination city (hexes), turns before a caravan gives up
+; trade_cap_land=20
+; trade_cap_sea=60
+; trade_fee=300
+; trade_escort=500
+; trade_food=3000
+; trade_arrive=3
+; trade_max_turns=90
+; passing another force's city: allied free; friendliness >= trade_rel_tax pays trade_tax percent of the cargo's value
+; there (hubs trade_tax_hub; the same as import duty at the destination); below it trade_rob percent chance to lose
+; trade_rob_loss percent of the goods; a destroyed caravan gives trade_loot percent of its cargo's value to the victor
+; trade_tax=10
+; trade_tax_hub=5
+; trade_rel_tax=40
+; trade_rob=15
+; trade_rob_loss=50
+; trade_loot=60
+; trade_player_auto: 1 = the player's caravans also move by themselves at the end of each turn (0: use 一括実行 / move them)
+; trade_player_auto=0
 
 ; ---- debugging
 ; trace: which game code creates/draws Direct3D resources (worldmod_trace_<section>.log)
