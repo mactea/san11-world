@@ -3,6 +3,8 @@
   {"name": "博斯普魯斯海峽 Bosporus", "line": [[40.96, 29.00], [41.04, 29.02], [41.10, 29.06], [41.17, 29.08], [41.26, 29.13]]},
   {"name": "達達尼爾海峽 Dardanelles", "line": [[39.98, 26.08], [40.06, 26.22], [40.15, 26.38], [40.22, 26.47], [40.32, 26.62], [40.42, 26.76], [40.50, 26.95]]},
   {"name": "墨西拿海峽 Messina", "line": [[38.36, 15.58], [38.25, 15.63], [38.15, 15.62], [38.02, 15.60], [37.92, 15.55]]},
+  {"name": "葉尼塞河口 Yenisei estuary (the river line stops 180 km short of the gulf)", "max_fill": 1500,
+   "line": [[70.12, 83.20], [70.50, 83.05], [70.90, 82.90], [71.30, 82.75], [71.80, 82.60]]},
   {"name": "刻赤海峽 Kerch", "line": [[45.50, 36.65], [45.35, 36.62], [45.20, 36.58], [45.05, 36.60], [44.95, 36.62]]}
  ],
  "plains": [
@@ -17,6 +19,16 @@
   {"name": "雲中—朔方 Yellow River gap (Hetao -> 晉陽's north)", "line": [[41.887, 111.704], [40.599, 111.603],
    [40.484, 111.867], [40.378, 111.996], [39.923, 111.959], [39.888, 111.827]]}
  ],
+ "cuts": [
+  {"name": "勒拿河源—貝加爾湖 Lena source / Baikal", "line": [[53.88, 108.05], [54.02, 108.12], [54.12, 108.25]]},
+  {"name": "勒拿河—下通古斯河 Lena / Lower Tunguska (Kirensk portage)", "line": [[59.55, 107.6], [59.55, 108.7]]}
+ ],
+ "wetlands": [
+  {"name": "普里皮亞季沼澤 Pripet marshes", "polygon": [[52.6, 24.0], [52.6, 28.0], [52.2, 30.5], [51.5, 30.5], [51.3, 27.0], [51.5, 24.0]], "share": 0.55},
+  {"name": "蘇德沼澤 Sudd", "polygon": [[9.6, 29.5], [9.6, 31.5], [8.5, 32.0], [6.2, 31.8], [6.0, 30.8], [7.5, 29.8]], "share": 0.7, "poison": 0.05},
+  {"name": "美索不達米亞沼澤 Mesopotamian marshes", "polygon": [[32.0, 46.4], [31.9, 47.5], [31.0, 47.8], [30.4, 47.6], [30.5, 46.0], [31.3, 45.9]], "share": 0.6},
+  {"name": "孫德爾本斯 Sundarbans", "polygon": [[22.6, 88.6], [22.6, 90.0], [21.6, 90.0], [21.6, 88.6]], "share": 0.45, "poison": 0.08}
+ ],
  "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4, "navigable_core_hexes": 1.5,
-             "join_max_gap": 3, "join_lowland_max_gap": 10, "join_lowland_max_elev": 50}
+             "navigable_max_elev": 1500, "join_max_gap": 3, "join_lowland_max_gap": 10, "join_lowland_max_elev": 50, "join_max_rise": 30}
 }
