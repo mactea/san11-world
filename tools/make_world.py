@@ -6,7 +6,8 @@ data/china_k3st_v.npy) so the world outside China has the same granularity:
     along rivers, like Koei's map; flat lowlands keep only scattered hills
   * major rivers are 4-6 hexes wide (type 7), tributaries about 2 (type 6), narrowing upstream
   * passable land is a hex-scale mix of grass/soil/sand/marsh/forest/wasteland whose proportions
-    follow a crude climate model and blend into China's own mix near the China block
+    follow the Köppen-Geiger climate class (tools/koppen.py, 1901-1930) and blend into China's own mix near the
+    China block
   * 3D heights follow Koei: flat valleys, ridges rising 40-130 above them, water at 0;
     vertex materials are sampled from China's per-terrain material statistics
 China's own hexes and stage vertices are copied in, and the edge of the China block is continued
@@ -31,7 +32,8 @@ Outputs (in <out_dir>):
 Global vertex of hex (lo, hi): z = lo*4 + 112, x = hi*4 + 112 + 2*(lo & 1) (hex centre +2, +2).
 
 Inputs: data/etopo60s_i16.npy (ETOPO 2022 60", int16 metres), data/raw/ne_rivers/*.zip,
-data/raw/ne_lakes/*.zip (Natural Earth 1:10m), data/cities_georef.json, data/china_shex.npy,
+data/raw/ne_lakes/*.zip (Natural Earth 1:10m), data/koppen_1901_1930_0p1.npz (tools/koppen.py),
+data/cities_georef.json, data/china_shex.npy,
 data/china_k3st_v.npy, data/new_cities.json.
 
 Usage: python make_world.py [out_dir] [--rows 1800 --cols 1000]  (defaults: Eurasia, China at row 1234, col 436)
@@ -72,6 +74,7 @@ MIX = {
     "taiga":    (.12, .04, .01, .17, .59, .07),
     "tundra":   (.08, .05, .01, .30, .04, .52),
     "tropical": (.22, .10, .03, .20, .42, .03),
+    "temperate": (.30, .25, .02, .08, .30, .05),      # Europe, the Mediterranean, the Ganges plain (Köppen C, Dfb)
 }
 
 
@@ -307,31 +310,34 @@ def rasterize_polygons(geo, shapes, rows, cols):
 
 # ---------------------------------------------------------------- climate and land cover
 
-def climate_weights(e0, lat, coast_km, dchina, rng):
-    """Soft membership (sums to 1) of each hex in the MIX zones."""
-    alat = np.abs(lat)
-    interior = np.clip((coast_km - 300.0) / 1500.0, 0, 1)
-    subtropic = np.exp(-((alat - 24.0) / 9.0) ** 2)                       # Hadley-cell dry belt
-    temperate_dry = np.exp(-((alat - 42.0) / 8.0) ** 2) * interior        # Central Asian rain shadow
-    arid = (0.9 * subtropic * np.clip(coast_km / 400.0, 0.2, 1) + 0.8 * temperate_dry
-            + 0.12 * noise(e0.shape, rng, 12))
+# Köppen-Geiger class (tools/koppen.py, Beck et al. 2023, 1901-1930) -> MIX zone; "alpine" comes from the elevation
+# and "china" (Koei's own mix) from the distance to the China block
+KG_ZONE = {"Af": "tropical", "Am": "tropical", "Aw": "tropical", "BWh": "desert", "BWk": "desert",
+           "BSh": "steppe", "BSk": "steppe", "Dfc": "taiga", "Dfd": "taiga", "Dsc": "taiga", "Dsd": "taiga",
+           "Dwc": "taiga", "Dwd": "taiga", "ET": "tundra", "EF": "tundra"}       # every other class: temperate
+
+
+def climate_weights(e0, kg, dchina, rng):
+    """Soft membership (sums to 1) of each hex in the MIX zones, from the Köppen-Geiger class of each hex (kg,
+    0 = sea: the nearest land class), blurred over a few hexes with coherent noise so zone borders are ragged."""
+    import koppen
+    zone_of = [KG_ZONE.get(c, "temperate") for c in koppen.KG_CLASSES]
+    land = kg > 0
+    _, (il, ih) = ndimage.distance_transform_edt(~land, return_indices=True)
+    kg = kg[il, ih]
     w = {}
-    w["desert"] = smoothstep(arid, 0.55, 0.72)
-    w["steppe"] = smoothstep(arid, 0.36, 0.5) * (1 - w["desert"])
-    w["tundra"] = smoothstep(alat + 2.5 * noise(e0.shape, rng, 15), 60, 67)
-    w["taiga"] = smoothstep(alat + 2.0 * noise(e0.shape, rng, 12), 49, 56) * (1 - w["tundra"]) * (1 - w["steppe"] - w["desert"])
-    w["tropical"] = (1 - smoothstep(alat, 13, 23)) * (1 - w["desert"] - w["steppe"])
+    for z in ("desert", "steppe", "tropical", "temperate", "taiga", "tundra"):
+        m = np.isin(kg, [i for i, zz in enumerate(zone_of) if zz == z and i > 0]).astype(np.float32)
+        w[z] = ndimage.gaussian_filter(m, 2.5) * np.exp(0.35 * noise(e0.shape, rng, 4))
     w["alpine"] = smoothstep(e0, 2600, 3800)
-    for k in ("desert", "steppe", "tundra", "taiga", "tropical"):
-        w[k] = np.clip(w[k] * (1 - w["alpine"]), 0, 1)
-    rest = sum(w.values())
-    w["china"] = np.clip(1 - rest, 0, 1)
-    tot = sum(w.values())
+    for k in ("desert", "steppe", "tropical", "temperate", "taiga", "tundra"):
+        w[k] = w[k] * (1 - w["alpine"])
+    tot = sum(w.values()) + 1e-6
     w = {k: v / tot for k, v in w.items()}
     # blend into Koei's own mix next to the China block
     fade = 1 - smoothstep(dchina, 8, 60)
     w = {k: v * (1 - fade) for k, v in w.items()}
-    w["china"] = w["china"] + fade
+    w["china"] = fade
     return w
 
 
@@ -900,7 +906,6 @@ def main():
         # ---- mountains, land cover
         water = np.isin(t, WATER)
         dw = ndimage.distance_transform_edt(~water).astype(np.float32)
-        coast_km = ndimage.distance_transform_edt(~(t == SEA)) * 9.0
         land = ~water
         land[CL, CH] = False
         mtn, p_mtn = mountain_mask(e0, relief, dw, land, rng)
@@ -909,7 +914,14 @@ def main():
         t[mtn] = MOUNTAIN
         dmt = ndimage.distance_transform_edt(~(t == MOUNTAIN)).astype(np.float32)
         dchina = dist_to_china(spec, R, C)
-        weights = climate_weights(e0, lat_c, coast_km, dchina, rng)
+        import koppen
+        kg = np.zeros((R, C), np.uint8)
+        grid = koppen.load()
+        for r0 in range(0, R, 200):
+            lo_, hi_ = np.mgrid[r0:r0 + 200, 0:C]
+            lon_, lat_ = geo.hex_to_lonlat(lo_.ravel(), hi_.ravel())
+            kg[r0:r0 + 200] = koppen.classes_at(lon_, lat_, grid).reshape(lo_.shape)
+        weights = climate_weights(e0, kg, dchina, rng)
         cover_land = land & ~mtn
         cover = land_cover((R, C), weights, dw, dmt, e0, rng, cover_land)
         t[cover_land] = cover[cover_land]
