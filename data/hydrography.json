@@ -5,6 +5,7 @@
                   "Bratul Sulina": 2.0, "Bykovskaya Protoka": 2.6, "Olenekskaya Protoka": 2.6, "Trofimovskaya Protoka": 2.0,
                   "Tumatskaya Protoka": 2.0, "Irrawaddy Delta": 2.6, "Nederrijn": 2.6, "Lek": 2.6, "Waal": 2.6, "IJssel": 2.0,
                   "Shatt al Hillah": 2.0, "Hindiyah Channel": 2.0, "Gharraf Canal": 2.0},
+ "max_width": {"Mekong": 2.2, "Lancang": 2.2},
  "scalerank": {"Angara": 4},
  "wobble": [0.85, 1.1],
  "max_sinuosity": 1.1,

@@ -225,8 +225,10 @@ def hydro_rules():
 
 def river_class(rec, rules=None):
     """(terrain type, full width in hexes at sea level) or None. Koei: rivers 4-6 wide, streams ~2.
-    hydrography.json: "exclude_rivers" (modern canals) are not drawn, "branch_width" (delta branches) caps the width,
-    "scalerank" overrides Natural Earth's rank of a river (the upper Angara, Baikal's outflow, is a thin line there)."""
+    hydrography.json: "exclude_rivers" (modern canals) are not drawn, "branch_width" (delta branches)
+    and "max_width" (the Mekong, wider than Koei's 長江 at full width; gorge rivers) cap the width, "scalerank"
+    overrides Natural Earth's rank of a river (the upper Angara, Baikal's outflow, is a thin line there; the Tonle Sap
+    river joining the lake to the Mekong)."""
     rules = rules or {}
     name = rec["name"]
     if name in rules.get("exclude_rivers", ()):
@@ -240,7 +242,7 @@ def river_class(rec, rules=None):
         val, width = STREAM, 2.0
     else:
         return None
-    return val, min(width, float(rules.get("branch_width", {}).get(name, width)))
+    return val, min(width, float(rules.get("branch_width", {}).get(name, width)), float(rules.get("max_width", {}).get(name, width)))
 
 
 def river_parts(geo, shapes, R, C, e0, rng, rules=None):

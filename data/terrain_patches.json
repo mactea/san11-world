@@ -34,6 +34,9 @@
   {"name": "美索不達米亞沼澤 Mesopotamian marshes", "polygon": [[32.0, 46.4], [31.9, 47.5], [31.0, 47.8], [30.4, 47.6], [30.5, 46.0], [31.3, 45.9]], "share": 0.6},
   {"name": "孫德爾本斯 Sundarbans", "polygon": [[22.6, 88.6], [22.6, 90.0], [21.6, 90.0], [21.6, 88.6]], "share": 0.45, "poison": 0.08}
  ],
+ "rapids": [
+  {"name": "孔瀑布 Khone Falls (Mekong): ships stop below and above", "line": [[13.95, 105.65], [13.95, 106.25]]}
+ ],
  "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4, "navigable_core_hexes": 1.5,
              "navigable_max_elev": 1500, "join_max_gap": 3, "join_lowland_max_gap": 10, "join_lowland_max_elev": 50, "join_max_rise": 30}
 }

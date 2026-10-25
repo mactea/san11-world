@@ -7,6 +7,7 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
      "passes":  [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "cuts":    [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "wetlands": [{"name": ..., "polygon": [[lat, lon], ...], "share": 0.6, "poison": 0.05}, ...],
+     "rapids":  [{"name": ..., "line": [[lat, lon], ...]}, ...],
      "streams": {"navigable_max_scalerank": 5, "ford_max_scalerank": 8, "match_hexes": 4,
                  "navigable_core_hexes": 1.5, "navigable_max_elev": 1500, "join_max_gap": 3,
                  "join_lowland_max_gap": 10, "join_lowland_max_elev": 50, "join_max_rise": 30}}
@@ -42,6 +43,9 @@ the DEM classification of make_world.py goes wrong at the map's scale (about 9 k
   sea (a river whose rasterized mouth stops a hex short of the coast, the Amur) is joined to the sea itself (海) the
   same way, never to another river (so rivers parted at a watershed stay apart). Above "navigable_max_elev" metres the new 河 is 浅瀬
   instead (mountain rivers in gorges: the upper Mekong and Salween, the Yarlung Tsangpo).
+* rapids: falls and cataracts that break a navigable river (the Khone Falls of the Mekong). The 河/浅瀬/川 hexes
+  along "line" (drawn across the river, bank to bank) become 崖 15 after the streams rule: ships cannot pass and
+  land units cannot wade across there (they still walk round on the banks); both stretches stay navigable water.
 * passes: a mountain pass, e.g. through Koei's northern wall (his China block ends in about 20 hexes of 崖 along its
   north edge, so the steppe reached China on foot only through Liaoxi and Hexi). The hexes along "line" (a path of
   hex neighbours, as for straits) that are 崖 15 or 岸 14 become 桟道 11, a 1-hex plank road; with "bridge": true,
@@ -390,6 +394,15 @@ def apply(t, e0, geo, spec, avoid=None):
 
     if "streams" in data:
         out += streams(t, e0, geo, data["streams"], china, cut if avoid is None else (avoid | cut))
+
+    for rp in data.get("rapids", []):
+        line = [h for h in hex_line(geo, rp["line"]) if inside(h)]
+        made = 0
+        for h in line:
+            if t[h] in (STREAM, RIVER, FORD):
+                t[h] = MOUNTAIN
+                made += 1
+        out.append(f"rapids {rp['name']}: line {len(line)} hexes, {made} river hexes made 崖")
 
     bridges = set()
     if data.get("passes"):
