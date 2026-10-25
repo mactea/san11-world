@@ -1,0 +1,26 @@
+{
+ "_doc": "make_world.py's hydrography rules (M11_MAP.md, 水系). Names are Natural Earth 1:10m 'name' fields.",
+ "exclude_rivers": ["Soroksari Duna", "Suez Canal", "Ismailiya Canal", "Volga-Don Canal", "Caledonian Canal", "White Sea Canal", "Moscow Canal"],
+ "branch_width": {"Rosetta Branch": 2.6, "Damietta Branch": 2.6, "Bratul Chillia": 2.4, "Bratul Sfântu Gheorghe": 2.0,
+                  "Bratul Sulina": 2.0, "Bykovskaya Protoka": 2.6, "Olenekskaya Protoka": 2.6, "Trofimovskaya Protoka": 2.0,
+                  "Tumatskaya Protoka": 2.0, "Irrawaddy Delta": 2.6, "Nederrijn": 2.6, "Lek": 2.6, "Waal": 2.6, "IJssel": 2.0,
+                  "Shatt al Hillah": 2.0, "Hindiyah Channel": 2.0, "Gharraf Canal": 2.0},
+ "scalerank": {"Angara": 4},
+ "wobble": [0.85, 1.1],
+ "max_sinuosity": 1.1,
+ "source_taper": {"width": 1.0, "full_after_hexes": 150},
+ "reservoirs_keep": ["Lake Zaysan", "Lake Il'Men'", "Lake Imandra", "Oulujärvi", "Lake Kovdozero", "Ondozero", "Koitere",
+                     "Rikkavesi", "Kemijärvi", "Umbozero Lake", "Stora Lulevatten", "Mjøsa", "Ozero Kubenskoye"],
+ "drop_lakes": ["Lake Razazah", "Sarygamysh Köli", "Aydar Ko‘l", "Buhayrat ath Tharthar", "Lake Habbaniyah"],
+ "add_lakes": [
+  {"name": "鹹海 Aral Sea (1960 shoreline)", "polygon": [
+   [46.10, 58.60], [46.40, 58.85], [46.55, 59.20], [46.45, 59.60], [46.55, 60.00], [46.30, 60.20], [46.40, 60.45],
+   [46.65, 60.60], [46.78, 61.00], [46.80, 61.60], [46.55, 61.70], [46.30, 61.40], [46.15, 61.15], [45.90, 61.15],
+   [45.60, 61.10], [45.20, 60.95], [44.80, 60.90], [44.40, 60.60], [44.10, 60.10], [43.90, 59.70], [43.75, 59.10],
+   [43.55, 58.80], [43.45, 58.40], [43.70, 58.25], [44.20, 58.20], [44.80, 58.25], [45.40, 58.30], [45.80, 58.40]]}
+ ],
+ "sea_levels": [
+  {"name": "裏海 Caspian Sea", "level": -27.5, "box": [36.0, 49.5, 44.0, 57.0]}
+ ],
+ "max_navigable_elev": 1500
+}

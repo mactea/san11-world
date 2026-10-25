@@ -217,27 +217,42 @@ def sample_hexes(geo, dem, R, C):
 
 # ---------------------------------------------------------------- hydrography
 
-def river_class(rec):
-    """(terrain type, full width in hexes at sea level) or None. Koei: rivers 4-6 wide, streams ~2."""
-    sr = int(rec["scalerank"])
+def hydro_rules():
+    """data/hydrography.json (M11_MAP.md, 水系): which Natural Earth rivers and lakes are drawn and how"""
+    f = DATA / "hydrography.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+
+
+def river_class(rec, rules=None):
+    """(terrain type, full width in hexes at sea level) or None. Koei: rivers 4-6 wide, streams ~2.
+    hydrography.json: "exclude_rivers" (modern canals) are not drawn, "branch_width" (delta branches) caps the width,
+    "scalerank" overrides Natural Earth's rank of a river (the upper Angara, Baikal's outflow, is a thin line there)."""
+    rules = rules or {}
+    name = rec["name"]
+    if name in rules.get("exclude_rivers", ()):
+        return None
+    sr = int(rules.get("scalerank", {}).get(name, rec["scalerank"]))
     if sr <= 3:
-        return RIVER, 5.0
-    if sr <= 5:
-        return STREAM, 2.6
-    if sr <= 8:
-        return STREAM, 2.0
-    return None
+        val, width = RIVER, 5.0
+    elif sr <= 5:
+        val, width = STREAM, 2.6
+    elif sr <= 8:
+        val, width = STREAM, 2.0
+    else:
+        return None
+    return val, min(width, float(rules.get("branch_width", {}).get(name, width)))
 
 
-def rasterize_rivers(geo, shapes, R, C, e0, rng):
-    """River hexes with Koei-like widths: each polyline is swept by a brush perpendicular to it.
-    Width narrows with elevation (upstream) and wobbles slowly along the river."""
-    out = np.zeros((R, C), np.uint8)
+def river_parts(geo, shapes, R, C, e0, rng, rules=None):
+    """the Natural Earth river lines drawn (river_class), one dict per polyline part: name, val, width and per point
+    lo, x (continuous hex position), elev, wob (the slow wobble of the width)"""
+    rules = rules or {}
     s = geo.spec
     lon_lo, lat_hi = s.linear_to_lonlat(0, 0)
     lon_hi, lat_lo = s.linear_to_lonlat(R, C)
+    out = []
     for sr in shapes.iterShapeRecords():
-        cls = river_class(sr.record)
+        cls = river_class(sr.record, rules)
         if not cls:
             continue
         bx = sr.shape.bbox                       # skip rivers far outside the world
@@ -256,19 +271,119 @@ def rasterize_rivers(geo, shapes, R, C, e0, rng):
             lo, x = lonlat_to_hex(geo, dense[:, 0], dense[:, 1])
             if lo.max() < -3 or lo.min() > R + 3 or x.max() < -3 or x.min() > C + 3:
                 continue
-            tl, tx = np.gradient(lo), np.gradient(x)
-            nrm = np.hypot(tl, tx) + 1e-9
-            nl, nx = -tx / nrm, tl / nrm
             hl, hh = to_hex(lo, x)
             elev = e0[np.clip(hl, 0, R - 1), np.clip(hh, 0, C - 1)]
-            taper = np.clip(1.15 - elev / 2500.0, 0.45, 1.0)
             wob = 1 + 0.18 * ndimage.gaussian_filter1d(rng.standard_normal(len(lo)), 25) * 6
-            w = np.maximum(1.0, width * taper * np.clip(wob, 0.7, 1.3))
-            k = int(np.ceil(w.max() / 0.35)) + 1
-            for s in np.linspace(-0.5, 0.5, k):
-                yl, yh = to_hex(lo + s * w * nl, x + s * w * nx)
-                ok = (yl >= 0) & (yl < R) & (yh >= 0) & (yh < C)
-                np.maximum.at(out, (yl[ok], yh[ok]), val)      # STREAM < RIVER: rivers win at confluences
+            out.append({"name": sr.record["name"], "val": val, "width": width, "lo": lo, "x": x, "elev": elev, "wob": wob})
+    return out
+
+
+def upstream_length(parts, R, C, water=None):
+    """for every point of every part (river_parts): the length (hexes) of the longest way up the river network from
+    it to a source. A part's lower end (a tributary's mouth into its river, a river's into the sea or a lake; both
+    ends of a flat part) joins the nearest point of another part within a hex; a higher end is a source and never
+    joins, even when another river runs past it (a watershed). water: (R, C) mask of the sea and lakes: a lower end
+    in or next to it is a mouth; a network without one flows to its lowest lower end."""
+    from scipy.sparse.csgraph import connected_components
+    from scipy.spatial import cKDTree
+    if not parts:
+        return []
+    P = np.concatenate([np.stack([p["lo"] * 0.866, p["x"]], 1) for p in parts])
+    pid = np.concatenate([np.full(len(p["lo"]), k) for k, p in enumerate(parts)])
+    start = np.cumsum([0] + [len(p["lo"]) for p in parts])
+    a_ = [np.arange(start[k], start[k + 1] - 1) for k in range(len(parts))]
+    b_ = [np.arange(start[k] + 1, start[k + 1]) for k in range(len(parts))]
+    tree = cKDTree(P)
+    ends = np.concatenate([[start[k], start[k + 1] - 1] for k in range(len(parts))])
+    other = np.concatenate([[start[k + 1] - 1, start[k]] for k in range(len(parts))])
+    elev = np.concatenate([p["elev"] for p in parts])
+    low = elev[ends] <= elev[other] + 5
+    for e in ends[low]:
+        for j in sorted(tree.query_ball_point(P[e], 1.0), key=lambda j: np.hypot(*(P[j] - P[e]))):
+            if pid[j] != pid[e]:
+                a_.append(np.array([e]))
+                b_.append(np.array([j]))
+                break
+    a_, b_ = np.concatenate(a_), np.concatenate(b_)
+    w_ = np.hypot(*(P[a_] - P[b_]).T) + 1e-6
+    N = len(P)
+    g = csr_matrix((np.concatenate([w_, w_]), (np.concatenate([a_, b_]), np.concatenate([b_, a_]))), shape=(N, N))
+    hl, hh = to_hex(P[:, 0] / 0.866, P[:, 1])
+    inside = (hl >= 0) & (hl < R) & (hh >= 0) & (hh < C)
+    wet = ~inside
+    if water is not None:
+        near = ndimage.binary_dilation(water, iterations=2)
+        wet[inside] = near[hl[inside], hh[inside]]
+    mouth = np.zeros(N, bool)
+    mouth[ends[low]] = wet[ends[low]]
+    ncomp, comp = connected_components(g, directed=False)
+    has = np.zeros(ncomp, bool)
+    has[comp[mouth]] = True
+    for c_ in np.flatnonzero(~has):              # an inland network: its lowest lower end is the mouth
+        e_c = ends[low][comp[ends[low]] == c_]
+        if len(e_c):
+            mouth[e_c[np.argmin(elev[e_c])]] = True
+    dm = dijkstra(g, indices=np.flatnonzero(mouth), min_only=True)
+    L = np.zeros(N)
+    u, v = np.concatenate([a_, b_]), np.concatenate([b_, a_])
+    w2 = np.concatenate([w_, w_])
+    down = np.isfinite(dm[u]) & (dm[u] > dm[v])
+    u, v, w2 = u[down], v[down], w2[down]
+    for i in np.argsort(-dm[u], kind="stable"):
+        if L[u[i]] + w2[i] > L[v[i]]:
+            L[v[i]] = L[u[i]] + w2[i]
+    return [L[start[k]:start[k + 1]] for k in range(len(parts))]
+
+
+def sinuosity(lo, x, half=4.0):
+    """length of the line within half hexes (along it) on either side of each point / the straight distance
+    between the ends of that stretch (1 = straight)"""
+    d = np.hypot(np.diff(lo) * 0.866, np.diff(x))
+    s = np.concatenate([[0], np.cumsum(d)])
+    a = np.searchsorted(s, s - half, side="left")
+    b = np.minimum(np.searchsorted(s, s + half, side="right") - 1, len(s) - 1)
+    chord = np.hypot((lo[b] - lo[a]) * 0.866, x[b] - x[a])
+    return (s[b] - s[a]) / np.maximum(chord, 1e-6)
+
+
+def rasterize_rivers(geo, shapes, R, C, e0, rng, water=None, rules=None):
+    """River hexes with Koei-like widths: each polyline is swept by a brush perpendicular to it.
+    Width narrows with elevation (upstream) and wobbles slowly along the river (hydrography.json "wobble").
+    hydrography.json "source_taper": the width also grows from "width" hexes at a source to the full width
+    "full_after_hexes" hexes downstream, measured along the river network (upstream_length), so two rivers rising
+    next to each other (Rhine and Danube, Volga and Daugava) are not joined by their brushes.
+    water: (R, C) mask of the sea and lakes (the river mouths). "max_navigable_elev": 河 above it is drawn as 川
+    (terrain_patches.py makes it 浅瀬). "max_sinuosity": where the line winds more than this (its length over
+    the straight distance, within 4 hexes either side) the width is divided by the excess (the Iron Gates, the
+    meanders of the Tigris), so a bend is not drawn as a lake."""
+    rules = rules or {}
+    out = np.zeros((R, C), np.uint8)
+    wob_lo, wob_hi = rules.get("wobble", (0.7, 1.3))
+    taper_cfg = rules.get("source_taper")
+    max_elev = rules.get("max_navigable_elev")
+    max_sin = rules.get("max_sinuosity")
+    parts = river_parts(geo, shapes, R, C, e0, rng, rules)
+    up = upstream_length(parts, R, C, water) if taper_cfg else [None] * len(parts)
+    for p, L in zip(parts, up):
+        lo, x, elev = p["lo"], p["x"], p["elev"]
+        tl, tx = np.gradient(lo), np.gradient(x)
+        nrm = np.hypot(tl, tx) + 1e-9
+        nl, nx = -tx / nrm, tl / nrm
+        taper = np.clip(1.15 - elev / 2500.0, 0.45, 1.0)
+        w = np.maximum(1.0, p["width"] * taper * np.clip(p["wob"], wob_lo, wob_hi))
+        if max_sin:                          # tight bends: a wide brush fills the whole loop, so narrow it there
+            w = np.maximum(1.0, w / np.clip(sinuosity(lo, x) / max_sin, 1.0, 1.8))
+        if taper_cfg:
+            sw = float(taper_cfg["width"])
+            w = np.where(w > sw, sw + (w - sw) * smoothstep(L, 0, float(taper_cfg["full_after_hexes"])), w)
+        v_ = np.full(len(lo), p["val"], np.uint8)
+        if max_elev is not None and p["val"] == RIVER:
+            v_[elev > max_elev] = STREAM
+        k = int(np.ceil(w.max() / 0.35)) + 1
+        for s in np.linspace(-0.5, 0.5, k):
+            yl, yh = to_hex(lo + s * w * nl, x + s * w * nx)
+            ok = (yl >= 0) & (yl < R) & (yh >= 0) & (yh < C)
+            np.maximum.at(out, (yl[ok], yh[ok]), v_[ok])      # STREAM < RIVER: rivers win at confluences
     return out
 
 
@@ -286,25 +401,37 @@ def points_in_ring(px, py, ring):
     return inside
 
 
-def rasterize_polygons(geo, shapes, rows, cols):
-    """Lake mask on the hex grid: hex centres tested against each polygon ring (rings toggle, so holes work)."""
+def rasterize_polygons(geo, shapes, rows, cols, rules=None):
+    """Lake mask on the hex grid: hex centres tested against each polygon ring (rings toggle, so holes work).
+    hydrography.json: modern reservoirs (featurecla "Reservoir", except "reservoirs_keep": natural lakes Natural
+    Earth files as reservoirs because they are dammed) and "drop_lakes" are left out; "add_lakes" (polygons of
+    [lat, lon]) are added (the Aral Sea before its desiccation)."""
+    rules = rules or {}
     out = np.zeros((rows, cols), bool)
+    rings = []
     for sr in shapes.iterShapeRecords():
+        rec = sr.record
+        if rec["featurecla"] == "Reservoir" and rec["name"] not in rules.get("reservoirs_keep", ()):
+            continue
+        if rec["name"] in rules.get("drop_lakes", ()):
+            continue
         shp = sr.shape
         parts = list(shp.parts) + [len(shp.points)]
-        for a, b in zip(parts[:-1], parts[1:]):
-            ring = np.asarray(shp.points[a:b], dtype=float)
-            if len(ring) < 3:
-                continue
-            lo, hi = lonlat_to_hex(geo, ring[:, 0], ring[:, 1])
-            l0, l1 = int(max(0, lo.min())), int(min(rows - 1, lo.max() + 1))
-            h0, h1 = int(max(0, hi.min())), int(min(cols - 1, hi.max() + 1))
-            if l1 < l0 or h1 < h0 or (l1 - l0) * (h1 - h0) == 0:
-                continue
-            L, Hh = np.mgrid[l0:l1 + 1, h0:h1 + 1]
-            Lr, Hr = L.ravel(), Hh.ravel()
-            inside = points_in_ring(Lr.astype(float), Hr + 0.5 * (Lr & 1), np.stack([lo, hi], 1))
-            out[Lr[inside], Hr[inside]] ^= True     # rings toggle (holes/islands)
+        rings += [np.asarray(shp.points[a:b], dtype=float) for a, b in zip(parts[:-1], parts[1:])]
+    for lake in rules.get("add_lakes", ()):
+        rings.append(np.asarray([[lo, la] for la, lo in lake["polygon"]], dtype=float))
+    for ring in rings:
+        if len(ring) < 3:
+            continue
+        lo, hi = lonlat_to_hex(geo, ring[:, 0], ring[:, 1])
+        l0, l1 = int(max(0, lo.min())), int(min(rows - 1, lo.max() + 1))
+        h0, h1 = int(max(0, hi.min())), int(min(cols - 1, hi.max() + 1))
+        if l1 < l0 or h1 < h0 or (l1 - l0) * (h1 - h0) == 0:
+            continue
+        L, Hh = np.mgrid[l0:l1 + 1, h0:h1 + 1]
+        Lr, Hr = L.ravel(), Hh.ravel()
+        inside = points_in_ring(Lr.astype(float), Hr + 0.5 * (Lr & 1), np.stack([lo, hi], 1))
+        out[Lr[inside], Hr[inside]] ^= True     # rings toggle (holes/islands)
     return out
 
 
@@ -887,15 +1014,27 @@ def main():
         print(f"terrain types read from {a.types_from}")
     else:
         # ---- water
-        lakes = rasterize_polygons(geo, read_shapes(next((DATA / "raw/ne_lakes").glob("*.zip"))), R, C)
-        rivers = rasterize_rivers(geo, read_shapes(next((DATA / "raw/ne_rivers").glob("*.zip"))), R, C, e0, rng)
-        sea = (e0 < 0) & ~lakes
+        rules = hydro_rules()
+        lon_c = np.zeros((R, C), np.float32)
+        for r0 in range(0, R, 200):
+            lo_, hi_ = np.mgrid[r0:r0 + 200, 0:C]
+            lon_c[r0:r0 + 200] = geo.hex_to_lonlat(lo_.ravel(), hi_.ravel())[0].reshape(lo_.shape)
+        lakes = rasterize_polygons(geo, read_shapes(next((DATA / "raw/ne_lakes").glob("*.zip"))), R, C, rules)
+        # the sea: below sea level, or below a basin's own water level ("sea_levels": the Caspian at -28 m, whose
+        # shores below 0 m are dry land)
+        level = np.zeros((R, C), np.float32)
+        for b in rules.get("sea_levels", ()):
+            la0, la1, lo0, lo1 = b["box"]
+            level[(lat_c >= la0) & (lat_c <= la1) & (lon_c >= lo0) & (lon_c <= lo1)] = b["level"]
+        sea = (e0 < level) & ~lakes
         lab, n = ndimage.label(sea)          # ocean only where connected to the open sea (no Turpan basin)
         sizes = ndimage.sum(sea, lab, range(1, n + 1))
         sea = np.isin(lab, 1 + np.flatnonzero(sizes > 2000))
         lab, n = ndimage.label(lakes)        # Koei draws lakes as rivers (type 7); only inland seas are sea
         sizes = ndimage.sum(lakes, lab, range(1, n + 1))
         inland_sea = np.isin(lab, 1 + np.flatnonzero(sizes > 3000))
+        rivers = rasterize_rivers(geo, read_shapes(next((DATA / "raw/ne_rivers").glob("*.zip"))), R, C, e0, rng,
+                                  sea | lakes, rules)
         t = np.full((R, C), GRASS, np.uint8)
         t[rivers > 0] = rivers[rivers > 0]
         t[lakes] = RIVER
