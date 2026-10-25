@@ -28,10 +28,25 @@ REC = 152
 ST_RULER, ST_GENERAL, ST_FREE, ST_UNAPPEARED, ST_UNFOUND, ST_DEAD = 0, 3, 4, 6, 7, 8
 STATUS = ir.STATUS
 CONF = {'A': 3, 'B': 2, 'C': 1, 'D': 0}
-DEFAULT_TIERS = {"1": {"troops": 25000, "gold": 5000, "food": 50000},
-                 "2": {"troops": 12000, "gold": 3000, "food": 25000},
-                 "3": {"troops": 5000, "gold": 1500, "food": 10000},
-                 "koei": {"troops": 20000, "gold": 4000, "food": 40000}}
+DEFAULT_TIERS = {"1": {"troops": 15000, "gold": 3000, "food": 30000},     # about Koei's own cities (198: median
+                 "2": {"troops": 8000, "gold": 1600, "food": 16000},      # 22000/3800/42000, but the world cities are
+                 "3": {"troops": 3000, "gold": 800, "food": 6000},        # mostly middle / small ones)
+                 "koei": {"troops": 15000, "gold": 3000, "food": 30000}}
+RES = ('troops', 'gold', 'food')
+ROUND = {'troops': 100, 'gold': 100, 'food': 1000}
+FLOOR = {'troops': 1000, 'gold': 300, 'food': 2000}
+
+
+def force_totals(scn, forces):
+    """f -> [troops, gold, food] summed over the force's cities"""
+    tot = {f: [0, 0, 0] for f in forces}
+    for c in range(scn.C):
+        f = scn.owner(c)
+        if f in tot:
+            v = struct.unpack_from('<III', scn.D, scn.at('city', c) + 5)
+            for j in range(3):
+                tot[f][j] += v[j]
+    return tot
 
 
 class Scen:
@@ -125,6 +140,11 @@ def build(spec, scn, roster, data_dir):
     rep = {'year': year, 'forces': [], 'fixes': [], 'auto': [], 'relocated': [], 'warnings': []}
     tc = bytes(D[at('city', TEMPLATE_CITY):at('city', TEMPLATE_CITY) + 81])
     live = scn.forces()
+    koei_tot = force_totals(scn, [f for f in live if f < R])
+    cap = None
+    if spec.get('force_cap') == 'strongest_koei':          # no new force richer than the richest Koei force
+        cap = [max(t[j] for t in koei_tot.values()) for j in range(3)]
+        rep['force_cap'] = dict(zip(RES, cap))
     used_kok = {D[at('force', f) + 4 + F + 1] for f in live}
     used_col = {D[at('force', f) + 4 + F + 2] for f in live}
     taken = set()                                   # persons placed by this spec
@@ -341,6 +361,18 @@ def build(spec, scn, roster, data_dir):
             D[co:co + 81] = r
             if c < 42:
                 D[0x1DB + c] = color
+        if cap:
+            tot = force_totals(scn, [fid])[fid]
+            for j, k in enumerate(RES):
+                if tot[j] > cap[j]:
+                    q = cap[j] / tot[j]
+                    for c, _ in cities:
+                        o = at('city', c) + 5 + 4 * j
+                        v = struct.unpack_from('<I', D, o)[0]
+                        v = max(FLOOR[k], int(v * q) // ROUND[k] * ROUND[k])
+                        struct.pack_into('<I', D, o, v)
+                    rep['warnings'].append(f'「{fname}」的{k}合计 {tot[j]} 超过最强光荣势力的 {cap[j]}，按比例缩到 '
+                                           f'{force_totals(scn, [fid])[fid][j]}')
         rc = struct.unpack_from('<h', D, at('person', rpid) + 96)[0]
         created.append({'fid': fid, 'corps': kid, 'name': fname, 'kokugo': kok if kok != 0xff else None,
                         'color': color, 'intro': intro, 'ruler': rpid, 'ruler_name': scn.pname(rpid),

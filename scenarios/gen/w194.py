@@ -25,7 +25,7 @@ F.append({"name": "羅馬", "ruler": "Septimius Severus", "stars": 1,
                 "伊比利亞": 55, "喀里多尼亞": 25, "夸迪": 55, "阿克蘇姆": 60, "庫施": 50, "貴霜": 60}})
 F.append({"name": "尼格爾", "kokugo": False, "ruler": "Pescennius Niger", "max_cities": 5, "stars": 3,
   "intro": "敘利亞總督佩斯切尼烏斯·尼格爾，193年在安提阿被東方軍團擁立為帝，據有敘利亞、埃及與小亞細亞。193年末至194年初敗於基齊庫斯、尼西亞，退守陶魯斯山口；拜占庭仍為其堅守。帕提亞與哈特拉遣兵相助。",
-  "cities": [{"city": "安都", "troops": 30000}, "塔爾", "拜占", "黎軒", "大馬"],
+  "cities": ["安都", "塔爾", "拜占", "黎軒", "大馬"],
   "officers": [O("Pescennius Niger", "安都"), O("Aurelianus (adviser of Pescennius Niger)", "安都"), O("Antistius Capella", "拜占")],
   "relations": {"阿爾比努斯": 30, "安息": 70, "哈特拉": 75}})
 F.append({"name": "阿爾比努斯", "kokugo": False, "ruler": "Clodius Albinus", "max_cities": 5, "stars": 4,
@@ -65,5 +65,5 @@ for f in F:
     if f["name"] in ("阿克蘇姆", "希木葉爾"):           # the princes BYGT and Dhamar'ali Yuhabirr are boys in 194
         f["officers"] = f["officers"][:1]
     f["intro"] = f["intro"].replace("198年", "194年")
-dump({"base": 2, "note": "194年（群雄割據）的世界：羅馬內戰（塞維魯、尼格爾、阿爾比努斯）、安息及其藩國、貴霜、印度諸國、阿拉伯、東非、黑海、高加索、鮮卑諸部、西域。",
+dump({"base": 2, **RESOURCES, "note": "194年（群雄割據）的世界：羅馬內戰（塞維魯、尼格爾、阿爾比努斯）、安息及其藩國、貴霜、印度諸國、阿拉伯、東非、黑海、高加索、鮮卑諸部、西域。",
       "forces": F}, sys.argv[1])

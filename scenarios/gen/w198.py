@@ -35,7 +35,7 @@ F.append({"name": "奧斯若恩", "kokugo_name": "奧斯", "ruler": "Abgar VIII"
   "relations": {}})
 F.append({"name": "哈特拉", "kokugo_name": "哈特", "ruler": "Abdsamiya", "stars": 5,
   "intro": "沙漠城邦哈特拉之王阿卜德薩米亞。曾遣弓騎兵助尼格爾，198年塞維魯親率大軍圍城，城中弓手擲毒蟲陶罐拒守，羅馬軍無功而退。",
-  "cities": [{"city": "哈特", "troops": 15000}],
+  "cities": ["哈特"],
   "officers": [O("Abdsamiya", "哈特"), O("Sanatruq II", "哈特", birth=175)],
   "relations": {}})
 F.append({"name": "波斯", "ruler": "Gochihr", "stars": 5,
@@ -174,5 +174,5 @@ F.append({"name": "素利", "kokugo": False, "ruler": "素利", "stars": 4,
 
 xb = F[-3:]
 F = F[:2] + xb + F[2:-3]
-dump({"base": 8, "note": "198年（呂布討伐戰）的世界：羅馬（塞維魯東征）、安息及其藩國、貴霜、印度諸國、阿拉伯、東非、黑海、高加索、鮮卑諸部、西域。剧本说明见 docs/剧本制作.md。",
+dump({"base": 8, **RESOURCES, "note": "198年（呂布討伐戰）的世界：羅馬（塞維魯東征）、安息及其藩國、貴霜、印度諸國、阿拉伯、東非、黑海、高加索、鮮卑諸部、西域。剧本说明见 docs/剧本制作.md。",
       "forces": F}, sys.argv[1])

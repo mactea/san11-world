@@ -4,7 +4,7 @@ ROME_PROV = ["羅馬", "米蘭", "阿奎", "拿坡", "敘拉", "塔拉", "科爾
 # Narbonensis, Africa); the other provinces stay unowned, their officers move to the nearest core city
 ROME_CORE = ["羅馬", "米蘭", "阿奎", "拿坡", "拉文", "布林", "都靈", "佛羅", "安科", "雷焦", "敘拉", "巴勒", "卡利", "阿萊",
              "薩洛", "維魯", "馬賽", "納博", "迦太", "萊普"]
-ROME_CITIES = [{"city": "羅馬", "troops": 30000, "gold": 10000, "food": 80000} if c == "羅馬" else c for c in ROME_CORE]
+ROME_CITIES = [{"city": "羅馬", "troops": 20000, "gold": 4000, "food": 40000} if c == "羅馬" else c for c in ROME_CORE]
 ROME_AUTO = {"polity": ["羅馬帝國"], "roles": ["武将", "文臣", "宗室"], "min_conf": "B",
              # the roster's estimated years let in a few whose careers lie decades before / after; and ladies without office
              "exclude": ["Regalianus", "Ragonius Venustus", "Publius Cornelius Saecularis", "Marcus Nummius Albinus",
@@ -21,3 +21,10 @@ def O(p, city=None, **kw):
 def dump(spec, path):
     s = json.dumps(spec, ensure_ascii=False, indent=1)
     open(path, 'w', encoding='utf-8', newline='\n').write(s + '\n')
+
+# city resources by tier (data/city_tiers.json) about the level of Koei's Chinese cities, and no new force richer
+# (troops, gold, food summed over its cities) than the richest Koei force of the same scenario
+RESOURCES = {"tiers": {"1": {"troops": 15000, "gold": 3000, "food": 30000},
+                       "2": {"troops": 8000, "gold": 1600, "food": 16000},
+                       "3": {"troops": 3000, "gold": 800, "food": 6000}},
+             "force_cap": "strongest_koei"}
