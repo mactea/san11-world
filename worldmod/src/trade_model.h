@@ -26,6 +26,10 @@ struct EventDef {
     uint16_t weight = 1;
 };
 
+// known merchant (trade.bin v3): the officer id (roster id = game id), or id -1: Koei's officer (0..849) of that name
+// (utf-8, 姓+名), has the merchant talent 商才 1..2
+struct MerchantName { std::string name; int32_t id = -1; uint8_t talent = 1; };
+
 // trade.bin (tools/trade_data.py)
 struct Data {
     int C = 0, G = 0, version = 0;
@@ -38,6 +42,12 @@ struct Data {
     std::vector<std::string> groupName;            // v2: market group g (1..NG) is groupName[g - 1]
     std::vector<Sea> seas;                         // v2: monsoon seas
     std::vector<EventDef> events;                  // v2: market events
+    std::vector<MerchantName> merchants;           // v3: historical merchants
+    int merchantTalent(int person, const std::string& utf8Name) const {
+        for (auto& m : merchants)
+            if (m.id >= 0 ? m.id == person : person < 850 && m.name == utf8Name) return m.talent;
+        return 0;
+    }
     bool load(const uint8_t* p, size_t n, std::string* err);
     bool produces(int c, int g) const { return supply[(size_t)c * G + g] != 0; }
     int seaOf(int lo, int hi) const;               // monsoon sea containing the hex, -1 none
@@ -62,7 +72,22 @@ struct Params {
     int stormRisk = 10, stormLoss = 30;                   // per turn at sea in a T month: chance %, cargo lost %
     int events = 1, eventChance = 15, eventMax = 4;       // per month: chance % that one starts, at most eventMax running
     int info = 1, infoRange = 40, infoMonths = 12;        // information delay: seen within infoRange hexes; history kept
+    // phase 4: merchant officers. Experience per finished trip: merchExpTrip + profit / merchExpDiv; level 1..5 at
+    // merchExp[0..4]; effective level = experience level + talent (商才: known merchants 1..2, politics >= merchPol: 1),
+    // at most merchMaxLevel. Per level: +merchPP permille on prices, +merchCap % load, -merchTax % of the taxes,
+    // -merchRob % of the robbery chance and of the loss.
+    int merchExp[5] = { 500, 1500, 3500, 7000, 12000 };
+    int merchExpTrip = 100, merchExpDiv = 20, merchPol = 80, merchMaxLevel = 7;
+    int merchPP = 8, merchCap = 5, merchTax = 8, merchRob = 12;
 };
+
+// phase 4: merchant level and its bonuses (trade.cpp, the panel and the sim use these)
+int merchantLevel(const Params& p, int exp);                  // 0..5 from experience
+int merchantEffective(const Params& p, int exp, int talent);  // + talent, capped
+int merchantTalent(const Params& p, int known, int politics); // known merchant talent, or 1 for politics >= merchPol
+int merchantExpGain(const Params& p, int64_t profit);         // one finished trip
+struct MerchantBonus { int pp = 0, capPct = 0, taxPct = 100, robPct = 100; };   // pp permille, capPct added %, tax / rob in % of normal
+MerchantBonus merchantBonus(const Params& p, int level);
 
 int hexDist(int lo1, int hi1, int lo2, int hi2);
 
@@ -103,6 +128,8 @@ inline int capacity(const Data& d, const Params& p, int origin, int dest, int ca
     return (d.port(origin) && d.port(dest) ? p.capSea : p.capLand) * capPct / 100;
 }
 inline int taxPct(const Data& d, int c, int tax, int taxHub) { return d.hub(c) ? taxHub : tax; }
+// a tax of pct % on value, the merchant pays merchPct % of it (merchantBonus().taxPct; 100: phase 1's value * pct / 100)
+inline int64_t taxOf(int64_t value, int pct, int merchPct) { return value * pct * merchPct / 10000; }
 
 // The most profitable cargo from `origin` to one of `dests` (indices into Data cities) for at most `budget` gold
 // (fee included) and `cap` loads. Profit = sale - purchase - fee - tax% of the sale. Returns false if none gains

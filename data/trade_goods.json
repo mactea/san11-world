@@ -200,5 +200,24 @@
       { "name": "豐收", "apply": "producers", "good": "any", "group": "any", "mult": 0.7, "months": [3, 6], "weight": 3,
         "about": "a good year: producers sell cheap" }
     ]
+  },
+
+  "merchants": {
+    "about": "M13 phase 4: officers known as merchants get the talent 商才 (1..2 extra merchant levels) the officer with \"id\" (= the roster id = the game's officer id, data/persons/roster.json), or for \"koei\": true Koei's own officer (ids 0..849) of exactly this name (姓+名 as the game stores it); names alone are ambiguous (three roster officers are 菲爾穆, the roster's 東萊太守 劉巴 is not Shu's). Only people attested as traders or trading families; officers with politics >= worldmod.ini trade_merchant_pol (80) get 商才 1 anyway.",
+    "list": [
+      { "name": "糜竺", "koei": true, "talent": 2, "about": "三國志 蜀書 糜竺傳：祖世貨殖，僮客萬人，貲產鉅億 (Koei officer)" },
+      { "name": "糜芳", "koei": true, "talent": 1, "about": "the same 東海 trading family (糜竺傳)" },
+      { "name": "張世平", "id": 1434, "talent": 2, "about": "三國志 先主傳：中山大商張世平、蘇雙等貲累千金，販馬周旋於涿郡 (roster 1434)" },
+      { "name": "蘇雙", "id": 1503, "talent": 2, "about": "same passage (roster 1503)" },
+      { "name": "甄逸", "id": 1608, "talent": 1, "about": "中山無極甄氏; 魏書 文昭甄皇后傳 注 魏略: in the famine the family, rich in stored grain, bought up gold and jewels (roster 1608)" },
+      { "name": "甄儼", "id": 1956, "talent": 1, "about": "the same family (roster 1956)" },
+      { "name": "甄堯", "id": 1476, "talent": 1, "about": "the same family (roster 1476)" },
+      { "name": "劉巴", "koei": true, "talent": 1, "about": "蜀書 劉巴傳：鑄直百錢，平諸物價，令吏為官市 (Koei officer; the roster's 東萊太守 劉巴 shares the name)" },
+      { "name": "王車", "id": 8522, "talent": 1, "about": "roster 8522, office 商人" },
+      { "name": "菲爾穆", "id": 10228, "talent": 2, "about": "Firmus of Alexandria (roster 10228, office 商人): Historia Augusta, Firmus 3: rich from trade with India (papyrus, glue)" },
+      { "name": "那奈萬達", "id": 12773, "talent": 2, "about": "Nanai-vandak (roster 12773): Sogdian merchant, author of Ancient Letter II (313)" },
+      { "name": "巴拉特", "id": 9513, "talent": 1, "about": "Barates of Palmyra (roster 9513): the Palmyrene of the South Shields tombstone, usually taken as a trader in flags / standards" },
+      { "name": "康僧會", "id": 12125, "talent": 1, "about": "高僧傳 卷一：其先康居人，世居天竺，其父因商賈移于交趾 (roster 12125)" }
+    ]
   }
 }

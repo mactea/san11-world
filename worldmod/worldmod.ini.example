@@ -119,8 +119,9 @@ move=1
 ; trade_rob=15
 ; trade_rob_loss=50
 ; trade_loot=60
-; trade_player_auto: 1 = the player's caravans also move by themselves at the end of each turn (0: use 一括実行 / move them)
-; trade_player_auto=0
+; trade_player_auto: 1 (default) = the player's caravans march by themselves at the end of each turn (自動行軍; each caravan
+; can be switched to 手動 in the panel); 0: use 一括実行 / move them
+; trade_player_auto=1
 ; phase 2 (M13_TRADE.md 第二期): trade_ui=1 adds the 「貿易」 panel to the 中地圖 opened from the main map (needs the world
 ; 中地圖: world_terrain=1, bases=1); trade_ui_ai_caravans: also draw the AI caravans the player can see
 ; trade_ui=1
@@ -135,7 +136,8 @@ move=1
 ; trade_monsoon_storm=125
 ; trade_storm_risk=10
 ; trade_storm_loss=30
-; trade_monsoon_all=0
+; trade_monsoon_all: 1 (default, phase 4) = every ship by the direction of each step; 0 = caravans only
+; trade_monsoon_all=1
 ; market events (fashions, bad harvests, war, plague, good years): trade_event_chance percent a month, at most trade_event_max
 ; trade_events=1
 ; trade_event_chance=15
@@ -187,3 +189,21 @@ auto_skip=1
 ; automation=1
 ; memlog=1   ; with automation=1: process memory + free address space in the log every 30 s (same as the "mem" command)
 ; ...same keys as [san11pk_world]
+; phase 4: panel keys (Tab, 1-4, arrows, PageUp / PageDown, + -, digits, Enter Enter, A, Esc)
+; trade_keys=1
+; merchant officers: experience per finished trip trade_merchant_exp_trip + profit / trade_merchant_exp_div, levels at
+; trade_merchant_exp, +1..2 levels of 商才 for known merchants (trade.bin) and +1 for politics >= trade_merchant_pol,
+; at most trade_merchant_max_level; per level: price +trade_merchant_price permille, load +trade_merchant_load %, taxes
+; -trade_merchant_tax %, robbery -trade_merchant_rob %. The AI sends a merchant officer (level >= 1, an ordinary officer of
+; a city with at least trade_ai_officer_min officers) instead of a temporary 商 when it has one.
+; trade_merchant_exp=500,1500,3500,7000,12000
+; trade_merchant_exp_trip=100
+; trade_merchant_exp_div=20
+; trade_merchant_pol=80
+; trade_merchant_max_level=7
+; trade_merchant_price=8
+; trade_merchant_load=5
+; trade_merchant_tax=8
+; trade_merchant_rob=12
+; trade_ai_officers=1
+; trade_ai_officer_min=4

@@ -264,9 +264,39 @@ __declspec(naked) static void recalcThunk() {
 // The table 0x9549830, or g_steer on 河 / 海 for a unit with 操舵; x4 when the hex burns (as Koei: a byte shift);
 // then the shore scaling above. Impassable (255) stays 255. The callers (0x5a4598, 0x567731, 0x5a5ed8, pathfind.cpp)
 // use only al.
-static MovementSeaCostFn g_seaCost = nullptr;      // M13 trade phase 3 (monsoon): sea-hex cost of a unit
-void movementSetSeaCost(MovementSeaCostFn fn) { g_seaCost = fn; }
-static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags, const uint8_t* hexRec) {
+static MovementSeaCostFn g_seaCost = nullptr;      // M13 trade (monsoon): sea-hex cost of a unit by step direction
+static int g_seaMinPct = 100;                      // the smallest percent the callback gives (pathfind.cpp's heuristic)
+void movementSetSeaCost(MovementSeaCostFn fn, int minPct) { g_seaCost = fn; g_seaMinPct = fn ? (minPct < 100 ? minPct : 100) : 100; }
+int movementSeaMinPct() { return g_seaCost ? g_seaMinPct : 100; }
+// where a step comes from (M13 phase 4), per caller of 0x56dd00:
+//   pathfind.cpp (A*)            sets it around its call (movementSetStepFrom)
+//   range search (ret 0x5a459d)  0x5a4540's 4th argument, the parent hex: [return slot + 0x30]
+//   path cost sum (ret 0x5a5ed8) 0x5a5e00 gets its path from 0x567ed0, which runs A* from the target to the unit, so the
+//                                list starts at the unit and each node's parent (+8) is the next hex towards the target;
+//                                its esi (saved by 0x56dd00 just under the return slot) is the node entered. The step
+//                                into it comes from the node of the previous call when that node's parent is this one.
+//   anything else (Koei's A* at 0x56772c when astar=0, ...): unknown
+static thread_local uint32_t t_stepFrom = 0xffffffffu;    // bit 31: the search runs backwards (see pathfind.cpp)
+static thread_local const uint8_t* t_sumPrev = nullptr;
+static MovementStepStats g_stepStats = {};
+void movementSetStepFrom(uint32_t packed) { t_stepFrom = packed; }
+const MovementStepStats* movementStepStats() { return &g_stepStats; }
+static uint32_t stepFrom(const uint32_t* retSlot) {
+    if (t_stepFrom != 0xffffffffu) { g_stepStats.astar++; return t_stepFrom; }
+    if (!retSlot) { g_stepStats.unknown++; return 0xffffffffu; }
+    switch (retSlot[0]) {
+    case 0x5a459d: g_stepStats.range++; return retSlot[0x30 / 4];
+    case 0x5a5ed8: {
+        const uint8_t* node = (const uint8_t*)(uintptr_t)retSlot[-1];
+        const uint8_t* prev = t_sumPrev;
+        t_sumPrev = node;
+        if (prev && node && *(const uint8_t* const*)(prev + 8) == node) { g_stepStats.pathSum++; return *(const uint32_t*)(prev + 0xc); }
+        g_stepStats.unknown++; return 0xffffffffu;                 // the unit's own hex (first node)
+    }
+    default: g_stepStats.unknown++; return 0xffffffffu;
+    }
+}
+static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags, const uint8_t* hexRec, const uint32_t* retSlot) {
     bool water = terr == 7 || terr == 8;
     const uint8_t* tab = water && g_steerReady && unitHasSteer(unit) ? g_steer : (const uint8_t*)(uintptr_t)g_table;
     uint8_t c = tab[weapon * 32 + terr];
@@ -278,7 +308,7 @@ static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t 
             if (cur && alt) { cost = (cost * cur + alt - 1) / alt; if (cost > 255) cost = 255; }
         }
     }
-    if (g_seaCost && terr == 8 && c != 0xff) cost = g_seaCost(unit, hexRec, cost);
+    if (g_seaCost && terr == 8 && c != 0xff) cost = g_seaCost(unit, hexRec, stepFrom(retSlot), cost);
     return cost;
 }
 
@@ -287,13 +317,15 @@ static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t 
 __declspec(naked) static void costThunk() {
     __asm {
         push edx
+        lea edx, [esp + 12]                     // 0x56dd00's return slot (above its saved esi / edi)
+        push edx
         push edi
         push dword ptr [edi]
         push esi
         push eax
         push ecx
         call stepCost
-        add esp, 20
+        add esp, 24
         pop edx
         pop edi
         pop esi

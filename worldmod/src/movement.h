@@ -22,7 +22,16 @@ int movementApplyRecords(uint8_t* records, const int move[12], const int cost[12
 // The 操舵 step costs (12 x 32, laid out like 0x9549830) the step cost 0x56dd00 uses on 河 / 海 for a unit with 操舵;
 // nullptr before the first map entry or with move=0.
 const uint8_t* movementSteerCosts();
-// M13 trade phase 3 (monsoon): called for every step onto a sea hex (terrain 8) with the unit, its HEX20 record and the
-// cost so far (move=1 only); returns the cost to use (1..254). nullptr (default): no change.
-typedef int (__cdecl* MovementSeaCostFn)(const uint8_t* unit, const uint8_t* hexRec, int cost);
-void movementSetSeaCost(MovementSeaCostFn fn);
+// M13 trade (monsoon): called for every step onto a sea hex (terrain 8) with the unit, the HEX20 record stepped onto,
+// the packed hex the step comes from (lo | hi << 16; 0xffffffff = unknown, see movement.cpp; bit 31 set: a backwards
+// search, the unit really moves the other way) and the cost so far
+// (move=1 only); returns the cost to use (1..254). minPct: the smallest percent of the cost it can return (A*'s
+// heuristic, pathfind.cpp). nullptr (default): no change.
+typedef int (__cdecl* MovementSeaCostFn)(const uint8_t* unit, const uint8_t* hexRec, uint32_t from, int cost);
+void movementSetSeaCost(MovementSeaCostFn fn, int minPct);
+int movementSeaMinPct();
+// pathfind.cpp: the hex its next 0x56dd00 calls step from (0xffffffff: none; bit 31: backwards search); per thread
+void movementSetStepFrom(uint32_t packed);
+// how the step direction was found (counts of sea-hex steps)
+struct MovementStepStats { uint32_t astar, range, pathSum, unknown; };
+const MovementStepStats* movementStepStats();

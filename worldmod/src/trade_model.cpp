@@ -19,7 +19,7 @@ bool Data::load(const uint8_t* p, size_t n, std::string* err) {
     uint32_t magic, ver, c, g, res;
     if (!rd(p, end, &magic) || magic != 0x42445254u /* "TRDB" */) { *err = "not a trade.bin (magic)"; return false; }
     if (!rd(p, end, &ver) || !rd(p, end, &c) || !rd(p, end, &g) || !rd(p, end, &res)) { *err = "short header"; return false; }
-    if (ver != 1 && ver != 2) { *err = "unsupported version"; return false; }
+    if (ver < 1 || ver > 3) { *err = "unsupported version"; return false; }
     if (c < 1 || c > 4096 || g < 1 || g > 64) { *err = "bad city / good count"; return false; }
     size_t need = (size_t)g * 24 + (size_t)c * 24 + (size_t)c * g * 5;
     if (ver == 1 ? (size_t)(end - p) != need : (size_t)(end - p) < need) { *err = "size does not match the counts"; return false; }
@@ -36,7 +36,7 @@ bool Data::load(const uint8_t* p, size_t n, std::string* err) {
     memcpy(price.data(), p, price.size() * 4); p += price.size() * 4;
     memcpy(supply.data(), p, supply.size()); p += supply.size();
     for (uint32_t& v : price) if (!v) v = 1;
-    groupName.clear(); seas.clear(); events.clear();
+    groupName.clear(); seas.clear(); events.clear(); merchants.clear();
     if (ver == 1) return true;
     // version 2: groups, monsoon seas, events
     uint32_t ng, nr, ne;
@@ -48,7 +48,7 @@ bool Data::load(const uint8_t* p, size_t n, std::string* err) {
         memcpy(s.months, p, 12); p += 12; s.name = name16(p); p += 16;
         seas.push_back(s);
     }
-    if (!rd(p, end, &ne) || ne > 256 || (size_t)(end - p) != (size_t)ne * 28) { *err = "v2: bad event table"; return false; }
+    if (!rd(p, end, &ne) || ne > 256 || (size_t)(end - p) < (size_t)ne * 28) { *err = "v2: bad event table"; return false; }
     for (uint32_t i = 0; i < ne; i++) {
         EventDef e; e.name = name16(p); p += 16;
         uint8_t pad8; uint16_t pad16;
@@ -58,6 +58,19 @@ bool Data::load(const uint8_t* p, size_t n, std::string* err) {
             *err = "v2: bad event " + std::to_string(i); return false;
         }
         events.push_back(e);
+    }
+    if (ver == 2) { if (p != end) { *err = "v2: bytes after the event table"; return false; } return true; }
+    // version 3: known merchants
+    uint32_t nm;
+    if (!rd(p, end, &nm) || nm > 4096 || (size_t)(end - p) != (size_t)nm * 32) { *err = "v3: bad merchant table"; return false; }
+    for (uint32_t i = 0; i < nm; i++) {
+        MerchantName m;                                  // char name[27] utf-8, i32 id, u8 talent
+        size_t n = 0; while (n < 27 && p[n]) n++;
+        m.name.assign((const char*)p, n);
+        memcpy(&m.id, p + 27, 4);
+        m.talent = p[31] ? p[31] : 1;
+        p += 32;
+        merchants.push_back(m);
     }
     return true;
 }
@@ -297,6 +310,34 @@ void Info::view(const Market& m, int f, Market* out, std::vector<char>* known) c
             else { out->at(c, g) = 1000; (*known)[c] = 0; }          // never seen: the base price (hearsay)
         }
     }
+}
+
+// ---------------------------------------------------------------- phase 4: merchant officers
+int merchantLevel(const Params& p, int exp) {
+    int l = 0;
+    while (l < 5 && exp >= p.merchExp[l]) l++;
+    return l;
+}
+int merchantEffective(const Params& p, int exp, int talent) {
+    int l = merchantLevel(p, exp) + (talent < 0 ? 0 : talent);
+    return l > p.merchMaxLevel ? p.merchMaxLevel : l;
+}
+int merchantTalent(const Params& p, int known, int politics) {
+    if (known > 0) return known > 2 ? 2 : known;
+    return politics >= p.merchPol ? 1 : 0;
+}
+int merchantExpGain(const Params& p, int64_t profit) {
+    int64_t g = p.merchExpTrip + (profit > 0 && p.merchExpDiv > 0 ? profit / p.merchExpDiv : 0);
+    return (int)(g > 100000 ? 100000 : g);
+}
+MerchantBonus merchantBonus(const Params& p, int level) {
+    MerchantBonus b;
+    if (level <= 0) return b;
+    b.pp = p.merchPP * level;
+    b.capPct = p.merchCap * level;
+    b.taxPct = 100 - p.merchTax * level; if (b.taxPct < 0) b.taxPct = 0;
+    b.robPct = 100 - p.merchRob * level; if (b.robPct < 0) b.robPct = 0;
+    return b;
 }
 
 }  // namespace trade

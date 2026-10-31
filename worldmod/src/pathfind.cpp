@@ -125,13 +125,21 @@ static inline int manhattan(int lo, int hi, int glo, int ghi) { return abs(glo -
 // (0x9549830, and movement.cpp's 操舵 table). Re-read on every call: the game refills the table on each map entry
 // (0x57e910, movement.cpp may change it).
 static const uint8_t* COSTS = nullptr;     // 0x56dd4d mov al, [eax+esi+imm32]
+// M13 monsoon: a sea step (terrain 8) can cost as little as movementSeaMinPct() percent (movement.cpp's callback rounds
+// (cost * pct + 50) / 100 and never goes below min(cost, 2)); the heuristic uses that so it stays admissible.
+static int seaScaled(int c) {
+    int pct = movementSeaMinPct();
+    if (pct >= 100 || c == 0xff) return c;
+    int v = (c * pct + 50) / 100, floor2 = c < 2 ? c : 2;
+    return v < floor2 ? floor2 : v < 1 ? 1 : v;
+}
 static int minStepCost() {
     int m = 0xff;
     const uint8_t* steer = movementSteerCosts();
     for (int w = 0; w < 12; w++)
         for (int t = 0; t < 22; t++) {
-            int c = COSTS[w * 32 + t]; if (c < m) m = c;
-            if (steer && steer[w * 32 + t] < m) m = steer[w * 32 + t];
+            int c = COSTS[w * 32 + t]; if (t == 8) c = seaScaled(c); if (c < m) m = c;
+            if (steer) { int sc = steer[w * 32 + t]; if (t == 8) sc = seaScaled(sc); if (sc < m) m = sc; }
         }
     return m == 0xff ? 0 : m;
 }
@@ -180,6 +188,10 @@ static Node* popMin() { Node* n = g_heap[0].n; removeAt(0); return n; }
 // ------------------------------------------------------------------ replacement
 static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count, int hnum, int margin) {
     void* t = unitT(unit);
+    // M13 monsoon: 0x567ed0 searches from the target to the unit (goal = the unit's hex): the unit moves the other way
+    uint32_t upos = 0;
+    ((uint32_t* (__thiscall*)(void*, uint32_t*))0x56dc30)(unit, &upos);
+    const uint32_t backwards = goal == upos ? 0x80000000u : 0;
     uint32_t mf[4];
     moveFlags(mf, t);
     g_cfg.clear28();
@@ -224,7 +236,9 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
             const uint8_t* rec = HEX20 + ((size_t)lo * W + hi) * 20;
             uint32_t terr = *(const uint32_t*)(rec + 4) & 0x1f;
             if (!PASSABLE[terr]) continue;
+            movementSetStepFrom(cur->coord | backwards);   // the monsoon needs the step's direction (movement.cpp)
             int cost = stepCost(unit, rec);
+            movementSetStepFrom(0xffffffffu);
             switch (*(const uint32_t*)rec & 3) {
             case 1: {                                   // building
                 void* b = building(BMGR, *(const uint16_t*)(rec + 8));

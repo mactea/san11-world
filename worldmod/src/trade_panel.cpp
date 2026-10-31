@@ -49,6 +49,7 @@ static const Rc SEND = { 65, 446, 100, 24 };
 static const int MSG_Y = 476;
 static const int CAR_Y = 26, CAR_H = 50, CAR_ROWS = 7, DONE_Y = 394;
 static const Rc CAR_LIST = { 0, CAR_Y, PANEL_W, CAR_ROWS * CAR_H };
+static Rc autoBtn(int row) { return { PANEL_W - 44, CAR_Y + row * CAR_H + 17, 40, 15 }; }   // 自動 / 手動 of a caravan row
 
 bool inPanel(const State& s, int x, int y) { return s.on && x >= PANEL_X && x < MAP_W && y >= 0 && y < MAP_H; }
 bool onToggle(const State& s, int x, int y) {
@@ -92,13 +93,15 @@ Plan plan(const Model& m, int origin, int dest, int good, int qty, int leader, b
     if (dest < 0 || dest >= d.C) { p.error = L"再點選終點城市"; return p; }
     if (origin == dest) { p.error = L"起點與終點相同"; return p; }
     if (good < 0 || good >= d.G) { p.error = L"選擇商品"; return p; }
-    int pol = TEMP_POL, intel = TEMP_INT;
+    int pol = TEMP_POL, intel = TEMP_INT, level = 0;
     if (leader >= 0) {
         const Officer* o = officer(m, leader);
-        if (o) { pol = o->pol; intel = o->intel; }
+        if (o) { pol = o->pol; intel = o->intel; level = o->level; }
     }
     int capPct;
     leaderFactors(pol, intel, &p.pricePermille, &capPct);
+    MerchantBonus mb = merchantBonus(m.live.p, level);           // phase 4 (trade.cpp applies the same)
+    p.pricePermille += mb.pp; capPct += mb.capPct; p.level = level;
     p.cap = capacity(d, m.live.p, origin, dest, capPct);
     p.qty = std::max(0, std::min(qty, p.cap));
     p.dist = hexDist(d.lo[origin], d.hi[origin], d.lo[dest], d.hi[dest]);
@@ -115,7 +118,7 @@ Plan plan(const Model& m, int origin, int dest, int good, int qty, int leader, b
     if (p.qty > 0 && p.known) {
         p.revenue = saleQuote(m.seen, dest, good, p.qty, p.pricePermille);
         bool free = m.stance[dest] == 2;
-        p.duty = free ? 0 : p.revenue * taxPct(d, dest, m.cfg.tax, m.cfg.taxHub) / 100;
+        p.duty = free ? 0 : taxOf(p.revenue, taxPct(d, dest, m.cfg.tax, m.cfg.taxHub), mb.taxPct);
         if (withTransit) {
             // the cities a caravan passes (trade.cpp: the nearest city within 30 hexes of its position, each once)
             int steps = std::max(1, p.dist / 3), last = origin;
@@ -128,7 +131,7 @@ Plan plan(const Model& m, int origin, int dest, int good, int qty, int leader, b
                 if (c == origin || c == dest || m.owner[c] < 0 || m.owner[c] == m.force) continue;
                 if (m.stance[c] == 1) {
                     int64_t value = (int64_t)p.qty * m.seen.sellPrice(c, good);
-                    p.transit += (int)(value * taxPct(d, c, m.cfg.tax, m.cfg.taxHub) / 100);
+                    p.transit += (int)taxOf(value, taxPct(d, c, m.cfg.tax, m.cfg.taxHub), mb.taxPct);
                     p.transitCities++;
                 } else if (m.stance[c] == 0) p.hostileCities++;
             }
@@ -243,12 +246,123 @@ Result click(Model& m, State& s, const Projector& proj, int x, int y) {
         auto cars = playerCaravans(m);
         for (int i = 0; i < CAR_ROWS; i++) {
             int k = s.carScroll + i;
-            if (k < (int)cars.size() && py >= CAR_Y + i * CAR_H && py < CAR_Y + (i + 1) * CAR_H) {
+            if (k >= (int)cars.size()) break;
+            if (autoBtn(i).in(px, py)) {                          // phase 4: 自動行軍 on / off for this caravan
+                s.carSel = k;
+                r.toggleUnit = cars[k]->unit; r.toggleAuto = !cars[k]->autoMarch;
+                r.repaint = REPAINT_PANEL; return r;
+            }
+            if (py >= CAR_Y + i * CAR_H && py < CAR_Y + (i + 1) * CAR_H) {
+                s.carSel = k;
                 s.origin = cars[k]->origin; s.dest = cars[k]->dest; s.good = cars[k]->good;   // show its route on the map
                 r.repaint = REPAINT_MAP; return r;
             }
         }
     }
+    return r;
+}
+
+// ---------------------------------------------------------------- keyboard (phase 4)
+static void showLeaderRow(const Model& m, State& s, int row) {
+    if (row < s.leaderScroll) s.leaderScroll = row;
+    if (row >= s.leaderScroll + LEAD_ROWS) s.leaderScroll = row - LEAD_ROWS + 1;
+    s.leaderScroll = std::max(0, std::min(s.leaderScroll, leaderRows(m) - LEAD_ROWS));
+}
+Result key(Model& m, State& s, int vk, bool shift) {
+    Result r;
+    if (!s.on || !m.d) return r;                              // panel closed: Koei's keys
+    r.consumed = true;
+    const bool digit = (vk >= '0' && vk <= '9') || (vk >= VK_NUMPAD0 && vk <= VK_NUMPAD9);
+    const int dval = vk >= VK_NUMPAD0 && vk <= VK_NUMPAD9 ? vk - VK_NUMPAD0 : vk - '0';
+    if (!(digit && s.tab == 1)) s.qtyTyping = false;
+    if (vk != VK_RETURN && vk != VK_ESCAPE && s.confirm) { s.confirm = false; s.msg.clear(); }
+    auto changeQty = [&](int q) { q = clampQty(m, s, q); if (q != s.qty) { s.qty = q; r.repaint = REPAINT_MAP; } else r.repaint = REPAINT_PANEL; };
+    switch (vk) {
+    case VK_ESCAPE:
+        if (s.confirm) { s.confirm = false; s.msg = L"已取消"; s.msgError = false; r.repaint = REPAINT_PANEL; }
+        else { s.on = false; r.repaint = REPAINT_MAP | REPAINT_LAYOUT; }
+        return r;
+    case VK_TAB:
+        s.tab = (s.tab + (shift ? 3 : 1)) % 4; r.repaint = REPAINT_PANEL; return r;
+    case VK_ADD: case VK_OEM_PLUS:
+        if (s.tab <= 1) changeQty(s.qty + (shift ? 10 : 1));
+        return r;
+    case VK_SUBTRACT: case VK_OEM_MINUS:
+        if (s.tab <= 1) changeQty(s.qty - (shift ? 10 : 1));
+        return r;
+    case VK_BACK:
+        if (s.tab == 1) { s.qtyTyping = true; changeQty(std::max(1, s.qty / 10)); }
+        return r;
+    case VK_RETURN:
+        if (s.tab == 0) { s.tab = 1; r.repaint = REPAINT_PANEL; return r; }
+        if (s.tab != 1) return r;
+        if (s.sendPending) { s.msg = L"上一支商隊的命令還在等待執行"; s.msgError = true; r.repaint = REPAINT_PANEL; return r; }
+        {
+            Plan p = plan(m, s.origin, s.dest, s.good, s.qty, s.leader);
+            if (!p.ok) { s.confirm = false; s.msg = p.error; s.msgError = true; r.repaint = REPAINT_PANEL; return r; }
+            if (!s.confirm) {
+                s.confirm = true; s.msgError = false;
+                s.msg = L"再按 Enter 出發（Esc 取消）：" + cityW(m, s.origin) + L"→" + cityW(m, s.dest) + L" " + goodW(m, s.good) + L" " +
+                        fmtGold(p.qty) + L"擔，成本 " + fmtGold(p.cost);
+                r.repaint = REPAINT_PANEL; return r;
+            }
+            s.confirm = false;
+            r.send = true;
+            r.req.origin = s.origin; r.req.dest = s.dest; r.req.good = s.good; r.req.qty = p.qty; r.req.leader = s.leader;
+            s.sendPending = true; m.lastResult.clear();
+            s.msg = L"已下令：遊戲等待指令時出發（關閉中地圖後）"; s.msgError = false;
+            r.repaint = REPAINT_PANEL;
+        }
+        return r;
+    }
+    if (digit) {
+        if (s.tab == 1) {                                          // type the quantity
+            int q = s.qtyTyping ? s.qty * 10 + dval : dval;
+            s.qtyTyping = true;
+            changeQty(q > 9999 ? 9999 : q);
+        } else if (dval >= 1 && dval <= 4) { s.tab = dval - 1; r.repaint = REPAINT_PANEL; }
+        return r;
+    }
+    int step = 0;
+    if (vk == VK_UP) step = -1; else if (vk == VK_DOWN) step = 1;
+    else if (vk == VK_PRIOR) step = -7; else if (vk == VK_NEXT) step = 7;
+    if (s.tab == 1 && (vk == VK_LEFT || vk == VK_RIGHT)) {         // the goods of the origin
+        auto goods = originGoods(m, s.origin);
+        if (goods.empty()) return r;
+        int i = (int)(std::find(goods.begin(), goods.end(), s.good) - goods.begin());
+        i = i >= (int)goods.size() ? 0 : (i + (vk == VK_RIGHT ? 1 : -1) + (int)goods.size()) % (int)goods.size();
+        s.good = goods[i]; s.qty = clampQty(m, s, s.qty); r.repaint = REPAINT_MAP;
+        return r;
+    }
+    if (step) {
+        if (s.tab == 0) {
+            int g = s.good < 0 ? 0 : std::max(0, std::min(m.d->G - 1, s.good + step));
+            if (g != s.good) { s.good = g; r.repaint = REPAINT_MAP; }
+        } else if (s.tab == 1) {
+            int rows = leaderRows(m), row = 0;
+            for (int i = 0; i < rows; i++) if (leaderAt(m, i) == s.leader) row = i;
+            row = std::max(0, std::min(rows - 1, row + (step == 7 || step == -7 ? step * LEAD_ROWS / 7 : step)));
+            s.leader = leaderAt(m, row); s.qty = clampQty(m, s, s.qty);
+            showLeaderRow(m, s, row);
+            r.repaint = REPAINT_MAP;
+        } else if (s.tab == 2) {
+            auto cars = playerCaravans(m);
+            if (cars.empty()) return r;
+            s.carSel = std::max(0, std::min((int)cars.size() - 1, s.carSel + step));
+            if (s.carSel < s.carScroll) s.carScroll = s.carSel;
+            if (s.carSel >= s.carScroll + CAR_ROWS) s.carScroll = s.carSel - CAR_ROWS + 1;
+            const CaravanView& c = *cars[s.carSel];
+            s.origin = c.origin; s.dest = c.dest; s.good = c.good;
+            r.repaint = REPAINT_MAP;
+        }
+        return r;
+    }
+    if (vk == 'A' && s.tab == 2) {
+        auto cars = playerCaravans(m);
+        if (s.carSel >= 0 && s.carSel < (int)cars.size()) { r.toggleUnit = cars[s.carSel]->unit; r.toggleAuto = !cars[s.carSel]->autoMarch; r.repaint = REPAINT_PANEL; }
+        return r;
+    }
+    r.consumed = false;                                            // other keys: Koei's
     return r;
 }
 
@@ -541,7 +655,7 @@ void drawForm(Canvas& cv, const Model& m, const State& s) {
     cv.fill(QTY_BOX.x, QTY_BOX.y, QTY_BOX.w, QTY_BOX.h, 0xff0e0c08);
     cv.frame(QTY_BOX.x, QTY_BOX.y, QTY_BOX.w, QTY_BOX.h, FRAME);
     cv.text(QTY_BOX.x + QTY_BOX.w / 2, QTY_BOX.y + 3, fmtGold(s.qty), GOLD, 2, true);
-    cv.text(4, LEAD_LABEL_Y, L"統領（滾輪捲動）", DIM);
+    cv.text(4, LEAD_LABEL_Y, L"統領　Lv 商人等級 ★商才", DIM);
     for (int i = 0; i < LEAD_ROWS; i++) {
         int row = s.leaderScroll + i, id = leaderAt(m, row);
         if (id == -2) break;
@@ -553,6 +667,10 @@ void drawForm(Canvas& cv, const Model& m, const State& s) {
         swprintf_s(b, L"政%d 智%d", o->pol, o->intel);
         cv.text(r.x + 4, r.y + 2, o->name, sel ? GOLD : TEXT);
         cv.text(r.x + r.w - 4, r.y + 2, b, DIM, 1);
+        if (o->level > 0 || o->talent > 0) {                       // phase 4: merchant level, ★ = 商才
+            wchar_t lv[24]; swprintf_s(lv, L"%lsLv%d", o->talent ? L"★" : L"", o->level);
+            cv.text(r.x + 64, r.y + 2, lv, o->level >= 3 ? GREEN : GOLD);
+        }
     }
     if (leaderRows(m) > LEAD_ROWS) {
         swprintf_s(b, L"%d/%d", s.leaderScroll + 1, leaderRows(m) - LEAD_ROWS + 1);
@@ -577,22 +695,30 @@ void drawCaravans(Canvas& cv, const Model& m, const State& s) {
     auto cars = playerCaravans(m);
     wchar_t b[160];
     if (cars.empty()) cv.text(4, CAR_Y, L"沒有我方商隊（在「組隊」派出）", DIM);
+    else cv.text(PANEL_W - 4, DONE_Y - 17, m.playerAuto ? L"自動＝回合末自動行軍（A 鍵切換）" : L"自動行軍已關（trade_player_auto=0）", DIM, 1);
     for (int i = 0; i < CAR_ROWS; i++) {
         int k = s.carScroll + i;
         if (k >= (int)cars.size()) break;
         const CaravanView& c = *cars[k];
         int y = CAR_Y + i * CAR_H;
-        if (i & 1) cv.fill(1, y, PANEL_W - 2, CAR_H, ROW_ALT);
+        if (k == s.carSel) cv.fill(1, y, PANEL_W - 2, CAR_H, ROW_SEL);
+        else if (i & 1) cv.fill(1, y, PANEL_W - 2, CAR_H, ROW_ALT);
         swprintf_s(b, L"%ls→%ls  %ls %d擔", cityW(m, c.origin).c_str(), cityW(m, c.dest).c_str(), goodW(m, c.good).c_str(), c.qty);
         cv.text(4, y + 1, b, c.temp ? TEXT : GOLD);
         int dist = hexDist(c.lo, c.hi, m.d->lo[c.dest], m.d->hi[c.dest]);
         int speed = c.atSea ? m.cfg.speedSea : m.cfg.speedLand;
         bool know = m.known.empty() || m.known[c.dest];
         int64_t value = know ? (int64_t)c.qty * m.seen.sellPrice(c.dest, c.good) : -1;
-        swprintf_s(b, L"位置 %d,%d　距%d格 約%d旬%ls", c.lo, c.hi, dist, (dist + speed - 1) / std::max(1, speed), c.atSea ? L" 海上" : L"");
+        swprintf_s(b, L"%d,%d 距%d格 約%d旬%ls", c.lo, c.hi, dist, (dist + speed - 1) / std::max(1, speed), c.atSea ? L" 海" : L"");
         cv.text(10, y + 17, b, DIM);
-        swprintf_s(b, L"貨值 %ls　成本 %d%ls", value >= 0 ? fmtGold(value).c_str() : L"?", c.cost, c.temp ? L"" : L"　武將");
+        Rc ab = autoBtn(i);
+        bool autoOn = m.playerAuto && c.autoMarch;
+        cv.button(ab, autoOn ? L"自動" : L"手動", autoOn, m.playerAuto);
+        swprintf_s(b, L"值%ls 本%d", value >= 0 ? fmtGold(value).c_str() : L"?", c.cost);
         cv.text(10, y + 33, b, value >= 0 && value > c.cost ? GREEN : DIM);
+        std::wstring who = c.temp ? L"商" : c.leader;
+        if (!c.temp && c.level > 0) { wchar_t lv[16]; swprintf_s(lv, L" Lv%d", c.level); who += lv; }
+        cv.text(PANEL_W - 4, y + 33, who, c.temp ? DIM : GOLD, 1);
     }
     if ((int)cars.size() > CAR_ROWS) { swprintf_s(b, L"%d–%d / %zu", s.carScroll + 1, s.carScroll + CAR_ROWS, cars.size()); cv.text(PANEL_W - 4, DONE_Y, b, DIM, 1); }
     cv.fill(2, DONE_Y - 4, PANEL_W - 4, 1, FRAME);

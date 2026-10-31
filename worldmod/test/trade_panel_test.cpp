@@ -85,6 +85,9 @@ int main(int argc, char** argv) {
     m.caravans = { { chengdu, luoyang, brocade, 18, 1700, d.lo[chengdu] + 6, d.hi[chengdu] - 3, true, true, false },
                    { panyu, muziris, silk, 60, 9000, d.lo[panyu] - 40, d.hi[panyu] + 60, true, false, true },
                    { luoyang, chengdu, silk, 20, 900, d.lo[luoyang] - 8, d.hi[luoyang] + 2, false, true, false } };
+    m.caravans[0].unit = 10; m.caravans[0].autoMarch = true;
+    m.caravans[1].unit = 11; m.caravans[1].leader = L"糜竺"; m.caravans[1].level = 3; m.caravans[1].autoMarch = false;
+    m.caravans[2].unit = 12;
     m.done = { { m.month * 30 - 20, chengdu, luoyang, brocade, 20, 1800, 2950, 0 }, { m.month * 30 - 50, chengdu, changan, silk, 20, 1200, 0, DONE_INTERCEPTED },
                { m.month * 30 - 90, panyu, hepu, pearl, 40, 2600, 2400, 0 } };
 
@@ -239,6 +242,78 @@ int main(int argc, char** argv) {
         check(!s.on && (r.repaint & REPAINT_LAYOUT), "× closes the panel");
     }
 
+    printf("phase 4: merchants, keys, 自動行軍 switch\n");
+    {
+        const Params& pr = m.live.p;
+        check(merchantLevel(pr, 499) == 0 && merchantLevel(pr, 500) == 1 && merchantLevel(pr, 12000) == 5 && merchantLevel(pr, 99999) == 5,
+              "merchant level: 500 -> 1 ... 12000 -> 5");
+        check(merchantEffective(pr, 12000, 2) == 7 && merchantEffective(pr, 0, 2) == 2 && merchantTalent(pr, 0, 85) == 1 &&
+              merchantTalent(pr, 2, 30) == 2 && merchantTalent(pr, 0, 79) == 0, "effective level = experience + 商才 (cap 7); 商才 by name or politics >= 80");
+        MerchantBonus b3 = merchantBonus(pr, 3);
+        check(b3.pp == 24 && b3.capPct == 15 && b3.taxPct == 76 && b3.robPct == 64, "level 3: +24 permille price, +15% load, 76% of taxes, 64% robbery");
+        // 糜竺: level 3 (商才 2 + 600 experience: level 1)
+        for (auto& o : m.officers) if (o.id == 1003) { o.exp = 600; o.talent = 2; o.level = merchantEffective(pr, o.exp, o.talent); }
+        Plan q = plan(m, chengdu, luoyang, brocade, 30, 1003);
+        int64_t goods = m.live.quoteBuy(chengdu, brocade, q.qty) * (1000 - 54) / 1000;
+        int64_t rev = m.seen.quoteSell(luoyang, brocade, q.qty) * (1000 + 54) / 1000;
+        int pct = d.hub(luoyang) ? 5 : 10;
+        char b[200];
+        sprintf_s(b, "糜竺 Lv3: pp 30 + 24 = %d, load 20 x 125%% = %d, goods %lld = %lld, duty %lld = %lld", q.pricePermille, q.cap,
+                  (long long)q.goods, (long long)goods, (long long)q.duty, (long long)(rev * pct * 76 / 10000));
+        check(q.pricePermille == 54 && q.cap == 25 && q.goods == goods && q.revenue == rev && q.duty == rev * pct * 76 / 10000, b);
+        // keys
+        State k; Result r;
+        r = key(m, k, VK_TAB, false);
+        check(!r.consumed, "panel closed: keys are Koei's (not consumed)");
+        k.on = true; k.origin = chengdu; k.dest = luoyang; k.good = brocade; k.qty = 10;
+        key(m, k, VK_TAB, false); key(m, k, VK_TAB, false);
+        check(k.tab == 2, "Tab Tab: page 3");
+        key(m, k, VK_TAB, true);
+        check(k.tab == 1, "Shift+Tab: back");
+        key(m, k, '1', false);
+        check(k.tab == 1 && k.qty == 1, "on 組隊 a digit is the quantity (1)");
+        key(m, k, '3', false);
+        check(k.qty == 13, "typing 1 3 -> 13");
+        key(m, k, VK_ADD, false); key(m, k, VK_SUBTRACT, true);
+        check(k.qty == 4, "+ then Shift - : 13 + 1 - 10 = 4");
+        key(m, k, '9', false); key(m, k, '9', false);
+        check(k.qty == 20, "typing 9 9 stops at the load (20)");
+        key(m, k, VK_BACK, false);
+        check(k.qty == 2, "Backspace drops a digit");
+        key(m, k, VK_DOWN, false);
+        check(k.leader == 1001, "Down: the next leader row (諸葛亮)");
+        key(m, k, VK_NEXT, false);
+        check(k.leader == 1007 && k.leaderScroll == 2, "PageDown: 6 rows on, list scrolled");
+        key(m, k, VK_UP, false);
+        check(k.leader == 1006, "Up");
+        int g0 = k.good; key(m, k, VK_RIGHT, false);
+        check(k.good != g0 && d.canBuy(chengdu, k.good), "Right: the next good the origin sells");
+        k.good = brocade; k.leader = -1;
+        r = key(m, k, VK_RETURN, false);
+        check(!r.send && k.confirm && k.msg.find(L"再按 Enter") != std::wstring::npos, "Enter on 組隊: asks first");
+        r = key(m, k, VK_ESCAPE, false);
+        check(!r.send && !k.confirm && k.on, "Esc: cancels the question, the panel stays");
+        key(m, k, VK_RETURN, false); r = key(m, k, VK_RETURN, false);
+        check(r.send && r.req.origin == chengdu && r.req.dest == luoyang && r.req.good == brocade && r.req.qty == 2 && k.sendPending, "Enter Enter: 出發 (the same request as the button)");
+        key(m, k, '1', false);
+        k.tab = 0; key(m, k, '3', false);
+        check(k.tab == 2, "on another page 1-4 switch pages");
+        key(m, k, VK_DOWN, false);
+        check(k.carSel == 1 && k.origin == panyu, "商隊: Down selects the next caravan and shows its route");
+        r = key(m, k, 'A', false);
+        check(r.toggleUnit == 11 && r.toggleAuto, "A: 自動行軍 on for the selected caravan (unit 11)");
+        r = key(m, k, 'Z', false);
+        check(!r.consumed, "an unused key goes on to Koei");
+        r = key(m, k, VK_ESCAPE, false);
+        check(r.consumed && !k.on && (r.repaint & REPAINT_LAYOUT), "Esc: closes the panel");
+        r = key(m, k, VK_ESCAPE, false);
+        check(!r.consumed, "Esc with the panel closed: Koei's");
+        // the switch button of a caravan row
+        State t; t.on = true; t.tab = 2;
+        r = click(m, t, proj, PANEL_X + PANEL_W - 30, 26 + 17 + 5);
+        check(r.consumed && r.toggleUnit == 10 && !r.toggleAuto, "click 自動 of row 1: 自動行軍 off for unit 10");
+    }
+
     // ---- renders
     printf("renders\n");
     std::vector<uint32_t> full((size_t)MAP_W * MAP_H);
@@ -257,6 +332,7 @@ int main(int argc, char** argv) {
     const char* names[4] = { "market", "form", "caravans", "news" };
     for (int t = 0; t < 4; t++) {
         s.tab = t;
+        if (t == 2) s.carSel = 1;
         if (t == 1) { s.leader = 1003; s.msg = L"已下令：遊戲等待指令時出發（關閉中地圖後）"; }
         background();
         renderMap(m, s, proj, full.data(), MAP_W);

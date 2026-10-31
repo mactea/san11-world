@@ -27,6 +27,9 @@
 // texture's panel rectangle (trade_panel.cpp renders). 「出發」 queues "trade send" like the automation command.
 // Phase 3: monsoon (sea step cost of caravans through movement.cpp's sea-cost callback, storms, AI route times),
 // market events (price factors), information delay (what each force knows of other markets); TRAD block v2.
+// Phase 4: the player's caravans march by themselves at the end of the 旬 (default; per caravan 自動 / 手動), the
+// monsoon by the direction of each step for every ship, keys in the panel (MapUI / midmap dialog vt +0xb8), merchant
+// officers (experience, levels, 商才; the AI sends its merchants); TRAD block v3.
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
@@ -106,8 +109,9 @@ struct Cfg {
     int tempMax = 30, tempKeep = 30, tmpl = 745;
     int ai = 1, aiHook = 1, aiMax = 2, aiMonth = 6, aiRange = 80, aiMinGold = 6000, aiInvest = 4000, aiReserve = 2000, aiMargin = 25;
     int tax = 10, taxHub = 5, relTax = 40, rob = 15, robLoss = 50, loot = 60;
-    int escort = 500, food = 3000, arrive = 3, maxTurns = 90, playerAuto = 0;
-    int ui = 1, uiAi = 1, monsoonAll = 0, PT = 1100;        // phase 2 panel, AI caravans on the map; phase 3; officer records
+    int escort = 500, food = 3000, arrive = 3, maxTurns = 90, playerAuto = 1;
+    int ui = 1, uiAi = 1, monsoonAll = 1, PT = 1100;        // phase 2 panel, AI caravans on the map; monsoon for all ships; officer records
+    int keys = 1, aiOfficers = 1, aiOfficerMin = 4;         // phase 4: panel keys; the AI's merchant officers
 } g_cfg;
 
 TraceLogFn g_log = nullptr;
@@ -120,7 +124,7 @@ std::vector<std::vector<int>> g_inRange;
 CRITICAL_SECTION g_cs;
 struct Lock { Lock() { EnterCriticalSection(&g_cs); } ~Lock() { LeaveCriticalSection(&g_cs); } };
 
-enum : uint32_t { F_TEMP = 1, F_PLAYER = 2, F_LOOTED = 4 };
+enum : uint32_t { F_TEMP = 1, F_PLAYER = 2, F_LOOTED = 4, F_MANUAL = 8 };   // F_MANUAL: the player moves it (no 自動行軍)
 struct Caravan {
     int32_t unit, leader, force, corps, origin, dest, good, qty, cost, taxDue, born, lastCity;
     uint32_t flags;
@@ -138,6 +142,14 @@ const size_t DONE_MAX = 24;
 std::vector<int8_t> g_unitDir;                 // per unit: caravan heading (1 east, -1 west, 2 neither), 0 = not a caravan
 uint8_t* g_unit0 = nullptr;                    // unit 0 (the sea-cost callback's pointer -> index)
 int g_month0 = 0;                              // month of the year (0 = January) at the last turn
+// phase 4: merchant officers' experience (saved)
+struct MerchRec { int32_t person, exp, trips; };
+std::vector<MerchRec> g_merch;
+int merchExpOf(int person) { for (auto& m : g_merch) if (m.person == person) return m.exp; return 0; }
+void merchGain(int person, int gain) {
+    for (auto& m : g_merch) if (m.person == person) { m.exp += gain; m.trips++; return; }
+    g_merch.push_back({ person, gain, 1 });
+}
 
 int today() {      // days since 1/1/1: the start date world +8 / +0xc / +0x10 plus 10 days a 旬 (+0x5c)
     const int* w = (const int*)(uintptr_t)WORLD;
@@ -156,13 +168,14 @@ bool freeHex(int lo, int hi) {
     if ((*(uint32_t*)c & 3) != 0) return false;                        // a building or a unit there
     return terr <= 14 || terr == 19;                                    // not 崖 (15), 城 港 関 (16..18)
 }
-// a free hex 1..2 from (lo, hi), nearest to (flo, fhi); false if none
-bool hexNear(int lo, int hi, int flo, int fhi, int* olo, int* ohi) {
+// a free hex 1..2 from (lo, hi), nearest to (flo, fhi); false if none. skip: packed hexes not to use (tried already)
+bool hexNear(int lo, int hi, int flo, int fhi, int* olo, int* ohi, const std::vector<uint32_t>* skip = nullptr) {
     int best = 1 << 30;
     for (int r = lo - 3; r <= lo + 3; r++)
         for (int c = hi - 3; c <= hi + 3; c++) {
             int d = hexDist(lo, hi, r, c);
             if (d < 1 || d > 2 || !freeHex(r, c)) continue;
+            if (skip) { uint32_t pk = (uint16_t)r | (uint32_t)(uint16_t)c << 16; bool used = false; for (uint32_t x : *skip) used |= x == pk; if (used) continue; }
             int e = hexDist(r, c, flo, fhi) * 4 + d;
             if (e < best) { best = e; *olo = r; *ohi = c; }
         }
@@ -228,14 +241,37 @@ void releaseTempIfOurs(const Caravan& k) {
 }
 
 // leader bonus: politics +-5% on prices, intelligence +-25% on the load
-void leaderBonus(int leader, int* pricePermille, int* capPct) {
+std::wstring big5(const uint8_t* p, int n) {
+    char b[16] = {}; memcpy(b, p, n);
+    wchar_t w[16] = {};
+    int len = MultiByteToWideChar(950, 0, b, -1, w, 16);
+    return len > 1 ? std::wstring(w, len - 1) : L"";
+}
+std::wstring personName(uint8_t* p) { return big5(p + 4, 4) + big5(p + 9, 4); }
+// phase 4: 商才 of an officer (known merchant by id / Koei name, or politics)
+int talentOf(int leader, uint8_t* p) {
+    std::wstring n = personName(p);
+    char u8[64] = {};
+    WideCharToMultiByte(CP_UTF8, 0, n.c_str(), -1, u8, sizeof u8, nullptr, nullptr);
+    return merchantTalent(g_mk.p, g_data.merchantTalent(leader, u8), ability(p, 3));
+}
+int leaderLevel(int leader) {
+    uint8_t* p = leader >= 0 ? personRec(WORLD, leader) : nullptr;
+    if (!p || !objValid(p)) return 0;
+    return merchantEffective(g_mk.p, merchExpOf(leader), talentOf(leader, p));
+}
+// price permille and load of a leader, merchant level included; *mb: the level's tax / robbery factors
+void leaderBonus(int leader, int* pricePermille, int* capPct, MerchantBonus* mb = nullptr) {
     uint8_t* p = personRec(WORLD, leader);
     int pol = p ? ability(p, 3) : 50, intel = p ? ability(p, 2) : 50;
     leaderFactors(pol, intel, pricePermille, capPct);   // + on sales, - on purchases (permille); load (trade_model.h)
+    MerchantBonus b = merchantBonus(g_mk.p, leaderLevel(leader));
+    *pricePermille += b.pp; *capPct += b.capPct;
+    if (mb) *mb = b;
 }
-void leaderOrTemp(const Caravan& k, int* pp, int* capPct) {
-    if (k.flags & F_TEMP) leaderFactors(TEMP_POL, TEMP_INT, pp, capPct);
-    else leaderBonus(k.leader, pp, capPct);
+void leaderOrTemp(const Caravan& k, int* pp, int* capPct, MerchantBonus* mb = nullptr) {
+    if (k.flags & F_TEMP) { leaderFactors(TEMP_POL, TEMP_INT, pp, capPct); if (mb) *mb = MerchantBonus(); }
+    else leaderBonus(k.leader, pp, capPct, mb);
 }
 int8_t headingOf(const Caravan& k) {
     int d = g_data.lo[k.dest] - g_data.lo[k.origin];
@@ -256,12 +292,13 @@ void recordDone(const Caravan& k, int64_t net, uint32_t flags) {
 }
 
 // ---------------------------------------------------------------- caravans
-void issueOrder(const Caravan& k, uint8_t* u) {
+uint32_t issueOrder(const Caravan& k, uint8_t* u, const std::vector<uint32_t>* skip = nullptr) {
     int dlo, dhi, tlo, thi;
     cityPos(k.dest, &dlo, &dhi);
     const int16_t* up = posOf(u);
-    if (!hexNear(dlo, dhi, up[0], up[1], &tlo, &thi)) { tlo = dlo; thi = dhi; }
+    if (!hexNear(dlo, dhi, up[0], up[1], &tlo, &thi, skip)) { tlo = dlo; thi = dhi; }
     setOrder(EXEC, u, 1, pack(tlo, thi), -1);
+    return pack(tlo, thi);
 }
 
 // creates a caravan; leader < 0: temporary 商 officer. Returns "" or an error.
@@ -284,7 +321,7 @@ std::string createCaravan(int origin, int dest, int good, int qty, int leader, b
         if (freeSpecials(WORLD) - 1 < g_cfg.tempKeep) return "too few free special officer slots (trade_temp_keep)";
     }
     int pp = 0, capPct = 100;
-    if (!temp) leaderBonus(leader, &pp, &capPct);
+    if (!temp) leaderBonus(leader, &pp, &capPct);           // politics / intelligence + merchant level (phase 4)
     else leaderFactors(TEMP_POL, TEMP_INT, &pp, &capPct);   // 商: politics 60, intelligence 50
     int cap = capacity(g_data, g_mk.p, origin, dest, capPct);
     if (qty > cap) qty = cap;
@@ -362,10 +399,58 @@ uint8_t* payee(int f, int c) {
     return best >= 0 ? base(best) : nullptr;
 }
 
+// sells the cargo at city c (the destination, or a city of the force the unit walked into); u: the unit to remove
+// (nullptr: it is gone already). Returns the net gold home.
+int64_t sellAt(Caravan& k, uint8_t* u, int c, const char* how) {
+    int pp = 0, capPct = 100;
+    MerchantBonus mb;
+    leaderOrTemp(k, &pp, &capPct, &mb);
+    int64_t rev = g_mk.sell(c, k.good, k.qty) * (1000 + pp) / 1000;   // = saleQuote (trade_model.h) before the sale
+    g_info.see(k.force, c);
+    int df = baseForce(c), st = stance(k.force, df);
+    int64_t duty = st == 2 ? 0 : taxOf(rev, g_data.hub(c) ? g_cfg.taxHub : g_cfg.tax, mb.taxPct);
+    if (duty && base(c)) addGold(PROC, base(c), (int)duty);
+    int64_t net = rev - duty - k.taxDue;
+    if (net < 0) net = 0;
+    uint8_t* home = payee(k.force, k.origin);
+    int paid = home ? addGold(PROC, home, (int)net) : 0;
+    g_log("trade: caravan %s at %s: %d x %s sold for %lld, duty %lld, transit tax %d, %d gold home (cost %d, profit %lld)", how,
+          cityName(c), k.qty, goodName(k.good), (long long)rev, (long long)duty, k.taxDue, paid, k.cost, (long long)(net - k.cost));
+    if (!(k.flags & F_TEMP)) {                                // phase 4: the leader learns
+        int gain = merchantExpGain(g_mk.p, net - k.cost);
+        int before = leaderLevel(k.leader);
+        { Lock l; merchGain(k.leader, gain); }
+        int after = leaderLevel(k.leader);
+        g_log("trade: officer %d gains %d trade experience (now %d)%s", k.leader, gain, merchExpOf(k.leader),
+              after > before ? (" - merchant level " + std::to_string(after)).c_str() : "");
+    }
+    recordDone(k, net, 0);
+    if (u) removeUnit(PROC, u, 0);                           // officers go home, a temporary one is released
+    return net;
+}
+// the unit is gone without being destroyed: did it walk into a city of its force? (the leader is in that city)
+int enteredCity(const Caravan& k) {
+    if (k.flags & F_LOOTED) return -1;
+    uint8_t* p = personRec(WORLD, k.leader);
+    if (!p || !objValid(p)) return -1;
+    int loc = *(int*)(p + 0x9c);
+    if (loc < 0 || loc >= g_data.C || baseForce(loc) != k.force) return -1;
+    return loc;
+}
+bool autoMarch(const Caravan& k) { return (k.flags & F_PLAYER) && g_cfg.playerAuto && !(k.flags & F_MANUAL); }
+typedef int (__thiscall* UnitFlagFn)(void* unit);
+const UnitFlagFn unitActed = (UnitFlagFn)0x4952c0;          // unit +0x40 bit 0: 行動済 (0x5ad980 checks it too)
+
 // one caravan at the end of a turn; false = it is over (remove from the list)
 bool caravanTurn(Caravan& k, int day) {
     uint8_t* u = liveUnit(k);
     if (!u) {
+        int c = enteredCity(k);
+        if (c >= 0) {                                        // walked into one of its force's cities: the market there buys
+            sellAt(k, nullptr, c, c == k.dest ? "entered its destination" : "entered a city");
+            if (k.flags & F_TEMP) releaseTempIfOurs(k);
+            return false;
+        }
         g_log("trade: caravan %s -> %s (%d x %s) is gone%s", cityName(k.origin), cityName(k.dest), k.qty, goodName(k.good),
               k.flags & F_LOOTED ? " (intercepted)" : " (lost)");
         if (k.flags & F_TEMP) releaseTempIfOurs(k);
@@ -375,31 +460,15 @@ bool caravanTurn(Caravan& k, int day) {
     const int16_t* up = posOf(u);
     int lo = up[0], hi = up[1];
     int dlo, dhi; cityPos(k.dest, &dlo, &dhi);
-    if (hexDist(lo, hi, dlo, dhi) <= g_cfg.arrive) {
-        int pp = 0, capPct = 100;
-        leaderOrTemp(k, &pp, &capPct);
-        int64_t rev = g_mk.sell(k.dest, k.good, k.qty) * (1000 + pp) / 1000;   // = saleQuote (trade_model.h) before the sale
-        g_info.see(k.force, k.dest);
-        int df = baseForce(k.dest), st = stance(k.force, df);
-        int64_t duty = st == 2 ? 0 : rev * (g_data.hub(k.dest) ? g_cfg.taxHub : g_cfg.tax) / 100;
-        if (duty && base(k.dest)) addGold(PROC, base(k.dest), (int)duty);
-        int64_t net = rev - duty - k.taxDue;
-        if (net < 0) net = 0;
-        uint8_t* home = payee(k.force, k.origin);
-        int paid = home ? addGold(PROC, home, (int)net) : 0;
-        g_log("trade: caravan arrived at %s: %d x %s sold for %lld, duty %lld, transit tax %d, %d gold home (cost %d, profit %lld)",
-              cityName(k.dest), k.qty, goodName(k.good), (long long)rev, (long long)duty, k.taxDue, paid, k.cost,
-              (long long)(net - k.cost));
-        recordDone(k, net, 0);
-        removeUnit(PROC, u, 0);                              // officers go home, a temporary one is released
-        return false;
-    }
+    if (hexDist(lo, hi, dlo, dhi) <= g_cfg.arrive) { sellAt(k, u, k.dest, "arrived"); return false; }
     if (day - k.born > g_cfg.maxTurns * 10) {
         g_log("trade: caravan %s -> %s gave up after %d turns, cargo lost", cityName(k.origin), cityName(k.dest), g_cfg.maxTurns);
         recordDone(k, 0, tradeui::DONE_GAVE_UP);
         removeUnit(PROC, u, 0);
         return false;
     }
+    MerchantBonus mb;
+    { int pp, cp; leaderOrTemp(k, &pp, &cp, &mb); }
     // phase 3: a storm at sea in a month of the monsoon change
     if (g_mk.p.monsoon) {
         uint8_t* h = cell(lo, hi);
@@ -422,12 +491,12 @@ bool caravanTurn(Caravan& k, int day) {
             int st = stance(k.force, cf);
             int64_t value = (int64_t)k.qty * g_mk.sellPrice(c, k.good);
             if (st == 1) {
-                int t = (int)(value * (g_data.hub(c) ? g_cfg.taxHub : g_cfg.tax) / 100);
+                int t = (int)taxOf(value, g_data.hub(c) ? g_cfg.taxHub : g_cfg.tax, mb.taxPct);
                 addGold(PROC, base(c), t);
                 k.taxDue += t;
                 g_log("trade: caravan %s -> %s pays %d transit tax at %s", cityName(k.origin), cityName(k.dest), t, cityName(c));
-            } else if (st == 0 && g_rng.pct() < g_cfg.rob) {
-                int lost = (k.qty * g_cfg.robLoss + 99) / 100;
+            } else if (st == 0 && g_rng.pct() * 100 < g_cfg.rob * mb.robPct) {   // a merchant level lowers the chance and the loss
+                int lost = (k.qty * (g_cfg.robLoss * mb.robPct / 100) + 99) / 100;
                 if (lost > k.qty) lost = k.qty;
                 k.qty -= lost;
                 int got = (int)((int64_t)lost * g_mk.sellPrice(c, k.good) * g_cfg.loot / 100);
@@ -436,9 +505,48 @@ bool caravanTurn(Caravan& k, int day) {
             }
         }
     }
-    issueOrder(k, u);                                        // re-path every turn (blocked target, moved city)
-    if ((k.flags & F_PLAYER) && g_cfg.playerAuto) execOrder(EXEC, u);
+    std::vector<uint32_t> tried;
+    tried.push_back(issueOrder(k, u));                       // re-path every turn (blocked target, moved city)
+    // phase 4: 自動行軍. Here (logic thread, every force has moved) the game's own executor 0x5ad980 moves it, as the AI
+    // moves its units: it does nothing for a unit that acted already this 旬 (the player moved it: +0x40 bit 0) or
+    // whose +0x24 is set. A target that cannot be reached: up to two other hexes next to the destination.
+    if (autoMarch(k) && !unitActed(u) && !*(int*)(u + 0x24)) {
+        bool moved = execOrder(EXEC, u) != 0;
+        for (int alt = 0; !moved && alt < 2 && liveUnit(k) && !unitActed(u); alt++) {
+            tried.push_back(issueOrder(k, u, &tried));
+            moved = execOrder(EXEC, u) != 0;
+        }
+        u = liveUnit(k);
+        if (!u) {                                            // moved into a city
+            int ec = enteredCity(k);
+            if (ec >= 0) { sellAt(k, nullptr, ec, "marched into"); if (k.flags & F_TEMP) releaseTempIfOurs(k); return false; }
+            return true;                                     // next turn decides (lost / intercepted)
+        }
+        const int16_t* np = posOf(u);
+        if (hexDist(np[0], np[1], dlo, dhi) <= g_cfg.arrive) { sellAt(k, u, k.dest, "marched to"); return false; }
+        if (!moved) g_log("trade: caravan %s -> %s: 自動行軍 could not move this turn", cityName(k.origin), cityName(k.dest));
+    }
     return true;
+}
+
+// phase 4: the AI's merchant for a caravan from city c: an ordinary officer (status 3) of force f in c, not the only
+// ones (the city keeps at least trade_ai_officer_min - 1), with merchant level >= 1; the best level, then politics.
+int aiMerchant(int f, int c) {
+    int best = -1, bestScore = 0, inCity = 0;
+    for (int i = 0; i < g_cfg.PT; i++) {
+        uint8_t* p = personRec(WORLD, i);
+        if (!p || !objValid(p) || *(int*)(p + 0x9c) != c || vcall(p, 0x40) != f) continue;
+        inCity++;
+        if (*(int*)(p + 0xa0) != 3) continue;                // 一般 officers only (not the ruler / governors)
+        if (p[4] == 0xb0 && p[5] == 0xd3 && !p[6] && !p[9]) continue;   // a temporary 商
+        bool busy = false; for (auto& k : g_car) busy |= k.leader == i;
+        if (busy) continue;
+        int lv = merchantEffective(g_mk.p, merchExpOf(i), talentOf(i, p));
+        if (lv < 1) continue;
+        int score = lv * 1000 + ability(p, 3);
+        if (score > bestScore) { bestScore = score; best = i; }
+    }
+    return inCity >= g_cfg.aiOfficerMin ? best : -1;
 }
 
 // AI: at most aiMonth new caravans a month, aiMax per force, temporary leaders only
@@ -477,7 +585,11 @@ void aiMonth() {
             if (bestRoute(view, c, sea, budget, g_mk.p.capSea, g_cfg.tax, g_cfg.aiMargin, &r, &seaTime) && (!have || eff(r) > eff(best))) { best = r; have = true; }
         }
         if (!have) continue;
-        std::string err = createCaravan(best.origin, best.dest, best.good, best.qty, -1, true, nullptr);
+        // phase 4: a merchant officer of the city leads it if there is one (商才 or experience), else a temporary 商
+        int leader = g_cfg.aiOfficers ? aiMerchant(f, best.origin) : -1;
+        std::string err = leader >= 0 ? createCaravan(best.origin, best.dest, best.good, best.qty, leader, true, nullptr) : "x";
+        if (leader >= 0 && err.empty()) g_log("trade: AI force %d sends merchant officer %d (level %d)", f, leader, leaderLevel(leader));
+        if (!err.empty()) err = createCaravan(best.origin, best.dest, best.good, best.qty, -1, true, nullptr);
         if (err.empty()) made++;
         else g_log("trade: AI force %d: %s -> %s %s: %s", f, cityName(best.origin), cityName(best.dest), goodName(best.good), err.c_str());
     }
@@ -556,19 +668,36 @@ void turn() {
     { Lock l; rebuildDirs(); }
 }
 
-// phase 3: monsoon on sea hexes (movement.cpp's step cost, any thread: reads only g_unitDir / g_month0)
-int __cdecl seaCostHook(const uint8_t* unit, const uint8_t* rec, int cost) {
-    uint8_t* u0 = g_unit0;
-    if (!u0 || !rec || unit < u0) return cost;
-    size_t ui = (size_t)(unit - u0) / 0xf4;
-    int dir = ui < g_unitDir.size() ? g_unitDir[ui] : 0;
-    if (!dir && !g_cfg.monsoonAll) return cost;
+// monsoon on sea hexes (movement.cpp's step cost, any thread: reads only g_unitDir / g_month0 / the map).
+// Phase 4: by the direction of the step (east / west component of from -> to) for every ship (trade_monsoon_all) when
+// movement.cpp knows where the step comes from (A*, range search, path cost sum); else a caravan's route heading
+// (phase 3), and for other ships no direction (only the storm months count).
+MovementStepStats g_dirStats = {};               // steps with a usable / unusable from-hex (harness check)
+int __cdecl seaCostHook(const uint8_t* unit, const uint8_t* rec, uint32_t from, int cost) {
+    if (!rec || rec < g_s.hex20) return cost;
     size_t h = (size_t)(rec - g_s.hex20) / 20;
-    if (rec < g_s.hex20 || h >= (size_t)g_s.W * g_s.H) return cost;
-    int sea = g_data.seaOf((int)(h / g_s.W), (int)(h % g_s.W));
+    if (h >= (size_t)g_s.W * g_s.H) return cost;
+    int tlo = (int)(h / g_s.W), thi = (int)(h % g_s.W);
+    int sea = g_data.seaOf(tlo, thi);
     if (sea < 0) return cost;
-    int pct = seaCostPct(g_data, g_mk.p, sea, g_month0, dir == 2 ? 0 : dir);
-    int c = (cost * pct + 50) / 100;
+    int carDir = 0;
+    uint8_t* u0 = g_unit0;
+    if (u0 && unit >= u0) { size_t ui = (size_t)(unit - u0) / 0xf4; if (ui < g_unitDir.size()) carDir = g_unitDir[ui]; }
+    if (!carDir && !g_cfg.monsoonAll) return cost;
+    int dir; bool known = false;
+    if (from != 0xffffffffu) {
+        int flo = (int16_t)(from & 0xffff), fhi = (int16_t)((from >> 16) & 0x7fff);
+        if (hexDist(flo, fhi, tlo, thi) == 1) {
+            dir = tlo > flo ? 1 : tlo < flo ? -1 : 0;
+            if (from & 0x80000000u) dir = -dir;                 // a backwards search (0x567ed0): the unit moves to -> from
+            known = true;
+        }
+    }
+    if (known) g_dirStats.astar++; else g_dirStats.unknown++;
+    if (!known) dir = carDir == 2 ? 0 : carDir;
+    int pct = seaCostPct(g_data, g_mk.p, sea, g_month0, dir);
+    int c = (cost * pct + 50) / 100, floor2 = cost < 2 ? cost : 2;   // never under min(cost, 2): A*'s heuristic (pathfind.cpp)
+    if (c < floor2) c = floor2;
     return c < 1 ? 1 : c > 254 ? 254 : c;
 }
 
@@ -693,12 +822,6 @@ int panelForce(uint8_t* ui) {
     for (int c = 0; c < g_data.C; c++) if (baseForce(c) == f) return f;
     return -1;
 }
-std::wstring big5(const uint8_t* p, int n) {
-    char b[16] = {}; memcpy(b, p, n);
-    wchar_t w[16] = {};
-    int len = MultiByteToWideChar(950, 0, b, -1, w, 16);
-    return len > 1 ? std::wstring(w, len - 1) : L"";
-}
 void buildModel(int force) {
     observeTerritory(force);                                 // what the player sees now
     tradeui::Model& m = g_model;
@@ -725,7 +848,9 @@ void buildModel(int force) {
             uint8_t* p = personRec(WORLD, i);
             if (!p || !objValid(p) || vcall(p, 0x40) != force || *(int*)(p + 0x9c) != g_ui.origin) continue;
             if (p[4] == 0xb0 && p[5] == 0xd3 && !p[6] && !p[9]) continue;     // a temporary 商
-            m.officers.push_back({ i, big5(p + 4, 4) + big5(p + 9, 4), (int)ability(p, 3), (int)ability(p, 2) });
+            tradeui::Officer o = { i, personName(p), (int)ability(p, 3), (int)ability(p, 2) };
+            o.exp = merchExpOf(i); o.talent = talentOf(i, p); o.level = merchantEffective(g_mk.p, o.exp, o.talent);
+            m.officers.push_back(o);
         }
     m.caravans.clear();
     for (auto& k : g_car) {
@@ -740,7 +865,10 @@ void buildModel(int force) {
         }
         uint8_t* h = cell(up[0], up[1]);
         int terr = h ? *(uint32_t*)(h + 4) & 0x1f : 0;
-        m.caravans.push_back({ k.origin, k.dest, k.good, k.qty, k.cost, up[0], up[1], player, (k.flags & F_TEMP) != 0, terr == 7 || terr == 8 });
+        tradeui::CaravanView cv = { k.origin, k.dest, k.good, k.qty, k.cost, up[0], up[1], player, (k.flags & F_TEMP) != 0, terr == 7 || terr == 8 };
+        cv.unit = k.unit; cv.autoMarch = !(k.flags & F_MANUAL);
+        if (!(k.flags & F_TEMP)) { uint8_t* lp = personRec(WORLD, k.leader); if (lp && objValid(lp)) cv.leader = personName(lp); cv.level = leaderLevel(k.leader); }
+        m.caravans.push_back(cv);
     }
     m.done.clear();
     for (auto it = g_done.rbegin(); it != g_done.rend(); ++it)
@@ -751,6 +879,7 @@ void buildModel(int force) {
     m.freeSpecials = freeSpecials(WORLD);
     m.cfg.tax = g_cfg.tax; m.cfg.taxHub = g_cfg.taxHub; m.cfg.tempMax = g_cfg.tempMax; m.cfg.tempKeep = g_cfg.tempKeep;
     m.lastResult = g_uiResult;
+    m.playerAuto = g_cfg.playerAuto != 0;
 }
 bool projectHex(int lo, int hi, float* x, float* y) { return midmapHexToPixel(lo, hi, 0.0f, x, y); }
 
@@ -791,6 +920,16 @@ void repaint(uint8_t* ui, int what) {
         ((UnlockFn)vt[0x50 / 4])(tex, 0);
     }
 }
+// the panel's 自動 / 手動 switch of a caravan (phase 4)
+void applyToggle(const tradeui::Result& r) {
+    if (r.toggleUnit < 0) return;
+    Lock l;
+    for (auto& k : g_car)
+        if (k.unit == r.toggleUnit && (k.flags & F_PLAYER)) {
+            if (r.toggleAuto) k.flags &= ~F_MANUAL; else k.flags |= F_MANUAL;
+            g_log("trade: caravan %s -> %s: 自動行軍 %s", cityName(k.origin), cityName(k.dest), r.toggleAuto ? "on" : "off");
+        }
+}
 void queueSend(const tradeui::SendRequest& r) {
     char line[128];
     if (r.leader >= 0) sprintf_s(line, "trade send %d %d %d %d %d", r.origin, r.dest, r.good, r.qty, r.leader);
@@ -809,6 +948,7 @@ int downImpl(uint8_t* ui, POINT* pt) {
     tradeui::Result r = tradeui::click(g_model, g_ui, projectHex, pt->x - MM_BORDER, pt->y - MM_BORDER);
     if (!r.consumed) return 0;
     if (r.send) queueSend(r.req);
+    applyToggle(r);
     if (r.repaint & (tradeui::REPAINT_MAP | tradeui::REPAINT_LAYOUT)) {
         if (g_ui.origin >= 0 && g_ui.origin < g_data.C) buildModel(f);   // officers of a new origin
         tradeui::validate(g_model, g_ui);
@@ -823,6 +963,38 @@ int wheelImpl(uint8_t* ui, uint32_t keys, int delta, POINT* pt) {
     if (!r.consumed) return 0;
     repaint(ui, r.repaint);
     return 1;
+}
+// keys (phase 4): the window system sends WM_KEYDOWN to the focused window's vt +0xb8 (target, vk, repeat, flags) and
+// on to its parents while they return 0 (0x46f6b0 / 0x46fb9b). Koei's MapUI and the midmap dialog both have the
+// default 0x4ed9d0 (handles nothing). Ours: the panel's keys when it is open (trade_panel.cpp key()), else nothing.
+typedef int (__fastcall* UiKeyFn)(void* self, void* edx, void* target, uint32_t vk, uint32_t rep, uint32_t flags);
+UiKeyFn g_keyMapPrev = nullptr, g_keyDlgPrev = nullptr;
+int keyImpl(uint32_t vk) {
+    uint8_t* ui = openMapUi();
+    int f = panelForce(ui);
+    if (f < 0 || !g_ui.on) return 0;
+    buildModel(f);
+    tradeui::validate(g_model, g_ui);
+    tradeui::Result r = tradeui::key(g_model, g_ui, (int)vk, (GetKeyState(VK_SHIFT) & 0x8000) != 0);
+    if (!r.consumed) return 0;
+    if (r.send) queueSend(r.req);
+    applyToggle(r);
+    if (r.repaint & (tradeui::REPAINT_MAP | tradeui::REPAINT_LAYOUT)) { buildModel(f); tradeui::validate(g_model, g_ui); }
+    else if (r.toggleUnit >= 0) { buildModel(f); tradeui::validate(g_model, g_ui); }
+    repaint(ui, r.repaint);
+    return 1;
+}
+int keySafe(uint32_t vk) {
+    __try { return keyImpl(vk); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { g_log("trade: ERROR: exception %08lx in the panel key", GetExceptionCode()); return 0; }
+}
+int __fastcall keyMapHook(void* self, void* edx, void* target, uint32_t vk, uint32_t rep, uint32_t flags) {
+    if (keySafe(vk)) return 1;
+    return g_keyMapPrev(self, edx, target, vk, rep, flags);
+}
+int __fastcall keyDlgHook(void* self, void* edx, void* target, uint32_t vk, uint32_t rep, uint32_t flags) {
+    if (keySafe(vk)) return 1;
+    return g_keyDlgPrev(self, edx, target, vk, rep, flags);
 }
 int downSafe(uint8_t* ui, POINT* pt) {
     __try { return downImpl(ui, pt); }
@@ -906,9 +1078,9 @@ std::string panelShot(const char* line) {
 
 // ---------------------------------------------------------------- save block
 const uint32_t TRAD = 0x44415254;      // "TRAD"
-const uint32_t TRAD_VERSION = 2;           // 1: phase 1; 2: + events, the players' last trips, information (phase 3)
+const uint32_t TRAD_VERSION = 3;           // 1: phase 1; 2: + events, the players' last trips, information (phase 3); 3: + merchants (phase 4)
 void resetPhase3() {
-    g_ev.live.clear(); g_mk.mod.clear(); g_done.clear();
+    g_ev.live.clear(); g_mk.mod.clear(); g_done.clear(); g_merch.clear();
     g_info.reset(g_s.R, g_data, g_mk.p.infoMonths);
 }
 void resetState() {
@@ -935,6 +1107,9 @@ std::vector<uint8_t> blockBytes() {
     pl.insert(pl.end(), g_info.age.begin(), g_info.age.end());
     const uint8_t* hp = (const uint8_t*)g_info.hist.data();
     pl.insert(pl.end(), hp, hp + g_info.hist.size() * 2);
+    // v3
+    put(pl, (uint32_t)g_merch.size());
+    for (auto& m : g_merch) put(pl, m);
     std::vector<uint8_t> out;
     put(out, TRAD); put(out, TRAD_VERSION); put(out, (uint32_t)pl.size());
     out.insert(out.end(), pl.begin(), pl.end());
@@ -967,6 +1142,12 @@ bool parseBlock(const uint8_t* p, size_t n, uint32_t version, int* cars) {
         if (!age.empty() && !get(age.data(), age.size())) return false;
         if (!hist.empty() && !get(hist.data(), hist.size() * 2)) return false;
     }
+    std::vector<MerchRec> merch;                              // v3: merchant officers
+    if (version >= 3) {
+        uint32_t nm;
+        if (!get(&nm, 4) || nm > 100000) return false;
+        merch.resize(nm); if (nm && !get(merch.data(), nm * sizeof(MerchRec))) return false;
+    }
     Lock l;
     if ((int)C == g_data.C && (int)G == g_data.G) {
         g_mk.idx = idx;
@@ -986,6 +1167,7 @@ bool parseBlock(const uint8_t* p, size_t n, uint32_t version, int* cars) {
         } else if (g_log) g_log("trade: save block information for %u forces / %u cities / %u goods / %u months, now %d / %d / %d / %d: information reset",
                                 iR, iC, iG, iH, g_info.R, g_info.C, g_info.G, g_info.H);
     }
+    for (auto& m : merch) if (m.person >= 0 && m.person < g_cfg.PT && m.exp >= 0) g_merch.push_back(m);
     rebuildDirs();
     return true;
 }
@@ -1001,6 +1183,12 @@ bool dumpState(const char* path) {
             g_info.R, g_info.C, g_info.histMonth);
     for (auto& e : g_ev.live) fprintf(f, "event %s: months %d..%d\n", describe(g_data, e).c_str(), e.start, e.end);
     for (size_t i = 0; i < g_data.seas.size(); i++) fprintf(f, "monsoon %s: %c\n", g_data.seas[i].name.c_str(), season(g_data, (int)i, g_month0));
+    {
+        const MovementStepStats* ms = movementStepStats();
+        fprintf(f, "monsoon steps: with a direction %u, without %u (movement.cpp: A* %u, range search %u, path sum %u, unknown %u)\n",
+                g_dirStats.astar, g_dirStats.unknown, ms->astar, ms->range, ms->pathSum, ms->unknown);
+    }
+    for (auto& m : g_merch) fprintf(f, "merchant officer %d: experience %d, %d trips, level %d\n", m.person, m.exp, m.trips, leaderLevel(m.person));
     for (auto& r : g_done) fprintf(f, "done day %d force %d: %s -> %s %d x %s cost %d net %d flags %u\n", r.day, r.force, cityName(r.origin),
                                    cityName(r.dest), r.qty, goodName(r.good), r.cost, r.net, r.flags);
     for (auto& k : g_car) {
@@ -1080,7 +1268,7 @@ void streamImpl(uint8_t* stream) {
             memcpy(hdr, cur, 12);
             if (hdr[0] != TRAD || 12 + (size_t)hdr[2] > left) { g_log("trade: save without a TRAD block: fresh trade state"); return; }
             int cars = 0;
-            bool ok = (hdr[1] == 1 || hdr[1] == TRAD_VERSION) && parseBlock(cur + 12, hdr[2], hdr[1], &cars);
+            bool ok = hdr[1] >= 1 && hdr[1] <= TRAD_VERSION && parseBlock(cur + 12, hdr[2], hdr[1], &cars);
             std::vector<uint8_t> sink(12 + (size_t)hdr[2]);
             streamRead(stream, sink.data(), (int)sink.size());   // consume the block (bounded: it fits)
             g_log("trade: TRAD block v%u (%u bytes) %s, %d caravans", hdr[1], hdr[2], ok ? "loaded" : "NOT understood (fresh state)", cars);
@@ -1153,8 +1341,9 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     g_cfg.tax = I(L"trade_tax", 10); g_cfg.taxHub = I(L"trade_tax_hub", 5); g_cfg.relTax = I(L"trade_rel_tax", 40);
     g_cfg.rob = I(L"trade_rob", 15); g_cfg.robLoss = I(L"trade_rob_loss", 50); g_cfg.loot = I(L"trade_loot", 60);
     g_cfg.escort = I(L"trade_escort", 500); g_cfg.food = I(L"trade_food", 3000); g_cfg.arrive = I(L"trade_arrive", 3);
-    g_cfg.maxTurns = I(L"trade_max_turns", 90); g_cfg.playerAuto = I(L"trade_player_auto", 0);
-    g_cfg.ui = I(L"trade_ui", 1); g_cfg.uiAi = I(L"trade_ui_ai_caravans", 1); g_cfg.monsoonAll = I(L"trade_monsoon_all", 0);
+    g_cfg.maxTurns = I(L"trade_max_turns", 90); g_cfg.playerAuto = I(L"trade_player_auto", 1);
+    g_cfg.ui = I(L"trade_ui", 1); g_cfg.uiAi = I(L"trade_ui_ai_caravans", 1); g_cfg.monsoonAll = I(L"trade_monsoon_all", 1);
+    g_cfg.keys = I(L"trade_keys", 1); g_cfg.aiOfficers = I(L"trade_ai_officers", 1); g_cfg.aiOfficerMin = I(L"trade_ai_officer_min", 4);
     g_cfg.PT = I(L"persons", 850) + 250;
     Params p;
     p.impact = I(L"trade_impact", 50); p.spread = I(L"trade_spread", 10); p.revert = I(L"trade_revert", 10);
@@ -1164,13 +1353,27 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     p.monStorm = I(L"trade_monsoon_storm", 125); p.stormRisk = I(L"trade_storm_risk", 10); p.stormLoss = I(L"trade_storm_loss", 30);
     p.events = I(L"trade_events", 1); p.eventChance = I(L"trade_event_chance", 15); p.eventMax = I(L"trade_event_max", 4);
     p.info = I(L"trade_info", 1); p.infoRange = I(L"trade_info_range", 40); p.infoMonths = I(L"trade_info_months", 12);
+    {   // phase 4: merchant levels "500,1500,3500,7000,12000"
+        wchar_t lv[128]; GetPrivateProfileStringW(s.section, L"trade_merchant_exp", L"500,1500,3500,7000,12000", lv, 128, ini);
+        int v[5], n = swscanf_s(lv, L"%d,%d,%d,%d,%d", &v[0], &v[1], &v[2], &v[3], &v[4]);
+        bool ok = n == 5;
+        for (int i = 0; ok && i < 5; i++) ok = v[i] > 0 && (i == 0 || v[i] > v[i - 1]);
+        if (ok) for (int i = 0; i < 5; i++) p.merchExp[i] = v[i];
+        else { log("trade: ERROR: trade_merchant_exp must be 5 rising numbers, trade not installed"); return false; }
+    }
+    p.merchExpTrip = I(L"trade_merchant_exp_trip", 100); p.merchExpDiv = I(L"trade_merchant_exp_div", 20);
+    p.merchPol = I(L"trade_merchant_pol", 80); p.merchMaxLevel = I(L"trade_merchant_max_level", 7);
+    p.merchPP = I(L"trade_merchant_price", 8); p.merchCap = I(L"trade_merchant_load", 5);
+    p.merchTax = I(L"trade_merchant_tax", 8); p.merchRob = I(L"trade_merchant_rob", 12);
     if (g_cfg.tempMax < 0 || g_cfg.tempMax > 100 || g_cfg.tempKeep < 0 || g_cfg.tempKeep > 100 || g_cfg.escort < 1 || g_cfg.escort > 60000 ||
         p.capLand < 1 || p.capSea < 1 || p.impact < 0 || p.impact > 1000 || p.spread < 0 || p.spread > 100 || p.revert < 0 || p.revert > 100 ||
         p.revertHub < 0 || p.revertHub > 100 || g_cfg.aiRange < 1 || g_cfg.aiRange > 2000 || g_cfg.arrive < 1 || g_cfg.arrive > 10 ||
         p.monWith < 20 || p.monWith > 500 || p.monAgainst < 20 || p.monAgainst > 500 || p.monStorm < 20 || p.monStorm > 500 ||
         p.stormRisk < 0 || p.stormRisk > 100 || p.stormLoss < 0 || p.stormLoss > 100 || p.eventChance < 0 || p.eventChance > 100 ||
         p.eventMax < 0 || p.eventMax > 32 || p.infoRange < 0 || p.infoRange > 2000 || p.infoMonths < 1 || p.infoMonths > 60 ||
-        g_cfg.PT < 1100 || g_cfg.PT > 40000) {
+        g_cfg.PT < 1100 || g_cfg.PT > 40000 || p.merchExpTrip < 0 || p.merchExpDiv < 1 || p.merchMaxLevel < 0 || p.merchMaxLevel > 20 ||
+        p.merchPP < 0 || p.merchPP > 100 || p.merchCap < 0 || p.merchCap > 100 || p.merchTax < 0 || p.merchTax > 20 ||
+        p.merchRob < 0 || p.merchRob > 20 || g_cfg.aiOfficerMin < 1 || g_cfg.aiOfficerMin > 50) {
         log("trade: ERROR: a trade_* value is out of range, trade not installed");
         return false;
     }
@@ -1225,8 +1428,9 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     if (g_planOrig) jmpTo(0x5def90, (void*)planHook);
     jmpTo(0x4bfa30, (void*)annihilateHook);
     jmpTo(0x57ff80, (void*)pumpHook);
-    // phase 3: monsoon on caravans' sea steps (movement.cpp, move=1)
-    if (g_mk.p.monsoon && !g_data.seas.empty()) movementSetSeaCost(seaCostHook);
+    // monsoon on sea steps (movement.cpp, move=1): caravans (phase 3), every ship by step direction (phase 4)
+    g_unit0 = unitRec(WORLD, 0);
+    if (g_mk.p.monsoon && !g_data.seas.empty()) movementSetSeaCost(seaCostHook, g_mk.p.monWith);
     // phase 2: the panel on the world 中地圖
     if (g_cfg.ui) {
         if (worldMidmapInstalled()) {
@@ -1235,6 +1439,12 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
             g_uiWheelPrev = (UiWheelFn)patchSlot(MAPUI_VT + 0xa8, (void*)uiWheelHook);
             midmapSetOverlay(overlayHook);
             g_uiOn = true;
+            // phase 4: keys (WM_KEYDOWN, vt +0xb8) of the MapUI and of the main map's midmap dialog (vt 0x858598)
+            const uint32_t DLG_VT = 0x858598;
+            if (g_cfg.keys && *(uint32_t*)(uintptr_t)(MAPUI_VT + 0xb8) == 0x4ed9d0 && *(uint32_t*)(uintptr_t)(DLG_VT + 0xb8) == 0x4ed9d0) {
+                g_keyMapPrev = (UiKeyFn)patchSlot(MAPUI_VT + 0xb8, (void*)keyMapHook);
+                g_keyDlgPrev = (UiKeyFn)patchSlot(DLG_VT + 0xb8, (void*)keyDlgHook);
+            } else if (g_cfg.keys) log("trade: panel keys NOT installed: unexpected key handlers (vt +0xb8)");
         } else log("trade: midmap panel NOT installed: the world 中地圖 is not active (world_terrain / bases)");
     }
     g_on = true;
@@ -1243,7 +1453,11 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
         g_data.C, hubs, g_data.G, g_cfg.tempMax, g_cfg.tempKeep, g_cfg.ai ? "on" : "off", g_planOrig ? "on" : "off", g_cfg.aiRange);
     log("trade: phase 2 panel %s; phase 3: monsoon %s (%zu seas, caravans%s, %d/%d/%d%%), events %s (%zu kinds, %d%%/month, <= %d), information delay %s (range %d, %d months)",
         g_uiOn ? "on (MapUI slots +0x90 +0x94 +0xa8 chained, overlay)" : "off", g_mk.p.monsoon ? "on" : "off", g_data.seas.size(),
-        g_cfg.monsoonAll ? " and all ships" : " only", g_mk.p.monWith, g_mk.p.monAgainst, g_mk.p.monStorm, g_mk.p.events ? "on" : "off",
+        g_cfg.monsoonAll ? " and all ships by step direction" : " only", g_mk.p.monWith, g_mk.p.monAgainst, g_mk.p.monStorm, g_mk.p.events ? "on" : "off",
         g_data.events.size(), g_mk.p.eventChance, g_mk.p.eventMax, g_mk.p.info ? "on" : "off", g_mk.p.infoRange, g_mk.p.infoMonths);
+    log("trade: phase 4: 自動行軍 %s; panel keys %s; merchants: %zu known (trade.bin v%d), levels at %d/%d/%d/%d/%d, AI merchant officers %s",
+        g_cfg.playerAuto ? "on" : "off", g_keyMapPrev ? "on (vt +0xb8 of the MapUI and the midmap dialog)" : "off", g_data.merchants.size(),
+        g_data.version, g_mk.p.merchExp[0], g_mk.p.merchExp[1], g_mk.p.merchExp[2], g_mk.p.merchExp[3], g_mk.p.merchExp[4],
+        g_cfg.aiOfficers ? "on" : "off");
     return true;
 }

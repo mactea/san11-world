@@ -7,7 +7,12 @@
 // information delay (the AI plans with the prices its force last saw: own / allied cities within info range,
 // destinations of its caravans).
 //
-//   trade_sim.exe <trade.bin> [months=120] [seed] [temp caravans=30] [p3|nop3]
+// Phase 4 (on unless the 6th argument is "nop4"): merchant officers. Every force has MERCH officers (politics /
+// intelligence 40..95, a few with 商才 1..2 as the known merchants); the AI sends one with merchant level >= 1 when it
+// has an idle one (trade.cpp aiMerchant), else a temporary 商 (politics 60): prices, load and taxes as trade.cpp
+// (trade_model.h leaderFactors / merchantBonus / taxOf), the interception chance x robPct; experience per trip.
+//
+//   trade_sim.exe <trade.bin> [months=120] [seed] [temp caravans=30] [p3|nop3] [p4|nop4]
 // Exit code 0 = every check passed.
 #include "../src/trade_model.h"
 #include <stdio.h>
@@ -26,7 +31,8 @@ static std::vector<uint8_t> readFile(const char* p) {
     v.resize(n); fread(v.data(), 1, n, f); fclose(f); return v;
 }
 
-struct Caravan { int force, origin, dest, good, qty, arrive; int64_t cost; };
+struct Caravan { int force, origin, dest, good, qty, arrive; int64_t cost; int leader = -1; };
+struct Officer { int force, pol, intel, talent, exp = 0, trips = 0; bool busy = false; };
 
 int main(int argc, char** argv) {
     if (argc < 2) { printf("usage: trade_sim <trade.bin> [months] [seed]\n"); return 2; }
@@ -38,6 +44,7 @@ int main(int argc, char** argv) {
 
     const int TEMP_MAX = argc > 4 ? atoi(argv[4]) : 30, AI_MONTH = TEMP_MAX / 5;   // trade_temp_max, trade_ai_month
     const bool P3 = !(argc > 5 && !strcmp(argv[5], "nop3"));
+    const bool P4 = !(argc > 6 && !strcmp(argv[6], "nop4"));
     const int R = 200, RANGE = 80, PER_FORCE = 2, MIN_GOLD = 6000, INVEST = 4000, RESERVE = 2000;
     const int MARGIN = 25, TAX = 10, SPEED = 18 /* hexes a month: 6 a turn */, LOSS = 5 /* % trips intercepted */;
     // forces: R capitals spread over the city list, every city joins the nearest
@@ -61,6 +68,18 @@ int main(int argc, char** argv) {
     Events ev;
     int evStarted = 0, storms = 0, stale = 0, unknownSkipped = 0; int64_t seaTrips = 0, seaTimeSum = 0;
     auto allied = [&](int a, int b) { return a == b || rel[(size_t)a * R + b] >= 90; };
+    // phase 4: officers (own rng: the other draws stay the same as without phase 4)
+    const int MERCH = 4;
+    std::vector<Officer> offs;
+    Rng orng; orng.s = rng.s ^ 0x5bd1e995u;
+    for (int f = 0; f < R; f++)
+        for (int i = 0; i < MERCH; i++) {
+            Officer o; o.force = f; o.pol = 40 + (int)(orng.next() % 56); o.intel = 40 + (int)(orng.next() % 56);
+            int roll = (int)(orng.next() % 100);
+            o.talent = merchantTalent(m.p, roll < 3 ? 2 : roll < 8 ? 1 : 0, o.pol);
+            offs.push_back(o);
+        }
+    int officerTrips = 0;
     std::vector<Caravan> live;
     int64_t totalIncome = 0, totalTradeNet = 0, trips = 0, lost = 0;
     std::vector<double> roi;
@@ -95,17 +114,23 @@ int main(int argc, char** argv) {
             }
             int64_t net;
             if (P3) info.see(k.force, k.dest);
-            if ((int)(rng.next() % 100) < LOSS) { net = -k.cost; lost++; }
+            int pp = 0, capPct = 100; MerchantBonus mb;
+            if (P4) {
+                if (k.leader >= 0) { Officer& o = offs[k.leader]; leaderFactors(o.pol, o.intel, &pp, &capPct); mb = merchantBonus(m.p, merchantEffective(m.p, o.exp, o.talent)); pp += mb.pp; }
+                else leaderFactors(TEMP_POL, TEMP_INT, &pp, &capPct);
+            }
+            if ((int)(rng.next() % 100) * 100 < LOSS * mb.robPct) { net = -k.cost; lost++; }
             else {
-                int64_t rev = m.sell(k.dest, k.good, k.qty);
+                int64_t rev = m.sell(k.dest, k.good, k.qty) * (1000 + pp) / 1000;
                 bool foreign = owner[k.dest] != k.force;
-                int64_t tax = foreign ? rev * TAX / 100 : 0;
+                int64_t tax = foreign ? taxOf(rev, TAX, mb.taxPct) : 0;
                 gold[k.dest] += tax;                    // import duty to the market's owner
                 gold[k.origin] += rev - tax;
                 net = rev - tax - k.cost;
                 roi.push_back((double)net / k.cost);
             }
             totalTradeNet += net; trips++;
+            if (k.leader >= 0) { Officer& o = offs[k.leader]; o.busy = false; o.exp += merchantExpGain(m.p, net); o.trips++; }
             live[i] = live.back(); live.pop_back();
         }
         // AI plans (trade.cpp aiMonth)
@@ -139,9 +164,23 @@ int main(int argc, char** argv) {
                 if (P3 && info.ageOf(f, best.dest) > 0) stale++;
                 int tp = routeTimePermille(d, m.p, best.origin, best.dest, month0);
                 if (d.port(best.origin) && d.port(best.dest) && d.seaOf(d.lo[best.origin], d.hi[best.origin]) >= 0) { seaTrips++; seaTimeSum += tp; }
-                int64_t paid = m.buy(best.origin, best.good, best.qty) + m.p.fee;
+                int leader = -1, bestScore = 0, pp = 0, capPct = 100;
+                if (P4) {                                              // trade.cpp aiMerchant: an idle officer with level >= 1
+                    for (int i = f * MERCH; i < (f + 1) * MERCH; i++) {
+                        Officer& o = offs[i];
+                        int lv = merchantEffective(m.p, o.exp, o.talent);
+                        if (o.busy || lv < 1) continue;
+                        int score = lv * 1000 + o.pol;
+                        if (score > bestScore) { bestScore = score; leader = i; }
+                    }
+                    if (leader >= 0) { Officer& o = offs[leader]; leaderFactors(o.pol, o.intel, &pp, &capPct); pp += merchantBonus(m.p, merchantEffective(m.p, o.exp, o.talent)).pp; o.busy = true; officerTrips++; }
+                    else leaderFactors(TEMP_POL, TEMP_INT, &pp, &capPct);
+                }
+                int64_t paid = m.buy(best.origin, best.good, best.qty) * (1000 - pp) / 1000 + m.p.fee;
                 gold[best.origin] -= paid;
-                live.push_back({ f, best.origin, best.dest, best.good, best.qty, mo + 1 + (int)((int64_t)best.dist * tp / 1000) / SPEED, paid });
+                Caravan nk = { f, best.origin, best.dest, best.good, best.qty, mo + 1 + (int)((int64_t)best.dist * tp / 1000) / SPEED, paid };
+                nk.leader = leader;
+                live.push_back(nk);
                 made++;
             }
             start = (start + 7) % R;
@@ -169,6 +208,15 @@ int main(int argc, char** argv) {
     check(dev[months + 35] <= 1.0, "prices settle back to the base (mean |idx-1000| <= 1) without trade");
     check(fabs(dev[months - 1] - dev[months * 2 / 3]) <= std::max(2.0, dev[months * 2 / 3] * 0.5), "no drift: deviation at the end ~ deviation at 2/3");
     check(share > 0 && share < 0.10, "trade money is under 10% of the normal income");
+    if (P4) {
+        int lv[8] = {}, talented = 0;
+        for (auto& o : offs) { lv[std::min(7, merchantEffective(m.p, o.exp, o.talent))]++; talented += o.talent > 0; }
+        printf("  phase 4: %d officer-led trips of %lld; %d officers with 商才; merchant levels at the end:", officerTrips, trips, talented);
+        for (int i = 0; i < 8; i++) printf(" L%d %d", i, lv[i]);
+        printf("\n");
+        check(share < 0.03, "phase 4: trade money is under 3% of the normal income");
+        check(officerTrips > 0 && lv[0] < (int)offs.size(), "phase 4: officers trade and gain levels");
+    }
     check(trips >= months, "the AI trades (at least one trip a month)");
     check(med > 0.05 && med < 2.0, "median AI return per trip between 5% and 200%");
     if (P3) {

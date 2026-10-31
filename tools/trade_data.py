@@ -11,7 +11,7 @@ Inputs
   data/city_tiers.json         tier and port flag of the other cities
 
 trade.bin (little endian)
-  "TRDB" u32 version=2, u32 C, u32 G, u32 0
+  "TRDB" u32 version=3, u32 C, u32 G, u32 0
   G x { char name[16] utf-8, u32 base, u32 0 }
   C x { i16 lo, i16 hi, u8 flags (1 hub, 2 port, 4 Koei China), u8 group (0 = none), u16 market size, char name[16] utf-8 }
   C x G u32 price      gold per load with the price index at 1000
@@ -21,7 +21,9 @@ version 2 (M13 phase 3) appends:
   u32 NR, NR x { i16 loMin, loMax, hiMin, hiMax; char months[12] (E / W / T / -); char name[16] }   monsoon seas
   u32 NE, NE x { char name[16]; u8 apply (0 consumers, 1 producers, 2 all); u8 good (0..G-1, 254 any, 255 all);
                  u8 group (1..NG, 0 any); u8 0; u16 mult (permille); u8 months min, max; u16 weight; u16 0 }   events
-The DLL also reads version 1 files (no monsoon, no events).
+version 3 (M13 phase 4) appends:
+  u32 NM, NM x { char name[27] utf-8; i32 officer id (-1: Koei's officer of that name); u8 talent 1..2 }   known merchants
+The DLL also reads versions 1 (no monsoon, no events) and 2 (no merchants).
 """
 import argparse
 import json
@@ -119,7 +121,7 @@ def build(args):
             price[c["id"]][g] = max(1, int(round(best * dem)))
 
     out = bytearray()
-    out += b"TRDB" + struct.pack("<IIII", 2, C, G, 0)
+    out += b"TRDB" + struct.pack("<IIII", 3, C, G, 0)
     for good in goods:
         out += name16(good["name"]) + struct.pack("<II", good["base"], 0)
     for c in cities:
@@ -154,6 +156,14 @@ def build(args):
         if not (1 <= lo_m <= hi_m <= 60) or not (0.1 <= e["mult"] <= 5):
             sys.exit(f"event {e['name']}: months 1..60, mult 0.1..5")
         out += name16(e["name"]) + struct.pack("<BBBBHBBHH", ap, gi, gr, 0, int(round(e["mult"] * 1000)), lo_m, hi_m, e["weight"], 0)
+    merchants = gd.get("merchants", {}).get("list", [])
+    out += struct.pack("<I", len(merchants))
+    for m in merchants:
+        nb = m["name"].encode("utf-8")
+        if len(nb) > 26 or not (1 <= m.get("talent", 1) <= 2) or ("id" in m) == bool(m.get("koei")):
+            sys.exit(f"merchant {m['name']}: name <= 26 bytes, talent 1..2, exactly one of id / koei")
+        out += nb + b"\0" * (27 - len(nb)) + struct.pack("<iB", m.get("id", -1), m.get("talent", 1))
+    print(f"trade_data: {len(merchants)} known merchants")
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_bytes(out)
     print(f"trade_data: {C} cities, {G} goods, {len(hubs)} hubs, {len(regions)} monsoon seas, {len(events)} events -> {args.out} ({len(out)} bytes)")
