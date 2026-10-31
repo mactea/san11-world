@@ -23,6 +23,12 @@ void midmapZoom(int mx, int my, int wheelDelta);        // (mx, my): map-area pi
 void midmapPan(int dx, int dy);
 float midmapScale();
 bool midmapHexToPixel(int lo, int hi, float margin, float* px, float* py);   // false: outside the area (by margin)
+// M13 trade panel: only the left `width` columns of the map area show the map (markers right of it are hidden,
+// as off the map); default 600. The overlay is called at the end of midmapRenderNames (on every compose).
+void midmapSetClip(int width);
+int midmapClip();
+typedef void (*MidmapOverlayFn)(uint32_t* dst, int pitch);
+void midmapSetOverlay(MidmapOverlayFn fn);
 bool midmapPixelToHex(float mx, float my, int* lo, int* hi);
 
 // paint the map area (600x600 ARGB, pitch in pixels); baseColour[b]: tint of base b (alpha = strength, 0 = none)

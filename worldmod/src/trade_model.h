@@ -10,16 +10,38 @@ namespace trade {
 
 enum : uint8_t { CITY_HUB = 1, CITY_PORT = 2, CITY_CHINA = 4 };
 
+// monsoon sea (trade.bin v2): a rectangle of world hexes and the season of each month
+struct Sea {
+    int16_t lo0 = 0, lo1 = 0, hi0 = 0, hi1 = 0;
+    char months[12] = {};       // 'E' south-west monsoon (eastbound favoured), 'W' north-east (westbound), 'T' change (storms), '-'
+    std::string name;
+};
+// market event template (trade.bin v2)
+enum : uint8_t { EV_CONSUMERS = 0, EV_PRODUCERS = 1, EV_ALL = 2, EV_GOOD_ANY = 254, EV_GOOD_ALL = 255 };
+struct EventDef {
+    std::string name;
+    uint8_t apply = 0, good = EV_GOOD_ANY, group = 0;   // group 1..NG, 0 = any
+    uint16_t mult = 1000;                               // permille
+    uint8_t mMin = 1, mMax = 1;
+    uint16_t weight = 1;
+};
+
 // trade.bin (tools/trade_data.py)
 struct Data {
-    int C = 0, G = 0;
+    int C = 0, G = 0, version = 0;
     std::vector<std::string> goodName, cityName;   // utf-8
     std::vector<int16_t> lo, hi;                   // city hex (world coordinates)
     std::vector<uint8_t> flags, group;
     std::vector<uint16_t> size;                    // market size in loads
     std::vector<uint32_t> price;                   // C x G: gold per load at price index 1000
     std::vector<uint8_t> supply;                   // C x G: producer level 0..3
+    std::vector<std::string> groupName;            // v2: market group g (1..NG) is groupName[g - 1]
+    std::vector<Sea> seas;                         // v2: monsoon seas
+    std::vector<EventDef> events;                  // v2: market events
     bool load(const uint8_t* p, size_t n, std::string* err);
+    bool produces(int c, int g) const { return supply[(size_t)c * G + g] != 0; }
+    int seaOf(int lo, int hi) const;               // monsoon sea containing the hex, -1 none
+    const char* groupLabel(int g) const { return g >= 1 && g <= (int)groupName.size() ? groupName[g - 1].c_str() : "?"; }
     bool canBuy(int c, int g) const { return supply[(size_t)c * G + g] || (flags[c] & CITY_HUB); }
     bool hub(int c) const { return (flags[c] & CITY_HUB) != 0; }
     bool port(int c) const { return (flags[c] & CITY_PORT) != 0; }
@@ -34,6 +56,12 @@ struct Params {
     int idxMin = 300, idxMax = 4000;
     int capLand = 20, capSea = 60;   // loads per caravan (both ends ports: sea)
     int fee = 300;              // gold per caravan (porters, animals) on top of the goods
+    // phase 3
+    int monsoon = 1;            // seasons on (0: every factor 100)
+    int monWith = 70, monAgainst = 140, monStorm = 125;   // percent of the normal sea step cost
+    int stormRisk = 10, stormLoss = 30;                   // per turn at sea in a T month: chance %, cargo lost %
+    int events = 1, eventChance = 15, eventMax = 4;       // per month: chance % that one starts, at most eventMax running
+    int info = 1, infoRange = 40, infoMonths = 12;        // information delay: seen within infoRange hexes; history kept
 };
 
 int hexDist(int lo1, int hi1, int lo2, int hi2);
@@ -42,6 +70,12 @@ struct Market {
     const Data* d = nullptr;
     Params p;
     std::vector<int32_t> idx;   // C x G price index, 1000 = the base price of trade.bin
+    std::vector<uint16_t> mod;  // C x G permille factor of the active events (empty: none)
+
+    int64_t base(int c, int g) const {
+        int64_t b = d->price[(size_t)c * d->G + g];
+        return mod.empty() ? b : b * mod[(size_t)c * d->G + g] / 1000;
+    }
 
     void reset();               // every index to 1000
     int32_t& at(int c, int g) { return idx[(size_t)c * d->G + g]; }
@@ -59,15 +93,24 @@ struct Market {
     int64_t walk(int c, int g, int q, bool buying, int32_t* index) const;
 };
 
+// Caravan prices, shared by trade.cpp and the panel (trade_panel.cpp) so the panel shows what a caravan gets.
+// pp: the leader's price bonus in permille (politics - 50; + on sales, - on purchases); capPct: load (intelligence).
+const int TEMP_POL = 60, TEMP_INT = 50;          // the temporary 商 officer
+inline void leaderFactors(int pol, int intel, int* pp, int* capPct) { *pp = pol - 50; *capPct = 100 + (intel - 50) / 2; }
+inline int64_t purchase(const Market& m, int c, int g, int q, int pp) { return m.quoteBuy(c, g, q) * (1000 - pp) / 1000; }
+inline int64_t saleQuote(const Market& m, int c, int g, int q, int pp) { return m.quoteSell(c, g, q) * (1000 + pp) / 1000; }
+inline int capacity(const Data& d, const Params& p, int origin, int dest, int capPct) {
+    return (d.port(origin) && d.port(dest) ? p.capSea : p.capLand) * capPct / 100;
+}
+inline int taxPct(const Data& d, int c, int tax, int taxHub) { return d.hub(c) ? taxHub : tax; }
+
 // The most profitable cargo from `origin` to one of `dests` (indices into Data cities) for at most `budget` gold
 // (fee included) and `cap` loads. Profit = sale - purchase - fee - tax% of the sale. Returns false if none gains
 // at least margin% of the outlay.
+// timePermille (optional, parallel to dests): travel time factor of each destination (monsoon); score = profit / time.
 struct Route { int origin = -1, dest = -1, good = -1, qty = 0; int64_t cost = 0, revenue = 0, profit = 0; int dist = 0; };
 bool bestRoute(const Market& m, int origin, const std::vector<int>& dests, int64_t budget, int cap, int taxPct,
-               int marginPct, Route* out);
-
-// Cities within `range` hexes of each city (precomputed once; range in hexes).
-std::vector<std::vector<int>> citiesInRange(const Data& d, int range);
+               int marginPct, Route* out, const std::vector<int>* timePermille = nullptr);
 
 // Deterministic rng (saved with the game so a reload repeats the same draws)
 struct Rng {
@@ -75,5 +118,45 @@ struct Rng {
     uint32_t next() { s ^= s << 13; s ^= s >> 17; s ^= s << 5; return s; }
     int pct() { return (int)(next() % 100); }
 };
+
+// ---- phase 3: monsoon (month0 = 0..11 = January..December)
+char season(const Data& d, int sea, int month0);
+// percent of the normal step cost on a sea hex of `sea` for a ship heading dir (+1 east, -1 west, 0 unknown)
+int seaCostPct(const Data& d, const Params& p, int sea, int month0, int dir);
+// travel time factor (permille) of a route between two ports: the seas at both ends and half-way; 1000 off the seas
+int routeTimePermille(const Data& d, const Params& p, int origin, int dest, int month0);
+// a storm month in the sea of this route (risk for a caravan at sea)
+bool routeStormy(const Data& d, const Params& p, int origin, int dest, int month0);
+
+// ---- phase 3: market events
+struct ActiveEvent { uint8_t def, good, group, pad; int32_t start, end; };   // good 255 = all; months [start, end)
+struct Events {
+    std::vector<ActiveEvent> live;
+    // a new month: drop the ended, maybe start one (p.eventChance, p.eventMax); the changes go to started / ended
+    void month(const Data& d, const Params& p, Rng& rng, int month, std::vector<ActiveEvent>* started, std::vector<ActiveEvent>* ended);
+    void apply(const Data& d, std::vector<uint16_t>* mod) const;   // C x G permille (empty when none is running)
+    bool affects(const Data& d, const ActiveEvent& e, int c, int g) const;
+};
+std::string describe(const Data& d, const ActiveEvent& e);       // "流行：羅馬 絲 ×1.6" (utf-8)
+
+// ---- phase 3: information delay. A force knows a market as it was the month it last saw it.
+struct Info {
+    int R = 0, C = 0, G = 0, H = 12;
+    std::vector<uint8_t> age;       // R x C months since force f last saw city c (255: never)
+    std::vector<int16_t> hist;      // H x C x G: the price index at the end of month m in slot m % H
+    int32_t histMonth = -1;         // the last month stored
+    void reset(int r, const Data& d, int h);
+    void endMonth(const Market& m, int month);      // store the month that ended, every age + 1
+    void see(int f, int c) { if (f >= 0 && f < R && c >= 0 && c < C) age[(size_t)f * C + c] = 0; }
+    int ageOf(int f, int c) const { return f >= 0 && f < R && c >= 0 && c < C ? age[(size_t)f * C + c] : 255; }
+    // the index force f believes for (c, g); false = unknown (never seen, or longer ago than H months)
+    bool believed(const Market& m, int f, int c, int g, int32_t* idx) const;
+    // m as force f sees it; known[c] = 0 for cities it knows nothing about (their index: 1000, the base price)
+    void view(const Market& m, int f, Market* out, std::vector<char>* known) const;
+};
+
+// Cities within `range` hexes of each city (precomputed once; range in hexes).
+std::vector<std::vector<int>> citiesInRange(const Data& d, int range);
+
 
 }  // namespace trade

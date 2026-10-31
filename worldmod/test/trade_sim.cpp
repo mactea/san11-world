@@ -3,8 +3,11 @@
 // random relations, flat city income), AI caravans as in trade.cpp (at most 6 new caravans a month, 2 per
 // force, 30 at a time, travel time from the hex distance). Checks that prices stay bounded and settle, that trade
 // money stays small against the normal income, and that the AI's trips earn a sane return.
+// Phase 3 (on unless the 5th argument is "nop3"): monsoon (sea trip time and storms by month), market events,
+// information delay (the AI plans with the prices its force last saw: own / allied cities within info range,
+// destinations of its caravans).
 //
-//   trade_sim.exe <trade.bin> [months=120] [seed] [temp caravans=30]
+//   trade_sim.exe <trade.bin> [months=120] [seed] [temp caravans=30] [p3|nop3]
 // Exit code 0 = every check passed.
 #include "../src/trade_model.h"
 #include <stdio.h>
@@ -34,6 +37,7 @@ int main(int argc, char** argv) {
     Rng rng; if (argc > 3) rng.s = (uint32_t)strtoul(argv[3], nullptr, 10) | 1;
 
     const int TEMP_MAX = argc > 4 ? atoi(argv[4]) : 30, AI_MONTH = TEMP_MAX / 5;   // trade_temp_max, trade_ai_month
+    const bool P3 = !(argc > 5 && !strcmp(argv[5], "nop3"));
     const int R = 200, RANGE = 80, PER_FORCE = 2, MIN_GOLD = 6000, INVEST = 4000, RESERVE = 2000;
     const int MARGIN = 25, TAX = 10, SPEED = 18 /* hexes a month: 6 a turn */, LOSS = 5 /* % trips intercepted */;
     // forces: R capitals spread over the city list, every city joins the nearest
@@ -50,7 +54,13 @@ int main(int argc, char** argv) {
     auto income = [&](int c) { return 600 + d.size[c] * 2; };
 
     Market m; m.d = &d; m.reset();
+    if (!P3) { m.p.monsoon = 0; m.p.events = 0; m.p.info = 0; }
     auto inRange = citiesInRange(d, RANGE);
+    auto infoNear = citiesInRange(d, m.p.infoRange);
+    Info info; info.reset(R, d, m.p.infoMonths);
+    Events ev;
+    int evStarted = 0, storms = 0, stale = 0, unknownSkipped = 0; int64_t seaTrips = 0, seaTimeSum = 0;
+    auto allied = [&](int a, int b) { return a == b || rel[(size_t)a * R + b] >= 90; };
     std::vector<Caravan> live;
     int64_t totalIncome = 0, totalTradeNet = 0, trips = 0, lost = 0;
     std::vector<double> roi;
@@ -59,12 +69,32 @@ int main(int argc, char** argv) {
     bool stopTrade = false;
     for (int mo = 0; mo < months + 36; mo++) {
         stopTrade = mo >= months;               // the last 3 years: no trade, prices must settle back to 1000
+        int month0 = mo % 12;
+        if (P3) {                               // phase 3: events and what each force sees this month
+            if (stopTrade) m.p.events = 0;      // (no new events in the tail: they end within 12 months)
+            std::vector<ActiveEvent> st;
+            ev.month(d, m.p, rng, mo, &st, nullptr);
+            evStarted += (int)st.size();
+            if (mo < 24) for (auto& e : st) printf("  event m%d: %s (until m%d)\n", mo, describe(d, e).c_str(), e.end);
+            ev.apply(d, &m.mod);
+            if (mo) info.endMonth(m, mo - 1);
+            for (int c = 0; c < d.C; c++)
+                for (int f = 0; f < R; f++)
+                    if (allied(f, owner[c])) { info.see(f, c); for (int t : infoNear[c]) info.see(f, t); }
+        }
         for (int c = 0; c < d.C; c++) { gold[c] += income(c); totalIncome += mo < months ? income(c) : 0; if (gold[c] > 15000) gold[c] = 15000; }   // the rest is spent (troops, development)
         // arrivals
         for (size_t i = 0; i < live.size();) {
             Caravan& k = live[i];
-            if (k.arrive > mo) { i++; continue; }
+            if (k.arrive > mo) {
+                if (P3 && routeStormy(d, m.p, k.origin, k.dest, month0) && rng.pct() < m.p.stormRisk * 3) {   // ~3 turns a month at sea
+                    k.qty -= (k.qty * m.p.stormLoss + 99) / 100; storms++;
+                    if (k.qty < 0) k.qty = 0;
+                }
+                i++; continue;
+            }
             int64_t net;
+            if (P3) info.see(k.force, k.dest);
             if ((int)(rng.next() % 100) < LOSS) { net = -k.cost; lost++; }
             else {
                 int64_t rev = m.sell(k.dest, k.good, k.qty);
@@ -86,19 +116,32 @@ int main(int argc, char** argv) {
                 int mine = 0; for (auto& k : live) mine += k.force == f;
                 if (mine >= PER_FORCE) continue;
                 Route best; bool have = false;
+                Market view; std::vector<char> known;
+                if (P3) info.view(m, f, &view, &known); else { view = m; known.assign(d.C, 1); }
                 for (int c = 0; c < d.C; c++) {
                     if (owner[c] != f || gold[c] < MIN_GOLD) continue;
-                    std::vector<int> land, sea;      // sea capacity when both ends are ports
-                    for (int t : inRange[c]) { int o = owner[t]; if (o == f || rel[(size_t)f * R + o] >= 40) (d.port(c) && d.port(t) ? sea : land).push_back(t); }
+                    std::vector<int> land, sea, seaTime;      // sea capacity when both ends are ports
+                    for (int t : inRange[c]) {
+                        int o = owner[t];
+                        if (!(o == f || rel[(size_t)f * R + o] >= 40)) continue;
+                        if (!known[t]) unknownSkipped++;       // planned on hearsay (the base price)
+                        if (d.port(c) && d.port(t)) { sea.push_back(t); seaTime.push_back(routeTimePermille(d, m.p, c, t, month0)); }
+                        else land.push_back(t);
+                    }
                     int64_t budget = std::min<int64_t>(INVEST, gold[c] - RESERVE);
                     Route r;
-                    if (bestRoute(m, c, land, budget, m.p.capLand, TAX, MARGIN, &r) && (!have || r.profit > best.profit)) { best = r; have = true; }
-                    if (bestRoute(m, c, sea, budget, m.p.capSea, TAX, MARGIN, &r) && (!have || r.profit > best.profit)) { best = r; have = true; }
+                    // routes compare by profit per travel time (monsoon: routeTimePermille; 1000 on land)
+                    auto eff = [&](const Route& x) { return x.profit * 1000 / routeTimePermille(d, m.p, x.origin, x.dest, month0); };
+                    if (bestRoute(view, c, land, budget, m.p.capLand, TAX, MARGIN, &r) && (!have || eff(r) > eff(best))) { best = r; have = true; }
+                    if (bestRoute(view, c, sea, budget, m.p.capSea, TAX, MARGIN, &r, &seaTime) && (!have || eff(r) > eff(best))) { best = r; have = true; }
                 }
                 if (!have) continue;
+                if (P3 && info.ageOf(f, best.dest) > 0) stale++;
+                int tp = routeTimePermille(d, m.p, best.origin, best.dest, month0);
+                if (d.port(best.origin) && d.port(best.dest) && d.seaOf(d.lo[best.origin], d.hi[best.origin]) >= 0) { seaTrips++; seaTimeSum += tp; }
                 int64_t paid = m.buy(best.origin, best.good, best.qty) + m.p.fee;
                 gold[best.origin] -= paid;
-                live.push_back({ f, best.origin, best.dest, best.good, best.qty, mo + 1 + best.dist / SPEED, paid });
+                live.push_back({ f, best.origin, best.dest, best.good, best.qty, mo + 1 + (int)((int64_t)best.dist * tp / 1000) / SPEED, paid });
                 made++;
             }
             start = (start + 7) % R;
@@ -117,6 +160,8 @@ int main(int argc, char** argv) {
     printf("  price index range seen %d..%d; mean |idx-1000|: m12 %.2f  m60 %.2f  m%d %.2f  after 36 months without trade %.2f\n",
            idxLo, idxHi, dev[11], dev[59], months, dev[months - 1], dev[months + 35]);
     printf("  gold in all cities at the end %lld\n", goldSum);
+    if (P3) printf("  phase 3: %d events, %lld monsoon-sea trips (mean time factor %.2f), %d storm losses, %d plans on stale prices, %d unknown markets considered at the base price, events running at the end %zu\n",
+                   evStarted, seaTrips, seaTrips ? seaTimeSum / 1000.0 / seaTrips : 1.0, storms, stale, unknownSkipped, ev.live.size());
     // checks
     int bad = 0;
     auto check = [&](bool ok, const char* what) { printf("  %-60s %s\n", what, ok ? "ok" : "FAILED"); bad += !ok; };
@@ -126,5 +171,10 @@ int main(int argc, char** argv) {
     check(share > 0 && share < 0.10, "trade money is under 10% of the normal income");
     check(trips >= months, "the AI trades (at least one trip a month)");
     check(med > 0.05 && med < 2.0, "median AI return per trip between 5% and 200%");
+    if (P3) {
+        check(ev.live.empty() && m.mod.empty(), "phase 3: every event has ended at the end (prices free of events)");
+        check(evStarted >= months / 20, "phase 3: events happen (at least one every 20 months)");
+        check(!seaTrips || seaTimeSum / seaTrips < 1000, "phase 3: the AI prefers in-season sea routes (mean time factor < 1)");
+    }
     return bad ? 1 : 0;
 }

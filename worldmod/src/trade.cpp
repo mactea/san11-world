@@ -20,6 +20,13 @@
 //             a temporary leader is never captured: the unit is removed (0x4bccd0) and its officer recycled
 //   0x57ff80  main loop's command pump (main thread): queued automation commands run here while the game waits
 //             for the player (0x57dcd0)
+// Phase 2 (trade_ui=1, needs the world 中地圖 of worldmod.cpp): the MapUI vtable slots +0x90 / +0x94 / +0xa8 (left
+// button down / up, wheel; already worldmod's midmap handlers) are chained: the 「貿易」 button, the panel and the
+// city picks are ours, everything else goes on to the midmap. The panel and the map overlay are drawn into the
+// midmap texture by midmap.cpp's overlay callback (each compose) or, for panel-only changes, by locking the
+// texture's panel rectangle (trade_panel.cpp renders). 「出發」 queues "trade send" like the automation command.
+// Phase 3: monsoon (sea step cost of caravans through movement.cpp's sea-cost callback, storms, AI route times),
+// market events (price factors), information delay (what each force knows of other markets); TRAD block v2.
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
@@ -29,6 +36,9 @@
 #include <vector>
 #include "trade.h"
 #include "trade_model.h"
+#include "trade_panel.h"
+#include "midmap.h"
+#include "movement.h"
 
 using namespace trade;
 
@@ -97,6 +107,7 @@ struct Cfg {
     int ai = 1, aiHook = 1, aiMax = 2, aiMonth = 6, aiRange = 80, aiMinGold = 6000, aiInvest = 4000, aiReserve = 2000, aiMargin = 25;
     int tax = 10, taxHub = 5, relTax = 40, rob = 15, robLoss = 50, loot = 60;
     int escort = 500, food = 3000, arrive = 3, maxTurns = 90, playerAuto = 0;
+    int ui = 1, uiAi = 1, monsoonAll = 0, PT = 1100;        // phase 2 panel, AI caravans on the map; phase 3; officer records
 } g_cfg;
 
 TraceLogFn g_log = nullptr;
@@ -117,6 +128,16 @@ struct Caravan {
 std::vector<Caravan> g_car;
 int32_t g_lastMonth = -1;
 uint32_t g_nextAiForce = 0;
+// phase 3
+Events g_ev;
+Info g_info;
+std::vector<std::vector<int>> g_infoNear;      // cities within trade_info_range of each city
+struct DoneRec { int32_t day, force, origin, dest, good, qty, cost, net; uint32_t flags; };   // a finished trip (tradeui::DONE_*)
+std::vector<DoneRec> g_done;                   // the players' last trips, newest last (at most DONE_MAX)
+const size_t DONE_MAX = 24;
+std::vector<int8_t> g_unitDir;                 // per unit: caravan heading (1 east, -1 west, 2 neither), 0 = not a caravan
+uint8_t* g_unit0 = nullptr;                    // unit 0 (the sea-cost callback's pointer -> index)
+int g_month0 = 0;                              // month of the year (0 = January) at the last turn
 
 int today() {      // days since 1/1/1: the start date world +8 / +0xc / +0x10 plus 10 days a 旬 (+0x5c)
     const int* w = (const int*)(uintptr_t)WORLD;
@@ -210,8 +231,28 @@ void releaseTempIfOurs(const Caravan& k) {
 void leaderBonus(int leader, int* pricePermille, int* capPct) {
     uint8_t* p = personRec(WORLD, leader);
     int pol = p ? ability(p, 3) : 50, intel = p ? ability(p, 2) : 50;
-    *pricePermille = (pol - 50);                // + on sales, - on purchases (permille)
-    *capPct = 100 + (intel - 50) / 2;
+    leaderFactors(pol, intel, pricePermille, capPct);   // + on sales, - on purchases (permille); load (trade_model.h)
+}
+void leaderOrTemp(const Caravan& k, int* pp, int* capPct) {
+    if (k.flags & F_TEMP) leaderFactors(TEMP_POL, TEMP_INT, pp, capPct);
+    else leaderBonus(k.leader, pp, capPct);
+}
+int8_t headingOf(const Caravan& k) {
+    int d = g_data.lo[k.dest] - g_data.lo[k.origin];
+    return d > 0 ? 1 : d < 0 ? -1 : 2;
+}
+void rebuildDirs() {                                     // the sea-cost callback's per-unit table (phase 3); updated in
+    if (g_unitDir.size() != (size_t)g_s.U) return;       // place (allocated once at install: the callback may run on another thread)
+    std::vector<int8_t> dirs(g_s.U, 0);
+    for (auto& k : g_car) if (k.unit >= 0 && k.unit < g_s.U) dirs[k.unit] = headingOf(k);
+    for (int i = 0; i < g_s.U; i++) if (g_unitDir[i] != dirs[i]) g_unitDir[i] = dirs[i];
+}
+void recordDone(const Caravan& k, int64_t net, uint32_t flags) {
+    if (!(k.flags & F_PLAYER)) return;
+    DoneRec r = { today(), k.force, k.origin, k.dest, k.good, k.qty, k.cost, (int32_t)net, flags };
+    Lock l;
+    g_done.push_back(r);
+    if (g_done.size() > DONE_MAX) g_done.erase(g_done.begin());
 }
 
 // ---------------------------------------------------------------- caravans
@@ -244,11 +285,11 @@ std::string createCaravan(int origin, int dest, int good, int qty, int leader, b
     }
     int pp = 0, capPct = 100;
     if (!temp) leaderBonus(leader, &pp, &capPct);
-    else pp = 10, capPct = 100;                              // 商: politics 60, intelligence 50
-    int cap = (g_data.port(origin) && g_data.port(dest) ? g_mk.p.capSea : g_mk.p.capLand) * capPct / 100;
+    else leaderFactors(TEMP_POL, TEMP_INT, &pp, &capPct);   // 商: politics 60, intelligence 50
+    int cap = capacity(g_data, g_mk.p, origin, dest, capPct);
     if (qty > cap) qty = cap;
     if (qty <= 0) return "nothing to carry";
-    int64_t goods = g_mk.quoteBuy(origin, good, qty) * (1000 - pp) / 1000;
+    int64_t goods = purchase(g_mk, origin, good, qty, pp);
     int64_t cost = goods + g_mk.p.fee;
     int gold = baseGold(b);
     if (cost > gold) return "not enough gold (" + std::to_string(cost) + " needed, " + std::to_string(gold) + " in the city)";
@@ -304,6 +345,7 @@ std::string createCaravan(int origin, int dest, int good, int qty, int leader, b
     {
         Lock l;
         g_car.push_back(k);
+        rebuildDirs();
     }
     g_log("trade: caravan %s -> %s: %d x %s for %lld gold (force %d, unit %d, leader %d%s)%s", cityName(origin), cityName(dest),
           qty, goodName(good), (long long)cost, force, uid, leader, temp ? " 商" : "", ai ? " [AI]" : "");
@@ -327,6 +369,7 @@ bool caravanTurn(Caravan& k, int day) {
         g_log("trade: caravan %s -> %s (%d x %s) is gone%s", cityName(k.origin), cityName(k.dest), k.qty, goodName(k.good),
               k.flags & F_LOOTED ? " (intercepted)" : " (lost)");
         if (k.flags & F_TEMP) releaseTempIfOurs(k);
+        recordDone(k, 0, k.flags & F_LOOTED ? tradeui::DONE_INTERCEPTED : tradeui::DONE_LOST);
         return false;
     }
     const int16_t* up = posOf(u);
@@ -334,8 +377,9 @@ bool caravanTurn(Caravan& k, int day) {
     int dlo, dhi; cityPos(k.dest, &dlo, &dhi);
     if (hexDist(lo, hi, dlo, dhi) <= g_cfg.arrive) {
         int pp = 0, capPct = 100;
-        if (!(k.flags & F_TEMP)) leaderBonus(k.leader, &pp, &capPct); else pp = 10;
-        int64_t rev = g_mk.sell(k.dest, k.good, k.qty) * (1000 + pp) / 1000;
+        leaderOrTemp(k, &pp, &capPct);
+        int64_t rev = g_mk.sell(k.dest, k.good, k.qty) * (1000 + pp) / 1000;   // = saleQuote (trade_model.h) before the sale
+        g_info.see(k.force, k.dest);
         int df = baseForce(k.dest), st = stance(k.force, df);
         int64_t duty = st == 2 ? 0 : rev * (g_data.hub(k.dest) ? g_cfg.taxHub : g_cfg.tax) / 100;
         if (duty && base(k.dest)) addGold(PROC, base(k.dest), (int)duty);
@@ -346,16 +390,31 @@ bool caravanTurn(Caravan& k, int day) {
         g_log("trade: caravan arrived at %s: %d x %s sold for %lld, duty %lld, transit tax %d, %d gold home (cost %d, profit %lld)",
               cityName(k.dest), k.qty, goodName(k.good), (long long)rev, (long long)duty, k.taxDue, paid, k.cost,
               (long long)(net - k.cost));
+        recordDone(k, net, 0);
         removeUnit(PROC, u, 0);                              // officers go home, a temporary one is released
         return false;
     }
     if (day - k.born > g_cfg.maxTurns * 10) {
         g_log("trade: caravan %s -> %s gave up after %d turns, cargo lost", cityName(k.origin), cityName(k.dest), g_cfg.maxTurns);
+        recordDone(k, 0, tradeui::DONE_GAVE_UP);
         removeUnit(PROC, u, 0);
         return false;
     }
+    // phase 3: a storm at sea in a month of the monsoon change
+    if (g_mk.p.monsoon) {
+        uint8_t* h = cell(lo, hi);
+        int sea = h && (*(uint32_t*)(h + 4) & 0x1f) == 8 ? g_data.seaOf(lo, hi) : -1;
+        if (sea >= 0 && season(g_data, sea, g_month0) == 'T' && g_rng.pct() < g_mk.p.stormRisk) {
+            int lost = (k.qty * g_mk.p.stormLoss + 99) / 100;
+            if (lost > k.qty) lost = k.qty;
+            k.qty -= lost;
+            g_log("trade: caravan %s -> %s caught by a storm (%s): %d x %s lost", cityName(k.origin), cityName(k.dest),
+                  g_data.seas[sea].name.c_str(), lost, goodName(k.good));
+        }
+    }
     // transit: the first turn in a city's surroundings
     int c = nearestCity(lo, hi, 30);
+    if (c >= 0) g_info.see(k.force, c);                      // phase 3: the caravan sees the market it passes
     if (c >= 0 && c != k.lastCity) {
         k.lastCity = c;
         int cf = baseForce(c);
@@ -395,21 +454,27 @@ void aiMonth() {
         int mine = 0; for (auto& k : g_car) mine += k.force == f;
         if (mine >= g_cfg.aiMax) continue;
         Route best; bool have = false;
+        // phase 3: the force plans with the prices it knows (information delay), unseen markets at the base price
+        Market view; std::vector<char> known; bool haveView = false;         // built for the first city with the gold
+        auto eff = [&](const Route& x) { return x.profit * 1000 / routeTimePermille(g_data, g_mk.p, x.origin, x.dest, g_month0); };
         for (int c = 0; c < g_data.C; c++) {
             if (owner[c] != f) continue;
             uint8_t* b = base(c);
             int gold = b ? baseGold(b) : 0;
             if (gold < g_cfg.aiMinGold) continue;
-            std::vector<int> land, sea;
+            if (!haveView) { if (g_mk.p.info) g_info.view(g_mk, f, &view, &known); else view = g_mk; haveView = true; }
+            std::vector<int> land, sea, seaTime;
             for (int t : g_inRange[c]) {
                 int o = owner[t];
                 if (o >= 0 && stance(f, o) == 0) continue;               // robbers there
-                (g_data.port(c) && g_data.port(t) ? sea : land).push_back(t);
+                if (g_data.port(c) && g_data.port(t)) { sea.push_back(t); seaTime.push_back(routeTimePermille(g_data, g_mk.p, c, t, g_month0)); }
+                else land.push_back(t);
             }
             int64_t budget = gold - g_cfg.aiReserve < g_cfg.aiInvest ? gold - g_cfg.aiReserve : g_cfg.aiInvest;
             Route r;
-            if (bestRoute(g_mk, c, land, budget, g_mk.p.capLand, g_cfg.tax, g_cfg.aiMargin, &r) && (!have || r.profit > best.profit)) { best = r; have = true; }
-            if (bestRoute(g_mk, c, sea, budget, g_mk.p.capSea, g_cfg.tax, g_cfg.aiMargin, &r) && (!have || r.profit > best.profit)) { best = r; have = true; }
+            // routes compare by profit per travel time (monsoon; land routes 1000: phase 1's comparison)
+            if (bestRoute(view, c, land, budget, g_mk.p.capLand, g_cfg.tax, g_cfg.aiMargin, &r) && (!have || eff(r) > eff(best))) { best = r; have = true; }
+            if (bestRoute(view, c, sea, budget, g_mk.p.capSea, g_cfg.tax, g_cfg.aiMargin, &r, &seaTime) && (!have || eff(r) > eff(best))) { best = r; have = true; }
         }
         if (!have) continue;
         std::string err = createCaravan(best.origin, best.dest, best.good, best.qty, -1, true, nullptr);
@@ -422,21 +487,89 @@ void aiMonth() {
 
 bool mapReady() { uint8_t* b = baseRec(WORLD, 0); return b && objValid(b); }
 
+// phase 3: what the forces see. Own and allied cities and every city within trade_info_range of them: now.
+void observeTerritory(int onlyForce) {
+    if (!g_mk.p.info || !g_info.C) return;
+    std::vector<int> owner(g_data.C);
+    for (int c = 0; c < g_data.C; c++) owner[c] = baseForce(c);
+    std::vector<int8_t> al((size_t)g_s.R * g_s.R, -1);         // stance cache (f, o)
+    for (int c = 0; c < g_data.C; c++) {
+        int o = owner[c];
+        if (o < 0 || o >= g_s.R) continue;
+        for (int f = onlyForce < 0 ? 0 : onlyForce; f < (onlyForce < 0 ? g_s.R : onlyForce + 1); f++) {
+            int8_t& a = al[(size_t)f * g_s.R + o];
+            if (a < 0) a = (int8_t)(stance(f, o) == 2);
+            if (!a) continue;
+            g_info.see(f, c);
+            for (int t : g_infoNear[c]) g_info.see(f, t);
+        }
+    }
+}
+// units of a force see the market of the city they stand near (10 hexes)
+void observeUnits() {
+    if (!g_mk.p.info || !g_info.C) return;
+    for (int i = 0; i < g_s.U; i++) {
+        uint8_t* u = unitRec(WORLD, i);
+        if (!u || !objValid(u)) continue;
+        int h = unitHome(u), f = h >= 0 ? baseForce(h) : -1;
+        if (f < 0 || f >= g_s.R) continue;
+        const int16_t* p = posOf(u);
+        int c = nearestCity(p[0], p[1], 10);
+        if (c >= 0) g_info.see(f, c);
+    }
+}
+void monthEvents(int month) {
+    std::vector<ActiveEvent> st, en;
+    {
+        Lock l;
+        g_ev.month(g_data, g_mk.p, g_rng, month, &st, &en);
+        g_ev.apply(g_data, &g_mk.mod);
+    }
+    for (auto& e : st) g_log("trade: event: %s for %d months", describe(g_data, e).c_str(), e.end - e.start);
+    for (auto& e : en) g_log("trade: event over: %s", describe(g_data, e).c_str());
+}
+
 void turn() {
     if (!mapReady()) return;
     int day = today(), month = day / 30;
+    g_month0 = month % 12;
+    g_unit0 = unitRec(WORLD, 0);
     for (size_t i = 0; i < g_car.size();) {
         bool keep;
         { Caravan k = g_car[i]; keep = caravanTurn(k, day); Lock l; if (i < g_car.size()) g_car[i] = k; }
         if (keep) i++;
         else { Lock l; g_car.erase(g_car.begin() + i); }
     }
-    if (g_lastMonth < 0) g_lastMonth = month;
+    bool first = g_lastMonth < 0;
+    if (first) g_lastMonth = month;
     while (g_lastMonth < month) {                            // a new month (several after a long skip: catch up)
         g_lastMonth++;
-        g_mk.month();
-        if (g_lastMonth == month && g_cfg.ai) aiMonth();
+        { Lock l; if (g_mk.p.info) g_info.endMonth(g_mk, g_lastMonth - 1); g_mk.month(); }
+        monthEvents(g_lastMonth);
+        if (g_lastMonth == month) {
+            observeTerritory(-1);
+            if (g_cfg.ai) aiMonth();
+        }
     }
+    if (first) observeTerritory(-1);
+    observeUnits();
+    { Lock l; rebuildDirs(); }
+}
+
+// phase 3: monsoon on sea hexes (movement.cpp's step cost, any thread: reads only g_unitDir / g_month0)
+int __cdecl seaCostHook(const uint8_t* unit, const uint8_t* rec, int cost) {
+    uint8_t* u0 = g_unit0;
+    if (!u0 || !rec || unit < u0) return cost;
+    size_t ui = (size_t)(unit - u0) / 0xf4;
+    int dir = ui < g_unitDir.size() ? g_unitDir[ui] : 0;
+    if (!dir && !g_cfg.monsoonAll) return cost;
+    size_t h = (size_t)(rec - g_s.hex20) / 20;
+    if (rec < g_s.hex20 || h >= (size_t)g_s.W * g_s.H) return cost;
+    int sea = g_data.seaOf((int)(h / g_s.W), (int)(h % g_s.W));
+    if (sea < 0) return cost;
+    int pct = seaCostPct(g_data, g_mk.p, sea, g_month0, dir == 2 ? 0 : dir);
+    int c = (cost * pct + 50) / 100;
+    return c < 1 ? 1 : c > 254 ? 254 : c;
 }
 
 // ---------------------------------------------------------------- hooks
@@ -485,8 +618,16 @@ int __fastcall annihilateHook(void* proc, void* edx, uint8_t* unit, uint8_t* att
     return g_annOrig(proc, edx, unit, attacker, a3, a4);
 }
 
-// main-thread queue (automation "trade send / ai")
-struct Job { std::string line, result; HANDLE done; };
+int findCityExt(const char* s);
+int findGoodExt(const char* s);
+
+// main-thread queue (automation "trade send / ai", the panel's 「出發」)
+struct Job { std::string line, result; HANDLE done; };   // done == nullptr: queued by the panel (result -> g_uiResult)
+std::wstring g_uiResult;                                   // the last panel send's result (shown by the panel)
+std::wstring resultText(const std::string& r) {
+    if (!r.compare(0, 2, "ok")) return L"成功：商隊出發（" + tradeui::wide(r.substr(3)) + L"）";
+    return L"失敗：" + tradeui::wide(r);
+}
 std::vector<Job*> g_jobs;
 void runJob(Job* j);
 typedef int (__fastcall* PumpFn)(void* self, void* edx, int arg);   // 0x57ff80: thiscall, 1 argument (ret 4)
@@ -500,7 +641,8 @@ void pumpJobs() {
     { Lock l; jobs.swap(g_jobs); }
     for (Job* j : jobs) {
         if (!runJobSafe(j)) j->result = "exception";
-        SetEvent(j->done);
+        if (j->done) SetEvent(j->done);
+        else { { Lock l; g_uiResult = resultText(j->result); } g_log("trade: panel send: %s", j->result.c_str()); delete j; }
     }
 }
 int __fastcall pumpHook(void* self, void* edx, int arg) {
@@ -523,12 +665,257 @@ void jmpTo(uint32_t from, const void* to) {
     VirtualProtect((void*)(uintptr_t)from, 5, old, &old);
 }
 
+// ---------------------------------------------------------------- phase 2: the 中地圖 panel (trade_panel.cpp)
+// research/midmap_re.md: while a MapUI is open its device callback is installed ([0x89e020] == 0x640340, [0x89e024] = the MapUI);
+// MapUI +0x7c = the viewing force, +0x8c = 1 when opened from the main map (mode 4, the camera-jump click).
+// Mouse points are panel pixels (the map area starts at +14). The midmap is modal: the game does not advance while
+// it is open, but every read of the trade state still takes the lock.
+const uint32_t MAPUI_VT = 0x859670;
+const int MM_BORDER = 14;
+typedef int (__fastcall* UiMouseFn)(void* ui, void* edx, void* target, uint32_t wp, POINT* pt);
+typedef int (__fastcall* UiWheelFn)(void* ui, void* edx, void* target, uint32_t keys, int delta, POINT* pt);
+typedef int (__thiscall* UiComposeFn)(void* ui);
+typedef void (__thiscall* UiLayoutFn)(void* ui);
+UiMouseFn g_uiDownPrev = nullptr, g_uiUpPrev = nullptr;
+UiWheelFn g_uiWheelPrev = nullptr;
+bool g_uiOn = false;                 // the panel hooks are installed
+tradeui::State g_ui;
+tradeui::Model g_model;
+bool g_uiOwnDown = false;            // the last button down was ours: swallow its button up
+uint8_t* g_uiLast = nullptr;         // the MapUI the state was last used with
+
+uint8_t* openMapUi() { return *(uint32_t*)(uintptr_t)0x89e020 == 0x640340 ? *(uint8_t**)(uintptr_t)0x89e024 : nullptr; }
+// the player's force when this MapUI is the main map's 中地圖 and the player has a city; else -1
+int panelForce(uint8_t* ui) {
+    if (!ui || ui[0x8c] != 1 || !mapReady()) return -1;
+    int f = *(int*)(ui + 0x7c);
+    if (f < 0 || f >= g_s.R || !isPlayerForce(f)) return -1;
+    for (int c = 0; c < g_data.C; c++) if (baseForce(c) == f) return f;
+    return -1;
+}
+std::wstring big5(const uint8_t* p, int n) {
+    char b[16] = {}; memcpy(b, p, n);
+    wchar_t w[16] = {};
+    int len = MultiByteToWideChar(950, 0, b, -1, w, 16);
+    return len > 1 ? std::wstring(w, len - 1) : L"";
+}
+void buildModel(int force) {
+    observeTerritory(force);                                 // what the player sees now
+    tradeui::Model& m = g_model;
+    std::vector<int> owner(g_data.C);
+    for (int c = 0; c < g_data.C; c++) owner[c] = baseForce(c);
+    Lock l;
+    m.d = &g_data;
+    m.live = g_mk;
+    if (g_mk.p.info) g_info.view(g_mk, force, &m.seen, &m.known);
+    else { m.seen = g_mk; m.known.assign(g_data.C, 1); }
+    m.age.resize(g_data.C);
+    for (int c = 0; c < g_data.C; c++) m.age[c] = g_mk.p.info ? (uint8_t)g_info.ageOf(force, c) : 0;
+    m.force = force;
+    m.owner = owner;
+    m.stance.assign(g_data.C, -1); m.gold.assign(g_data.C, -1);
+    for (int c = 0; c < g_data.C; c++) {
+        if (owner[c] < 0) continue;
+        m.stance[c] = (int8_t)stance(force, owner[c]);
+        if (owner[c] == force) { uint8_t* b = base(c); m.gold[c] = b ? baseGold(b) : 0; }
+    }
+    m.officers.clear();
+    if (g_ui.origin >= 0 && g_ui.origin < g_data.C && owner[g_ui.origin] == force)
+        for (int i = 0; i < g_cfg.PT; i++) {
+            uint8_t* p = personRec(WORLD, i);
+            if (!p || !objValid(p) || vcall(p, 0x40) != force || *(int*)(p + 0x9c) != g_ui.origin) continue;
+            if (p[4] == 0xb0 && p[5] == 0xd3 && !p[6] && !p[9]) continue;     // a temporary 商
+            m.officers.push_back({ i, big5(p + 4, 4) + big5(p + 9, 4), (int)ability(p, 3), (int)ability(p, 2) });
+        }
+    m.caravans.clear();
+    for (auto& k : g_car) {
+        uint8_t* u = liveUnit(k);
+        if (!u) continue;
+        const int16_t* up = posOf(u);
+        bool player = k.force == force;
+        if (!player) {
+            if (!g_cfg.uiAi) continue;
+            int c = nearestCity(up[0], up[1], 30);
+            if (c < 0 || (g_mk.p.info && g_info.ageOf(force, c) != 0)) continue;   // AI caravans where the player can see
+        }
+        uint8_t* h = cell(up[0], up[1]);
+        int terr = h ? *(uint32_t*)(h + 4) & 0x1f : 0;
+        m.caravans.push_back({ k.origin, k.dest, k.good, k.qty, k.cost, up[0], up[1], player, (k.flags & F_TEMP) != 0, terr == 7 || terr == 8 });
+    }
+    m.done.clear();
+    for (auto it = g_done.rbegin(); it != g_done.rend(); ++it)
+        if (it->force == force) m.done.push_back({ it->day, it->origin, it->dest, it->good, it->qty, it->cost, it->net, it->flags });
+    m.events = g_ev.live;
+    m.month = today() / 30;
+    m.tempLive = tempLive();
+    m.freeSpecials = freeSpecials(WORLD);
+    m.cfg.tax = g_cfg.tax; m.cfg.taxHub = g_cfg.taxHub; m.cfg.tempMax = g_cfg.tempMax; m.cfg.tempKeep = g_cfg.tempKeep;
+    m.lastResult = g_uiResult;
+}
+bool projectHex(int lo, int hi, float* x, float* y) { return midmapHexToPixel(lo, hi, 0.0f, x, y); }
+
+// midmap.cpp's overlay: every compose of the world 中地圖 (open, zoom, pan, background mode, our repaints)
+void overlayImpl(uint32_t* dst, int pitch) {
+    uint8_t* ui = openMapUi();
+    int f = panelForce(ui);
+    if (f < 0) { midmapSetClip(600); return; }
+    if (ui != g_uiLast) { g_uiLast = ui; g_uiOwnDown = false; g_ui.msg.clear(); }
+    midmapSetClip(g_ui.on ? tradeui::PANEL_X : 600);
+    buildModel(f);
+    tradeui::validate(g_model, g_ui);
+    tradeui::renderMap(g_model, g_ui, projectHex, dst, pitch);
+    if (g_ui.on) tradeui::renderPanel(g_model, g_ui, dst + tradeui::PANEL_X, pitch);
+}
+void __cdecl overlayHook(uint32_t* dst, int pitch) {
+    __try { overlayImpl(dst, pitch); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { g_log("trade: ERROR: exception %08lx in the midmap overlay", GetExceptionCode()); }
+}
+
+void repaint(uint8_t* ui, int what) {
+    if (what & (tradeui::REPAINT_MAP | tradeui::REPAINT_LAYOUT)) {
+        midmapSetClip(g_ui.on ? tradeui::PANEL_X : 600);
+        ((UiComposeFn)0x640260)(ui);                         // worldmod's compose: Koei's frame, the world map, the overlay
+        if (what & tradeui::REPAINT_LAYOUT) ((UiLayoutFn)0x63fd00)(ui);   // markers under the panel hidden / shown again
+        return;
+    }
+    if (!(what & tradeui::REPAINT_PANEL) || !g_ui.on) return;
+    void* tex = *(void**)(uintptr_t)0x89e01c;                // the shared texture (IDirect3DTexture9: LockRect +0x4c, UnlockRect +0x50)
+    if (!tex) return;
+    struct { int Pitch; void* pBits; } lr = {};
+    RECT rc = { MM_BORDER + tradeui::PANEL_X, MM_BORDER, MM_BORDER + tradeui::MAP_W, MM_BORDER + tradeui::MAP_H };
+    typedef long (__stdcall* LockFn)(void* t, unsigned level, void* lr, const RECT* r, unsigned long flags);
+    typedef long (__stdcall* UnlockFn)(void* t, unsigned level);
+    void** vt = *(void***)tex;
+    if (((LockFn)vt[0x4c / 4])(tex, 0, &lr, &rc, 0) >= 0) {
+        tradeui::renderPanel(g_model, g_ui, (uint32_t*)lr.pBits, lr.Pitch / 4);
+        ((UnlockFn)vt[0x50 / 4])(tex, 0);
+    }
+}
+void queueSend(const tradeui::SendRequest& r) {
+    char line[128];
+    if (r.leader >= 0) sprintf_s(line, "trade send %d %d %d %d %d", r.origin, r.dest, r.good, r.qty, r.leader);
+    else sprintf_s(line, "trade send %d %d %d %d", r.origin, r.dest, r.good, r.qty);
+    Job* j = new Job; j->line = line; j->done = nullptr;
+    { Lock l; g_uiResult.clear(); g_jobs.push_back(j); }
+    g_log("trade: panel queued \"%s\"", line);
+}
+// 0: not ours; 1: handled
+int downImpl(uint8_t* ui, POINT* pt) {
+    int f = panelForce(ui);
+    if (f < 0 || !pt) return 0;
+    if (ui != g_uiLast) { g_uiLast = ui; g_ui.msg.clear(); }
+    buildModel(f);
+    tradeui::validate(g_model, g_ui);
+    tradeui::Result r = tradeui::click(g_model, g_ui, projectHex, pt->x - MM_BORDER, pt->y - MM_BORDER);
+    if (!r.consumed) return 0;
+    if (r.send) queueSend(r.req);
+    if (r.repaint & (tradeui::REPAINT_MAP | tradeui::REPAINT_LAYOUT)) {
+        if (g_ui.origin >= 0 && g_ui.origin < g_data.C) buildModel(f);   // officers of a new origin
+        tradeui::validate(g_model, g_ui);
+    }
+    repaint(ui, r.repaint);
+    return 1;
+}
+int wheelImpl(uint8_t* ui, uint32_t keys, int delta, POINT* pt) {
+    int f = panelForce(ui);
+    if (f < 0 || !pt || !g_ui.on) return 0;
+    tradeui::Result r = tradeui::wheel(g_model, g_ui, pt->x - MM_BORDER, pt->y - MM_BORDER, (int16_t)delta, (keys & MK_SHIFT) != 0);
+    if (!r.consumed) return 0;
+    repaint(ui, r.repaint);
+    return 1;
+}
+int downSafe(uint8_t* ui, POINT* pt) {
+    __try { return downImpl(ui, pt); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { g_log("trade: ERROR: exception %08lx in the panel click", GetExceptionCode()); return 0; }
+}
+int wheelSafe(uint8_t* ui, uint32_t keys, int delta, POINT* pt) {
+    __try { return wheelImpl(ui, keys, delta, pt); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { g_log("trade: ERROR: exception %08lx in the panel wheel", GetExceptionCode()); return 0; }
+}
+int __fastcall uiDownHook(uint8_t* ui, void* edx, void* target, uint32_t wp, POINT* pt) {
+    if (downSafe(ui, pt)) { g_uiOwnDown = true; return 1; }
+    g_uiOwnDown = false;
+    return g_uiDownPrev(ui, edx, target, wp, pt);
+}
+int __fastcall uiUpHook(uint8_t* ui, void* edx, void* target, uint32_t wp, POINT* pt) {
+    if (g_uiOwnDown) { g_uiOwnDown = false; return 1; }
+    return g_uiUpPrev(ui, edx, target, wp, pt);
+}
+int __fastcall uiWheelHook(uint8_t* ui, void* edx, void* target, uint32_t keys, int delta, POINT* pt) {
+    if (wheelSafe(ui, keys, delta, pt)) return 1;
+    return g_uiWheelPrev(ui, edx, target, keys, delta, pt);
+}
+void* patchSlot(uint32_t slot, const void* fn) {
+    void* old = *(void**)(uintptr_t)slot;
+    DWORD o; VirtualProtect((void*)(uintptr_t)slot, 4, PAGE_READWRITE, &o);
+    *(const void**)(uintptr_t)slot = fn;
+    VirtualProtect((void*)(uintptr_t)slot, 4, o, &o);
+    return old;
+}
+// the world 中地圖 (worldmod.cpp installMidmapHooks) is in place: its handlers in the slots, compose jumps to it
+bool worldMidmapInstalled() {
+    auto slot = [](uint32_t off) { return *(uint32_t*)(uintptr_t)(MAPUI_VT + off); };
+    return midmapReady() && *(uint8_t*)(uintptr_t)0x640260 == 0xE9 && slot(0x90) != 0x63d790 && slot(0x94) != 0x63d800 && slot(0xa8) != 0x4754d0;
+}
+
+// automation: "trade panel <from> <to> <good> <file.bmp>": the panel and its map overlay as the player sees them now,
+// rendered off screen (a fixed view around the origin, 2 pixels a hex)
+std::string panelShot(const char* line) {
+    char a[64] = {}, b[64] = {}, c[64] = {}, path[MAX_PATH] = {};
+    if (sscanf_s(line, "%*s %*s %63s %63s %63s %259[^\r\n]", a, (unsigned)sizeof a, b, (unsigned)sizeof b, c, (unsigned)sizeof c, path, (unsigned)sizeof path) != 4)
+        return "usage: trade panel <from> <to> <good> <file.bmp>";
+    int o = findCityExt(a), d = findCityExt(b), g = findGoodExt(c);
+    if (o < 0 || d < 0 || g < 0) return "unknown city or good";
+    int f = -1;
+    for (int i = 0; i < g_s.R && f < 0; i++) if (isPlayerForce(i)) f = i;
+    if (f < 0) return "no player force";
+    tradeui::State keep = g_ui;
+    g_ui = tradeui::State(); g_ui.on = true; g_ui.origin = o; g_ui.dest = d; g_ui.good = g;
+    buildModel(f);
+    tradeui::validate(g_model, g_ui);
+    const int W = tradeui::MAP_W, H = tradeui::MAP_H;
+    std::vector<uint32_t> px((size_t)W * H * 4, 0xffcac4b7);
+    float cl = (float)g_data.lo[o], ch = (float)g_data.hi[o];
+    tradeui::Projector proj = [&](int lo, int hi, float* x, float* y) {
+        *x = (lo - cl) * 2.0f + tradeui::PANEL_X / 2.0f; *y = (hi - ch) * 2.0f + H / 2.0f;
+        return *x >= 0 && *y >= 0 && *x < tradeui::PANEL_X && *y < H;
+    };
+    std::string out;
+    FILE* fp = nullptr;
+    if (fopen_s(&fp, path, "wb") || !fp) out = "cannot write the file";
+    else {
+        int shot = 0;
+        for (int tab = 0; tab < 4; tab++) {                  // the four tabs side by side
+            g_ui.tab = tab;
+            std::vector<uint32_t> one((size_t)W * H, 0xffcac4b7);
+            tradeui::renderMap(g_model, g_ui, proj, one.data(), W);
+            tradeui::renderPanel(g_model, g_ui, one.data() + tradeui::PANEL_X, W);
+            for (int y = 0; y < H; y++) memcpy(&px[(size_t)y * W * 4 + (size_t)tab * W], &one[(size_t)y * W], W * 4);
+            shot++;
+        }
+        BITMAPFILEHEADER fh = {}; BITMAPINFOHEADER ih = {};
+        ih.biSize = sizeof ih; ih.biWidth = W * 4; ih.biHeight = -H; ih.biPlanes = 1; ih.biBitCount = 32; ih.biCompression = BI_RGB;
+        fh.bfType = 0x4d42; fh.bfOffBits = sizeof fh + sizeof ih; fh.bfSize = fh.bfOffBits + W * 4 * H * 4;
+        fwrite(&fh, sizeof fh, 1, fp); fwrite(&ih, sizeof ih, 1, fp); fwrite(px.data(), 4, px.size(), fp); fclose(fp);
+        out = "ok " + std::to_string(shot) + " tabs, " + std::to_string(g_model.officers.size()) + " officers, " +
+              std::to_string(g_model.caravans.size()) + " caravans on the map";
+    }
+    g_ui = keep;
+    return out;
+}
+
 // ---------------------------------------------------------------- save block
 const uint32_t TRAD = 0x44415254;      // "TRAD"
-const uint32_t TRAD_VERSION = 1;
+const uint32_t TRAD_VERSION = 2;           // 1: phase 1; 2: + events, the players' last trips, information (phase 3)
+void resetPhase3() {
+    g_ev.live.clear(); g_mk.mod.clear(); g_done.clear();
+    g_info.reset(g_s.R, g_data, g_mk.p.infoMonths);
+}
 void resetState() {
     Lock l;
     g_car.clear(); g_mk.reset(); g_lastMonth = -1; g_rng = Rng(); g_nextAiForce = 0;
+    resetPhase3();
+    rebuildDirs();
 }
 template <class T> void put(std::vector<uint8_t>& v, const T& x) { const uint8_t* p = (const uint8_t*)&x; v.insert(v.end(), p, p + sizeof x); }
 std::vector<uint8_t> blockBytes() {
@@ -538,13 +925,23 @@ std::vector<uint8_t> blockBytes() {
     put(pl, g_lastMonth); put(pl, g_rng.s); put(pl, g_nextAiForce);
     put(pl, (uint32_t)g_car.size());
     for (auto& k : g_car) put(pl, k);
+    // v2
+    put(pl, (uint32_t)g_ev.live.size());
+    for (auto& e : g_ev.live) put(pl, e);
+    put(pl, (uint32_t)g_done.size());
+    for (auto& r : g_done) put(pl, r);
+    put(pl, (uint32_t)g_info.R); put(pl, (uint32_t)g_info.C); put(pl, (uint32_t)g_info.G); put(pl, (uint32_t)g_info.H);
+    put(pl, g_info.histMonth);
+    pl.insert(pl.end(), g_info.age.begin(), g_info.age.end());
+    const uint8_t* hp = (const uint8_t*)g_info.hist.data();
+    pl.insert(pl.end(), hp, hp + g_info.hist.size() * 2);
     std::vector<uint8_t> out;
     put(out, TRAD); put(out, TRAD_VERSION); put(out, (uint32_t)pl.size());
     out.insert(out.end(), pl.begin(), pl.end());
     return out;
 }
 // parses a payload; false (state unchanged) if malformed
-bool parseBlock(const uint8_t* p, size_t n, int* cars) {
+bool parseBlock(const uint8_t* p, size_t n, uint32_t version, int* cars) {
     const uint8_t* e = p + n;
     auto get = [&](void* v, size_t s) { if ((size_t)(e - p) < s) return false; memcpy(v, p, s); p += s; return true; };
     uint32_t C, G, nc, rng, nextAi; int32_t lastMonth;
@@ -554,6 +951,22 @@ bool parseBlock(const uint8_t* p, size_t n, int* cars) {
     if (!get(&lastMonth, 4) || !get(&rng, 4) || !get(&nextAi, 4) || !get(&nc, 4) || nc > 100000) return false;
     std::vector<Caravan> cars_((size_t)nc);
     if (nc && !get(cars_.data(), nc * sizeof(Caravan))) return false;
+    // v2: events, last trips, information
+    std::vector<ActiveEvent> evs; std::vector<DoneRec> done;
+    uint32_t iR = 0, iC = 0, iG = 0, iH = 0; int32_t histMonth = -1;
+    std::vector<uint8_t> age; std::vector<int16_t> hist;
+    if (version >= 2) {
+        uint32_t ne, nd;
+        if (!get(&ne, 4) || ne > 256) return false;
+        evs.resize(ne); if (ne && !get(evs.data(), ne * sizeof(ActiveEvent))) return false;
+        if (!get(&nd, 4) || nd > 1024) return false;
+        done.resize(nd); if (nd && !get(done.data(), nd * sizeof(DoneRec))) return false;
+        if (!get(&iR, 4) || !get(&iC, 4) || !get(&iG, 4) || !get(&iH, 4) || !get(&histMonth, 4)) return false;
+        if (iR > 4096 || iC > 4096 || iG > 64 || iH > 60) return false;
+        age.resize((size_t)iR * iC); hist.resize((size_t)iH * iC * iG);
+        if (!age.empty() && !get(age.data(), age.size())) return false;
+        if (!hist.empty() && !get(hist.data(), hist.size() * 2)) return false;
+    }
     Lock l;
     if ((int)C == g_data.C && (int)G == g_data.G) {
         g_mk.idx = idx;
@@ -563,6 +976,17 @@ bool parseBlock(const uint8_t* p, size_t n, int* cars) {
     g_car.clear();
     for (auto& k : cars_) if (k.good >= 0 && k.good < g_data.G && k.origin >= 0 && k.origin < g_data.C && k.dest >= 0 && k.dest < g_data.C) g_car.push_back(k);
     *cars = (int)g_car.size();
+    resetPhase3();
+    if (version >= 2) {
+        for (auto& e : evs) if (e.def < g_data.events.size() && (e.good < g_data.G || e.good == EV_GOOD_ALL)) g_ev.live.push_back(e);
+        g_ev.apply(g_data, &g_mk.mod);
+        g_done = done;
+        if ((int)iR == g_info.R && (int)iC == g_info.C && (int)iG == g_info.G && (int)iH == g_info.H) {
+            g_info.age = age; g_info.hist = hist; g_info.histMonth = histMonth;
+        } else if (g_log) g_log("trade: save block information for %u forces / %u cities / %u goods / %u months, now %d / %d / %d / %d: information reset",
+                                iR, iC, iG, iH, g_info.R, g_info.C, g_info.G, g_info.H);
+    }
+    rebuildDirs();
     return true;
 }
 
@@ -573,6 +997,12 @@ bool dumpState(const char* path) {
     Lock l;
     fprintf(f, "trade: %d cities, %d goods, month %d, %zu caravans (%d with 商), free special officers %d\n", g_data.C, g_data.G,
             g_lastMonth, g_car.size(), tempLive(), mapReady() ? freeSpecials(WORLD) : -1);
+    fprintf(f, "month of year %d; events %zu; info: %d forces x %d cities, history to month %d\n", g_month0 + 1, g_ev.live.size(),
+            g_info.R, g_info.C, g_info.histMonth);
+    for (auto& e : g_ev.live) fprintf(f, "event %s: months %d..%d\n", describe(g_data, e).c_str(), e.start, e.end);
+    for (size_t i = 0; i < g_data.seas.size(); i++) fprintf(f, "monsoon %s: %c\n", g_data.seas[i].name.c_str(), season(g_data, (int)i, g_month0));
+    for (auto& r : g_done) fprintf(f, "done day %d force %d: %s -> %s %d x %s cost %d net %d flags %u\n", r.day, r.force, cityName(r.origin),
+                                   cityName(r.dest), r.qty, goodName(r.good), r.cost, r.net, r.flags);
     for (auto& k : g_car) {
         uint8_t* u = mapReady() ? liveUnit(k) : nullptr;
         const int16_t* up = u ? posOf(u) : nullptr;
@@ -605,6 +1035,9 @@ int findGood(const char* s) {
     return -1;
 }
 
+int findCityExt(const char* s) { return findCity(s); }
+int findGoodExt(const char* s) { return findGood(s); }
+
 void runJob(Job* j) {
     char cmd[32] = {}, a[64] = {}, b[64] = {}, c[64] = {};
     int qty = 0, officer = -1;
@@ -618,6 +1051,8 @@ void runJob(Job* j) {
         std::string err = createCaravan(o, d, g, qty, n >= 5 ? officer : -1, false, &k);
         j->result = err.empty() ? "ok unit " + std::to_string(k.unit) + " leader " + std::to_string(k.leader) + " qty " + std::to_string(k.qty) +
                                   " cost " + std::to_string(k.cost) : err;
+    } else if (!strcmp(cmd, "panel")) {
+        j->result = panelShot(j->line.c_str());
     } else if (!strcmp(cmd, "ai")) {
         size_t before = g_car.size();
         aiMonth();
@@ -645,7 +1080,7 @@ void streamImpl(uint8_t* stream) {
             memcpy(hdr, cur, 12);
             if (hdr[0] != TRAD || 12 + (size_t)hdr[2] > left) { g_log("trade: save without a TRAD block: fresh trade state"); return; }
             int cars = 0;
-            bool ok = hdr[1] == TRAD_VERSION && parseBlock(cur + 12, hdr[2], &cars);
+            bool ok = (hdr[1] == 1 || hdr[1] == TRAD_VERSION) && parseBlock(cur + 12, hdr[2], hdr[1], &cars);
             std::vector<uint8_t> sink(12 + (size_t)hdr[2]);
             streamRead(stream, sink.data(), (int)sink.size());   // consume the block (bounded: it fits)
             g_log("trade: TRAD block v%u (%u bytes) %s, %d caravans", hdr[1], hdr[2], ok ? "loaded" : "NOT understood (fresh state)", cars);
@@ -691,7 +1126,7 @@ void tradeCommand(const char* line, FILE* out) {
         if (c >= 0) cityPos(c, &dlo, &dhi);
         bool ok = c >= 0 && hexNear(dlo, dhi, lo, hi, &tlo, &thi);
         fprintf(out, "trade target: city %d at %d,%d -> %s %d,%d\n", c, dlo, dhi, ok ? "hex" : "none", tlo, thi);
-    } else if (!strcmp(cmd, "send") || !strcmp(cmd, "ai")) {
+    } else if (!strcmp(cmd, "send") || !strcmp(cmd, "ai") || !strcmp(cmd, "panel")) {
         Job j; j.line = line; j.done = CreateEventA(nullptr, TRUE, FALSE, nullptr);
         { Lock l; g_jobs.push_back(&j); }
         DWORD w = WaitForSingleObject(j.done, 60000);
@@ -702,7 +1137,7 @@ void tradeCommand(const char* line, FILE* out) {
         }
         CloseHandle(j.done);
         fprintf(out, "trade %s: %s\n", cmd, j.result.c_str());
-    } else fprintf(out, "trade: commands: dump [file] | send <from> <to> <good> <qty> [officer] | ai | tick [months] | target <city> <lo> <hi>\n");
+    } else fprintf(out, "trade: commands: dump [file] | send <from> <to> <good> <qty> [officer] | ai | tick [months] | target <city> <lo> <hi> | panel <from> <to> <good> <file.bmp>\n");
 }
 
 bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
@@ -719,13 +1154,23 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     g_cfg.rob = I(L"trade_rob", 15); g_cfg.robLoss = I(L"trade_rob_loss", 50); g_cfg.loot = I(L"trade_loot", 60);
     g_cfg.escort = I(L"trade_escort", 500); g_cfg.food = I(L"trade_food", 3000); g_cfg.arrive = I(L"trade_arrive", 3);
     g_cfg.maxTurns = I(L"trade_max_turns", 90); g_cfg.playerAuto = I(L"trade_player_auto", 0);
+    g_cfg.ui = I(L"trade_ui", 1); g_cfg.uiAi = I(L"trade_ui_ai_caravans", 1); g_cfg.monsoonAll = I(L"trade_monsoon_all", 0);
+    g_cfg.PT = I(L"persons", 850) + 250;
     Params p;
     p.impact = I(L"trade_impact", 50); p.spread = I(L"trade_spread", 10); p.revert = I(L"trade_revert", 10);
     p.revertHub = I(L"trade_revert_hub", 25); p.capLand = I(L"trade_cap_land", 20); p.capSea = I(L"trade_cap_sea", 60);
     p.fee = I(L"trade_fee", 300);
+    p.monsoon = I(L"trade_monsoon", 1); p.monWith = I(L"trade_monsoon_with", 70); p.monAgainst = I(L"trade_monsoon_against", 140);
+    p.monStorm = I(L"trade_monsoon_storm", 125); p.stormRisk = I(L"trade_storm_risk", 10); p.stormLoss = I(L"trade_storm_loss", 30);
+    p.events = I(L"trade_events", 1); p.eventChance = I(L"trade_event_chance", 15); p.eventMax = I(L"trade_event_max", 4);
+    p.info = I(L"trade_info", 1); p.infoRange = I(L"trade_info_range", 40); p.infoMonths = I(L"trade_info_months", 12);
     if (g_cfg.tempMax < 0 || g_cfg.tempMax > 100 || g_cfg.tempKeep < 0 || g_cfg.tempKeep > 100 || g_cfg.escort < 1 || g_cfg.escort > 60000 ||
         p.capLand < 1 || p.capSea < 1 || p.impact < 0 || p.impact > 1000 || p.spread < 0 || p.spread > 100 || p.revert < 0 || p.revert > 100 ||
-        p.revertHub < 0 || p.revertHub > 100 || g_cfg.aiRange < 1 || g_cfg.aiRange > 2000 || g_cfg.arrive < 1 || g_cfg.arrive > 10) {
+        p.revertHub < 0 || p.revertHub > 100 || g_cfg.aiRange < 1 || g_cfg.aiRange > 2000 || g_cfg.arrive < 1 || g_cfg.arrive > 10 ||
+        p.monWith < 20 || p.monWith > 500 || p.monAgainst < 20 || p.monAgainst > 500 || p.monStorm < 20 || p.monStorm > 500 ||
+        p.stormRisk < 0 || p.stormRisk > 100 || p.stormLoss < 0 || p.stormLoss > 100 || p.eventChance < 0 || p.eventChance > 100 ||
+        p.eventMax < 0 || p.eventMax > 32 || p.infoRange < 0 || p.infoRange > 2000 || p.infoMonths < 1 || p.infoMonths > 60 ||
+        g_cfg.PT < 1100 || g_cfg.PT > 40000) {
         log("trade: ERROR: a trade_* value is out of range, trade not installed");
         return false;
     }
@@ -755,11 +1200,19 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     for (auto& t : sites)
         if (memcmp((void*)(uintptr_t)t.at, t.b, t.n)) { log("trade: ERROR: unexpected code at %08x (%s)", t.at, t.what); bad++; }
     if (bad) { log("trade: not installed"); return false; }
-    if (!s.write) { log("trade: verify_only: hook sites ok, %d cities, %d goods", g_data.C, g_data.G); return true; }
+    if (!s.write) {
+        log("trade: verify_only: hook sites ok, %d cities, %d goods (trade.bin v%d: %zu monsoon seas, %zu events); panel: %s", g_data.C, g_data.G,
+            g_data.version, g_data.seas.size(), g_data.events.size(), !g_cfg.ui ? "off" : worldMidmapInstalled() ? "world 中地圖 present" : "needs the world 中地圖 (not installed in verify_only)");
+        return true;
+    }
 
     InitializeCriticalSection(&g_cs);
     g_mk.d = &g_data; g_mk.p = p; g_mk.reset();
     g_inRange = citiesInRange(g_data, g_cfg.aiRange);
+    if (g_data.version < 2) { g_mk.p.monsoon = 0; g_mk.p.events = 0; }      // a phase 1 trade.bin: no seas, no events
+    g_infoNear = citiesInRange(g_data, g_mk.p.infoRange);
+    resetPhase3();
+    g_unitDir.assign(g_s.U, 0);
     g_planOrig = g_cfg.aiHook ? (PlanFn)trampoline(0x5def90, planHead, sizeof planHead) : nullptr;
     g_annOrig = (AnnihilateFn)trampoline(0x4bfa30, annHead, sizeof annHead);
     g_pumpOrig = (PumpFn)trampoline(0x57ff80, pumpHead, sizeof pumpHead);
@@ -772,9 +1225,25 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     if (g_planOrig) jmpTo(0x5def90, (void*)planHook);
     jmpTo(0x4bfa30, (void*)annihilateHook);
     jmpTo(0x57ff80, (void*)pumpHook);
+    // phase 3: monsoon on caravans' sea steps (movement.cpp, move=1)
+    if (g_mk.p.monsoon && !g_data.seas.empty()) movementSetSeaCost(seaCostHook);
+    // phase 2: the panel on the world 中地圖
+    if (g_cfg.ui) {
+        if (worldMidmapInstalled()) {
+            g_uiDownPrev = (UiMouseFn)patchSlot(MAPUI_VT + 0x90, (void*)uiDownHook);
+            g_uiUpPrev = (UiMouseFn)patchSlot(MAPUI_VT + 0x94, (void*)uiUpHook);
+            g_uiWheelPrev = (UiWheelFn)patchSlot(MAPUI_VT + 0xa8, (void*)uiWheelHook);
+            midmapSetOverlay(overlayHook);
+            g_uiOn = true;
+        } else log("trade: midmap panel NOT installed: the world 中地圖 is not active (world_terrain / bases)");
+    }
     g_on = true;
     int hubs = 0; for (int c = 0; c < g_data.C; c++) hubs += g_data.hub(c);
     log("trade: installed: %d cities (%d hubs), %d goods; temp caravans <= %d keeping %d special slots; AI %s (planning hook %s), range %d",
         g_data.C, hubs, g_data.G, g_cfg.tempMax, g_cfg.tempKeep, g_cfg.ai ? "on" : "off", g_planOrig ? "on" : "off", g_cfg.aiRange);
+    log("trade: phase 2 panel %s; phase 3: monsoon %s (%zu seas, caravans%s, %d/%d/%d%%), events %s (%zu kinds, %d%%/month, <= %d), information delay %s (range %d, %d months)",
+        g_uiOn ? "on (MapUI slots +0x90 +0x94 +0xa8 chained, overlay)" : "off", g_mk.p.monsoon ? "on" : "off", g_data.seas.size(),
+        g_cfg.monsoonAll ? " and all ships" : " only", g_mk.p.monWith, g_mk.p.monAgainst, g_mk.p.monStorm, g_mk.p.events ? "on" : "off",
+        g_data.events.size(), g_mk.p.eventChance, g_mk.p.eventMax, g_mk.p.info ? "on" : "off", g_mk.p.infoRange, g_mk.p.infoMonths);
     return true;
 }

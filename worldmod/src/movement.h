@@ -22,3 +22,7 @@ int movementApplyRecords(uint8_t* records, const int move[12], const int cost[12
 // The 操舵 step costs (12 x 32, laid out like 0x9549830) the step cost 0x56dd00 uses on 河 / 海 for a unit with 操舵;
 // nullptr before the first map entry or with move=0.
 const uint8_t* movementSteerCosts();
+// M13 trade phase 3 (monsoon): called for every step onto a sea hex (terrain 8) with the unit, its HEX20 record and the
+// cost so far (move=1 only); returns the cost to use (1..254). nullptr (default): no change.
+typedef int (__cdecl* MovementSeaCostFn)(const uint8_t* unit, const uint8_t* hexRec, int cost);
+void movementSetSeaCost(MovementSeaCostFn fn);

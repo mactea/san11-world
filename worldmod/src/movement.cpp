@@ -264,7 +264,9 @@ __declspec(naked) static void recalcThunk() {
 // The table 0x9549830, or g_steer on 河 / 海 for a unit with 操舵; x4 when the hex burns (as Koei: a byte shift);
 // then the shore scaling above. Impassable (255) stays 255. The callers (0x5a4598, 0x567731, 0x5a5ed8, pathfind.cpp)
 // use only al.
-static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags) {
+static MovementSeaCostFn g_seaCost = nullptr;      // M13 trade phase 3 (monsoon): sea-hex cost of a unit
+void movementSetSeaCost(MovementSeaCostFn fn) { g_seaCost = fn; }
+static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags, const uint8_t* hexRec) {
     bool water = terr == 7 || terr == 8;
     const uint8_t* tab = water && g_steerReady && unitHasSteer(unit) ? g_steer : (const uint8_t*)(uintptr_t)g_table;
     uint8_t c = tab[weapon * 32 + terr];
@@ -276,6 +278,7 @@ static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t 
             if (cur && alt) { cost = (cost * cur + alt - 1) / alt; if (cost > 255) cost = 255; }
         }
     }
+    if (g_seaCost && terr == 8 && c != 0xff) cost = g_seaCost(unit, hexRec, cost);
     return cost;
 }
 
@@ -284,12 +287,13 @@ static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t 
 __declspec(naked) static void costThunk() {
     __asm {
         push edx
+        push edi
         push dword ptr [edi]
         push esi
         push eax
         push ecx
         call stepCost
-        add esp, 16
+        add esp, 20
         pop edx
         pop edi
         pop esi

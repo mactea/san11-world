@@ -24,6 +24,8 @@ static float g_lo = 0, g_hi = 0, g_scale = 3.0f;      // view centre (hex units)
 static const int MAP = 600;                            // the map area of the panel (inner 600x600)
 static const float MIN_SCALE = 0.32f, MAX_SCALE = 16.0f;
 static uint8_t* g_cityArr = nullptr;
+static int g_clipW = 600;                               // map-area columns that show the map (M13 trade panel: 370)
+static MidmapOverlayFn g_overlay = nullptr;             // drawn after the names (M13 trade panel)
 
 // textures cut from Koei's picture (midmap.wft image 0, BGRA 628x628)
 static const int PATCH = 64;
@@ -99,8 +101,11 @@ float midmapScale() { return g_scale; }
 bool midmapHexToPixel(int lo, int hi, float margin, float* px, float* py) {
     *px = (lo + 0.5f - g_lo) * g_scale + MAP * 0.5f;
     *py = (hi + 0.5f + 0.5f * (lo & 1) - g_hi) * g_scale + MAP * 0.5f;
-    return *px >= margin && *py >= margin && *px < MAP - margin && *py < MAP - margin;
+    return *px >= margin && *py >= margin && *px < g_clipW - margin && *py < MAP - margin;
 }
+void midmapSetClip(int width) { g_clipW = std::max(1, std::min(MAP, width)); }
+int midmapClip() { return g_clipW; }
+void midmapSetOverlay(MidmapOverlayFn fn) { g_overlay = fn; }
 bool midmapPixelToHex(float mx, float my, int* lo, int* hi) {
     float fl = g_lo + (mx - MAP * 0.5f) / g_scale, fh = g_hi + (my - MAP * 0.5f) / g_scale;
     int l = (int)floorf(fl);
@@ -200,8 +205,13 @@ void midmapRender(uint32_t* dst, int pitch, const uint32_t* baseColour, bool bor
     }
 }
 
-// city names (GDI on a DIB), when zoomed in far enough to have room for them
+// city names (GDI on a DIB), when zoomed in far enough to have room for them; then the overlay (M13 trade panel)
+static void renderNames(uint32_t* dst, int pitch);
 void midmapRenderNames(uint32_t* dst, int pitch) {
+    renderNames(dst, pitch);
+    if (g_overlay && g_ready) g_overlay(dst, pitch);
+}
+static void renderNames(uint32_t* dst, int pitch) {
     if (!g_ready || g_scale < 5.0f || !g_cityArr) return;
     const int W = MAP, H = MAP;
     BITMAPINFO bi = {};

@@ -175,5 +175,30 @@
       "demand": { "草原": 1.5 },
       "sources": "Han salt offices (鹽官): sea salt of 齊 / 渤海 and 吳會, well salt of 巴蜀 (江州 / 臨邛), lake salt of 河東 and 樓蘭 (Lop Nur)."
     }
-  ]
+  ],
+
+  "monsoon": {
+    "about": "M13 phase 3: monsoon seas (lo = west-east, hi = north-south, world hexes). months[0..11] = January..December: E = the south-west monsoon (eastbound sailing favoured: Red Sea / Arabia -> India -> Malaya -> China), W = the north-east monsoon (westbound favoured), T = change of the monsoon (storms, slow), - = no monsoon. Periplus of the Erythraean Sea 39, 49, 56-57 (leave Egypt in July, India in December-January); Pliny NH 6.104-106; Faxian (return 411-412). Step costs on sea hexes (worldmod.ini trade_monsoon_with / _against / _storm) and storm risk apply to caravans; AI route choice uses the same factors.",
+    "regions": [
+      { "name": "阿拉伯海", "lo": [480, 860], "hi": [560, 1000], "months": "WWWTEEEEETWW" },
+      { "name": "印度洋",   "lo": [860, 1200], "hi": [640, 1000], "months": "WWWTEEEEETWW" },
+      { "name": "南海",     "lo": [1200, 1460], "hi": [600, 1000], "months": "WWWTEEEEETWW" }
+    ]
+  },
+
+  "events": {
+    "about": "M13 phase 3: market news. Each month with probability worldmod.ini trade_event_chance % one event (weight) starts if fewer than trade_event_max are running. apply: consumers = the cities of the group that do not produce the good, producers = the producing cities of the group, all = every city of the group. good: a key, any (random good; for producers a good the group produces) or all. group: a market group or any (random; for producers a group with producers of the good). mult: price factor while it lasts; months: [min, max].",
+    "list": [
+      { "name": "流行", "apply": "consumers", "good": "any", "group": "any", "mult": 1.6, "months": [6, 12], "weight": 4,
+        "about": "a fashion: Roman ladies and silk (Seneca, Pliny), Han court and glass / coral" },
+      { "name": "歉收", "apply": "producers", "good": "any", "group": "any", "mult": 1.7, "months": [3, 8], "weight": 3,
+        "about": "harvest failure / bad season at the producers: little to sell, prices up" },
+      { "name": "戰亂", "apply": "producers", "good": "all", "group": "any", "mult": 1.4, "months": [4, 10], "weight": 2,
+        "about": "war in a producing land: every good it makes is scarce" },
+      { "name": "疫病", "apply": "all", "good": "all", "group": "any", "mult": 0.75, "months": [3, 9], "weight": 1,
+        "about": "plague (the Antonine plague 165-180, the plagues of 217 China): demand collapses" },
+      { "name": "豐收", "apply": "producers", "good": "any", "group": "any", "mult": 0.7, "months": [3, 6], "weight": 3,
+        "about": "a good year: producers sell cheap" }
+    ]
+  }
 }

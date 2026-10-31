@@ -121,6 +121,30 @@ move=1
 ; trade_loot=60
 ; trade_player_auto: 1 = the player's caravans also move by themselves at the end of each turn (0: use 一括実行 / move them)
 ; trade_player_auto=0
+; phase 2 (M13_TRADE.md 第二期): trade_ui=1 adds the 「貿易」 panel to the 中地圖 opened from the main map (needs the world
+; 中地圖: world_terrain=1, bases=1); trade_ui_ai_caravans: also draw the AI caravans the player can see
+; trade_ui=1
+; trade_ui_ai_caravans=1
+; phase 3 (第三期, trade.bin version 2): monsoon seas: a caravan's step cost on sea hexes is trade_monsoon_with percent
+; with the season (south-west monsoon eastbound, north-east westbound), trade_monsoon_against against it,
+; trade_monsoon_storm in the change months (move=1 needed); a caravan at sea in a change month has trade_storm_risk
+; percent a turn to lose trade_storm_loss percent of its goods; trade_monsoon_all=1: every ship gets the storm-month cost
+; trade_monsoon=1
+; trade_monsoon_with=70
+; trade_monsoon_against=140
+; trade_monsoon_storm=125
+; trade_storm_risk=10
+; trade_storm_loss=30
+; trade_monsoon_all=0
+; market events (fashions, bad harvests, war, plague, good years): trade_event_chance percent a month, at most trade_event_max
+; trade_events=1
+; trade_event_chance=15
+; trade_event_max=4
+; information delay: a force knows the prices of cities within trade_info_range hexes of its own and allied cities now,
+; and of cities its caravans / units passed as they were then (kept trade_info_months months)
+; trade_info=1
+; trade_info_range=40
+; trade_info_months=12
 
 ; ---- debugging
 ; trace: which game code creates/draws Direct3D resources (worldmod_trace_<section>.log)
