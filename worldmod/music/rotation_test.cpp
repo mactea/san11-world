@@ -25,23 +25,23 @@ int main() {
     Current(-1);
     PlayHook(manager, nullptr, 3, 1, 500, 0, -1.0f);
     assert(played == 3 && looping == 0 && active);
-    CompleteAndRequest(3, 31);
+    CompleteAndRequest(3, 30);
     PlayHook(manager, nullptr, 6, 1, 500, 0, -1.0f);
-    assert(played == 31 && season == 6);
-    CompleteAndRequest(6, 30);
+    assert(played == 30 && season == 6);
+    CompleteAndRequest(6, 31);
     PlayHook(manager, nullptr, 5, 1, 500, 0, -1.0f);
-    assert(played == 30 && season == 5);
+    assert(played == 31 && season == 5);
     CompleteAndRequest(5, 5);
-    CompleteAndRequest(5, 31);
+    CompleteAndRequest(5, 30);
     PlayHook(manager, nullptr, 10, 1, 500, 0, -1.0f);
-    assert(played == 31 && season == 10 && active);
-    CompleteAndRequest(10, 30);
+    assert(played == 30 && season == 10 && active);
+    CompleteAndRequest(10, 31);
     CompleteAndRequest(10, 10);
     DWORD previousStart = started = GetTickCount() - 1000;
     for (int repeat = 0; repeat < 20; ++repeat)
         PlayHook(manager, nullptr, 10, 1, 500, 0, -1.0f);
     assert(played == 10 && started == previousStart && active);
-    CompleteAndRequest(10, 31);
+    CompleteAndRequest(10, 30);
     PlayHook(manager, nullptr, 16, 1, 500, 0, -1.0f);
     assert(played == 16 && looping == 1 && !active);
     PlayHook(manager, nullptr, 1, 1, 500, 0, -1.0f);
@@ -74,5 +74,5 @@ int main() {
         assert(played == 31 && looping == 1 && !active);
     }
     puts("PASS: fixed Hero's Dawn map loop, all map cues, custom restores, menu/event cues and map return");
-    puts("PASS: original / Hero's Dawn / medley rotation, wartime map cue 10, repeated requests, native cues, both resources, one-track compatibility");
+    puts("PASS: original / medley / Hero's Dawn rotation, wartime map cue 10, repeated requests, native cues, both resources, one-track compatibility");
 }

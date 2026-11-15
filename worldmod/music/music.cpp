@@ -44,8 +44,8 @@ static void Log(const char* message, int value = 0) {
 }
 
 static int NextTrack() {
-    if (last < 30) return 30 + customCount - 1;
-    return last > 30 ? last - 1 : season;
+    if (last < 30) return 30;
+    return last + 1 < 30 + customCount ? last + 1 : season;
 }
 
 static int __fastcall PlayHook(void* self, void*, int id, int loop, int fade, int flag, float volume) {

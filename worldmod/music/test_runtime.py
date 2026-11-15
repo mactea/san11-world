@@ -44,13 +44,12 @@ try:
     send(3, 30)       # Integration builds start the medley immediately.
     assert read(0x09119878) == 0  # Native loop flag is off.
     send(6, 30)       # Changing season keeps the medley until it ends.
-    send(-998, 6)     # Medley completion returns to the latest original map cue.
-    send(-998, 31)    # Original completion advances to Hero's Dawn.
+    send(-998, 31)    # Medley completion advances to Hero's Dawn.
     send(5, 31)       # Season changes do not interrupt Hero's Dawn either.
     assert read(0x09119878) == 0
     send(10, 31)      # Wartime map requests must not cancel Hero's Dawn.
-    send(-998, 30)    # Hero's Dawn completion advances to the medley.
-    send(-998, 10)    # Medley completion returns to the latest original map cue.
+    send(-998, 10)    # Hero's Dawn completion returns to the latest original map cue.
+    send(-998, 30)    # Original completion advances to the medley.
     send(16, 16)     # Native event cue cancels the map playlist.
     send(-998, -1)   # Cancelling the battle cue cannot resurrect the playlist.
     send(1, 1)       # Restore normal menu music.
