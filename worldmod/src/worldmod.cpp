@@ -21,6 +21,11 @@
 #include "midmap.h"
 #include "forces.h"
 #include "units.h"
+#include "render_backend.h"
+#include "terrain_replacement.h"
+#include "skills.h"
+#include "scene_allocator_trace.h"
+#include "graphics_lifecycle_trace.h"
 
 // ---------------------------------------------------------------- logging
 static FILE* g_log = nullptr;
@@ -45,8 +50,16 @@ struct Config {
     int enable = 1;              // 0 = proxy only, no patches
     int verifyOnly = 0;          // 1 = check patch table against exe bytes, write nothing
     int trace = 0;               // 1 = log Direct3D calls by game call site (worldmod_trace_<section>.log)
+    wchar_t renderBackend[16] = L"system";
+    wchar_t terrainRenderer[16] = L"original";
+    int renderPresentInterval = 0; // windowed 9on12: 0 unchanged, 1 ONE, 2 IMMEDIATE, 3 IMMEDIATE/60
+    int terrainAnisotropy = 0;   // opt-in base terrain minification: 0 off, 2/4/8/16
+    int renderMsaa = 4;         // default 4x; 0 unchanged, 2/4/8 samples
+    int waterEffectStrength = 0; // opt-in, 0..100; real scene acceptance pending
+    int terrainTextureReplacement = 0;
     int automation = 0;          // 1 = test-automation channel (automation.cpp)
     int autoSkip = 0;            // 1 = click through the opening events and dialogs when a map loads (automation.cpp)
+    int skillCombos = 0;         // external original-effect combinations (worldmod_skills.txt)
     int worldTerrain = 0;        // 1 = whole-world 3D terrain (terrainworld.cpp, worldmod_terrain*.txt)
     wchar_t dataDir[MAX_PATH] = L"";   // world_shex.bin / world_height.npy / world_mat.npy / world_palette.bin
     char saveDir[MAX_PATH] = "";       // save_dir=: the game's Documents folder (saves, settings) becomes <game>\<save_dir>
@@ -88,6 +101,13 @@ static void loadConfig() {
     g_cfg.enable = GetPrivateProfileIntW(L"mod", L"enable", 1, ini);
     g_cfg.verifyOnly = GetPrivateProfileIntW(L"mod", L"verify_only", 0, ini);
     g_cfg.trace = GetPrivateProfileIntW(g_section, L"trace", 0, ini);
+    GetPrivateProfileStringW(g_section, L"render_backend", L"system", g_cfg.renderBackend, 16, ini);
+    GetPrivateProfileStringW(g_section, L"terrain_renderer", L"original", g_cfg.terrainRenderer, 16, ini);
+    g_cfg.renderPresentInterval = GetPrivateProfileIntW(g_section, L"render_present_interval", 0, ini);
+    g_cfg.terrainAnisotropy = GetPrivateProfileIntW(g_section, L"terrain_anisotropy", 0, ini);
+    g_cfg.renderMsaa = GetPrivateProfileIntW(g_section, L"render_msaa", 4, ini);
+    g_cfg.waterEffectStrength = GetPrivateProfileIntW(g_section, L"water_effect_strength", 0, ini);
+    g_cfg.terrainTextureReplacement = GetPrivateProfileIntW(g_section, L"terrain_texture_replacement", 0, ini);
     g_cfg.fastClear = GetPrivateProfileIntW(g_section, L"fast_clear", 1, ini);
     wchar_t w[32] = L"";
     GetPrivateProfileStringW(g_section, L"watch", L"", w, 32, ini);
@@ -121,6 +141,7 @@ static void loadConfig() {
         WideCharToMultiByte(CP_ACP, 0, sd, -1, g_cfg.saveDir, MAX_PATH, nullptr, nullptr);
     }
     g_cfg.autoSkip = GetPrivateProfileIntW(g_section, L"auto_skip", 0, ini);
+    g_cfg.skillCombos = GetPrivateProfileIntW(g_section, L"skill_combos", 0, ini);
     g_cfg.worldTerrain = GetPrivateProfileIntW(g_section, L"world_terrain", 0, ini);
     wchar_t sub[MAX_PATH] = L"";
     GetPrivateProfileStringW(g_section, L"data_dir", L"", sub, MAX_PATH, ini);
@@ -1102,7 +1123,10 @@ static OpenMutexAFn g_openMutexA = nullptr;
 static CreateMutexAFn g_createMutexA = nullptr;
 static const char* testMutexName(LPCSTR name, char* buf, size_t n) {
     if (!name) return nullptr;
-    sprintf_s(buf, n, "%s_worldmod_test", name);
+    // Independent test directories must not collide with another game.
+    uint32_t id = 2166136261u;
+    for (const wchar_t* p = g_dir; *p; ++p) id = (id ^ (uint32_t)towlower(*p)) * 16777619u;
+    sprintf_s(buf, n, "%s_worldmod_test_%08x", name, id);
     return buf;
 }
 static HANDLE WINAPI openMutexAHook(DWORD access, BOOL inherit, LPCSTR name) {
@@ -1116,6 +1140,63 @@ static void hookIat(uint32_t slot, const void* fn) {
     DWORD old; VirtualProtect((void*)(uintptr_t)slot, 4, PAGE_READWRITE, &old);
     *(const void**)(uintptr_t)slot = fn;
     VirtualProtect((void*)(uintptr_t)slot, 4, old, &old);
+}
+
+static GraphicsLifecycleTrace g_graphicsLifecycleTrace;
+static void __fastcall graphicsSettingsHook(void* self, void*, UINT action, const char* section) {
+    g_graphicsLifecycleTrace.settings(self, action, section);
+}
+static HRESULT __fastcall graphicsInitializeHook(void* self, void*, HWND window, void* callback) {
+    return g_graphicsLifecycleTrace.initialize(self, window, callback, _ReturnAddress());
+}
+static BOOL WINAPI graphicsPostHook(HWND window, UINT message, WPARAM w, LPARAM l) {
+    return g_graphicsLifecycleTrace.post(window, message, w, l, _ReturnAddress());
+}
+static void installGraphicsLifecycleTrace() {
+    const uint32_t entry[] = { WM_SETTINGCHANGE, 0, 0, 0, 0x2a, 0x43d960 };
+    const uint8_t reinitialize[] = { 0xe8, 0x82, 0x04, 0x01, 0x00 };
+    const uint8_t initialize[] = { 0xe8, 0x5c, 0xff, 0x00, 0x00 };
+    if (memcmp((void*)0x792780, entry, sizeof entry) ||
+        memcmp((void*)0x43d8b9, reinitialize, sizeof reinitialize) ||
+        memcmp((void*)0x43dddf, initialize, sizeof initialize)) {
+        logf("graphics lifetime trace: unexpected game bytes; not installed"); return;
+    }
+    g_graphicsLifecycleTrace.log = logf;
+    g_graphicsLifecycleTrace.settingsCall = (GraphicsLifecycleTrace::SettingsFn)0x43d960;
+    g_graphicsLifecycleTrace.initializeCall = (GraphicsLifecycleTrace::InitializeFn)0x44dd40;
+    g_graphicsLifecycleTrace.postCall = *(GraphicsLifecycleTrace::PostFn*)0x74e5e8;
+    // Change only the two verified CALL displacements, leaving the original functions intact.
+    for (uint32_t site : { 0x43d8b9u, 0x43dddfu }) {
+        DWORD old;
+        if (!VirtualProtect((void*)(uintptr_t)site, 5, PAGE_EXECUTE_READWRITE, &old)) {
+            logf("graphics lifetime trace: cannot patch call at %08x", site); continue;
+        }
+        *(int32_t*)(uintptr_t)(site + 1) = (int32_t)((uintptr_t)graphicsInitializeHook - (site + 5));
+        VirtualProtect((void*)(uintptr_t)site, 5, old, &old);
+        FlushInstructionCache(GetCurrentProcess(), (void*)(uintptr_t)site, 5);
+    }
+    hookIat(0x792794, (void*)graphicsSettingsHook);
+    hookIat(0x74e5e8, (void*)graphicsPostHook);
+    logf("graphics lifetime trace enabled; settings, initialize and close calls preserved");
+}
+
+static SceneAllocatorTrace g_sceneAllocatorTrace;
+static void WINAPI sceneInitializeHook(LPCRITICAL_SECTION cs) { g_sceneAllocatorTrace.initialize(cs, _ReturnAddress()); }
+static void WINAPI sceneDeleteHook(LPCRITICAL_SECTION cs) { g_sceneAllocatorTrace.erase(cs, _ReturnAddress()); }
+static void WINAPI sceneEnterHook(LPCRITICAL_SECTION cs) { g_sceneAllocatorTrace.enter(cs, _ReturnAddress()); }
+static void installSceneAllocatorTrace() {
+    wchar_t flag[2] = {};
+    if (GetEnvironmentVariableW(L"WORLDMOD_SCENE_LIFETIME_TRACE", flag, 2) != 1 || flag[0] != L'1') return;
+    g_sceneAllocatorTrace.target = (LPCRITICAL_SECTION)(uintptr_t)0x32602d0;
+    g_sceneAllocatorTrace.log = logf;
+    g_sceneAllocatorTrace.initializeCall = *(SceneAllocatorTrace::LockFn*)(uintptr_t)0x74e2b8;
+    g_sceneAllocatorTrace.deleteCall = *(SceneAllocatorTrace::LockFn*)(uintptr_t)0x74e2bc;
+    g_sceneAllocatorTrace.enterCall = *(SceneAllocatorTrace::LockFn*)(uintptr_t)0x74e360;
+    hookIat(0x74e2b8, (void*)sceneInitializeHook);
+    hookIat(0x74e2bc, (void*)sceneDeleteHook);
+    hookIat(0x74e360, (void*)sceneEnterHook);
+    logf("scene allocator lifetime trace enabled; calls and exceptions preserved");
+    installGraphicsLifecycleTrace();
 }
 
 // 0x418fb0 K3ST (stage vertices + quads) and 0x4191f0 GCOL (seasonal vertex colours) parsers,
@@ -1703,15 +1784,16 @@ static FARPROC realProc(const char* name) {
     }
     return g_real ? GetProcAddress(g_real, name) : nullptr;
 }
-extern "C" void* WINAPI Direct3DCreate9(UINT sdk) {
+extern "C" IDirect3D9* WINAPI Direct3DCreate9(UINT sdk) {
     relaunchFromAsciiPath();
-    typedef void* (WINAPI* F)(UINT); static F f = (F)realProc("Direct3DCreate9");
-    void* d3d = f ? f(sdk) : nullptr;
-    return (g_cfg.trace || g_cfg.automation || g_cfg.autoSkip) ? traceWrapDirect3D9(d3d) : d3d;
+    realProc("Direct3DCreate9");
+    return (IDirect3D9*)traceWrapDirect3D9(renderCreate9(g_real, sdk));
 }
-extern "C" HRESULT WINAPI Direct3DCreate9Ex(UINT sdk, void** out) {
-    typedef HRESULT(WINAPI* F)(UINT, void**); static F f = (F)realProc("Direct3DCreate9Ex");
-    return f ? f(sdk, out) : E_FAIL;
+extern "C" HRESULT WINAPI Direct3DCreate9Ex(UINT sdk, IDirect3D9Ex** out) {
+    realProc("Direct3DCreate9Ex");
+    HRESULT hr = renderCreate9Ex(g_real, sdk, out);
+    if (SUCCEEDED(hr) && out && *out) traceWrapDirect3D9(*out);
+    return hr;
 }
 extern "C" int WINAPI D3DPERF_BeginEvent(DWORD c, LPCWSTR n) { typedef int(WINAPI* F)(DWORD, LPCWSTR); static F f = (F)realProc("D3DPERF_BeginEvent"); return f ? f(c, n) : 0; }
 extern "C" int WINAPI D3DPERF_EndEvent() { typedef int(WINAPI* F)(); static F f = (F)realProc("D3DPERF_EndEvent"); return f ? f() : 0; }
@@ -1762,7 +1844,7 @@ static void init() {
     AddVectoredExceptionHandler(1, onException);
     g_mainThreadId = GetCurrentThreadId();
     commitMainStack();
-    if (g_cfg.automation) profilerInit(logf);
+    if (g_cfg.automation || g_cfg.autoSkip) profilerInit(logf);
     if (g_cfg.heapCheck) { CreateThread(nullptr, 1 << 18, heapCheckThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr); logf("heap check thread started"); }
     if (g_cfg.watch) { RaiseException(WATCH_ARM, 0, 0, nullptr); logf("watchpoint armed on %08x (main thread)", g_cfg.watch); g_watchTest = 1; }
     if (g_cfg.watchObjList) {
@@ -1771,11 +1853,24 @@ static void init() {
         if (g_cfg.watchObjList == 2) { DWORD old; VirtualProtect((void*)(uintptr_t)OBJ_GUARD_PAGE, 4096, PAGE_READONLY, &old); }
         logf("object list watch: heads %08x/%08x, validation thread started", OBJ_USED, OBJ_FREE);
     }
-    if (g_cfg.trace || g_cfg.automation || g_cfg.autoSkip) traceInit(g_dir, g_section, logf, g_cfg.trace != 0);
+    renderConfigure(g_cfg.renderBackend,
+        isTargetExe() && g_cfg.enable && !g_cfg.verifyOnly ? g_cfg.terrainRenderer : L"original", logf, g_cfg.automation != 0,
+        isTargetExe() && g_cfg.enable && !g_cfg.verifyOnly ? g_cfg.renderPresentInterval : 0,
+        isTargetExe() && g_cfg.enable && !g_cfg.verifyOnly ? g_cfg.terrainAnisotropy : 0,
+        isTargetExe() && g_cfg.enable && !g_cfg.verifyOnly ? g_cfg.renderMsaa : 0,
+        isTargetExe() && g_cfg.enable && !g_cfg.verifyOnly ? g_cfg.waterEffectStrength : 0);
+    if(isTargetExe() && g_cfg.enable && !g_cfg.verifyOnly && g_cfg.terrainTextureReplacement==1 &&
+       !_wcsicmp(g_cfg.renderBackend,L"9on12") && !_wcsicmp(g_cfg.terrainRenderer,L"dx12")){
+        wchar_t pack[MAX_PATH];swprintf_s(pack,L"%s\\worldmod_terrain.wmtr",g_dir);
+        logf("terrain replacement package loaded=%d",terrainReplacementConfigure(pack));
+    }
+    traceInit(g_dir, g_section, logf, g_cfg.trace != 0);
     if (g_cfg.trace) logf("d3d trace enabled");
     if (!isTargetExe()) { logf("not the expected san11pk.exe build; patches disabled"); return; }
+    if (g_cfg.enable && !g_cfg.verifyOnly) installSceneAllocatorTrace();
     hookIat(IAT_SHGetPathFromIDListA, (void*)pathFromIDListHook);
-    if (g_cfg.automation) {                              // 0x74e264 OpenMutexA, 0x74e2f0 CreateMutexA
+    if (g_cfg.automation || !_wcsicmp(g_section, L"san11pk_render")) { // isolate the manual render-test launcher too
+        // 0x74e264 OpenMutexA, 0x74e2f0 CreateMutexA
         g_openMutexA = *(OpenMutexAFn*)(uintptr_t)0x74e264; hookIat(0x74e264, (void*)openMutexAHook);
         g_createMutexA = *(CreateMutexAFn*)(uintptr_t)0x74e2f0; hookIat(0x74e2f0, (void*)createMutexAHook);
     }
@@ -1892,11 +1987,16 @@ static void init() {
         bad += loadPatches(L"worldmod_terrain.txt");
         bad += loadCaves(L"worldmod_terrain_caves.txt", true);
     }
+    if (g_cfg.skillCombos) {
+        wchar_t path[MAX_PATH]; swprintf_s(path, L"%s\\worldmod_skills.txt", g_dir);
+        if (!skillsPrepare(path, logf)) ++bad;
+    }
     if (bad) { logf("ERROR: rejected entries; nothing written"); return; }
     if (g_cfg.verifyOnly) { logf("verify_only: nothing written"); return; }
     commitPatches();
     commitCaves();
     installHooks();
+    if (g_cfg.skillCombos && !skillsInstall()) logf("ERROR: skills: install failed");
 }
 
 BOOL WINAPI DllMain(HINSTANCE, DWORD reason, LPVOID) {

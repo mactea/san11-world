@@ -25,6 +25,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <d3d9.h>
+#include "render_copy_msaa.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -33,6 +34,8 @@
 #include "pathfind.h"
 #include "radar.h"
 #include "units.h"
+#include "render_backend.h"
+#include "terrain_dx12.h"
 
 namespace {
 
@@ -132,7 +135,7 @@ void capture(IDirect3DDevice9* d) {
     if (SUCCEEDED(d->GetRenderTarget(0, &rt)) && SUCCEEDED(rt->GetDesc(&desc)) &&
         (desc.Format == D3DFMT_X8R8G8B8 || desc.Format == D3DFMT_A8R8G8B8) &&
         SUCCEEDED(d->CreateOffscreenPlainSurface(desc.Width, desc.Height, desc.Format, D3DPOOL_SYSTEMMEM, &sys, nullptr)) &&
-        SUCCEEDED(d->GetRenderTargetData(rt, sys))) {
+        SUCCEEDED(renderReadback(d, rt, sys))) {
         D3DLOCKED_RECT lr;
         if (SUCCEEDED(sys->LockRect(&lr, nullptr, D3DLOCK_READONLY))) {
             ok = writeBmp(g_shotPath, (const uint8_t*)lr.pBits, desc.Width, desc.Height, lr.Pitch);
@@ -155,8 +158,6 @@ IDirect3DSurface9* g_probeSys = nullptr;
 volatile LONG g_skipping = 0;
 bool g_automation = false, g_autoSkipOn = false;
 
-IDirect3DSurface9* g_probeRt = nullptr;      // single-sampled copy of a multisampled render target
-
 void probe(IDirect3DDevice9* d) {     // render thread
     IDirect3DSurface9* rt = nullptr;
     D3DSURFACE_DESC desc;
@@ -168,21 +169,14 @@ void probe(IDirect3DDevice9* d) {     // render thread
         g_rtW = desc.Width; g_rtH = desc.Height;
     }
     if (known && desc.Height > 40) {
-        IDirect3DSurface9* src = rt;
         D3DSURFACE_DESC sd;
-        if (desc.MultiSampleType != D3DMULTISAMPLE_NONE) {          // GetRenderTargetData needs a single-sampled source
-            if (g_probeRt && (FAILED(g_probeRt->GetDesc(&sd)) || sd.Width != desc.Width || sd.Height != desc.Height || sd.Format != desc.Format)) {
-                g_probeRt->Release(); g_probeRt = nullptr;
-            }
-            if (!g_probeRt) d->CreateRenderTarget(desc.Width, desc.Height, desc.Format, D3DMULTISAMPLE_NONE, 0, FALSE, &g_probeRt, nullptr);
-            src = (g_probeRt && SUCCEEDED(d->StretchRect(rt, nullptr, g_probeRt, nullptr, D3DTEXF_NONE))) ? g_probeRt : nullptr;
-        }
         if (g_probeSys && (FAILED(g_probeSys->GetDesc(&sd)) || sd.Width != desc.Width || sd.Height != desc.Height || sd.Format != desc.Format)) {
             g_probeSys->Release(); g_probeSys = nullptr;
         }
         if (!g_probeSys) d->CreateOffscreenPlainSurface(desc.Width, desc.Height, desc.Format, D3DPOOL_SYSTEMMEM, &g_probeSys, nullptr);
         D3DLOCKED_RECT lr;
-        if (src && g_probeSys && SUCCEEDED(d->GetRenderTargetData(src, g_probeSys))) {
+        // The resolve target must not survive this probe: DEFAULT-pool references block Reset.
+        if (g_probeSys && SUCCEEDED(renderReadback(d, rt, g_probeSys))) {
             LONG x = g_probeX >= 0 ? g_probeX : 30, y = g_probeY >= 0 ? g_probeY : (LONG)desc.Height - 30;
             x = min(x, (LONG)desc.Width - 1); y = min(y, (LONG)desc.Height - 1);
             RECT r = { x, y, x + 1, y + 1 };
@@ -366,6 +360,22 @@ void run(char* line, FILE* out) {
             automationGoto(x, z);
             fprintf(out, "goto hex (%d,%d) = world (%.0f, %.0f)\n", lo, hi, x, z);
         } else fprintf(out, "usage: goto <lo> <hi>\n");
+    } else if (!strcmp(cmd, "render_native") && sscanf_s(line, "%*s %d", &a) == 1 && g_automation) {
+        terrain12SetEnabled(a != 0); fprintf(out, "ok\n");
+    } else if (!strcmp(cmd, "render_timing_reset")) {
+        renderTimingReset(); fprintf(out, "ok\n");
+    } else if (!strcmp(cmd, "resize") && sscanf_s(line, "%*s %d %d", &a, &b) == 2 && g_automation) {
+        if(a>=640 && a<=3840 && b>=480 && b<=2160) {
+            HWND w=window();
+            // Test window only: remove the frame so the requested client area
+            // fits a 1440-line display without Windows clipping its caption.
+            SetWindowLongW(w,GWL_STYLE,(GetWindowLongW(w,GWL_STYLE)&~(WS_CAPTION|WS_THICKFRAME|WS_MINIMIZE|WS_MAXIMIZE))|WS_POPUP);
+            SetWindowLongW(w,GWL_EXSTYLE,GetWindowLongW(w,GWL_EXSTYLE)&~(WS_EX_WINDOWEDGE|WS_EX_CLIENTEDGE));
+            SetWindowPos(w,nullptr,0,0,a,b,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
+            fprintf(out,"ok\n");
+        } else fprintf(out,"unsupported test size\n");
+    } else if (!strcmp(cmd, "render_status")) {
+        renderStatus(out);
     } else if (!strcmp(cmd, "stats")) {
         RECT rc = {}; if (HWND w = window()) GetClientRect(w, &rc);
         fprintf(out, "hwnd=%p client=%ldx%ld GetCursorPos=%ld GetAsyncKeyState=%ld GetKeyState=%ld GetForegroundWindow=%ld\n",
@@ -410,7 +420,7 @@ void run(char* line, FILE* out) {
         fprintf(out, "bench armed: runs at the next A* call\n");
     }
     else if (!strcmp(cmd, "prof") && sscanf_s(line, "%*s %31s", arg, (unsigned)sizeof arg) == 1 && !strcmp(arg, "start"))
-        fprintf(out, profilerStart() ? "ok\n" : "profiler already running\n");
+        fprintf(out, profilerStart() ? "ok\n" : "profiler unavailable or already running\n");
     else if (!strcmp(cmd, "prof") && sscanf_s(line, "%*s stop %259[^\r\n]", arg, (unsigned)sizeof arg) == 1)
         fprintf(out, "prof: %d samples\n", profilerStop(arg));
     else fprintf(out, "unknown: %s", line);
@@ -460,8 +470,12 @@ DWORD WINAPI commandThread(void*) {
 
 // 命令通道（不碰窗口/输入）：automation 和 auto_skip 都用它，这样正常游戏也能收 worldmod_cmd.txt
 void commandInit(const wchar_t* dir, TraceLogFn log) {
+    static bool started = false;
+    if (started) return;   // automationInit and autoSkipInit both request this channel
+    started = true;
     g_log = log;
     wcscpy_s(g_dir, dir);
+    g_shotDone = CreateEventA(nullptr, TRUE, FALSE, nullptr);
     CreateThread(nullptr, 256 << 10, commandThread, nullptr, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr);
     if (g_log) g_log("command channel enabled (worldmod_cmd.txt)");
 }
@@ -469,7 +483,6 @@ void commandInit(const wchar_t* dir, TraceLogFn log) {
 void automationInit(const wchar_t* dir, TraceLogFn log) {
     g_automation = true;
     commandInit(dir, log);                                   // 命令通道（设置 g_dir + 启动 commandThread）
-    g_shotDone = CreateEventA(nullptr, TRUE, FALSE, nullptr);
     if (!g_probeDone) g_probeDone = CreateEventA(nullptr, TRUE, FALSE, nullptr);
     g_fake = 1;
     hookIat(IAT_GetCursorPos, (void*)hGetCursorPos);

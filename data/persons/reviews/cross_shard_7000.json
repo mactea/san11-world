@@ -1,0 +1,421 @@
+{
+  "decisions": [
+    {
+      "id": 12804,
+      "keys": [
+        "sl:sl_09:11:張祚",
+        "gl:Q712568",
+        "cbdb:17859"
+      ],
+      "review_status": "duplicate",
+      "duplicate_of": 7968,
+      "candidate_duplicate_of": null,
+      "identity_status": "same_former_liang_ruler_all_source_keys_checked",
+      "source_identities_all_adjudicated": true,
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_15.txt",
+          "offset": 8624,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "祚字太伯，博学雄武",
+          "excerpt_offset": 8524,
+          "excerpt": "华遗令，以祚为持节、督中外诸军、抚军将军，辅政。长待议以耀灵冲幼，时难未夷，宜立长君。祚先烝重华母马氏，马氏遂从缉议，命废耀灵为凉宁侯而立祚。祚寻使杨秋胡害耀灵于东苑，埋之于沙坑，私谥曰哀公。 \n　　祚字太伯，博学雄武，有政事之才。既立，自称大都督、大将军、凉州牧、凉公。淫暴不道，又通重华妻裴氏，自阁内媵妾及骏、重华未嫁子女，无不暴乱，国人相目，咸赋《墙茨》之诗。 \n　　永和十年。祚纳尉缉、赵长等议，僭称帝位，立宗庙，舞八佾，置百官，下书曰：“昔金行失驭，戎狄乱华，胡、羯、氐、羌咸怀窃玺。我武公以神武拨乱，保宁西夏，贡款勤王，旬朔不",
+          "citation": "晉書·張軌傳附張祚",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "張重華庶兄、與馬氏私通、字太伯、和平君主，非別一張祚"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_17.txt",
+          "offset": 21121,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "祚遣其太子太和以执友礼造之",
+          "excerpt_offset": 21021,
+          "excerpt": "玉，维国之琛。室迩人遐，实劳我心。” \n　　纤注《论语》，及为诗颂数万言。年八十，笃学不倦。张祚后遣使者张兴备礼征为太子友，兴逼喻甚切，纤喟然叹曰：“德非庄生，才非干木，何取稽停明命！”遂随兴至姑臧。祚遣其太子太和以执友礼造之，纤称疾不见，赠遗一皆不受。寻迁太子太傅。顷之，上疏曰：“臣受生方外，心慕太古。生不喜存，死不悲没。素有遗属，属诸知识，在山投山，临水投水，处泽露形，在人亲土。声闻书疏，勿告我家。今当命终，乞如素愿。”遂不食而卒，时年八十二，谥曰玄虚先生。 \n　　郭荷，字承休，略阳人也。六世祖整，汉安顺之世，公府八辟，公车五征，皆不就",
+          "citation": "晉書·宋纖傳",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "涼州君主張祚與太子太和，和王室傳同一身份"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_04.txt",
+          "offset": 3167,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "生闻张祚见杀玄靓幼冲",
+          "excerpt_offset": 3067,
+          "excerpt": "堕洛州刺史杜郁堕之甥也左仆射赵韶恶之谮于生以为贰于晋杀之壬戌宴群臣于太极殿酣饮乐奏生亲歌以和之命尚书令辛牢为酒监既而怒曰何不强人酒而犹有坐者引弓射牢杀之百竂大惧莫不引满昏醉污服失冠蓬头僵仆生乃大乐二月生闻张祚见杀玄靓幼冲命征东大将军晋王栁遣叅军阎负梁殊使凉以书喻之负殊至姑臧玄靓年幼不见殊等凉州牧张瓘见之曰孤之本朝世执忠节逺宗大晋臣无境外之交二君何以来辱负殊曰晋王与君邻藩义好有自来矣虽山河阻绝然风通道会不欲使羊陆二公独美于前主上以钦明绍统八表宅心光被四海功格天地晋王思与张王齐曜大明交玉帛之好兼与君公同金兰之契是以不逺而来君何怪焉瓘曰羊陆",
+          "citation": "十六國春秋·前秦錄",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "回述前涼王祚被殺、玄靚幼沖，非此年仍生或其他張祚"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_00.txt",
+          "offset": 5809,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "重华庶兄祚杀曜灵而自立",
+          "excerpt_offset": 5709,
+          "excerpt": "一举而定，若或留连，经历岁稔，恐无永逸之利，或有亏损之忧。”帝乃止。是岁，氐苻健僭称大位，自号大秦。  \n　　十五年，慕容俊灭冉闵，僭尊号。  \n　　十六年，慕容俊遣使朝贡。是年，张重华死，子曜灵立。重华庶兄祚杀曜灵而自立，称凉公。  \n　　十七年，遣使于慕容俊。张祚复称凉王，置百官，遣使朝贡。  \n　　十八年，太后王氏崩。是年，苻健死，子生僭立。羌姚襄自称大将军、大单于。张瓘、宋混杀张祚，立重华少子玄靖，称凉王。  \n　　十九年春正月，刘务桓死，其弟阏头立，潜谋反叛。二月，帝西巡，因而临河，便人招喻，阏头从命。冬，慕容俊来请婚，许之。",
+          "citation": "魏書·序紀",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "重華兄祚、廢曜靈，身份鎖定"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_04.txt",
+          "offset": 5533,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "祚，字太伯。既统任",
+          "excerpt_offset": 5433,
+          "excerpt": "雍凉三州牧。重华死。子曜灵统任。  \n　　曜灵，年十岁。自称大司马、凉州牧，以重华兄祚为抚军将军辅政。祚先蒸重华母马氏，密说马氏以曜灵幼弱，须立长君，马从之，遂废曜灵而立祚。曜灵寻为祚所杀。  \n　　祚，字太伯。既统任，自称大将军、凉州牧、凉公。专为奸虐，骏及垂华子女未嫁者皆淫之，凉州人士咸赋《墙茨》。初，重华末年，有螽斯虫集安昌门外，缘壁逆行。都尉常据谏曰：“螽斯是祚小字，今乃逆行，灾之大者，愿出之。”重华曰：“子孙繁昌之征，何为灾也？吾昨梦祚摄位，方委以周公之事，辅翼世子，而祚终杀曜灵焉。”  \n　　自署凉王，立宗庙，置百官，号",
+          "citation": "魏書·張寔傳附張祚",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "同字太伯、涼公、和平、太和之父，全部6原書支一人"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_09.txt",
+          "offset": 960,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "张祚字太伯小字螽斯骏之庶长子也",
+          "excerpt_offset": 860,
+          "excerpt": "外诸军事抚军大将军辅政长等建议以为时难未夷宜立长君灵耀冲幼请立长宁侯祚祚先烝重华母马氏乃宻说马氏遂从长议废灵耀为宁凉侯而立祚寻为宋混等所攻乃使杨秋胡将灵耀于东苑拉其腰而杀之埋之于沙坑私谥曰哀公\n张祚\n张祚字太伯小字螽斯骏之庶长子也博学雄武有政事之才骏之二十一年拜延兴太守封长宁侯重华薨子灵耀嗣及灵耀见害祚遂自立称大都督大将军护羌校尉凉州牧凉公祚既得志恣为滛虐通重华妃裴氏自阁内媵妾及骏重华子女未嫁无不滛乱国人士相视以目咸赋墙茨之诗\n永和十年春正月祚从赵长尉缉等议僣即王位于谦光殿[载记作帝位]立宗庙置百官郊祀天地用天子礼乐下书曰昔金行失驭凶暴横行石羯",
+          "citation": "十六國春秋·前涼錄",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "根片sl09也同字、父、兄弟及篡位事件"
+        },
+        {
+          "citation": "Wikipedia identity: Zhang Zuo",
+          "url": "https://en.wikipedia.org/w/index.php?oldid=1376829587",
+          "revision_id": 1376829587,
+          "excerpt": "full_name=Zhang Zuo (張祚); father=Zhang Jun; predecessor=Zhang Yaoling; era_name=Heping",
+          "verification": "original cached revision read; page QID verification by coordinator; identity only, not dates"
+        },
+        {
+          "citation": "CBDB BIOG_MAIN17859 original fields",
+          "excerpt": "[{\"c_personid\": 17859, \"c_name_chn\": \"張祚\", \"c_index_year\": 285, \"c_index_year_type_code\": \"29\", \"c_birthyear\": 0, \"c_by_nh_code\": 0, \"c_by_nh_year\": null, \"c_by_range\": null, \"c_deathyear\": 348, \"c_dy_nh_code\": 0, \"c_dy_nh_year\": null, \"c_dy_range\": null, \"c_death_age\": 0, \"c_death_age_range\": null, \"c_fl_earliest_year\": null, \"c_fl_latest_year\": null, \"c_notes\": \"Zhang(1) Zuo [17859] Proclaimed himself first emperor of the Former Liang in 346 and assasinated by clansmen (zongren) in 348). Renming Da cidian, p. 949.\", \"c_by_intercalary\": 0, \"c_dy_intercalary\": 0, \"c_by_month\": null, \"c_dy_month\": null, \"c_by_day\": null, \"c_dy_day\": null, \"c_by_day_gz\": null, \"c_dy_day_gz\": null, \"offices\": []}]",
+          "verification": "Original notes explicitly identify the Former Liang ruler; 346/348 chronology is not supported by the read primary annals"
+        }
+      ],
+      "unresolved": [
+        "Identity merge does not validate CBDB348 death; primary sources support355. Preserve contradictory database claim separately; do not copy its index285 into life/activity.",
+        "Birth not established; no new dates assigned on this cross-shard decision"
+      ]
+    },
+    {
+      "id": 12812,
+      "keys": [
+        "js:js_11:139:張駿",
+        "js:js_15:7:張駿",
+        "sl:sl_00:428:張駿",
+        "sl:sl_01:406:張駿",
+        "sl:sl_02:54:張駿",
+        "sl:sl_03:384:張駿",
+        "sl:sl_08:130:張駿",
+        "sl:sl_09:19:張駿",
+        "tj:tj_14:48:張駿",
+        "tj:tj_15:4:張駿",
+        "tj:tj_16:197:張駿",
+        "wsh:wsh_00:69:張駿",
+        "wsh:wsh_04:3:張駿",
+        "hy:hy_00:522:張駿",
+        "js:js_08:136:張駿",
+        "js:js_18:140:張駿",
+        "sl:sl_10:31:張駿",
+        "sl:sl_11:0:張駿",
+        "gl:Q712757",
+        "cbdb:17858"
+      ],
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "candidate_duplicate_of": null,
+      "identity_status": "distinct_homonym_from_8486_confirmed",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_11.txt",
+          "offset": 29505,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "获襄将张骏、杨凝等，徙于寻阳",
+          "excerpt_offset": 29405,
+          "excerpt": "阳襄阳新野义阳顺阳雍州之京兆扬州之义成七郡军事、宁朔将军、义成新野二郡太守，镇襄阳。又从温破姚襄。及虏周成，进号征虏将军，赐爵丰城公。寻迁振威将军、江州刺史、领镇蛮护军、西阳谯二郡太守。温之破姚襄也，获襄将张骏、杨凝等，徙于寻阳。冲在江陵，未及之职，而骏率其徒五百人杀江州督护赵毗，掠武昌府库，将妻子北叛。冲遣将讨获之，遽还所镇。 \n　　初，彝亡后，冲兄弟并少，家贫，母患，须羊以解，无由得之，温乃以冲为质。羊主甚富，言不欲为质，幸为养买德郎，买德郎，冲小字也。及冲为江州，出射，羊主于堂边看，冲识之，谓曰：“我买德也。”遂厚报之。顷之，进监江荆豫",
+          "citation": "晉書·桓沖傳",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "姚襄將張駿，尋陽遷徒殺趙毗，與涼王公庭不同身份"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_18.txt",
+          "offset": 12265,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "姚襄故将张骏杀江州督护赵毘",
+          "excerpt_offset": 12165,
+          "excerpt": "癸亥，大赦。\n　　冬，十月，燕镇南将军慕容尘攻陈留太守袁披于长平；汝南太守朱斌乘虚袭许昌，克之。\n　　代王什冀犍击高车，大破之，俘获万馀口，马、牛、羊百馀万头。\n　　以征虏将军桓冲为江州刺史。十一月，姚襄故将张骏杀江州督护赵毘，帅其徒北叛；冲讨斩之。\n　　孝宗穆皇帝下兴宁二年（甲子，公元三六四年）\n　　春，正月，丙辰，燕大赦。\n　　二月，燕太傅评、龙骧将军李洪略地河南。\n　　三月，庚戌朔，大阅户口，令所在土断，严其法制，谓之《庚戌制》。\n　　帝信方士言，断谷饵药以求长生。侍中高崧谏曰：“此非成乘所宜为；陛下兹事，实日月之食。”不听。辛未，帝",
+          "citation": "資治通鑑·363年十一月",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "姚襄將張駿363北叛被桓沖討斬"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_15.txt",
+          "offset": 1505,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "骏字公庭，幼而奇伟",
+          "excerpt_offset": 1405,
+          "excerpt": "承先人余德，假摄此州，以全性命，上欲不负晋室，下欲保完百姓。然官非王命，位由私议，苟以集事，岂荣之哉！气绝之日，白帢入棺，无以朝服，以彰吾志焉。”年四十八。在位五年。私谥曰成。茂无子，骏嗣位。 \n　　骏字公庭，幼而奇伟。建兴四年，封霸城侯。十岁能属文，卓越不羁，而淫纵过度，常夜微行于邑里，国中化之，及统任，年十八。先是，愍帝使人黄门侍郎史淑在姑臧，左长史泛祎、右长史马谟等讽淑，令拜骏使持节、大都督、大将军、凉州牧、领护羌校尉西平公。赦其境内，置左右前后四率官，缮南宫。刘曜又使人拜骏凉州牧、凉王。 \n　　时辛晏兵于枹罕，骏宴群僚于闲豫",
+          "citation": "晉書·張軌傳附張駿",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "張寔子、嗣張茂、涼州牧西平公，為前涼主"
+        }
+      ],
+      "unresolved": [
+        "撤銷8486同名候選：12812為前涼張駿字公庭，8486為姚襄部將；不可合併。",
+        "This decision compares these identities only; root source-key/date review remains authoritative."
+      ]
+    },
+    {
+      "id": 10094,
+      "keys": [
+        "sl:sl_04:109:苟氏",
+        "sl:sl_05:74:苟氏",
+        "tj:tj_18:185:苟氏",
+        "wsh:wsh_02:52:苟氏",
+        "gl:Q5374525"
+      ],
+      "review_status": "identity_conflict",
+      "duplicate_of": null,
+      "candidate_duplicate_of": null,
+      "identity_status": "merged_fu_jian_mother_and_wife_require_source_key_split",
+      "source_identities_all_adjudicated": false,
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_18.txt",
+          "offset": 1894,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "母苟氏为皇太后，妃苟氏为皇后",
+          "excerpt_offset": 1794,
+          "excerpt": "氏泣谓群臣曰：“社稷重事，小儿自知不能。它日有悔，失在诸君。”群臣皆顿首请立坚。坚乃去皇帝之号，称大秦天王，即位于太极殿，诛生幸臣中书监董荣、左仆射赵韶等二十馀人。大赦，改元永兴。追尊父雄为文桓皇帝，母苟氏为皇太后，妃苟氏为皇后，世子宏为皇太子，以清河王法为都督中外诸军事、丞相、录尚书事、东海公，诸王皆降爵为公。以从祖右光禄大夫、永安公侯为太尉，晋公柳为车骑大将军、尚书令。封弟融为阳平公，双为河南公，子丕为长乐公，晖为平原公，熙为广平公，睿为巨鹿公。以汉阳李威为左仆射，梁平老为右仆射，强汪为领军将军，吕婆楼为司隶校尉，王猛为中书侍郎。\n　　融",
+          "citation": "資治通鑑·357年条",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Same sentence explicitly separates 苻堅母 and 苻堅妃; two women with same surname"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_04.txt",
+          "offset": 7520,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "母茍氏为皇太后妃茍氏为皇后",
+          "excerpt_offset": 7420,
+          "excerpt": "譲法法曰汝嫡嗣且贤宜立坚曰兄年长宜立群臣皆顿首固请坚从之\n永兴元年夏六月坚去皇帝之号称大秦天王即位于太极殿诛生佞臣中书监董荣左仆射赵韶等二十余人大赦境内殊死以下遂以晋升平元年改元永兴追谥父雄为文桓皇帝母茍氏为皇太后妃茍氏为皇后世子宏为皇太子以清河王法为使持节侍中都督中外诸军丞相录尚书事东海公诸王皆降爵为公以从祖右光禄大夫永安公侯为太尉从兄晋公栁为车骑大将军尚书令封弟融为阳平公双为河南公子丕为长乐公晖为平原公熈为广平公叡为巨鹿公汉阳李威为卫将军尚书左仆射梁平老为右仆射强汪为领军将军仇腾为尚书领选席宝为丞相长史行太子詹事吕婆楼为司隶校尉王猛为中",
+          "citation": "十六國春秋·永興元年条",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Separate mother and wife in original reign record"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_05.txt",
+          "offset": 12040,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "太后茍氏略阳氐人坚所生母也",
+          "excerpt_offset": 11940,
+          "excerpt": "太后遂以忧愤卒谥曰明德皇后\n生后梁氏\n生后梁氏略阳人左仆射梁安之女也初为淮南王妃生嗣伪位遂以寿光元年立为皇后会有客星孛大角荧惑入东井占曰不出三年国有大丧生曰朕与皇后对临天下遂杀梁后以应之\n坚太后茍氏\n太后茍氏略阳氐人坚所生母也以坚永兴元年尊为皇太后坚杀生以位让其兄清河王法法不受群臣复固请于坚太后泣谓群臣曰社稷事重小儿自知不能他日有悔失在诸君群臣固请坚既即位署法为丞相东海公太后以法长且贤素得众心疑忌特甚后游宣明台见法之第门车马辐辏惧终为变遂与李威谋赐法死阳平公融太后少子也甚爱之出镇冀州比发三至灞上其夕又窃如融所内外莫知是夜坚寝于前殿太史令魏延",
+          "citation": "十六國春秋·堅太后茍氏傳",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Mother of Fu Jian; postpartum ritual/murder of苻法 stories belong to mother, not his wife"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_02.txt",
+          "offset": 12531,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "见母苟氏通李威之事",
+          "excerpt_offset": 12431,
+          "excerpt": "　　三十八年，改为建元。坚遣使牛恬朝贡。使尚书令王猛伐邺，坚亲率大众以继之。克邺，擒慕容𬀩。坚使其右将军杨安攻克汉中，仍平蜀；又遣其武卫将军苟苌西伐凉州，降张天锡；遣其子长乐公丕攻克襄阳。坚观其史书，见母苟氏通李威之事，惭怒，乃焚其书。  \n　　坚南伐司马昌明，戎卒六十万，骑二十七万，前后千里，旗鼓相望。坚至项城，凉州兵始达咸阳，蜀汉之军，顺流而下，幽冀之众，至于彭城，东西万里，水陆齐进，运漕万艘，自河入石门，达于汝颍。坚弟阳平公融攻寿春，克之。融驰使白坚曰：“贼少易俘，但惧越逸，宜速进军。”坚大悦，舍大军于项城，轻骑八千，兼道赴之",
+          "citation": "魏書·苻健傳附苻堅",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Also explicitly the mother; not spouse"
+        },
+        {
+          "citation": "Wikipedia identity: Empress Gou",
+          "url": "https://en.wikipedia.org/w/index.php?oldid=1225743641",
+          "revision_id": 1225743641,
+          "excerpt": "Empress Gou: husband Fu Jiān; original lead identifies her as wife. Lead says355 accession, conflicting with explicit357 primary reign record; identity only accepted.",
+          "verification": "original cached revision read; page QID verification by coordinator; identity only, not dates"
+        }
+      ],
+      "component_identities": [
+        {
+          "keys": [
+            "sl:sl_04:109:苟氏",
+            "sl:sl_05:74:苟氏",
+            "tj:tj_18:185:苟氏",
+            "wsh:wsh_02:52:苟氏"
+          ],
+          "identity": "苻雄妻、苻堅母苟太后",
+          "keep_separate_from": 9252
+        },
+        {
+          "keys": [
+            "gl:Q5374525"
+          ],
+          "identity": "苻堅妻苟皇后",
+          "candidate_duplicate_of": 9252
+        }
+      ],
+      "unresolved": [
+        "整條hold，不得整條redirect9252或刪除。建議僅gl:Q5374525移至9252；四條母親原書key保留另一實體。",
+        "No top-level birth/death assigned to this mixed entity. 母375明德 versus妻獻穆 must not be conflated."
+      ]
+    },
+    {
+      "id": 9825,
+      "keys": [
+        "sl:sl_03:114:可足渾氏",
+        "sl:sl_05:150:可足渾氏",
+        "tj:tj_17:257:可足渾氏",
+        "tj:tj_18:98:可足渾氏",
+        "sl:sl_06:30:可足渾氏",
+        "gl:Q5374544"
+      ],
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "candidate_duplicate_of": null,
+      "identity_status": "murong_jun_wife_murong_wei_mother_distinct_from_9271_9454",
+      "source_identities_all_adjudicated": true,
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_03.txt",
+          "offset": 27139,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "俊后可足浑氏尚书令豫章公翼之从姊也",
+          "excerpt_offset": 27039,
+          "excerpt": "议之皆以为当然博士刘详董谧议以为尧母为帝喾妃位次第三不以贵陵姜嫄明圣王之道以至公为先文昭后宜立别庙垂怒逼之详谧曰上所欲为无问于臣臣按经奉礼不敢有二垂乃不复问诸儒卒迁段后而以兰氏配飨太祖\n景昭可足浑氏\n俊后可足浑氏尚书令豫章公翼之从姊也俊元玺二年立为皇后𬀩嗣位尊为皇太后颇预朝政性尤猜忌垂为吴王威名素着太后甚忌之其妃段氏自以贵姓不尊事太后太后衔憾诬以巫蛊拷掠致死[事具段氏传]及垂枋头之捷威名益着太后愈不平之遂与太傅评宻谋诛垂垂惧奔秦俄而太后卒追谥曰景昭皇后配飨于烈祖及垂即伪位以可足浑氏谋倾社稷不宜从祀乃尊昭仪段氏为景徳皇后配飨烈祖而追废可足浑后\n\n卷三",
+          "citation": "十六國春秋·景昭可足渾氏傳",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Murong Jun wife/Murong Wei mother; cousin elder sister of Kezuhun Yi"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_03.txt",
+          "offset": 18293,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "浑氏太后从弟尚书令豫章公翼女也",
+          "excerpt_offset": 18193,
+          "excerpt": "天府肃明法令以清四海𬀩纳之绾既定朝制朝野震惧出戸二十余万冬十一月左仆射悦绾卒十二月有神降于邺自称相汝[一作湘女]有声与人接欵数日而去\n\n卷二十九 前燕录七\n慕容𬀩下\n建熙十年夏四月立贵妃可足浑氏为皇后浑氏太后从弟尚书令豫章公翼女也六月晋大司马桓温率徐兖二州刺史郄愔江州刺史南中郎将桓冲豫州刺史西中郎将袁真江夏相刘岵等歩骑五万来伐温又遣建威将军檀玄攻胡陆拔之执宁东将军忠进次金乡时亢旱水道不通乃凿仪阳道以通舟运自帅师次于合肥[一云凿巨野三百余里以通舟运自清水入河]𬀩遣抚军将军下邳王厉为征讨大都督帅歩骑八万逆战于黄墟厉兵大败单骑奔还髙平太守徐翻举郡降温",
+          "citation": "十六國春秋·建熙十年四月",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Murong Wei wife is Yi daughter, a clan niece and daughter-in-law of Empress Dowager; not the dowager"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_18.txt",
+          "offset": 18976,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "太后从弟尚书令豫章公翼之女也",
+          "excerpt_offset": 18876,
+          "excerpt": "乃更作愔笺，自陈非将帅才，不堪军旅，老病，乞闲地自养，劝温并领己所统。温得笺大喜，即转愔冠军将军、会稽内史，温自领徐、兖二州刺史。夏，四月，庚戌，温帅步骑五万发姑孰。\n　　甲子，燕主立皇后可足浑氏，太后从弟尚书令豫章公翼之女也。\n　　大司马温自兖州伐燕。郗超曰：“道远，汴水又浅，恐漕运难通。”温不从。六月，辛丑，温至金乡，天旱，水道绝，温使冠军将军毛虎生凿巨野三百里，引汶水会于清水。虎生，宝之子也。温引舟师自清水入河，舳舻数百里。郗超曰：“清水入河，难以通运。若寇不战，运道又绝，因敌为资，复无所得，此危道也。不若尽举见众直趋邺城，彼畏公威名",
+          "citation": "資治通鑑·369年四月",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Explicitly same Wei wife as sl03 branch in mixed9271 and clean9454"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_18.txt",
+          "offset": 4886,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "以其妹长安君妻垂",
+          "excerpt_offset": 4786,
+          "excerpt": "一死，何堪楚毒如此！不若引服。”段氏叹曰：“吾岂爱死者耶！若自诬以恶逆，上辱祖宗，下累于王，固不为也！”辩答益明，故垂得免祸，而段氏竟死于狱中。出垂为平州刺史，镇辽东。垂以段氏女弟为继室；足浑氏黜之，以其妹长安君妻垂；垂不悦，由是益恶之。\n　　匈奴刘阏头部落多叛，惧而东走，乘冰渡河，半渡而冰解，后众尽归刘悉勿祈，阏头奔代。悉勿祈，务桓之子也。\n　　孝宗穆皇帝中之下升平三年（己未，公元三五九年）\n　　春，二月，燕主俊立子泓为济北王，冲为中山王。\n　　燕人杀段勤，勤弟思来奔。\n　　燕主俊宴群臣于蒲池，语及周太子晋，潸然流涕曰：“才子难",
+          "citation": "資治通鑑·358年条",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Chang’an Jun, dowager’s younger sister, married Murong Chui; a third woman"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_05.txt",
+          "offset": 30172,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "评遂与太后可足浑氏共谋诛之",
+          "excerpt_offset": 30072,
+          "excerpt": "次以臣先之臣死之后愿陛下委政吴王可谓亲贤兼举矣𬀩不能从建熙十年晋大司马桓温率众来伐诸军皆溃垂以车骑大将军败温于枋头威名大振太傅上庸王评深忌疾之及垂所奏将士应蒙殊赏者皆抑而不行垂数以为言与评廷争嫌隙愈深评遂与太后可足浑氏共谋诛之太宰恪之子楷及垂舅兰建知之以告垂曰先发制人但除上庸王评及乐安王臧余无能为矣垂曰骨肉相残而首乱于国吾有死而已不忍为也顷之二人又以告曰内意已决不可不蚤发垂曰必不可弥缝吾宁避之于外耳余非所议也冬十一月辛卯朔垂请畋于大陆因微服出邺将趋龙城至邯郸少子麟素不为垂所爱逃还以状告垂左右多亡叛太傅评白𬀩𬀩遣西平公强率精骑追之及于范阳世子",
+          "citation": "十六國春秋·慕容垂傳",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Same Former Yan dowager conspiring with慕容評"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_06.txt",
+          "offset": 25564,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "以其妹长安君妻垂",
+          "excerpt_offset": 25464,
+          "excerpt": "甚急垂愍之私使人谓段氏曰人生会当一死何堪楚毒如此不若引服段氏叹曰吾岂爱死者耶若自诬以恶逆上辱祖宗下累于王固不为也辨荅益明故垂得以免祸而段氏竟死于狱中垂出为平州刺史还镇辽东垂以段氏女弟为继室可足浑氏黜之以其妹长安君妻垂垂不悦由是浑氏益恶之密谋杀垂垂遂奔秦及即位追谥段氏曰成昭皇后\n垂后后段氏\n垂后段氏字符妃辽西鲜卑光禄大夫段仪之女也少而婉慧有节操尝谓其妹季妃曰我终不作凡人妻季妃曰妹亦不为庸夫妇邻人闻而笑之内黄人张定善相见仪二女大惊曰君家大兴当由二女仪深异之至年二十余而不嫁仪子伦谓仪曰张定何知而拒求者仪曰吾女辈志行不凡故且踟蹰以择良配既",
+          "citation": "十六國春秋·慕容垂段后傳",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Same dowager contrasted with her sister"
+        },
+        {
+          "citation": "Wikipedia identity: Empress Dowager Kezuhun",
+          "url": "https://en.wikipedia.org/w/index.php?oldid=1353246973",
+          "revision_id": 1353246973,
+          "excerpt": "spouse=Murong Jun; issue=Murong Ye, Murong Wei, Murong Chong; reign353–360 as empress consort",
+          "verification": "original cached revision read; page QID verification by coordinator; identity only, not dates"
+        }
+      ],
+      "unresolved": [
+        "不要合9271或9454：太后、太后妹長安君、太后從弟翼女，共三人。",
+        "Identity-only cross-shard review does not replace root date adjudications."
+      ]
+    },
+    {
+      "id": 12795,
+      "keys": [
+        "sk:sk_01:17:高斯由",
+        "gl:Q498716"
+      ],
+      "review_status": "duplicate",
+      "duplicate_of": 7322,
+      "candidate_duplicate_of": null,
+      "identity_status": "gogugwon_sayu_micheon_son_same_person",
+      "source_identities_all_adjudicated": true,
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sk_00.txt",
+          "offset": 20393,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "立王子<斯由>为太子",
+          "excerpt_offset": 20293,
+          "excerpt": "一二年\n\n○十二年，秋八月，遣将袭取<辽东><西安平>。\n\n一七卷高句丽本纪五美川王一四年\n\n○十四年，冬十月，侵<乐浪郡>，虏获男女二千余口。\n\n一七卷高句丽本纪五美川王一五年\n\n○十五年，春正月，立王子<斯由>为太子。秋九月，南侵<带方郡>。\n\n一七卷高句丽本纪五美川王一六年\n\n○十六年，春二月，攻破<玄　城>，杀获甚众。秋八月，星　于东北。\n\n一七卷高句丽本纪五美川王二零年\n\n○二十年，冬十二月，<晋><平州>刺史{刺使}<崔毖>来奔。初，<崔毖>阴说我及<段>氏<宇文>氏，使共攻<慕容　>，三国进攻<棘城>。<　>闭门自守，独",
+          "citation": "三國史記·美川王十五年",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Micheon son Sayu appointed crown prince; birth not stated"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sk_01.txt",
+          "offset": 2176,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "<丽>王<&斯由{钊}>，力战拒之，中流矢死",
+          "excerpt_offset": 2076,
+          "excerpt": "水>南，旗帜皆用黄。\n\n二四卷百济本纪二近肖古王二六年\n\n○二十六年，<高句丽>举兵来。王闻之，伏兵于<𬇙河>上，俟其至，急击之，<高句丽>兵败北。冬，王与太子帅精兵三万，侵<高句丽>，攻<平壤城>。<丽>王<&斯由{钊}>，力战拒之，中流矢死，王引军退。\n\n移都<汉山>。\n\n二四卷百济本纪二近肖古王二七年\n\n○二十七年，春正月，遣使入<晋>朝贡。秋七月，地震。\n\n二四卷百济本纪二近肖古王二八年\n\n○二十八年，春二月，遣使入<晋>朝贡。秋七月，筑城于<靑木岭>。<秃山>城主率三百人，奔<新罗>。\n\n二四卷百济本纪二近肖古王三零年\n\n○三十年，秋七月，<高句丽",
+          "citation": "三國史記·百濟近肖古王二十六年",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "Goguryeo king Sayu/Zhao (國岡王 in next accession account); not an unrelated same-name officer"
+        },
+        {
+          "citation": "Wikipedia identity: Gogugwon of Goguryeo",
+          "url": "https://en.wikipedia.org/w/index.php?oldid=1358658150",
+          "revision_id": 1358658150,
+          "excerpt": "birth_name=Go Sayu/Yu/Soe; father=Micheon; crown prince January314–February331; regnal name=Guggangsang Taewang",
+          "verification": "original cached revision read; page QID verification by coordinator; identity only, not dates"
+        },
+        {
+          "citation": "三國史記卷18·高句麗本紀六·故國原王",
+          "url": "https://zh.wikisource.org/w/index.php?oldid=2270202&title=三國史記/卷18",
+          "source_revision_id": 2270202,
+          "reviewed_on": "2026-11-08",
+          "excerpt": "諱斯由；是月二十三日，薨。",
+          "source_context": "Opening identifies Sayu, also Zhao, made crown prince in Micheon15 and succeeding in Micheon32. Reign41 winter month10 records arrow wound and death on month day23.",
+          "verification": "entire Gogugwon section read online; named subject and regnal month/day directly adjudicated"
+        },
+        {
+          "citation": "三國史記卷30·年表中",
+          "url": "https://zh.wikisource.org/w/index.php?oldid=2020967&title=三國史記/卷30",
+          "source_revision_id": 2020967,
+          "reviewed_on": "2026-11-08",
+          "excerpt": "辛未 簡文皇帝 咸安元年；四十一 故國原王薨",
+          "source_context": "Same row: Gogugwon41, BaekjeGeunchogo26, JinXianan1 (371). Accession row pairs Gogugwon1 with JinXianhe6 (331). Crown prince year Micheon15 is JinJianxing2 (314).",
+          "verification": "primary synchronistic table read; CE year conversion independently corroborated, not inferred from biography estimates"
+        }
+      ],
+      "unresolved": [
+        "Birthday not given; do not infer it from age at succession.",
+        "Wiki infobox reign end372 conflicts with its death371; exact16 November conversion was not independently verified in this identity review.",
+        "Cached gap filled from fixed-revision primary volume18 and synchronistic volume30; canonical7322 records lunar371-10-23, without converting to16November."
+      ]
+    }
+  ]
+}

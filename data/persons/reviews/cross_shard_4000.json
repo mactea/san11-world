@@ -1,0 +1,2274 @@
+{
+  "decisions": [
+    {
+      "id": 9793,
+      "keys": [
+        "tj:tj_10:199:阮咸",
+        "gl:Q3270479",
+        "cbdb:29617"
+      ],
+      "review_status": "source_checked_dates_unknown",
+      "duplicate_of": null,
+      "identity_status": "all_source_identities_adjudicated_same_historical_person",
+      "source_identities_all_adjudicated": true,
+      "confirmed_duplicate_children": [
+        4379
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 583706,
+          "excerpt": "咸字仲容。父熙，武都太守。咸任达不拘，与叔父籍为竹林之游，",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+          "source_key": "tj:tj_10:199:阮咸",
+          "offset": 14961,
+          "excerpt": "会计，常若不足。家有好李，卖之恐人得种，常钻其核。凡所赏拔，专事虚名。阮咸之子瞻尝见戎，戎问曰：“圣人贵名教，老、庄明自然，其旨同异？”瞻曰：“将无同！”戎咨嗟良久，遂辟之。时人谓之“三语掾”。\n　　是时，王衍为尚书令，南阳乐广为河南尹，皆善清谈，宅心事外，名",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 584122,
+          "excerpt": "出补始平太守。以寿终。二子：瞻、孚。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "unresolved": [
+        "Own Jinshu biography says only 以寿终, no exact birth/death date. CBDB29617 dictionary citation identifies this Ruan Xian; no DB index-year activity inference."
+      ],
+      "original_secondary_identity_records": {
+        "id": 9793,
+        "keys": [
+          "tj:tj_10:199:阮咸",
+          "gl:Q3270479",
+          "cbdb:29617"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Ruan Xian",
+            "revision_id": 1356249205,
+            "page_id": 4684088,
+            "content_sha256": "1f8fd45d94e915286c23f0fa913a25e78ea86537d96449dd90b78c98c15a96a8",
+            "date_fields": {
+              "birth_date": "Unknown",
+              "death_date": "Unknown"
+            },
+            "date_categories": [],
+            "lead_wikitext": "{{Short description|3rd-century Chinese scholar and musician}}\n{{family name hatnote|[[Ruan (surname)|Ruan]]|lang=Chinese}}\n{{Infobox person\n| name        = Ruan Xian<br>{{nobold|{{lang|zh-hant|阮咸}}}}\n| image       = Rong Qiqi and Ruan Xian.JPG\n| caption     = Ruan Xian (right) and [[Rong Qiqi]], in a relief dating from the 4th century\n| other_names = Zhongrong ({{lang|zh-hant|仲容}})\n| birth_date  = Unknown\n| birth_place = [[Weishi County]], [[Henan]]\n| death_date  = Unknown\n| father      = Ruan Xi\n| children    = {{unbulleted list|Ruan Zhan|[[Ruan Fu]]}}\n| relatives   = {{unbulleted list|[[Ruan Yu]] (grandfather)|Ruan Ji (uncle)}}\n}}\n{{Infobox Chinese|c=阮咸|p=Ruǎn Xián|w=Juan Hsien}}\n\n'''Ruan Xian''' ([[Floruit|fl.]] 3rd century), [[courtesy name]] '''Zhongrong''', was a Chinese scholar who lived in the [[Six Dynasties]] period. One of the [[Seven Sages of the Bamboo Grove]], he was a skilled player of the Chinese lute, an old version of [[pipa]] which has been called ''[[Ruan (instrument)|ruan]]'' after his name since the [[Tang dynasty]]. His achievement in music reached such high as to be described as \"divine understanding\" in the ''[[Book of Jin]]''. Ruan Xian had a [[Xianbei]] slave who gave birth to his son, Ruan Fu.<ref>{{cite book|title=Zhou Mi's record of clouds and mist passing before one's eyes: an annotated translation|edition=illustrated, annotated|last1=Zhou|first1=Mi|first2=Ankeney|last2=Weitz|editor-last1=Ankeney|editor-last2=Weitz|year=2002|publisher=Brill|volume=54 of Sinica Leidensia|page=85|isbn=90-04-12605-8|quote=331 Ruan Fu (278-326) was the son of Ruan Xian (one of the Seven Worthies of the Bamboo Grove) by a Xianbei slave. Ruan Fu's uncommon obsession for wooden clogs (ji) caused him to exhautst himself in waxing his many pairs.}}</ref>\n\n==References==\n{{Reflist}}\n\n{{Seven sages}}\n{{Authority control}}\n\n{{DEFAULTSORT:Ruan, Xian}}\n[[Category:Seven Sages of the Bamboo Grove]]\n[[Category:Year of death unknown]]\n[[Category:Pipa players]]\n[[Category:Cao Wei musicians]]\n[[Category:Jin dynasty (266–420) musicians]]\n[[Category:Jin dynasty (266–420) government officials]]\n[[Category:Political office-holders in Shaanxi]]\n[[Category:Musicians from Henan]]\n[[Category:Politicians from Kaifeng]]\n[[Category:Year of birth unknown]]\n[[Category:3rd-century musicians]]\n[[Category:People from Weishi County]]\n[[Category:3rd-century Chinese people]]\n\n{{China-academic-bio-stub}}",
+            "url": "https://en.wikipedia.org/wiki/Ruan_Xian",
+            "wikidata_qid": "Q3270479",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q3270479"
+            ]
+          }
+        ],
+        "cbdb_originals": [
+          {
+            "c_personid": 29617,
+            "c_name_chn": "阮咸",
+            "c_index_year": 251,
+            "c_index_year_type_code": "13",
+            "c_birthyear": 0,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 0,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 0,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Ruan(1) Xian [29617] RM, p. 517.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          }
+        ],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 11029,
+      "keys": [
+        "js:js_05:7:劉伶",
+        "tj:tj_08:197:劉伶",
+        "js:js_04:216:劉伶",
+        "sg:sg_07:216:劉伶",
+        "gl:Q706832",
+        "ssxy:ssxy_02:234:劉伶",
+        "ssxy:ssxy_03:70:劉伶"
+      ],
+      "review_status": "source_checked_dates_unknown",
+      "duplicate_of": null,
+      "identity_status": "all_source_identities_adjudicated_same_historical_person",
+      "source_identities_all_adjudicated": true,
+      "confirmed_duplicate_children": [
+        5540
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 590486,
+          "excerpt": "刘伶，字伯伦，沛国人也。身长六尺，容貌甚陋。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_05.txt",
+          "source_key": "js:js_05:7:劉伶",
+          "offset": 887,
+          "excerpt": "门侍郎、散骑常侍，在朝不任职，容迹而已。卒于位。二子：纯、悌。 \n　　刘伶，字伯伦，沛国人也。身长六尺，容貌甚陋。放情肆志，常以细宇宙齐万物为心。澹默少言，不妄交游，与阮籍、嵇康相遇，欣然神解，携手入林。初不以家产有无介意。常乘鹿车，携一壶酒，使人荷锸而随之，",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_08.txt",
+          "source_key": "tj:tj_08:197:劉伶",
+          "offset": 17354,
+          "excerpt": "庄而尚奇任侠，与陈留阮籍、籍兄子咸、河内山涛、河南向秀、琅邪王戎、沛人刘伶特相友善，号竹林七贤。皆崇尚虚无，轻蔑礼法，纵酒昏酣，遗落世事。\n　　阮籍为步兵校尉，其母卒，籍方与人围棋，对者求止，籍留与决赌。既而饮酒二斗，举声一号，吐血数升，毁瘠骨立。居丧，饮酒无",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_04.txt",
+          "source_key": "js:js_04:216:劉伶",
+          "offset": 32370,
+          "excerpt": " 阮籍（兄子咸　咸子瞻　瞻弟孚　从子修　族弟放　放弟裕）　嵇康　向秀　刘伶　谢鲲　胡毋辅之（子谦之）　毕卓　王尼　羊曼　光逸 \n　　阮籍，字嗣宗，陈留尉氏人也。父瑀，魏丞相掾，知名于世。籍容貌瑰杰，志气宏放，傲然独得，任性不羁，而喜怒不形于色。或闭户视书，累月",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_07.txt",
+          "source_key": "sg:sg_07:216:劉伶",
+          "offset": 30476,
+          "excerpt": "与之游者未尝见其喜愠之色与陈留阮籍河内山涛河南向秀籍兄子咸琅邪王戎沛人刘伶相与友善游于竹林号为七贤钟防为大将军所昵闻康名而造之会名公子以才能贵幸乗肥衣轻賔从如云康方箕踞而鍜会至不为之礼康问会曰何所闻而来何所见而去会曰有所闻而来有所见而去会深衔之大将军尝欲辟康康",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_02.txt",
+          "source_key": "ssxy:ssxy_02:234:劉伶",
+          "offset": 27398,
+          "excerpt": "仪脱冠冕麤服乱头皆好时人以为玉人见者曰见裴叔则如玉山上行光映照人\n　　刘伶身长六尺貌甚丑顇而悠悠忽忽土木形骸【梁祚魏国统曰刘伶字伯伦形貌丑陋身长六尺然肆意放荡悠焉独畅自得一时常以宇宙为狭】\n　　骠骑王武子是卫玠之舅俊爽有风姿见玠辄叹曰珠玉在侧觉我形【玠别传曰",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_03.txt",
+          "source_key": "ssxy:ssxy_03:70:劉伶",
+          "offset": 4170,
+          "excerpt": "二十三\n　　陈留阮籍谯国嵇康河内山涛三人年皆相比康年少亚之预此契者沛国刘伶陈留阮咸河内向秀琅邪王戎七人常集于竹林之下肆意酣畅故世谓竹林七贤【晋阳秋曰于时风誉扇于海内至于今咏之】\n　　阮籍母防在晋文王坐进酒肉司何曽亦在坐【晋诸公賛曰何曽字颕考陈郡阳夏人父防魏",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 591061,
+          "excerpt": "竟以寿终。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "unresolved": [
+        "Consulted primary biography gives longevity, not exact221 birth/300 death; those secondary years remain uncorroborated by these passages."
+      ],
+      "original_secondary_identity_records": {
+        "id": 11029,
+        "keys": [
+          "js:js_05:7:劉伶",
+          "tj:tj_08:197:劉伶",
+          "js:js_04:216:劉伶",
+          "sg:sg_07:216:劉伶",
+          "gl:Q706832",
+          "ssxy:ssxy_02:234:劉伶",
+          "ssxy:ssxy_03:70:劉伶"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Liu Ling (poet)",
+            "revision_id": 1371733534,
+            "page_id": 3106430,
+            "content_sha256": "4946ada9fd2573ef015dfcacd02f8d6eba534700a55e0a72ceb861d9d8e67269",
+            "date_fields": {
+              "birth_date": "221",
+              "death_date": "300"
+            },
+            "date_categories": [
+              "221 births",
+              "300 deaths"
+            ],
+            "lead_wikitext": "{{Short description|Chinese scholar and poet (221–300)}}\n{{Infobox writer\n| name        = Liu Ling\n| birth_name  = Liu Ling\n| birth_date  = 221\n| birth_place = \n| death_date  = 300\n| occupation  = Poet, Scholar\n}}\n[[File:Long Corridor-竹林七贤2.jpg|thumb|The [[Seven Sages of the Bamboo Grove]] depicted in the [[Long Corridor]], one of whom is Liu Ling]]\n\n'''Liu Ling''' ({{Lang-zh|c=劉伶}}), born 221 and died 300 CE, was a Chinese poet and scholar.  Little information survives about his family background, though he is described in historical sources as short and unattractive, with a dissipated appearance.\n\n==Name==\nLiu Ling's name is commonly misprinted as \"劉靈\".\n\n==Background==\nLiu Ling was born in the state of Pei of the [[Jin dynasty (266–420)|Western Jin dynasty]] (266–316 CE), which is now the [[Suzhou, Anhui|Suzhou]] of [[Anhui]] province.<ref name=\"cultural-china_com\">{{cite web|url=http://www.cultural-china.com/chinaWH/History/en/59H516H5062.html|title=Cultural China|url-status=dead|archiveurl=https://web.archive.org/web/20111005035912/http://www.cultural-china.com/chinaWH/History/en/59H516H5062.html|archivedate=2011-10-05}}</ref>\n\n==Seven Sages of the Bamboo Grove==\n{{further|Seven Sages of the Bamboo Grove}}\n\nOne of the [[Seven Sages of the Bamboo Grove]], Liu Ling  was a [[Taoism|Taoist]] who retreated to the countryside in order to pursue a spontaneous and natural existence that would have been impossible under the tight constraints of the [[Emperor of China|Imperial court]].\n\n==Personality and life==\nPopularly regarded as an eccentric, he was notorious for his love of alcohol.  The earliest depictions of him, on tombs in [[Nanjing]], show him drinking wine from a gourd, and his most famous work is a poem titled \"In Praise of the Virtue of Wine\".<ref name=\"cultural-china_com\" />\n\nAn oft-quoted [[Folklore|folk tale]] about Liu Ling claims that he was followed at all times by a servant bearing a bottle of wine and a shovel, who was equally prepared to offer him wine at a moment's notice or bury him if he fell over dead.  Another cites his practice of commonly walking around his home in the [[nudity|nude]], explaining to surprised visitors that he considered the entire universe his home and his rooms his clothing, and then inquiring as to why they had just entered his pants. \"I see the earth and skies as my home, and this room as my pants. What are you, gentlemen, doing in my pants?\"\n\nLiu Ling and his beliefs about drinking are mentioned in Chapter XXXVI\nof [[Jack London]]'s [[autobiographical novel]] ''[[John Barleycorn (novel)|John Barleycorn]]''.<ref>{{Cite web |last=London |first=Jack |title=John Barleycorn |url=https://www.gutenberg.org/cache/epub/318/pg318-images.html#chap36 |access-date=2024-04-01 |website=[[Project Gutenberg]] |language=en}}</ref>\n\n==Literature==\n\n* [[Ulrich Holbein]]: ''Unheilige Narren''. 22 Lebensbilder. Marix Verlag, [[Wiesbaden]] 2012, {{ISBN|978-3-86539-300-5}}. S.42-43 (German)\n\n{{Seven sages}}\n\n==References==\n{{reflist}}\n\n{{DEFAULTSORT:Liu, Ling}}\n[[Category:Seven Sages of the Bamboo Grove]]\n[[Category:Cao Wei poets]]\n[[Category:Jin dynasty (266–420) poets]]\n[[Category:People from Suzhou, Anhui]]\n[[Category:Poets from Anhui]]\n[[Category:221 births]]\n[[Category:300 deaths]]\n[[Category:Deities of wine and beer]]",
+            "url": "https://en.wikipedia.org/wiki/Liu_Ling_(poet)",
+            "wikidata_qid": "Q706832",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q706832"
+            ]
+          }
+        ],
+        "cbdb_originals": [],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 11000,
+      "keys": [
+        "js:js_18:111:慕容廆",
+        "sl:sl_01:368:慕容廆",
+        "sl:sl_03:113:慕容廆",
+        "tj:tj_11:173:慕容廆",
+        "tj:tj_12:78:慕容廆",
+        "tj:tj_13:48:慕容廆",
+        "tj:tj_14:29:慕容廆",
+        "tj:tj_15:190:慕容廆",
+        "wsh:wsh_00:36:慕容廆",
+        "yi:yi_02:51:慕容廆",
+        "js:js_17:312:慕容廆",
+        "sl:sl_06:11:慕容廆",
+        "wsh:wsh_04:55:慕容廆",
+        "wsh:wsh_05:11:慕容廆",
+        "yi:yi_00:11:慕容廆",
+        "gl:Q1071559",
+        "cbdb:17119"
+      ],
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "identity_status": "all_source_identities_adjudicated_same_historical_person",
+      "source_identities_all_adjudicated": true,
+      "confirmed_duplicate_children": [
+        5923
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 1252944,
+          "excerpt": "慕容廆，字弈洛瑰，昌黎棘城鲜卑人也。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_18.txt",
+          "source_key": "js:js_18:111:慕容廆",
+          "offset": 14437,
+          "excerpt": "。国中有古秽城，本秽貃之城也。 \n　　武帝时，频来朝贡，至太康六年，为慕容廆所袭破，其王依虑自杀，子弟走保沃沮。帝为下诏曰：“夫余王世守忠孝，为恶虏所灭，其愍念之。若其遗类足以复国者，当为之方计，使得存立。”有司奏护东夷校尉鲜于婴不救夫余，失于机略。诏免婴，以",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_01.txt",
+          "source_key": "sl:sl_01:368:慕容廆",
+          "offset": 23345,
+          "excerpt": "春三月勒冦彭城下邳徐州刺史卞敦与征北将军王邃退保盱眙夏四月勒遣使结好于慕容廆廆执送建康五月大旱佛图澄于石井岗掘得死龙长尺余渍之以水良乆乃蘓既而呪之祭之以酒龙腾空而上须臾天遂晦暝雨乃大降因名龙岗秋八月勒遣中山公虎统中外步卒[一作骑]四万击安东将军青州刺史曹嶷嶷议",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_03.txt",
+          "source_key": "sl:sl_03:113:慕容廆",
+          "offset": 22789,
+          "excerpt": "年岁在庚午灭凡八十五年\n\n卷三十 前燕录八\n吐谷浑\n吐谷浑者本辽东鲜卑慕容廆之庶兄因氏其字以为首类之种号也故谓之野虏父徒河渉归有二子长曰吐谷浑少曰若洛廆廆代统部落为慕容氏浑庶长廆正嫡父在时分戸一千七百与浑以隶之浑与廆二部俱牧马马鬬相伤廆怒径遣使让浑曰先公处分与",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_11.txt",
+          "source_key": "tj:tj_11:173:慕容廆",
+          "offset": 8903,
+          "excerpt": "，陈留王薨，谥日魏元皇帝。\n　　鲜卑宁文单于莫圭部众强盛，遣其弟屈云攻慕容廆，廆击其别帅素怒延，破之。素怒延耻之，复发兵十万，围廆于棘城。廆众皆惧，廆曰：“素怒延兵虽多而无法制，已在吾算中矣，诸君但为力战，无所忧也！”遂出击，大破之，追奔百里，俘斩万计。辽东孟",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_12.txt",
+          "source_key": "tj:tj_12:78:慕容廆",
+          "offset": 3502,
+          "excerpt": "逊为宁州刺史，仍诏交州出兵救李钊。交州刺史吾彦遣其子咨将兵救之。\n　　慕容廆自称鲜卑大单于。拓跋禄官卒，弟猗卢总摄三部，与廆通好。\n　　孝惠皇帝下永嘉二年（戊辰，公元三零八年）\n　　春，正月，丙午朔，日有食之。\n　　丁未，大赦。\n　　汉王渊遣抚军将军聪等十将南",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_13.txt",
+          "source_key": "tj:tj_13:48:慕容廆",
+          "offset": 2361,
+          "excerpt": "逃奔令支，依段疾陆眷。会稽朱左车、鲁国孔纂、泰山胡母翼自蓟逃奔昌黎，依慕容廆。是时中国流民归廆者数万家，廆以冀州人为冀阳郡，豫州人为成周郡，青州人为营丘郡，并州人为唐国郡。初，王浚以邵续为乐陵太守，屯厌次。浚败，续附于石勒，勒以续子乂为督护。浚所署勃海太守东莱",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_14.txt",
+          "source_key": "tj:tj_14:29:慕容廆",
+          "offset": 609,
+          "excerpt": "北渡河。于是河南之民皆相帅归矩，洛阳遂空。\n　　三月，裴嶷至建康，盛称慕容廆之威德，贤俊皆为之用，朝廷始重之。帝谓嶷曰：“卿中朝名臣，当留江东，朕别诏龙骧送卿家属。”嶷曰：“臣少蒙国恩，出入省闼，若得复奉辇毂，臣之至荣。但以旧京沦没，山陵穿毁，虽名臣宿将，莫能",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_15.txt",
+          "source_key": "tj:tj_15:190:慕容廆",
+          "offset": 13794,
+          "excerpt": "臣之体，则不应敬。若他日小会，自可尽礼。”诏从之。弈，组之子也。\n　　慕容廆遣使与太尉陶侃笺，劝以兴兵北伐，共清中原。僚属宋该等共议，以“廆立功一隅，位卑任重，等差无别，不足以镇华、夷，宜表请进廆官爵。”参军韩恒驳曰：“夫立功者患信义不著，不患名位不高。桓、文",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_00.txt",
+          "source_key": "wsh:wsh_00:36:慕容廆",
+          "offset": 2808,
+          "excerpt": "年，賨人李雄僭帝号于蜀，自称大成。  \n　　十三年，昭帝崩。徒何大单于慕容廆遣使朝贡。是岁，羯胡石勒与晋马牧帅汲桑反。  \n　　穆皇帝天姿英特，勇略过人，昭帝崩后，遂总摄三部，以为一统。  \n　　元年，刘渊僭帝号，自称大汉。  \n　　三年，晋并州刺史刘琨遣使，",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\yi_02.txt",
+          "source_key": "yi:yi_02:51:慕容廆",
+          "offset": 15731,
+          "excerpt": "纪功；又到丸都山，铭不耐城而还。其后，复通中夏。 \n　　晋永嘉乱，鲜卑慕容廆据昌黎大棘城，元帝授平州刺史。句骊王乙弗利频寇辽东，廆不能制。弗利死，子刘代立。康帝建元元年，慕容廆子晃率兵伐之，刘与战，大败，单马奔走。晃乘胜追至丸都，焚其宫室，掠男子五万余口以归。",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_17.txt",
+          "source_key": "js:js_17:312:慕容廆",
+          "offset": 39296,
+          "excerpt": "，与渤海高瞻避地幽州，说瞻曰：“王浚昏暴，终必无成，宜思去就以图久安。慕容廆法政修明，虚怀引纳，且谶言真人出东北，傥或是乎？宜相与归之，同建事业。”瞻不从。泓乃率宗族归廆，廆待以客礼，引为参军，军国之务动辄访之。泓指说成败，事皆如言。廆常曰：“黄参军，孤之仲翔",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_05.txt",
+          "source_key": "wsh:wsh_05:11:慕容廆",
+          "offset": 20622,
+          "excerpt": "丘不勤立，尚平文女。丘不勤死 ，子莫廆立，本名犯太祖讳，莫廆遣弟屈云攻慕容廆，廆击破之；又遣别部素延伐慕容廆于棘城，复为慕容廆所破。时莫廆部众强盛，自称单于，塞外诸部咸畏惮之。莫廆死，子逊昵延立，率众攻慕容廆于棘城。廆子翰先戍于外，逊昵延谓其众曰：“翰素果勇，",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 1257213,
+          "excerpt": "朝议未定。八年，廆卒，乃止。时年六十五，在位四十九年。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 975608,
+          "excerpt": "夏，五月，甲寅，辽东武宣公慕容廆卒。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_06.txt",
+          "offset": 12287,
+          "excerpt": "辽川无桑及廆通于晋求种江南",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated",
+          "source_tier": "late_reconstruction",
+          "source_edition": "明屠乔孙、项琳重编本；缓存卷首明示伪本，非崔鸿原著直传",
+          "requires_earlier_source_corroboration": true
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_04.txt",
+          "offset": 22437,
+          "excerpt": "涉归一名弈洛韩，有二子，庶长曰吐谷浑，少曰若洛廆。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\yi_00.txt",
+          "offset": 20922,
+          "excerpt": "父弈洛韩，有二子，长曰吐谷浑，少曰若洛廆。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "historical_birth": {
+        "year": 269,
+        "precision": "inferred_year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "朝议未定。八年，廆卒，乃止。时年六十五，在位四十九年。",
+        "inference": "333 - nominal65 +1"
+      },
+      "historical_death": {
+        "year": 333,
+        "precision": "year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+        "excerpt": "夏，五月，甲寅，辽东武宣公慕容廆卒。"
+      },
+      "unresolved": [
+        "Birth269 is nominal-age reconstruction; lunar5月甲寅 death, not an independently converted Western date."
+      ],
+      "original_secondary_identity_records": {
+        "id": 11000,
+        "keys": [
+          "js:js_18:111:慕容廆",
+          "sl:sl_01:368:慕容廆",
+          "sl:sl_03:113:慕容廆",
+          "tj:tj_11:173:慕容廆",
+          "tj:tj_12:78:慕容廆",
+          "tj:tj_13:48:慕容廆",
+          "tj:tj_14:29:慕容廆",
+          "tj:tj_15:190:慕容廆",
+          "wsh:wsh_00:36:慕容廆",
+          "yi:yi_02:51:慕容廆",
+          "js:js_17:312:慕容廆",
+          "sl:sl_06:11:慕容廆",
+          "wsh:wsh_04:55:慕容廆",
+          "wsh:wsh_05:11:慕容廆",
+          "yi:yi_00:11:慕容廆",
+          "gl:Q1071559",
+          "cbdb:17119"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Murong Hui",
+            "revision_id": 1304867651,
+            "page_id": 7158405,
+            "content_sha256": "9809c6df060be8f80eca9638e3013f1570d910d1ecaa17a9a3558725a8ce9c5c",
+            "date_fields": {},
+            "date_categories": [
+              "269 births",
+              "333 deaths"
+            ],
+            "lead_wikitext": "{{about|the ancestor of the rulers of Former Yan|his great-grandson|Murong Hui (Later Yan)}}\n{{family name hatnote|[[Murong]]|lang=Chinese}}\n{{more citations needed|date=January 2009}}\n\n'''Murong Hui<ref>The character \"廆\" has multiple pronunciations: \"guī\", \"huì\" and \"wěi\".</ref>''' (慕容廆, 269 &ndash; 4 June 333<ref>([咸和八年]夏，五月，甲寅，辽东武宣公慕容廆卒。) ''Zizhi Tongjian'', vol.95. ([咸和]八年，廆卒，乃止。时年六十五，在位四十九年。) ''Jin Shu'', vol.108</ref>), courtesy name '''Yiluo''' (弈洛)''',''' was an Xianbei chief, formally known as Duke Xiang of Liaodong, posthumously honored as '''Emperor Wuxuan''' (武宣皇帝). In the [[Book of Jin]], Murong Hui was described as tall, physically strong and having a beautiful appearance.<ref>(廆幼而魁岸，美姿貌，身长八尺，雄杰有大度。) ''Jin Shu'', vol.108</ref>\n\nMurong Hui had initially been a [[Xianbei]] chief who fought [[Jin dynasty (266–420)|Jin]] forces during the late reign of [[Emperor Wu of Jin]], Jin's founding emperor, but he submitted as a Jin vassal in 289. Under constant attack by fellow Xianbei chief Duan Jie ({{lang|zh|段階}}) of the [[Duan tribe]], he humbly sought peace with the Duan and married one of Duan Jie's daughters. From this union came Murong Huang (in 297) and two of his younger brothers, Murong Ren ({{lang|zh|慕容仁}}) and Murong Zhao ({{lang|zh|慕容昭}}).<ref>{{cite book|title=[[Book of Jin]]|volume=108|chapter=慕容廆|trans-chapter=Murong Hui|author=Fang Xuanling|authorlink=Fang Xuanling}}</ref><ref>{{cite book|title=[[Shiliuguo Chunqiu]]|volume=3|chapter=前燕錄|trans-chapter=Former Yan|author=Tsui Hung}}</ref>\n\nDuring Murong Hui's rule as tribal chief, the Jin dynasty's central government was in constant turmoil and eventually collapsed due to infighting and agrarian rebellions, the strongest of which was the [[Xiongnu]] state [[Han-Zhao]]. As a result, many refugees arrived in the relatively safe domain of Murong Hui's, and as he treated the ethnically [[Han Chinese|Han]] refugees with kindness, most chose to stay, greatly strengthening his power, and as Jin forces in the north gradually fell to Han-Zhao's capable general [[Shi Le]] (who later established his own independent state [[Later Zhao]]), Murong Hui became the only domain in northern China still under titular Jin rule, carrying the Jin-bestowed title of the Duke of Liaodong. He entrusted Murong Huang with many important military tasks such as fighting the powerful fellow Xianbei [[Yuwen]] tribe in 320 and 325. In early 322, Murong Hui named [[Murong Huang]] [[heir apparent]]. However, Murong Hui also greatly favored Murong Huang's brothers Murong Ren, Murong Zhao, and particularly Murong Han ({{lang|zh|慕容翰}}), who was regarded very highly as a general. Murong Huang became jealous and suspicious of these brothers, feelings which became known to them and which would sow the seeds of future troubles.\n\n== See also ==\n\n* [[Song of the Xianbei Brother]]\n\n==Family==\nConsort and issue(s):\n*Empress Wuxuan, of the Duan clan (武宣皇后 段氏)\n**[[Murong Huang]], Prince Wenming (文明王慕容皝; 297– 25 October 348), third son\n**[[Murong Ren]], Duke of Liaodong (遼東公慕容仁, d. 336), fourth son\n**Murong Zhao (慕容昭, d. 333), fifth son\n*Unknown\n**[[Murong Han]] (慕容翰, d. 344), first son\n**Second son\n**[[Murong You]] ({{lang|zh|慕容幼}}), sixth son\n**[[Murong Zhi]] ({{lang|zh|慕容稚}}), seventh son\n**[[Murong Jūn]], Prince Xiangyang ({{lang|zh-Hans|襄阳王 慕容軍}}), eight son<ref>different character from his nephew [[Murong Jun]]</ref>\n**Murong Han ({{lang|zh|慕容汗}}), ninth son\n**[[Murong Ping]], Prince Shangyong (上庸王 慕容評), tenth son\n**[[Murong Biao]], Prince Wuchang (武昌王 {{lang|zh|慕容彪}}), eleventh son\n**Princess Murong (慕容氏, d. 341), first daughter\n***Married [[Tuoba Shiyijian|Tuoba Shiyiqian]] (拓跋什翼犍), a son of [[Tuoba Yulü]]\n\n==References==\n{{reflist}}\n\n{{s-start}}\n{{s-hou|[[Former Yan|House of Murong]]||269||333||name=Duke Xiang of Liaodong}}\n{{s-reg|cn}}\n{{s-new|creation}}\n{{s-ttl|title=Duke of [[Liaodong]]|years=321–333}}\n{{s-aft|after=[[Murong Huang]]}}\n{{s-end}}\n\n{{DEFAULTSORT:Murong, Hui}}\n[[Category:Jin dynasty (266–420) generals]]\n[[Category:Former Yan people]]\n[[Category:269 births]]\n[[Category:333 deaths]]\n[[Category:People from Jinzhou]]\n[[Category:Political office-holders in Liaoning]]\n[[Category:Jin dynasty (266–420) government officials]]\n[[Category:Politicians from Liaoning]]\n[[Category:Generals from Liaoning]]\n\n\n{{china-royal-stub}}",
+            "url": "https://en.wikipedia.org/wiki/Murong_Hui",
+            "wikidata_qid": "Q1071559",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q1071559"
+            ]
+          }
+        ],
+        "cbdb_originals": [
+          {
+            "c_personid": 17119,
+            "c_name_chn": "慕容廆",
+            "c_index_year": 266,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 266,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 333,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 68,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Murong(1) Hui [17119] Giles, p. 591.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          }
+        ],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 12803,
+      "keys": [
+        "js:js_14:141:張軌",
+        "sl:sl_00:474:張軌",
+        "sl:sl_08:29:張軌",
+        "sl:sl_09:20:張軌",
+        "sl:sl_10:30:張軌",
+        "tj:tj_12:83:張軌",
+        "tj:tj_13:27:張軌",
+        "wsh:wsh_04:0:張軌",
+        "js:js_01:282:張軌",
+        "js:js_05:127:張軌",
+        "js:js_15:0:張軌",
+        "js:js_17:131:張軌",
+        "gl:Q700840",
+        "cbdb:17855",
+        "ssxy:ssxy_00:189:張軌"
+      ],
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "identity_status": "all_source_identities_adjudicated_same_historical_person",
+      "source_identities_all_adjudicated": true,
+      "confirmed_duplicate_children": [
+        6296
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 986258,
+          "excerpt": "张轨，字士彦，安定乌氏人，汉常山景王耳十七代孙也。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_14.txt",
+          "source_key": "js:js_14:141:張軌",
+          "offset": 34909,
+          "excerpt": "威，身陨名飞。魏终协契，效绩扬辉。 \n列传第五十六 \n　　　　　　　 张轨（子寔　寔弟茂　寔子骏　骏子重华　华子耀灵　灵伯父祚　灵弟玄靓　靓叔天锡） \n　　张轨，字士彦，安定乌氏人，汉常山景王耳十七代孙也。家世孝廉，以儒学显。父温，为太官令。轨少明敏好学，有器",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_00.txt",
+          "source_key": "sl:sl_00:474:張軌",
+          "offset": 34047,
+          "excerpt": "朝廷不能制会天下大乱进逼洛阳太傅越遣司马王斌帅甲士五千人来卫京师凉州牧张轨亦遣督护北宫纯来援弥入自轘辕败官军于伊北京师大震宫城门昼闭弥至洛阳屯于津阳晋以司徒王衍都督征讨诸军事衍与王斌等出战北宫纯募勇士百余人突陈弥兵大败遂烧建春门而东衍遣左卫将军王秉追之战于七里",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_08.txt",
+          "source_key": "sl:sl_08:29:張軌",
+          "offset": 26892,
+          "excerpt": "\n韩耆字黄耉安定安武人也仕勃勃为并州刺史后归仕魏\n\n卷七十 前凉录一\n张轨\n张轨字士彦安定乌氏人汉常山王耳十七世孙也家世孝亷以儒学着闻祖烈魏外黄令父温为太官令母陇西辛氏轨少好学明经有器量姿仪典则与同郡皇甫谧[字士安]友善隠于宜阳女几山太始初受叔父锡官五品中书监",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_09.txt",
+          "source_key": "sl:sl_09:20:張軌",
+          "offset": 7357,
+          "excerpt": "不替终显厥功岂以一眚而废才用其以天锡为左员外散骑常侍又诏曰故太尉西平公张轨着德遐域世袭前劳强兵纵害遂至失守散骑常侍天锡拔迹登朝先祀沦替用増矜慨可复天锡西平郡公爵俄拜金紫光禄大夫天锡少有文才流誉逺近虽遐方殊数亦迈人之杰也闻皇京多才钦羡弥至犹在江渚司马著作[未详姓",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_10.txt",
+          "source_key": "sl:sl_10:30:張軌",
+          "offset": 37101,
+          "excerpt": "祖柔仕晋并歴显位雍至东莞太守柔至相国从事中郎北地太守祖弇[音奄]仕前凉张轨为武卫将军天水太守封安世亭侯父昶字中坚幼有令誉为世子侍讲年十八卒暠昶之遗腹子也少而好学性沈敏寛和美器度通渉经史尤善天文及长颇有声称兼习武艺诵孙吴兵法尝与吕光太史令郭黁及同母弟宋繇同宿黁起",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_12.txt",
+          "source_key": "tj:tj_12:83:張軌",
+          "offset": 3659,
+          "excerpt": "，太傅越杀清河王覃。\n　　庚子，石勒寇常山，王浚击破之。\n　　凉州刺史张轨病风，口不能言，使其子茂摄州事。陇西内史晋昌张越，凉州大族，欲逐轨而代之，与其兄酒泉太守镇及西平太守曹祛，谋遣使诣长安告南阳王模，称轨废疾，请以秦州刺史贾龛代之。龛将受之，其兄让龛曰：“",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_13.txt",
+          "source_key": "tj:tj_13:27:張軌",
+          "offset": 1005,
+          "excerpt": "无禄秩，取给于民；军无部伍，号令不肃；此其所短也。\n　　二月，壬寅，以张轨为太尉、凉州牧，封西平郡公；王浚为大司马、都督幽、冀诸军事；荀组为司空、领尚书左仆射兼司隶校尉，行留台事；刘琨为大将军、都督并州诸军事。朝廷以张轨老病，拜其子实为副刺史。\n　　石勒纂严，",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_04.txt",
+          "source_key": "wsh:wsh_04:0:張軌",
+          "offset": 27962,
+          "excerpt": "。东去长安四千九百里，汉西域长史、戊己校尉并居于此。晋以其地为高昌郡，张轨、吕光、沮渠蒙逊据河西，皆置太守以统之。去敦煌十三日行。国有八城，皆有华人。地多石碛。气候温暖，厥土良沃，谷麦一岁再熟，宜蚕，多五果，又饶漆。有草名羊刺，其上生蜜而味甚佳。引水溉田。出赤",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_01.txt",
+          "source_key": "js:js_01:282:張軌",
+          "offset": 31532,
+          "excerpt": "有文义，好述作。初拜南阳国世子。模遇害，保在邽上。其后贾疋死，裴苞又为张轨所杀，保全有秦州之地，自号大司马，承制置百官。陇右氐羌并从之，凉州刺史张寔遣使贡献。及愍帝即位，以保为右丞相，加侍中、都督陕西诸军事。寻进位相国。 \n　　模之败也，都尉陈安归于保，保命统",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_05.txt",
+          "source_key": "js:js_05:127:張軌",
+          "offset": 20201,
+          "excerpt": "、《高士》、《逸士》、《列女》等传、《玄晏春秋》，并重于世。门人挚虞、张轨、牛综、席纯，皆为晋名臣。 \n　　方回少遵父操，兼有文才。永嘉初，博士征，不起。避乱荆州，闭户闲居，未尝入城府。蚕而后衣，耕而后食，先人后己，尊贤爱物，南土人士咸崇敬之。刺史陶侃礼之甚厚",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_15.txt",
+          "source_key": "js:js_15:0:張軌",
+          "offset": 11953,
+          "excerpt": "以一眚而废才用！其以天锡为散骑常侍、左员外。”又诏曰：“故太尉、西平公张轨著德遐域，世袭前劳。强兵纵害，遂至失守。散骑常侍天锡拔迹登朝，先祀沦替，用增矜慨，可复天锡西平郡公爵。”俄拜金紫光禄大夫。 \n　　天锡少有文才，流誉远近。及归朝，甚被恩遇。朝士以其国破身",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_17.txt",
+          "source_key": "js:js_17:131:張軌",
+          "offset": 14413,
+          "excerpt": "世，贵而能贫，乃可以免。”散家财五十万，以施宗族，柴门灌园，琴书自适。张轨征之为府司马，腾曰：“门一杜，其可开乎！”固辞。病两月余而卒。 \n　　任旭，字次龙，临海章安人也。父访，吴南海太守。旭幼孤弱，儿童时勤于学。及长，立操清修，不染流俗，乡曲推而爱之。郡将蒋",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 989259,
+          "excerpt": "表立子寔为世子。卒年六十。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 911044,
+          "excerpt": "夏，五月，西平武穆公张轨寝疾，遗令：“文武将佐，务安百姓，上思报国，下以宁家。”己丑，轨薨；",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_00.txt",
+          "offset": 27902,
+          "excerpt": "曾祖轨永嘉中为凉州刺史值京师大乱遂据凉土",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "historical_birth": {
+        "year": 255,
+        "precision": "inferred_year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "表立子寔为世子。卒年六十。",
+        "inference": "314 - 60 + 1; assumes Chinese nominal age, not an explicit birth date",
+        "depends_on_death_year": 314
+      },
+      "historical_death": {
+        "year": 314,
+        "precision": "year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+        "excerpt": "夏，五月，西平武穆公张轨寝疾，遗令：“文武将佐，务安百姓，上思报国，下以宁家。”己丑，轨薨；"
+      },
+      "unresolved": [
+        "Birth255 inferred from314 minus nominal60 plus1; no exact birth month/day. Death lunar5月己丑 retained, no independent Western-day conversion."
+      ],
+      "original_secondary_identity_records": {
+        "id": 12803,
+        "keys": [
+          "js:js_14:141:張軌",
+          "sl:sl_00:474:張軌",
+          "sl:sl_08:29:張軌",
+          "sl:sl_09:20:張軌",
+          "sl:sl_10:30:張軌",
+          "tj:tj_12:83:張軌",
+          "tj:tj_13:27:張軌",
+          "wsh:wsh_04:0:張軌",
+          "js:js_01:282:張軌",
+          "js:js_05:127:張軌",
+          "js:js_15:0:張軌",
+          "js:js_17:131:張軌",
+          "gl:Q700840",
+          "cbdb:17855",
+          "ssxy:ssxy_00:189:張軌"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Zhang Gui",
+            "revision_id": 1358904515,
+            "page_id": 30669901,
+            "content_sha256": "d9f177c34ae3e9cceb644be7035649f503adc5bd578370963a33cbee8529dff9",
+            "date_fields": {
+              "reign": "301–314",
+              "birth_date": "255",
+              "death_date": "{{death year and age|314|255}}"
+            },
+            "date_categories": [
+              "314 deaths",
+              "255 births"
+            ],
+            "lead_wikitext": "{{about|the ancestor to the royal house of Former Liang|the Tang Dynasty warlord|Zhang Gui (Tang dynasty)}}\n{{Infobox royalty\n|name=Zhang Gui<br/>{{lang|zh|張軌}}\n|title=Prince of [[Former Liang]] (posthumously)\n|succession=Inspector of [[Liang Province]]\n|reign=301–314\n|predecessor = \n|successor = [[Zhang Shi (Former Liang)|Zhang Shi]]\n|regnal_name = General to Pacify the West, Inspector of [[Liang Province]], Colonel to Guard the [[Qiang (historical people)|Qiang people]], Marquis of Anle District ({{lang|zh|安西將軍 涼州刺史 領護羌校尉 安樂鄉侯}})\n|posthumous_name=Duke Wu ({{lang|zh|武公}}, honored by [[Jin dynasty (266–420)|Western Jin]])<br>Prince Wu ({{lang|zh|武王}}, honored by [[Zhang Zuo]])\n|temple_name=Taizu ({{lang|zh|太祖}}, honored by [[Zhang Zuo]])\n|era_name = \n|era_dates = \n|dynasty = [[Former Liang]]\n|full_name= Zhang Gui ({{lang|zh|張軌}})\n|birth_date= 255\n|death_date= {{death year and age|314|255}}\n|father= Zhang Wen\n|mother= Lady Xin<ref>(母陇西辛氏。) ''[[Taiping Yulan]]'', vol.124, citing ''[[Spring and Autumn Annals of the Sixteen Kingdoms]]''</ref>\n|spouse= \n|issue=\n}}\n'''Zhang Gui''' ({{zh|c=張軌}}, 255 – 19 June 314)<ref>Vol.124 of ''Taiping Yulan'', citing ''Spring and Autumn Annals of the Sixteen Kingdoms'', recorded that Zhang Gui died at the age of 60 (by East Asian reckoning) on the ''jichou'' day of the 5th month of the 2nd year of the ''Jianxing'' era of the reign of [[Emperor Min of Jin]].</ref> was the governor of Liang province and first Duke of Xiping under the [[Jin dynasty (266–420)|Western Jin]].  He was the seventeenth-generation descendant of [[Zhang Er (Eighteen Kingdoms)|Zhang Er]], the King of Changshan from the [[Chu–Han Contention]] era. In {{circa}}February 301,<ref>1st month of the 1st year of the ''Yongning'' era, per vol.84 of ''Zizhi Tongjian''. The month corresponds to 26 Jan to 24 Feb 301 in the Julian calendar.</ref> he was appointed governor of Liang province. In 313, [[Emperor Min of Jin]] bestowed upon Zhang the title \"Duke of Xiping\"; Zhang declined the title.<ref>''Jin Shu'', vol.86 and ''Taiping Yulan'', vol.124 (citing ''Shiliuguo Chunqiu'')</ref> The following year, Zhang Gui died from an illness and his followers supported his eldest son [[Zhang Shi (warlord)|Zhang Shi]] to continue as governor of Liang province.<ref>{{cite book|title=[[Book of Jin]]|volume=86|chapter=張軌传|trans-chapter=Biography of Zhang Gui|author=Fang Xuanling|authorlink=Fang Xuanling}}</ref>\n==Life==\n===Before the [[War of the Eight Princes]]===\nWhen Zhang Gui was young, he was friendly with [[Huangfu Mi]], who was from the same commandery.<ref>(与同郡皇甫谧善...) ''Jin Shu'', vol.86</ref> During the reign of [[Emperor Wu of Jin]], Zhang Gui once served under Yang Yao (younger brother of [[Yang Jun (minister)|Yang Jun]]) who was then General of the Guards.<ref>(卫将军杨珧辟为掾...) ''Jin Shu'', vol.86</ref>\n\n===During the War===\nIn 303-304, [[Sima Yong]] and [[Sima Ying]] sieged [[Luoyang]]. Zhang Gui sent 3000 troops to assist the then-regent of [[Emperor Hui of Jin|Emperor Hui]], [[Sima Ai]].<ref>(河间、成都二王之难，遣兵三千，东赴京师。) ''Jin Shu'', vol.86</ref>\n\n==References==\n{{reflist}}\n\n{{s-start}}\n{{s-hou|[[Former Liang|House of Zhang]]||255||314||name=Duke Wu of Xiping}}\n{{S-reg|cn}}\n{{s-new}}\n{{s-ttl|title=Duke of [[Former Liang|Xiping]]|years=313–314}}\n{{s-aft|after=[[Zhang Shi (Former Liang)|Zhang Shi]]}}\n{{end}}{{Sixteen Kingdoms monarchs}}{{DEFAULTSORT:Zhang, Gui}}\n[[Category:Monarchs of Former Liang]]\n[[Category:314 deaths]]\n[[Category:255 births]]",
+            "url": "https://en.wikipedia.org/wiki/Zhang_Gui",
+            "wikidata_qid": "Q700840",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q700840"
+            ]
+          }
+        ],
+        "cbdb_originals": [
+          {
+            "c_personid": 17855,
+            "c_name_chn": "張軌",
+            "c_index_year": 254,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 254,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 314,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 61,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Zhang(1) Gui(3) [17855] Appointed prefect of Liangzhou, his sons, Shi(4) [17856] and then Mao [17857], inherited his office (Mao was enfeoffed Liang wang (king of Liang), he was the designated ancestor of the rulers of the Former Liang dynasty, but his great grandson, Zuo [17859], was the first in the line to proclaim himself emperor even though his father, Jun(6) [17858], is usually considered the founder of the dynasty. Giles, p. 31.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          }
+        ],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 9809,
+      "keys": [
+        "js:js_01:81:石勒",
+        "js:js_02:65:石勒",
+        "js:js_08:215:石勒",
+        "js:js_09:11:石勒",
+        "js:js_11:97:石勒",
+        "js:js_12:226:石勒",
+        "js:js_13:131:石勒",
+        "js:js_15:49:石勒",
+        "js:js_17:181:石勒",
+        "sl:sl_00:66:石勒",
+        "sl:sl_01:532:石勒",
+        "sl:sl_02:271:石勒",
+        "sl:sl_06:37:石勒",
+        "sl:sl_08:149:石勒",
+        "tj:tj_12:29:石勒",
+        "tj:tj_13:13:石勒",
+        "tj:tj_14:13:石勒",
+        "tj:tj_15:13:石勒",
+        "wsh:wsh_00:37:石勒",
+        "wsh:wsh_01:60:石勒",
+        "js:js_00:282:石勒",
+        "js:js_03:159:石勒",
+        "js:js_04:112:石勒",
+        "js:js_05:88:石勒",
+        "js:js_07:275:石勒",
+        "js:js_10:57:石勒",
+        "js:js_14:85:石勒",
+        "js:js_16:116:石勒",
+        "js:js_19:10:石勒",
+        "sl:sl_03:320:石勒",
+        "sl:sl_05:131:石勒",
+        "sl:sl_10:16:石勒",
+        "sz:sz_00:10:石勒",
+        "wsh:wsh_05:27:石勒",
+        "gl:Q1196190",
+        "cbdb:31360",
+        "ssxy:ssxy_01:253:石勒",
+        "ssxy:ssxy_00:52:石勒",
+        "ssxy:ssxy_02:30:石勒",
+        "ssxy:ssxy_03:257:石勒"
+      ],
+      "review_status": "identity_conflict",
+      "duplicate_of": null,
+      "identity_status": "single_person_conflicting_primary_chronology",
+      "source_identities_all_adjudicated": true,
+      "confirmed_duplicate_children": [
+        6556
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 1208885,
+          "excerpt": "石勒字世龙，初名[C111]，上党武乡羯人也。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_01.txt",
+          "source_key": "js:js_01:81:石勒",
+          "offset": 8750,
+          "excerpt": "王越以为豫州刺史、北中郎将、假节。王浚承制，以宪为尚书。永嘉末，王浚为石勒所破，枣嵩等莫不谢罪军门，贡赂交错，惟宪及荀绰恬然私室。勒素闻其名，召而谓之曰：“王浚虐暴幽州，人鬼同疾。孤恭行干宪，拯兹黎元，羁旧咸欢，庆谢交路。二君齐恶傲威，诚信岨绝，防风之戮，将谁",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_02.txt",
+          "source_key": "js:js_02:65:石勒",
+          "offset": 1696,
+          "excerpt": "薨，繇被害，然后得还。拜光禄大夫、尚书、太子太傅，改封武陵王。永嘉末为石勒所害，子哀王喆立。喆字景林，拜散骑常侍，亦为勒所害。无子，其后元帝立皇子晞为武陵王，以奉澹祀焉。 \n　　东安王繇字思玄。初拜东安公，历散骑黄门侍郎，迁散骑常侍。美须髯，性刚毅，有威望，博",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_08.txt",
+          "source_key": "js:js_08:215:石勒",
+          "offset": 15789,
+          "excerpt": "邺而还。西讨吕朗等，灭之。后高密王泰讨青州贼刘根，破汲桑故将公师籓，败石勒于河北，威名甚盛，时人拟之韩白。进位抚军将军、假节、都督青兖诸军事，封东平郡侯，邑万户。 \n　　晞练于官事，文簿盈积，断决如流，人不敢欺。其从母依之，奉养甚厚。从母子求为将，晞距之曰：“",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_09.txt",
+          "source_key": "js:js_09:11:石勒",
+          "offset": 2880,
+          "excerpt": "事、假节。当之国，会洛阳陷没，端东奔苟晞于蒙。晞立为皇太子，七十日，为石勒所没。 \n　　汝阴哀王谟，字令度，太康七年薨，时年十一。无后，国除。 \n　　吴敬王晏，字平度，太康十年受封，食丹阳、吴兴并吴三郡，历射声校尉、后军将军。与兄淮南王允共攻赵王伦，允败，收晏",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_11.txt",
+          "source_key": "js:js_11:97:石勒",
+          "offset": 17699,
+          "excerpt": "公之与下官负荷轻重，量其所宜。 \n　　鉴又不许，故其事得息。 \n　　时石勒新死，亮有开复中原之谋，乃解豫州授辅国将军毛宝，使与西阳太守樊峻精兵一万，俱戍邾城。又以陶称为南中郎将、江夏相，率部曲五千人入沔中。亮弟翼为南蛮校尉、南郡太守，镇江陵。以武昌太守陈嚣为辅",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_12.txt",
+          "source_key": "js:js_12:226:石勒",
+          "offset": 29504,
+          "excerpt": "，下为夷狄作一象之颂，于义有疑焉。”于是遂寝。 \n　　时征西将军庾亮以石勒新死，欲移镇石城，为灭贼之渐。事下公卿。谟议曰： \n　　时有否泰，道有屈伸，暴逆之寇虽终灭亡，然当其强盛，皆屈而避之。是以高祖受黜于巴汉，忍辱于平城也。若争强于鸿门，则亡不终日。故萧何曰",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_13.txt",
+          "source_key": "js:js_13:131:石勒",
+          "offset": 24951,
+          "excerpt": "破东莞太守侯史旄而据其坞。石季龙伐之，龛惧，求降，元帝许焉。既而复叛归石勒，勒遣其将王伏都、张景等数百骑助龛。诏征虏将军羊鉴、武威将军侯礼、临淮太守刘遐、鲜卑段文鸯等与豹共讨之。诸将畏懦，顿兵下邳，不敢前。豹欲进军，鉴固不许。龛遣使请救于勒，勒辞以外难，而多求",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_15.txt",
+          "source_key": "js:js_15:49:石勒",
+          "offset": 2244,
+          "excerpt": "日，皆变之大者，不可以轻动。轻动而不捷，为祸更深。吾将久而毙之。且曜与石勒相攻，胤亦不能久也。”积七十余日，军粮竭，遣辛岩督运于金城。胤闻之，大悦，谓其将士曰：“韩璞之众十倍于吾，羌胡皆叛，不为之用。吾粮廪将悬，难以持久。今虏分兵运粮，可谓天授吾也。若败辛岩，",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_17.txt",
+          "source_key": "js:js_17:181:石勒",
+          "offset": 18243,
+          "excerpt": "。谧以洛阳将败，故应之。及长安陷没于刘聪，聪拜太中大夫，固辞不受。又历石勒、季龙之世，并不应辟命。虽处丧乱之中，颓然高迈，视荣利蔑如也。及冉闵僭号，复备礼征为太常，谧遗闵书曰：“昔许由辞尧，以天下让之，全其清高之节。伯夷去国，子推逃赏，皆显史牒，传之无穷。此往",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_00.txt",
+          "source_key": "sl:sl_00:66:石勒",
+          "offset": 3667,
+          "excerpt": "使来降渊拜弥镇东大将军青州刺史东莱郡公夏四月四部鲜卑陆逐延氐酋大单征及石勒等并相次来降渊悉署其官爵\n永凤元年春正月渊遣抚军将军聪等十将南据太行辅汉将军石勒等十将东下赵魏夏四月王弥帅众冦掠青徐兖豫四州兖州刺史茍晞与之连战不能克丁亥转冦许昌太傅东海王越遣司马王斌帅",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_01.txt",
+          "source_key": "sl:sl_01:532:石勒",
+          "offset": 2736,
+          "excerpt": "知其寃乃斩此女设少牢以祭其墓谥曰孝烈贞妇其日大雨\n\n卷十一 后赵录一\n石勒上\n石勒字世龙初名背[魏书作小字匐勒]上党武乡羯人也其先匈奴别部羌渠之胄分散居于上党羯室因号羯胡祖耶奕干父周曷朱一名乞翼加并为部落小卒勒生时赤光满室白气自天属于中庭见者咸异之年十四随邑人",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_02.txt",
+          "source_key": "sl:sl_02:271:石勒",
+          "offset": 3868,
+          "excerpt": "将自其天亡之始也中原之事宜加筹量且戴开已帅部党归顺宜加慰劳又檄石虎文曰石勒因衅前覆旧京穷凶极逆伪号累祀百姓受灰没之酷王室有黍离之哀不为少康之隆孰能祀夏不有宣王之兴谁克旧物羯帅石虎僭袭凶叶负恃其众陆梁河朔每念俯之士懐仁抱义食胆饮血罹其祸酷心存倒悬而力不能奋今遣使",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_06.txt",
+          "source_key": "sl:sl_06:37:石勒",
+          "offset": 27823,
+          "excerpt": "于是赴者相继\n眭邃\n眭邃字懐道赵郡髙邑人也父迈晋东海王司马越军谋掾后没石勒为徐州刺史邃仕垂为从事中郎农至高邑遣邃出近违期不还长史张攀言于农曰邃目下参佐敢欺妄不还请回军讨之农不应𠡠备假板以邃为髙阳太守参佐家在赵北者悉假署遣归退谓攀曰君所言殊误当今岂可使自相鱼肉吾",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_08.txt",
+          "source_key": "sl:sl_08:149:石勒",
+          "offset": 25117,
+          "excerpt": "尚书加冠军将军封河阳侯\n赵逸\n赵逸字思群天水人也十世祖融汉光禄大夫父昌石勒时为黄门侍郎逸好学夙成仕姚兴歴中书侍郎为兴将齐难军司马从征勃勃难败逸为勃勃所虏拜著作郎世祖平统万见逸所为文誉勃勃太过怒曰此竖无道安得为此言乎作者谁也其速推之司徒崔浩进曰文士褒贬多过其实彼",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_12.txt",
+          "source_key": "tj:tj_12:29:石勒",
+          "offset": 1308,
+          "excerpt": "籓既死，汲桑逃还苑中，更聚众劫掠郡县，自称大将军，声言为成都王报仇；以石勒为前驱，所向辄克，署勒扫虏将军，遂进攻邺。时邺中府库空竭，而新蔡武哀王腾资用甚饶。腾性吝啬，无所振惠，临急，乃赐将士米各数升，帛各丈尺，以是人不为用。夏，五月，桑大破魏郡太守冯嵩，长驱入",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_13.txt",
+          "source_key": "tj:tj_13:13:石勒",
+          "offset": 408,
+          "excerpt": "司徒，朱纪为大司空，中山王曜为大司马。壬辰，王子春等及王浚使者至襄国，石勒匿其劲卒、精甲，羸师虚府以示之，北面拜使者而受书。浚遗勒麈尾，勒阳不敢执，悬之于壁，朝夕拜之，曰：“我不得见王公，见其所赐，如见公也。”复遣董肇奉表于浚，期以三月中旬亲诣幽州奉上尊号；亦",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_15.txt",
+          "source_key": "tj:tj_15:13:石勒",
+          "offset": 271,
+          "excerpt": "璞进度沃干岭。岩欲速战，璞曰：“夏末以来，日星数有变，不可轻动。且曜与石勒相攻，胤必不能久与我相守也。”与胤夹洮相持七十馀日。冬，十月，璞遣辛岩督运于金城，胤闻之，曰：“韩璞之众，十倍于吾。吾粮不多，难以持久。今虏分兵运粮，天授我也。若败辛岩，璞等自溃”。乃帅",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_00.txt",
+          "source_key": "wsh:wsh_00:37:石勒",
+          "offset": 2821,
+          "excerpt": "称大成。  \n　　十三年，昭帝崩。徒何大单于慕容廆遣使朝贡。是岁，羯胡石勒与晋马牧帅汲桑反。  \n　　穆皇帝天姿英特，勇略过人，昭帝崩后，遂总摄三部，以为一统。  \n　　元年，刘渊僭帝号，自称大汉。  \n　　三年，晋并州刺史刘琨遣使，以子遵为质。帝嘉其意，厚报",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_01.txt",
+          "source_key": "wsh:wsh_01:60:石勒",
+          "offset": 4869,
+          "excerpt": "二帝招纳晋人，于是晋人附者稍众。桓帝嘉之，以为辅相，任以国事。及刘渊、石勒之乱，劝桓帝匡助晋氏。东瀛公司马腾闻而善之，表加将号。稍迁至右将军，封定襄侯。  \n　　桓帝崩后，操立碑于大邗城南，以颂功德，云：“魏，轩辕之苗裔。”言：桓穆二帝“驰名域外 ，九译宗焉。",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_00.txt",
+          "source_key": "js:js_00:282:石勒",
+          "offset": 28913,
+          "excerpt": "崇从孙演为乐陵公。 \n　　苞曾孙朴字玄真，为人谨厚，无他材艺，没于胡。石勒以与朴同姓，俱出河北，引朴为宗室，特加优宠，位至司徒。 \n　　欧阳建字坚石，世为冀方右族。雅有理思，才藻美赡，擅名北州。时人为之语曰：“渤海赫赫，欧阳坚石。”辟公府，历山阳令、尚书郎、冯",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_03.txt",
+          "source_key": "js:js_03:159:石勒",
+          "offset": 15187,
+          "excerpt": "有负海之险，卿二人在外，而吾留此，足以为三窟矣。”识者鄙之。 \n　　及石勒、王弥寇京师，以衍都督征讨诸军事、持节、假黄钺以距之。衍使前将军曹武、左卫将军王景等击贼，退之，获其辎重。迁太尉，尚书令如故。封武陵侯，辞封不受。时洛阳危逼，多欲迁都以避其难，而衍独卖车",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_04.txt",
+          "source_key": "js:js_04:112:石勒",
+          "offset": 20280,
+          "excerpt": "不之惜，以此赏之。年未弱冠，甚有重名。以选入侍讲东宫，为秘书丞。寻没于石勒，勒以为大将军右司马。谙识朝仪，恒居机密，勒甚重之。作《晋诸公叙赞》二十二卷，又为《公卿故事》九卷。咸和五年卒。子咏，过江为交州刺史、太子右率。 \n　　史臣曰：武帝览观四方，平章百姓，永",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_05.txt",
+          "source_key": "js:js_05:88:石勒",
+          "offset": 9777,
+          "excerpt": "”敳曰：“卿自君我，我自卿卿。我自用我家法，卿自用卿家法。”衍甚奇之。石勒之乱，与衍俱被害，时年五十。 \n　　郭象，字子玄，少有才理，好《老》《庄》，能清言。太尉王衍每云：“听象语，如悬河泻水，注而不竭。”州郡辟召，不就。常闲居，以文论自娱。后辟司徒掾，稍至黄",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_07.txt",
+          "source_key": "js:js_07:275:石勒",
+          "offset": 17479,
+          "excerpt": "相。苏峻作逆，率所领从温峤讨之。峻平，迁监沔北军事、南中郎将，镇襄阳。石勒将郭敬率骑攻抚，抚不能守，率所领奔于武昌，坐免官。寻迁振威将军、豫章太守，后代毌丘奥监巴东诸军事、益州刺史、假节，将军如故。寻进征虏将军，加督宁州诸军事。永和初，桓温征蜀，进抚督梁州之汉",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_10.txt",
+          "source_key": "js:js_10:57:石勒",
+          "offset": 8686,
+          "excerpt": "酒，转镇东长史。帝亲幸瞻宅，与之同乘而归。以讨周馥、华轶功，封都乡侯。石勒入寇，加扬威将军、都督京口以南至芜湖诸军事，以距勒。勒退，除会稽内史。时有诈作大将军府符收诸暨令，令已受拘，瞻觉其诈，便破槛出之，讯问使者，果伏诈妄。寻迁丞相军谘祭酒。论讨陈敏功，封临湘",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_14.txt",
+          "source_key": "js:js_14:85:石勒",
+          "offset": 10121,
+          "excerpt": "因南渡。元帝以为丹阳令。中兴建，拜奉朝请，迁治书御史。时东海王越尸既为石勒所焚，妃裴氏求招魂葬越，朝廷疑之。瑰与博士傅纯议，以为招魂葬是谓埋神，不可从也。帝然之，虽许裴氏招魂葬越，遂下诏禁之。寻除庐江太守。大将军王敦引为谘议参军。俄为临川太守。敦平，为镇南将军",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_16.txt",
+          "source_key": "js:js_16:116:石勒",
+          "offset": 9797,
+          "excerpt": "部郎。越弟腾为东中郎将，请攸为长史。出为河东太守。 \n　　永嘉末，没于石勒。然勒宿忌诸官长二千石，闻攸在营，驰召，将杀之。攸至门，门干乃攸为郎时干，识攸，攸求纸笔作辞。干候勒和悦，致之。勒重其辞，乃勿杀。勒长史张宾先与攸比舍，重攸名操，因称攸于勒。勒召至幕下，",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_19.txt",
+          "source_key": "js:js_19:10:石勒",
+          "offset": 11180,
+          "excerpt": "有水。’”于是署弥司隶校尉，加侍中、特进，弥固辞。使随刘曜寇河内，又与石勒攻临漳。 \n　　永嘉初，寇上党，围壶关，东海王越遣淮南内史王旷、安丰太守卫干等讨之，及弥战于高都、长平间，大败之，死者十六七。元海进弥征东大将军，封东莱公。与刘曜、石勒等攻魏郡、汲郡、顿",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_03.txt",
+          "source_key": "sl:sl_03:320:石勒",
+          "offset": 28159,
+          "excerpt": "书殷勤我稽留不往将累及卿且乱世宗族宜分以冀遗种邃从之𪽈竟归浚与浚俱没于石勒邃子泓仕为居就令\n髙瞻[子开商]\n髙瞻字子前渤海蓚人也少而英爽有俊才身长八尺二寸光熙中调补尚书郎永嘉之乱还乡里乃与父老议曰今皇纲不振兵革云扰此郡沃壤凭固河海若兵荒岁俭必为冦庭非图安之所王",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_10.txt",
+          "source_key": "sl:sl_10:16:石勒",
+          "offset": 11995,
+          "excerpt": "出连髙胡为右辅将军镇至便川叱卢那胡为率义将军镇牵屯山述延死子傉大寒立会石勒灭刘曜惧而迁于麦田无孤山[晋记作元孤山]大寒死子司繁立秦皇始中迁于度坚山建元七年秦将益州刺史王綂来伐司繁帅骑三万拒綂于苑川綂潜袭度坚山部众五万余落悉降于綂司繁叹谓左右曰智不拒敌德不抚众剑",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sz_00.txt",
+          "source_key": "sz:sz_00:10:石勒",
+          "offset": 1692,
+          "excerpt": "，向得其边。」忡还许之。首便剪落，\n从澄。及净捡尼受戒，立建贤寺，澄以石勒所\n遗剪花，纳七条衣及象鼻澡灌与之。博览群\n籍，经目必诵。思致渊深，神照详远，一时道学\n莫不宗焉，因其出家者二百余人。又造五等寺、\n六精舍，匪惮勤苦皆得修立。石虎敬之，擢\n父忡为黄门侍郎",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\wsh_05.txt",
+          "source_key": "wsh:wsh_05:27:石勒",
+          "offset": 21454,
+          "excerpt": "己用，深德之，乃表封务目尘为辽西公，假大单于印绶。浚使务目尘率万余骑伐石勒于常山封龙山下，大破之。  \n　　务目尘死，就六眷立。就六眷与弟匹䃅、从弟末波等率五万余骑围石勒于襄国。勒登城望之，见将士皆释仗寝卧，无警备之意，勒因其懈怠 ，选募勇健，穿城突出，直冲末",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_01.txt",
+          "source_key": "ssxy:ssxy_01:253:石勒",
+          "offset": 7255,
+          "excerpt": "世务自婴累吏部尚书太常卿卒】\n　　庾子嵩作意赋成【晋阳秋曰敱永嘉中为石勒所害先是敱见王室多难知终婴其祸乃作意赋以寄怀】从子文康见问曰有意邪非赋之所尽若无意邪复何所赋答曰正在有意无意之间\n　　郭景纯诗云林无静川无停流【王晋书曰郭璞字景纯河东闻喜人父瑗建平",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_00.txt",
+          "source_key": "ssxy:ssxy_00:52:石勒",
+          "offset": 6104,
+          "excerpt": "伯道平阳襄陵人七岁丧父母及祖父母持重九年性清慎平简邓粲晋纪曰永嘉中攸为石勒所获召见立幕下与语恱之坐而饭焉攸车所止与胡人邻毂胡人失火烧车营勒吏案问胡胡诬攸攸度不可与争乃曰向为老姥作粥失火延逸罪应万死勒知遣之所诬胡厚德攸遗其驴马防送令得逸王晋书曰攸以路逺斫坏车以",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_02.txt",
+          "source_key": "ssxy:ssxy_02:30:石勒",
+          "offset": 1482,
+          "excerpt": "祖逖若不清中原而复济此者有如大江攻城略地招懐义士屡摧石虎虎不敢复闚河南石勒为逖母墓置守吏刘琨与亲旧书曰吾枕戈待旦志枭逆虏常恐祖生先吾着鞭耳防其病卒先有妖星见豫州分逖曰此必为我也天未欲灭寇故耳赠车骑将军】\n　　时人目庾中郎善于托大长于自藏【名士传曰敳虽居职仕未尝",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\ssxy_03.txt",
+          "source_key": "ssxy:ssxy_03:257:石勒",
+          "offset": 22046,
+          "excerpt": "教自台郎以下皆雅崇拱黙以遗事为髙四海尚宁而识者知其将乱晋阳秋曰夷甫将为石勒所杀谓人曰吾等不祖尚浮虚不至于此】虎率尔对曰运自有废兴岂必诸人之过桓公懔然作色顾谓四坐曰诸君颇闻刘景升不【刘镇南铭曰表字景升山阳髙平人黄中通理博识多闻仕至镇南将军荆州刺史】有大牛重千",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 1231020,
+          "excerpt": "以咸和七年死，时年六十，在位十五年。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 975940,
+          "excerpt": "戊辰，勒卒。中山王虎劫太子弘使临轩，",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_05.txt",
+          "offset": 26238,
+          "excerpt": "诸兄仕于石氏咸登显位惟虞耻臣非类阴欲避地海东会丁母忧遂止哀毁骨立庐于墓侧五年后勒以为武城令虞以密迩黄河走海微近将伸前志欣然就职石虎时太守刘征甚器重之",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated",
+          "source_tier": "late_reconstruction",
+          "source_edition": "明屠乔孙、项琳重编本；缓存卷首明示伪本，非崔鸿原著直传",
+          "requires_earlier_source_corroboration": true
+        },
+        {
+          "source": "https://zh.wikisource.org/wiki/晉書/卷105?oldid=2556245",
+          "excerpt": "以咸和七年死，時年六十，在位十五年。",
+          "verification": "parent_agent_independently_read_public_primary_text"
+        }
+      ],
+      "historical_birth": {
+        "year": null,
+        "year_alternatives": [
+          273,
+          274
+        ],
+        "precision": "conditional_inference",
+        "calendar": "CE",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "以咸和七年死，时年六十，在位十五年。",
+        "inference": "death332 or333 - nominal60 +1, depends on unresolved regnal chronology"
+      },
+      "historical_death": {
+        "year": null,
+        "year_alternatives": [
+          332,
+          333
+        ],
+        "precision": "disputed_year",
+        "calendar": "Chinese regnal chronology mapped to CE",
+        "sources": [
+          {
+            "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+            "offset": 1231020,
+            "excerpt": "以咸和七年死，时年六十，在位十五年。",
+            "normalization": "OpenCC t2s",
+            "verification": "Individually read and identity adjudicated"
+          },
+          {
+            "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+            "offset": 975940,
+            "excerpt": "戊辰，勒卒。中山王虎劫太子弘使临轩，",
+            "normalization": "OpenCC t2s",
+            "verification": "Individually read and identity adjudicated"
+          }
+        ]
+      },
+      "unresolved": [
+        "Jinshu咸和七年332 versus Tongjian咸和八年333; public Wikisource卷105 oldid2556245 also has七年, confirmed independently by parent. Edition/chronology adjudication pending; do not choose332 automatically."
+      ],
+      "original_secondary_identity_records": {
+        "id": 9809,
+        "keys": [
+          "js:js_01:81:石勒",
+          "js:js_02:65:石勒",
+          "js:js_08:215:石勒",
+          "js:js_09:11:石勒",
+          "js:js_11:97:石勒",
+          "js:js_12:226:石勒",
+          "js:js_13:131:石勒",
+          "js:js_15:49:石勒",
+          "js:js_17:181:石勒",
+          "sl:sl_00:66:石勒",
+          "sl:sl_01:532:石勒",
+          "sl:sl_02:271:石勒",
+          "sl:sl_06:37:石勒",
+          "sl:sl_08:149:石勒",
+          "tj:tj_12:29:石勒",
+          "tj:tj_13:13:石勒",
+          "tj:tj_14:13:石勒",
+          "tj:tj_15:13:石勒",
+          "wsh:wsh_00:37:石勒",
+          "wsh:wsh_01:60:石勒",
+          "js:js_00:282:石勒",
+          "js:js_03:159:石勒",
+          "js:js_04:112:石勒",
+          "js:js_05:88:石勒",
+          "js:js_07:275:石勒",
+          "js:js_10:57:石勒",
+          "js:js_14:85:石勒",
+          "js:js_16:116:石勒",
+          "js:js_19:10:石勒",
+          "sl:sl_03:320:石勒",
+          "sl:sl_05:131:石勒",
+          "sl:sl_10:16:石勒",
+          "sz:sz_00:10:石勒",
+          "wsh:wsh_05:27:石勒",
+          "gl:Q1196190",
+          "cbdb:31360",
+          "ssxy:ssxy_01:253:石勒",
+          "ssxy:ssxy_00:52:石勒",
+          "ssxy:ssxy_02:30:石勒",
+          "ssxy:ssxy_03:257:石勒"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Shi Le",
+            "revision_id": 1365144951,
+            "page_id": 3665059,
+            "content_sha256": "a6cb6c314414564b53ac70e91b3e5c6ee016464d6fb1f1c6b8cc8a24cc81959c",
+            "date_fields": {
+              "reign": "{{circa}}March 330<ref>2nd month of the 5th year of the ''Xian'he'' era, per vol.94 of ''Zizhi Tongjian''. The month corresponds to 6 Mar to 4 Apr 330 in the Julian calendar.</ref> – 333",
+              "birth_date": "274",
+              "death_date": "17 August 333 (aged 59)"
+            },
+            "date_categories": [
+              "274 births",
+              "333 deaths"
+            ],
+            "lead_wikitext": "{{Short description|Emperor of Later Zhao from 330 to 333}}\n{{Family name hatnote|[[Shí (surname)|Shi]]|lang=Chinese}}\n{{Infobox royalty\n| name            = Emperor Ming of Later Zhao<br/>後趙明帝\n| image           = Shi Le (Emperor Ming of Later Zhao).jpg\n| image_size      = 220px\n| alt             = \n| caption         = [[Ming dynasty]] depiction of Shi Le from \"''Shi Le Reverencing a Buddhist Monk''\" (石勒問道圖), formerly attributed to [[Qian Xuan]].\n| succession      = Emperor of [[Later Zhao]]\n| reign           = {{circa}}March 330<ref>2nd month of the 5th year of the ''Xian'he'' era, per vol.94 of ''Zizhi Tongjian''. The month corresponds to 6 Mar to 4 Apr 330 in the Julian calendar.</ref> – 333\n| successor       = [[Shi Hong]]\n| house           = Shi\n| dynasty         = [[Later Zhao]]\n| birth_date      = 274\n| birth_place     = \n| death_date      = 17 August 333 (aged 59)\n| death_place     = \n| burial_place    = {{ill|Gaoping Mausoleum|zh|高平陵 (後趙)}} (高平陵)\n| full_name       = '''Family name''': Shí (石)<br>'''Given name''': Lè (勒)<br>'''[[Courtesy name]]''': Shìlóng (世龍)\n| posthumous_name = Emperor Ming (明皇帝)\n| temple_name     = Gāozǔ (高祖)\n| regnal_name     = Grand General, Grand [[Chanyu]], Governor of [[Jizhou (ancient China)|Ji Province]], Prince of Zhao (大將軍 大單于 領冀州牧 趙王, 319–330)<br>[[Heavenly King]] of Great Zhao (大趙天王, 330)<br>Emperor (since {{circa}}March 330)\n| era_name        = \n| era_dates       = * Tàihé (太和): 328–330\n* Jiànpíng (建平): 330–333\n| father          = Zhouhezhu\n| mother          = Lady Wang\n| spouse          = {{unbulleted list|[[Empress Liu (Shi Le's wife)|Empress Liu]]|[[Empress Dowager Cheng|Consort Cheng]]}}\n| issue           = {{unbulleted list|Shi Xing|[[Shi Hong|Shi Daya]]|Shi Hong|Shi Hui}}\n}}\n'''Shi Le''' ({{zh|c=石勒}}; 274<ref>Shi Le's biography in ''Book of Jin'' recorded that he was 60 (by East Asian reckoning) when he died.</ref> –17 August 333<ref>''wu'chen'' day of the 7th month of the 8th year of the ''Xian'he'' era, per vol.95 of ''Zizhi Tongjian''</ref>), [[courtesy name]] '''Shilong''', also known by his [[posthumous name]] as the '''Emperor Ming of Later Zhao''', was the founding [[Emperor of China|emperor]] of the [[Jie people|Jie]]-led [[Later Zhao|Later Zhao dynasty]] of China.<ref name=Rene>{{Cite book |last=Grousset |first=Rene |title=The Empire of the Steppes |publisher=Rutgers University Press |year=1970 |isbn=0-8135-1304-9 |pages=[https://archive.org/details/empireofsteppesh00prof/page/57 57–58] |url=https://archive.org/details/empireofsteppesh00prof/page/57 }}</ref>  He was initially sold as a slave by [[Jin dynasty (266–420)#Western Jin (266–316)|Western Jin]] officials, but after attaining freedom, he helped start a rebellion and eventually became a powerful general for the [[Han-Zhao|Han-Zhao dynasty]], conquering most of northern China in Han-Zhao's name but holding the territory under his own control. In 319, after a dispute with the Han-Zhao emperor [[Liu Yao]], he broke away from Han and formed his own state, Later Zhao (named as such due to Liu Yao changing his state's name from Han to Zhao, which is distinguished as the Former Zhao). In 321, he defeated [[Duan Pidi]], the last remaining Jin power in northern China besides [[Murong Hui]], and in 329 he captured Liu Yao and conquered the Han-Zhao, adding western China to his empire as well. For the next 21 years, the Later Zhao would dominate northern China.\n\nShi Le is notably the only emperor in Chinese history to have risen from the status of slave. He was known as a brilliant general, but was criticized by historians for excessive cruelty during his campaigns. He also put too much power in the hands of his ambitious and even more ferocious nephew and adopted brother, [[Shi Hu]], who, after Shi Le's death, seized power from his son [[Shi Hong|Shi Daya]]. Additionally, Shi Le was an important figure in the rise of [[Buddhism]] in 4th-century China, as he allowed the [[Kucha|Kuchan]] monk, [[Fotudeng]] to wield considerable influence in his court.\n\n== Early life ==\nShi Le was born in 274—but was not named as such, and certainly did not have the family name \"Shi\", as it appeared that the [[Jie (ethnic group)|Jie]] did not use family names at the time. His likely original name is Bèi (㔨);<ref>{{Cite web|url=https://chardb.iis.sinica.edu.tw/char/U+3528|title = 漢字「㔨」：基本資料}}</ref> one other possible original name was Fule (匐勒).  His grandfather, named Yeyiyu (耶奕于), and his father, named Zhouhezhu (周曷朱), were minor Jie chiefs, and their tribe traditionally lived in [[Bing Province]] (并州, modern [[Shanxi]]).  Shi grew up in Wuxiang (武鄉, in modern [[Jinzhong]], [[Shanxi]]).\n\nIn 302 or 303,<ref>(太安中，幷州饥乱，勒与诸小胡亡散，乃自雁门还依甯驱。......会建威将军阎粹说幷州刺史、东嬴公腾执诸胡于山东卖充军实，腾使将军郭阳、张隆虏群胡将诣冀州，两胡一枷。勒时年二十馀，亦在其中，...) ''Jin Shu'', vol.104. Shi Le's biography in ''Book of Jin'' dated the famine at Bing Province to the ''Tai'an'' era (302-303) of the reign of [[Emperor Hui of Jin]]. The biography also recorded that he was in his 20s at the time.</ref> Bing Province suffered a major famine, and the Jie tribes were seriously affected.  Shi Le's tribe spread out and became refugees. Shi and many other Jie and ''[[Hu (people)|hu]]'' people were captured by Jin officials and sold as slaves.  Eventually, he was sold to a man named Shi Huan (師懽), but Shi Huan freed him after becoming impressed with his talents. Eventually, he became a leader of bandits, and at one point he befriended [[Ji Sang]], one of [[Sima Ying]] the Prince of Chengdu's military commanders. Sima Ying was then stationed at [[Ye (Hebei)|Yecheng]] and was the most powerful of the Jin imperial princes.\n\nAfter Sima Ying briefly served as [[Taizi|crown prince]] in 304, he was forced to flee with his brother Emperor Hui to the capital [[Luoyang]] and was deposed by [[Sima Yong]] the Prince of Hejian.  Many of his subordinates, including Ji and Gongsun Fan (公孫藩), deserted, and Gongsun eventually started a rebellion with the stated goal of restoring Sima Ying. Ji and Shi both joined the rebellion—and it was only at that time that Ji gave his friend the family name \"Shi\" and personal name \"Le.\" After Gongsun was subsequently defeated and killed, Ji became leader of the rebellion and made Shi his key general—now with the goal of avenging Sima Ying, who was forced to commit suicide in late 306.  However, their rebellion, while briefly successful in capturing Yecheng in 307 and killing [[Sima Teng]] (司馬騰){{efn|Shi Le was sold as a slave during Sima Teng's tenure as Inspector of Bing Province.<ref>(并州刺史司马腾执诸胡，于山东卖充军实，两胡一枷，勒亦在中。) ''Wei Shu'', vol.95.</ref>}} the Prince of Xincai, ultimately was defeated in the winter of that year, and Shi instead joined [[Liu Yuan (Han-Zhao)|Liu Yuan]], an ethnically Xiongnu former Sima Ying subordinate who had by now declared independence from Jin and established his own state [[Han-Zhao]]. Liu Yuan made him a general.\n\n== As Han-Zhao general ==\n\n=== As commander of a roving army ===\nFor the next few years, Shi led his roving band, which he appeared to have largely recruited himself, throughout central China, losing few battles but largely interested in pillaging and not in holding territory.  From the beginning, though, Shi showed willingness to accept learned men into his army to serve as advisors and officers, unlike many other agrarian revolt leaders, and he gained many followers, mostly from the Jie and other non-[[Han Chinese|Han]] ethnicities, but including some Han as well.  After Liu Yuan's death in 310, Shi continued to submit to the authority of Liu Yuan's son and successor [[Liu Cong (Han Zhao)|Liu Cong]].\n\nIn summer 311, Shi's prestige and power increased greatly when he was able to utterly defeat the largest Jin force remaining in central China.  The Jin regent [[Sima Yue]] the Prince of Donghai had died in April that year, and the large force that he commanded was trying to escort his funeral train back to his principality of Donghai (roughly modern [[Linyi]], [[Shandong]]).  Shi Le [[Battle of Ningping|intercepted them]] at Ku (苦縣, in modern [[Zhoukou]], [[Henan]]), and while the Jin force was much larger than his, Shi's force was mostly cavalry, and it surrounded and disrupted the procession of the Jin force so that it stampeded itself into oblivion.  The many Jin princes and officials were captured by Shi, and Shi executed them all.  Shi, from that point on, became a feared general.\n\nIn July 311, several major Han generals, including Shi, [[Huyan Yan]], [[Liu Yao]], and [[Wang Mi]], converged on the Jin capital Luoyang, which had been left defenseless by Sima Yue. Without major resistance, the capital fell in the [[Disaster of Yongjia]], and [[Emperor Huai of Jin]] was captured and later executed in 313. Later that year, Shi captured the powerful Jin general [[Gou Xi]] and assassinated fellow Han general Wang, merging their forces with his own.  As Shi's army grew, he increasingly trusted his young distant nephew [[Shi Hu]] as a general, and under the violent b",
+            "url": "https://en.wikipedia.org/wiki/Shi_Le",
+            "wikidata_qid": "Q1196190",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q1196190"
+            ]
+          }
+        ],
+        "cbdb_originals": [
+          {
+            "c_personid": 31360,
+            "c_name_chn": "石勒",
+            "c_index_year": 273,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 273,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 332,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 60,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Shi(4) Le [31360] Morihashi, Volume 4, p. 844. Giles, pp. 656-7.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          }
+        ],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 12174,
+      "keys": [
+        "js:js_11:62:葛洪",
+        "js:js_06:51:葛洪",
+        "js:js_12:181:葛洪",
+        "js:js_17:147:葛洪",
+        "gl:Q553678",
+        "cbdb:30856"
+      ],
+      "review_status": "source_checked_dates_unknown",
+      "duplicate_of": null,
+      "identity_status": "all_source_identities_adjudicated_same_historical_person",
+      "source_identities_all_adjudicated": true,
+      "confirmed_duplicate_children": [
+        6670
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 842598,
+          "excerpt": "葛洪，字稚川，丹阳句容人也。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_11.txt",
+          "source_key": "js:js_11:62:葛洪",
+          "offset": 5506,
+          "excerpt": "章尤善。侯爵崧传，高门𫖳显。 \n列传第四十二 \n　　　　　　　 郭璞　葛洪 \n　　郭璞，字景纯，河东闻喜人也。父瑗，尚书都令史。时尚书杜预有所增损，瑗多驳正之，以公方著称。终于建平太守。璞好经术，博学有高才，而讷于言论，词赋为中兴之冠。好古文奇字，妙于阴阳算历",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_06.txt",
+          "source_key": "js:js_06:51:葛洪",
+          "offset": 9706,
+          "excerpt": "恨才少，而子更患其多。”弟云尝与书曰：“君苗见兄文，辄欲烧其笔砚。”后葛洪著书，称“机文犹玄圃之积玉，无非夜光焉，五河之吐流，泉源如一焉。其弘丽妍赡，英锐漂逸，亦一代之绝乎！”其为人所推服如此。然好游权门，与贾谧亲善，以进趣获讥。所著文章凡三百余篇，并行于世。",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_12.txt",
+          "source_key": "js:js_12:181:葛洪",
+          "offset": 22227,
+          "excerpt": "行之。时所部四县并以旱失田，闿乃立曲阿新丰塘，溉田八百余顷，每岁丰稔。葛洪为其颂。计用二十一万一千四百二十功，以擅兴造免官。后公卿并为之言曰：“张闿兴陂溉田，可谓益国，而反被黜，使臣下难复为善。”帝感悟，乃下诏曰：“丹阳侯闿昔以劳役部人免官，虽从吏议，犹未掩其",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_17.txt",
+          "source_key": "js:js_17:147:葛洪",
+          "offset": 15285,
+          "excerpt": "猛兽明旦致一鹿于其室前。猎者时往寄宿，文夜为担水而无倦色。余杭令顾飏与葛洪共造之，而携与俱归。飏以文山行或须皮衣，赠以韦袴褶一具，文不纳，辞归山中。飏追遣使者置衣室中而去，文亦无言，韦衣乃至烂于户内，竟不服用。 \n　　王导闻其名，遣人迎之，文不肯就船车，荷担徒",
+          "normalization": "OpenCC t2s",
+          "verification": "identity_context_individually_read_no_date_inference"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 843880,
+          "excerpt": "而洪坐至日中，兀然若睡而卒，岳至，遂不及见。时年八十一。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "unresolved": [
+        "Jinshu reports age81 within 尸解 narrative; original CBDB30856 explicitly records scholarly61/81 age dispute. No unconditional birth/death year inferred."
+      ],
+      "original_secondary_identity_records": {
+        "id": 12174,
+        "keys": [
+          "js:js_11:62:葛洪",
+          "js:js_06:51:葛洪",
+          "js:js_12:181:葛洪",
+          "js:js_17:147:葛洪",
+          "gl:Q553678",
+          "cbdb:30856"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Ge Hong",
+            "revision_id": 1371469337,
+            "page_id": 2172835,
+            "content_sha256": "e7373bcd318f141daba9a381b032231e09483838142a74fe8e11ecf6bf1ad4c2",
+            "date_fields": {
+              "birth_date": "283",
+              "death_date": "343 or 364"
+            },
+            "date_categories": [
+              "283 births"
+            ],
+            "lead_wikitext": "{{Short description|4th-century Chinese philosopher and physician}}\n{{more footnotes needed|date=August 2022}}\n{{Infobox person\n| name               = Ge Hong\n| native_name        = 葛洪\n| native_name_lang   = \n| image              = Chinese woodcut, Famous medical figures; Portrait of Ge Hong Wellcome L0039323.jpg\n| caption            = Ge Hong as depicted by Gan Bozong, woodcut print, [[Tang dynasty]] (618–907)\n| other_names        = Zhichuan (稚川), Baopuzi (抱朴子)\n| birth_date         = 283\n| birth_place        = Jurong Province, Jin Empire\n| death_date         = 343 or 364\n| module             = {{infobox Chinese\n  | child     = yes\n  | s         = 葛洪\n  | t         = 葛洪\n  | p         = Gé hóng\n  | showflag  = stp\n  | order = st}}\n}}\n{{Taoism}}\n\n'''Ge Hong''' ({{zh|c=葛洪|p=Gě Hóng|w=Ko Hung}}; b. 283<ref name=wells>{{cite journal|last1=Wells|first1=Matthew|title=Self as Historical Artifact: Ge Hong and Early Chinese Autobiographical Writing|journal=Early Medieval China|date=18 July 2013|volume=2003|issue=1|pages=71–103|doi=10.1179/152991003788138465|s2cid=161623586 }}</ref><ref name=liu/> – d. 343<ref name=wells/> or 364<ref name=liu>{{cite journal|last1=Liu|first1=Peng|title=\"Conceal my Body so that I can Protect the State\": The Making of the Mysterious Woman in Daoism and Water Margin|journal=Ming Studies|date=12 October 2016|volume=2016|issue=74|pages=48–71|doi=10.1080/0147037X.2016.1228876|s2cid=164447144 }}</ref>), [[courtesy name]] '''Zhichuan''' ({{lang|zh|稚川}}), was a Chinese linguist, philosopher, physician, politician, and writer during the [[Jin dynasty (266–420)#Eastern Jin (317–420)|Eastern Jin dynasty]]. He was the author of ''[[Ziyuan (book)|Essays on Chinese Characters]]'', the ''[[Baopuzi]]'', the ''Emergency Formulae at an Elbow's Length'',<ref>{{Cite web |date=2020-12-09 |title=Daoism Series 31: Prepared Emergency Formulae Behind the Elbow |url=https://purplecloudinstitute.com/daoism-series-31-prepared-emergency-formulae-behind-the-elbow/ |access-date=2022-05-05 |website=Purple Cloud |language=en-AU}}</ref> among others. He was the originator of [[first aid]] in [[traditional Chinese medicine]] and influenced later generations.\n\nHe also took on the name '''Baopuzi''' ({{zh|s=抱朴子}}), with which translates literally as 'embracing simplicity'—a reflection of his commitment to fundamental virtues, unadorned truth, and detachment from material temptations.\n\n==Early life==\nGe Hong was born near [[Jurong, Jiangsu|Jurong county]] in AD 283, as the third son into a well-established family originally from [[Eastern Wu]].\n\nHis ancestor Ge Xi ({{lang|zh|葛奚}}) once served in the high ranking position of Dahonglu ({{lang|zh|大鸿胪}}) in [[Eastern Wu]]. His great-uncle was [[Ge Xuan]] ({{lang|zh|葛玄}}) (also known as Ge [[Xian (Taoism)|Xianweng]]), an alchemist during the [[Three Kingdoms]] period. He studied alchemy and Taoism with [[Zuo Ci]].\n\nHis father, Ge Ti ({{lang|zh|葛悌}}), served as the prefect of Shaoling ({{lang|zh|邵陵}}) after the nation entered the [[Jin dynasty (266–420)|Jin Dynasty]]. He died when Ge Hong was 13 and his family went into decline. Ge had no inheritance and took up farming at an early age. As the family library had been destroyed in the war, Ge borrowed books from friends, selling firewood to make money for buying paper and writing brushes so he could copy the books.<ref name=\":0\" /> \n\nGe Hong is of an ascetic nature and did not like honor and gain. He was not especially fond of classic literature, but rather especially appreciated the guidance of the divine. Ge Hong studied [[Chinese alchemy]] under Ge Xuan's disciple Zheng Yin ({{lang|zh|郑隐}}).<ref>{{lang|zh|《晉書》〈葛洪傳〉：「從祖玄，吳時學道得仙，號曰葛仙公，以其煉丹秘術授弟子鄭隱。洪就隱學，悉得其法焉。」}}</ref>\n\n==Career==\nBy Ge Hong's time, although the family was declining, he was employed in numerous high ranking positions within the bureaucracy of the time.\n\nIn his public service role as an official, he was often asked to appraise his friends and acquaintances as possible candidates for government office positions and was also chosen to perform military service. However, he was unhappy with his life as an official and general. Although he never rejected [[Confucianism]], he grew interested in [[Taoist]] cultivation and [[Pill of Immortality|elixirs]] to achieve the spiritual freedoms of [[Xian (Taoism)|Taoist Immortality]].\n\nIn the second year of [[Emperor Hui of Jin|Tai'an]] in the [[Western Jin]] Dynasty (AD 303), Ge Hong was promoted due to his contributions in calming the peasant uprising led by [[Shi Bing]] in [[Yangzhou (ancient China)|Yangzhou]].\n\nIn the first year of Guangxi (AD 306), Ji Han ({{lang|zh|嵇含}}), the newly promoted governor of [[Guangzhou]], recommended Ge Hong to join the ranks as an army official. Ge Hong first went to Guangzhou, but after Ji Han was killed, he went to [[Mount Luofu]] to live in seclusion. There, he gathered [[Traditional Chinese Medicine|herbal medicine]], refined [[Pill of Immortality|elixirs]], and documented numerous cases of illness.\n\nLater, Ge Hong became a disciple of Bao Liang ({{lang|zh|鲍靓}}), then prefect of [[Nanhai, Foshan|Nanhai]], from whom he learned alchemy and received the ''[[Sanhuangjing]]''. He also married Bao Liang's daughter [[Bao Gu]], who excelled in the techniques of [[moxibustion]].\n\nIn the second year of Jianxing of [[Emperor Min of Jin|Emperor Min]] (AD 313), Ge Hong returned to his hometown, but still lived in seclusion and did not work as an official. In the first year of Jianwu of [[Emperor Yuan of Jin]] (AD 317), the ''Inner'' and ''Outer Chapters'' of ''Baopuzi'' were written.\n\nIn the first year of [[Emperor Cheng of Jin|Xianhe]] (AD 326), he was called by [[Wang Dao]] to serve as under the position of \"Zhubo\" ({{lang|zh|主簿}}), later promoted to \"consulting general\" ({{lang|zh|咨议将军}}).\n\nIn the 7th year of Xianhe, he heard that [[Jiaozhi]] County (present-day [[Vietnam]]) produced [[cinnabar]], and asked [[Emperor Cheng of Jin|Emperor Cheng]] to serve as the magistrate of Gouti ({{lang|zh|句屚}}) (near present-era [[Hà Sơn Bình province]]).<ref name=\"国学大师_国学网_国学迷_汉字宝典_诗词宝典_国学经典&古典文学_古今图书集成&四库全书电子版&永乐大典 c922\">{{cite web | script-title=zh:句屚县_历史地名:句屚县_历史上的句屚县来历与出处_历史地名 | script-website=zh:国学大师_国学网_国学迷_汉字宝典_诗词宝典_国学经典&古典文学_古今图书集成&四库全书电子版&永乐大典 | url=https://m2.guoxuedashi.net/diming/17034ccrq/ | language=zh | access-date=2024-04-02}}</ref> After receiving the Emperor's consent, his family traveled south. When he arrived in Guangzhou, he was asked to remain, so Ge Hong once again lived in seclusion in Mount Luofu to refine elixirs.<ref>Book of Jin ({{lang|zh|晋书}}), Ge Hong's chapter：{{lang|zh|“以年老，欲炼丹以祈遐寿。闻交阯出丹，求为句漏令。帝以洪资高，不许。洪曰：“非欲为荣，以有丹耳。”帝从之。洪遂将子侄俱行，至广州，刺史邓岳留不听去，洪乃止罗浮山炼丹。岳表补东官太守，又辞不就。岳乃以洪兄子望为记室参军。在山积年，优游闭养，著述不辍。”}}</ref><ref name=\"ycpai.ycwb.com 2019 j309\">{{cite web | author=Yang Xia (夏杨)|trans-title=\"Why does Mount Luofo hold a special place in the heart of Elder Ge?| script-title=zh:【惠州文脉】\"葛仙翁\"为何钟情于罗浮山? | website=ycpai.ycwb.com | date=2019-12-13 | url=https://ycpai.ycwb.com/ycppad/content/2019-12/13/content_586461.html | access-date=2024-04-02}}</ref>\n\nHis autobiography was the last part of his collected writings.<ref name=\":0\">{{Cite book |last=Ebrey |first=Patricia Buckley |url=https://archive.org/details/chinesecivilizat00patr/page/91 |title=Chinese civilization : a sourcebook |publisher=The Free Press |year=1993 |isbn=002908752X |edition=2nd |location=New York |pages=91 |oclc=27226697 |url-access=registration}}</ref> Referring to his years as an official in Guangzhou, he wrote that \"Honor and status, are like guests yet are not common goods, as they leave they cannot be kept.\"<ref>{{lang|zh|《抱朴子外篇》}}(autobiographical)：「{{lang|zh|荣位势利，譬如寄客既非常物，又去其不可留也。}}」</ref>\n\n== Impact ==\nHong's main contributions were in [[Chinese alchemy]] and medicine, and also as a religious scholar integrating [[Confucianism]] and [[Taoism]]. Ge Hong questioned ancient writings and was against the traditionalism of the time, whereby older writings were valued while newer ideas were less respected, and instead emphasized innovation and methods which involved experimentation and results. This was especially the case in his work in medicine and alchemy. In medical practice, Ge Hong read a large number of medical books in his analysis and research. He summarized treatment experience and collected knowledge from folk treatments, compiling works such as the hundred-scrolled book ''Yuhanfang'' ({{zhi|s=玉函方}}).\n\nIn his book ''Emergency Formulae at an Elbow's Length'' ({{zhi|s=肘后备急方}}), he suggested treating rabies patients by applying the brain matter of rabid dogs onto the bite wound,<ref>{{Cite book |last=Ge |first=Hong |orig-date=circa 340 CE |script-title=zh:《肘后备急方》 |location=Wester Jin (near present day Guangdong) |url=https://so.gushiwen.cn/guwen/book_46653FD803893E4FC7937A49E44EA8D1.aspx |language=Chinese}}</ref> and extractions from the plant ''[[Artemisia annua]]'' to treat malaria.<ref>{{Cite web |title=5 ancient diseases and what the ancients",
+            "url": "https://en.wikipedia.org/wiki/Ge_Hong",
+            "wikidata_qid": "Q553678",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q553678"
+            ]
+          }
+        ],
+        "cbdb_originals": [
+          {
+            "c_personid": 30856,
+            "c_name_chn": "葛洪",
+            "c_index_year": 283,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 283,
+            "c_by_nh_code": 117,
+            "c_by_nh_year": 4,
+            "c_by_range": null,
+            "c_deathyear": 343,
+            "c_dy_nh_code": 142,
+            "c_dy_nh_year": 1,
+            "c_dy_range": null,
+            "c_death_age": 61,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "目前關於葛洪的卒年，以六十一歲和八十一歲兩種說法為主，持前一說法的學者較多。《晉書》載為“八十一”，錢穆《葛洪年歷》卻考證為不足六十",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          }
+        ],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 12171,
+      "keys": [
+        "js:js_09:0:王導",
+        "js:js_11:15:王導",
+        "tj:tj_16:237:王導",
+        "gl:Q3274914"
+      ],
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "identity_status": "clean_Wang_Dao_Maohong_core",
+      "source_identities_all_adjudicated": true,
+      "historical_birth": {
+        "year": 276,
+        "precision": "inferred_year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "咸康五年薨，时年六十四。",
+        "inference": "339 - 64 + 1; assumes Chinese nominal age, not an explicit birth date",
+        "depends_on_death_year": 339
+      },
+      "historical_death": {
+        "year": 339,
+        "precision": "year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "咸康五年薨，时年六十四。"
+      },
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 762529,
+          "excerpt": "王导，字茂弘，光禄大夫览之孙也。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 766893,
+          "excerpt": "咸康五年薨，时年六十四。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "unresolved": [
+        "Birth276 inferred from339 minus nominal64 plus1. Do not absorb/delete4455 sparse CBDB branches without splitting them."
+      ],
+      "original_secondary_identity_records": {
+        "id": 12171,
+        "keys": [
+          "js:js_09:0:王導",
+          "js:js_11:15:王導",
+          "tj:tj_16:237:王導",
+          "gl:Q3274914"
+        ],
+        "wikipedia_originals": [
+          {
+            "title": "Wang Dao",
+            "revision_id": 1376319681,
+            "page_id": 3709882,
+            "content_sha256": "a4f2b29986a610ee231aff6d0ed8a45df870ec4d2891ab6fded1e27fbd0d813e",
+            "date_fields": {
+              "birth_date": "276",
+              "death_date": "{{death year and age|339|276}}"
+            },
+            "date_categories": [
+              "276 births",
+              "339 deaths"
+            ],
+            "lead_wikitext": "{{Short description|Chinese official and Jin Dynasty regent (276-339)}}\n{{family name hatnote|[[Wang (surname)|Wang]]|lang=Chinese}}\n{{Infobox royalty\n|name=Wang Dao\n|image=NAJDA-290-0047 古聖賢像伝略5 (王導).jpg\n|full_name=[[Family name]]: Wang (王)<br />[[Given name]]: Dao (導)<br />[[Courtesy name]]: Maohong (茂弘) <br />{{center|'''Titles'''}}<br />Viscount of Jiqiu (即丘子)<br />Marquis of Wugang (武岡侯)<br />Duke of Shixing (始興郡公)\n|birth_date=276\n|death_date={{death year and age|339|276}}\n|father=Wang Cai (王裁)\n|spouse=Lady Cao Shu<ref>''Wang Shi Pu'' annotation in ''Shishuo Xinyu'', vol.01</ref>\n|posthumous_name=Wenxian (文獻)\n|occupation = Politician\n}}\n'''Wang Dao''' ({{zh|t=王導|w=Wang Tao}}; 276{{efn|According to Wang Dao's biography in ''Book of Jin'', he was 64 (by East Asian reckoning) when he died.<ref>(咸康五年薨，时年六十四。) ''Jin Shu'', vol.65</ref>. Thus by calculation, his birth year should be 276.}} – 7 September 339{{efn|According to Emperor Cheng's biography in ''Book of Jin'', Wang Dao died on the ''gengshen'' day of the 7th month of the 5th year of the ''Xiankang'' era of his reign. This corresponds to 7 Sep 339 in the Julian calendar.<ref>[(咸康五年)秋七月庚申，使持节、侍中、丞相、领扬州刺史、始兴公王导薨] ''Jin Shu'', vol. 07</ref>}}), [[courtesy name]] '''Maohong''' (茂弘), formally '''Duke Wenxian of Shixing''' (始興文獻公), was a Chinese politician during the [[Jin Dynasty (266–420)|Jin dynasty]] who played an important role in the administrations of [[Emperor Yuan of Jin|Emperor Yuan]], [[Emperor Ming of Jin|Emperor Ming]], and [[Emperor Cheng of Jin|Emperor Cheng]], including as Emperor Cheng's [[regent]]. In these capacities, he served as a crucial governing figure of the [[Eastern Jin Dynasty]] during its first decades, as well as the leading member of the prominent [[Wang clan of Langya]], especially after the death of his rebellious cousin [[Wang Dun]]. His governance style was to be lenient with the laws, and he handed out few punishments—which stabilized the Jin regime greatly, but which also led to extensive, if moderate, corruption and incompetence in the Jin regime, making it difficult for Jin armies to recapture northern China.\n\nWang's line, during the subsequent [[Southern Dynasties]], was known as one of the two most honored lines of nobles—the other being [[Xie An]]'s line—and in the people's minds no less honored than imperial households.\n\n== Early career ==\nWang Dao's grandfather Wang Lan (王覽) and father Wang Cai (王裁) were mid-level Jin Dynasty officials, and he inherited from them the title Viscount of Jiqiu. He was the grandnephew of [[Wang Xiang]]. When he was young, during the late reign of [[Emperor Hui of Jin|Emperor Hui]], he served on the staff of [[Sima Yue]] the Prince of Donghai.  During that time, he befriended [[Emperor Yuan of Jin|Sima Rui]] the Prince of Langye.  It was at Wang's suggestion that Sima Rui slipped out of the capital [[Luoyang]] and stayed safe during most of the [[War of the Eight Princes]] in his [[Principality of Langye]]. When Sima Yue later became [[regent]] for [[Emperor Huai of Jin|Emperor Huai]] and commissioned Sima Rui to be the military commander for the area southeast of the [[Yangtze River]], posted to Jianye (建業, modern [[Nanjing]], [[Jiangsu]]), Wang volunteered to serve on Sima Rui's staff, and he became Sima Rui's chief advisor.\n\nAs Sima Rui lacked fame, after he arrived in Jianye, few of the powerful local gentlemen would come visit and support him.  Under Wang Dao's counsel, Sima Rui personally visited He Xun (賀循) and [[Gu Rong]] (顧榮) and invited them to serve in his administration.  He and Gu were well regarded by the local population, which eventually began to trust Sima Rui's leadership.  Wang Dao and his cousin, the general [[Wang Dun]], served in key roles, and it was said at the time that the domain was ruled equally by the Simas and the Wangs.  Around the time that Luoyang fell to [[Han-Zhao]] and [[Disaster of Yongjia|Emperor Huai was captured]] (July 311), large numbers of refugees fled to Sima Rui's domain.  Wang assisted Sima Rui in settling the refugees and strengthening his rule.  After [[Emperor Min of Jin|Emperor Min]] was also captured by Han, Wang was one of the officials who urged Sima Rui to take the throne, and he did, initially claiming the title \"Prince of Jin\" in 317 and then emperor in 318 after Emperor Min was executed by Han.\n\n== During Emperor Yuan's reign ==\nInitially, Wang Dao continued to serve as chief advisor for Emperor Yuan, but after Emperor Yuan began to have a falling out with Wang Dao's powerful cousin Wang Dun over Wang Dun's domination of the western provinces, he also began to distance himself from Wang Dao.  When Wang Dun finally rebelled in 322 and attacked the capital [[Jiankang]] (renamed from Jianye because of [[naming taboo]] of Emperor Min's name), Wang Dao feared that his clan would be slaughtered, and he and his clan members went to the palace door to beg for their lives.  Initially, Emperor Yuan would not see them.  When Wang Dao asked [[Zhou Yi (Jin dynasty)|Zhou Yi]], an official who had once compared him to [[Guan Zhong]], to intercede on his behalf, Zhou did and persuaded Emperor Yuan that Wang Dao was not involved in Wang Dun's rebellion—but in order to not make Wang Dao grateful for him, he chose not to respond to Wang Dao but instead cursed Wang Dun when Wang Dao begged him, causing Wang Dao to believe that he, like [[Liu Wei (Jin dynasty)|Liu Wei]] and Diao Xie (刁協), wanted to exterminate the Wang clan. Wang Dao did not find out what Zhou had done for him. Later, after Wang Dun successfully captured Jiankang, forcing Emperor Yuan to submit to him, he asked Wang Dao what he thought of Zhou, and Wang Dao said nothing—so Wang Dun executed Zhou. Later, when Wang found out from imperial archives the petitions that Zhou had submitted on his behalf, he mourned and gave a famous quote, which later became a Chinese idiom:\n\n:''Although I did not kill Boren{{efn|Zhou Yi's [[courtesy name]]}}(伯仁), Boren died because of me!''<ref>(吾虽不杀伯仁，伯仁由我而死) ''Jin Shu'', vol. 69</ref>\n\nWang Dao also noticed that Emperor Yuan's court initially had no court historian. As such, he recommended [[Gan Bao]] for the position, which was accepted by Emperor Yuan.<ref>(中兴草创，未置史官，中书监王导上疏曰：“夫帝王之迹，莫不必书，著为令典，垂之无穷。宣皇帝廓定四海，武皇帝受禅于魏，至德大勋，等踪上圣，而纪传不存于王府，德音未被乎管弦。陛下圣明，当中兴之盛，宜建立国史，撰集帝纪，上敷祖宗之烈，下纪佐命之勋，务以实录，为后代之准，厌率土之望，悦人神之心，斯诚雍熙之至美，王者之弘基也。宜备史官，敕佐著作郎干宝等渐就撰集。”元帝纳焉。宝于是始领国史。) ''Jin Shu'', vol.82 (biography of Gan Bao)</ref>\n\nWang Dao continued to serve Emperor Yuan faithfully until Emperor Yuan's death in January 323.\n\n== During Emperor Ming's reign ==\nEmperor Yuan was succeeded by his son and [[Taizi|crown prince]] Sima Shao ([[Emperor Ming of Jin|Emperor Ming]]), who trusted Wang Dao's faithfulness and made him his prime minister.  Later, when Emperor Ming faced Wang Dun's forces in 324, Wang Dao contributed greatly to defeating Wang Dun's force by falsely claiming that Wang Dun was dead—a claim that the army believed because he was Wang Dun's cousin and which gave the army high morale.  Before Emperor Ming's death in October 325, he made Wang Dao one of the officials he entrusted his four-year-old son Sima Yan with.\n\n== During Emperor Cheng's reign ==\nAfter Sima Yan took the throne (as [[Emperor Cheng of Jin|Emperor Cheng]]), several officials who were named in Emperor Ming's will were put in charge—that included Wang Dao, [[Sima Yang]] (司馬羕) the Prince of Xiyang, Bian Kun (卞壼), [[Chi Jian|Xi Jian]], [[Yu Liang]], Lu Ye (陸瞱), and [[Wen Jiao]].  However, quickly, Yu Liang, as the brother of Emperor Cheng's mother [[Yu Wenjun|Empress Dowager Yu]], became effectively the most powerful among them, as Empress Dowager Yu became regent.  Wang's role in government continued to be important, however.\n\nIn 327, the ambitious general [[Su Jun]], offended by Yu Liang's attempt to strip him of his military command, rebelled along with [[Zu Yue]], and Su's forces quickly captured Jiankang in early 328, taking Empress Dowager Yu and Emperor Cheng hostage and forcing Yu to flee.  Wang, who remained in Jiankang, continued to be respected by Su, but secretly ordered the provincial forces to resist Su.  As [[Tao Kan]] and Wen gathered their forces and marched against Su's, Wang persuaded Su's general Lu Yong (路永) to defect to Tao and Wen, and Wang and Lu fled Jiankang together, joining Tao and Wen's forces.  Later that year, Su was killed in battle, and in early 329, his remaining forces were defeated.  As Empress Dowager Yu died during Su's rebellion, most officials requested Wen stay in Jiankang to serve as regent, but Wen, believing that Emperor Ming intended for Wang to be regent, declined and gave the post to Wang.\n\nFor the next few years, Wang was largely in control of the government, but Yu Liang, who had then exiled himself from the capital as the governor of Jing Province (荊州, modern [[Hubei]] and [[Hunan]]), continued to be influential despite his distance from the capital.  In 338, Yu, unhappy that, in his ",
+            "url": "https://en.wikipedia.org/wiki/Wang_Dao",
+            "wikidata_qid": "Q3274914",
+            "identity_check": "qid_matches_source_record",
+            "expected_qids": [
+              "Q3274914"
+            ]
+          }
+        ],
+        "cbdb_originals": [],
+        "status": "original_sources_extracted_not_historically_adjudicated"
+      }
+    },
+    {
+      "id": 10064,
+      "keys": [
+        "js:js_13:243:司馬彪",
+        "js:js_03:196:司馬彪",
+        "gl:Q5976294"
+      ],
+      "review_status": "identity_conflict",
+      "duplicate_of": null,
+      "candidate_duplicate_of": 4442,
+      "identity_status": "known_core_plus_unadjudicated_or_conflicting_source_key",
+      "source_identities_all_adjudicated": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 526767,
+          "excerpt": "始为领军校尉，坐擅放司马彪，系廷尉，世多义之。",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated"
+        }
+      ],
+      "unresolved": [
+        "js03:196 may be a different Sima Biao or military司马 named彪; core historian绍统 is clear, but this key is not proven same.",
+        "Do not apply one branch’s dates to the entire mixed record."
+      ]
+    },
+    {
+      "id": 10977,
+      "keys": [
+        "js:js_01:33:王沈",
+        "js:js_02:110:王沈",
+        "sg:sg_01:259:王沈",
+        "tj:tj_07:156:王沈",
+        "tj:tj_08:74:王沈",
+        "tj:tj_09:40:王沈",
+        "js:js_03:56:王沈",
+        "js:js_04:64:王沈",
+        "sg:sg_04:11:王沈",
+        "sg:sg_09:145:王沈",
+        "sl:sl_01:25:王沈",
+        "gl:Q2949846",
+        "qxz:wangshen",
+        "ssxy:ssxy_01:104:王沈",
+        "ssxy:ssxy_02:289:王沈"
+      ],
+      "review_status": "identity_conflict",
+      "duplicate_of": null,
+      "candidate_duplicate_of": 4473,
+      "identity_status": "known_core_plus_unadjudicated_or_conflicting_source_key",
+      "source_identities_all_adjudicated": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sl_01.txt",
+          "offset": 1193,
+          "excerpt": "卜崇仕聪左卫将军为人清直不与世浮沈与少府陈休素恶中常侍王沈等谄佞用事",
+          "normalization": "OpenCC t2s",
+          "verification": "Individually read and identity adjudicated",
+          "source_tier": "late_reconstruction",
+          "source_edition": "明屠乔孙、项琳重编本；缓存卷首明示伪本，非崔鸿原著直传",
+          "requires_earlier_source_corroboration": true
+        }
+      ],
+      "unresolved": [
+        "sl01:25 is Han-Zhao eunuch Wang Shen, not Duke of Boling王沈处道; separate toward7196 branch before any whole-record deletion.",
+        "Do not apply one branch’s dates to the entire mixed record."
+      ]
+    },
+    {
+      "id": 10087,
+      "keys": [
+        "js:js_00:88:司馬遹",
+        "js:js_01:1:司馬遹",
+        "js:js_02:123:司馬遹",
+        "js:js_04:140:司馬遹",
+        "js:js_05:195:司馬遹",
+        "js:js_06:0:司馬遹",
+        "js:js_18:39:司馬遹",
+        "sg:sg_08:159:司馬遹",
+        "tj:tj_10:90:司馬遹",
+        "hy:hy_01:199:司馬遹",
+        "js:js_03:133:司馬遹",
+        "js:js_07:351:司馬遹",
+        "gl:Q3275306",
+        "cbdb:135465"
+      ],
+      "name": "愍懷太子司馬遹",
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_00.txt",
+          "offset": 10633,
+          "excerpt": "遂生愍怀太子，年三四岁，惠帝不知也。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_00:88:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_01.txt",
+          "offset": 39,
+          "excerpt": "性亮直忠烈，屡谏愍怀太子",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_01:1:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_02.txt",
+          "offset": 11433,
+          "excerpt": "及愍怀太子幽于许昌，浚承贾后旨，与黄门孙虑共害太子。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_02:123:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_03.txt",
+          "offset": 14838,
+          "excerpt": "女为愍怀太子妃，太子为贾后所诬，衍惧祸，自表离婚。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_03:133:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_04.txt",
+          "offset": 28608,
+          "excerpt": "愍怀太子之废也，缵舆棺诣阙，上书理太子之冤曰",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_04:140:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_05.txt",
+          "offset": 38680,
+          "excerpt": "愍怀太子遹，字熙祖，惠帝长子，母曰谢才人。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_05:195:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_06.txt",
+          "offset": 1032,
+          "excerpt": "虑以药杵椎杀之，太子大呼，声闻于外。时年二十三。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_06:0:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_07.txt",
+          "offset": 24490,
+          "excerpt": "愍怀太子废，使伦领右军将军。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_07:351:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_18.txt",
+          "offset": 6553,
+          "excerpt": "愍怀太子妃王氏，太尉衍女也，字惠风。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "js:js_18:39:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_08.txt",
+          "offset": 12861,
+          "excerpt": "愍怀太子初立以峤为少保加散骑常侍",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "sg:sg_08:159:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+          "offset": 6365,
+          "excerpt": "皇孙遹为广陵王。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "tj:tj_10:90:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+          "offset": 22153,
+          "excerpt": "癸未，贾后使太医令程据和毒药。矫诏使黄门孙虑至许昌毒太子。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "tj:tj_10:90:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\hy_01.txt",
+          "offset": 33600,
+          "excerpt": "愍怀太子死于许下，博士、中书论虞之礼。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "all14_target_owned_keys_actual_full_person_scopes_read_authorized_cross_shard_dedup_SimaYu_Minhuai_not_Jianwen_Giles_misnaming_identity_bridge_batch599",
+          "source_key": "hy:hy_01:199:司馬遹"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 37047,
+          "excerpt": "癸未，贾后矫诏害庶人遹于许昌。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "supplemental_source_not_original_owned_key_scope": true
+        },
+        {
+          "source": "https://en.wikipedia.org/w/index.php?title=Sima_Yu&oldid=1375835296",
+          "source_key": "gl:Q3275306",
+          "page_id": 3576881,
+          "revision_id": 1375835296,
+          "revision_timestamp": "2026-09-20T10:45:19Z",
+          "excerpt": "| posthumous_name = Crown Prince Minhuai ({{lang|zh|愍懷太子}})\n| father          = [[Emperor Hui of Jin]]\n| mother          = [[:zh:謝玖|Xie Jiu]]",
+          "verification": "Delegated_actual_original_wikitext_full_page_identity_read_not_independent_primary_dates",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "read_scope": "entire original local dump page including Family References, not title hit; typed-name司馬遹/熙祖 and exclusion of Jianwen verified",
+          "dataset_row": {
+            "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\laouenan.csv.gz",
+            "wikidata_code": "Q3275306",
+            "name": "Sima_Yu",
+            "curid": 3576881,
+            "birth": 278,
+            "death": 300,
+            "verification": "actual compressed CSV row read, dates secondary not independent early attestation"
+          },
+          "local_dump_locator": "wiki/enwiki-latest-pages-articles-multistream.xml.bz2 via readonly titles.sqlite stream17281"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\cbdb_20261017.sqlite3",
+          "source_key": "cbdb:135465",
+          "query": "BIOG_MAIN/SOURCE/KIN135465 plus wife135460 father135461 typed",
+          "records": {
+            "BIOG_MAIN": [
+              {
+                "c_personid": 135465,
+                "c_name": "Sima Yu",
+                "c_name_chn": "司馬遹",
+                "c_index_year": null,
+                "c_index_year_type_code": "",
+                "c_index_year_source_id": null,
+                "c_female": 0,
+                "c_index_addr_id": null,
+                "c_index_addr_type_code": null,
+                "c_ethnicity_code": 0,
+                "c_household_status_code": 0,
+                "c_tribe": null,
+                "c_birthyear": null,
+                "c_by_nh_code": 0,
+                "c_by_nh_year": null,
+                "c_by_range": null,
+                "c_deathyear": null,
+                "c_dy_nh_code": 0,
+                "c_dy_nh_year": null,
+                "c_dy_range": null,
+                "c_death_age": null,
+                "c_death_age_range": null,
+                "c_fl_earliest_year": null,
+                "c_fl_ey_nh_code": 0,
+                "c_fl_ey_nh_year": null,
+                "c_fl_ey_notes": null,
+                "c_fl_latest_year": null,
+                "c_fl_ly_nh_code": 0,
+                "c_fl_ly_nh_year": null,
+                "c_fl_ly_notes": null,
+                "c_surname": "Sima",
+                "c_surname_chn": "司馬",
+                "c_mingzi": "Yu",
+                "c_mingzi_chn": "遹",
+                "c_dy": 23,
+                "c_choronym_code": 0,
+                "c_notes": null,
+                "c_by_intercalary": 0,
+                "c_dy_intercalary": 0,
+                "c_by_month": null,
+                "c_dy_month": null,
+                "c_by_day": null,
+                "c_dy_day": null,
+                "c_by_day_gz": null,
+                "c_dy_day_gz": null,
+                "c_surname_proper": null,
+                "c_mingzi_proper": null,
+                "c_name_proper": null,
+                "c_surname_rm": null,
+                "c_mingzi_rm": null,
+                "c_name_rm": null,
+                "c_created_by": "BDZZK",
+                "c_modified_by": null,
+                "c_created_date": "2013-01-11 00:00:00",
+                "c_modified_date": null
+              }
+            ],
+            "BIOG_SOURCE_DATA": [
+              {
+                "c_personid": 135465,
+                "c_textid": 9601,
+                "c_pages": "3052",
+                "c_notes": "傳主為:王惠風.MQWW PoetID #3052",
+                "c_main_source": 1,
+                "c_self_bio": 0,
+                "c_created_by": null,
+                "c_created_date": null,
+                "c_modified_by": null,
+                "c_modified_date": null
+              },
+              {
+                "c_personid": 135465,
+                "c_textid": 68942,
+                "c_pages": "Q45474029",
+                "c_notes": "批次導入於 2025-11-08 07:15:41 由 Frank Lin (任務ID: import_1762557305_68942)",
+                "c_main_source": null,
+                "c_self_bio": null,
+                "c_created_by": null,
+                "c_created_date": null,
+                "c_modified_by": null,
+                "c_modified_date": null
+              }
+            ],
+            "KIN_DATA": [
+              {
+                "c_personid": 135465,
+                "c_kin_id": 135460,
+                "c_kin_code": 135,
+                "c_source": 9601,
+                "c_pages": "MQWW PoetID #3052",
+                "c_notes": null,
+                "c_autogen_notes": null,
+                "c_created_by": "BDZZK",
+                "c_modified_by": null,
+                "c_created_date": "2013-01-11 00:00:00",
+                "c_modified_date": null
+              }
+            ],
+            "wife_and_father_typed": [
+              {
+                "c_personid": 135460,
+                "c_kin_id": 135461,
+                "c_kin_code": 75,
+                "c_source": 9601,
+                "c_pages": "MQWW PoetID #3052",
+                "c_notes": null,
+                "c_autogen_notes": "Auto-generated from PersonID = 0135461, KinCode = 0176",
+                "c_created_by": "BDZZK",
+                "c_modified_by": null,
+                "c_created_date": "2013-01-11 00:00:00",
+                "c_modified_date": null,
+                "c_kinrel_chn": "父",
+                "c_name_chn": "王衍"
+              },
+              {
+                "c_personid": 135460,
+                "c_kin_id": 135465,
+                "c_kin_code": 134,
+                "c_source": 9601,
+                "c_pages": "MQWW PoetID #3052",
+                "c_notes": null,
+                "c_autogen_notes": "Auto-generated from PersonID = 0135465, KinCode = 0135",
+                "c_created_by": "BDZZK",
+                "c_modified_by": null,
+                "c_created_date": "2013-01-11 00:00:00",
+                "c_modified_date": null,
+                "c_kinrel_chn": "丈夫",
+                "c_name_chn": "司馬遹"
+              },
+              {
+                "c_personid": 135461,
+                "c_kin_id": 135460,
+                "c_kin_code": 176,
+                "c_source": 9601,
+                "c_pages": "MQWW PoetID #3052",
+                "c_notes": null,
+                "c_autogen_notes": null,
+                "c_created_by": "BDZZK",
+                "c_modified_by": null,
+                "c_created_date": "2013-01-11 00:00:00",
+                "c_modified_date": null,
+                "c_kinrel_chn": "女兒",
+                "c_name_chn": "王惠風"
+              }
+            ]
+          },
+          "verification": "Actual_read_structured_identity_metadata_not_independent_dates",
+          "source_limit": "MQWW3052主传为王惠风self_bio0，是妻传关联夫非本人传；实际Jin53聘王衍小女惠风、Jin96愍怀妃王惠风闭双向夫妻及妻父精链；反向生成非另独证源"
+        }
+      ],
+      "unresolved": [
+        "生年278为虚岁推算非独立生日。",
+        "古传与编年葬日己卯/壬寅真源差保，不当死亡年差；后各子卒和母被害不移本人。",
+        "所有14keys本人scope本批已实读；MQWW本人页未取以独立Jin妻父配偶精链闭身份，不假称读过该页。"
+      ],
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "identity_status": "all14_current_source_keys_person_scopes_actual_read_and_closed_as_Minhuai_prince_SimaYu_Xizu_not_Jianwen",
+      "source_identities_all_adjudicated": true,
+      "historical_birth": {
+        "year": 278,
+        "precision": "inferred_year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_06.txt",
+        "excerpt": "虑以药杵椎杀之，太子大呼，声闻于外。时年二十三。",
+        "inference": "TJ/Jin帝纪永康1=300死+Jin本人23，跨源虚岁300-23+1；无独立生日"
+      },
+      "historical_death": {
+        "year": 300,
+        "precision": "year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "癸未，贾后矫诏害庶人遹于许昌。",
+        "original_calendar": "永康元年三月癸未；Jin帝纪/TJ10独立相合"
+      },
+      "proposed_appear": null,
+      "appearance_no_later_than": 290,
+      "appearance_basis": "最早明年题太康10十一月甲申封广陵王，原纪年289，未换末月具体西历；保守上界290用于游戏，不伪称290初仕或按278+16推迟幼主。",
+      "attested_activity_years": [
+        291
+      ],
+      "last_manual_cross_review_batch": "4000_6999_batch599",
+      "source_original_calendar_events": [
+        {
+          "original": "太康十年十一月甲申",
+          "traditional_year": 289,
+          "event": "封广陵王",
+          "CE_day_not_converted": true
+        },
+        {
+          "original": "元康九年十二月壬戌",
+          "traditional_year": 299,
+          "event": "废储",
+          "CE_year_cross_boundary_unconverted": true
+        }
+      ],
+      "source_burial_date_alternatives": [
+        {
+          "source": "Jin53本人传",
+          "original": "六月己卯葬显平陵"
+        },
+        {
+          "source": "Jin惠帝纪/TJ10",
+          "original": "六月壬寅葬，TJ另己卯谥愍怀"
+        }
+      ],
+      "source_modern_conversions_not_adopted": {
+        "wiki_death": "Julian27April300",
+        "wiki_deposition": "CE6February300",
+        "decision": "仅记录现代原说不代早史原历；四岁现代周岁与古五岁不另定火年"
+      },
+      "pre_cross599_secondary_top_dates": {
+        "historical_birth": {
+          "raw": "278",
+          "relation": "at",
+          "tradition_or_dispute": false,
+          "calendar": "as_reported_in_source_not_converted",
+          "precision": "year",
+          "year": 278,
+          "sources": [
+            {
+              "title": "Sima Yu",
+              "url": "https://en.wikipedia.org/wiki/Sima_Yu",
+              "field": "birth_date"
+            }
+          ],
+          "verification_level": "original_secondary_statement_checked"
+        },
+        "historical_death": {
+          "raw": "{{death year and age|300|278}}",
+          "relation": "at",
+          "tradition_or_dispute": false,
+          "calendar": "as_reported_in_source_not_converted",
+          "precision": "year",
+          "year": 300,
+          "sources": [
+            {
+              "title": "Sima Yu",
+              "url": "https://en.wikipedia.org/wiki/Sima_Yu",
+              "field": "death_date"
+            }
+          ],
+          "verification_level": "original_secondary_statement_checked"
+        },
+        "review_status": "secondary_fields_extracted",
+        "identity_status": "coherent_in_available_records"
+      }
+    },
+    {
+      "id": 10075,
+      "keys": [
+        "js:js_02:74:司馬柬",
+        "js:js_08:86:司馬柬",
+        "js:js_09:18:司馬柬",
+        "tj:tj_09:16:司馬柬",
+        "tj:tj_10:82:司馬柬",
+        "js:js_07:343:司馬柬",
+        "gl:Q2286938"
+      ],
+      "name": "秦獻王司馬柬",
+      "historical_birth": {
+        "year": 262,
+        "precision": "inferred_year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_09.txt",
+        "excerpt": "元康元年薨，时年三十，朝野痛惜之。",
+        "inference": "291−nominal_age30+1=262; traditional虚岁条件推生，不是原文独载生年或生日",
+        "nominal_age": 30,
+        "birth_month_day_unknown": true
+      },
+      "historical_death": {
+        "year": 291,
+        "precision": "year",
+        "calendar": "CE year; original Chinese calendar dates retained in evidence",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+        "excerpt": "九月，甲午，秦献王柬薨。",
+        "original_calendar": "元康元年九月甲午",
+        "original_lunisolar_month": 9,
+        "original_day_ganzhi": "甲午",
+        "Western_month_day_not_converted": true
+      },
+      "proposed_appear": null,
+      "duplicate_of": null,
+      "review_status": "primary_text_corroborated",
+      "identity_status": "all7_owned_keys_QinXianWang_SimaJian_Hongdu_Wudi_YangYan_son_Huidi_fullbrother_closed",
+      "source_identities_all_adjudicated": true,
+      "source_key_scopes_all_read": true,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_02.txt",
+          "offset": 3942,
+          "excerpt": "元康初，转征西将军，代秦王柬都督关中军事，领护西戎校尉。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "js:js_02:74:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_07.txt",
+          "offset": 23846,
+          "excerpt": "玮左右无复一人，窘迫不知所为，惟一奴年十四，驾牛车将赴秦王柬。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "js:js_07:343:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_08.txt",
+          "offset": 4768,
+          "excerpt": "司徒迁含领始平中正。秦王柬薨，含依台仪，葬讫除丧。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "js:js_08:86:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_09.txt",
+          "offset": 801,
+          "excerpt": "秦献王柬，字弘度，沈敏有识量。泰始六年，封汝南王。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "js:js_09:18:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_09.txt",
+          "offset": 1094,
+          "excerpt": "元康元年薨，时年三十，朝野痛惜之。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "js:js_09:18:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_09.txt",
+          "offset": 7081,
+          "excerpt": "冬，十一月，立皇子东为汝南王。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "tj:tj_09:16:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_09.txt",
+          "offset": 18245,
+          "excerpt": "又徙太原王颙为河间王，汝南王柬为南阳王。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "tj:tj_09:16:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+          "offset": 6275,
+          "excerpt": "徙南阳王柬为秦王，都督关中诸军事",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "tj:tj_10:82:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+          "offset": 11296,
+          "excerpt": "以秦王柬为大将军",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "tj:tj_10:82:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_10.txt",
+          "offset": 13228,
+          "excerpt": "九月，甲午，秦献王柬薨。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "delegated_report_scope": "6古史ownedkeys全部个人scope完整实读：梁孝王肜入关/楚玮受诏至死/李含丧制整表/武十三王母系和柬全传至继嗣国绝/TJ270与277及289分镇和291卒；年题朝界逐读，所有他人年龄排除",
+          "source_key": "tj:tj_10:82:司馬柬"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 26284,
+          "excerpt": "立皇子柬为汝南王。",
+          "normalization": "OpenCC t2s",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "read_scope": "武帝纪26284泰始6冬十一月辟雍及前后年/月段全读，补TJ同事原东字差，不默校缓存"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\laouenan.csv.gz",
+          "source_key": "gl:Q2286938",
+          "record": {
+            "wikidata_code": "Q2286938",
+            "birth": "262",
+            "death": "291",
+            "updated_death_date": "",
+            "approx_birth": "",
+            "approx_death": "",
+            "birth_min": "262",
+            "birth_max": "262",
+            "death_min": "291",
+            "death_max": "291",
+            "gender": "Male",
+            "level1_main_occ": "Leadership",
+            "name": "Sima_Jian",
+            "un_subregion": "Eastern Asia",
+            "birth_estimation": "262",
+            "death_estimation": "291",
+            "bigperiod_birth_graph_b": "1.Ancient History Before 500AD",
+            "bigperiod_death_graph_b": "1.Ancient History Before 500AD",
+            "curid": "2562738",
+            "level2_main_occ": "Nobility",
+            "freq_main_occ": ".40000001",
+            "freq_second_occ": ".40000001",
+            "level2_second_occ": "Politics",
+            "level3_main_occ": "prinz",
+            "bigperiod_birth": "1.Ancient History Before 500AD",
+            "bigperiod_death": "1.Ancient History Before 500AD",
+            "wiki_readers_2015_2018": "6829",
+            "non_missing_score": "3",
+            "total_count_words_b": "983",
+            "number_wiki_editions": "3",
+            "total_noccur_links_b": "0",
+            "sum_visib_ln_5criteria": "17.107439",
+            "ranking_visib_5criteria": "1554168",
+            "all_geography_groups": "China",
+            "string_citizenship_raw_d": "'China'",
+            "citizenship_1_b": "China",
+            "citizenship_2_b": "",
+            "list_areas_of_rattach": "D:_'China'_matchB1_P:_'China'",
+            "area1_of_rattachment": "Old_(before_year_1949_AD)_China",
+            "area2_of_rattachment": "Missing",
+            "list_wikipedia_editions": "dewiki|zhwiki|jawiki",
+            "un_region": "Asia",
+            "group_wikipedia_editions": "grB",
+            "bplo1": "",
+            "dplo1": "",
+            "bpla1": "",
+            "dpla1": "",
+            "pantheon_1": "0",
+            "level3_all_occ": "D:_politician_P:_prinz_sohn_kaisers_German"
+          },
+          "verification": "Actual_read_original_secondary_dataset_row_identity_only_not_independent_primary_dates",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "secondary_scope_limitation": "curid2562738不能据此拿英文dump页，原语言德中日，无英文；262/291本身非独原证"
+        },
+        {
+          "source": "https://www.wikidata.org/w/index.php?title=Q2286938&oldid=2553976278",
+          "source_key": "gl:Q2286938",
+          "revision_id": 2553976278,
+          "excerpt": "Q2286938",
+          "excerpt_kind": "entity_or_article_name_anchor_not_full_biographical_quote",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "read_scope": "实际整实体父武帝Q7356/母杨艳Q63686/兄惠帝Q7357，sitelink德日中文；262/291来源德Wiki",
+          "source_tier": "modern_secondary_identity_reference_only"
+        },
+        {
+          "source": "https://de.wikipedia.org/w/index.php?title=Sima_Jian&oldid=209204151",
+          "source_key": "gl:Q2286938",
+          "revision_id": 209204151,
+          "excerpt": "Sima Jian",
+          "excerpt_kind": "entity_or_article_name_anchor_not_full_biographical_quote",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "read_scope": "完整德文原条武帝三子惠帝弟/270汝南/291卒；um276南阳及289Qi二手差误分源不采用",
+          "source_tier": "modern_secondary_identity_reference_only"
+        },
+        {
+          "source": "https://zh.wikipedia.org/wiki/司馬柬",
+          "source_key": "gl:Q2286938",
+          "revision_id": null,
+          "excerpt": "司馬柬",
+          "excerpt_kind": "entity_or_article_name_anchor_not_full_biographical_quote",
+          "verification": "Delegated_actual_original_text_personal_scope_read_authorized_parallel_audit",
+          "original_reader_agent": "/root/chronology_4000_6999/read_le_guang_4483",
+          "read_scope": "完整中文本人正文及继嗣故事和引注，弘度/武帝杨艳子/惠帝胞弟/秦献王；现代291-10-23历算未独复算不作古史原公历日",
+          "source_tier": "modern_secondary_identity_reference_only"
+        }
+      ],
+      "unresolved": [
+        "B262系30虚岁推年，不是独立生年题；生月日未知。",
+        "Jin本传元康1薨，与TJ291九月甲午同年；不独复算现代291-10-23，无明确死因不补病死。",
+        "Jin继嗣郁与允俱害/永宁2追谥悼属于嗣子郁，不是柬；楚玮奴14/玮21/遹5均非柬年龄。",
+        "旧appear278来自16岁默认非史料，270已经幼王。",
+        "5733陕西1542原key仍未取得，只候选指本clean目标，不删其原record。"
+      ],
+      "last_individual_review_batch": "4000_6999_cross_batch613",
+      "appearance_no_later_than": 270,
+      "appearance_basis": "早Jin武帝纪及本人传明确泰始6年封汝南王；幼王不能套birth+16=278默认出场。270是已封王上界，未称首次有一切可记活动。",
+      "attested_activity_years": [
+        270,
+        277,
+        289,
+        291
+      ],
+      "source_year_event_details": [
+        {
+          "year": 270,
+          "event": "泰始6封汝南王",
+          "source": "Jin本人传和武帝纪",
+          "note": "TJ09原皇子东不默改柬；爵号与具名徙封加早Jin桥"
+        },
+        {
+          "year": 277,
+          "event": "咸宁3八月癸亥徙南阳王",
+          "source": "TJ09",
+          "note": "Jin咸宁初较宽时期；德Wiki约276不替原纪年"
+        },
+        {
+          "year": 289,
+          "event": "太康10十一月甲申徙秦/都督关中",
+          "source": "TJ10",
+          "note": "德WikiQi为二手封号差误，不改古秦"
+        },
+        {
+          "year": 291,
+          "event": "元康1为大将军，九月甲午卒",
+          "source": "TJ10"
+        }
+      ],
+      "pre_cross613_root_record": {
+        "historical_birth": null,
+        "historical_death": null,
+        "proposed_appear": null,
+        "identity_status": "coherent_in_available_records",
+        "review_status": "needs_further_research",
+        "evidence": []
+      }
+    }
+  ]
+}

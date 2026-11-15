@@ -1,0 +1,16 @@
+{
+  "scope": "Confirmed cross-era source identities; match source keys, never names or game dates.",
+  "exclusions": [
+    {
+      "keys": ["zhsan:8021"],
+      "name": "李績",
+      "reason": "唐朝人物；来源游戏将生卒和登场年改为三国年代，不能用于历史时期筛选。",
+      "evidence": {
+        "path": "san11world-persons/data/persons/src/zhsan.json",
+        "zh_id": 8021,
+        "field": "brief",
+        "excerpt": "唐朝凌煙閣二十四功臣中之一人。曹國公。本名徐世績。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# UTF-8. id|name (Big5, max 4 bytes)|description (Big5, max 66 bytes)|effect IDs (0..99 or 146, max 8)
+# New composite IDs: 100..249. Original IDs: keep their own effect and add the listed effects.
+# No nested combinations. Bole (146, remote recruitment within affinity difference 25) is implemented;
+# other SIRE-only effects are not implemented.
+# Names/descriptions must use characters in the game's Traditional Chinese Big5 font.
+100|明略|虛實、名聲、發明|57,79,82
+101|神膽|遁走、騎將、強行、長驅、洞察|1,37,2,3,61
+102|清談|機智、名聲、論客|55,79,86
+108|仁德|伯樂、遁走、眼力、名聲|146,1,85,79

@@ -285,6 +285,9 @@ def deploy_mod(cfg, log=say):
         shutil.copy2(dll, old)
     for t in PATCH_TABLES:
         shutil.copy2(WORLDMOD / t, g / t)
+    # Preserve the player's definitions when updating the DLL.
+    if not (g / "worldmod_skills.txt").exists():
+        shutil.copy2(WORLDMOD / "worldmod_skills.txt", g / "worldmod_skills.txt")
     exe = g / cfg["exe"]
     if not exe.exists():
         run("make_world_exe.py", g, cfg["exe"], log=log)

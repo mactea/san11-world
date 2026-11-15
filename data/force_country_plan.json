@@ -1,0 +1,183 @@
+{
+  "scope": "用户确认的44个现存势力国号；不改爵位",
+  "forces": [
+    {
+      "leader": "曹操",
+      "country": "魏"
+    },
+    {
+      "leader": "劉備",
+      "country": "漢"
+    },
+    {
+      "leader": "孫策",
+      "country": "吳"
+    },
+    {
+      "leader": "馬騰",
+      "country": "涼"
+    },
+    {
+      "leader": "劉璋",
+      "country": "蜀"
+    },
+    {
+      "leader": "劉表",
+      "country": "楚"
+    },
+    {
+      "leader": "袁紹",
+      "country": "趙"
+    },
+    {
+      "leader": "張魯",
+      "country": "漢寧"
+    },
+    {
+      "leader": "公孫瓚",
+      "country": "燕"
+    },
+    {
+      "leader": "張濟",
+      "country": "秦"
+    },
+    {
+      "leader": "塞維魯",
+      "country": "羅馬"
+    },
+    {
+      "leader": "尼格爾",
+      "country": "羅馬"
+    },
+    {
+      "leader": "阿爾比努",
+      "country": "羅馬"
+    },
+    {
+      "leader": "沃洛吉斯",
+      "country": "安息"
+    },
+    {
+      "leader": "張楊",
+      "country": "晉"
+    },
+    {
+      "leader": "步度根",
+      "country": "鮮卑"
+    },
+    {
+      "leader": "軻比能",
+      "country": "鮮卑"
+    },
+    {
+      "leader": "素利",
+      "country": "鮮卑"
+    },
+    {
+      "leader": "庫思老",
+      "country": "亞美"
+    },
+    {
+      "leader": "阿布加爾",
+      "country": "奧斯"
+    },
+    {
+      "leader": "阿布薩米",
+      "country": "哈特"
+    },
+    {
+      "leader": "戈契爾",
+      "country": "波斯"
+    },
+    {
+      "leader": "阿坦貝",
+      "country": "梅珊"
+    },
+    {
+      "leader": "奧羅德",
+      "country": "埃利"
+    },
+    {
+      "leader": "韋蘇提婆",
+      "country": "貴霜"
+    },
+    {
+      "leader": "魯陀辛哈",
+      "country": "塞種"
+    },
+    {
+      "leader": "薩塔卡尼",
+      "country": "百乘"
+    },
+    {
+      "leader": "斯里那伽",
+      "country": "師子"
+    },
+    {
+      "leader": "傑利延",
+      "country": "潘地"
+    },
+    {
+      "leader": "弗沙那伽",
+      "country": "那伽"
+    },
+    {
+      "leader": "伽那",
+      "country": "穆倫"
+    },
+    {
+      "leader": "帕哈雷",
+      "country": "圖蘭"
+    },
+    {
+      "leader": "法恩薩珊",
+      "country": "薩卡"
+    },
+    {
+      "leader": "薩烏羅",
+      "country": "博斯"
+    },
+    {
+      "leader": "雷夫",
+      "country": "伊比"
+    },
+    {
+      "leader": "阿根託科",
+      "country": "喀里"
+    },
+    {
+      "leader": "蓋奧博馬",
+      "country": "夸迪"
+    },
+    {
+      "leader": "葛達拉",
+      "country": "阿克"
+    },
+    {
+      "leader": "阿瑪尼塔",
+      "country": "庫施"
+    },
+    {
+      "leader": "阿爾漢",
+      "country": "示巴"
+    },
+    {
+      "leader": "塔蘭",
+      "country": "希木"
+    },
+    {
+      "leader": "伊拉茲",
+      "country": "哈德"
+    },
+    {
+      "leader": "山習",
+      "country": "于闐"
+    },
+    {
+      "leader": "壹多雜",
+      "country": "車師"
+    }
+  ],
+  "status": "已写入并回读验证，当前44势力国号与爵位检查通过",
+  "last_backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\country-backups\\20261105-014540"
+}

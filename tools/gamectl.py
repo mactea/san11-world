@@ -5,7 +5,6 @@ Usage: python gamectl.py "<cmd>" ["<cmd>" ...]
   python gamectl.py "click 640 400" "wait 500" "shot out/s1.bmp"
 Screenshots given as *.bmp are also saved as a half-size PNG next to them.
 """
-import sys
 import time
 from pathlib import Path
 
@@ -103,7 +102,15 @@ def scenario_list(timeout=180):
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--game-dir', type=Path, default=GAME)
+    parser.add_argument('commands', nargs='+')
+    options = parser.parse_args()
+    GAME = options.game_dir.resolve()
+    if not (GAME / 'worldmod.ini').is_file():
+        parser.error(f'no worldmod.ini in {GAME}')
+    args = options.commands
     if args and args[0] in ("@newgame", "@europe"):
         if not scenario_list():
             raise SystemExit("scenario list not reached")

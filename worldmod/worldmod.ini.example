@@ -32,6 +32,23 @@ bases=1
 cities=210
 
 ; ---- optional (defaults shown)
+; render_msaa: native-rendering antialiasing, default 4; 0 unchanged, 2/4/8.
+; DISCARD uses direct MSAA with D24S8; COPY uses offscreen MSAA with D24S8/D24X8,
+; resolved before Present. Lockable targets and unsupported devices stay unchanged.
+; Game UI/transparency acceptance is still pending. Set 0 to disable this override.
+render_msaa=4
+; water_effect_strength: optional native water waves/foam/opacity smoothing, 0..100.
+; 0 keeps original water; requires terrain_renderer=dx12. Real scene acceptance pending.
+; Uses a presentation clock (not the simulation clock); long frame steps cap at 0.1 s.
+water_effect_strength=0
+; Optional exact-content base-terrain replacement from worldmod_terrain.wmtr.
+; Default off; sample art and actual game matching have not been accepted.
+terrain_texture_replacement=0
+; terrain_anisotropy: base terrain filtering, 0 unchanged, 2/4/8/16;
+; available for both original and native terrain, subject to mip/state checks.
+; terrain_anisotropy=0
+; skill_combos: original-effect combinations from UTF-8 worldmod_skills.txt (docs/特技组合.md)
+; skill_combos=1
 ; astar: A* (0x567520): 0 original, 1 binary heap (same results), 2 + 2x heuristic, 3 + search window
 ; astar=3
 ; astar_margin: mode 3: hexes searched around the box of the start and the goal

@@ -4,6 +4,7 @@
   * SizeOfStackReserve = 48 MB       -> functions that keep W*H-sized arrays on the stack fit (up to ~8M cells)
 
 The code and data are untouched, so worldmod's build check (timestamp + SizeOfImage) still matches.
+The Python API accepts a map-sized stack_reserve; the standalone CLI keeps the 48 MB default.
 Usage: python make_world_exe.py <game_dir> [name]   (name: the new launcher, default san11pk_world.exe;
        worldmod reads the worldmod.ini section named after it)
 """
@@ -15,7 +16,7 @@ from pathlib import Path
 STACK_RESERVE = 48 << 20   # default for EVERY thread; larger values starve the 32-bit address space
 
 
-def main(game_dir: Path, name: str = "san11pk_world.exe") -> None:
+def main(game_dir: Path, name: str = "san11pk_world.exe", *, stack_reserve: int = STACK_RESERVE) -> None:
     src = game_dir / "san11pk.exe"
     dst = game_dir / name
     data = bytearray(src.read_bytes())
@@ -30,12 +31,12 @@ def main(game_dir: Path, name: str = "san11pk_world.exe") -> None:
 
     characteristics = struct.unpack_from("<H", data, characteristics_at)[0] | 0x20
     struct.pack_into("<H", data, characteristics_at, characteristics)
-    struct.pack_into("<I", data, stack_reserve_at, STACK_RESERVE)
+    struct.pack_into("<I", data, stack_reserve_at, stack_reserve)
 
     tmp = dst.with_suffix(".tmp")
     tmp.write_bytes(data)
     shutil.move(tmp, dst)
-    print(f"wrote {dst} (LAA on, stack reserve {STACK_RESERVE >> 20} MB)")
+    print(f"wrote {dst} (LAA on, stack reserve {stack_reserve >> 20} MB)")
 
 
 if __name__ == "__main__":

@@ -15,7 +15,21 @@ UEND = UBASE + 1000 * USIZE          # 0x73a69a8: also where type 23 (new-office
 
 FIELD = []
 REWRITE = []
-CAVE_TEXT = []
+CAVE_TEXT = [
+    # Preserve manually assigned long false reports across countdown and reload.
+    # Other abnormal statuses retain the native five-turn setter and validation.
+    (0x496350, 'mov al, byte ptr [esp + 4]',
+     'mov al, byte ptr [esp + 4]; cmp dword ptr [ecx + 0x24], 2; jne N; '
+     'cmp al, 30; jbe S; mov al, 30; S: mov byte ptr [ecx + 0x28], al; ret 4; '
+     'N: mov al, byte ptr [esp + 4]'),
+    (0x497211, 'mov cl, 5',
+     'mov cl, 5; cmp dword ptr [ebx + 0x24], 2; jne N; mov cl, 30; N:'),
+    # Nearby-enemy callback: a hex can reference an invalid unit id, so the
+    # unit getter returns NULL. Return false before dereferencing its vtable.
+    # ESI was saved by the callback; its cdecl arguments remain on the stack.
+    (0x4b997e, 'mov ecx, dword ptr [esp + 0x10]',
+     'test eax, eax; jne L; pop esi; xor eax, eax; ret; L: mov ecx, dword ptr [esp + 0x10]'),
+]
 
 
 def f(va, old, expr, comment, size=4):

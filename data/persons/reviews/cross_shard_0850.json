@@ -1,0 +1,1298 @@
+{
+  "decisions": [
+    {
+      "id": 10974,
+      "keys": [
+        "zhsan:9055",
+        "sg:sg_01:104:步度根",
+        "sg:sg_10:129:步度根",
+        "tj:tj_05:74:步度根",
+        "tj:tj_06:173:步度根",
+        "hhs:hhs_08:34:步度根",
+        "sg:sg_09:64:步度根",
+        "gl:Q859082",
+        "qxz:budugen"
+      ],
+      "name": "步度根",
+      "review_status": "duplicate",
+      "duplicate_of": 1702,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": {
+        "year": 233,
+        "precision": "annal_year",
+        "calendar": "traditional_Chinese",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+        "offset": 729359,
+        "excerpt": "皆叛出塞，与轲比能合寇边。帝遣骁骑将军秦朗将中军讨之，轲比能乃走幕北，泄归泥将其部众来降。步度根寻为轲比能所杀。\n　　公孙渊知吴远难恃，乃斩张弥、许晏等首，传送京师，悉没其兵资珍宝。冬，十二月，诏拜渊大司马，封乐浪公。吴主闻之，大",
+        "verification": "individually_read_primary_passage",
+        "normalization": "OpenCC t2s"
+      },
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 576855,
+          "excerpt": "淫，后出攻北地，北地人射杀之。其子骞曼尚幼，兄子魁头立。后骞曼长大，与魁头争国，众遂离散。魁头死，弟步度根立。\n　　是岁，帝作列肆于后宫，使诸采女贩卖，更相盗窃争斗；帝著商贾服，从之饮宴为乐。又于西园弄狗，著进贤冠，带绶。又驾四驴，帝躬自操辔，驱驰周旋；京师转相仿效，",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 729359,
+          "excerpt": "皆叛出塞，与轲比能合寇边。帝遣骁骑将军秦朗将中军讨之，轲比能乃走幕北，泄归泥将其部众来降。步度根寻为轲比能所杀。\n　　公孙渊知吴远难恃，乃斩张弥、许晏等首，传送京师，悉没其兵资珍宝。冬，十二月，诏拜渊大司马，封乐浪公。吴主闻之，大",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "生年未载；181年段为数代继立的追叙，不是步度根181年即已继位的证明"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "zhsan:9055",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_01:104:步度根",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "歩度根 in the Four Libraries text corresponds to 步度根"
+        },
+        {
+          "source_key": "sg:sg_10:129:步度根",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "歩度根 in the Four Libraries text corresponds to 步度根"
+        },
+        {
+          "source_key": "tj:tj_05:74:步度根",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_06:173:步度根",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "hhs:hhs_08:34:步度根",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_09:64:步度根",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "歩度根 in the Four Libraries text corresponds to 步度根"
+        },
+        {
+          "source_key": "gl:Q859082",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Budugen",
+          "wikidata_qid": "Q859082",
+          "title": "Budugen",
+          "excerpt": "{{Short description|Xianbei tribal chief (died 233)}}\n{{Chinese\n|c=步度根\n|p=Bùdùgēn\n|w=Putuken\n}}\n'''Budugen''' (died 233) was a [[Xianbei]] chieftain who lived during the late [[Eastern Han dynasty]] and [[Three Kingdoms]] period of China. He was the grandson of [[Tanshihuai]], and after the death of his head chief and brother, [[Kuitou]], his clan's domain was divided between him and another brother, [[Fuluohan]].\n\nBudugen retained his independence by pledging allegiance to the state of [[Cao Wei]] during the Three Kingdoms period and sending tribute to [[Cao Pi]], the first Wei emperor. After Fuluohan was killed by a rival Xianbei chieftain, [[Kebineng]], he fought incessantly with Kebineng and weakened his forces in the process. During the reign of the second Wei emperor [[Cao Rui]], Budugen formed an alliance with Kebineng and started a rebellion against Wei rule. However, the rebellion was crushed and Budugen was killed by Kebineng.\n\n==See also==\n* [[Lists of people of the Three Kingdoms]]\n\n==References==\n{{reflist}}\n* [[Chen Shou|Chen, Shou]] (3rd century). ''[[Records of the Three Kingdoms]]'' (''Sanguozhi'').\n* [[Pei Songzhi|Pei, Songzhi]] (5th century). ''[[Annotated Records of the Three Kingdoms]]'' (''Sanguozhi zhu'').\n\n{{People of Cao Wei}}\n\n{{DEFAULTSORT:Budugen}}\n[[Category:Year of birth unknown]]\n[[Category:233 deaths]]\n[[Category:People of Cao Wei]]\n[[Category:Xianbei]]",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "qxz:budugen",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "record": {
+            "name": "步度根",
+            "azana": "",
+            "polity": "",
+            "role": "武将",
+            "group": "異民族"
+          },
+          "identity_basis": "game roster name/courtesy and historical context correspond to identified primary person; game years are not evidence"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 10042,
+      "keys": [
+        "sz:sz_00:40:安玄",
+        "gl:Q4750264"
+      ],
+      "name": "安玄",
+      "review_status": "duplicate",
+      "duplicate_of": 1980,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\高僧传.txt",
+          "offset": 3006,
+          "excerpt": "弃文存质深得经意。朔又以光和二年。于雒阳出般舟三昧。谶为傅言。河南雒阳孟福张莲笔受。时又有优婆塞安玄。安息国人。性贞白。深沉有理致。博诵群经多所通习。亦以汉灵之末。游贾雒阳。以功号曰骑都尉。性虚靖温恭。常以法事为己任。渐解汉言。志宣经典。常与沙门讲论道义。世所谓都尉者也。玄与沙门严佛调共出法镜经。玄口译梵文。佛调笔受。理得音正尽经微旨。郢匠之美见述后代。调本临淮人。绮年颖悟。敏而好学。世称安侯都尉佛调三人传译。号为难继。调又撰十慧。亦传于世。安公称佛调出经。省而不烦。全本巧妙。又有沙门支曜。康巨。康孟详等。并以汉灵献之间有慧学之誉。驰于京雒。曜译成具定意小本起等。巨译问地狱事经。并言直理旨不加润饰。孟详译中本起及修行本起。先是沙门昙果。于迦维罗卫国得梵本。孟详共竺大力译为汉文。安公云。孟详所出。奕奕流便足腾玄趣也。\n　　昙柯迦罗此云法时。本中天竺人。家世大富。常修梵福。迦罗幼而才悟质像过人。读书一览皆文义通畅。善学四围陀论。风云星宿图谶运变莫不该综。自言。天下文理毕己心腹。至年二十五。入一僧坊。看遇见法胜毗昙。聊取览之。茫然不解。殷勤重省更增昏漠。乃叹曰。吾积学多年。浪志坟典。游刃经籍。义不再思文无重览。今睹佛书顿",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\T55n2145.xml",
+          "offset": 150918,
+          "excerpt": "安玄。安息国人也。志性贞白深沈有理致。为\n优婆塞。秉持法戒豪厘弗亏。博诵群经多所\n通习。汉灵帝末。游贾洛阳有功。号骑都尉。性\n虚静温恭。常以法事为己务。渐练汉言志宣\n经典。常与沙门讲论道义。世所谓都尉言也。\n玄与沙门严佛调。共出法镜经。玄口译梵文。\n佛调笔受。理得音正。尽经微旨郢匠之美见\n述后代。佛调。临淮人也。绮年颕悟。敏而好学。\n信慧自然。遂出家修道。通译经典见重于时。\n世称。安侯。都尉。佛调。三人传译号为难继。\n佛调又撰十慧。并传于世。安公称。佛调出经\n省不烦全本妙巧。次有康孟详者。其先康居\n人也。译出中本起。安公称。孟详出经奕奕流\n便。足腾玄趣。后有沙门维秖难者。天竺人也。\n以孙权黄武三年赍昙钵经胡本来至武昌。\n昙钵即法句经也。时支谦请出经。乃令其同\n道竺将炎传译。谦写为汉文。时炎未善汉言。\n颇有不尽。然志存义本近于质实。今所传法\n句是也。白延者。不知何许人。魏正始之末重\n译出首楞严。又须赖及除灾患经凡三部云。\n4 康僧会传康僧会传第四\n\n康僧会。其先康居人。世居天竺。其父因商贾\n移于交阯。会年十余岁。二亲并亡。以至性\n闻。既而出家。砺行甚峻。为人弘雅有识量\n笃志好学。明练三藏博览六典。天文图纬多\n所贯涉。辩于枢机颇属文翰。时孙权称制\n江左。而未有佛教。会欲运流大法。乃振锡东",
+          "normalization": "XML ElementTree.itertext then OpenCC t2s",
+          "verification": "individually_read_primary_biography"
+        }
+      ],
+      "unresolved": [
+        "两传同安息优婆塞、骑都尉、与严佛调译法镜经；151/171生与184/201卒均不见所读传记，不当史实"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "sz:sz_00:40:安玄",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q4750264",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/An_Xuan",
+          "wikidata_qid": "Q4750264",
+          "title": "An Xuan",
+          "excerpt": "{{Short description|2nd century Parthian translator of Buddhist texts}}\n{{distinguish|Ai Xuan}}\n'''An Xuan''' ({{zh|c=安玄|p=Ānxuán}}) was a [[Parthia]]n layman credited with working alongside [[An Shigao]] ({{zh|c=安世高|p=Ānshìgāo}}) and Yan Fotiao ({{zh|c=嚴佛調|p=Yán Fúdiào}}) in the translation of early [[Buddhist texts]] in [[Luoyang]] in [[Han dynasty|Later Han China]].\n\n== Bibliography ==\n* Nattier, Jan (2008). [https://web.archive.org/web/20131023055957/http://iriab.soka.ac.jp/orc/Publications/BPPB/pdf/BPPB-10.pdf A Guide to the Earliest Chinese Buddhist Translations: Texts from the Eastern Han and Three Kingdoms Periods], Bibliotheca Philologica et Philosophica, IRIAB Vol. X, 89–94; {{ISBN|978-4-904234-00-6}}\n\n[[Category:2nd-century Buddhists]]\n[[Category:Iranian Buddhists]]\n[[Category:Han dynasty Buddhists]]\n[[Category:2nd-century Iranian people]]\n\n\n{{China-translator-stub}}",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 12130,
+      "keys": [
+        "zhsan:9566",
+        "hhs:hhs_07:5:陸康",
+        "sg:sg_13:215:陸康",
+        "sg:sg_16:183:陸康",
+        "tj:tj_01:3:陸康",
+        "gl:Q3818137",
+        "cbdb:33661"
+      ],
+      "name": "陸康",
+      "review_status": "duplicate",
+      "duplicate_of": 2050,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\后汉书.txt",
+          "offset": 271288,
+          "excerpt": "董昭﹑观津长梁国黄就当官待琮，于是州界翕然。\n灵帝崩，大将军何进表琮为度辽将军，卒于官。\n陆康字季宁，吴郡吴人也。祖父续，在独行传。父曪，有志操，连征不至。\n康少仕郡，以义烈称，刺史臧旻举为茂才，除高成令。县在边垂，旧制，令户一人具弓弩以备不虞，不得行来。长吏新到，辄发民缮修城郭。康至，皆罢遣，百姓大悦。以恩信为治，寇盗亦息，州郡表上其状。光和元年，迁武陵太守，转守桂阳﹑乐安二郡，所在称之。\n时灵帝欲铸铜人",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\后汉书.txt",
+          "offset": 271974,
+          "excerpt": "之。术大怒，遣其将孙策攻康，围城数重。康固守，吏士有先受休假者，皆遁伏还赴，暮夜缘城而入。受敌二年，城陷。月余，发病卒，年七十。宗族百余人，遭离饥□，死者将半。朝廷愍其守节，拜子鉨为郎中。\n少子绩，仕吴为郁林太守，博学善政，见称当时。悬年曾谒袁术，怀橘墯地者也，有名称。\n赞曰：伋牧朔藩，信立童昏。诗守南楚",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 613054,
+          "excerpt": "兵人好叛，当共疾之，何为谢也！”由是军中益畏惮之。术初许以策为九江太守，已而更用丹杨陈纪。后术欲攻徐州，从庐江太守陆康求米三万斛；康不与。术大怒，遣策攻康，谓曰：“前错用陈纪，每恨本意不遂。今若得康，庐江真卿有也。”策攻康，拔之，术复用其故吏刘勋为太守；策益失望。侍御史刘繇，岱之弟也，素有盛名，诏书用为扬州刺史。州旧治寿春，术已据之，繇欲南渡江，吴景、孙贲迎置曲阿。及策攻庐江，繇闻之，以景、贲本术所置，惧为袁、孙所并，遂构嫌隙，迫逐景、贲。景、贲退屯历阳。繇遣将樊能、于糜屯横江，张英屯当利口以拒之。术乃自用故吏惠衢为扬州刺",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "庐江太守同人、拒袁术米并被孙策攻；原传只二年城陷月余卒年70，未在该段给唯一卒年，不直接算126生"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "zhsan:9566",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "hhs:hhs_07:5:陸康",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_13:215:陸康",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_16:183:陸康",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_01:3:陸康",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q3818137",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Lu_Kang_(Han_dynasty)",
+          "wikidata_qid": "Q3818137",
+          "title": "Lu Kang (Han dynasty)",
+          "excerpt": "{{Short description|Han dynasty politician (126–195)}}\n{{hatnote|For his great-grandnephew, see [[Lu Kang (Eastern Wu)]]}}\n{{Infobox officeholder\n| name = Lu Kang\n| native_name = 陸康\n| image = \n| image_size = \n| caption = \n| alt = \n| office = Administrator of Lujiang (廬江太守)\n| term_start = ?\n| term_end = {{End date|195}}\n| successor = [[Liu Xun (warlord)|Liu Xun]]\n| monarch = [[Emperor Xian of Han]]\n| office1 = Administrator of Le'an (樂安太守)\n| term_start1 = ?\n| term_end1 = ?\n| monarch1 = [[Emperor Ling of Han]] / <br> [[Emperor Xian of Han]]\n| office2 = Administrator of Guiyang (桂陽太守)\n| term_start2 = ?\n| term_end2 = ?\n| monarch2 = [[Emperor Ling of Han]]\n| office3 = Administrator of Wuling (武陵太守)\n| term_start3 = {{Start date|178}}\n| term_end3 = ?\n| monarch3 = [[Emperor Ling of Han]]\n| birth_date = 126{{efn|Lu Kang's biography in the ''Houhanshu'' mentioned that Lu Kang died at the age of 70 (by [[East Asian age reckoning]]) about a month after the successful siege of Lujiang.<ref name=\"HHS birth and death years\">(受敌二年，城陷。月餘，發病卒，年七十。) ''Houhanshu'' vol. 31.</ref> The siege of Lujiang, which is considered part of [[Sun Ce's conquests in Jiangdong]], ended around 195. By calculation, Lu Kang's birth year should be around 126. Vol.61 of ''Zizhi Tongjian'' dated Lujiang's fall to 194 (1st year of the ''Xingping'' era).}}\n| birth_place = [[Suzhou, Jiangsu|Suzhou]], [[Jiangsu]]\n| death_date = 195 (aged 69)<ref name=\"HHS birth and death years\" />\n| death_place = [[Lu'an]], [[Anhui]]\n| f",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "cbdb:33661",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "original_record": {
+            "c_personid": 33661,
+            "c_name_chn": "陸康",
+            "c_index_year": 122,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 122,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 191,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 70,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Lu(5) Kang [33661] Zhou Jiayou, 2.304. SanGuo zhi, 58.1343.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          },
+          "identity_basis": "original name, notes and cited Chinese source correspond; index year is not an activity date"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 10036,
+      "keys": [
+        "hhs:hhs_01:0:馬日磾",
+        "hhs:hhs_02:31:馬日磾",
+        "sg:sg_02:240:馬日磾",
+        "sg:sg_05:104:馬日磾",
+        "tj:tj_01:85:馬日磾",
+        "hhs:hhs_03:114:馬日磾",
+        "gl:Q4163141",
+        "qxz:maridi",
+        "hj:hj_00:123:馬日磾",
+        "hj:hj_01:22:馬日磾"
+      ],
+      "name": "馬日磾",
+      "review_status": "duplicate",
+      "duplicate_of": 2053,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\后汉书.txt",
+          "offset": 567899,
+          "excerpt": "傅马日䃅奉使山东，及至淮南，数有意于袁术。术轻侮之，遂夺取其节，求去又不听，因欲逼为军帅。日䃅深自恨，遂呕血而毙。及丧还，朝廷议欲加礼。\n融乃独议曰：“日䃅以上公之尊，秉髦节之使，衔命直指，宁辑东夏，\n而曲媚奸臣，为所牵率，章表署用，辄使首名，附下罔上，奸以事君。\n昔国佐当晋军而不挠，宜僚临白刃而正色。王室大臣，岂得以见胁为辞！又",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 114697,
+          "excerpt": "安欲结术为援以术为左将军封阳翟侯假节遣太傅马日防因循行拜授术夺日防节拘留不遣【三辅决录注曰日防字翁叔马融之族子少传融业以才学进与杨彪卢植蔡邕等典校中书歴位九卿遂登台辅献帝春秋曰术从日防借节观之因夺不还备军中千余人使促辟之日防谓术曰卿家先世诸公辟士云何而言促之谓公府掾可劫得乎从术求去而术留之不遣既以失节屈辱忧恚而死】时沛相下邳陈珪故太尉球弟子也术与珪俱公族子孙少共交游书与珪曰昔秦失其政天下群雄争而取之兼智勇者卒受其归今世事纷扰复",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "同汉太傅持节至袁术处被夺节；139生与194卒尚须独立纪年，不把出使年或丧还京师年直接作卒年"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "hhs:hhs_01:0:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "hhs:hhs_02:31:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "sg:sg_02:240:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "sg:sg_05:104:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "tj:tj_01:85:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "hhs:hhs_03:114:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "gl:Q4163141",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Ma_Midi",
+          "wikidata_qid": "Q4163141",
+          "title": "Ma Midi",
+          "excerpt": "{{Short description|Chinese Eastern Han dynasty official (died 194)}}\n{{Infobox officeholder\n| name = Ma Midi\n| native_name = 馬日磾\n| image = \n| image_size = \n| caption = \n| alt = \n| office = Manager of the Affairs of the Masters of Writing (錄尚書事)\n| term_start = {{Start date|192}}\n| term_end = {{End date|194}}\n| monarch = [[Emperor Xian of Han]]\n| office1 = Grand Tutor (太傅)\n| term_start1 = {{Start date|192}}\n| term_end1 = {{End date|194}}\n| monarch1 = [[Emperor Xian of Han]]\n| office2 = Grand Commandant (太尉)\n| term_start2 = {{Start date|191}}\n| term_end2 = {{End date|192}}\n| monarch2 = [[Emperor Xian of Han]]\n| chancellor2 = [[Dong Zhuo]]\n| birth_date = 140\n| birth_place = [[Xingping]], [[Shaanxi]]\n| death_date = 194\n| death_place = [[Shou County]], [[Anhui]]\n| relations = [[Ma Rong]] (relative)\n| occupation = Official\n| blank1 = [[Courtesy name]]\n| data1 = Wengshu (翁叔)\n}}\n{{family name hatnote|[[Ma (surname)|Ma]]|lang=Chinese}}\n\n'''Ma Midi''' (died 194), [[courtesy name]] '''Wengshu''', was an official who lived during the late [[Eastern Han dynasty]] of China.\n\n==Life==\nMa Midi was from Maoling County (茂陵縣), [[Youfufeng]] Commandery (右扶風郡), which is located northeast of present-day [[Xingping]], [[Shaanxi]]. He was a relative of [[Ma Rong]], an influential Confucian scholar and government official. Ma Midi studied under Ma Rong's tutelage in his younger days and later joined the government service as a Counsellor Remonstrant (諫議大夫). During this time, he and his colleagues [[L",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "qxz:maridi",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "record": {
+            "name": "馬日磾",
+            "azana": "翁叔",
+            "polity": "",
+            "role": "文臣",
+            "group": "漢室朝臣"
+          },
+          "identity_basis": "game roster name/courtesy and historical context correspond to identified primary person; game years are not evidence"
+        },
+        {
+          "source_key": "hj:hj_00:123:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        },
+        {
+          "source_key": "hj:hj_01:22:馬日磾",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "textual_variant": "马日䃅/马日防 are source-text forms of 马日磾, identified also as Wengshu and Ma Rong's kinsman"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 12152,
+      "keys": [
+        "sg:sg_16:207:顧承",
+        "tj:tj_07:115:顧承",
+        "gl:Q2504309",
+        "cbdb:33680"
+      ],
+      "name": "顧承（字子直）",
+      "review_status": "duplicate",
+      "duplicate_of": 3108,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 629191,
+          "excerpt": "法皆徙之】谭坐徙交州幽而发愤者新言二十篇其知难篇葢以自悼伤也见流二年年四十二卒于交阯\n　　承字子直嘉禾中与舅陆瑁俱以礼征权赐丞相雍书曰贵孙子直令问休休至与相见过于所闻为君嘉之拜骑都尉领羽林兵后为呉郡西部都尉与诸葛恪等共平山越别得精兵八千人还屯军章阮拜昭义中郎将入为侍中芍陂之役拜奋威将军出领京下督数年与兄谭张休等俱徙交州年三十七卒\n　　诸葛瑾字子瑜琅邪阳都人也【呉书曰其先葛氏本琅邪诸县人后徙阳都阳都先有姓葛者时人谓之诸葛因以为氏瑾少游京师治毛诗尚书左氏春秋遭母忧居丧至孝事继母恭谨甚得人子之道风俗通曰葛婴为陈渉将军有功而诛孝文帝追录封其孙诸县侯因并氏焉此与吴书所说不同】汉末避乱江东值孙策卒孙权姊壻曲阿咨见而异之荐之于权与鲁肃等并见宾待后为权长史转中司马建安二十年权遣瑾使蜀通好刘备与其弟亮俱公会相见退无私面与权谈说谏喻未尝切愕微见风采粗陈指归如有未合则舍而及他徐复托事造端以物类相求于是权意往往而释呉郡太守朱治权举将也权曾有以望之而素加敬难自诘让忿忿不觧瑾揣知其故而不敢显陈乃乞以意私自问遂于权前为书泛论物理因以己心遥往忖度之毕以呈权权喜笑曰孤意觧矣颜氏之徳使人加亲岂谓此邪权又怪校尉殷模罪至不测群下多为之言权怒益",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 629296,
+          "excerpt": "葛恪等共平山越别得精兵八千人还屯军章阮拜昭义中郎将入为侍中芍陂之役拜奋威将军出领京下督数年与兄谭张休等俱徙交州年三十七卒\n　　诸葛瑾字子瑜琅邪阳都人也【呉书曰其先葛氏本琅邪诸县人后徙阳都阳都先有姓葛者",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "同顾邵子顾谭弟子直、芍陂有功并徙交州；享年37可记，247卒211生未直接见于本传，不能把兄谭流放二年后卒的句子搬给弟承"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "sg:sg_16:207:顧承",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_07:115:顧承",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q2504309",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Gu_Cheng_(Eastern_Wu)",
+          "wikidata_qid": "Q2504309",
+          "title": "Gu Cheng (Eastern Wu)",
+          "excerpt": "{{Short description|3rd-century Chinese Three Kingdoms general}}\n{{Infobox officeholder\n| name = Gu Cheng\n| native_name = 顧承\n| image = \n| image_size = \n| caption = \n| alt = \n| office = Capital Superintendent (京下督)\n| term_start = {{Start date|241}}\n| term_end = {{End date|245}}\n| office1 = General of Vehement Might (奮威將軍)\n| term_start1 = {{Start date|241}}\n| term_end1 = {{End date|245}}\n| office2 = Palace Attendant (侍中)\n| term_start2 = ?\n| term_end2 = {{End date|241}}\n| office3 = General of the Household of Righteous Illustriousness (昭義中郎將)\n| term_start3 = ?\n| term_end3 = {{End date|241}}\n| office4 = Commandant of the West Section of [[Wu Commandery]] (吳郡西部都尉)\n| term_start4 = ?\n| term_end4 = ?\n| office5 = Cavalry Commandant (騎都尉)\n| term_start5 = ?\n| term_end5 = ?\n| monarch5 = [[Sun Quan]]\n| birth_date = Unknown\n| birth_place = [[Suzhou]], [[Jiangsu]]\n| death_date = Unknown\n| death_place = [[Hanoi]], [[Vietnam]]\n| father = [[Gu Shao]]\n| mother = [[Lu Xun (Three Kingdoms)|Lu Xun]]'s sister\n| relations = {{unbulleted list|[[Gu Tan]] (brother)|''see also [[Gu clan of Wu]]''}}\n| occupation = General\n| blank1 = [[Courtesy name]]\n| data1 = Zizhi (子直)\n}}\n{{family name hatnote|[[Gu (surname)|Gu]]|lang=Chinese}}\n\n'''Gu Cheng''' ({{fl.}}232 to 240s), [[courtesy name]] '''Zizhi''', was a military general of the state of [[Eastern Wu]] during the [[Three Kingdoms]] period of China.\n\n==Family background==\nGu Cheng's [[Ancestral home (Chinese)|ancestral home]] was in [[Wu County]], [[Wu Comm",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "cbdb:33680",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "original_record": {
+            "c_personid": 33680,
+            "c_name_chn": "顧承",
+            "c_index_year": 211,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 211,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 247,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 37,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Gu(3) Cheng [33680] Died in Vietnam. SanGuo zhi, 52.1231.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          },
+          "identity_basis": "original name, notes and cited Chinese source correspond; index year is not an activity date"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 9792,
+      "keys": [
+        "js:js_02:112:阮籍",
+        "js:js_00:207:阮籍",
+        "js:js_03:77:阮籍",
+        "js:js_05:8:阮籍",
+        "js:js_17:87:阮籍",
+        "gl:Q142683",
+        "qxz:ruanji",
+        "cbdb:29615",
+        "ssxy:ssxy_02:257:阮籍"
+      ],
+      "name": "阮籍",
+      "review_status": "duplicate",
+      "duplicate_of": 3354,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": {
+        "year": 210,
+        "precision": "derived_from_reported_sui_age",
+        "calendar": "traditional_Chinese",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "excerpt": "汉战处，叹曰：“时无英雄，使竖子成名！”登武牢山，望京邑而叹，于是赋《豪杰诗》。景元四年冬卒，时年五十四。 \n　　籍能属文，初不留思。作《咏怀诗》八十余篇，为世所重。著《达庄论》，叙无为之贵。文多不录。 \n　　籍尝于苏门山遇孙登，与商略终古及栖神导气之术，登皆不应，籍因长",
+        "note": "death year minus reported age plus one; no exact birth month/day established"
+      },
+      "historical_death": {
+        "year": 263,
+        "precision": "regnal_year",
+        "calendar": "traditional_Chinese",
+        "regnal_date": "景元四年",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+        "source_key": "js:js_04:160:阮籍",
+        "excerpt": "汉战处，叹曰：“时无英雄，使竖子成名！”登武牢山，望京邑而叹，于是赋《豪杰诗》。景元四年冬卒，时年五十四。 \n　　籍能属文，初不留思。作《咏怀诗》八十余篇，为世所重。著《达庄论》，叙无为之贵。文多不录。 \n　　籍尝于苏门山遇孙登，与商略终古及栖神导气之术，登皆不应，籍因长",
+        "age_sui_candidate": 54,
+        "biography_anchor": "籍，字嗣宗，陈留尉氏人也。父瑀，魏丞相掾，知名于世。籍容貌瑰杰，志气宏放，傲然独得，任性不羁，而喜怒",
+        "method": "named_biography_and_direct_dated_death_clause",
+        "verification": "individually_read_primary_death_clause",
+        "season": "winter"
+      },
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 583343,
+          "excerpt": "武，观楚、汉战处，叹曰：“时无英雄，使竖子成名！”登武牢山，望京邑而叹，于是赋《豪杰诗》。景元四年冬卒，时年五十四。 \n　　籍能属文，初不留思。作《咏怀诗》八十余篇，为世所重。著《达庄论》，叙无为之贵。文多不录。 \n　　籍尝于苏门山遇孙登，与商略终古及栖神导气之术，登皆不应，籍因长啸而退。至半岭，闻有声若鸾凤之音",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "同陈留尉氏阮瑀子嗣宗步兵校尉；210为263减54加1的虚岁反推，非原书直接生年"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "js:js_02:112:阮籍",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "js:js_00:207:阮籍",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "js:js_03:77:阮籍",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "js:js_05:8:阮籍",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "js:js_17:87:阮籍",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q142683",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Ruan_Ji",
+          "wikidata_qid": "Q142683",
+          "title": "Ruan Ji",
+          "excerpt": "{{Short description|Chinese musician and poet (210–263)}}\n{{Infobox writer <!-- for more information see [[:Template:Infobox writer/doc]] -->\n| name             = Ruan Ji\n| image            = Ruan Ji.png\n| birth_date       = 210\n| birth_place      = Chenliu, Henan<ref>{{cite web | url=https://www.britannica.com/biography/Ruan-Ji | title=Ruan Ji &#124; Tang Dynasty, Music, Poetry &#124; Britannica }}</ref>\n| death_date       = 263 (aged 53)\n| occupation       = Poet, musician\n}}\n{{Infobox Chinese\n| c = 阮籍\n| p = Ruǎn Jí\n| w = {{tonesup|Juan3 Chi2}}\n| mi = {{IPAc-cmn|r|uan|3|-|j|i|2}}\n| gr = Roan Jyi\n| j = Jyun5 Zik6\n| y = Yúhn Jihk\n| ci = {{IPAc-yue|j|yun|5|-|z|ik|6}}\n| tl = {{Zhwb|Ńg Tsi̍k|Guán Tsi̍k}}\n| altname = Courtesy name\n| c2 = 嗣宗\n| p2 = Sìzōng\n}}\n'''Ruan Ji''' (210–263), courtesy name '''Sizong''', was a Chinese musician, poet, and military officer who lived in the late [[Eastern Han dynasty]] and [[Three Kingdoms]] period. He was one of the [[Seven Sages of the Bamboo Grove]]. The [[guqin]] melody ''Jiukuang'' ({{lang|zh|酒狂}} 'Drunken ecstasy', or 'Wine-mad') is believed to have been composed by him. At one time an infantry colonel, he was also known as Ruan Bubing ({{lang|zh|阮步兵}}; 'Ruan of the infantry').\n\n==Life==\n[[File:Memorial tombstones of Ruan Ji in Nanjing.jpg|thumb|Memorial tombstone of Ruan Ji's life in Nanjing]]\nRuan Ji was born in Chenliu (in the southern part of modern-day [[Kaifeng]], [[Henan]]).<ref>{{cite web | url=https://www.britannica.com/biography",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "qxz:ruanji",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "record": {
+            "name": "阮籍",
+            "azana": "嗣宗",
+            "polity": "曹魏",
+            "role": "文臣",
+            "group": "魏 · 司馬氏與西晉"
+          },
+          "identity_basis": "game roster name/courtesy and historical context correspond to identified primary person; game years are not evidence"
+        },
+        {
+          "source_key": "cbdb:29615",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "original_record": {
+            "c_personid": 29615,
+            "c_name_chn": "阮籍",
+            "c_index_year": 210,
+            "c_index_year_type_code": "01",
+            "c_birthyear": 210,
+            "c_by_nh_code": 0,
+            "c_by_nh_year": null,
+            "c_by_range": null,
+            "c_deathyear": 263,
+            "c_dy_nh_code": 0,
+            "c_dy_nh_year": null,
+            "c_dy_range": null,
+            "c_death_age": 54,
+            "c_death_age_range": null,
+            "c_fl_earliest_year": null,
+            "c_fl_latest_year": null,
+            "c_notes": "Ruan(1) Ji [29615] For dates, see Lidai renwu linian tongpu. RM, p. 518.",
+            "c_by_intercalary": 0,
+            "c_dy_intercalary": 0,
+            "c_by_month": null,
+            "c_dy_month": null,
+            "c_by_day": null,
+            "c_dy_day": null,
+            "c_by_day_gz": null,
+            "c_dy_day_gz": null,
+            "offices": []
+          },
+          "identity_basis": "original name, notes and cited Chinese source correspond; index year is not an activity date"
+        },
+        {
+          "source_key": "ssxy:ssxy_02:257:阮籍",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants",
+          "limitation": "cited chunk explicitly attributes Yonghuai poetry to Ruan Ji; expanded life-story summary is not itself verified by that short attribution"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 13023,
+      "keys": [
+        "hy:hy_00:67:張裔",
+        "sg:sg_11:75:張裔",
+        "sg:sg_12:209:張裔",
+        "sg:sg_13:53:張裔",
+        "tj:tj_05:163:張裔",
+        "hy:hy_01:15:張裔",
+        "gl:Q197326",
+        "qxz:zhangyi2"
+      ],
+      "name": "張裔（字君嗣）",
+      "review_status": "duplicate",
+      "duplicate_of": 3420,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": {
+        "year": 230,
+        "precision": "regnal_year",
+        "calendar": "traditional_Chinese",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+        "offset": 521385,
+        "excerpt": "岁裔迎留与分屋而居事恭母如母恭之子息长大为之娶妇买田宅产业使立门户抚恤故旧振赡衰宗行义甚至加辅汉将军领长史如故建兴八年卒子毣嗣【毣音忙角反见字林曰毣思貎也】歴三郡监军毣弟郁太子中庻子\n　　杨洪字季休犍为武阳人也刘璋时歴部诸郡先主定蜀太守李严命为功曹严欲徙郡治舍洪固谏不聼遂辞功曹请",
+        "verification": "individually_read_primary_passage",
+        "normalization": "OpenCC t2s"
+      },
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 520740,
+          "excerpt": "二月而晋武帝即尊位炎兴于是乎徴焉孙盛曰昔公孙述自以起成都号曰成氏二玉之文殆述所作乎】\n　　张裔字君嗣蜀郡成都人也治公羊春秋博渉史汉汝南许文休入蜀谓裔干理敏防是中夏钟元常之伦也刘璋时举孝亷为鱼复长还州署从事领帐下司马张飞自荆州由垫江入璋授裔兵拒张飞于徳阳陌下军败还成都为璋奉使诣先主先主许以礼其君而安其人也裔还城门乃开先主以裔为巴郡太守还为司金中郎将典作农战之器先是益州郡杀太守正昻耆率雍闿恩信着于南土使命周旋逺通孙权乃以裔为益州太守径往至郡闿遂趑趄不賔假鬼教曰张府君如瓠",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 521385,
+          "excerpt": "岁裔迎留与分屋而居事恭母如母恭之子息长大为之娶妇买田宅产业使立门户抚恤故旧振赡衰宗行义甚至加辅汉将军领长史如故建兴八年卒子毣嗣【毣音忙角反见字林曰毣思貎也】歴三郡监军毣弟郁太子中庻子\n　　杨洪字季休犍为武阳人也刘璋时歴部诸郡先主定蜀太守李严命为功曹严欲徙郡治舍洪固谏不聼遂辞功曹请",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "同留府长史、称亮赏不遗远罚不阿近；230卒有明文，165生须核其对吴自陈58岁与交聘纪年及版本，不直接沿用"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "hy:hy_00:67:張裔",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_11:75:張裔",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_12:209:張裔",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_13:53:張裔",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_05:163:張裔",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "hy:hy_01:15:張裔",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q197326",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Zhang_Yi_(Junsi)",
+          "wikidata_qid": "Q197326",
+          "title": "Zhang Yi (Junsi)",
+          "excerpt": "{{Short description|Chinese Shu Han official (c.166–230)}}\n{{Other people|Zhang Yi|Zhang Yi (disambiguation)}}\n{{family name hatnote|[[Zhang (surname)|Zhang]]|lang=Chinese}}\n{{Infobox officeholder\n| name = Zhang Yi\n| native_name = 張裔\n| image = \n| image_size = \n| caption = \n| alt = \n| office = General Who Assists Han (輔漢將軍)\n| term_start = {{Start date|229}}\n| term_end = {{End date|230}}\n| monarch = [[Liu Shan]]\n| office1 = Chief Clerk to the [[Chancellor (China)|Imperial Chancellor]]<br>(丞相長史)\n| term_start1 = {{Start date|228}}\n| term_end1 = {{End date|230}}\n| monarch1 = [[Liu Shan]]\n| chancellor1 = [[Zhuge Liang]]\n| office2 = Colonel of Trainee Archers (射聲校尉)\n| term_start2 = {{Start date|228}}\n| term_end2 = {{End date|230}}\n| monarch2 = [[Liu Shan]]\n| chancellor2 = [[Zhuge Liang]]\n| office3 = Administrator of Yizhou (Commandery)<br>(益州太守)\n| term_start3 = {{Start date|223}}\n| term_end3 = {{End date|228}}\n| monarch3 = [[Liu Shan]]\n| chancellor3 = [[Zhuge Liang]]\n| office4 = Administrator of Ba Commandery<br>(巴郡太守)\n| term_start4 = {{Start date|214}}\n| term_end4 = ?\n| birth_date = {{circa}} 166{{efn|name=birth and death dates}}\n| birth_place = [[Chengdu]], [[Sichuan]]\n| death_date = 230 (aged 64){{efn|name=birth and death dates}}\n| children = {{unbulleted list|Zhang Mu|Zhang Yu}}\n| occupation = Official\n| blank1 = [[Courtesy name]]\n| data1 = Junsi (君嗣)\n}}\n\n'''Zhang Yi''' ({{circa}} 166 – 230),{{efn|name=birth and death dates|According to the ''Sanguozhi'', Zhang Yi, who conversin",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "qxz:zhangyi2",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "record": {
+            "name": "張裔",
+            "azana": "君嗣",
+            "polity": "蜀漢",
+            "role": "文臣",
+            "group": "蜀 · 謀臣文臣"
+          },
+          "identity_basis": "game roster name/courtesy and historical context correspond to identified primary person; game years are not evidence"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 13648,
+      "keys": [
+        "zhsan:9190",
+        "js:js_01:175:和洽",
+        "sg:sg_00:243:和洽",
+        "sg:sg_01:123:和洽",
+        "sg:sg_04:325:和洽",
+        "sg:sg_08:154:和洽",
+        "tj:tj_03:219:和洽",
+        "tj:tj_04:19:和洽",
+        "gl:Q864335",
+        "qxz:hexia"
+      ],
+      "name": "和洽",
+      "review_status": "duplicate",
+      "duplicate_of": 3530,
+      "identity_status": "primary_source_identity_correspondence_confirmed",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\晋书.txt",
+          "offset": 545418,
+          "excerpt": "，迁尚事郎、侍御史，在职皆以事干显。补洛阳令，历安定、顿丘太守，所莅著绩。卒于官。 \n　　和峤，字长舆，汝南西平人也。祖洽，魏尚书令。父逌，魏吏部尚书。峤少有风格，慕舅夏侯玄之为人，厚自崇重。有盛名于世，朝野许其能风俗，理人伦。袭父爵上蔡伯，起家太子舍人。累迁颍川太守，为政清简，甚得百姓欢心。太傅从事中郎庾𫖮见而叹曰：“峤森森如千丈松，虽磥可多节目，施之大厦，有栋梁之用。”贾充亦重之，称于武帝，入为给事黄门侍郎，迁中书令，帝深",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 344414,
+          "excerpt": "拟于王公而性至俭吝峤同母弟郁素无名峤轻侮之以此为损卒于官赠光禄大夫郁以公彊当世致位尚书令】洽同郡许混者许劭子也清醇有鉴识明帝时为尚书【劭字子将汝南先贤传曰召陵谢子微高才远识见劭年十八时乃叹息曰此则希世出众之伟人也劭始发明樊子昭于鬻帻之肆出虞永贤于牧竖召李叔才乡闾之间擢郭子瑜鞍马之吏援杨孝祖举和阳士兹六",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "同汝南西平和洽、和峤祖；SG父名适与JS父名逌有文字异同需保留，但共同祖与姓贯一致；现有178/193生和241/255卒不据估算任选"
+      ],
+      "review_scope": "cross_shard_identity_and_quoted_primary_chronology",
+      "source_identity_adjudications": [
+        {
+          "source_key": "zhsan:9190",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "js:js_01:175:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_00:243:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_01:123:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_04:325:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_08:154:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_03:219:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_04:19:和洽",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q864335",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/He_Qia",
+          "wikidata_qid": "Q864335",
+          "title": "He Qia",
+          "excerpt": "{{Short description|3rd century Cao Wei state official}}\n{{Infobox officeholder\n| name = He Qia\n| native_name = 和洽\n| image = \n| image_size = \n| caption = \n| alt = \n| office = Minister of Ceremonies (太常)\n| term_start = ?\n| term_end = ?\n| monarch = [[Cao Rui]]\n| office1 = Minister of the Household (光祿勳)\n| term_start1 = {{Start date|220}}\n| term_end1 = {{End date|226}}\n| monarch1 = [[Cao Pi]]\n| office2 = Prefect of the Gentlemen of the Palace<br>(郎中令)\n| term_start2 = {{Start date|219}}\n| term_end2 = {{End date|220}}\n| monarch2 = [[Emperor Xian of Han]]\n| chancellor2 = [[Cao Cao]]\n| birth_date = Unknown\n| birth_place = [[Xiping County]], [[Henan]]\n| death_date = Between 228 and 233<ref name=_657>''Records of the Three Kingdoms'', '''23'''.657</ref>\n| children = {{unbulleted list|He Li|He You}}\n| occupation = Politician\n| blank1 = [[Courtesy name]]\n| data1 = Yangshi (陽士)\n| blank2 = [[Posthumous name]]\n| data2 = Marquis Jian (簡侯)\n| blank3 = Peerage\n| data3 = Marquis of Xiling District<br>(西陵鄉侯)\n}}\n{{family name hatnote|[[He (surname)|He]]|lang=Chinese}}\n\n'''He Qia''' (died between 228 and 233<ref>He Qia's biography in vol.23 of ''Sanguozhi'' dated his death to the ''Taihe'' era of Cao Rui's reign.</ref>), [[courtesy name]] '''Yangshi''', was a Chinese official of the state of [[Cao Wei]] during the [[Three Kingdoms]] period of China. He was known for his austere lifestyle.\n\n==Early life==\nHe Qia was born in Xiping County ({{lang|zh-hant|西平縣}}), [[Runan Commandery]] ([[:zh:汝南郡#漢代汝南郡",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        },
+        {
+          "source_key": "qxz:hexia",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "record": {
+            "name": "和洽",
+            "azana": "陽士",
+            "polity": "曹魏",
+            "role": "文臣",
+            "group": "魏 · 文臣"
+          },
+          "identity_basis": "game roster name/courtesy and historical context correspond to identified primary person; game years are not evidence"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 11024,
+      "keys": [
+        "zhsan:9160",
+        "hy:hy_00:116:甘氏",
+        "sg:sg_11:171:甘氏",
+        "gl:Q1064069",
+        "qxz:ganfuren"
+      ],
+      "name": "昭烈皇后甘氏",
+      "review_status": "needs_further_research",
+      "duplicate_of": null,
+      "candidate_duplicate_of": 2641,
+      "identity_status": "duplicate_rejected_pending_textual_emendation_of_2641",
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\资治通鉴.txt",
+          "offset": 756616,
+          "excerpt": "，吴将军马茂谋杀吴主及大臣以应魏，事泄，并党与皆族诛。\n　　八月，以太常高柔为司空。\n　　汉甘太后殂。\n　　吴主遣校尉陈勋将屯田及作士三万人，凿句容中道，自小其至云阳西城，通会市，作邸阁。\n　　冬，十一月，汉大司马琬卒。\n　　十二月，汉费祎",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 470098,
+          "excerpt": "常摄内事随先主于荆州产后主值曹公军至追及先主于当阳长阪于时困偪弃后及后主赖赵云保防得免于难后卒于南郡章武二年追谥皇思夫人迁于蜀未至而先主殂陨丞相亮上言皇思夫人履行修仁淑慎其身大行皇帝昔在上将嫔配作合载育圣躬大命不融大行皇帝存时笃义垂恩念皇思夫人神柩在逺飘飖特遣使者奉迎防大行皇帝崩今皇思夫人神柩已到又梓宫在道园陵将成安厝有期臣輙与太常臣赖恭防议礼记曰立爱自亲始教民孝也立敬自长始教民顺也不忘其亲所由生也春秋之义母以子贵",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 470749,
+          "excerpt": "授玺绶承宗庙母天下皇后其敬之哉建兴元年五月后主即位尊后为皇太后称长乐宫壹官至车骑将军封县侯延熙八年后薨合陵【孙盛蜀世谱曰壹孙乔没李雄中三十年不为雄屈也】\n　　后主敬哀皇后车骑将军张飞长女也章武元年纳为太子妃建兴元年立为皇后十五年薨南陵\n　　后主张皇后前后敬哀之妹也",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "2641缓存通鉴245段确作甘；SG甘后222已追谥，而穆皇后吴氏明载延熙八年245薨。须校版本，不并2641入早卒甘后"
+      ]
+    },
+    {
+      "id": 13414,
+      "keys": [
+        "sg:sg_14:9:孫慮",
+        "sg:sg_15:193:孫慮",
+        "sg:sg_16:263:孫慮",
+        "tj:tj_06:115:孫慮",
+        "sg:sg_17:83:孫慮",
+        "gl:Q844298"
+      ],
+      "name": "孫慮（字子智）",
+      "review_status": "primary_text_corroborated",
+      "duplicate_of": null,
+      "candidate_duplicate_of": null,
+      "identity_status": "distinct_from_3367_Sun_Chen_cousin_Sun_Xian_or_Lu",
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 693392,
+          "excerpt": "觉皆见杀英实不知】谢景者字叔发南阳宛人在郡有治迹吏民称之以为前有顾邵其次即景数年卒官\n　　孙虑字子智登弟也少敏惠有才艺权器爱之黄武七年封建昌侯后二年丞相雍等奏虑性聪体达所尚日新北方近汉宜进爵称王权未许久之尚书仆射存上疏曰帝王之兴莫不褒崇至亲以光群后故鲁卫于周龙冠诸侯高帝五王封列于汉所以藩屏本朝为国镇卫建昌侯虑禀性聪敏才兼文武于古典制宜正名号陛下谦光未肯如旧群寮大小咸用于邑方今奸寇恣雎金鼔未弭腹心爪牙惟亲与贤辄与丞相雍等议咸以虑宜为镇军大将军授任偏方以光大业权乃许之于是假节开府治半州【吴书载权诏曰期运扰",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 590070,
+          "excerpt": "都遣将军刘丞督歩骑攻兵败夷灭己酉大赦改元辛亥获吕据于新州十一月以𬘭为大将军假节封永康侯孙宪与将军王惇谋杀𬘭事觉𬘭杀惇廹宪令自杀十二月使五官中郎将刁告乱于蜀\n　　二年春二月甲寅大雨震电乙卯雪大寒以长沙东部为湘东郡西部为衡阳郡防稽东部为临海郡豫章东部为临川郡夏四月亮临正殿大赦始亲政事𬘭所表奏多见难问又科兵子弟年十八已下十五已上得三千余人选大将子弟年少有勇力者为之将",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 581051,
+          "excerpt": "军迎布冬十月权以大兵潜伏于阜陵俟之凌觉而走防稽南始平言嘉禾生十二月丁卯大赦改明年元也\n　　嘉禾元年春正月建昌侯虑卒三月遣将军周贺校尉裴潜乘海之辽东秋九月魏将田豫要击斩贺于成山冬十月魏辽东太守公孙渊遣校尉宿舒阆中令孙",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+          "offset": 693749,
+          "excerpt": "不溢敬慎乃心无忝所受】虑以皇子之尊富于春秋逺近嫌其不能留意及至临事遵奉法度敬纳师友过于众望年二十嘉禾元年卒无子国除\n　　孙和字子孝虑弟也少以母王有宠见爱年十四为置宫卫使中书令阚泽教以书艺好学下士",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "unresolved": [
+        "3367为256逆吕据并谋诛孙綝者，孙虑/宪异文；13414为孙权子建昌侯232卒，相隔24年，不合并"
+      ],
+      "historical_birth": {
+        "year": 213,
+        "precision": "derived_from_reported_sui_age",
+        "calendar": "traditional_Chinese",
+        "reported_age_sui": 20,
+        "note": "232减20加1；非原文直接记生年",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+        "offset": 693749,
+        "excerpt": "不溢敬慎乃心无忝所受】虑以皇子之尊富于春秋逺近嫌其不能留意及至临事遵奉法度敬纳师友过于众望年二十嘉禾元年卒无子国除\n　　孙和字子孝虑弟也少以母王有宠见爱年十四为置宫卫使中书令阚泽教以书艺好学下士",
+        "verification": "individually_read_primary_passage",
+        "normalization": "OpenCC t2s"
+      },
+      "historical_death": {
+        "year": 232,
+        "lunar_month": 1,
+        "precision": "traditional_calendar_month",
+        "calendar": "traditional_Chinese",
+        "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\texts\\三国志.txt",
+        "offset": 581051,
+        "excerpt": "军迎布冬十月权以大兵潜伏于阜陵俟之凌觉而走防稽南始平言嘉禾生十二月丁卯大赦改明年元也\n　　嘉禾元年春正月建昌侯虑卒三月遣将军周贺校尉裴潜乘海之辽东秋九月魏将田豫要击斩贺于成山冬十月魏辽东太守公孙渊遣校尉宿舒阆中令孙",
+        "verification": "individually_read_primary_passage",
+        "normalization": "OpenCC t2s"
+      },
+      "source_identity_adjudications": [
+        {
+          "source_key": "sg:sg_14:9:孫慮",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_15:193:孫慮",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_16:263:孫慮",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "tj:tj_06:115:孫慮",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "sg:sg_17:83:孫慮",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "identity_basis": "individually compared original cited Chinese passage and primary portrait using office, family, event and textual name variants"
+        },
+        {
+          "source_key": "gl:Q844298",
+          "identity_verdict": "same_person_as_primary_portrait",
+          "source": "https://en.wikipedia.org/wiki/Sun_Lü",
+          "wikidata_qid": "Q844298",
+          "title": "Sun Lü",
+          "excerpt": "{{Short description|Marquis of Jianchang (213-232)}}\n{{Infobox royalty\n| name = Sun Lü<br>孫慮\n| image = \n| image_size = \n| caption = \n| succession = Marquis of Jianchang (建昌侯)\n| reign = April or May 228 – February or March 232\n| reign_type = Tenure\n| birth_date = 213{{efn|The ''Sanguozhi'' mentioned that Sun Lü was 20 years old (by [[East Asian age reckoning]]) when he died in February 232.<ref name=\"SGZ 47 death date\" /><ref name=\"SGZ 59 death date\" /> By calculation, his birth year should be around 213.}}\n| death_date = February or March 232 (aged 19)<ref name=\"SGZ 47 death date\" /><ref name=\"SGZ 59 death date\" />\n| spouse = [[Pan Jun#Family|Lady Pan]]<ref name=\"Pan Jun's daughter\" />\n| full_name = '''Family name:''' Sun (孫) <br> '''Given name:''' Lü (慮) <br> '''[[Courtesy name]]''': Zizhi (子智)\n| house = [[Eastern Wu|House of Sun]]\n| father = [[Sun Quan]]\n}}\n{{family name hatnote|[[Sun (surname)|Sun]]|lang=Chinese}}\n\n'''Sun Lü''' (213 – February or March 232),<ref name=\"SGZ 47 death date\" /><ref name=\"SGZ 59 death date\" /> [[courtesy name]] '''Zizhi''', was a noble and military general of the state of [[Eastern Wu]] in the [[Three Kingdoms]] period of China. He was the second son of [[Sun Quan]], the founding emperor of Eastern Wu.\n\n==Life==\nSun Lü was the second son of [[Sun Quan]],<ref>(孫慮字子智，登弟也。) ''Sanguozhi'' vol. 59.</ref> a warlord who lived in the late [[Eastern Han dynasty]] and became the founding emperor of the [[Eastern Wu]] state in the [[Three Kingdoms]] period",
+          "identity_basis": "original page QID plus Chinese name/courtesy name/office or kinship read against primary text; dates not accepted automatically"
+        }
+      ],
+      "source_identities_all_adjudicated": true
+    },
+    {
+      "id": 13650,
+      "keys": [
+        "hy:hy_00:243:陳祗",
+        "sg:sg_12:107:陳祗",
+        "tj:tj_07:125:陳祗",
+        "tj:tj_08:157:陳祗",
+        "sg:sg_11:250:陳祗",
+        "gl:Q5369380",
+        "qxz:chenzhi"
+      ],
+      "name": "陳祗",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "appearance_basis": "retain_game_estimate; first attestation does not prove first office",
+      "duplicate_of": null,
+      "identity_status": "current_source_keys_identity_corroborated",
+      "source_identities_all_adjudicated": true,
+      "review_scope": "individually_read_current_cited_subject_passages",
+      "review_status": "primary_text_corroborated",
+      "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+      "source_date_claims": [
+        {
+          "year": 258,
+          "precision": "regnal_year",
+          "calendar": "traditional_Chinese",
+          "date_basis": "SG董允附传景耀元年卒",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_12.txt",
+          "offset": 11676,
+          "excerpt": "中常侍奉车都尉操弄威柄终至覆国蜀人无不追思允及邓艾至蜀闻皓奸险収闭将杀之而皓厚赂艾左右得免祗字奉宗汝南人许靖兄之外孙也少孤长于靖家弱冠知名稍迁至选曹郎矜厉有威容多技艺挟数术费袆甚异之故超继允内侍吕乂卒祗又以侍中守尚书令加镇军将军大将军姜维虽班在祗上常率众在外希亲朝政祗上承主指下接阉竖深见信爱权重于维景耀元年卒后主痛惜发言流涕乃下诏曰祗统职一纪柔嘉维则干肃有章和义利物庶绩允明命不融逺朕用悼焉夫存有令问则亡加美谥谥曰忠侯赐子粲爵关内侯拔次子裕为黄门侍郎自祗之有宠后主追怨允日深谓为自轻由祗媚兹一人皓搆闲浸润故耳允孙宏晋巴西太守【臣松之以为陈群子泰陆逊子抗传皆以子系父不别载姓及王肃杜恕张承顾劭之流莫不皆然惟董允独否未详其意当以允名位优重事迹逾父故邪夏侯陈表并有骍角之美而亦如泰者魏书总名此卷云诸夏侯曹传故不复稍加品藻陈武与表俱至偏将军以位不相过故也】\n　　吕乂字季阳南阳人也父常送故将军刘焉入蜀值王路隔塞遂不得还乂少孤好读书鼓琴初先主定益州置盐府校尉较盐鐡之利后校尉王连请乂及南阳杜祺南乡刘干等并为典曹都尉乂迁新都緜竹令乃心隐防百姓称之为一州诸城之首迁巴西太守丞相诸葛亮连年出军调发诸郡多不相救乂募取兵五千人诣亮慰喻检制无逃窜者徙为汉中太守兼领督农供继军粮亮卒累迁广汉蜀郡太守蜀郡一都之防戸口众多又亮卒之后士伍亡命更相重冒奸巧非一乂到官为之防禁开喻劝导数年之中漏脱自出者万余口后入为尚书代董允为尚书令众事无留门无停宾乂歴职内外治身俭约谦靖少言为政简而不烦号为清能然持法刻深好用文俗吏故居大官名声损于郡县延熙十四年卒子辰景耀中为成都令辰弟雅谒者雅清厉有文才着格论十五篇杜祺歴郡守监军大将军司马刘干官至巴西太守皆与乂亲善亦有当时之称而俭素守法不及于乂\n　　评曰董和蹈羔羊之素刘巴履清尚之节马良贞实称为令士陈震忠恪老而益笃董允匡主义形于色皆蜀臣之良矣吕乂临郡则垂称处朝则被损亦黄薛之流亚矣\n\n\n\n\n\n　　蜀志卷九\n　　蜀志卷九考证\n　　刘巴少知名注刘表亦素不善祥拘巴欲杀之○【臣清植】按夲传下文云荆州牧刘表连辟及举茂才皆不就则表初未必有欲杀巴之事也零陵先贤传盖传讹之谈\n　　又注郡署戸曹史主记主簿刘先主欲遣周不疑就巴学○【臣浩】按主记疑作主计刘先主主字宜衍刘表传中别驾刘先是其人也\n　　巴复从交阯至蜀注乃由牂牱道去○道去元夲作遁去\n　　先主辟为左将军西曹掾注足下虽天素高亮宜少降意也○元夲作天分素高亮多分字\n　　非公事不言注与主簿雍茂谏备备以他事杀茂○【臣清植】按夲传下文凡诸文诰防命皆巴所作则先主之称尊号巴未必以为非也零陵先贤传盖勦敌国谤诽之辞亦不足信\n　　马良亮犹不然以谡为参军○宋夲作亮犹谓不然多谓字\n　　吕乂雅清厉有文才着格论十五篇○格论毛夲作恪论\n\n\n\n\n\n\n\n\n\n\n\n　　蜀志卷九考证\n<史部,正史类,三国志__蜀志>\n　　钦定四库全书\n　　蜀志卷十\n　　晋著作郎巴西中正安汉陈　寿撰\n　　宋太中大夫国子博士闻喜裴松之注\n　　刘封　彭羕　廖立　李严　刘琰\n　　魏延　杨仪\n　　刘封者夲罗侯宼氏之子长沙刘氏之甥也先主至荆州以未有继嗣养封为子及先主入蜀自葭萌还攻刘璋时封年二十余有武艺气力过人将兵俱与诸葛亮张飞等溯流西上所在战克益州既定以封为副军中郎将初刘璋遣扶风孟达副法正各将兵二千人使迎先主先主因令达并领兵众留",
+          "verification": "individually_read_full_subject_biography",
+          "normalization": "OpenCC t2s",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159"
+        },
+        {
+          "year": 259,
+          "month": 8,
+          "day_ganzhi": "丙子",
+          "precision": "original_calendar_lunar_month_and_ganzhi",
+          "calendar": "traditional_Chinese",
+          "date_basis": "HY景耀二年秋八月丙子",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\hy_00.txt",
+          "offset": 19887,
+          "excerpt": "军王含守乐城，护军蒋斌守汉城。又于西安、建威、武卫、石门、武城、建昌、临远皆立围守。\n　　二年，夏六月，立子谌为北地王，恂为新兴王，虔为上党王。以征西张翼为左车骑将军，领冀州刺史；广武督廖化为右车骑将军，领并州刺史。时南郡阎宇为右大将军。秋八月丙子，镇军将军陈祗卒，谥曰忠侯。祗在朝，上希主指，下接阉宦，后主甚善焉。以仆射南乡侯董厥为尚书令。\n　　三年，魏景初元年也。秋九月，追谥故前将军关羽曰壮缪侯，车骑将军张飞曰桓侯，骠骑将军马超曰威侯，军师庞统曰靖侯，后将军黄忠曰刚侯。是岁，魏帝高贵乡公卒，常道乡公即帝位。\n　　四年春三月，追谥故镇军赵军赵云曰顺平侯。冬十月，大赦。拜丞相亮子武乡侯瞻中都护、卫将军；迁董厥辅国大将军，与瞻辅政；以侍中义阳樊建守尚书令。自瞻、厥用事，黄皓秉权，无能正矫者，惟建特不与皓和好往来。而秘书令河南郄正与皓比屋周旋，皓从微至着，既不憎正，又不爱之，官不过六百石，常免于忧患。\n　　五年春正月，西河王琮卒。大将军维恶皓之恣擅，启后主欲杀之。后主曰：“皓，趋走小臣耳。往者董允切齿，吾常恨之，君何足介意！”维本羁旅自，而功效无称，见皓枝附叶连，惧于失言，逊辞而出。后主敕皓诣维陈谢，维说皓求沓中种麦，以避内逼。皓承白后主。秋，维出侯和，为魏将邓艾所破，还驻沓中。皓协比阎宇，欲废维树宇，故维惧，不敢还。\n　　六年春，魏相国晋文王命征西将军邓艾、镇西将军锺会、雍州刺史诸葛绪、益州刺史师纂五道伐蜀。大将军姜维表后主，求遣左、右车骑张翼、廖化督诸军分护阳安关口及阴平桥头。黄皓信巫鬼，谓敌不来，启后主寝其事，群臣不知。\n　　夏，艾将入沓中，会将向骆谷，蜀方闻之。遣张翼、董厥为阳安关外助，廖化为维援继。大赦。改元炎兴。比至阴平，闻诸葛绪向建威，故待月馀。维为邓艾所摧，还阴平。\n　　锺会围乐城，遣别将攻关。守将蒋舒开门降，都督傅佥奋战而死。冬，会以乐城不下，径长驱而前。\n　　翼、厥之至汉寿也，维、化舍阴平还保剑阁拒会。会不能克，粮运悬远，议欲还。而邓艾由阴平景谷傍入。后主又遣都护诸葛瞻督诸",
+          "verification": "individually_read_annal_and_subject_death_context",
+          "normalization": "OpenCC t2s",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159"
+        },
+        {
+          "year": 259,
+          "month": 8,
+          "day_ganzhi": "丙子",
+          "precision": "original_calendar_lunar_month_and_ganzhi",
+          "calendar": "traditional_Chinese",
+          "date_basis": "TJ甘露四己卯259秋八月丙子",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_08.txt",
+          "offset": 13977,
+          "excerpt": "搏之，此殄敌之术也。”于是汉主令督汉中胡济却住汉寿，监军王含守乐城，护军蒋斌守汉城。\n　　高贵乡公下甘露四年（己卯，公元二五九年）\n　　春，正月，黄龙二见宁陵井中。先是，顿丘、冠军、阳夏进中屡有龙见，群臣以为吉祥，帝曰：“龙者，君德也，上不在天，下不在田，而数屈于井，非嘉兆也。”作《潜龙诗》以自讽，司马昭见而恶之。\n　　夏，六月，京陵穆侯王昶卒。\n　　汉主封其子谌为北地王，恂为新兴王，虔为上党王。尚书令陈祗以巧佞有宠于汉主，姜维虽位在祗上，而多率众在外，希亲朝政，权任不及祗。秋，八月，丙子，祗卒；汉主以仆射义阳董厥为尚书令，尚书诸葛瞻为仆射。\n　　冬，十一月，车骑将军孙壹为婢所杀。\n　　是岁，以王基为征南将军，都督荆州诸军事。\n　　元皇帝上\n　　高贵乡公下景元元年（庚辰，公元二六零年）\n　　春，正月，朔，日有食之。\n　　夏，四月，诏有司率遵前命，复进大将军昭位相国，封晋公，加九锡。\n　　帝见威权日去，不胜其忿。五月，己丑，召侍中王沈、尚书王经、散骑常侍王业，谓曰：“司马昭之心，路人所知也。吾不能坐受废辱，今日当与卿自出讨之。”王经曰：“昔鲁昭公不忍季氏，败走失国，为天下笑。今权在其门，为日久矣。朝廷四方皆为之致死，不顾逆顺之理，非一日也。且宿卫空阙，兵甲寡弱，陛下何所资用；而一旦如此，无乃欲除疾而更深之邪！祸殆不测，宜见重详。”帝乃出怀中黄素诏投地曰：“行之决矣！正使死何惧，况不必死邪！”于是入白太后。沈、业奔走告昭，呼经欲与俱，经不从。帝遂拔剑升辇，率殿中宿卫苍头官僮鼓噪而出。昭弟屯骑校尉亻由遇帝于东止车门，左右呵之，亻由众奔走。中护军贾充自外入，逆与帝战于南阙下，帝自用剑。众欲退，骑督成亻卒弟太子舍人济问充曰：“事急矣，当云何？”充曰；“司马公畜养汝等，正为今日。今日之事，无所问也！”济即抽戈前刺帝，殒于车下。昭闻之，大惊，自投于地。太傅孚奔往，枕帝股而哭，甚哀，曰；“杀陛下者，臣之罪也！”\n　　昭入殿中，召群臣会议。尚书左仆射陈泰不至，昭使其舅尚书荀𫖮召之，泰曰：“世之论者以泰方于舅，今舅不如泰也。”子弟内外咸共逼之，乃入，见昭，悲恸。昭亦对之泣曰：“玄伯，卿何以处我？”泰曰：“独有斩贾充，少可以谢天下耳。”昭久之曰：“卿更思其次。”泰曰：“泰言惟有进于此，不知其次。”昭乃不复更言。𫖮，彧之子也。\n　　太后下令，罪状高贵乡公，废为庶人，葬以民礼。收王经及其家属付廷尉。经谢其母，母颜色不变，笑而应曰：“人谁不死，正恐不得其所”以此并命，何恨之有！”及就诛，故吏向雄哭，哀动一市。王沈以功封安平侯。庚寅，太傅孚等上言，请以王礼葬高贵乡公，太后许之。使中护军司马炎迎燕王宇之子常道乡公璜于邺，以为明帝嗣。炎，昭之子也。\n　　辛卿，群公奏太后自今令书皆称诏制。\n　　癸卿，司马昭固让相国、晋公、九锡之命，太后诏许之。\n　　戊申，昭上言：“成济兄弟大逆不道。”夷其族。\n　　六月，癸丑，太后诏常道乡公更名奂。甲寅，常道乡公入洛阳，是日，即皇帝位，年十五，大赦，改元。\n　　丙辰，诏进司马昭爵位九锡如",
+          "verification": "individually_read_annal_and_subject_death_context",
+          "normalization": "OpenCC t2s",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159"
+        }
+      ],
+      "source_date_conflicts": [
+        {
+          "date_type": "death",
+          "years": [
+            258,
+            259
+          ],
+          "note": "景耀元年SG258 vs景耀二HY/甘露四TJ259，月份干支仅259两源分支"
+        }
+      ],
+      "all_life_dates_independently_verified": false,
+      "historical_date_status": {
+        "birth": "unknown_in_consulted_sources",
+        "death": "source_conflict_not_uniquely_resolved"
+      },
+      "unresolved": [
+        "death_year_source_conflict_SG258_HY_TJ259",
+        "appointment_year_source_conflict_TJ245_SG246_and_TJ251_HY252",
+        "all_life_dates_independently_verified_is_false"
+      ],
+      "evidence": [
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_12.txt",
+          "offset": 11676,
+          "excerpt": "中常侍奉车都尉操弄威柄终至覆国蜀人无不追思允及邓艾至蜀闻皓奸险収闭将杀之而皓厚赂艾左右得免祗字奉宗汝南人许靖兄之外孙也少孤长于靖家弱冠知名稍迁至选曹郎矜厉有威容多技艺挟数术费袆甚异之故超继允内侍吕乂卒祗又以侍中守尚书令加镇军将军大将军姜维虽班在祗上常率众在外希亲朝政祗上承主指下接阉竖深见信爱权重于维景耀元年卒后主痛惜发言流涕乃下诏曰祗统职一纪柔嘉维则干肃有章和义利物庶绩允明命不融逺朕用悼焉夫存有令问则亡加美谥谥曰忠侯赐子粲爵关内侯拔次子裕为黄门侍郎自祗之有宠后主追怨允日深谓为自轻由祗媚兹一人皓搆闲浸润故耳允孙宏晋巴西太守【臣松之以为陈群子泰陆逊子抗传皆以子系父不别载姓及王肃杜恕张承顾劭之流莫不皆然惟董允独否未详其意当以允名位优重事迹逾父故邪夏侯陈表并有骍角之美而亦如泰者魏书总名此卷云诸夏侯曹传故不复稍加品藻陈武与表俱至偏将军以位不相过故也】\n　　吕乂字季阳南阳人也父常送故将军刘焉入蜀值王路隔塞遂不得还乂少孤好读书鼓琴初先主定益州置盐府校尉较盐鐡之利后校尉王连请乂及南阳杜祺南乡刘干等并为典曹都尉乂迁新都緜竹令乃心隐防百姓称之为一州诸城之首迁巴西太守丞相诸葛亮连年出军调发诸郡多不相救乂募取兵五千人诣亮慰喻检制无逃窜者徙为汉中太守兼领督农供继军粮亮卒累迁广汉蜀郡太守蜀郡一都之防戸口众多又亮卒之后士伍亡命更相重冒奸巧非一乂到官为之防禁开喻劝导数年之中漏脱自出者万余口后入为尚书代董允为尚书令众事无留门无停宾乂歴职内外治身俭约谦靖少言为政简而不烦号为清能然持法刻深好用文俗吏故居大官名声损于郡县延熙十四年卒子辰景耀中为成都令辰弟雅谒者雅清厉有文才着格论十五篇杜祺歴郡守监军大将军司马刘干官至巴西太守皆与乂亲善亦有当时之称而俭素守法不及于乂\n　　评曰董和蹈羔羊之素刘巴履清尚之节马良贞实称为令士陈震忠恪老而益笃董允匡主义形于色皆蜀臣之良矣吕乂临郡则垂称处朝则被损亦黄薛之流亚矣\n\n\n\n\n\n　　蜀志卷九\n　　蜀志卷九考证\n　　刘巴少知名注刘表亦素不善祥拘巴欲杀之○【臣清植】按夲传下文云荆州牧刘表连辟及举茂才皆不就则表初未必有欲杀巴之事也零陵先贤传盖传讹之谈\n　　又注郡署戸曹史主记主簿刘先主欲遣周不疑就巴学○【臣浩】按主记疑作主计刘先主主字宜衍刘表传中别驾刘先是其人也\n　　巴复从交阯至蜀注乃由牂牱道去○道去元夲作遁去\n　　先主辟为左将军西曹掾注足下虽天素高亮宜少降意也○元夲作天分素高亮多分字\n　　非公事不言注与主簿雍茂谏备备以他事杀茂○【臣清植】按夲传下文凡诸文诰防命皆巴所作则先主之称尊号巴未必以为非也零陵先贤传盖勦敌国谤诽之辞亦不足信\n　　马良亮犹不然以谡为参军○宋夲作亮犹谓不然多谓字\n　　吕乂雅清厉有文才着格论十五篇○格论毛夲作恪论\n\n\n\n\n\n\n\n\n\n\n\n　　蜀志卷九考证\n<史部,正史类,三国志__蜀志>\n　　钦定四库全书\n　　蜀志卷十\n　　晋著作郎巴西中正安汉陈　寿撰\n　　宋太中大夫国子博士闻喜裴松之注\n　　刘封　彭羕　廖立　李严　刘琰\n　　魏延　杨仪\n　　刘封者夲罗侯宼氏之子长沙刘氏之甥也先主至荆州以未有继嗣养封为子及先主入蜀自葭萌还攻刘璋时封年二十余有武艺气力过人将兵俱与诸葛亮张飞等溯流西上所在战克益州既定以封为副军中郎将初刘璋遣扶风孟达副法正各将兵二千人使迎先主先主因令达并领兵众留",
+          "verification": "individually_read_full_subject_biography",
+          "normalization": "OpenCC t2s",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\hy_00.txt",
+          "offset": 19887,
+          "excerpt": "军王含守乐城，护军蒋斌守汉城。又于西安、建威、武卫、石门、武城、建昌、临远皆立围守。\n　　二年，夏六月，立子谌为北地王，恂为新兴王，虔为上党王。以征西张翼为左车骑将军，领冀州刺史；广武督廖化为右车骑将军，领并州刺史。时南郡阎宇为右大将军。秋八月丙子，镇军将军陈祗卒，谥曰忠侯。祗在朝，上希主指，下接阉宦，后主甚善焉。以仆射南乡侯董厥为尚书令。\n　　三年，魏景初元年也。秋九月，追谥故前将军关羽曰壮缪侯，车骑将军张飞曰桓侯，骠骑将军马超曰威侯，军师庞统曰靖侯，后将军黄忠曰刚侯。是岁，魏帝高贵乡公卒，常道乡公即帝位。\n　　四年春三月，追谥故镇军赵军赵云曰顺平侯。冬十月，大赦。拜丞相亮子武乡侯瞻中都护、卫将军；迁董厥辅国大将军，与瞻辅政；以侍中义阳樊建守尚书令。自瞻、厥用事，黄皓秉权，无能正矫者，惟建特不与皓和好往来。而秘书令河南郄正与皓比屋周旋，皓从微至着，既不憎正，又不爱之，官不过六百石，常免于忧患。\n　　五年春正月，西河王琮卒。大将军维恶皓之恣擅，启后主欲杀之。后主曰：“皓，趋走小臣耳。往者董允切齿，吾常恨之，君何足介意！”维本羁旅自，而功效无称，见皓枝附叶连，惧于失言，逊辞而出。后主敕皓诣维陈谢，维说皓求沓中种麦，以避内逼。皓承白后主。秋，维出侯和，为魏将邓艾所破，还驻沓中。皓协比阎宇，欲废维树宇，故维惧，不敢还。\n　　六年春，魏相国晋文王命征西将军邓艾、镇西将军锺会、雍州刺史诸葛绪、益州刺史师纂五道伐蜀。大将军姜维表后主，求遣左、右车骑张翼、廖化督诸军分护阳安关口及阴平桥头。黄皓信巫鬼，谓敌不来，启后主寝其事，群臣不知。\n　　夏，艾将入沓中，会将向骆谷，蜀方闻之。遣张翼、董厥为阳安关外助，廖化为维援继。大赦。改元炎兴。比至阴平，闻诸葛绪向建威，故待月馀。维为邓艾所摧，还阴平。\n　　锺会围乐城，遣别将攻关。守将蒋舒开门降，都督傅佥奋战而死。冬，会以乐城不下，径长驱而前。\n　　翼、厥之至汉寿也，维、化舍阴平还保剑阁拒会。会不能克，粮运悬远，议欲还。而邓艾由阴平景谷傍入。后主又遣都护诸葛瞻督诸",
+          "verification": "individually_read_annal_and_subject_death_context",
+          "normalization": "OpenCC t2s",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_08.txt",
+          "offset": 13977,
+          "excerpt": "搏之，此殄敌之术也。”于是汉主令督汉中胡济却住汉寿，监军王含守乐城，护军蒋斌守汉城。\n　　高贵乡公下甘露四年（己卯，公元二五九年）\n　　春，正月，黄龙二见宁陵井中。先是，顿丘、冠军、阳夏进中屡有龙见，群臣以为吉祥，帝曰：“龙者，君德也，上不在天，下不在田，而数屈于井，非嘉兆也。”作《潜龙诗》以自讽，司马昭见而恶之。\n　　夏，六月，京陵穆侯王昶卒。\n　　汉主封其子谌为北地王，恂为新兴王，虔为上党王。尚书令陈祗以巧佞有宠于汉主，姜维虽位在祗上，而多率众在外，希亲朝政，权任不及祗。秋，八月，丙子，祗卒；汉主以仆射义阳董厥为尚书令，尚书诸葛瞻为仆射。\n　　冬，十一月，车骑将军孙壹为婢所杀。\n　　是岁，以王基为征南将军，都督荆州诸军事。\n　　元皇帝上\n　　高贵乡公下景元元年（庚辰，公元二六零年）\n　　春，正月，朔，日有食之。\n　　夏，四月，诏有司率遵前命，复进大将军昭位相国，封晋公，加九锡。\n　　帝见威权日去，不胜其忿。五月，己丑，召侍中王沈、尚书王经、散骑常侍王业，谓曰：“司马昭之心，路人所知也。吾不能坐受废辱，今日当与卿自出讨之。”王经曰：“昔鲁昭公不忍季氏，败走失国，为天下笑。今权在其门，为日久矣。朝廷四方皆为之致死，不顾逆顺之理，非一日也。且宿卫空阙，兵甲寡弱，陛下何所资用；而一旦如此，无乃欲除疾而更深之邪！祸殆不测，宜见重详。”帝乃出怀中黄素诏投地曰：“行之决矣！正使死何惧，况不必死邪！”于是入白太后。沈、业奔走告昭，呼经欲与俱，经不从。帝遂拔剑升辇，率殿中宿卫苍头官僮鼓噪而出。昭弟屯骑校尉亻由遇帝于东止车门，左右呵之，亻由众奔走。中护军贾充自外入，逆与帝战于南阙下，帝自用剑。众欲退，骑督成亻卒弟太子舍人济问充曰：“事急矣，当云何？”充曰；“司马公畜养汝等，正为今日。今日之事，无所问也！”济即抽戈前刺帝，殒于车下。昭闻之，大惊，自投于地。太傅孚奔往，枕帝股而哭，甚哀，曰；“杀陛下者，臣之罪也！”\n　　昭入殿中，召群臣会议。尚书左仆射陈泰不至，昭使其舅尚书荀𫖮召之，泰曰：“世之论者以泰方于舅，今舅不如泰也。”子弟内外咸共逼之，乃入，见昭，悲恸。昭亦对之泣曰：“玄伯，卿何以处我？”泰曰：“独有斩贾充，少可以谢天下耳。”昭久之曰：“卿更思其次。”泰曰：“泰言惟有进于此，不知其次。”昭乃不复更言。𫖮，彧之子也。\n　　太后下令，罪状高贵乡公，废为庶人，葬以民礼。收王经及其家属付廷尉。经谢其母，母颜色不变，笑而应曰：“人谁不死，正恐不得其所”以此并命，何恨之有！”及就诛，故吏向雄哭，哀动一市。王沈以功封安平侯。庚寅，太傅孚等上言，请以王礼葬高贵乡公，太后许之。使中护军司马炎迎燕王宇之子常道乡公璜于邺，以为明帝嗣。炎，昭之子也。\n　　辛卿，群公奏太后自今令书皆称诏制。\n　　癸卿，司马昭固让相国、晋公、九锡之命，太后诏许之。\n　　戊申，昭上言：“成济兄弟大逆不道。”夷其族。\n　　六月，癸丑，太后诏常道乡公更名奂。甲寅，常道乡公入洛阳，是日，即皇帝位，年十五，大赦，改元。\n　　丙辰，诏进司马昭爵位九锡如",
+          "verification": "individually_read_annal_and_subject_death_context",
+          "normalization": "OpenCC t2s",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\hy_00.txt",
+          "offset": 19961,
+          "excerpt": "西张翼为左车骑将军，领冀州刺史；广武督廖化为右车骑将军，领并州刺史。时南郡阎宇为右大将军。秋八月丙子，镇军将军陈祗卒，谥曰忠侯。祗在朝，上希主指，下接阉宦，后主甚善焉。以仆射南乡侯董厥为尚书令。\n　　三年，魏景初元年也。秋九月，追谥故前将军关羽曰壮缪侯，车骑将军张飞曰桓侯，骠骑将军马超曰威侯，军师庞统曰靖侯，后将军黄忠曰刚侯。是岁，魏帝高贵乡公卒，常道乡公即帝位。\n　　四年春三月，追谥故镇军赵军赵云曰顺平侯。冬十月，大赦。拜丞相亮子武乡侯瞻中都护、卫将军；迁董厥辅国大将军，与瞻辅政；以侍中义阳樊建守尚书令。自瞻、厥用事，黄皓秉权，无能正矫者，惟建特不与皓和好往来。而秘书令河南郄正与皓比屋周旋，皓从微至着，既不憎正，又不爱之，官不过六百石，常免于忧患。\n　　五年春正月，西河王琮卒。大将军维恶皓之恣擅，启后主欲杀之。后主曰：“皓，趋走小臣耳。往者董允切齿，吾常恨之，君何足介意！”维本羁旅自，而功效无称，见皓枝附叶连，惧于失言，逊辞而出。后主敕皓诣维陈谢，维说皓求沓中种麦，以避内逼。皓承白后主。秋，维出侯和，为魏将邓艾所破，还驻沓中。皓协比阎宇，欲废维树宇，故维惧，不敢还。\n　　六年春，魏相国晋文王命征西将军邓艾、镇西将军锺会、雍州刺史诸葛绪、益州刺史师纂五道伐蜀。大将军姜维表后主，求遣左、右车骑张翼、廖化督诸军分护阳安关口及阴平桥头。黄皓信巫鬼，谓敌不来，启后主寝其事，群臣不知。\n　　夏，艾将入沓中，会将向骆谷，蜀方闻之。遣张翼、董厥为阳安关外助，廖化为维援继。大赦。改元炎兴。比至阴平，闻诸葛绪向建威，故待月馀。维为邓艾所摧，还阴平。\n　　锺会围乐城，遣别将攻关。守将蒋舒开门降，都督傅佥奋战而死。冬，会以乐城不下，径长驱而前。\n　　翼、厥之至汉寿也，维、化舍阴平还保剑阁拒会。会不能克，粮运悬远，议欲还。而邓艾由阴平景谷傍入。后主又遣都护诸葛瞻督诸军拒艾，至涪，不进。尚书郎黄崇，权子也，劝瞻速行固险，无令敌得入坪，言至流涕。瞻不从。前锋已破，艾径至涪，瞻退保绵竹。艾书诱瞻曰：“若降者，必表封琅琊王。”瞻怒，杀艾使。战于绵竹，瞻军败绩，瞻临阵死。崇及羽林督李球、尚书张遵皆必死没命。瞻长子尚叹曰：“父子荷恩，不早斩黄皓，以致败国殄民，用生何为！”乃驱马赴魏军而死。\n　　百姓闻艾入坪，惊迸山野。后主会群臣议，欲南入七郡，或欲奔吴。光禄大夫谯周劝降魏，魏必裂土封后主。后主从之，遣侍中张绍、驸马都尉邓良赍玺绶奉笺诣艾降。北地王谌恚愤，杀妻子而后自杀。\n　　艾至成都，后主舆榇面缚，衔璧迎之。艾亲释其缚，受其璧，焚其榇，承制拜骠骑将军，使止其宫。执黄皓，将杀之，受贿而赦之。诸围守皆奉后主敕令乃下。姜维未知后主降，谓且固城；素与执政者不平，欲使其知卫敌之难，而后逞志；乃回由巴西，出妻阝、五城。会被后主手令，乃投戈释甲，诣锺会降于涪。军士莫不奋激，以刃斫石。\n　　明年春正月，会构艾，槛车见征。会图异计，奇维雄勇，还其节盖本兵，谓长史杜预曰：“姜伯约比中州名士，夏侯太初、诸葛公休不如也。”邓艾亦谓蜀人曰：“",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_12.txt",
+          "offset": 11676,
+          "excerpt": "中常侍奉车都尉操弄威柄终至覆国蜀人无不追思允及邓艾至蜀闻皓奸险収闭将杀之而皓厚赂艾左右得免祗字奉宗汝南人许靖兄之外孙也少孤长于靖家弱冠知名稍迁至选曹郎矜厉有威容多技艺挟数术费袆甚异之故超继允内侍吕乂卒祗又以侍中守尚书令加镇军将军大将军姜维虽班在祗上常率众在外希亲朝政祗上承主指下接阉竖深见信爱权重于维景耀元年卒后主痛惜发言流涕乃下诏曰祗统职一纪柔嘉维则干肃有章和义利物庶绩允明命不融逺朕用悼焉夫存有令问则亡加美谥谥曰忠侯赐子粲爵关内侯拔次子裕为黄门侍郎自祗之有宠后主追怨允日深谓为自轻由祗媚兹一人皓搆闲浸润故耳允孙宏晋巴西太守【臣松之以为陈群子泰陆逊子抗传皆以子系父不别载姓及王肃杜恕张承顾劭之流莫不皆然惟董允独否未详其意当以允名位优重事迹逾父故邪夏侯陈表并有骍角之美而亦如泰者魏书总名此卷云诸夏侯曹传故不复稍加品藻陈武与表俱至偏将军以位不相过故也】\n　　吕乂字季阳南阳人也父常送故将军刘焉入蜀值王路隔塞遂不得还乂少孤好读书鼓琴初先主定益州置盐府校尉较盐鐡之利后校尉王连请乂及南阳杜祺南乡刘干等并为典曹都尉乂迁新都緜竹令乃心隐防百姓称之为一州诸城之首迁巴西太守丞相诸葛亮连年出军调发诸郡多不相救乂募取兵五千人诣亮慰喻检制无逃窜者徙为汉中太守兼领督农供继军粮亮卒累迁广汉蜀郡太守蜀郡一都之防戸口众多又亮卒之后士伍亡命更相重冒奸巧非一乂到官为之防禁开喻劝导数年之中漏脱自出者万余口后入为尚书代董允为尚书令众事无留门无停宾乂歴职内外治身俭约谦靖少言为政简而不烦号为清能然持法刻深好用文俗吏故居大官名声损于郡县延熙十四年卒子辰景耀中为成都令辰弟雅谒者雅清厉有文才着格论十五篇杜祺歴郡守监军大将军司马刘干官至巴西太守皆与乂亲善亦有当时之称而俭素守法不及于乂\n　　评曰董和蹈羔羊之素刘巴履清尚之节马良贞实称为令士陈震忠恪老而益笃董允匡主义形于色皆蜀臣之良矣吕乂临郡则垂称处朝则被损亦黄薛之流亚矣\n\n\n\n\n\n　　蜀志卷九\n　　蜀志卷九考证\n　　刘巴少知名注刘表亦素不善祥拘巴欲杀之○【臣清植】按夲传下文云荆州牧刘表连辟及举茂才皆不就则表初未必有欲杀巴之事也零陵先贤传盖传讹之谈\n　　又注郡署戸曹史主记主簿刘先主欲遣周不疑就巴学○【臣浩】按主记疑作主计刘先主主字宜衍刘表传中别驾刘先是其人也\n　　巴复从交阯至蜀注乃由牂牱道去○道去元夲作遁去\n　　先主辟为左将军西曹掾注足下虽天素高亮宜少降意也○元夲作天分素高亮多分字\n　　非公事不言注与主簿雍茂谏备备以他事杀茂○【臣清植】按夲传下文凡诸文诰防命皆巴所作则先主之称尊号巴未必以为非也零陵先贤传盖勦敌国谤诽之辞亦不足信\n　　马良亮犹不然以谡为参军○宋夲作亮犹谓不然多谓字\n　　吕乂雅清厉有文才着格论十五篇○格论毛夲作恪论\n\n\n\n\n\n\n\n\n\n\n\n　　蜀志卷九考证\n<史部,正史类,三国志__蜀志>\n　　钦定四库全书\n　　蜀志卷十\n　　晋著作郎巴西中正安汉陈　寿撰\n　　宋太中大夫国子博士闻喜裴松之注\n　　刘封　彭羕　廖立　李严　刘琰\n　　魏延　杨仪\n　　刘封者夲罗侯宼氏之子长沙刘氏之甥也",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_07.txt",
+          "offset": 11403,
+          "excerpt": "佞慧，汉主爱之。允上则正色规主，下则数责于皓。皓畏允，不敢为非，终允之世，皓位不过黄门丞。费祎以选曹郎汝南陈祗代允为侍中，祗矜厉有威容，多技艺，挟智数，故祎以为贤，越次而用之。祗与皓相表里，皓始预政，累迁至中常侍，操弄威柄，终以覆国。自陈祗有宠，而汉主追怨董允日深，谓为自轻，由祗阿意迎合而皓浸润构间故也。\n\n●卷第七十五\n【魏纪七】　起柔兆摄提格，尽玄黓涒滩，凡七年。\n　　邵陵厉公中正始七年（丙寅，公元二四六年）\n　　春，二月，吴车骑将军朱然寇柤中，杀略数千人而去。\n　　幽州刺史毌丘俭以高句骊王位宫数为侵叛，督诸军讨之；位宫败走，俭遂屠丸都，斩获首虏以千数。句骊之臣得来数谏位宫，位宫不从，得来叹曰：“立见此地将生蓬蒿。”遂不食而死。俭令诸军不坏其墓，不伐其树，得其妻子皆放遣之。位宫单将妻子逃窜，俭引军还。未几，复击之，位宫遂奔买沟。俭遣玄菟太守王颀追之，过沃沮千有馀里，至肃慎氏南界，刻石纪功而还，所诛、纳八千馀口。论功受赏，侯者百馀人。\n　　秋，九月，吴主以骠骑将军步骘为丞相，车骑将军朱然为左大司马，卫将军全琮为右大司马。分荆州为二部：以镇南将军吕岱为上大将军，督右部，自武昌以西至蒲圻；以威北将军诸葛恪为大将军，督左部，代陆逊镇武昌。\n　　汉大赦，大司农河南孟光于众中责费祎曰：“夫赦者，偏枯之物，非明世所宜有也。衰敝穷极，必不得已，然后乃可权而行之耳。今主上仁贤，百僚称职，何有旦夕之急，而数施非常之恩，以惠奸宄之恶乎！”祎但顾谢，踧而已。\n　　初，丞相亮时，有言公惜赦者，亮答曰：“治世以大德，不以小惠，故匡衡、吴汉不愿为赦。先帝亦言：‘吾周旋陈元方、郑康成间，每见启告治乱之道悉矣，曾不语赦也。若刘景升、季玉父子，岁岁赦宥，何益于治！’”由是蜀人称亮之贤，知祎不及焉。\n　　陈寿评曰：诸葛亮为政，军旅数兴而赦不妄下，不亦卓乎？\n　　吴人不便大钱，乃罢之。\n　　汉主以凉州刺史姜维为卫将军，与大将军费祎并录尚书事。汶山平康夷反，维讨平之。\n　　汉主数出游观，增广声乐。太子家令巴西谯周上疏谏曰：“昔王莽之败，豪杰并起以争神器，才智之士思望所归，未必以其势之广狭，惟其德之薄厚也。于时更始、公孙述等多已广大，然莫不快情恣欲，怠于为善。世祖初入河北，冯异等劝之曰：‘当行人所不能为者。’遂务理冤狱，崇节俭，北州歌叹，声布四远。于是邓禹自南阳追之，吴汉、寇恂素未之识，举兵助之，其馀望风慕德，邳肜、耿纯、刘植之徒，至于舆病赍棺，襁负而至，不可胜数，故能以弱为强而成帝业。及在洛阳，尝欲小出，铫期进谏，即时还车。及颍川盗起，寇恂请世祖身往临贼，闻言即行。故非急务，欲小出不敢；至于急务，欲自安不为；帝者之欲善也如此！故《传》曰：‘百姓不徒附’，诚以德先之也。今汉遭厄运，天下三分，雄哲之士思望之时也。臣愿陛下复行人所不能为者，以副人望。且承事宗庙，所以率民尊上也，今四时之祀或有不临，而池苑之观或有仍出，臣之愚滞，私不自安。夫忧责在身者，不暇尽乐，先帝之志，堂构未成，诚非尽乐之时。愿省减乐官、后宫，凡所增",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_08.txt",
+          "offset": 14132,
+          "excerpt": "恶之。\n　　夏，六月，京陵穆侯王昶卒。\n　　汉主封其子谌为北地王，恂为新兴王，虔为上党王。尚书令陈祗以巧佞有宠于汉主，姜维虽位在祗上，而多率众在外，希亲朝政，权任不及祗。秋，八月，丙子，祗卒；汉主以仆射义阳董厥为尚书令，尚书诸葛瞻为仆射。\n　　冬，十一月，车骑将军孙壹为婢所杀。\n　　是岁，以王基为征南将军，都督荆州诸军事。\n　　元皇帝上\n　　高贵乡公下景元元年（庚辰，公元二六零年）\n　　春，正月，朔，日有食之。\n　　夏，四月，诏有司率遵前命，复进大将军昭位相国，封晋公，加九锡。\n　　帝见威权日去，不胜其忿。五月，己丑，召侍中王沈、尚书王经、散骑常侍王业，谓曰：“司马昭之心，路人所知也。吾不能坐受废辱，今日当与卿自出讨之。”王经曰：“昔鲁昭公不忍季氏，败走失国，为天下笑。今权在其门，为日久矣。朝廷四方皆为之致死，不顾逆顺之理，非一日也。且宿卫空阙，兵甲寡弱，陛下何所资用；而一旦如此，无乃欲除疾而更深之邪！祸殆不测，宜见重详。”帝乃出怀中黄素诏投地曰：“行之决矣！正使死何惧，况不必死邪！”于是入白太后。沈、业奔走告昭，呼经欲与俱，经不从。帝遂拔剑升辇，率殿中宿卫苍头官僮鼓噪而出。昭弟屯骑校尉亻由遇帝于东止车门，左右呵之，亻由众奔走。中护军贾充自外入，逆与帝战于南阙下，帝自用剑。众欲退，骑督成亻卒弟太子舍人济问充曰：“事急矣，当云何？”充曰；“司马公畜养汝等，正为今日。今日之事，无所问也！”济即抽戈前刺帝，殒于车下。昭闻之，大惊，自投于地。太傅孚奔往，枕帝股而哭，甚哀，曰；“杀陛下者，臣之罪也！”\n　　昭入殿中，召群臣会议。尚书左仆射陈泰不至，昭使其舅尚书荀𫖮召之，泰曰：“世之论者以泰方于舅，今舅不如泰也。”子弟内外咸共逼之，乃入，见昭，悲恸。昭亦对之泣曰：“玄伯，卿何以处我？”泰曰：“独有斩贾充，少可以谢天下耳。”昭久之曰：“卿更思其次。”泰曰：“泰言惟有进于此，不知其次。”昭乃不复更言。𫖮，彧之子也。\n　　太后下令，罪状高贵乡公，废为庶人，葬以民礼。收王经及其家属付廷尉。经谢其母，母颜色不变，笑而应曰：“人谁不死，正恐不得其所”以此并命，何恨之有！”及就诛，故吏向雄哭，哀动一市。王沈以功封安平侯。庚寅，太傅孚等上言，请以王礼葬高贵乡公，太后许之。使中护军司马炎迎燕王宇之子常道乡公璜于邺，以为明帝嗣。炎，昭之子也。\n　　辛卿，群公奏太后自今令书皆称诏制。\n　　癸卿，司马昭固让相国、晋公、九锡之命，太后诏许之。\n　　戊申，昭上言：“成济兄弟大逆不道。”夷其族。\n　　六月，癸丑，太后诏常道乡公更名奂。甲寅，常道乡公入洛阳，是日，即皇帝位，年十五，大赦，改元。\n　　丙辰，诏进司马昭爵位九锡如前，昭固让，乃止。\n　　癸亥，以尚书左仆射王观为司空。\n　　吴都尉严密建议作浦里塘，群臣皆以为难；唯卫将军陈留濮阳兴以为可成，遂会诸军民就作，功费不可胜数，士卒多死亡，民大愁怨。\n　　会稽郡谣言王亮当还为天子，而亮宫人告亮使巫祷祠，有恶言，有司以闻。吴主黜亮为候官侯，遣之国；亮自杀，卫送者皆伏罪",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_11.txt",
+          "offset": 26759,
+          "excerpt": "】董厥者丞相亮时为府令史亮称之曰董令史良士也吾每与之言思慎宜适徙为主簿亮卒后稍迁至尚书仆射代陈祗为尚书令迁大将军平防事而义阳樊建代焉【案晋百官表董厥字龚袭亦义阳人建字长元】延熙二十四年以校尉使吴值孙权病笃不自见建权问诸葛恪曰樊建何如宗预也恪对曰才识不及预而雅性过之后为侍中守尚书令自瞻厥建统事姜维常征伐在外宦人黄皓窃弄机柄咸共将防无能匡矫【孙盛异同记曰瞻厥等以维好战无功国内疲弊宜表后主召还为益州刺史夺其兵权蜀长老犹有瞻表以阎宇代维故事晋永和三年蜀史常璩说长老云陈夀尝为瞻吏为瞻所辱故因此事归恶黄皓而云瞻不能匡矫也】然建特不与皓和好往来蜀破之明年厥建俱诣京都同为相国参军其秋并兼散骑常侍使蜀慰劳【汉晋春秋曰樊建为给事中晋武帝问诸葛亮之治国建对曰闻恶必改而不矜过赏罚之信足感神明帝曰善哉使我得此人以自辅岂有今日之劳乎建稽首曰臣窃闻天下之论皆谓邓艾见枉陛下知而不理此岂冯唐之所谓虽得颇牧而不能用者乎帝笑曰吾方欲明之卿言起我意于是发诏治艾焉】\n　　评曰诸葛亮之为相国也抚百姓示仪轨约官职从权制开诚心布公道尽忠益时者虽讐必赏犯法怠慢者虽亲必罚服罪输情者虽重必释防辞巧饰者虽轻必戮善无微而不赏恶无纎而不贬庶事精练物理其本循名责实虚伪不齿终于邦域之内咸畏而爱之刑政虽峻而无怨者以其用心平而劝戒明也可谓识治之良才管萧之亚匹矣然连年动众未能成功葢应变将畧非其所长欤【袁子曰或问诸葛亮何如人也袁子曰张飞关羽与刘备俱起爪牙腹心之臣而武人也晩得诸葛亮因以为佐相而群臣悦服刘备足信亮足重故也及其受六尺之孤摄一国之政事凡庸之君专权而不失礼行君事而国人不疑如此即以为君臣百姓之心欣戴之矣行法严而国人悦服用民尽其力而下不怨及其兵出入如賔行不宼刍荛者不猎如在国中其用兵也止如山进退如风兵出之日天下震动而人心不忧亮死至今数十年国人歌思如周人之思召公也孔子曰雍也可使南靣诸葛亮有焉又问诸葛亮始出陇右南安天水安定三郡人反应之若亮速进则三郡非中国之有也而亮徐行不进既而官兵上陇三郡复亮无尺寸之功失此机何也袁子曰蜀兵轻锐良将少亮始出未知国中彊弱是以疑而尝之且大防者不求近功所以不进也曰何以知其疑也袁子曰初出迟重屯营重复后转降未进兵欲战亮勇而能鬬三郡反而不速应此其疑徴也曰何以知其勇而能鬬也袁子曰亮之在街亭也前军大破亮屯去数里不救官兵相接又徐行此其勇也亮之行军安静而坚重安静则易动坚重则可以进退亮法令明赏罚信士卒用命赴险而不顾此所以能鬬也曰亮帅数万之众其所兴造若数十万之功是其竒者也所至营垒井灶圚溷藩篱障塞皆应绳墨一月之行去之如始至劳费而徒为饰好何也袁子曰蜀人轻脱亮故坚用之曰何以明其然也袁子曰亮治实而不治名志大而所欲逺非求近速者也曰亮好治官府次舍桥梁道路此非急务何也袁子曰小国贤才少故欲其尊严也亮之治蜀田畴辟仓廪实噐械利蓄积饶朝防不哗路无醉人夫本立故末治有余力而后及小事此所以劝其功也曰子之论诸葛亮则有证也以亮之才而少其功何也袁子曰亮持本者也其于应变则非所长也故不敢用其短曰然则吾子美之何也袁子曰此固贤者之逺矣安可以备体责也夫能知所短而不用此贤者之大也知所短则",
+          "verification": "individually_read_primary_passage",
+          "normalization": "OpenCC t2s"
+        }
+      ],
+      "source_identity_adjudications": [
+        {
+          "source_key": "hy:hy_00:243:陳祗",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\hy_00.txt",
+          "offset": 19961,
+          "excerpt": "西张翼为左车骑将军，领冀州刺史；广武督廖化为右车骑将军，领并州刺史。时南郡阎宇为右大将军。秋八月丙子，镇军将军陈祗卒，谥曰忠侯。祗在朝，上希主指，下接阉宦，后主甚善焉。以仆射南乡侯董厥为尚书令。\n　　三年，魏景初元年也。秋九月，追谥故前将军关羽曰壮缪侯，车骑将军张飞曰桓侯，骠骑将军马超曰威侯，军师庞统曰靖侯，后将军黄忠曰刚侯。是岁，魏帝高贵乡公卒，常道乡公即帝位。\n　　四年春三月，追谥故镇军赵军赵云曰顺平侯。冬十月，大赦。拜丞相亮子武乡侯瞻中都护、卫将军；迁董厥辅国大将军，与瞻辅政；以侍中义阳樊建守尚书令。自瞻、厥用事，黄皓秉权，无能正矫者，惟建特不与皓和好往来。而秘书令河南郄正与皓比屋周旋，皓从微至着，既不憎正，又不爱之，官不过六百石，常免于忧患。\n　　五年春正月，西河王琮卒。大将军维恶皓之恣擅，启后主欲杀之。后主曰：“皓，趋走小臣耳。往者董允切齿，吾常恨之，君何足介意！”维本羁旅自，而功效无称，见皓枝附叶连，惧于失言，逊辞而出。后主敕皓诣维陈谢，维说皓求沓中种麦，以避内逼。皓承白后主。秋，维出侯和，为魏将邓艾所破，还驻沓中。皓协比阎宇，欲废维树宇，故维惧，不敢还。\n　　六年春，魏相国晋文王命征西将军邓艾、镇西将军锺会、雍州刺史诸葛绪、益州刺史师纂五道伐蜀。大将军姜维表后主，求遣左、右车骑张翼、廖化督诸军分护阳安关口及阴平桥头。黄皓信巫鬼，谓敌不来，启后主寝其事，群臣不知。\n　　夏，艾将入沓中，会将向骆谷，蜀方闻之。遣张翼、董厥为阳安关外助，廖化为维援继。大赦。改元炎兴。比至阴平，闻诸葛绪向建威，故待月馀。维为邓艾所摧，还阴平。\n　　锺会围乐城，遣别将攻关。守将蒋舒开门降，都督傅佥奋战而死。冬，会以乐城不下，径长驱而前。\n　　翼、厥之至汉寿也，维、化舍阴平还保剑阁拒会。会不能克，粮运悬远，议欲还。而邓艾由阴平景谷傍入。后主又遣都护诸葛瞻督诸军拒艾，至涪，不进。尚书郎黄崇，权子也，劝瞻速行固险，无令敌得入坪，言至流涕。瞻不从。前锋已破，艾径至涪，瞻退保绵竹。艾书诱瞻曰：“若降者，必表封琅琊王。”瞻怒，杀艾使。战于绵竹，瞻军败绩，瞻临阵死。崇及羽林督李球、尚书张遵皆必死没命。瞻长子尚叹曰：“父子荷恩，不早斩黄皓，以致败国殄民，用生何为！”乃驱马赴魏军而死。\n　　百姓闻艾入坪，惊迸山野。后主会群臣议，欲南入七郡，或欲奔吴。光禄大夫谯周劝降魏，魏必裂土封后主。后主从之，遣侍中张绍、驸马都尉邓良赍玺绶奉笺诣艾降。北地王谌恚愤，杀妻子而后自杀。\n　　艾至成都，后主舆榇面缚，衔璧迎之。艾亲释其缚，受其璧，焚其榇，承制拜骠骑将军，使止其宫。执黄皓，将杀之，受贿而赦之。诸围守皆奉后主敕令乃下。姜维未知后主降，谓且固城；素与执政者不平，欲使其知卫敌之难，而后逞志；乃回由巴西，出妻阝、五城。会被后主手令，乃投戈释甲，诣锺会降于涪。军士莫不奋激，以刃斫石。\n　　明年春正月，会构艾，槛车见征。会图异计，奇维雄勇，还其节盖本兵，谓长史杜预曰：“姜伯约比中州名士，夏侯太初、诸葛公休不如也。”邓艾亦谓蜀人曰：“",
+          "verification": "individually_read_by_delegated_reviewer",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source_key": "sg:sg_12:107:陳祗",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_12.txt",
+          "offset": 11676,
+          "excerpt": "中常侍奉车都尉操弄威柄终至覆国蜀人无不追思允及邓艾至蜀闻皓奸险収闭将杀之而皓厚赂艾左右得免祗字奉宗汝南人许靖兄之外孙也少孤长于靖家弱冠知名稍迁至选曹郎矜厉有威容多技艺挟数术费袆甚异之故超继允内侍吕乂卒祗又以侍中守尚书令加镇军将军大将军姜维虽班在祗上常率众在外希亲朝政祗上承主指下接阉竖深见信爱权重于维景耀元年卒后主痛惜发言流涕乃下诏曰祗统职一纪柔嘉维则干肃有章和义利物庶绩允明命不融逺朕用悼焉夫存有令问则亡加美谥谥曰忠侯赐子粲爵关内侯拔次子裕为黄门侍郎自祗之有宠后主追怨允日深谓为自轻由祗媚兹一人皓搆闲浸润故耳允孙宏晋巴西太守【臣松之以为陈群子泰陆逊子抗传皆以子系父不别载姓及王肃杜恕张承顾劭之流莫不皆然惟董允独否未详其意当以允名位优重事迹逾父故邪夏侯陈表并有骍角之美而亦如泰者魏书总名此卷云诸夏侯曹传故不复稍加品藻陈武与表俱至偏将军以位不相过故也】\n　　吕乂字季阳南阳人也父常送故将军刘焉入蜀值王路隔塞遂不得还乂少孤好读书鼓琴初先主定益州置盐府校尉较盐鐡之利后校尉王连请乂及南阳杜祺南乡刘干等并为典曹都尉乂迁新都緜竹令乃心隐防百姓称之为一州诸城之首迁巴西太守丞相诸葛亮连年出军调发诸郡多不相救乂募取兵五千人诣亮慰喻检制无逃窜者徙为汉中太守兼领督农供继军粮亮卒累迁广汉蜀郡太守蜀郡一都之防戸口众多又亮卒之后士伍亡命更相重冒奸巧非一乂到官为之防禁开喻劝导数年之中漏脱自出者万余口后入为尚书代董允为尚书令众事无留门无停宾乂歴职内外治身俭约谦靖少言为政简而不烦号为清能然持法刻深好用文俗吏故居大官名声损于郡县延熙十四年卒子辰景耀中为成都令辰弟雅谒者雅清厉有文才着格论十五篇杜祺歴郡守监军大将军司马刘干官至巴西太守皆与乂亲善亦有当时之称而俭素守法不及于乂\n　　评曰董和蹈羔羊之素刘巴履清尚之节马良贞实称为令士陈震忠恪老而益笃董允匡主义形于色皆蜀臣之良矣吕乂临郡则垂称处朝则被损亦黄薛之流亚矣\n\n\n\n\n\n　　蜀志卷九\n　　蜀志卷九考证\n　　刘巴少知名注刘表亦素不善祥拘巴欲杀之○【臣清植】按夲传下文云荆州牧刘表连辟及举茂才皆不就则表初未必有欲杀巴之事也零陵先贤传盖传讹之谈\n　　又注郡署戸曹史主记主簿刘先主欲遣周不疑就巴学○【臣浩】按主记疑作主计刘先主主字宜衍刘表传中别驾刘先是其人也\n　　巴复从交阯至蜀注乃由牂牱道去○道去元夲作遁去\n　　先主辟为左将军西曹掾注足下虽天素高亮宜少降意也○元夲作天分素高亮多分字\n　　非公事不言注与主簿雍茂谏备备以他事杀茂○【臣清植】按夲传下文凡诸文诰防命皆巴所作则先主之称尊号巴未必以为非也零陵先贤传盖勦敌国谤诽之辞亦不足信\n　　马良亮犹不然以谡为参军○宋夲作亮犹谓不然多谓字\n　　吕乂雅清厉有文才着格论十五篇○格论毛夲作恪论\n\n\n\n\n\n\n\n\n\n\n\n　　蜀志卷九考证\n<史部,正史类,三国志__蜀志>\n　　钦定四库全书\n　　蜀志卷十\n　　晋著作郎巴西中正安汉陈　寿撰\n　　宋太中大夫国子博士闻喜裴松之注\n　　刘封　彭羕　廖立　李严　刘琰\n　　魏延　杨仪\n　　刘封者夲罗侯宼氏之子长沙刘氏之甥也",
+          "verification": "individually_read_by_delegated_reviewer",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source_key": "tj:tj_07:125:陳祗",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_07.txt",
+          "offset": 11403,
+          "excerpt": "佞慧，汉主爱之。允上则正色规主，下则数责于皓。皓畏允，不敢为非，终允之世，皓位不过黄门丞。费祎以选曹郎汝南陈祗代允为侍中，祗矜厉有威容，多技艺，挟智数，故祎以为贤，越次而用之。祗与皓相表里，皓始预政，累迁至中常侍，操弄威柄，终以覆国。自陈祗有宠，而汉主追怨董允日深，谓为自轻，由祗阿意迎合而皓浸润构间故也。\n\n●卷第七十五\n【魏纪七】　起柔兆摄提格，尽玄黓涒滩，凡七年。\n　　邵陵厉公中正始七年（丙寅，公元二四六年）\n　　春，二月，吴车骑将军朱然寇柤中，杀略数千人而去。\n　　幽州刺史毌丘俭以高句骊王位宫数为侵叛，督诸军讨之；位宫败走，俭遂屠丸都，斩获首虏以千数。句骊之臣得来数谏位宫，位宫不从，得来叹曰：“立见此地将生蓬蒿。”遂不食而死。俭令诸军不坏其墓，不伐其树，得其妻子皆放遣之。位宫单将妻子逃窜，俭引军还。未几，复击之，位宫遂奔买沟。俭遣玄菟太守王颀追之，过沃沮千有馀里，至肃慎氏南界，刻石纪功而还，所诛、纳八千馀口。论功受赏，侯者百馀人。\n　　秋，九月，吴主以骠骑将军步骘为丞相，车骑将军朱然为左大司马，卫将军全琮为右大司马。分荆州为二部：以镇南将军吕岱为上大将军，督右部，自武昌以西至蒲圻；以威北将军诸葛恪为大将军，督左部，代陆逊镇武昌。\n　　汉大赦，大司农河南孟光于众中责费祎曰：“夫赦者，偏枯之物，非明世所宜有也。衰敝穷极，必不得已，然后乃可权而行之耳。今主上仁贤，百僚称职，何有旦夕之急，而数施非常之恩，以惠奸宄之恶乎！”祎但顾谢，踧而已。\n　　初，丞相亮时，有言公惜赦者，亮答曰：“治世以大德，不以小惠，故匡衡、吴汉不愿为赦。先帝亦言：‘吾周旋陈元方、郑康成间，每见启告治乱之道悉矣，曾不语赦也。若刘景升、季玉父子，岁岁赦宥，何益于治！’”由是蜀人称亮之贤，知祎不及焉。\n　　陈寿评曰：诸葛亮为政，军旅数兴而赦不妄下，不亦卓乎？\n　　吴人不便大钱，乃罢之。\n　　汉主以凉州刺史姜维为卫将军，与大将军费祎并录尚书事。汶山平康夷反，维讨平之。\n　　汉主数出游观，增广声乐。太子家令巴西谯周上疏谏曰：“昔王莽之败，豪杰并起以争神器，才智之士思望所归，未必以其势之广狭，惟其德之薄厚也。于时更始、公孙述等多已广大，然莫不快情恣欲，怠于为善。世祖初入河北，冯异等劝之曰：‘当行人所不能为者。’遂务理冤狱，崇节俭，北州歌叹，声布四远。于是邓禹自南阳追之，吴汉、寇恂素未之识，举兵助之，其馀望风慕德，邳肜、耿纯、刘植之徒，至于舆病赍棺，襁负而至，不可胜数，故能以弱为强而成帝业。及在洛阳，尝欲小出，铫期进谏，即时还车。及颍川盗起，寇恂请世祖身往临贼，闻言即行。故非急务，欲小出不敢；至于急务，欲自安不为；帝者之欲善也如此！故《传》曰：‘百姓不徒附’，诚以德先之也。今汉遭厄运，天下三分，雄哲之士思望之时也。臣愿陛下复行人所不能为者，以副人望。且承事宗庙，所以率民尊上也，今四时之祀或有不临，而池苑之观或有仍出，臣之愚滞，私不自安。夫忧责在身者，不暇尽乐，先帝之志，堂构未成，诚非尽乐之时。愿省减乐官、后宫，凡所增",
+          "verification": "individually_read_by_delegated_reviewer",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source_key": "tj:tj_08:157:陳祗",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_08.txt",
+          "offset": 14132,
+          "excerpt": "恶之。\n　　夏，六月，京陵穆侯王昶卒。\n　　汉主封其子谌为北地王，恂为新兴王，虔为上党王。尚书令陈祗以巧佞有宠于汉主，姜维虽位在祗上，而多率众在外，希亲朝政，权任不及祗。秋，八月，丙子，祗卒；汉主以仆射义阳董厥为尚书令，尚书诸葛瞻为仆射。\n　　冬，十一月，车骑将军孙壹为婢所杀。\n　　是岁，以王基为征南将军，都督荆州诸军事。\n　　元皇帝上\n　　高贵乡公下景元元年（庚辰，公元二六零年）\n　　春，正月，朔，日有食之。\n　　夏，四月，诏有司率遵前命，复进大将军昭位相国，封晋公，加九锡。\n　　帝见威权日去，不胜其忿。五月，己丑，召侍中王沈、尚书王经、散骑常侍王业，谓曰：“司马昭之心，路人所知也。吾不能坐受废辱，今日当与卿自出讨之。”王经曰：“昔鲁昭公不忍季氏，败走失国，为天下笑。今权在其门，为日久矣。朝廷四方皆为之致死，不顾逆顺之理，非一日也。且宿卫空阙，兵甲寡弱，陛下何所资用；而一旦如此，无乃欲除疾而更深之邪！祸殆不测，宜见重详。”帝乃出怀中黄素诏投地曰：“行之决矣！正使死何惧，况不必死邪！”于是入白太后。沈、业奔走告昭，呼经欲与俱，经不从。帝遂拔剑升辇，率殿中宿卫苍头官僮鼓噪而出。昭弟屯骑校尉亻由遇帝于东止车门，左右呵之，亻由众奔走。中护军贾充自外入，逆与帝战于南阙下，帝自用剑。众欲退，骑督成亻卒弟太子舍人济问充曰：“事急矣，当云何？”充曰；“司马公畜养汝等，正为今日。今日之事，无所问也！”济即抽戈前刺帝，殒于车下。昭闻之，大惊，自投于地。太傅孚奔往，枕帝股而哭，甚哀，曰；“杀陛下者，臣之罪也！”\n　　昭入殿中，召群臣会议。尚书左仆射陈泰不至，昭使其舅尚书荀𫖮召之，泰曰：“世之论者以泰方于舅，今舅不如泰也。”子弟内外咸共逼之，乃入，见昭，悲恸。昭亦对之泣曰：“玄伯，卿何以处我？”泰曰：“独有斩贾充，少可以谢天下耳。”昭久之曰：“卿更思其次。”泰曰：“泰言惟有进于此，不知其次。”昭乃不复更言。𫖮，彧之子也。\n　　太后下令，罪状高贵乡公，废为庶人，葬以民礼。收王经及其家属付廷尉。经谢其母，母颜色不变，笑而应曰：“人谁不死，正恐不得其所”以此并命，何恨之有！”及就诛，故吏向雄哭，哀动一市。王沈以功封安平侯。庚寅，太傅孚等上言，请以王礼葬高贵乡公，太后许之。使中护军司马炎迎燕王宇之子常道乡公璜于邺，以为明帝嗣。炎，昭之子也。\n　　辛卿，群公奏太后自今令书皆称诏制。\n　　癸卿，司马昭固让相国、晋公、九锡之命，太后诏许之。\n　　戊申，昭上言：“成济兄弟大逆不道。”夷其族。\n　　六月，癸丑，太后诏常道乡公更名奂。甲寅，常道乡公入洛阳，是日，即皇帝位，年十五，大赦，改元。\n　　丙辰，诏进司马昭爵位九锡如前，昭固让，乃止。\n　　癸亥，以尚书左仆射王观为司空。\n　　吴都尉严密建议作浦里塘，群臣皆以为难；唯卫将军陈留濮阳兴以为可成，遂会诸军民就作，功费不可胜数，士卒多死亡，民大愁怨。\n　　会稽郡谣言王亮当还为天子，而亮宫人告亮使巫祷祠，有恶言，有司以闻。吴主黜亮为候官侯，遣之国；亮自杀，卫送者皆伏罪",
+          "verification": "individually_read_by_delegated_reviewer",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source_key": "sg:sg_11:250:陳祗",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\sg_11.txt",
+          "offset": 26759,
+          "excerpt": "】董厥者丞相亮时为府令史亮称之曰董令史良士也吾每与之言思慎宜适徙为主簿亮卒后稍迁至尚书仆射代陈祗为尚书令迁大将军平防事而义阳樊建代焉【案晋百官表董厥字龚袭亦义阳人建字长元】延熙二十四年以校尉使吴值孙权病笃不自见建权问诸葛恪曰樊建何如宗预也恪对曰才识不及预而雅性过之后为侍中守尚书令自瞻厥建统事姜维常征伐在外宦人黄皓窃弄机柄咸共将防无能匡矫【孙盛异同记曰瞻厥等以维好战无功国内疲弊宜表后主召还为益州刺史夺其兵权蜀长老犹有瞻表以阎宇代维故事晋永和三年蜀史常璩说长老云陈夀尝为瞻吏为瞻所辱故因此事归恶黄皓而云瞻不能匡矫也】然建特不与皓和好往来蜀破之明年厥建俱诣京都同为相国参军其秋并兼散骑常侍使蜀慰劳【汉晋春秋曰樊建为给事中晋武帝问诸葛亮之治国建对曰闻恶必改而不矜过赏罚之信足感神明帝曰善哉使我得此人以自辅岂有今日之劳乎建稽首曰臣窃闻天下之论皆谓邓艾见枉陛下知而不理此岂冯唐之所谓虽得颇牧而不能用者乎帝笑曰吾方欲明之卿言起我意于是发诏治艾焉】\n　　评曰诸葛亮之为相国也抚百姓示仪轨约官职从权制开诚心布公道尽忠益时者虽讐必赏犯法怠慢者虽亲必罚服罪输情者虽重必释防辞巧饰者虽轻必戮善无微而不赏恶无纎而不贬庶事精练物理其本循名责实虚伪不齿终于邦域之内咸畏而爱之刑政虽峻而无怨者以其用心平而劝戒明也可谓识治之良才管萧之亚匹矣然连年动众未能成功葢应变将畧非其所长欤【袁子曰或问诸葛亮何如人也袁子曰张飞关羽与刘备俱起爪牙腹心之臣而武人也晩得诸葛亮因以为佐相而群臣悦服刘备足信亮足重故也及其受六尺之孤摄一国之政事凡庸之君专权而不失礼行君事而国人不疑如此即以为君臣百姓之心欣戴之矣行法严而国人悦服用民尽其力而下不怨及其兵出入如賔行不宼刍荛者不猎如在国中其用兵也止如山进退如风兵出之日天下震动而人心不忧亮死至今数十年国人歌思如周人之思召公也孔子曰雍也可使南靣诸葛亮有焉又问诸葛亮始出陇右南安天水安定三郡人反应之若亮速进则三郡非中国之有也而亮徐行不进既而官兵上陇三郡复亮无尺寸之功失此机何也袁子曰蜀兵轻锐良将少亮始出未知国中彊弱是以疑而尝之且大防者不求近功所以不进也曰何以知其疑也袁子曰初出迟重屯营重复后转降未进兵欲战亮勇而能鬬三郡反而不速应此其疑徴也曰何以知其勇而能鬬也袁子曰亮之在街亭也前军大破亮屯去数里不救官兵相接又徐行此其勇也亮之行军安静而坚重安静则易动坚重则可以进退亮法令明赏罚信士卒用命赴险而不顾此所以能鬬也曰亮帅数万之众其所兴造若数十万之功是其竒者也所至营垒井灶圚溷藩篱障塞皆应绳墨一月之行去之如始至劳费而徒为饰好何也袁子曰蜀人轻脱亮故坚用之曰何以明其然也袁子曰亮治实而不治名志大而所欲逺非求近速者也曰亮好治官府次舍桥梁道路此非急务何也袁子曰小国贤才少故欲其尊严也亮之治蜀田畴辟仓廪实噐械利蓄积饶朝防不哗路无醉人夫本立故末治有余力而后及小事此所以劝其功也曰子之论诸葛亮则有证也以亮之才而少其功何也袁子曰亮持本者也其于应变则非所长也故不敢用其短曰然则吾子美之何也袁子曰此固贤者之逺矣安可以备体责也夫能知所短而不用此贤者之大也知所短则",
+          "verification": "individually_read_by_delegated_reviewer",
+          "normalization": "OpenCC t2s"
+        },
+        {
+          "source_key": "gl:Q5369380",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source_record": {
+            "key": "gl:Q5369380",
+            "qid": "Q5369380",
+            "name": "陳祗",
+            "sei": "陳",
+            "mei": "祗",
+            "name_full": "陳祗",
+            "name_orig": "Chen Zhi (Three Kingdoms)",
+            "sex": 0,
+            "birth": null,
+            "death": 258,
+            "years": [
+              null,
+              258
+            ],
+            "life_est": null,
+            "death_violent": false,
+            "polity": "蜀漢",
+            "role": "文臣",
+            "place": "汝南",
+            "lat": 32.98,
+            "lon": 114.37,
+            "offices": [
+              "侍中",
+              "尚書令",
+              "鎮軍將軍"
+            ],
+            "kin": [],
+            "friends": [
+              "Fei Yi",
+              "Huang Hao",
+              "Liu Shan"
+            ],
+            "foes": [
+              "Dong Yun",
+              "Jiang Wei"
+            ],
+            "bio": "汝南人，許靖兄之外孫。矜厲有威容，多技藝，兼通天文卜數，費禕甚器之。董允卒後代為侍中，後加尚書令、鎮軍將軍。上承劉禪旨意，下接宦官黃皓，權勢在姜維之上，蜀政由此日衰。258年卒，諡忠侯。",
+            "stats": [
+              30,
+              28,
+              72,
+              70,
+              62
+            ],
+            "lean": "無",
+            "src": "Wikidata Q5369380（Laouenan 等 2022）",
+            "conf": "A",
+            "fame": 89.893434,
+            "world": true,
+            "region_un": "Eastern Asia"
+          },
+          "verification": "original_QID_mapping_and_matching_article_identity_individually_read",
+          "source_url": "https://en.wikipedia.org/wiki/Chen_Zhi_(Three_Kingdoms)",
+          "existing_source_evidence_metadata": {
+            "wikidata_qid": "Q5369380",
+            "expected_qids": [
+              "Q5369380"
+            ],
+            "identity_check": "qid_matches_source_record",
+            "revision_id": "1375850368",
+            "page_id": "57523688"
+          },
+          "identity_content_bridge": "Fengzong/Runan/maternal grandson of elder brother Xu Jing/Fei Yi/Liu Shan/Huang Hao; no 210s birth adopted"
+        },
+        {
+          "source_key": "qxz:chenzhi",
+          "identity_verdict": "same_person_after_individually_read_source_specific_identity_chain",
+          "identity_basis": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。",
+          "source_reader_agent": "/root/chronology_0850_3999/prefix_readonly_1120_1159",
+          "source_record": {
+            "key": "qxz:chenzhi",
+            "name": "陳祗",
+            "azana": "奉宗",
+            "sex": 0,
+            "birth": null,
+            "death": 258,
+            "years": [
+              null,
+              258
+            ],
+            "stats": [
+              34,
+              27,
+              69,
+              70,
+              62
+            ],
+            "lean": "无",
+            "role": "文臣",
+            "polity": "蜀漢",
+            "group": "蜀 · 謀臣文臣",
+            "src": "三國群雄志扩容名单",
+            "conf": "B",
+            "romance": false,
+            "fame": 40
+          },
+          "verification": "original_QXZ_specific_courtesy_name_and_polity_input_read_not_date_authority",
+          "identity_content_bridge": "姓名陈祗/字奉宗/蜀汉文臣专名字组合，258名册年非独证"
+        }
+      ],
+      "batch_review_note": "七当前key逐candidate后原文实际核：汝南奉宗许靖兄之外孙，选曹郎继董允侍中，吕乂后兼尚书令镇军，黄皓姜维权任及忠侯同人链全闭。GL实际原QID映射相符并读英文同籍字亲官文，210s出生与258不作独立史证；QXZ蜀汉奉宗同专名桥。生卒年份并非全核唯一：SG258/HY及TJ259，原季八月丙子只259分支。"
+    }
+  ]
+}

@@ -31,9 +31,13 @@
 0047ca7b 1 4 e8f0de0000 SER_ID-0x47ca80 ; [call] stream i8 id field: city +0x98 city id (setter 0x4
 0047d374 1 4 be2a000000 C ; [CITY_COUNT] mov esi, 0x2a
 0047dd2c 3 4 8b0c8590e5fa06 AREACOL ; [disp] AREACOL u32[144] @0x6fae590 (function-static, fill
+0047e019 2 1 83f808 16 ; [M8] 16 corps: number validator
+0047e16d 2 1 83f808 16 ; [M8] 16 corps: number setter
 0047e4f1 1 4 e87ac40000 SER_U8ID-0x47e4f6 ; [M8] stream id field corps +4 force: u8 (0xff = none)
 0047e51d 1 4 e84ec40000 SER_ID-0x47e522 ; [call] stream i8 id field: corps +0x14 target id (type +0
 0047e533 1 4 e838c40000 SER_ID-0x47e538 ; [call] stream i8 id field: corps +0x1c target id (type +0
+0047e5eb 2 1 83f808 16 ; [M8] 16 corps: corps consistency check
+0047ebe0 2 1 83f808 16 ; [M8] 16 corps: leader and corps refresh
 0047f491 3 4 8b943018110000 FLAG104+0x0-0x73bf304 ; [M8] flag object FLAG104
 0047f498 3 4 8d8c3018110000 FLAG104+0x0-0x73bf304 ; [M8] flag object FLAG104
 0047f4e1 3 4 8b9430d4400000 FLAG84A+0x0-0x73bf304 ; [M8] flag object FLAG84A
@@ -76,6 +80,7 @@
 00480bea 4 4 c74424142a000000 0x2a ; [imm] ScnInfo scenario/save header (ScnInfoB 0x2e0 vt 0x
 00480d19 1 4 bd2a000000 0x2a ; [imm] ScnInfo scenario/save header (ScnInfoB 0x2e0 vt 0x
 00480edc 1 4 bd2a000000 0x2a ; [imm] ScnInfo scenario/save header (ScnInfoB 0x2e0 vt 0x
+0048124f 2 1 83f808 16 ; [M8] 16 corps: force-local number lookup
 00481db2 1 4 e8b98b0000 SER_ID-0x481db7 ; [call] stream i8 id field: force +0x4c target id (type +0
 00481e0e 1 4 e85d8b0000 SER_U8ID-0x481e13 ; [M8] stream id field force +0x94 force: u8 (0xff = none)
 00482614 1 1 3c2f R+5 ; [M8 FORCE_COUNT] cmp al, 0x2f
@@ -234,6 +239,7 @@
 004b4c32 2 4 81fde8030000 U ; [M9 UNIT_COUNT] cmp ebp, 0x3e8
 004b4e64 1 4 bb2a000000 R ; [M8 REG_COUNT] mov ebx, 0x2a
 004b5a8a 1 4 3de7030000 U-1 ; [M9 UNIT_MAX] cmp eax, 0x3e7
+004b5e21 2 1 83ff08 16 ; [M8] 16 corps: force-wide corps refresh
 004b5eac 1 4 b92a000000 C ; [CITY_COUNT] mov ecx, 0x2a
 004b6249 2 4 2b87ac000000 0xac+(C-42)*4 ; [disp] city-flood object vt 0x7e8558 (stack obj in 0x4b65
 004b65e0 2 4 81ecb4000000 0xb4+((C-42)*4) ; [frame] stack 0x4b65e0 city-flood object (vt 0x7e8558, int
@@ -250,6 +256,7 @@
 004bbc06 1 4 3d3e040000 N+U-1 ; [LOCATION_MAX] cmp eax, 0x43e
 004bbc12 1 4 3d3e040000 N+U-1 ; [LOCATION_MAX] cmp eax, 0x43e
 004bd96b 1 4 3de8030000 U ; [M9 UNIT_COUNT] cmp eax, 0x3e8
+004be48e 2 1 83fb08 16 ; [M8] 16 corps: force-wide corps transfer
 004c0c30 2 4 81ecac000000 0xac+((C-42)*4) ; [frame] stack 0x4c0c30 (int[42] city->barbarian base, esp+
 004c0c37 3 4 8bb424b4000000 0xb4+((C-42)*4) ; [disp] stack 0x4c0c30 (int[42] city->barbarian base, esp+
 004c0c4c 2 4 81c4ac000000 0xac+((C-42)*4) ; [frame] stack 0x4c0c30 (int[42] city->barbarian base, esp+
@@ -1250,6 +1257,7 @@
 005ac1ab 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
 005ac848 2 4 81c6b0995409 UWRAP ; [M9] unit view wrapper (absolute) -> UWRAP
 005acf64 1 4 a110275509 UPOOL+U*0xc+4 ; [M9] unit view node pool: used head (absolute) -> UPOOL
+005b43a4 2 1 83fb08 16 ; [M8] 16 corps: force-wide delegation reset
 005bb62d 1 4 bb34000000 C+G ; [GATE_END] mov ebx, 0x34
 005bcd10 1 4 b92f000000 R+5 ; [M8 ARRAY_SIZE] mov ecx, 0x2f
 005bcdf0 1 4 b92f000000 R+5 ; [M8 ARRAY_SIZE] mov ecx, 0x2f
@@ -1266,6 +1274,7 @@
 005c0740 3 4 8b8c24c0000000 0xc0+((C-42)*4) ; [disp] stack 0x5c05c0 int[C] city flags
 005c0761 3 4 8b8c24c0000000 0xc0+((C-42)*4) ; [disp] stack 0x5c05c0 int[C] city flags
 005c076f 2 4 81c4ac000000 0xac+((C-42)*4) ; [frame] stack 0x5c05c0 int[C] city flags
+005c0953 2 1 83fe08 16 ; [M8] 16 corps: regroup availability
 005c1156 2 4 81ec64080000 0x864+(A8((C-42)*4)) ; [frame] stack 0x5c1150 int[C] per-city force
 005c149d 3 4 8d8c24d4000000 0xd4+(A8((C-42)*4)) ; [disp] stack 0x5c1150 int[C] per-city force
 005c14b0 3 4 8d8c24d8000000 0xd8+(A8((C-42)*4)) ; [disp] stack 0x5c1150 int[C] per-city force
@@ -1274,6 +1283,9 @@
 005c14de 3 4 8d9424a0040000 0x4a0+(A8((C-42)*4)) ; [disp] stack 0x5c1150 int[C] per-city force
 005c14ea 3 4 8db424d0000000 0xd0+(A8((C-42)*4)) ; [disp] stack 0x5c1150 int[C] per-city force
 005c14f1 3 4 8dbc24a0040000 0x4a0+(A8((C-42)*4)) ; [disp] stack 0x5c1150 int[C] per-city force
+005c18b7 2 1 83fb08 16 ; [M8] 16 corps: regroup selected number
+005c1ad8 2 1 83ff08 16 ; [M8] 16 corps: new corps selected number
+005c1db2 2 1 83fe08 16 ; [M8] 16 corps: new corps availability
 005c1f9b 2 4 81ec80080000 0x880+(A8((C-42)*4)) ; [frame] stack 0x5c1f80 int[C] city flags
 005c20ac 1 4 b92a000000 C ; [CITY_COUNT] mov ecx, 0x2a
 005c20bc 3 4 899c2494080000 0x894+(A8((C-42)*4)) ; [disp] stack 0x5c1f80 int[C] city flags
@@ -1297,6 +1309,15 @@
 005c240b 3 4 8b8c248c080000 0x88c+(A8((C-42)*4)) ; [disp] stack 0x5c1f80 int[C] city flags
 005c47b0 1 4 3d3e040000 N+U-1 ; [LOCATION_MAX] cmp eax, 0x43e
 005cd3e8 1 4 b92f000000 R+5 ; [M8 ARRAY_SIZE] mov ecx, 0x2f
+005d6090 2 1 83ec28 72 ; [M8] 16 corps: officer count stack frame
+005d6094 3 1 8b5c2430 80 ; [M8] 16 corps: officer count iterator or argument
+005d60c4 2 1 83c428 72 ; [M8] 16 corps: officer count stack frame
+005d6165 3 1 8b7c2440 96 ; [M8] 16 corps: officer count iterator or argument
+005d616e 3 1 8944243c 92 ; [M8] 16 corps: officer count iterator or argument
+005d6174 3 1 8d44243c 92 ; [M8] 16 corps: officer count iterator or argument
+005d61cd 3 1 8b44243c 92 ; [M8] 16 corps: officer count iterator or argument
+005d6214 2 1 83fe08 16 ; [M8] 16 corps: officer reassignment checks
+005d621f 2 1 83c428 72 ; [M8] 16 corps: officer count stack frame
 005d6236 2 4 81ec0c090000 0x90c+(A8((N-87)*4)) ; [frame] stack 0x5d6230 int[N] person-by-base
 005d62c2 3 4 8d8c247c010000 0x17c+(A8((N-87)*4)) ; [disp] stack 0x5d6230 int[N] person-by-base
 005d62d5 3 4 8d8c2480010000 0x180+(A8((N-87)*4)) ; [disp] stack 0x5d6230 int[N] person-by-base
@@ -1314,6 +1335,11 @@
 005dc486 2 4 81fae7030000 U-1 ; [M9 UNIT_MAX] cmp edx, 0x3e7
 005dc496 2 4 81fae7030000 U-1 ; [M9 UNIT_MAX] cmp edx, 0x3e7
 005dc7b7 3 4 0fb68e91623f07 AIFREG+0xd1 ; [M8] AI regular-force record -> AIFREG
+005dcb71 3 1 8b54862c 76 ; [M8] 16 corps: AI corps weight array
+005dcb80 3 1 8954862c 76 ; [M8] 16 corps: AI corps weight array
+005dcc1a 2 1 8b5a24 68 ; [M8] 16 corps: AI weight relative to count pointer
+005dcc1d 3 1 3b5c0e2c 76 ; [M8] 16 corps: AI corps weight array
+005dcc2c 2 1 83ff09 17 ; [M8] 16 corps: AI strongest corps search
 005dcd8f 3 4 0fb68644330000 0x3344+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005dcd96 3 4 c78486b432000007000000 0x32b4+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005dcdb9 3 4 0fb69644330000 0x3344+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
@@ -1638,6 +1664,9 @@
 005ddcd0 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
 005ddd1f 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
 005ddd67 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
+005debb1 2 1 83f808 16 ; [M8] 16 corps: AI desired corps cap
+005debd9 2 1 83fa09 17 ; [M8] 16 corps: AI desired corps scan
+005debe3 1 1 bf08000000 16 ; [M8] 16 corps: AI desired corps cap value
 005df095 1 1 0fbe0cbdc09f3f07 0xb6 ; [M8] AI record force byte: movsx -> movzx
 005df095 4 4 0fbe0cbdc09f3f07 AIUREC+0 ; [M9] AI unit record [0] -> AIUREC
 005df09f 3 4 8d04bdc09f3f07 AIUREC+0 ; [M9] AI unit record [0] -> AIUREC
@@ -2202,12 +2231,15 @@
 005f449c 2 4 c7834833000000000000 0x3348+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005f44a6 2 4 c7834c33000000000000 0x334c+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005f44b0 2 4 c7835033000000000000 0x3350+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
-005f4580 2 4 81ecb4010000 0x1b4+((N-87)*4) ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
-005f45c2 2 4 81c4b4010000 0x1b4+((N-87)*4) ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
+005f4580 2 4 81ecb4010000 (0x1b4+((N-87)*4))+64 ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
+005f45c2 2 4 81c4b4010000 (0x1b4+((N-87)*4))+64 ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
 005f4621 1 4 b92f000000 R+5 ; [M8 FORCE_COUNT] mov ecx, 0x2f
-005f470e 2 4 81c4b4010000 0x1b4+((N-87)*4) ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
-005f471b 2 4 81c4b4010000 0x1b4+((N-87)*4) ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
-005f47b8 2 4 81c4b4010000 0x1b4+((N-87)*4) ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
+005f46a5 2 1 83f808 16 ; [M8] 16 corps: AI existing delegated corps loop
+005f46d3 1 1 be08000000 16 ; [M8] 16 corps: AI creation cap
+005f4700 2 1 83f909 17 ; [M8] 16 corps: AI creation candidate scan
+005f470e 2 4 81c4b4010000 (0x1b4+((N-87)*4))+64 ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
+005f471b 2 4 81c4b4010000 (0x1b4+((N-87)*4))+64 ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
+005f47b8 2 4 81c4b4010000 (0x1b4+((N-87)*4))+64 ; [frame] stack 0x5f4580 int[N] AI-base byte+0x1f copy
 005f49b6 2 4 898688320000 0x3288+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005f49ec 2 4 8b866c320000 0x326c+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005f49fe 2 4 8d9e68320000 0x3268+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
@@ -2249,7 +2281,9 @@
 005f5540 2 4 8b8688320000 0x3288+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005f554d 2 4 898688320000 0x3288+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
 005f5590 2 4 8d8e94320000 0x3294+(N-87)*0x34 ; [disp] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
+005f5b2b 2 1 83fb08 16 ; [M8] 16 corps: AI all-corps actions
 005f5c10 2 4 81fbe8030000 U ; [M9 UNIT_COUNT] cmp ebx, 0x3e8
+005f5c88 2 1 83fb08 16 ; [M8] 16 corps: AI delegated corps actions
 005f606d 2 4 8d8f61af3f07 AICITY+1 ; [disp] AI subobject 0x73f612c: city records -> AICITY
 005f62b8 2 4 8d9661af3f07 AICITY+1 ; [disp] AI subobject 0x73f612c: city records -> AICITY
 005f6519 3 4 0fbf80168e3f07 AIBASE+2 ; [disp] AI subobject 0x73f612c: base records -> AIBASE
@@ -2300,6 +2334,7 @@
 005f9b0a 2 4 81ffe8030000 U ; [M9 UNIT_COUNT] cmp edi, 0x3e8
 005f9bae 1 4 b92f000000 R+5 ; [M8 ARRAY_SIZE] mov ecx, 0x2f
 00600b76 1 4 bb34000000 C+G ; [GATE_END] mov ebx, 0x34
+00603928 2 1 83f808 16 ; [M8] 16 corps: native corps dialog validation
 0061c35e 1 4 b8e0900700 0x790e0+(N-87)*0x50 ; [frame] stack 0x61c350: union slot [esp+0x1e038] (0x1e20 B
 0061c37f 3 4 898424e4900700 0x790e4+((N-87)*0x50) ; [disp] stack 0x61c350: union slot [esp+0x1e038] (0x1e20 B
 0061c398 3 4 899c24f0900700 0x790f0+((N-87)*0x50) ; [disp] stack 0x61c350: union slot [esp+0x1e038] (0x1e20 B
@@ -2563,6 +2598,7 @@
 00642c13 1 4 3de7030000 U-1 ; [M9 UNIT_MAX] cmp eax, 0x3e7
 0065c680 2 4 81fbe8030000 U ; [M9 UNIT_COUNT] cmp ebx, 0x3e8
 00675a66 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
+00675f64 2 1 83ff08 16 ; [M8] 16 corps: force-wide corps merge
 00676864 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
 006768c4 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 
 00677844 1 4 b950936a09 AREAHEX ; [imm] area hex-list object 0x96a9350 (AREAHEX): +0 ptr, 

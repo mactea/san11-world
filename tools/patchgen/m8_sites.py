@@ -268,8 +268,21 @@ REWRITE.append((0x6801e0, 0x680234 - 0x6801e0,
                 'test byte ptr [eax], 1; je L1; bts dword ptr [{FBITS}], ecx; ret 8; L1: btr dword ptr [{FBITS}], ecx; '
                 'L0: ret 8', 'flag bitset<F>: set on FBITS'))
 
+# New attack plans normally require three groups; keep the reduced one-group case.
+REWRITE.append((0x5efa34, 4, 'lea edx, [edx + 1]; nop',
+                'AI new attack plan: normal minimum 3 -> 2, reduced minimum remains 1'))
+
+# Ordinary transport need not wait for the city's domestic build plan. Ignore
+# this caller's readiness result; keep the shared helper and other gates intact.
+REWRITE.append((0x5f0aeb, 2, 'nop; nop',
+                'AI ordinary transport: remove domestic readiness gate'))
+
 # (va, original, replacement) re-encoded in caves
 CAVE_TEXT = [
+    # AI target selection passes a force id in ESI to the shared is_city helper.
+    # C can exceed R: accepting bandits (R+4) overruns AIFREG at 0x5e7973.
+    # Keep is_city unchanged for city callers; this call requires 0 <= id < R.
+    (0x5e77f7, 'call 0x4882b0', 'xor eax, eax; cmp esi, {R}; setb al'),
     # consistency check 0x482050: the two bit-set row pointers
     (0x48228a, 'add edi, 0x50', 'push eax; push ecx; push edx; push edi; mov eax, {FROWPTR}; call eax; add esp, 4; mov edi, eax; '
                                 'pop edx; pop ecx; pop eax'),
@@ -296,3 +309,18 @@ for va, what in [(0x47c996, 'city +0x38 corps'), (0x47e4f1, 'corps +4 force'), (
 # 255, past every bound, the same branch as -1 took)
 for va in (0x479483, 0x479502, 0x5df095):
     f(va, 0xbe, '0xb6', 'AI record force byte: movsx -> movzx', size=1)
+
+# Keep transport policy hooks beside their behavioral regression fixtures.
+from ai_transport_policy import CAVE_TEXT as TRANSPORT_CAVES, REWRITE as TRANSPORT_REWRITES
+CAVE_TEXT += TRANSPORT_CAVES
+REWRITE += TRANSPORT_REWRITES
+
+from corps_appointments import CAVE_TEXT as CORPS_APPOINTMENT_CAVES
+CAVE_TEXT += CORPS_APPOINTMENT_CAVES
+
+from corps_limits import FIELD as CORPS_LIMIT_FIELDS, CAVE_TEXT as CORPS_LIMIT_CAVES, FRAME_EXTRA
+FIELD += CORPS_LIMIT_FIELDS
+CAVE_TEXT += CORPS_LIMIT_CAVES
+
+from delegated_sortie import CAVE_TEXT as DELEGATED_SORTIE_CAVES
+CAVE_TEXT += DELEGATED_SORTIE_CAVES

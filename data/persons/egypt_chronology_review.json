@@ -1,0 +1,723 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-08",
+  "scope": "上一轮提出的埃及8个候选身份；不是全世界13365名扩展武将的完成审计",
+  "policy": {
+    "unknown_date": null,
+    "calendar": "CE; date strings retain source precision, not invented months/days",
+    "appearance": "取已证实活动/任职年作为游戏登场依据；约年和区间保持标签，不把文书年代当生卒年",
+    "deduplication": "全体源名单原文名/全名/别名检索，结合身份和列传核对；安装编号与源编号不共用",
+    "release_gate": "未知生卒年不自动填入游戏强制整数；所有候选未部署，未改剧本/存档/运行进程"
+  },
+  "baseline": [
+    {
+      "path": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\scenario\\SCEN002.S11",
+      "sha256": "37defe1f896ea0bf71b9d576a7883f6da7e259e85553463a1ec2ec546e0566d7"
+    },
+    {
+      "path": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\world_custom\\persons_bio.bin",
+      "sha256": "d09509f54c01d7b3ad89cfb29396afd75ddb653a5129d05f5226630e3749121f"
+    },
+    {
+      "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\roster.json",
+      "sha256": "d1203af79736a34ada8c4bd8e892a547e9b6d6d13f7e9977e7660b8073c0d985"
+    }
+  ],
+  "source_roster_count": 13365,
+  "installed_person_slots": 14163,
+  "sources": {
+    "heroninos": {
+      "url": "https://www.trismegistos.org/arch/archives/pdf/103.pdf",
+      "title": "Trismegistos Archives 103: Heroninos",
+      "access": "search-index excerpts; direct retrieval returned 403"
+    },
+    "heroninos_editor": {
+      "url": "https://www.accademiafiorentina.it/?pg=cr_hero",
+      "title": "Accademia Fiorentina: Heroninos archive, date conventions",
+      "access": "search-index excerpts"
+    },
+    "diodora": {
+      "url": "https://it.scribd.com/document/744437542/P-messeri-Firenze-2020",
+      "title": "D. Rathbone and M. Langellotti, Women in Charge: Two Accounts from the Heroninos Archive, P.Messeri (2020), pp.223-235, especially p.225",
+      "access": "indexed rehost of scholarly edition; publisher-hosted copy not retrieved"
+    },
+    "claudia": {
+      "url": "https://www.uni-koeln.de/phil-fak/ifa/zpe/downloads/2000/129pdf/129179.pdf",
+      "title": "Six Notes on Documentary Papyri, ZPE 129 (2000), p.179",
+      "access": "search-index text"
+    },
+    "claudia_death": {
+      "url": "https://mc.dlib.nyu.edu/files/books/isaw_asp000034/isaw_asp000034_lo.pdf",
+      "title": "P.Col. X 276, Petition to the Strategos, introduction",
+      "access": "search-index text"
+    },
+    "charite": {
+      "url": "https://pure.manchester.ac.uk/ws/portalfiles/portal/1574775967/FULL_TEXT.PDF",
+      "title": "Landowners and Tenants in Byzantine Hermopolis, Table 4.8",
+      "access": "search-index table; P.Charite 1 about 314?, P.Charite 2 312-322?"
+    },
+    "nearcheides": {
+      "url": "https://library.duke.edu/papyrus/records/666.html",
+      "title": "P.Duk.inv.666: Official letter, 340-05-08",
+      "access": "full catalogue read"
+    },
+    "ammon": {
+      "url": "https://www.trismegistos.org/arch/archives/pdf/31.pdf",
+      "title": "Trismegistos Archives 31: Aurelius Ammon scholasticus, especially pp.3-4 and family stemma",
+      "access": "search-index text; direct retrieval failed"
+    },
+    "ammon_petition": {
+      "url": "https://library.duke.edu/rubenstein/scriptorium/papyrus/records/1278.html",
+      "title": "P.Duk.inv.1278 / P.Ammon I 13, petition of 348-12-09 through 348-12-13",
+      "access": "full catalogue read"
+    },
+    "duke_overview": {
+      "url": "https://library.duke.edu/papyrus/texts/archives.html",
+      "title": "Duke Papyrus Archive: archive overview",
+      "access": "full page read; Horion profession conflicts with detailed catalogue and stemma"
+    },
+    "abinnaeus": {
+      "url": "https://connectinglateantiquities.org/text.html?id=plre-1-abinnaeus",
+      "title": "PLRE I: Flavius Abinnaeus, attested command 342-351",
+      "access": "full entry read in preceding research"
+    },
+    "abinnaeus_oxford": {
+      "url": "https://api.pageplace.de/preview/DT0400.9780192562463_A35502837/preview-9780192562463_A35502837.pdf",
+      "title": "Oxford Dictionary of Late Antiquity: Abinnaeus, Flavius (c.286-post 351)",
+      "access": "search-index entry"
+    },
+    "abinnaeus_career": {
+      "url": "https://en.wikipedia.org/wiki/Flavius_Abinnaeus",
+      "title": "Flavius Abinnaeus; cites Barnes (1985) and Ast (2018), discusses 336 versus 337/338 chronology",
+      "access": "full search-index entry; secondary cross-check"
+    }
+  },
+  "candidates": [
+    {
+      "key": "heroninos",
+      "name_orig": "Heroninos",
+      "aliases": [
+        "Heroneinos",
+        "Heroninus",
+        "赫罗尼诺斯",
+        "赫羅尼諾斯"
+      ],
+      "identity": "Theadelphia的庄园管理者",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "249-09",
+            "end": "268",
+            "kind": "任职区间；268年的季节为夏季"
+          }
+        ]
+      },
+      "calibrated_appear": 249,
+      "appearance_status": "attested_year",
+      "source_ids": [
+        "heroninos"
+      ],
+      "review_note": "不是殉道者Heron，也不与教父Heron混同。任职终止不是死亡。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [],
+        "source_similar_names": [],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "appianus",
+      "name_orig": "Aurelius Appianus",
+      "aliases": [
+        "Aurelios Appianos",
+        "Appianus",
+        "Appianos",
+        "阿庇安努斯",
+        "阿皮安努斯"
+      ],
+      "identity": "亚历山大议员、骑士及庄园所有人",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "231",
+            "end": "259",
+            "kind": "文献活动记录；末端须结合死亡上界阅读"
+          }
+        ],
+        "death_upper_bound": {
+          "date": "259-10",
+          "inclusive": true,
+          "meaning": "至259年10月已去世；不是死亡月份"
+        }
+      },
+      "calibrated_appear": 231,
+      "appearance_status": "attested_year",
+      "source_ids": [
+        "heroninos",
+        "heroninos_editor"
+      ],
+      "review_note": "231是已知活动年，不是出生年；不能与历史学家Appian混同。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [],
+        "source_similar_names": [],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "diodora",
+      "name_orig": "Aurelia Appiana Diodora alias Posidonia",
+      "aliases": [
+        "Appiana Diodora",
+        "Diodora",
+        "Posidonia",
+        "狄奥多拉",
+        "狄奧多拉"
+      ],
+      "identity": "Appianus之女、Antonius Philoxenos之妻",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "259-10",
+            "end": null,
+            "kind": "P.Prag.III 236月报的收件人；据2020年整理研究"
+          }
+        ],
+        "death_note": "确切死亡年月未核实；不把遗产交接或档案终止当作死亡。"
+      },
+      "calibrated_appear": 259,
+      "appearance_status": "attested_year_provisional",
+      "source_ids": [
+        "diodora",
+        "heroninos"
+      ],
+      "review_note": "比上一轮约260年的说法细化至259年10月；依据为学术整理本的索引文字，尚未独立阅读纸草原文。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [
+          {
+            "id": 14052,
+            "name_full": "弗拉維婭·馬克西米安娜·狄奧多拉",
+            "name_orig": "Flavia Maximiana Theodora",
+            "qid": "Q232094",
+            "region": "高盧",
+            "birth": 242,
+            "appear": 289,
+            "death": 301,
+            "bio": "馬克西米安之女，一說為其繼女。約289年嫁君士坦提烏斯一世，以結四帝之盟，生三子三女。其子孫如尤利烏斯·君士坦提烏斯一系，後出皇帝尤利安與加盧斯。"
+          }
+        ],
+        "source_similar_names": [],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "claudia_isidora",
+      "name_orig": "Claudia Isidora alias Apia",
+      "aliases": [
+        "Claudia Isidora",
+        "Klaudia Isidora",
+        "Apia",
+        "Apias",
+        "伊西多拉",
+        "伊西多爾"
+      ],
+      "identity": "Oxyrhynchos地主，Claudianus Appianus家族",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "214-07-12",
+            "end": null,
+            "kind": "P.Oxy.XLI 2997；目前检索到的最早可靠有年记录"
+          }
+        ]
+      },
+      "calibrated_appear": 214,
+      "appearance_status": "attested_year",
+      "source_ids": [
+        "claudia",
+        "claudia_death"
+      ],
+      "review_note": "不与游戏中的修女Saint Isidora或殉道者Isidore混同。225年财产归国库不能当作225年死亡。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [
+          {
+            "id": 10175,
+            "name_full": "埃及人伊西多爾",
+            "name_orig": "Isidore (Alexandrian martyr)",
+            "qid": "Q1342994",
+            "region": "埃及",
+            "birth": 205,
+            "appear": 221,
+            "death": 250,
+            "bio": "亞歷山卓人，於羅馬艦隊服役。德西烏斯迫害時艦隊泊於希俄斯島，被告發為基督徒，拒絕獻祭，受刑後被斬首，遺體投入井中。威尼斯聖馬可教堂奉有其遺骨。"
+          },
+          {
+            "id": 10314,
+            "name_full": "聖伊西多拉",
+            "name_orig": "Saint Isidora",
+            "qid": "Q1093812",
+            "region": "埃及",
+            "birth": 310,
+            "appear": 326,
+            "death": 365,
+            "bio": "上埃及塔本尼西女修道院修女。佯為癡愚，頭裹破布，做最卑賤的苦工，眾修女輕侮之。隱修士皮提里姆受天啟來訪，向其下拜，眾人始知其聖，紛紛懺悔。伊西多拉不堪尊崇，悄然出走，不知所終。被尊為首位「為基督而癡」者。"
+          },
+          {
+            "id": 10341,
+            "name_full": "亞歷山大里亞的伊西多爾",
+            "name_orig": "Isidoro de Alejandría",
+            "qid": "Q9009472",
+            "region": "埃及",
+            "birth": 318,
+            "appear": 334,
+            "death": 403,
+            "bio": "曾為尼特里亞沙漠修士，後受亞他那修按立為司鐸，主管亞歷山大里亞教會的濟貧事務，人稱「招待者」。晚年與主教提阿非羅交惡，被逐，投奔君士坦丁堡的金口約翰，403年卒。"
+          },
+          {
+            "id": 10352,
+            "name_full": "伊西多爾",
+            "name_orig": "Isidore (Thebaid abbot)",
+            "qid": "Q107863875",
+            "region": "埃及",
+            "birth": 330,
+            "appear": 346,
+            "death": 390,
+            "bio": "4世紀埃及基督教司鐸、沙漠苦修者，沙漠教父之一，大馬加略之同伴。約翰‧卡西安列其為斯凱提斯四個修道團體領袖之一。《羅馬殉道錄》稱其以聖潔、信德與奇蹟著稱。約390年卒。"
+          }
+        ],
+        "source_similar_names": [],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "charite",
+      "name_orig": "Aurelia Charite",
+      "aliases": [
+        "Aurelia Charité",
+        "Aurelia Kharite",
+        "Charite",
+        "Charité",
+        "卡里忒"
+      ],
+      "identity": "Hermopolis女地主、Amazonios之女",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "312",
+            "end": "322",
+            "kind": "P.Charite 2的文书断代区间，有问号；不是持续活动区间"
+          },
+          {
+            "start": "314",
+            "end": null,
+            "kind": "P.Charite 1约年，有问号"
+          }
+        ]
+      },
+      "calibrated_appear": 314,
+      "appearance_status": "approximate_game_setting",
+      "source_ids": [
+        "charite"
+      ],
+      "review_note": "314只能作为带约数的游戏登场建议，不是已经证明的确切首仕年。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [],
+        "source_similar_names": [],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "nearcheides",
+      "name_orig": "Aurelius Nearcheides",
+      "aliases": [
+        "Aurelius Nearchides",
+        "Aurelios Nearcheides",
+        "Nearcheides",
+        "Nearchides",
+        "涅阿尔基德斯",
+        "涅阿爾基德斯"
+      ],
+      "identity": "Hermopolite nome第十五pagus官员",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "340-05-08",
+            "end": null,
+            "kind": "P.Duk.inv.666官方来信的收件人"
+          }
+        ]
+      },
+      "calibrated_appear": 340,
+      "appearance_status": "attested_year",
+      "source_ids": [
+        "nearcheides"
+      ],
+      "review_note": "不能与三世纪殉道者Saint Nearchus按相似名字合并。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [],
+        "source_similar_names": [],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "ammon",
+      "name_orig": "Aurelius Ammon scholasticus",
+      "aliases": [
+        "Aurelius Ammon",
+        "Aurelios Ammon",
+        "Ammon scholasticus",
+        "Ammon",
+        "阿蒙"
+      ],
+      "identity": "Panopolis律师，Petearbeschinis之子",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": [
+          {
+            "start": "324",
+            "end": "330",
+            "kind": "P.Ammon I 3的文书断代区间，不是出生或死亡区间"
+          },
+          {
+            "start": "348-12-09",
+            "end": "348-12-13",
+            "kind": "P.Duk.inv.1278诉状书写时间区间"
+          },
+          {
+            "start": "365",
+            "end": "366",
+            "kind": "涉及本人和女儿土地的诉状断代区间"
+          }
+        ]
+      },
+      "calibrated_appear": null,
+      "appearance_status": "range_only_pending",
+      "source_ids": [
+        "ammon",
+        "ammon_petition"
+      ],
+      "review_note": "暂以324-330年作为最早记录的断代范围；不选中点伪装精确登场年。不能用整份家族档案281年起点作为其出生或活动年。",
+      "decision": "retain_candidate",
+      "game_import_status": "withheld_unknown_lifespan",
+      "deduplication": {
+        "source_name_matches": [
+          {
+            "id": 10306,
+            "name_full": "尼特里亞的聖阿蒙",
+            "name_orig": "Saint Amun",
+            "qid": "Q473349",
+            "region": "埃及",
+            "birth": 302,
+            "appear": 318,
+            "death": 357,
+            "bio": "埃及人，少時被迫成婚，與妻約守貞同居十八年。後入尼特里亞沙漠隱修，追隨者日眾，遂成著名的尼特里亞修道聚落。與大安東尼交好，安東尼曾見其靈魂升天之異象。"
+          },
+          {
+            "id": 12724,
+            "name_full": "貝勒尼基的阿蒙",
+            "name_orig": "Ammon of Berenice",
+            "qid": "",
+            "region": "昔蘭尼加",
+            "birth": 239,
+            "appear": 255,
+            "death": 270,
+            "bio": "五城地區貝勒尼基教會的主教。撒伯流派之說在五城地區盛行時，亞歷山卓主教狄奧尼修斯屢次致書於他，駁斥撒伯流的教義。"
+          }
+        ],
+        "source_similar_names": [
+          {
+            "id": 10151,
+            "name_full": "阿摩尼烏斯·薩卡斯",
+            "name_orig": "Ammonius Saccas",
+            "qid": "Q310173",
+            "region": "埃及",
+            "birth": 175,
+            "appear": 191,
+            "death": 242,
+            "bio": "亞歷山卓的哲學家，綽號「背麻袋者」，相傳出身挑夫。未留著述，講學於亞歷山卓，門下有普羅提諾、俄利根等人，被視為新柏拉圖主義的奠基者。"
+          },
+          {
+            "id": 10189,
+            "name_full": "亞歷山大的阿蒙娜莉翁",
+            "name_orig": "Ammonarion",
+            "qid": "",
+            "region": "埃及",
+            "birth": 205,
+            "appear": 221,
+            "death": 250,
+            "bio": "亞歷山大里亞聖潔童貞女。事先言明絕不說法官所要的話，受長時酷刑而守約不移，被押去處死；她一人承受了全部刑罰，使同伴不再受折磨。"
+          },
+          {
+            "id": 10233,
+            "name_full": "亞歷山大的阿摩尼烏斯",
+            "name_orig": "Ammonius of Alexandria (Christian philosopher)",
+            "qid": "Q473405",
+            "region": "埃及",
+            "birth": 247,
+            "appear": 263,
+            "death": 283,
+            "bio": "據信為3世紀亞歷山大港的基督教哲學家。有人認為他就是新柏拉圖主義哲學家阿摩尼烏斯·薩卡斯，但難以確證。"
+          },
+          {
+            "id": 10234,
+            "name_full": "埃及的阿蒙納斯",
+            "name_orig": "Ammonas of Egypt",
+            "qid": "Q695707",
+            "region": "埃及",
+            "birth": 247,
+            "appear": 263,
+            "death": 283,
+            "bio": "埃及的基督教隱修士、沙漠教父，約生於3世紀末或4世紀初。師事聖安東尼與潘波，其言行多見於《沙漠教父言行錄》。曾在斯凱提斯苦修十四年以克制怒氣，東正教尊為聖人。"
+          },
+          {
+            "id": 10350,
+            "name_full": "阿摩尼烏斯",
+            "name_orig": "Ammonius (exiled bishop)",
+            "qid": "",
+            "region": "埃及",
+            "birth": 323,
+            "appear": 339,
+            "death": 403,
+            "bio": "埃及、利比亞的尼西亞派主教。卡帕多細亞人喬治入亞歷山大後大肆迫害亞他那修黨人，阿摩尼烏斯與阿摩尼烏斯、德拉孔提烏斯等十餘主教同遭嚴酷流放，有人死於途中。"
+          },
+          {
+            "id": 10362,
+            "name_full": "皮阿蒙",
+            "name_orig": "Piammon",
+            "qid": "",
+            "region": "埃及",
+            "birth": 332,
+            "appear": 348,
+            "death": 383,
+            "bio": "與約翰同主持狄奧爾科斯一帶最著名的修院，身為長老，主持聖事極為莊敬。相傳行聖禮時見天使立於祭壇旁，將在場修士記入冊中，缺席者則除名。"
+          },
+          {
+            "id": 10363,
+            "name_full": "普雷赫特的福巴蒙",
+            "name_orig": "Phoibammon of Preht",
+            "qid": "Q118608119",
+            "region": "埃及",
+            "birth": 332,
+            "appear": 348,
+            "death": 378,
+            "bio": "戴克里先在位、庫爾奇亞努斯任埃及長官時，駐守底比斯普雷赫特營地的基督徒哨兵。他違抗向異教神祇獻祭的敕令，於5月26日在阿西尤特被處死，常與另一同名殉道者相混。"
+          },
+          {
+            "id": 10372,
+            "name_full": "尼拉蒙",
+            "name_orig": "Nilammon (bishop)",
+            "qid": "",
+            "region": "埃及",
+            "birth": 338,
+            "appear": 354,
+            "death": 368,
+            "bio": "埃及、利比亞的尼西亞派主教。卡帕多細亞人喬治入亞歷山大後大肆迫害亞他那修黨人，尼拉蒙與阿摩尼烏斯、德拉孔提烏斯等十餘主教同遭嚴酷流放，有人死於途中。"
+          },
+          {
+            "id": 10575,
+            "name_full": "赫拉克拉蒙",
+            "name_orig": "Heraclammon",
+            "qid": "",
+            "region": "奇里乞亞",
+            "birth": 227,
+            "appear": 243,
+            "death": 272,
+            "bio": "提亞納富人。奧勒良圍城，揚言城中不留一犬，赫拉克拉蒙懼死，指示城外天然土丘可登之處，城遂陷。奧勒良不喜叛國之徒，任士卒殺之，然將其家產歸還其子。"
+          },
+          {
+            "id": 10953,
+            "name_full": "雕刻家阿莫尼烏斯",
+            "name_orig": "Ammonio (scultore)",
+            "qid": "Q2696158",
+            "region": "希臘",
+            "birth": 256,
+            "appear": 272,
+            "death": 311,
+            "bio": "希臘的雕刻家。生平事蹟不詳。"
+          },
+          {
+            "id": 11288,
+            "name_full": "昆圖斯·塞雷努斯·薩莫尼庫斯",
+            "name_orig": "Serenus Sammonicus",
+            "qid": "Q933792",
+            "region": "意大利",
+            "birth": 167,
+            "appear": 183,
+            "death": 212,
+            "bio": "羅馬博學之士，藏書六萬餘卷，著有多種考據雜著。受塞維魯皇帝敬重，與皇子蓋塔友善。212年卡拉卡拉殺蓋塔後清洗其黨羽，薩莫尼庫斯於宴席間被殺。傳世醫藥詩《醫書》或為其作，載「阿布拉卡達布拉」咒語。"
+          },
+          {
+            "id": 11417,
+            "name_full": "小塞雷努斯·薩莫尼庫斯",
+            "name_orig": "Serenus Sammonicus the Younger",
+            "qid": "",
+            "region": "意大利",
+            "birth": 192,
+            "appear": 208,
+            "death": 243,
+            "bio": "老薩莫尼庫斯之子，與老戈爾迪安交好，為小戈爾迪安之師，甚愛之。臨終將其父所遺藏書六萬二千卷盡贈小戈爾迪安，戈爾迪安由此以文學顯名。"
+          },
+          {
+            "id": 13005,
+            "name_full": "卡法科布拉的阿摩尼烏斯",
+            "name_orig": "Ammonius of Kefar Chobra",
+            "qid": "",
+            "region": "猶太",
+            "birth": 332,
+            "appear": 348,
+            "death": 383,
+            "bio": "加薩卡法科布拉村人，在離貝特萊亞約十斯塔德處修道，苦修嚴謹堅毅。"
+          },
+          {
+            "id": 14189,
+            "name_full": "普布利烏斯·埃利烏斯·阿蒙紐斯",
+            "name_orig": "Publius Aelius Ammonius",
+            "qid": "",
+            "region": "默西亞",
+            "birth": 216,
+            "appear": 232,
+            "death": 252,
+            "bio": "騎士出身，歷任步騎輔兵長官，曾在亞美尼亞前線統領卡帕多西亞軍分遣隊，又統下默西亞分遣隊、默西亞「戈爾迪安」艦隊，終任下默西亞督辦。戈爾迪安三世的釋奴為其立碑。"
+          }
+        ],
+        "identity_resolution": "未找到同身份已有记录；同名候选需结合职业、年代、父名排除"
+      }
+    },
+    {
+      "key": "horion_withdrawn",
+      "name_orig": "Horion (previously described as Ammon's orator brother)",
+      "aliases": [
+        "Horion",
+        "Horion I",
+        "霍里翁",
+        "霍里昂"
+      ],
+      "identity": "上一轮身份组合存在冲突",
+      "history": {
+        "birth": null,
+        "death": null,
+        "attestations": []
+      },
+      "calibrated_appear": null,
+      "appearance_status": "withdrawn_identity_conflict",
+      "source_ids": [
+        "duke_overview",
+        "ammon",
+        "ammon_petition"
+      ],
+      "review_note": "详细家谱将Horion I列为祭司亲属；348年诉状把演说家兄弟记作Harpokration。撤回这个身份组合，不能自动改名或新增。",
+      "decision": "withdraw_identity_conflict",
+      "game_import_status": "blocked_identity_conflict",
+      "deduplication": {
+        "source_name_matches": [],
+        "source_similar_names": [],
+        "identity_resolution": "撤回；不进行合并或分配编号"
+      }
+    }
+  ],
+  "existing_person_issues": [
+    {
+      "installed_id": 10224,
+      "source_record": {
+        "id": 10236,
+        "name_full": "弗拉維烏斯·阿賓奈烏斯",
+        "name_orig": "Flavius Abinnaeus",
+        "qid": "Q634089",
+        "region": "埃及",
+        "birth": 248,
+        "appear": 264,
+        "death": 323,
+        "bio": "羅馬駐埃及軍官，或為敘利亞人、基督徒。自稱在底比斯的帕提亞弓騎兵隊服役三十三年，後奉命護送布倫米人使節赴君士坦丁堡，336年適逢君士坦丁大帝在位三十年慶典，升為護衛，後歸埃及領兵至351年以後。其書信檔案傳世。"
+      },
+      "installed_years": {
+        "appear": 264,
+        "birth": 248,
+        "death": 323
+      },
+      "installed_bio_sha256": "88ea8727a463fdd862236e85b684d7dc754804b041a16ddc67d93df4066e0ca5",
+      "issue": "死亡年323早于可证实的351年任职；登场264也与约286年出生的研究估计冲突",
+      "historical_birth": {
+        "year": 286,
+        "precision": "circa",
+        "month": null,
+        "day": null
+      },
+      "historical_death": null,
+      "historical_last_alive": "351-02-11",
+      "calibrated_appear": 303,
+      "appearance_status": "inferred_game_setting",
+      "alternative_appear_range": [
+        303,
+        305
+      ],
+      "basis": "按336年出使前服役33年回推约303；PLRE采用337/338年出使，回推304/305，保留争议。",
+      "source_ids": [
+        "abinnaeus",
+        "abinnaeus_oxford",
+        "abinnaeus_career"
+      ],
+      "decision": "existing_person_do_not_add",
+      "game_import_status": "withheld_unknown_death_and_disputed_early_career"
+    },
+    {
+      "installed_id": 14072,
+      "source_record": {
+        "id": 14126,
+        "name_full": "席昂（高盧醫者）",
+        "name_orig": "Theon (physician)",
+        "qid": "Q354384",
+        "region": "高盧",
+        "birth": 335,
+        "appear": 351,
+        "death": 405,
+        "bio": "亞歷山卓的數學家與天文學家，主持繆斯宮學者群。364年觀測並記錄日月食，校訂歐幾里得《幾何原本》，其版本流傳至近代，又為托勒密《天文學大成》作註。其女即女學者希帕提婭。"
+      },
+      "installed_years": {
+        "appear": 351,
+        "birth": 335,
+        "death": 405
+      },
+      "installed_bio_sha256": "54bb0bc748c708d7602edecef98d51509c701e2cb30d735a48142c5ac2260fcf",
+      "issue": "源身份Theon (physician)与数学家列传混用；不是单纯城市分配错误",
+      "decision": "identity_conflict_no_automatic_move_or_new_record",
+      "calibrated_appear": null,
+      "source_ids": []
+    }
+  ],
+  "summary": {
+    "candidate_identities_reviewed": 8,
+    "retained_candidates": 7,
+    "withdrawn_identity_conflicts": 1,
+    "firm_appearance_years": 4,
+    "provisional_appearance_years": 1,
+    "approximate_appearance_years": 1,
+    "pending_appearance_ranges": 1,
+    "birth_dates_exactly_verified": 0,
+    "death_dates_exactly_verified": 0,
+    "game_files_changed": 0,
+    "new_playable_officers_added": 0
+  }
+}

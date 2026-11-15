@@ -23,3 +23,11 @@ __pycache__/
 *.pyc
 *.part
 project.json
+
+# ---- 本地诊断输出、测试游戏副本与临时空文件
+/out/
+/outputs/
+/cands.py
+/known_world.py
+/merge.py
+/2048x1152），

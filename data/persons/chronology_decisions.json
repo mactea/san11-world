@@ -1,0 +1,1136 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-08",
+  "scope": "全地区新增武将；本文件只记录已逐项裁定的身份/年代，未出现者不能视为已核实",
+  "policy": "保留源编号；重定向是数据修订计划，尚未改写游戏文件。待考日期不伪造年月日；游戏设定与历史日期分开。",
+  "decisions": [
+    {
+      "keys": [
+        "gl:Q740977"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 10121,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            10121,
+            11036
+          ],
+          "name_orig": "Lucius Volusius Maecianus",
+          "qid": "Q740977"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q740977"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 10121,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            10121,
+            11036
+          ],
+          "name_orig": "Lucius Volusius Maecianus",
+          "qid": "Q740977"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q949530"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 10894,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            10894,
+            10895
+          ],
+          "name_orig": "Demonax",
+          "qid": "Q949530"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q949530"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 10894,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            10894,
+            10895
+          ],
+          "name_orig": "Demonax",
+          "qid": "Q949530"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q937426"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 10903,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            10903,
+            10905
+          ],
+          "name_orig": "Pinytus",
+          "qid": "Q937426"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q937426"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 10903,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            10903,
+            10905
+          ],
+          "name_orig": "Pinytus",
+          "qid": "Q937426"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q436931"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 11048,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11048,
+            11069
+          ],
+          "name_orig": "Leucius of Brindisi",
+          "qid": "Q436931"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q436931"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 11048,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11048,
+            11069
+          ],
+          "name_orig": "Leucius of Brindisi",
+          "qid": "Q436931"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q717414"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 11057,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11057,
+            11061
+          ],
+          "name_orig": "Plautius Quintillus",
+          "qid": "Q717414"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q717414"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 11057,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11057,
+            11061
+          ],
+          "name_orig": "Plautius Quintillus",
+          "qid": "Q717414"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q2488959"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 11059,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11059,
+            11089
+          ],
+          "name_orig": "Paraskevi of Rome",
+          "qid": "Q2488959"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q2488959"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 11059,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11059,
+            11089
+          ],
+          "name_orig": "Paraskevi of Rome",
+          "qid": "Q2488959"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q7167775"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 11080,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11080,
+            11118
+          ],
+          "name_orig": "Peregrine (martyr)",
+          "qid": "Q7167775"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q7167775"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 11080,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11080,
+            11118
+          ],
+          "name_orig": "Peregrine (martyr)",
+          "qid": "Q7167775"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q7881718"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 11093,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11093,
+            11094
+          ],
+          "name_orig": "Ummidia Cornificia Faustina",
+          "qid": "Q7881718"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q7881718"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 11093,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11093,
+            11094
+          ],
+          "name_orig": "Ummidia Cornificia Faustina",
+          "qid": "Q7881718"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q436439"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 11228,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11228,
+            11229
+          ],
+          "name_orig": "Pontianus of Spoleto",
+          "qid": "Q436439"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q436439"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 11228,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            11228,
+            11229
+          ],
+          "name_orig": "Pontianus of Spoleto",
+          "qid": "Q436439"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q220787"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 12231,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            12231,
+            12235
+          ],
+          "name_orig": "Theophilus of Antioch",
+          "qid": "Q220787"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q220787"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 12231,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            12231,
+            12235
+          ],
+          "name_orig": "Theophilus of Antioch",
+          "qid": "Q220787"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q1153549"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 12637,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            12637,
+            12638
+          ],
+          "name_orig": "Ballomar",
+          "qid": "Q1153549"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q1153549"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 12637,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            12637,
+            12638
+          ],
+          "name_orig": "Ballomar",
+          "qid": "Q1153549"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q1239294"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 12823,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            12823,
+            12826
+          ],
+          "name_orig": "Gaius Vettius Sabinianus Julius Hospes",
+          "qid": "Q1239294"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q1239294"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 12823,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            12823,
+            12826
+          ],
+          "name_orig": "Gaius Vettius Sabinianus Julius Hospes",
+          "qid": "Q1239294"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q468917"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 13127,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            13127,
+            13130
+          ],
+          "name_orig": "Saint Glyceria",
+          "qid": "Q468917"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q468917"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 13127,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同一QID、相同原文名，逐组对照列传的职位、亲属和事迹确认同一身份；生卒冲突不能据此消除。",
+      "evidence": [
+        {
+          "kind": "roster_identity_comparison",
+          "ids": [
+            13127,
+            13130
+          ],
+          "name_orig": "Saint Glyceria",
+          "qid": "Q468917"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q359945"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 9550,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同为撒狄主教Melito，作品、教区身份一致。",
+      "evidence": [
+        {
+          "url": "https://www.newadvent.org/fathers/250104.htm",
+          "kind": "primary_text_translation"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "eus:eus_02:11:Melito of Sardis"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 9550,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同为撒狄主教Melito，作品、教区身份一致。",
+      "evidence": [
+        {
+          "url": "https://www.newadvent.org/fathers/250104.htm",
+          "kind": "primary_text_translation"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q272087"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 12230,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同为叙利亚作家Tatian、Rhodo之师，《致希腊人书》作者；不是两个同名人。",
+      "evidence": [
+        {
+          "url": "https://www.newadvent.org/fathers/250105.htm",
+          "citation": "Eusebius HE V.13.1 and V.13.8",
+          "kind": "primary_text_translation"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "eus:eus_01:2:Tatian"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 12230,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同为叙利亚作家Tatian、Rhodo之师，《致希腊人书》作者；不是两个同名人。",
+      "evidence": [
+        {
+          "url": "https://www.newadvent.org/fathers/250105.htm",
+          "citation": "Eusebius HE V.13.1 and V.13.8",
+          "kind": "primary_text_translation"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "gl:Q7402115"
+      ],
+      "action": "keep_canonical",
+      "canonical_id": 13948,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同为177年里昂少年殉道者Ponticus，Blandina相伴，原文称十五岁；132年出生为生成器错误估算。",
+      "evidence": [
+        {
+          "url": "https://www.newadvent.org/fathers/250105.htm",
+          "kind": "primary_text_translation"
+        }
+      ],
+      "historical_birth": {
+        "year": 162,
+        "precision": "inferred_from_age_about_15"
+      },
+      "historical_death": {
+        "year": 177,
+        "precision": "historical_event_year"
+      },
+      "proposed_appear": 177
+    },
+    {
+      "keys": [
+        "eus:eus_00:9:Ponticus"
+      ],
+      "action": "duplicate_of_expanded",
+      "canonical_id": 13948,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "同为177年里昂少年殉道者Ponticus，Blandina相伴，原文称十五岁；132年出生为生成器错误估算。",
+      "evidence": [
+        {
+          "url": "https://www.newadvent.org/fathers/250105.htm",
+          "kind": "primary_text_translation"
+        }
+      ],
+      "historical_birth": {
+        "year": 162,
+        "precision": "inferred_from_age_about_15"
+      },
+      "historical_death": {
+        "year": 177,
+        "precision": "historical_event_year"
+      },
+      "proposed_appear": 177
+    },
+    {
+      "keys": [
+        "cbdb:135004"
+      ],
+      "action": "duplicate_of_stock",
+      "canonical_id": 548,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "CBDB原名卞氏(曹丕母)，丈夫曹操；与原版武宣卞皇后相同。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\cbdb.json",
+          "keys": [
+            "cbdb:135004"
+          ]
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\koei.json",
+          "id": 548
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "cbdb:135352"
+      ],
+      "action": "duplicate_of_stock",
+      "canonical_id": 371,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "CBDB原名孫氏(劉備妻)，与原版孙夫人相同。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\cbdb.json",
+          "keys": [
+            "cbdb:135352"
+          ]
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\koei.json",
+          "id": 371
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "cbdb:135006"
+      ],
+      "action": "duplicate_of_stock",
+      "canonical_id": 300,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "CBDB原名甄氏(曹丕妻)，与原版甄氏相同。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\cbdb.json",
+          "keys": [
+            "cbdb:135006"
+          ]
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\koei.json",
+          "id": 300
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "cbdb:136007"
+      ],
+      "action": "duplicate_of_stock",
+      "canonical_id": 291,
+      "identity_verified": true,
+      "dates_verified": false,
+      "basis": "CBDB原名徐氏(孫翊妻)，与原版徐氏相同；不能与孙权妃徐氏合并。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\cbdb.json",
+          "keys": [
+            "cbdb:136007"
+          ]
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\src\\koei.json",
+          "id": 291
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q12286106",
+        "wk:Q11934516"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "basis": "该条把Q12286106（元老、约176年去世的Vindex）和Q11934516（172年战死的禁卫军长官Vindex）合并。应拆成两个身份；不能把父子关系当成无争议事实。",
+      "evidence": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Marcus_Macrinius_Vindex",
+          "kind": "identity_cross_check"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "eun:eun_03:8:Theon (physician)",
+        "gl:Q354384"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "basis": "eun来源为高卢医者Theon，gl:Q354384为亚历山大数学家Theon；不同人物被合并。必须按来源拆开列传和年代，不能直接迁移城市。",
+      "evidence": [
+        {
+          "url": "https://www.wikidata.org/wiki/Q354384",
+          "kind": "identity_cross_check"
+        }
+      ],
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null
+    },
+    {
+      "keys": [
+        "wk:Q634089"
+      ],
+      "action": "chronology_correction",
+      "identity_verified": true,
+      "dates_verified": false,
+      "historical_birth": {
+        "year": 286,
+        "precision": "circa",
+        "month": null,
+        "day": null
+      },
+      "historical_death": {
+        "after": "351-02-11",
+        "precision": "lower_bound_not_death_date"
+      },
+      "proposed_appear": 303,
+      "appearance_precision": "inferred_game_setting",
+      "appearance_alternatives": [
+        303,
+        304,
+        305
+      ],
+      "basis": "阿賓奈不是新候选；现有264年登场、323年死亡与史料不符。303按336年出使之前服役33年回推，另有337/338年出使说。",
+      "evidence": [
+        {
+          "url": "https://connectinglateantiquities.org/text.html?id=plre-1-abinnaeus",
+          "kind": "PLRE I entry"
+        },
+        {
+          "url": "https://api.pageplace.de/preview/DT0400.9780192562463_A35502837/preview-9780192562463_A35502837.pdf",
+          "kind": "Oxford Dictionary of Late Antiquity entry"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "js:js_02:158:高柔",
+        "sl:sl_01:208:高柔",
+        "tj:tj_12:475:高柔"
+      ],
+      "action": "keep_distinct",
+      "identity_verified": true,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": {
+        "year": 313,
+        "precision": "year"
+      },
+      "proposed_appear": null,
+      "basis": "313年被王浚杀害的司空掾高柔不是263年去世的魏太尉高柔；同名不可合并。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_02.txt",
+          "citation": "晉書卷三十九王浚傳"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "gl:Q2470320",
+        "gl:Q3620723",
+        "gl:Q28374052",
+        "soz:soz_13:17:Apollonius (Scetis)"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "以弗所的反孟他努派作家（约210年）与Scetis修士（来源350-375）及其他Apollonius的QID混用。不能通过拉长寿命解决。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "gl:Q2470320",
+            "gl:Q3620723",
+            "gl:Q28374052",
+            "soz:soz_13:17:Apollonius (Scetis)"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "cth:cth_13:11:Paulinus (praeses Epiri Novae)",
+        "wk:Q7800379"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "372年新伊庇鲁斯总督Paulinus与216-220年任高卢/不列颠总督Tiberius Claudius Paulinus混用，源职位、年代不相容。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "cth:cth_13:11:Paulinus (praeses Epiri Novae)",
+            "wk:Q7800379"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "amm:amm_26:21:Marcus (haruspex)",
+        "wk:Q5517446"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "364年占卜者Marcus与213-214年下不列颠总督Gaius Julius Marcus混用，原文名、身份和年代不相容。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "amm:amm_26:21:Marcus (haruspex)",
+            "wk:Q5517446"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "cth:cth_09:4:Crispinus (official under Constantine)",
+        "wk:Q63105278"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "君士坦丁时315-320年的官员Crispinus与173年的毛里塔尼亚总督Publius Aelius Crispinus混用。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "cth:cth_09:4:Crispinus (official under Constantine)",
+            "wk:Q63105278"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "lib:lib_03:5:Tryphonianus",
+        "wk:Q21662232"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "359-360年的利巴尼乌斯书信人物Tryphonianus与三世纪神学家Trypho混用。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "lib:lib_03:5:Tryphonianus",
+            "wk:Q21662232"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "cth:cth_00:10:Valerianus (vicarius Hispaniarum)",
+        "cth:cth_01:11:Valerianus (vicarius 330)",
+        "cth:cth_06:0:Valerianus (vicarius Hispaniarum)",
+        "gl:Q3554324",
+        "gl:Q6766009",
+        "pir2:pir2_00:0:Quintus Decius Valerianus",
+        "pir2:pir2_01:3:Marcus Fabius Magnus Valerianus",
+        "pir3:pir3_07:1:Valerianus (grammarian)"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "193年至366年的多个Valerianus合并，含三世纪人物、365年西班牙副长官和主教；属于多个身份混合。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "cth:cth_00:10:Valerianus (vicarius Hispaniarum)",
+            "cth:cth_01:11:Valerianus (vicarius 330)",
+            "cth:cth_06:0:Valerianus (vicarius Hispaniarum)",
+            "gl:Q3554324",
+            "gl:Q6766009",
+            "pir2:pir2_00:0:Quintus Decius Valerianus",
+            "pir2:pir2_01:3:Marcus Fabius Magnus Valerianus",
+            "pir3:pir3_07:1:Valerianus (grammarian)"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "gl:Q558275",
+        "mhv:mhv_01:1:Deva (thera of Kappukagama)",
+        "wl:wl_05:0:Deva (Vakataka minister)"
+      ],
+      "action": "identity_conflict",
+      "identity_verified": false,
+      "dates_verified": false,
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "basis": "中观学者Aryadeva与《大史》的Deva长老及Vakataka大臣Deva混用；不能据合并后的209-330年区间拟造寿命。",
+      "evidence": [
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\build\\merged.jsonl",
+          "keys": [
+            "gl:Q558275",
+            "mhv:mhv_01:1:Deva (thera of Kappukagama)",
+            "wl:wl_05:0:Deva (Vakataka minister)"
+          ],
+          "kind": "contradictory_source_identities"
+        }
+      ]
+    }
+  ]
+}

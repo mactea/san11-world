@@ -1,0 +1,4 @@
+build/
+__pycache__/
+exports.inc
+winmm.def
