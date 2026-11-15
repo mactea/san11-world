@@ -1,6 +1,7 @@
 #pragma once
 // Hex-grid A* (0x567520): faster replacement, verification and statistics (see pathfind.cpp).
 #include <stdint.h>
+#include <vector>
 #include "d3dtrace.h"
 
 struct PathfindConfig {
@@ -18,4 +19,10 @@ struct PathfindConfig {
     void (*clear28)();  // what the original does at 0x567541 (clear HEX28)
 };
 bool pathfindInstall(const PathfindConfig& cfg, TraceLogFn log);
+bool pathfindReady();
 void pathfindBench(int lo, int hi);   // time original vs replacement at the next A* call
+// Logic/main thread only, outside a running search. Uses the installed native A* entry and copies
+// its shared HEX28 result before another search can overwrite it. Input is a real unit record;
+// converted to its native view wrapper before calling A*. Path starts at the unit.
+bool pathfindRoute(void* unit, uint32_t start, const std::vector<uint32_t>& targets,
+                   std::vector<uint32_t>* path, int* cost);

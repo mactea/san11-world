@@ -23,6 +23,7 @@ uint8_t* alloc(size_t size) {
 
 const uint32_t PERSON_SIZE = 0x190;
 int g_pstream = 850;
+int g_ptstream = 1100;
 TraceLogFn g_log = nullptr;
 
 // officer snapshot objects (vt 0x862d28) live on the stack of four dialogs with room for 1100 officers; their data
@@ -87,16 +88,19 @@ extern "C" const char* __cdecl personBio(int id) {
     return g_bio.data() + a;
 }
 
-bool personsSetup(int PS, const wchar_t* dataDir, Persons& p, TraceLogFn log) {
+bool personsSetup(int PS, int specials, const wchar_t* dataDir, Persons& p, TraceLogFn log) {
     // officer ids are i16 in the files and the virtual fathers move to 32000..32060 above 2000 officers
-    const int maxPS = 32000 - 250;
+    if(!personlayout::validSpecials(specials)) { if(log)log("persons: special_persons must be 100 or 300");return false; }
+    const int maxPS = 32000 - 150 - specials;
     if (PS < 850 || PS > maxPS) { if (log) log("persons: scenario officer count %d not supported (850..%d), using 850", PS, maxPS); PS = 850; }
     p.PS = PS;
-    p.PT = PS + 250;
+    p.specials=specials;
+    p.PT = personlayout::total(PS,specials);
     p.VF = p.PT <= 2000 ? 2000 : 32000;
     p.PERSONARR = alloc((size_t)p.PT * PERSON_SIZE);
     p.PPOOL = alloc(0x2000 + 0x10000 * 0x7c);
     p.PSTREAM = &g_pstream;
+    p.PTSTREAM = &g_ptstream;g_ptstream=p.PT;
     g_log = log;
     g_shadowSize = 4 + (size_t)p.PT * 0x14c;
     if (!p.PERSONARR || !p.PPOOL) { if (log) log("persons: allocation failed"); return false; }
@@ -104,6 +108,15 @@ bool personsSetup(int PS, const wchar_t* dataDir, Persons& p, TraceLogFn log) {
     if (dataDir && dataDir[0]) swprintf_s(g_bioPath, L"%s\\persons_bio.bin", dataDir);
     if (log) log("persons: PS=%d PT=%d VF=%d, arrays allocated (PERSONARR %p, PPOOL %p)", p.PS, p.PT, p.VF, p.PERSONARR, p.PPOOL);
     return true;
+}
+
+void personsResetStreamTail(int first) {
+    if(!g_p || first<0 || first>g_p->PT)return;
+    for(int id=first;id<g_p->PT;++id) {
+        auto p=g_p->PERSONARR+(size_t)id*PERSON_SIZE;
+        auto vt=*(void***)p;
+        if(vt)((void(__thiscall*)(void*,int))vt[0x20/4])(p,0);
+    }
 }
 
 uint8_t* personPtr(int id) {

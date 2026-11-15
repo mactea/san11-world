@@ -268,8 +268,16 @@ REWRITE.append((0x6801e0, 0x680234 - 0x6801e0,
                 'test byte ptr [eax], 1; je L1; bts dword ptr [{FBITS}], ecx; ret 8; L1: btr dword ptr [{FBITS}], ecx; '
                 'L0: ret 8', 'flag bitset<F>: set on FBITS'))
 
+# New attack plans normally require three groups; keep the reduced one-group case.
+REWRITE.append((0x5efa34, 4, 'lea edx, [edx + 1]; nop',
+                'AI new attack plan: normal minimum 3 -> 2, reduced minimum remains 1'))
+
 # (va, original, replacement) re-encoded in caves
 CAVE_TEXT = [
+    # AI target selection passes a force id in ESI to the shared is_city helper.
+    # C can exceed R: accepting bandits (R+4) overruns AIFREG at 0x5e7973.
+    # Keep is_city unchanged for city callers; this call requires 0 <= id < R.
+    (0x5e77f7, 'call 0x4882b0', 'xor eax, eax; cmp esi, {R}; setb al'),
     # consistency check 0x482050: the two bit-set row pointers
     (0x48228a, 'add edi, 0x50', 'push eax; push ecx; push edx; push edi; mov eax, {FROWPTR}; call eax; add esp, 4; mov edi, eax; '
                                 'pop edx; pop ecx; pop eax'),

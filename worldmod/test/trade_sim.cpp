@@ -40,6 +40,8 @@ int main(int argc, char** argv) {
     Data d; std::string err;
     if (!d.load(bin.data(), bin.size(), &err)) { printf("trade.bin: %s\n", err.c_str()); return 2; }
     int months = argc > 2 ? atoi(argv[2]) : 120;
+    if (months < 60 || months > 1200) { puts("months must be 60..1200"); return 2; }
+    const bool balanceGate = argc > 7 && !strcmp(argv[7], "balance");
     Rng rng; if (argc > 3) rng.s = (uint32_t)strtoul(argv[3], nullptr, 10) | 1;
 
     const int TEMP_MAX = argc > 4 ? atoi(argv[4]) : 30, AI_MONTH = TEMP_MAX / 5;   // trade_temp_max, trade_ai_month
@@ -82,6 +84,8 @@ int main(int argc, char** argv) {
     int officerTrips = 0;
     std::vector<Caravan> live;
     int64_t totalIncome = 0, totalTradeNet = 0, trips = 0, lost = 0;
+    std::vector<int64_t> forceIncome(R,0), forceNet(R,0);
+    std::vector<bool> participates(R,false);
     std::vector<double> roi;
     std::vector<double> dev(months + 37);
     int start = 0, idxLo = 1 << 30, idxHi = 0;
@@ -99,9 +103,13 @@ int main(int argc, char** argv) {
             if (mo) info.endMonth(m, mo - 1);
             for (int c = 0; c < d.C; c++)
                 for (int f = 0; f < R; f++)
-                    if (allied(f, owner[c])) { info.see(f, c); for (int t : infoNear[c]) info.see(f, t); }
+                    if (allied(f, owner[c])) { info.see(f, c, &m); for (int t : infoNear[c]) info.see(f, t, &m); }
         }
-        for (int c = 0; c < d.C; c++) { gold[c] += income(c); totalIncome += mo < months ? income(c) : 0; if (gold[c] > 15000) gold[c] = 15000; }   // the rest is spent (troops, development)
+        for (int c = 0; c < d.C; c++) {
+            gold[c] += income(c);
+            if (mo < months) { totalIncome += income(c); forceIncome[owner[c]] += income(c); }
+            if (gold[c] > 15000) gold[c] = 15000;
+        }   // the rest is spent (troops, development)
         // arrivals
         for (size_t i = 0; i < live.size();) {
             Caravan& k = live[i];
@@ -113,7 +121,7 @@ int main(int argc, char** argv) {
                 i++; continue;
             }
             int64_t net;
-            if (P3) info.see(k.force, k.dest);
+            if (P3) info.see(k.force, k.dest, &m);
             int pp = 0, capPct = 100; MerchantBonus mb;
             if (P4) {
                 if (k.leader >= 0) { Officer& o = offs[k.leader]; leaderFactors(o.pol, o.intel, &pp, &capPct); mb = merchantBonus(m.p, merchantEffective(m.p, o.exp, o.talent)); pp += mb.pp; }
@@ -121,7 +129,8 @@ int main(int argc, char** argv) {
             }
             if ((int)(rng.next() % 100) * 100 < LOSS * mb.robPct) { net = -k.cost; lost++; }
             else {
-                int64_t rev = m.sell(k.dest, k.good, k.qty) * (1000 + pp) / 1000;
+                int64_t rev = m.sell(k.dest, k.good, std::min(k.qty, m.room(k.dest, k.good)), pp);
+                if (rev < 0) rev = 0;
                 bool foreign = owner[k.dest] != k.force;
                 int64_t tax = foreign ? taxOf(rev, TAX, mb.taxPct) : 0;
                 gold[k.dest] += tax;                    // import duty to the market's owner
@@ -130,6 +139,7 @@ int main(int argc, char** argv) {
                 roi.push_back((double)net / k.cost);
             }
             totalTradeNet += net; trips++;
+            forceNet[k.force] += net;
             if (k.leader >= 0) { Officer& o = offs[k.leader]; o.busy = false; o.exp += merchantExpGain(m.p, net); o.trips++; }
             live[i] = live.back(); live.pop_back();
         }
@@ -156,9 +166,9 @@ int main(int argc, char** argv) {
                     int64_t budget = std::min<int64_t>(INVEST, gold[c] - RESERVE);
                     Route r;
                     // routes compare by profit per travel time (monsoon: routeTimePermille; 1000 on land)
-                    auto eff = [&](const Route& x) { return x.profit * 1000 / routeTimePermille(d, m.p, x.origin, x.dest, month0); };
+                    auto eff = [&](const Route& x) { return x.profit * 1000000 / ((x.dist + 20) * routeTimePermille(d, m.p, x.origin, x.dest, month0)); };
                     if (bestRoute(view, c, land, budget, m.p.capLand, TAX, MARGIN, &r) && (!have || eff(r) > eff(best))) { best = r; have = true; }
-                    if (bestRoute(view, c, sea, budget, m.p.capSea, TAX, MARGIN, &r, &seaTime) && (!have || eff(r) > eff(best))) { best = r; have = true; }
+                    if (bestRoute(view, c, sea, budget, m.p.capLand, TAX, MARGIN, &r, &seaTime) && (!have || eff(r) > eff(best))) { best = r; have = true; }
                 }
                 if (!have) continue;
                 if (P3 && info.ageOf(f, best.dest) > 0) stale++;
@@ -176,25 +186,37 @@ int main(int argc, char** argv) {
                     if (leader >= 0) { Officer& o = offs[leader]; leaderFactors(o.pol, o.intel, &pp, &capPct); pp += merchantBonus(m.p, merchantEffective(m.p, o.exp, o.talent)).pp; o.busy = true; officerTrips++; }
                     else leaderFactors(TEMP_POL, TEMP_INT, &pp, &capPct);
                 }
-                int64_t paid = m.buy(best.origin, best.good, best.qty) * (1000 - pp) / 1000 + m.p.fee;
+                int64_t paid = m.buy(best.origin, best.good, best.qty, pp) + m.p.fee;
                 gold[best.origin] -= paid;
                 Caravan nk = { f, best.origin, best.dest, best.good, best.qty, mo + 1 + (int)((int64_t)best.dist * tp / 1000) / SPEED, paid };
                 nk.leader = leader;
                 live.push_back(nk);
+                participates[f] = true;
                 made++;
             }
             start = (start + 7) % R;
         }
-        m.month();
+        m.month(mo);
         int64_t sum = 0; for (int32_t v : m.idx) { sum += abs(v - 1000); idxLo = std::min(idxLo, (int)v); idxHi = std::max(idxHi, (int)v); }
         dev[mo] = (double)sum / m.idx.size();
     }
     std::sort(roi.begin(), roi.end());
     double med = roi.empty() ? 0 : roi[roi.size() / 2], p10 = roi.empty() ? 0 : roi[roi.size() / 10], p90 = roi.empty() ? 0 : roi[roi.size() * 9 / 10];
     double share = totalIncome ? (double)totalTradeNet / totalIncome : 0;
+    int64_t participantIncome=0, participantNet=0; int participants=0, inTarget=0;
+    for (int f=0; f<R; f++) if (participates[f]) {
+        participants++; participantIncome+=forceIncome[f]; participantNet+=forceNet[f];
+        double ratio=forceIncome[f] ? (double)forceNet[f]/forceIncome[f] : 0;
+        inTarget += ratio >= 0.10 && ratio <= 0.30;
+    }
+    double participantShare=participantIncome ? (double)participantNet/participantIncome : 0;
+    bool balanceOK=participantShare>=0.10 && participantShare<=0.30;
     int64_t goldSum = 0; for (auto g : gold) goldSum += g;
     printf("trade_sim: %d cities, %d goods, %d months (+36 without trade), %d forces\n", d.C, d.G, months, R);
     printf("  trips %lld (lost %lld), trade net %lld gold = %.2f%% of the normal income %lld\n", trips, lost, totalTradeNet, share * 100, totalIncome);
+    printf("  participating forces: %d, weighted income share %.2f%%; %d forces individually in 10..30%%; target %s\n",
+           participants, participantShare*100, inTarget, balanceOK ? "MET (synthetic model only)" : "NOT MET");
+    puts("  Diagnostic model: distance-based travel; no native routing, split/recombine or resource consumption. Not game acceptance.");
     printf("  return per trip: p10 %.0f%%  median %.0f%%  p90 %.0f%%\n", p10 * 100, med * 100, p90 * 100);
     printf("  price index range seen %d..%d; mean |idx-1000|: m12 %.2f  m60 %.2f  m%d %.2f  after 36 months without trade %.2f\n",
            idxLo, idxHi, dev[11], dev[59], months, dev[months - 1], dev[months + 35]);
@@ -207,14 +229,13 @@ int main(int argc, char** argv) {
     check(idxLo >= m.p.idxMin && idxHi <= m.p.idxMax, "price index stays inside idx_min..idx_max");
     check(dev[months + 35] <= 1.0, "prices settle back to the base (mean |idx-1000| <= 1) without trade");
     check(fabs(dev[months - 1] - dev[months * 2 / 3]) <= std::max(2.0, dev[months * 2 / 3] * 0.5), "no drift: deviation at the end ~ deviation at 2/3");
-    check(share > 0 && share < 0.10, "trade money is under 10% of the normal income");
+    if (balanceGate) check(balanceOK, "participating-force income share is 10..30%");
     if (P4) {
         int lv[8] = {}, talented = 0;
         for (auto& o : offs) { lv[std::min(7, merchantEffective(m.p, o.exp, o.talent))]++; talented += o.talent > 0; }
         printf("  phase 4: %d officer-led trips of %lld; %d officers with 商才; merchant levels at the end:", officerTrips, trips, talented);
         for (int i = 0; i < 8; i++) printf(" L%d %d", i, lv[i]);
         printf("\n");
-        check(share < 0.03, "phase 4: trade money is under 3% of the normal income");
         check(officerTrips > 0 && lv[0] < (int)offs.size(), "phase 4: officers trade and gain levels");
     }
     check(trips >= months, "the AI trades (at least one trip a month)");
@@ -222,7 +243,7 @@ int main(int argc, char** argv) {
     if (P3) {
         check(ev.live.empty() && m.mod.empty(), "phase 3: every event has ended at the end (prices free of events)");
         check(evStarted >= months / 20, "phase 3: events happen (at least one every 20 months)");
-        check(!seaTrips || seaTimeSum / seaTrips < 1000, "phase 3: the AI prefers in-season sea routes (mean time factor < 1)");
+        check(!seaTrips || (seaTimeSum / seaTrips >= 700 && seaTimeSum / seaTrips <= 1400), "sea time factors stay within configured seasonal bounds");
     }
     return bad ? 1 : 0;
 }

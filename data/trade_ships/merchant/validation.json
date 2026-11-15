@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "triangles": 7492,
+  "vertices": 22476,
+  "parts": 21,
+  "files": {
+    "merchant_ship.glb": "68c487edf02f54363b2c7a2bc3e2f4f95e06621867eef7b9002ab570c30bb5fe",
+    "merchant_ship.obj": "1242c67ec42a4d50ec57454e9f2f8f7848d972c1dbb14de54b7bebccd80bce5b",
+    "merchant_ship.mtl": "20a6f5dbedc4f5f297b56348aee4fc9659cac0011c09861939f603d12aa91458",
+    "merchant_ship.wkm": "c05fe59db204baf747b650abb4ee5dd45359fea800858a39d9fd9c04cf6517f4",
+    "merchant_ship.wft": "8830e5d59c78fcb9200a8d57dc882b9a79561d2a2d0eb00da52896b96a03f88b"
+  }
+}

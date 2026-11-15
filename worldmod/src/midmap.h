@@ -27,10 +27,11 @@ bool midmapHexToPixel(int lo, int hi, float margin, float* px, float* py);   // 
 // as off the map); default 600. The overlay is called at the end of midmapRenderNames (on every compose).
 void midmapSetClip(int width);
 int midmapClip();
-typedef void (*MidmapOverlayFn)(uint32_t* dst, int pitch);
+// Pass the composing MapUI explicitly, including during dialog initialization.
+typedef void (*MidmapOverlayFn)(void* ui, uint32_t* dst, int pitch);
 void midmapSetOverlay(MidmapOverlayFn fn);
 bool midmapPixelToHex(float mx, float my, int* lo, int* hi);
 
 // paint the map area (600x600 ARGB, pitch in pixels); baseColour[b]: tint of base b (alpha = strength, 0 = none)
 void midmapRender(uint32_t* dst, int pitch, const uint32_t* baseColour, bool borders, bool roads);
-void midmapRenderNames(uint32_t* dst, int pitch);
+void midmapRenderNames(void* ui, uint32_t* dst, int pitch);

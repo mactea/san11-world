@@ -22,9 +22,13 @@
 #include "forces.h"
 #include "units.h"
 #include "persons.h"
+#include "skills.h"
+#include "skill_telemetry.h"
+#include "research_progress.h"
 #include "cityshape.h"
 #include "movement.h"
 #include "trade.h"
+#include "garrison.h"
 #include "threads.h"
 #include "dllblock.h"
 
@@ -47,13 +51,17 @@ struct Config {
     int bases = 0;               // 1 = base-count patch set (worldmod_bases*.txt, bases.cpp): cities = C
     int R = 42;                  // regular forces = regular corps (forces.cpp, M8_FORCES.md); forces = corps = R + 5
     int U = 1000;                // units (部队) on the map (units.cpp, M9_UNITS.md); locations N..N+U-1 are units
-    int PS = 850;                // scenario officers (persons.cpp, M10_PERSONS.md); all officers PT = PS + 250
+    int PS = 850;                // scenario officers (persons.cpp, M10_PERSONS.md)
+    int specials = 100;          // appended special-person slots; 100 or 300
+    int faces = 2400;            // portrait capacity; metadata, archive indices and UI bounds grow together
     int X0 = 0, Y0 = 0;          // where the original 200x200 China map sits in the world (Y0 must be even)
     int enable = 1;              // 0 = proxy only, no patches
     int verifyOnly = 0;          // 1 = check patch table against exe bytes, write nothing
     int trace = 0;               // 1 = log Direct3D calls by game call site (worldmod_trace_<section>.log)
     int automation = 0;          // 1 = test-automation channel (automation.cpp)
     int autoSkip = 0;            // 1 = click through the opening events and dialogs when a map loads (automation.cpp)
+    int skillCombos = 0;
+    int tradePictures = 0;       // trade pictures/ship assets need device hooks without automation
     int worldTerrain = 0;        // 1 = whole-world 3D terrain (terrainworld.cpp, worldmod_terrain*.txt)
     wchar_t dataDir[MAX_PATH] = L"";   // world_shex.bin / world_height.npy / world_mat.npy / world_palette.bin
     char saveDir[MAX_PATH] = "";       // save_dir=: the game's Documents folder (saves, settings) becomes <game>\<save_dir>
@@ -93,6 +101,8 @@ static void loadConfig() {
     g_cfg.R = GetPrivateProfileIntW(g_section, L"forces", 42, ini);
     g_cfg.U = GetPrivateProfileIntW(g_section, L"units", 1000, ini);
     g_cfg.PS = GetPrivateProfileIntW(g_section, L"persons", 850, ini);
+    g_cfg.specials = GetPrivateProfileIntW(g_section, L"special_persons", 100, ini);
+    g_cfg.faces = GetPrivateProfileIntW(g_section, L"faces", 2400, ini);
     g_cfg.X0 = GetPrivateProfileIntW(g_section, L"china_x", 0, ini);
     g_cfg.Y0 = GetPrivateProfileIntW(g_section, L"china_y", 0, ini);
     g_cfg.enable = GetPrivateProfileIntW(L"mod", L"enable", 1, ini);
@@ -131,6 +141,8 @@ static void loadConfig() {
         WideCharToMultiByte(CP_ACP, 0, sd, -1, g_cfg.saveDir, MAX_PATH, nullptr, nullptr);
     }
     g_cfg.autoSkip = GetPrivateProfileIntW(g_section, L"auto_skip", 0, ini);
+    g_cfg.skillCombos = GetPrivateProfileIntW(g_section, L"skill_combos", 0, ini);
+    g_cfg.tradePictures = g_cfg.enable && !g_cfg.verifyOnly && GetPrivateProfileIntW(g_section,L"trade",0,ini) && (GetPrivateProfileIntW(g_section,L"trade_ui",1,ini) || GetPrivateProfileIntW(g_section,L"trade_ship_visual",1,ini));
     g_cfg.worldTerrain = GetPrivateProfileIntW(g_section, L"world_terrain", 0, ini);
     g_cfg.cityShapes = GetPrivateProfileIntW(g_section, L"city_shapes", 1, ini);
     {
@@ -151,6 +163,7 @@ static bool configValid() {
     if (c.W < 200 || c.H < 200 || c.W % 200 || c.H % 200) return false;
     if (c.W > 8000 || c.H > 8000) return false;
     if (c.X0 < 0 || c.Y0 < 0 || c.X0 + 200 > c.W || c.Y0 + 200 > c.H || (c.Y0 & 1)) return false;
+    if (c.faces < 2400 || c.faces > 32760 || (c.faces & 1)) return false;
     return true;
 }
 
@@ -187,8 +200,9 @@ struct Eval {
         if (is("R")) return g_cfg.R;
         if (is("U")) return g_cfg.U;
         if (is("PS")) return g_cfg.PS;
-        if (is("PT")) return g_cfg.PS + 250;
-        if (is("VF")) return g_cfg.PS + 250 <= 2000 ? 2000 : 32000;
+        if (is("PT")) return personlayout::total(g_cfg.PS,g_cfg.specials);
+        if (is("SPECIALS")) return g_cfg.specials;
+        if (is("VF")) return personlayout::total(g_cfg.PS,g_cfg.specials) <= 2000 ? 2000 : 32000;
         if (is("B20")) return (int64_t)(uintptr_t)g_world.hex20;
         if (is("E20")) return (int64_t)(uintptr_t)g_world.hex20 + W * H * 20;
         if (is("B28")) return (int64_t)(uintptr_t)g_world.hex28;
@@ -1427,6 +1441,8 @@ static void installViewTweaks() {
 // drag; a click without dragging still moves the camera there).
 static Bases* g_bases = nullptr;
 static Forces* g_forces = nullptr;
+
+#include "skill_actor_telemetry.inc"
 static const uint32_t MAPUI_VT = 0x859670;
 typedef int(__thiscall* MapUiComposeFn)(void* ui);                                   // 0x640260
 typedef void(__thiscall* MapUiLayoutFn)(void* ui);                                   // 0x63fd00
@@ -1480,7 +1496,7 @@ static int __fastcall mmCompose(uint8_t* ui, void*) {
     void** vt = *(void***)tex;
     if (((LockFn)vt[0x4c / 4])(tex, 0, &lr, &rc, 0) >= 0) {
         midmapRender((uint32_t*)lr.pBits, lr.Pitch / 4, col.data(), mode >= 0 && mode <= 4, (ui[0x80] & 0x20) != 0);
-        midmapRenderNames((uint32_t*)lr.pBits, lr.Pitch / 4);
+        midmapRenderNames(ui, (uint32_t*)lr.pBits, lr.Pitch / 4);
         ((UnlockFn)vt[0x50 / 4])(tex, 0);
     }
     return r;
@@ -1593,15 +1609,18 @@ static void installMidmapHooks() {
 // before the post-load fixups 0x493400, which look positions up in the map): scenarios and TS stages
 // store China-local hex positions; move them to China's place in the world (COORDS.md H1).
 // Saves written in world mode already hold world positions.
-static void __stdcall translateLoaded(uint8_t* stream) {
+static int __stdcall translateLoaded(uint8_t* stream) {
     g_loadThreadId = GetCurrentThreadId();
-    tradeStream(stream);                           // M13: the TRAD block of saves (trade.cpp; nothing unless trade=1)
     int rdKind = *(int*)(stream + 0x54);           // M9: unit records the stream did not hold (not master data 4 / 0x18)
+    skillsTelemetryStream(*(int*)(stream + 8),rdKind);
+    if (!tradeStream(stream)) return false;         // abort if the trade block could not be written
+    if (*(int*)(stream + 8) == 1 && rdKind != 4 && rdKind != 0x18) garrisonReset();
     if (*(int*)(stream + 8) == 1 && g_units && rdKind != 4 && rdKind != 0x18) unitsResetTail(*g_units);
-    if (*(int*)(stream + 8) != 1 || (!g_cfg.X0 && !g_cfg.Y0)) return;      // reading only
+    if (*(int*)(stream + 8) == 1 && g_persons && rdKind != 4 && rdKind != 0x18) personsResetStreamTail(*g_persons->PTSTREAM);
+    if (*(int*)(stream + 8) != 1 || (!g_cfg.X0 && !g_cfg.Y0)) return true;      // reading only
     int kind = *(int*)(stream + 0x54);
     bool chinaLocal = kind == 2 || kind == 3 || kind == 0x16 || kind == 0x17 || kind == 0x0C || kind == 0x1B;
-    if (!chinaLocal) return;
+    if (!chinaLocal) return true;
     auto move = [](int16_t* p) {
         if (p[0] >= 0 && p[0] < CHINA && p[1] >= 0 && p[1] < CHINA) { p[0] += (int16_t)g_cfg.Y0; p[1] += (int16_t)g_cfg.X0; return 1; }
         return 0;
@@ -1614,6 +1633,7 @@ static void __stdcall translateLoaded(uint8_t* stream) {
         move((int16_t*)(u + 0x38));
     }
     logf("loaded stream kind %#x: %d building and %d unit positions moved into the world", kind, nb, nu);
+    return true;
 }
 
 __declspec(naked) static void loadedThunk() {
@@ -1621,13 +1641,18 @@ __declspec(naked) static void loadedThunk() {
         pushad
         push ebp
         call translateLoaded
+        test eax, eax
         popad
+        jz failed
         cmp dword ptr [ebp + 8], 1            // the 10 replaced bytes: cmp [ebp+8],1 / jne 0x493C73
         je cont
         push 0x493C73
         ret
     cont:
         push 0x493BD8
+        ret
+    failed:
+        push 0x493BC5                      // original serializer failure epilogue
         ret
     }
 }
@@ -1644,9 +1669,10 @@ static HeaderIoFn g_hdrReadOrig = nullptr, g_hdrWriteOrig = nullptr;
 // and after the write.
 static uint32_t streamMarkPS(uint32_t v) {
     int PS = g_persons ? g_persons->PS : 850;
-    if (PS == 850) return v;
+    int specials=g_persons?g_persons->specials:100;
+    if (PS == 850 && specials==100) return v;
     if (v > 0xff) { logf("ERROR: header dword 0x20 = %#x does not leave room for the officer count", v); return v; }
-    return v | 'P' << 8 | (uint32_t)PS << 16;
+    return personlayout::mark(v,PS,specials);
 }
 static uint32_t streamMark() {
     int R = g_forces ? g_forces->R : 42, U = g_units ? g_units->U : 1000;
@@ -1655,6 +1681,7 @@ static uint32_t streamMark() {
 }
 static int __fastcall hdrRead(uint8_t* hdr, void*, uint8_t* stream) {
     int r = g_hdrReadOrig(hdr, stream);
+    if(!r)return r;
     uint32_t m = *(uint32_t*)(hdr + 0x30);
     bool wf = (m & 0xffff) == ('F' << 8 | 'W'), wu = (m & 0xff) == 'U';
     if (g_bases && g_bases->IDWIDE) InterlockedExchange((LONG*)g_bases->IDWIDE, m == WIDE_MARK || wf || wu);
@@ -1672,14 +1699,19 @@ static int __fastcall hdrRead(uint8_t* hdr, void*, uint8_t* stream) {
     }
     if (g_persons) {
         uint32_t mp = *(uint32_t*)(hdr + 0x24);
-        bool marked = (mp >> 8 & 0xff) == 'P';
-        int PS = g_persons->PS, streamPS = marked ? (int)(mp >> 16) : 850;
+        bool marked = personlayout::marked(mp);
+        int PS = g_persons->PS, streamPS = personlayout::streamScenario(mp);
+        int streamPT=personlayout::total(streamPS,personlayout::streamSpecials(mp));
+        if(!master && (streamPT>g_persons->PT || streamPS<850 || streamPS>PS || (streamPS!=PS && kind!=0x16))) {
+            logf("ERROR: incompatible officer stream PS=%d PT=%d, runtime PS=%d PT=%d; load rejected",streamPS,streamPT,PS,g_persons->PT);return 0;
+        }
         if (marked) *(uint32_t*)(hdr + 0x24) = mp & 0xff;
         // a scenario (kind 0x16) may hold fewer officers (the rest stay empty); elsewhere the new / special officer
         // ids follow PS, so a different count cannot load
         if (streamPS > PS || (streamPS != PS && kind != 0x16 && !master))
             logf("ERROR: this file (kind %#x) was made for %d scenario officers, the game runs %d (worldmod.ini persons=): it will not load correctly", kind, streamPS, PS);
         *g_persons->PSTREAM = streamPS < PS ? streamPS : PS;
+        *g_persons->PTSTREAM = streamPT<g_persons->PT?streamPT:g_persons->PT;
     }
     return r;
 }
@@ -1688,7 +1720,7 @@ static int __fastcall hdrWrite(uint8_t* hdr, void*, uint8_t* stream) {
     if (g_bases && g_bases->IDWIDE) InterlockedExchange((LONG*)g_bases->IDWIDE, 1);
     if (g_units) *g_units->USTREAM = g_units->U;
     uint32_t v = *(uint32_t*)(hdr + 0x24);
-    if (g_persons) { *(uint32_t*)(hdr + 0x24) = streamMarkPS(v); *g_persons->PSTREAM = g_persons->PS; }
+    if (g_persons) { *(uint32_t*)(hdr + 0x24) = streamMarkPS(v); *g_persons->PSTREAM = g_persons->PS; *g_persons->PTSTREAM=g_persons->PT; }
     int r = g_hdrWriteOrig(hdr, stream);
     *(uint32_t*)(hdr + 0x24) = v;
     return r;
@@ -1777,6 +1809,10 @@ static void installHooks() {
     logf("hooks installed (hexCtor, shex=%s, hex28 dirty-page clear=%s)", g_shexOrig ? "yes" : "no", clear ? "yes" : "no");
     PathfindConfig pf = {};
     pf.mode = g_cfg.astarMode; pf.margin = g_cfg.astarMargin; pf.benchSlow = g_cfg.astarBenchSlow; pf.benchGoal = g_cfg.astarBenchGoal; pf.stats = g_cfg.astarStats; pf.enterLog = g_cfg.astarEnter; pf.verify = g_cfg.astarVerify; pf.benchable = g_cfg.automation;
+    wchar_t tradeIni[MAX_PATH]; swprintf_s(tradeIni,L"%s\\worldmod.ini",g_dir);
+    // Caravan steps can cost one point; their searches need the adjusted heuristic
+    // even when ordinary units use the original A* mode.
+    pf.benchable = pf.benchable || GetPrivateProfileIntW(g_section,L"trade",0,tradeIni)!=0;
     pf.chinaLo = g_cfg.Y0; pf.chinaHi = g_cfg.X0; pf.hex28 = g_hex28Alloc; pf.hex28Size = g_hex28AllocSize;
     pf.clear28 = clear ? clearHex28Dirty : clearHex28All;
     pathfindInstall(pf, logf);
@@ -1797,7 +1833,7 @@ extern "C" void* WINAPI Direct3DCreate9(UINT sdk) {
     relaunchFromAsciiPath();
     typedef void* (WINAPI* F)(UINT); static F f = (F)realProc("Direct3DCreate9");
     void* d3d = f ? f(sdk) : nullptr;
-    return (g_cfg.trace || g_cfg.automation || g_cfg.autoSkip) ? traceWrapDirect3D9(d3d) : d3d;
+    return (g_cfg.trace || g_cfg.automation || g_cfg.autoSkip || g_cfg.tradePictures) ? traceWrapDirect3D9(d3d) : d3d;
 }
 extern "C" HRESULT WINAPI Direct3DCreate9Ex(UINT sdk, void** out) {
     typedef HRESULT(WINAPI* F)(UINT, void**); static F f = (F)realProc("Direct3DCreate9Ex");
@@ -1865,7 +1901,7 @@ static void init() {
         if (g_cfg.watchObjList == 2) { DWORD old; VirtualProtect((void*)(uintptr_t)OBJ_GUARD_PAGE, 4096, PAGE_READONLY, &old); }
         logf("object list watch: heads %08x/%08x, validation thread started", OBJ_USED, OBJ_FREE);
     }
-    if (g_cfg.trace || g_cfg.automation || g_cfg.autoSkip) traceInit(g_dir, g_section, logf, g_cfg.trace != 0);
+    if (g_cfg.trace || g_cfg.automation || g_cfg.autoSkip || g_cfg.tradePictures) traceInit(g_dir, g_section, logf, g_cfg.trace != 0);
     if (g_cfg.trace) logf("d3d trace enabled");
     if (!isTargetExe()) { logf("not the expected san11pk.exe build; patches disabled"); return; }
     hookIat(IAT_SHGetPathFromIDListA, (void*)pathFromIDListHook);
@@ -1920,6 +1956,15 @@ static void init() {
     num("CVC", 4 * g_cfg.X0);
     int bad = loadPatches(L"worldmod_patches.txt");
     bad += loadCaves(L"worldmod_caves.txt", false);
+    if (g_cfg.faces > 2400) {
+        auto meta = VirtualAlloc(nullptr, (size_t)g_cfg.faces * 4, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+        auto manager = VirtualAlloc(nullptr, (size_t)g_cfg.faces * 24 + 0x1e8, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+        if (!meta || !manager) { logf("ERROR: portrait arrays could not be set up. Patches disabled."); return; }
+        num("FCOUNT", g_cfg.faces); Eval::add("FMETA", meta); Eval::add("FMAN", manager);
+        logf("portraits: capacity %d, metadata %p, archive manager %p", g_cfg.faces, meta, manager);
+        bad += loadPatches(L"worldmod_portraits.txt");
+        bad += loadCaves(L"worldmod_portraits_caves.txt", true);
+    }
     if (g_cfg.bases) {
         static Units un;
         if (!unitsSetup(g_cfg.U, un, logf)) { logf("ERROR: unit arrays could not be set up. Patches disabled."); return; }
@@ -1930,11 +1975,11 @@ static void init() {
             { "UPOOL", un.UPOOL }, { "SNAPSHADOW", (void*)snapShadow } };
         for (auto& e : usyms) Eval::add(e.n, e.v);
         static Persons pe;
-        if (!personsSetup(g_cfg.PS, g_cfg.dataDir, pe, logf)) { logf("ERROR: officer arrays could not be set up. Patches disabled."); return; }
+        if (!personsSetup(g_cfg.PS, g_cfg.specials, g_cfg.dataDir, pe, logf)) { logf("ERROR: officer arrays could not be set up. Patches disabled."); return; }
         g_persons = &pe;
         g_cfg.PS = pe.PS;                  // the patch expressions use the count personsSetup accepted
         struct { const char* n; const void* v; } psyms[] = {
-            { "PERSONARR", pe.PERSONARR }, { "PPOOL", pe.PPOOL }, { "PSTREAM", pe.PSTREAM },
+            { "PERSONARR", pe.PERSONARR }, { "PPOOL", pe.PPOOL }, { "PSTREAM", pe.PSTREAM }, { "PTSTREAM", pe.PTSTREAM },
             { "PSNAPSHADOW", (void*)personSnapShadow }, { "PBIO", (void*)personBio },
             { "PORDERS", (void*)personsRebuildOrders } };
         for (auto& e : psyms) Eval::add(e.n, e.v);
@@ -1995,23 +2040,46 @@ static void init() {
         bad += loadPatches(L"worldmod_terrain.txt");
         bad += loadCaves(L"worldmod_terrain_caves.txt", true);
     }
+    if (g_cfg.skillCombos) {
+        wchar_t path[MAX_PATH]; swprintf_s(path, L"%s\\worldmod_skills.txt", g_dir);
+        if (!skillsPrepare(path, logf)) ++bad;
+    }
     if (bad) { logf("ERROR: rejected entries; nothing written"); return; }
     // 3-hex / 1-hex cities (cityshape.cpp): hooks after the patches and caves, whose code they must find unchanged
     CityShapeSetup cs = { g_cfg.dataDir, g_cfg.C, g_cfg.C + 45, g_cfg.W, g_cfg.H, g_area20,
                           g_bases ? (const int32_t*)g_bases->AREA2BASE : nullptr, g_cfg.cityScaleMid, g_cfg.cityScaleSmall, false };
     TradeSetup ts = { g_dir, g_section, g_cfg.dataDir, g_cfg.C, g_cfg.R, g_cfg.U, g_cfg.W, g_cfg.H, g_world.hex20, false };
+    GarrisonSetup gs = { g_dir, g_section, g_bases, g_units, g_world.hex20, g_cfg.W, g_cfg.H, g_cfg.R, false };
     if (g_cfg.verifyOnly) {
+        researchProgressInstall(g_dir, g_section, g_forces, false, logf);
         if (g_cfg.bases && g_cfg.cityShapes) cityShapesInstall(cs, logf);
         movementInstall(g_dir, g_section, false, logf);
         tradeInstall(ts, logf);
+        if (g_cfg.bases) garrisonInstall(gs, logf);
         logf("verify_only: nothing written"); return;
     }
     commitPatches();
     commitCaves();
     installHooks();
     if (g_cfg.bases && g_cfg.cityShapes) { cs.write = true; cityShapesInstall(cs, logf); }
+    // Movement verifies the original skill accessor at 0x4890f0; skills replaces
+    // that entry, so install it only after movement has checked its prerequisites.
     movementInstall(g_dir, g_section, true, logf);     // per-weapon movement and terrain costs (M12_MOVE.md)
+    skillsSetSteeringDescribe(movementReady()?movementDescribeSteering:nullptr);
+    bool skillsReady=g_cfg.skillCombos && skillsInstall();
+    if (g_cfg.skillCombos && !skillsReady) logf("ERROR: skills: install failed");
+    wchar_t telemetryIni[MAX_PATH];swprintf_s(telemetryIni,L"%s\\worldmod.ini",g_dir);
+    if(skillsReady && GetPrivateProfileIntW(g_section,L"skill_telemetry",0,telemetryIni)) {
+        wchar_t folder[MAX_PATH],path[MAX_PATH];SYSTEMTIME now;GetLocalTime(&now);
+        swprintf_s(folder,L"%s\\skill_logs",g_dir);CreateDirectoryW(folder,nullptr);
+        swprintf_s(path,L"%s\\skills-%04u%02u%02u-%02u%02u%02u-%lu-%lu.csv",folder,
+            now.wYear,now.wMonth,now.wDay,now.wHour,now.wMinute,now.wSecond,GetCurrentProcessId(),GetTickCount());
+        logf("skill telemetry: %s (%ls)",skilltelemetry::open(path,telemetryActor,logf)?"enabled":"FAILED",path);
+    }
+    if (!researchProgressInstall(g_dir, g_section, g_forces, true, logf)) logf("ERROR: conditional research not installed");
     ts.write = true; tradeInstall(ts, logf);           // M13 trade (M13_TRADE.md): trade=0 installs nothing
+    gs.write = true;
+    if (g_cfg.bases && !garrisonInstall(gs, logf)) logf("ERROR: dynamic garrison not installed");
 }
 
 BOOL WINAPI DllMain(HINSTANCE, DWORD reason, LPVOID) {

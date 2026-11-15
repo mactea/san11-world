@@ -1,0 +1,44 @@
+{
+  "parts": {
+    "01_deep_ocean_hull": 144,
+    "02_hull_wales_and_bulwarks": 2080,
+    "03_deck_planking": 416,
+    "04_low_bow_shelter": 560,
+    "05_stern_steering_cabin": 392,
+    "06_plain_pitched_cabin_roof": 196,
+    "07_cabin_entrance": 60,
+    "08_large_cargo_hatches": 208,
+    "08_mid_cargo_shelter": 560,
+    "09_secured_deck_cargo": 240,
+    "10_anchor_and_oar_supports": 268,
+    "11_main_mast": 44,
+    "12_main_sail_canvas": 192,
+    "12_main_sail_seams_and_yards": 784,
+    "14_main_shrouds": 80,
+    "11_fore_mast": 44,
+    "12_fore_sail_canvas": 192,
+    "12_fore_sail_seams_and_yards": 784,
+    "14_fore_shrouds": 80,
+    "16_trade_pennants": 4,
+    "17_rudder_and_mooring": 164
+  },
+  "triangles": 7492,
+  "vertices": 22476,
+  "bounds": [
+    [
+      -4.17,
+      -1.7249999999999999,
+      -9.393209546700966
+    ],
+    [
+      4.17,
+      13.935000000000002,
+      9.540000000000001
+    ]
+  ],
+  "up_axis": "Y",
+  "native_status": "native export; runtime binding in trade_ship_visual.cpp; validate regenerated assets before deployment",
+  "historical_status": "interpretive game reconstruction inspired by Han boat models; exact sea-going hull proportions and two-mast rig are conjectural",
+  "visual_scale": 1.5,
+  "design": "Han-inspired two-masted merchant; two single-tier sails, layered shelters and open cargo deck"
+}

@@ -38,6 +38,7 @@
 #include "radar.h"
 #include "units.h"
 #include "trade.h"
+#include "garrison.h"
 #pragma comment(lib, "psapi.lib")
 
 namespace {
@@ -463,6 +464,7 @@ void run(char* line, FILE* out) {
     else if (!strcmp(cmd, "unitclone") && sscanf_s(line, "%*s %d %259[^\r\n]", &a, arg, (unsigned)sizeof arg) == 2)
         fprintf(out, "unitclone: %d\n", unitsClone(a, arg));       // debug (M9 tests): units.cpp
     else if (!strcmp(cmd, "trade")) tradeCommand(line, out);            // M13 trade (trade.cpp): dump / send / ai / tick
+    else if (!strcmp(cmd, "garrison")) garrisonDump(out);
     else if (!strcmp(cmd, "wild") && sscanf_s(line, "%*s %d", &a) == 1) {   // wild <city>: 在野/未登场/未发现武将都去这个城市
         int moved = 0;
         for (int i = 0; personPtr(i); i++) {

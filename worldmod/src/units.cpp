@@ -69,6 +69,16 @@ bool unitsSetup(int U, Units& u, TraceLogFn log) {
 }
 
 typedef void(__thiscall* UnitResetFn)(void*, int);
+uint8_t* unitsView(const void* unit) {
+    if (!g_u || !unit) return nullptr;
+    uintptr_t addr = (uintptr_t)unit, first = (uintptr_t)g_u->UNITARR;
+    if (addr < first || (addr - first) % UNIT_SIZE) return nullptr;
+    size_t id = (addr - first) / UNIT_SIZE;
+    if (id >= (size_t)g_u->U) return nullptr;
+    uint8_t* view = g_u->UWRAP + id * 0x10;
+    return *(uint16_t*)(view + 8) == id ? view : nullptr;
+}
+
 void unitsResetTail(const Units& u) {
     for (int i = *u.USTREAM; i < u.U; i++) {
         uint8_t* p = u.UNITARR + (size_t)i * UNIT_SIZE;

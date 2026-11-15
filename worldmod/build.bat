@@ -15,7 +15,7 @@ call "%VSDIR%\VC\Auxiliary\Build\vcvars32.bat" >nul
 :build
 cd /d "%~dp0"
 if not exist build mkdir build
-cl /nologo /utf-8 /O2 /MT /W3 /EHsc /std:c++17 /LD src\worldmod.cpp src\d3dtrace.cpp src\automation.cpp src\terrainworld.cpp src\bases.cpp src\profiler.cpp src\pathfind.cpp src\radar.cpp src\midmap.cpp src\forces.cpp src\units.cpp src\persons.cpp src\cityshape.cpp src\movement.cpp src\threads.cpp src\dllblock.cpp src\trade.cpp src\trade_model.cpp src\trade_panel.cpp /Fobuild\ /Febuild\d3d9.dll /link /DEF:src\d3d9.def user32.lib kernel32.lib shell32.lib gdi32.lib
+cl /nologo /utf-8 /O2 /MT /W3 /EHsc /std:c++17 /LD src\worldmod.cpp src\d3dtrace.cpp src\automation.cpp src\terrainworld.cpp src\bases.cpp src\profiler.cpp src\pathfind.cpp src\radar.cpp src\midmap.cpp src\forces.cpp src\units.cpp src\persons.cpp src\skills.cpp src\skill_telemetry.cpp src\research_progress.cpp src\research_exchange_ui.cpp src\cityshape.cpp src\movement.cpp src\threads.cpp src\dllblock.cpp src\trade.cpp src\trade_model.cpp src\trade_panel.cpp src\trade_images.cpp src\trade_ship_visual.cpp src\trade_ship_ui.cpp src\garrison.cpp /Fobuild\ /Febuild\d3d9.dll /link /DEF:src\d3d9.def user32.lib kernel32.lib shell32.lib gdi32.lib cabinet.lib gdiplus.lib
 if errorlevel 1 exit /b 1
 exit /b 0
 

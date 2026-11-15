@@ -16,6 +16,8 @@ struct Units {
 extern "C" uint8_t* __cdecl snapShadow(uint8_t* self);
 
 bool unitsSetup(int U, Units& u, TraceLogFn log);
+// Native movement/A* APIs take a 16-byte view wrapper, not the 0xf4-byte unit record.
+uint8_t* unitsView(const void* unit);
 // after a stream has been read (0x493BCE): records USTREAM..U-1 got no data, reset them as the serializer resets
 // the ones it reads (vtable+0x20); constructed but never reset, a record passes for a live unit led by person 0
 void unitsResetTail(const Units& u);

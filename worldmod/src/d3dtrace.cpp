@@ -13,6 +13,9 @@
 #include <algorithm>
 #include "d3dtrace.h"
 #include "automation.h"
+#include "trade_images.h"
+#include "trade_ship_visual.h"
+#include "trade_ship_ui.h"
 
 namespace {
 
@@ -141,6 +144,8 @@ HRESULT STDMETHODCALLTYPE hSetVSCF(IDirect3DDevice9* d, UINT reg, const float* d
 // The game presents through a swap chain, so frames are counted at EndScene and a thread writes the file.
 HRESULT STDMETHODCALLTYPE hEndScene(IDirect3DDevice9* d) {
     g_frames++;
+    tradeImagesDraw(d);
+    tradeShipUiDraw(d);
     HRESULT hr = oEndScene(d);
     automationOnEndScene(d);
     return hr;
@@ -250,6 +255,9 @@ void logParams(const char* what, const D3DPRESENT_PARAMETERS* pp) {
                              pp->FullScreen_RefreshRateInHz, pp->PresentationInterval);
 }
 HRESULT STDMETHODCALLTYPE hReset(IDirect3DDevice9* d, D3DPRESENT_PARAMETERS* pp) {
+    tradeShipVisualReset();
+    tradeImagesReset();
+    tradeShipUiReset();
     automationReleaseSurfaces("Reset");
     HRESULT hr = oReset(d, pp);
     if (g_tlog) g_tlog("trace: Reset device=%p hr=%#lx", d, hr);
@@ -266,6 +274,9 @@ template <class T> void patchSlot(void** vtbl, int index, T hook, T* orig) {
 }
 
 HRESULT STDMETHODCALLTYPE hCreateDevice(IDirect3D9* self, UINT ad, D3DDEVTYPE ty, HWND w, DWORD fl, D3DPRESENT_PARAMETERS* pp, IDirect3DDevice9** out) {
+    tradeShipVisualReset();
+    tradeImagesReset();
+    tradeShipUiReset();
     automationReleaseSurfaces("CreateDevice");          // they would keep a previous device alive
     HRESULT hr = oCreateDevice(self, ad, ty, w, fl, pp, out);
     if (g_tlog) g_tlog("trace: CreateDevice type=%d flags=%#lx hr=%#lx device=%p", (int)ty, fl, hr, out ? *out : nullptr);

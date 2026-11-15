@@ -207,9 +207,9 @@ void midmapRender(uint32_t* dst, int pitch, const uint32_t* baseColour, bool bor
 
 // city names (GDI on a DIB), when zoomed in far enough to have room for them; then the overlay (M13 trade panel)
 static void renderNames(uint32_t* dst, int pitch);
-void midmapRenderNames(uint32_t* dst, int pitch) {
+void midmapRenderNames(void* ui, uint32_t* dst, int pitch) {
     renderNames(dst, pitch);
-    if (g_overlay && g_ready) g_overlay(dst, pitch);
+    if (g_overlay && g_ready) g_overlay(ui, dst, pitch);
 }
 static void renderNames(uint32_t* dst, int pitch) {
     if (!g_ready || g_scale < 5.0f || !g_cityArr) return;

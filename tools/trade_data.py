@@ -11,8 +11,8 @@ Inputs
   data/city_tiers.json         tier and port flag of the other cities
 
 trade.bin (little endian)
-  "TRDB" u32 version=3, u32 C, u32 G, u32 0
-  G x { char name[16] utf-8, u32 base, u32 0 }
+  "TRDB" u32 version=6, u32 C, u32 G, u32 0
+  G x { char name[16] utf-8, u32 base, u32 load_units (tenths of a slot; v1..4 reserved) }
   C x { i16 lo, i16 hi, u8 flags (1 hub, 2 port, 4 Koei China), u8 group (0 = none), u16 market size, char name[16] utf-8 }
   C x G u32 price      gold per load with the price index at 1000
   C x G u8  supply     producer level 0..3 (0: the city does not sell the good unless it is a hub)
@@ -23,7 +23,12 @@ version 2 (M13 phase 3) appends:
                  u8 group (1..NG, 0 any); u8 0; u16 mult (permille); u8 months min, max; u16 weight; u16 0 }   events
 version 3 (M13 phase 4) appends:
   u32 NM, NM x { char name[27] utf-8; i32 officer id (-1: Koei's officer of that name); u8 talent 1..2 }   known merchants
-The DLL also reads versions 1 (no monsoon, no events) and 2 (no merchants).
+version 4 appends:
+  u32 stock cap %, producer stock %, hub stock %, production divisor, consumption divisor
+  C x G u16 demand multiplier (permille)
+version 6 appends:
+  G x { u32 native_units_per_lot, u32 min_value } (both zero for unanchored goods)
+The DLL also reads versions 1..5; older catalogues have no pricing anchors.
 """
 import argparse
 import json
@@ -33,6 +38,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+LEGACY_KEYS = 'silk brocade lacquer iron horse jade pepper cotton glass coral incense fur pearl salt wheat rice soybean dried_fish beef cheese raisins honey cane_sugar olive_oil coconut_oil ginger cinnamon clove cardamom saffron musk sandalwood wool raw_cotton flax wool_cloth linen pile_cloth wine tea rice_wine gold silver amber crystal ruby sapphire emerald diamond pottery ivory ivory_carving goldwork sculpture painting ginseng rhubarb indigo turmeric wood wax iron_ore copper_ore tin_ore coal sulfur mineral_nitre sword armor'.split()
 
 
 def cube(lo, hi):
@@ -81,6 +87,12 @@ def build(args):
     cities, gd = load_cities(args)
     goods = gd["goods"]
     C, G = len(cities), len(goods)
+    if len(goods) < len(LEGACY_KEYS) or [g['key'] for g in goods[:len(LEGACY_KEYS)]] != LEGACY_KEYS:
+        sys.exit('published goods IDs 0..68 must not be removed or reordered')
+    if not 1 <= G <= 128 or len({g['key'] for g in goods}) != G or len({g['name'] for g in goods}) != G:
+        sys.exit('goods require 1..128 unique keys and names')
+    if any(len(g['name'].encode('utf-8')) > 15 for g in goods):
+        sys.exit('good names must fit 15 UTF-8 bytes without truncation')
     pm, mk = gd["price_model"], gd["market"]
     per = pm["per_hexes"]
     lvf = {int(k): v for k, v in pm["level_factor"].items()}
@@ -121,9 +133,12 @@ def build(args):
             price[c["id"]][g] = max(1, int(round(best * dem)))
 
     out = bytearray()
-    out += b"TRDB" + struct.pack("<IIII", 3, C, G, 0)
+    out += b"TRDB" + struct.pack("<IIII", 6, C, G, 0)
     for good in goods:
-        out += name16(good["name"]) + struct.pack("<II", good["base"], 0)
+        units = good.get('load_units', {'salt': 2, 'cotton': 4, 'silk': 5, 'fur': 5, 'iron': 5}.get(good['key'], 10))
+        if not isinstance(units, int) or not 1 <= units <= 100:
+            sys.exit(f"invalid load_units: {good['key']}")
+        out += name16(good["name"]) + struct.pack("<II", good["base"], units)
     for c in cities:
         flags = (1 if c["id"] in hubs else 0) | (2 if c["port"] else 0) | (4 if c["koei"] else 0)
         size = mk["size_koei"] if c["koei"] else mk["size_tier"][str(c["tier"])]
@@ -163,6 +178,21 @@ def build(args):
         if len(nb) > 26 or not (1 <= m.get("talent", 1) <= 2) or ("id" in m) == bool(m.get("koei")):
             sys.exit(f"merchant {m['name']}: name <= 26 bytes, talent 1..2, exactly one of id / koei")
         out += nb + b"\0" * (27 - len(nb)) + struct.pack("<iB", m.get("id", -1), m.get("talent", 1))
+    inventory = gd.get("inventory", {})
+    cfg = [inventory.get(k, v) for k, v in [("capacity_percent", 200), ("producer_initial_percent", 100), ("hub_initial_percent", 10), ("production_divisor", 30), ("consumption_divisor", 50)]]
+    if any(not isinstance(v, int) or v < 1 or v > 1000 for v in cfg) or max(cfg[1:3]) > cfg[0]:
+        sys.exit("invalid inventory settings")
+    out += struct.pack("<5I", *cfg)
+    for c in cities:
+        gr = region_group.get(c["region"], 0)
+        for good in goods:
+            dem = good.get("demand", {}).get(groups[gr - 1], 1.0) if gr else 1.0
+            out += struct.pack("<H", int(round(dem * 1000)))
+    for good in goods:
+        units, floor = good.get('native_units_per_lot', 0), good.get('min_value', 0)
+        if not isinstance(units, int) or not isinstance(floor, int) or not 0 <= units <= 100000 or not 0 <= floor <= 1000000 or bool(units) != bool(floor):
+            sys.exit(f"invalid pricing lot or floor: {good['key']}")
+        out += struct.pack('<II', units, floor)
     print(f"trade_data: {len(merchants)} known merchants")
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_bytes(out)

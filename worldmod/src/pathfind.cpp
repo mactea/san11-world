@@ -29,11 +29,14 @@
 #include <stdio.h>
 #include <vector>
 #include "pathfind.h"
+#include <algorithm>
 #include "movement.h"
+#include "units.h"
 
 static TraceLogFn g_log = nullptr;
 static PathfindConfig g_cfg = {};
 static uint8_t* g_tramp = nullptr;          // original A*: copied prologue + jmp back
+bool pathfindReady() { return g_tramp!=nullptr; }
 static uint32_t g_savedRet = 0, g_args = 0;
 static LARGE_INTEGER g_freq, g_lastSummary;
 static uint64_t g_calls = 0, g_ticks = 0, g_maxTicks = 0, g_fails = 0, g_slow = 0, g_verified = 0, g_mismatch = 0;
@@ -145,6 +148,7 @@ static int minStepCost() {
 }
 // heuristic h = (|d row| + |d column|) * hnum / 2: hnum 2 = Koei's h (modes 0/1), minStepCost() for modes 2/3
 static inline int heurNum(int mode) { return mode >= 2 ? minStepCost() : 2; }
+static int unitHeuristic(const uint8_t* unit,int hnum) { return movementIsTradeUnit(unit) ? min(hnum,1) : hnum; }
 
 // ------------------------------------------------------------------ open list: binary heap on (f, seq)
 struct HeapItem { int32_t f; uint32_t seq; Node* n; };
@@ -188,6 +192,9 @@ static Node* popMin() { Node* n = g_heap[0].n; removeAt(0); return n; }
 // ------------------------------------------------------------------ replacement
 static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count, int hnum, int margin) {
     void* t = unitT(unit);
+    // Caravan roads can cost one point, so even the original h=Manhattan
+    // would overestimate. Keep the bound admissible for all heap modes.
+    hnum=unitHeuristic((const uint8_t*)t,hnum);
     // M13 monsoon: 0x567ed0 searches from the target to the unit (goal = the unit's hex): the unit moves the other way
     uint32_t upos = 0;
     ((uint32_t* (__thiscall*)(void*, uint32_t*))0x56dc30)(unit, &upos);
@@ -236,6 +243,7 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
             const uint8_t* rec = HEX20 + ((size_t)lo * W + hi) * 20;
             uint32_t terr = *(const uint32_t*)(rec + 4) & 0x1f;
             if (!PASSABLE[terr]) continue;
+            if (!movementCanStep((const uint8_t*)t,rec)) continue;
             movementSetStepFrom(cur->coord | backwards);   // the monsoon needs the step's direction (movement.cpp)
             int cost = stepCost(unit, rec);
             movementSetStepFrom(0xffffffffu);
@@ -279,6 +287,29 @@ static Node* astarHeap(void* unit, uint32_t goal, const uint32_t* src, int count
 
 // ------------------------------------------------------------------ dispatch, verification, statistics
 typedef Node* (__cdecl* AstarFn)(void*, uint32_t, const uint32_t*, int);
+static AstarFn g_routeAstar = (AstarFn)0x567520;
+bool pathfindRoute(void* unit, uint32_t start, const std::vector<uint32_t>& targets,
+                   std::vector<uint32_t>* path, int* cost) {
+    path->clear(); *cost = 0;
+    if (!unit || targets.empty() || targets.size() > 64 || !g_cfg.hex28 || !g_cfg.hex28Size) return false;
+    uint8_t* view = unitsView(unit);
+    if (!view) return false;
+    // Same backwards search convention as Koei's 0x567ed0: sources are destinations,
+    // goal is the current unit hex. Seasonal costs use the actual movement direction.
+    Node* n = g_routeAstar(view, start, targets.data(), (int)targets.size());
+    uintptr_t begin = (uintptr_t)g_cfg.hex28, end = begin + g_cfg.hex28Size;
+    size_t limit = g_cfg.hex28Size / sizeof(Node);
+    while (n && path->size() < limit) {
+        uintptr_t addr = (uintptr_t)n;
+        if (addr < begin || addr > end - sizeof(Node) || (addr - begin) % sizeof(Node)) { path->clear(); return false; }
+        if (path->empty()) { if (n->coord != start || n->g < 0) return false; *cost = n->g; }
+        path->push_back(n->coord); n = n->parent;
+    }
+    if (n || path->empty() || std::find(targets.begin(), targets.end(), path->back()) == targets.end()) {
+        path->clear(); return false;
+    }
+    return true;
+}
 
 static size_t dirtyPages(bool reset) {
     ULONG_PTR n = g_cfg.hex28Size / 4096; DWORD gran = 4096;
@@ -389,8 +420,9 @@ extern "C" static Node* __cdecl astarDispatch(void* unit, uint32_t goal, const u
         g_log("A* enter (%d,%d) -> (%d,%d) %d src caller %p",
               (short)s, (short)(s >> 16), (short)goal, (short)(goal >> 16), count, caller);
     }
-    if (InterlockedExchange(&g_benchPending, 0)) bench(unit, src, count, caller);
-    if (g_cfg.benchGoal && (g_calls == 0 || g_calls == 19 || g_calls == 99 || g_calls == 299)) {
+    bool caravan=movementIsTradeUnit((const uint8_t*)unitT(unit));
+    if (!caravan && InterlockedExchange(&g_benchPending, 0)) bench(unit, src, count, caller);
+    if (!caravan && g_cfg.benchGoal && (g_calls == 0 || g_calls == 19 || g_calls == 99 || g_calls == 299)) {
         g_benchGoal = g_cfg.benchGoal - 1;
         bench(unit, src, count, caller);
         g_benchGoal = 0;
@@ -398,8 +430,8 @@ extern "C" static Node* __cdecl astarDispatch(void* unit, uint32_t goal, const u
     g_lastGoal = goal;
     LARGE_INTEGER t0; QueryPerformanceCounter(&t0);
     Node* r;
-    if (g_cfg.verify) r = verifyCall(unit, goal, src, count);
-    else if (g_cfg.mode == 0) r = ((AstarFn)(void*)g_tramp)(unit, goal, src, count);
+    if (g_cfg.verify && !caravan) r = verifyCall(unit, goal, src, count);
+    else if (g_cfg.mode == 0 && !caravan) r = ((AstarFn)(void*)g_tramp)(unit, goal, src, count);
     else r = astarHeap(unit, goal, src, count, heurNum(g_cfg.mode), g_cfg.mode >= 3 ? g_cfg.margin : 0);
     if (g_cfg.stats) {
         LARGE_INTEGER t1; QueryPerformanceCounter(&t1);
@@ -413,7 +445,7 @@ extern "C" static Node* __cdecl astarDispatch(void* unit, uint32_t goal, const u
             size_t pages = dirtyPages(false);
             g_log("A*: %.1f ms %s  (%d,%d) -> (%d,%d)  sources %d  %zu HEX28 pages touched, caller %p",
                   ms, r ? "found" : "NOT FOUND", (short)s, (short)(s >> 16), (short)goal, (short)(goal >> 16), count, pages, caller);
-            if (g_cfg.benchSlow && g_benchSlowLeft > 0) {     // replay this call with every variant
+            if (!caravan && g_cfg.benchSlow && g_benchSlowLeft > 0) {     // replay this call with every variant
                 g_benchSlowLeft--;
                 g_benchGoal = goal;
                 bench(unit, src, count, caller);

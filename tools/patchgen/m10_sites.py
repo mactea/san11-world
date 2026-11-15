@@ -19,6 +19,12 @@ REWRITE = []
 CAVE_TEXT = []
 SKIP = set()                     # review sites handled here
 
+# The allocator used a separate imm8 count even after all ID bounds moved.
+CAVE_TEXT.append((0x4910c8, 'cmp ecx, 0x64', 'cmp ecx, {SPECIALS}'))
+# Older saves contain only PS+250 records. Header parsing sets the stream bound.
+CAVE_TEXT.append((0x493837, 'cmp edi, 0x44c', 'cmp edi, dword ptr [{PTSTREAM}]'))
+SKIP.add(0x493837)
+
 
 def f(va, old, expr, comment, size=4):
     FIELD.append((va, old, size, expr, comment))

@@ -1,0 +1,161 @@
+//24/50 describe permission used by an ordinary attack or selected tactic. Preserve the native
+// read-only bounds/terrain decisions, then follow the existing packet owner
+// transport to an actual troop settlement. A preview alone is never applied.
+uintptr_t g_attackReachBoundsEntry=0x5a3870,g_attackReachPermissionEntry=0x5a4990;
+__declspec(naked) int __cdecl attackReachBounds(int*,void*,uint32_t){__asm {
+    push edi
+    mov edi,[esp+8]
+    push [esp+16]
+    push [esp+16]
+    call dword ptr [g_attackReachBoundsEntry]
+    add esp,8
+    pop edi
+    ret}}
+__declspec(naked) int __cdecl attackReachPermission(void*,void*,const int*,int,uint32_t,int){__asm {
+    mov ecx,[esp+8]
+    mov eax,[esp+12]
+    push 1
+    push [esp+28]
+    push [esp+28]
+    push [esp+28]
+    push [esp+20]
+    call dword ptr [g_attackReachPermissionEntry]
+    add esp,20
+    ret}}
+typedef void*(__thiscall* AttackReachHandleUnit)(void*);
+AttackReachHandleUnit g_attackReachHandleUnit=(AttackReachHandleUnit)0x56dba0;
+typedef int(__stdcall* AttackReachTacticBounds)(uint8_t*,void*,uint32_t);
+typedef int(__cdecl* AttackReachTacticPermission)(void*,uint32_t,void*,uint32_t,int,const uint8_t*);
+AttackReachTacticBounds g_attackReachTacticBounds=(AttackReachTacticBounds)0x5a3a60;
+AttackReachTacticPermission g_attackReachTacticPermission=(AttackReachTacticPermission)0x5a3f90;
+AttackReachAttribution attackReachPrepare(void* source,int tactic,uint32_t to,int mode,int requiredEffect){
+    AttackReachAttribution r;
+    if(tactic < -1 || tactic>31 || mode!=0 || !source)return r;
+    int weapon=*(const int*)((const uint8_t*)source+0xa8);
+    if(tactic==-1 && weapon!=3 && weapon!=6 && weapon!=7)return r;
+    // The guarded native dispatch adds24 only to tactic12/15. Other tactics
+    // can use50 only through the native crossbow/forest permission branch.
+    int effect=requiredEffect==50?50:tactic==-1?(weapon==3?50:24):(tactic==12 || tactic==15?24:weapon==3?50:-1);
+    if(effect<0)return r;
+    bool candidate=false;
+    for(int n=0;n<3;++n){int id=*(const int*)((const uint8_t*)source+0xc+4*n);
+        auto p=id>=0?g_telemetryPerson((void*)0x7201958,id):nullptr;
+        if(p && contains(*(const int*)(p+0xe8),effect)){candidate=true;break;}}
+    if(!candidate)return r;
+    int sourceId=g_telemetryUnitId((void*)0x7201958,source);
+    if(sourceId<0 || sourceId>65535 || g_movementUnitById((void*)0x7201958,sourceId)!=source)return r;
+    typedef const uint32_t*(__thiscall* Position)(void*);
+    uint32_t from=*(*(Position*)(*(uint8_t**)source+0x3c))(source);
+    int terrain=movementTerrain(to),distance=reachDistance(from,to);
+    if(movementTerrain(from)<0 || terrain<0 || distance<1 || (effect==50 && (terrain!=5 || (tactic==-1 && distance<=1))))return r;
+    int width=*(const int*)((const uint8_t*)g_movementMapOperand-0x1b);
+    auto cells=(const uint8_t*)(uintptr_t)*g_movementMapOperand;
+    auto cell=cells+20*((size_t)(int16_t)to*width+(int16_t)(to>>16));
+    if((*(const uint32_t*)cell&3)!=1)return r; // base/empty targets remain separate contexts
+    auto target=g_reachObjectOriginal((void*)cell);
+    int targetId=target?g_telemetryUnitId((void*)0x7201958,target):-1;
+    if(targetId<0 || g_movementUnitById((void*)0x7201958,targetId)!=target ||
+       *(*(Position*)(*(uint8_t**)target+0x3c))(target)!=to)return r;
+    uint8_t handle[16]={};*(uint16_t*)(handle+8)=(uint16_t)sourceId;
+    if(g_attackReachHandleUnit(handle)!=source)return r;
+    int bounds[2]={};const void* actor=nullptr;
+    int actualMax,normalMax,permission;
+    if(tactic>=0){
+        uint8_t choices[72]={};
+        if(effect==24){ProgressionProbe p(24);p.scene="battle";p.event="tactic_range_permission_revalidation";
+            g_attackReachTacticBounds(choices,source,from);actor=p.actor;}
+        else g_attackReachTacticBounds(choices,source,from);
+        uint32_t selected=1u<<tactic;
+        actualMax=choices[9+2*tactic];normalMax=actualMax-(effect==24?1:0);
+        if(!(*(uint32_t*)choices&selected) || distance<choices[8+2*tactic] || distance>actualMax ||
+           (effect==24 && (!actor || distance<=normalMax)))return r;
+        // Only the selected tactic may supply a50 provider. Queries made for
+        // another available tactic cannot authorize this attack's event.
+        *(uint32_t*)choices=selected;
+        if(effect==50){ProgressionProbe p(50);p.scene="battle";p.event="tactic_forest_permission_revalidation";
+            permission=g_attackReachTacticPermission(source,from,target,to,distance,choices);actor=p.actor;}
+        else permission=g_attackReachTacticPermission(source,from,target,to,distance,choices);
+        if(!((uint32_t)permission&selected) || !actor)return r;
+    }else{
+        if(effect==24){ProgressionProbe p(24);p.scene="battle";p.event="attack_range_permission_revalidation";
+            attackReachBounds(bounds,handle,from);actor=p.actor;}
+        else attackReachBounds(bounds,handle,from);
+        // Native5a4990 converts the stored zero-based endpoints to physical rings.
+        actualMax=bounds[1]+1;normalMax=actualMax-(effect==24?1:0);
+        if(distance>actualMax || distance<bounds[0]+1 || (effect==24 && (!actor || distance<=normalMax)))return r;
+        if(effect==50){ProgressionProbe p(50);p.scene="battle";p.event="forest_attack_permission_revalidation";
+            permission=attackReachPermission(source,target,bounds,weapon,to,distance);actor=p.actor;}
+        else permission=attackReachPermission(source,target,bounds,weapon,to,distance);
+        if(!(permission&1) || !actor)return r;
+    }
+    int actorId=growthPersonId((void*)actor),owned=*(const int*)((const uint8_t*)actor+0xe8);
+    if(actorId<0 || !afterAttackMember(source,actor) || !contains(owned,effect))return r;
+    r.actor=actor;r.target=target;r.actorId=actorId;r.owned=owned;r.effect=effect;r.sourceId=sourceId;r.targetId=targetId;
+    r.force=unitTarget(source).force;r.targetForce=unitTarget(target).force;r.weapon=weapon;r.distance=distance;r.normalMax=normalMax;r.actualMax=actualMax;
+    r.terrain=terrain;r.permission=permission;r.tactic=tactic;r.from=from;r.to=to;r.generation=skilltelemetry::contextGeneration();return r;
+}
+bool attackReachAttributionMatches(const CriticalRecord& record,const AttackReachAttribution& r,void* source,const uint8_t* packet,void* target,int requested){
+    if(!r.actor || !skilltelemetry::enabled() || r.generation!=skilltelemetry::contextGeneration() || record.source!=source || r.target!=target ||
+       record.tactic!=r.tactic || record.attackMode!=0 || *(const int*)(packet+0x70)!=0 || requested>0 || requested!=-*(const int*)(packet+0xc) ||
+       memcmp(record.snapshot,packet,sizeof record.snapshot) || *(const uint32_t*)(packet+0x58)!=r.from || *(const uint32_t*)(packet+0x5c)!=r.to ||
+       g_movementUnitById((void*)0x7201958,r.sourceId)!=source || g_movementUnitById((void*)0x7201958,r.targetId)!=target ||
+       !g_growthValid(source) || !g_growthValid(target) || unitTarget(source).force!=r.force ||
+       unitTarget(target).force!=r.targetForce ||
+       *(const int*)((const uint8_t*)source+0xa8)!=r.weapon || growthPersonId((void*)r.actor)!=r.actorId ||
+       *(const int*)((const uint8_t*)r.actor+0xe8)!=r.owned || !contains(r.owned,r.effect) || !afterAttackMember(source,r.actor))return false;
+    typedef const uint32_t*(__thiscall* Position)(void*);
+    return *(*(Position*)(*(uint8_t**)source+0x3c))(source)==r.from && *(*(Position*)(*(uint8_t**)target+0x3c))(target)==r.to;
+}
+bool attackReachGrantMatches(const CriticalRecord& record,void* source,const uint8_t* packet,void* target,int requested){
+    return attackReachAttributionMatches(record,record.attackReach,source,packet,target,requested) ||
+        attackReachAttributionMatches(record,record.forestReach,source,packet,target,requested);
+}
+void attackReachEmit(const AttackReachAttribution& r,int requested,int before,int after,uintptr_t caller,skilltelemetry::Target target,uint64_t sharedWrite){
+    target.equipment=r.weapon;target.x=(int16_t)r.to;target.y=(int16_t)(r.to>>16);target.terrain=r.terrain;
+    char shared[80]={};if(sharedWrite)sprintf_s(shared,",\"shared_resource_write_id\":%llu",(unsigned long long)sharedWrite);
+    char context[400];sprintf_s(context,"{\"tactic_id\":%d,\"record_kind\":0,\"distance\":%d,\"normal_range_max\":%d,\"actual_range_max\":%d,\"native_permission_mask\":%d,\"requested_troop_loss\":%d,\"damage_attribution\":\"whole_attack_not_marginal_skill_bonus\",\"counterfactual_evaluated\":false%s}",
+        r.tactic,r.distance,r.normalMax,r.actualMax,r.permission,-requested,shared);target.context=context;
+    const char* event=r.tactic<0?(r.effect==24?"extended_range_attack_settled":"forest_ranged_attack_settled"):
+        (r.effect==24?"extended_range_tactic_settled":"forest_ranged_tactic_settled");
+    skilltelemetry::applied(r.actor,r.owned,r.effect,"battle",event,
+        "troops",before,after,caller,target);
+}
+__declspec(align(8)) volatile LONG64 g_attackReachSharedWrite=0;
+void attackReachGrantCommitted(const CriticalRecord& record,void* source,const uint8_t* packet,void* affected,int requested,int before,int after,uintptr_t caller,skilltelemetry::Target target){
+    bool primary=attackReachAttributionMatches(record,record.attackReach,source,packet,affected,requested);
+    bool forest=attackReachAttributionMatches(record,record.forestReach,source,packet,affected,requested);
+    uint64_t sharedWrite=primary && forest?(uint64_t)InterlockedIncrement64(&g_attackReachSharedWrite):0;
+    if(primary)attackReachEmit(record.attackReach,requested,before,after,caller,target,sharedWrite);
+    if(forest)attackReachEmit(record.forestReach,requested,before,after,caller,target,sharedWrite);
+}
+
+struct AttackReachLayout {uint32_t start;int size;const char* bytes;};
+const AttackReachLayout g_attackReachLayouts[]={
+    {0x5a3a60,382,"\x83\xec\x14\x55\x8b\x6c\x24\x1c\x56\x8b\x74\x24\x24\x57\x33\xc0\xb9\x12\x00\x00\x00\x8b\xfd\xf3\xab\x83\x7e\x08\x01\x75\x0b\x5f\x5e\x33\xc0\x5d\x83\xc4\x14\xc2\x0c\x00\x8b\x06\x53\x8b\xce\xff\x50\x40\x50\xb9\x58\x19\x20\x07\xe8\x03\xd0\xee\xff\x8b\x4c\x24\x30\x51\x8b\xce\x89\x44\x24\x20\xe8\xb3\x26\xef\xff\x50\xb9\x58\x19\x20\x07\x89\x44\x24\x1c\xe8\x04\xd1\xee\xff\x33\xdb\x83\xc5\x09\x89\x44\x24\x14\x89\x5c\x24\x10\x89\x6c\x24\x30\x8d\x49\x00\x8b\x4c\x24\x14\x53\xe8\x56\xb3\xed\xff\x85\xc0\x0f\x84\xc1\x00\x00\x00\x53\xb9\x58\x19\x20\x07\xe8\xa3\xd1\xee\xff\x8b\x54\x24\x18\x8b\xe8\x8b\x7d\x3c\x52\x8b\xce\xe8\x52\x32\xef\xff\x3b\xf8\x0f\x8f\x9d\x00\x00\x00\x8b\x44\x24\x28\x8b\x50\x04\x8b\xcb\xbf\x01\x00\x00\x00\xd3\xe7\x8b\xce\x0b\xd7\x89\x50\x04\x8b\x06\xff\x50\x40\x50\xb9\x58\x19\x20\x07\xe8\x73\xcf\xee\xff\x8a\x4d\x30\x8b\x16\x88\x4c\x24\x2c\x8b\xce\xff\x52\x54\x0f\xb6\x4c\x24\x2c\x3b\xc1\x7c\x5f\x8b\x44\x24\x28\x09\x38\x0f\xb6\x55\x31\x0f\xb6\x45\x32\x8d\x4b\xfa\x83\xf9\x09\x89\x54\x24\x20\x89\x44\x24\x2c\x77\x2c\x0f\xb6\x93\xce\x3b\x5a\x00\xff\x24\x95\xc8\x3b\x5a\x00\x8b\x4c\x24\x1c\x6a\x0a\xe8\x65\xd6\xed\xff\xeb\x09\x8b\x06\x6a\x18\x8b\xce\xff\x50\x58\x85\xc0\x74\x04\xff\x44\x24\x2c\x8b\x44\x24\x30\x8a\x4c\x24\x20\x8a\x54\x24\x2c\x88\x48\xff\x88\x10\xff\x44\x24\x10\x8b\x4c\x24\x30\x43\x83\xc1\x02\x83\xfb\x20\x89\x4c\x24\x30\x0f\x8c\x18\xff\xff\xff\x8b\x44\x24\x10\x5b\x5f\x5e\x5d\x83\xc4\x14\xc2\x0c\x00\x8b\xff\x70\x3b\x5a\x00\x7d\x3b\x5a\x00\x8e\x3b\x5a\x00\x00\x00\x00\x02\x02\x02\x01\x02\x02\x01"},
+    {0x5a3f90,471,"\x83\xec\x10\x53\x8b\x5c\x24\x2c\x8b\x03\x57\x33\xff\x3b\xc7\x89\x7c\x24\x0c\x74\x11\x8b\x44\x24\x24\x50\xe8\x31\xbc\x00\x00\x83\xc4\x04\x85\xc0\x74\x08\x5f\x33\xc0\x5b\x83\xc4\x10\xc3\x55\x56\x8b\x74\x24\x24\x8b\x16\x8b\xce\xff\x52\x40\x50\xb9\x58\x19\x20\x07\xe8\xca\xca\xee\xff\x8b\x44\x24\x28\x50\x8b\xce\xe8\x7e\x21\xef\xff\x50\xb9\x58\x19\x20\x07\x89\x44\x24\x20\xe8\xcf\xcb\xee\xff\x0f\xbf\x44\x24\x30\x0f\xbf\x4c\x24\x32\x69\xc0\xc8\x00\x00\x00\x03\xc1\x8d\x14\x80\x8d\x04\x95\x68\x0e\xfb\x06\x8d\x4b\x09\x89\x44\x24\x18\x89\x4c\x24\x10\xeb\x06\x8b\x5c\x24\x38\x8b\xff\x8b\x03\xbd\x01\x00\x00\x00\x8b\xcf\xd3\xe5\x85\xc5\x0f\x84\x13\x01\x00\x00\x57\xb9\x58\x19\x20\x07\xe8\x52\xcc\xee\xff\x8b\x54\x24\x10\x0f\xb6\x4a\xff\x8b\xd8\x8b\x44\x24\x34\x3b\xc1\x0f\x8c\xf2\x00\x00\x00\x0f\xb6\x0a\x3b\xc1\x0f\x8f\xe7\x00\x00\x00\x8b\x54\x24\x18\x8b\x42\x04\x83\xe0\x1f\x50\x8b\xcb\xe8\xbf\x07\xef\xff\x85\xc0\x75\x2f\x8b\x16\x6a\x32\x8b\xce\xff\x52\x58\x85\xc0\x0f\x84\xc0\x00\x00\x00\x8b\x44\x24\x18\x8b\x48\x04\x83\xe1\x1f\x80\xf9\x05\x0f\x85\xad\x00\x00\x00\x83\x7c\x24\x1c\x03\x0f\x85\xa2\x00\x00\x00\x8b\x54\x24\x2c\x52\x8b\xce\xe8\x10\x2c\xef\xff\x85\xc0\x0f\x84\x8e\x00\x00\x00\x83\xff\x07\x74\x05\x83\xff\x0e\x75\x1e\x8b\x44\x24\x34\x8b\x4c\x24\x30\x8b\x54\x24\x28\x50\x51\x52\xb9\x68\x0e\xfb\x06\xe8\x65\xff\xed\xff\x83\xf8\x06\x74\x66\x8b\x4c\x24\x2c\x8b\x01\x6a\x05\xff\x50\x2c\x85\xc0\x74\x2c\x8b\x4c\x24\x34\x8b\x74\x24\x2c\x51\xe8\xe3\xfa\xff\xff\x83\xc4\x04\x85\xc0\x74\x3e\x8a\x43\x36\x84\xc0\x74\x37\x8b\x44\x24\x14\x8b\x74\x24\x24\x0b\xc5\x89\x44\x24\x14\xeb\x2b\x8b\x54\x24\x2c\x52\xe8\xbb\x1e\xef\xff\x8b\x80\xa8\x00\x00\x00\x50\xe8\xaf\x05\xef\xff\x8a\x4c\x18\x33\x83\xc4\x08\x84\xc9\x74\x0a\x09\x6c\x24\x14\xeb\x04\x8b\x74\x24\x24\x8b\x4c\x24\x10\x47\x83\xc1\x02\x83\xff\x20\x89\x4c\x24\x10\x0f\x8c\xbf\xfe\xff\xff\x8b\x44\x24\x14\x5e\x5d\x5f\x5b\x83\xc4\x10\xc3"},
+    {0x5a3870,268,"\x33\xc0\x8b\xcf\x89\x01\x53\x89\x41\x04\x8b\x4c\x24\x08\x56\xe8\x1c\xa3\xfc\xff\x8b\xf0\x8b\x16\x8b\xce\xff\x52\x40\x50\xb9\x58\x19\x20\x07\xe8\x08\xd2\xee\xff\x8b\xd8\x8b\x44\x24\x10\x50\x8b\xce\xe8\xba\x28\xef\xff\x83\xc0\xfd\x83\xf8\x08\x0f\x87\x9d\x00\x00\x00\xff\x24\x85\x58\x39\x5a\x00\x6a\x0a\x8b\xcb\xe8\x1e\xd9\xed\xff\x33\xc9\x85\xc0\x0f\x95\xc1\x5e\x5b\x41\x89\x4f\x04\x8b\xc1\xc3\x8b\x16\x6a\x19\x8b\xce\xff\x52\x58\x85\xc0\x74\x07\xc7\x47\x04\x01\x00\x00\x00\x6a\x0e\x8b\xcb\xe8\xf1\xd8\xed\xff\x85\xc0\x74\x5c\x5e\xc7\x47\x04\x01\x00\x00\x00\x8b\x47\x04\x5b\xc3\xc7\x07\x01\x00\x00\x00\xc7\x47\x04\x01\x00\x00\x00\x8b\x06\x6a\x18\x8b\xce\xff\x50\x58\x85\xc0\x74\x35\x8b\x47\x04\x40\x5e\x89\x47\x04\x5b\xc3\xc7\x07\x02\x00\x00\x00\xc7\x47\x04\x02\x00\x00\x00\x8b\x16\x6a\x18\x8b\xce\xff\x52\x58\x85\xc0\x74\x11\x8b\x47\x04\x40\x5e\x89\x47\x04\x5b\xc3\xc7\x47\x04\x03\x00\x00\x00\x8b\x47\x04\x5e\x5b\xc3\x8d\x49\x00\xb9\x38\x5a\x00\xd2\x38\x5a\x00\x4f\x39\x5a\x00\x00\x39\x5a\x00\x24\x39\x5a\x00\x4f\x39\x5a\x00\xf3\x38\x5a\x00\xf3\x38\x5a\x00\x48\x39\x5a\x00"},
+    {0x5a4990,694,"\x51\x53\x55\x8b\x6c\x24\x10\x8b\xd8\x8b\x44\x24\x20\x85\xc0\x56\x8b\xf1\x74\x0d\x56\xe8\x36\xb2\x00\x00\x83\xc4\x04\x85\xc0\x74\x07\x5e\x5d\x33\xc0\x5b\x59\xc3\x83\x7c\x24\x18\x0b\x57\xc7\x44\x24\x10\x00\x00\x00\x00\x75\x07\xbf\x02\x00\x00\x00\xeb\x04\x8b\x7b\x04\x47\x56\xe8\x57\x5c\xed\xff\x83\xc4\x04\x85\xc0\x0f\x84\x99\x01\x00\x00\x56\x8b\xcd\xe8\xd4\x22\xef\xff\x85\xc0\x0f\x84\xd8\x00\x00\x00\xf6\x44\x24\x28\x01\x74\x78\x8b\x44\x24\x24\x50\xe8\xdb\xf1\xff\xff\x83\xc4\x04\x85\xc0\x74\x67\x8b\x0b\x8b\x44\x24\x24\x41\x3b\xc1\x7c\x5c\x3b\xc7\x7f\x58\xf6\x44\x24\x28\x20\xc7\x44\x24\x10\x01\x00\x00\x00\x74\x49\x83\xf8\x01\x75\x44\xe8\xbc\xeb\xff\xff\x85\xc0\x74\x16\x8b\x16\x8b\xce\xff\x52\x3c\x8b\x00\x6a\x00\x55\x68\x80\x32\x5a\x00\x6a\x02\x50\xeb\x0f\x8b\x4c\x24\x20\x6a\x00\x55\x68\x80\x32\x5a\x00\x6a\x01\x51\xb9\x68\x0e\xfb\x06\xe8\x39\xf9\xed\xff\x85\xc0\x74\x08\xc7\x44\x24\x10\x21\x00\x00\x00\x8a\x44\x24\x28\xbb\x08\x00\x00\x00\x84\xc3\x0f\x84\x73\x01\x00\x00\x83\x7c\x24\x24\x01\x0f\x85\x68\x01\x00\x00\x8b\x16\x6a\x0b\x8b\xce\xff\x52\x2c\x85\xc0\x0f\x84\x57\x01\x00\x00\x56\xe8\x3a\x15\xef\xff\x8b\x10\x83\xc4\x04\x8b\xc8\xff\x52\x40\x50\xe8\xfa\x37\xee\xff\x83\xc4\x04\x85\xc0\x0f\x84\x36\x01\x00\x00\x8b\x44\x24\x10\x0b\xc3\xe9\x27\x01\x00\x00\x83\x7c\x24\x24\x01\x0f\x85\x20\x01\x00\x00\x8b\x06\x6a\x0b\x8b\xce\xff\x50\x2c\x85\xc0\x8a\x44\x24\x28\x74\x53\xbb\x04\x00\x00\x00\x84\xc3\x0f\x84\x02\x01\x00\x00\x56\xe8\xe5\x14\xef\xff\x83\xc4\x04\x50\x8b\xcd\xe8\x1a\x11\xef\xff\x85\xc0\x0f\x84\xe9\x00\x00\x00\x56\xe8\xcc\x14\xef\xff\x8b\x48\x08\x83\xc4\x04\x83\xf9\x01\x0f\x84\xd4\x00\x00\x00\x8b\xf0\xe8\x96\xe7\xff\xff\x85\xc0\x0f\x85\xc5\x00\x00\x00\x89\x5c\x24\x10\xe9\xbc\x00\x00\x00\xbb\x10\x00\x00\x00\x84\xc3\x0f\x84\xaf\x00\x00\x00\x56\xe8\x12\x7f\xef\xff\x83\xc4\x04\x55\xb9\x58\x19\x20\x07\x8b\xf0\xe8\x62\xcc\xee\xff\x8b\xc8\xc1\xe1\x04\x56\x81\xc1\xb0\x99\x54\x09\xe8\x41\x90\xfc\xff\x85\xc0\x0f\x84\x80\x00\x00\x00\x89\x5c\x24\x10\xeb\x7a\x83\x7c\x24\x24\x01\x75\x73\x33\xff\x8b\xcf\xbe\x00\x01\x00\x00\xd3\xe6\x8b\x4c\x24\x28\x85\xf1\x74\x48\x8b\x55\x00\x8b\xcd\xff\x52\x40\x50\xb9\x58\x19\x20\x07\xe8\xf6\xbe\xee\xff\x50\x57\xe8\x4f\xe7\xff\xff\x83\xc4\x08\x85\xc0\x7c\x27\x83\xf8\x3f\x7f\x22\x50\xb9\x58\x19\x20\x07\xe8\xc8\xbf\xee\xff\x8b\x4c\x24\x20\x51\x50\x55\xe8\x9c\xf5\xff\xff\x83\xc4\x0c\x85\xc0\x74\x04\x09\x74\x24\x10\x47\x83\xff\x0a\x7c\xa1\x8b\x44\x24\x10\xa9\x00\xfe\x3f\x00\x74\x07\x83\xc8\x02\x89\x44\x24\x10\x83\x7c\x24\x1c\x03\x5f\x75\x3e\x83\x7c\x24\x20\x01\x7e\x37\x0f\xbf\x44\x24\x1c\x0f\xbf\x54\x24\x1e\x69\xc0\xc8\x00\x00\x00\x03\xc2\x8d\x04\x80\x8b\x0c\x85\x6c\x0e\xfb\x06\x83\xe1\x1f\x80\xf9\x05\x75\x13\x8b\x55\x00\x6a\x32\x8b\xcd\xff\x52\x58\x85\xc0\x75\x05\x83\x64\x24\x0c\xfe\x8b\x44\x24\x0c\x5e\x5d\x5b\x59\xc3"},
+    {0x5a3be0,59,"\x8b\x06\x6a\x05\x8b\xce\xff\x50\x2c\x85\xc0\x74\x28\x57\x8b\x3e\xe8\x7b\xf8\xfc\xff\x50\x8b\xce\xff\x57\x2c\xf7\xd8\x1b\xc0\x23\xc6\x83\x78\x08\x17\x5f\x75\x0d\x8b\x4c\x24\x04\x33\xc0\x83\xf9\x02\x0f\x9c\xc0\xc3\xb8\x01\x00\x00\x00\xc3"},
+};
+struct AttackReachImmediate {uint32_t at;int kind;};
+const AttackReachImmediate g_attackReachImmediates[]={
+    {0x5a3ffd,0}, // 005a3ffb 2 4 69c0c8000000 W
+    {0x5a4009,3}, // 005a4006 3 4 8d0495680efb06 B20
+    {0x5a40d2,3}, // 005a40d1 1 4 b9680efb06 B20
+    {0x5a4c12,0}, // 005a4c10 2 4 69c0c8000000 W
+    {0x5a4c1e,1}, // 005a4c1b 3 4 8b0c856c0efb06 B20+4
+    {0x5a4b66,2}, // 005a4b64 2 4 81c1b0995409 UWRAP
+    {0x5a4a5e,3}, // 005a4a5d 1 4 b9680efb06 B20
+};
+bool verifyAttackReachLayout(){
+    for(const auto& s:g_attackReachLayouts){auto p=(const uint8_t*)(g_strategyCodeBase+s.start-0x400000);
+        for(int n=0;n<s.size;++n){bool operand=false;
+            for(const auto& m:g_attackReachImmediates)if(s.start+n>=m.at && s.start+n<m.at+4)operand=true;
+            if(!operand && p[n]!=(uint8_t)s.bytes[n])return false;
+        }
+    }
+    uint32_t width=*(const uint32_t*)(g_strategyCodeBase+0x5a078f-0x400000),base=*(const uint32_t*)(g_strategyCodeBase+0x5a07aa-0x400000);
+    uint32_t wrap=*(const uint32_t*)(g_strategyCodeBase+0x5a5130-0x400000);if(!wrap)return false;
+    for(const auto& m:g_attackReachImmediates)if(*(const uint32_t*)(g_strategyCodeBase+m.at-0x400000)!=(m.kind==0?width:m.kind==1?base+4:m.kind==2?wrap:base))return false;
+    return true;
+}

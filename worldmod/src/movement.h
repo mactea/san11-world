@@ -1,6 +1,7 @@
 #pragma once
 // Per-weapon movement and terrain costs (movement.cpp, M12_MOVE.md).
 #include <stdint.h>
+#include <vector>
 #include "d3dtrace.h"
 
 // Reads move / move_w0..move_w11 / move_steer_w9..w11 / move_transport_water / move_cap_ship / move_shore_scale from [section] of
@@ -22,6 +23,8 @@ int movementApplyRecords(uint8_t* records, const int move[12], const int cost[12
 // The 操舵 step costs (12 x 32, laid out like 0x9549830) the step cost 0x56dd00 uses on 河 / 海 for a unit with 操舵;
 // nullptr before the first map entry or with move=0.
 const uint8_t* movementSteerCosts();
+struct SkillSteerCosts;
+bool movementDescribeSteering(const uint8_t* unit,int terrain,SkillSteerCosts& out);
 // M13 trade (monsoon): called for every step onto a sea hex (terrain 8) with the unit, the HEX20 record stepped onto,
 // the packed hex the step comes from (lo | hi << 16; 0xffffffff = unknown, see movement.cpp; bit 31 set: a backwards
 // search, the unit really moves the other way) and the cost so far
@@ -29,6 +32,23 @@ const uint8_t* movementSteerCosts();
 // heuristic, pathfind.cpp). nullptr (default): no change.
 typedef int (__cdecl* MovementSeaCostFn)(const uint8_t* unit, const uint8_t* hexRec, uint32_t from, int cost);
 void movementSetSeaCost(MovementSeaCostFn fn, int minPct);
+// Trade pause constraints must affect range display, path finding and actual execution equally.
+typedef bool (__cdecl* MovementAllowedFn)(const uint8_t* unit);
+void movementSetAllowed(MovementAllowedFn fn);
+bool movementReady();
+// Applied to native movement, range search, A* and route-time quotes alike.
+typedef bool (__cdecl* MovementStepAllowedFn)(const uint8_t* unit,const uint8_t* hexRec);
+void movementSetStepAllowed(MovementStepAllowedFn fn);
+bool movementCanStep(const uint8_t* unit,const uint8_t* hexRec);
+// Only registered trade caravans receive the road/plain/sea discounts and extended range.
+typedef bool (__cdecl* MovementTradeFn)(const uint8_t* unit);
+void movementSetTradeUnits(MovementTradeFn fn);
+bool movementIsTradeUnit(const uint8_t* unit);
+struct MovementRouteTime { int turns = -1, steps = 0, land = 0, water = 0, cost = 0; };
+// Uses the same step costs and per-turn range limits as native movement. Current season,
+// no future blockers or rests; path must start at the unit's current position.
+MovementRouteTime movementRouteTime(const uint8_t* unit, const std::vector<uint32_t>& path,
+                                   const uint8_t* hex20, int width, int height);
 int movementSeaMinPct();
 // pathfind.cpp: the hex its next 0x56dd00 calls step from (0xffffffff: none; bit 31: backwards search); per thread
 void movementSetStepFrom(uint32_t packed);

@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "movement.h"
+#include "skills.h"
 
 static TraceLogFn g_log = nullptr;
 static int g_move[12];
@@ -78,7 +79,9 @@ static int g_transportWater = 31;                   // M12: 走舸 26 + 5 = 31 t
 
 // Range search: depth cap (Koei: 10) and the relocated node pool / visited list.
 static const int LAND_CAP = 10, CAP_MAX = 25;      // radius 25: 1 + 3 * 25 * 26 = 1951 hexes
-static const int RANGE_CAP = 2048;
+static const int TRADE_SEA_CAP = 36;
+// Include the extra visited frontier beyond the furthest reachable hex.
+static const int RANGE_CAP = 1 + 3 * (TRADE_SEA_CAP + 1) * (TRADE_SEA_CAP + 2);
 static int g_capShip = 16;
 static int g_depthCap = LAND_CAP;
 static uint8_t g_pool[RANGE_CAP * 0x14];            // nodes: +0 coord, +0x10 next in the bucket
@@ -185,15 +188,30 @@ __declspec(naked) static void entryThunk() {
 // 0x495bd0 (the bonus check in 0x496570) asks 0x4890f0: person +0xe8 == skill, for the members 0x496dd0 collects
 // (unit +0xc, +0x10, +0x14; person ids, 0x490b00 returns 0 out of range).
 static const int SKILL_STEER = 5;
-static int __cdecl unitHasSteer(const uint8_t* unit) {
+static const uint8_t* unitSteerActor(const uint8_t* unit,PersonFn lookup) {
     static const int member[3] = { 0xc, 0x10, 0x14 };
     for (int k = 0; k < 3; k++) {
         int id = *(const int*)(unit + member[k]);
         if (id < 0) continue;
-        const uint8_t* p = personRec(g_world, id);
-        if (p && *(const int*)(p + 0xe8) == SKILL_STEER) return 1;
+        const uint8_t* p = lookup(g_world, id);
+        if (p && *(const int*)(p + 0xe8) == SKILL_STEER) return p;
     }
-    return 0;
+    return nullptr;
+}
+static int __cdecl unitHasSteer(const uint8_t* unit) {return unitSteerActor(unit,personRec)!=nullptr;}
+static bool steeringDescribeWithPersons(const uint8_t* unit,int terrain,SkillSteerCosts& out,PersonFn lookup) {
+    if(!g_table || !g_steerReady || (terrain!=7 && terrain!=8))return false;
+    const auto actor=unitSteerActor(unit,lookup);if(!actor)return false;
+    // Same ship selection as native 0x495490 and movementRouteTime.
+    int weapon=*(const int*)(unit+8)==1?9:*(const int*)(unit+0x50);
+    if(weapon<0 || weapon>11)return false;
+    out.actor=actor;out.weapon=weapon;
+    out.normal=((const uint8_t*)(uintptr_t)g_table)[weapon*32+terrain];
+    out.steering=g_steer[weapon*32+terrain];
+    return out.steering!=255 && out.steering!=out.normal;
+}
+bool movementDescribeSteering(const uint8_t* unit,int terrain,SkillSteerCosts& out) {
+    return steeringDescribeWithPersons(unit,terrain,out,personRec);
 }
 
 // ------------------------------------------------------------------ shore crossing: movement of the other weapon
@@ -265,6 +283,19 @@ __declspec(naked) static void recalcThunk() {
 // then the shore scaling above. Impassable (255) stays 255. The callers (0x5a4598, 0x567731, 0x5a5ed8, pathfind.cpp)
 // use only al.
 static MovementSeaCostFn g_seaCost = nullptr;      // M13 trade (monsoon): sea-hex cost of a unit by step direction
+static MovementAllowedFn g_allowed = nullptr;
+static MovementStepAllowedFn g_stepAllowed = nullptr;
+void movementSetStepAllowed(MovementStepAllowedFn fn) { g_stepAllowed=fn; }
+bool movementCanStep(const uint8_t* unit,const uint8_t* hexRec) { return !g_stepAllowed || g_stepAllowed(unit,hexRec); }
+static bool g_installed = false;
+static MovementTradeFn g_tradeUnit = nullptr;
+void movementSetTradeUnits(MovementTradeFn fn) { g_tradeUnit = fn; }
+bool movementIsTradeUnit(const uint8_t* unit) { return g_tradeUnit && g_tradeUnit(unit); }
+static int rangeCap(const uint8_t* unit, bool water) {
+    return movementIsTradeUnit(unit) ? (water ? TRADE_SEA_CAP : 24) : water ? g_capShip : LAND_CAP;
+}
+void movementSetAllowed(MovementAllowedFn fn) { g_allowed = fn; }
+bool movementReady() { return g_installed; }
 static int g_seaMinPct = 100;                      // the smallest percent the callback gives (pathfind.cpp's heuristic)
 void movementSetSeaCost(MovementSeaCostFn fn, int minPct) { g_seaCost = fn; g_seaMinPct = fn ? (minPct < 100 ? minPct : 100) : 100; }
 int movementSeaMinPct() { return g_seaCost ? g_seaMinPct : 100; }
@@ -296,20 +327,76 @@ static uint32_t stepFrom(const uint32_t* retSlot) {
     default: g_stepStats.unknown++; return 0xffffffffu;
     }
 }
-static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags, const uint8_t* hexRec, const uint32_t* retSlot) {
+static int costForStep(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags,
+                      const uint8_t* hexRec, uint32_t from, int cur, int alt, int afloat) {
+    if(!movementCanStep(unit,hexRec)) return 0xff;
     bool water = terr == 7 || terr == 8;
     const uint8_t* tab = water && g_steerReady && unitHasSteer(unit) ? g_steer : (const uint8_t*)(uintptr_t)g_table;
     uint8_t c = tab[weapon * 32 + terr];
-    int cost = hexFlags & 0x3800000 ? (uint8_t)(c << 2) : c;
-    if (g_shoreScale && c != 0xff) {
-        int i = unitIndex(unit);
-        if (i >= 0 && g_afloat[i] != 0xff && (g_afloat[i] != 0) != water) {
-            int cur = unit[0xcc], alt = g_alt[i];
-            if (cur && alt) { cost = (cost * cur + alt - 1) / alt; if (cost > 255) cost = 255; }
-        }
+    if (c == 0xff) return 0xff;
+    // Grass, soil, sand, roads and bridges: established caravan travel. Difficult
+    // terrain, rivers, fire penalties and impassability keep their original rules.
+    if (movementIsTradeUnit(unit) && (terr==0 || terr==1 || terr==2 || terr==10 || terr==12))
+        c = (uint8_t)((c+1)/3 > 0 ? (c+1)/3 : 1);
+    bool tradeSea = terr == 8 && movementIsTradeUnit(unit);
+    int cost = c;
+    if (tradeSea) {
+        // Apply wind before rounding the merchant shipping discount; doing this
+        // after reducing 5 to 1 would erase the headwind / storm penalty.
+        if (g_seaCost) cost = g_seaCost(unit, hexRec, from, cost);
+        cost = (cost + 2) / 4;
+        if (cost < 1) cost = 1;
     }
-    if (g_seaCost && terr == 8 && c != 0xff) cost = g_seaCost(unit, hexRec, stepFrom(retSlot), cost);
+    if (hexFlags & 0x3800000) cost = tradeSea ? (cost > 63 ? 254 : cost * 4) : (uint8_t)(cost << 2);
+    if (g_shoreScale && afloat != 0xff && (afloat != 0) != water && cur && alt) {
+        cost = (cost * cur + alt - 1) / alt; if (cost > 255) cost = 255;
+    }
+    if (g_seaCost && terr == 8 && !tradeSea && cost != 0xff) cost = g_seaCost(unit, hexRec, from, cost);
     return cost;
+}
+static int __cdecl stepCost(const uint8_t* unit, int weapon, int terr, uint32_t hexFlags, const uint8_t* hexRec, const uint32_t* retSlot) {
+    if (g_allowed && !g_allowed(unit)) return 0xff;
+    int i=unitIndex(unit);
+    return costForStep(unit,weapon,terr,hexFlags,hexRec,terr==8 ? stepFrom(retSlot) : 0xffffffffu,
+                       unit[0xcc],i>=0 ? g_alt[i] : 0,i>=0 ? g_afloat[i] : 0xff);
+}
+
+MovementRouteTime movementRouteTime(const uint8_t* unit,const std::vector<uint32_t>& path,
+                                   const uint8_t* hex20,int width,int height) {
+    MovementRouteTime result;
+    if(!unit || path.empty() || !hex20 || width<1 || height<1) return result;
+    int ui=unitIndex(unit);if(ui<0 || g_afloat[ui]==0xff) return result;
+    auto cell=[&](uint32_t p)->const uint8_t* {
+        int x=(int16_t)p,y=(int16_t)(p>>16);
+        return x>=0 && x<height && y>=0 && y<width ? hex20+((size_t)x*width+y)*20 : nullptr;
+    };
+    auto first=cell(path.front());if(!first) return result;
+    int land=g_afloat[ui] ? g_alt[ui] : unit[0xcc];
+    int sea=g_afloat[ui] ? unit[0xcc] : g_alt[ui];
+    int firstTerr=*(const uint32_t*)(first+4)&31;
+    bool afloat=firstTerr==7 || firstTerr==8;
+    int budget=afloat ? sea : land, used=0, steps=0;
+    if(!budget) return result;
+    result.turns=path.size()>1 ? 1 : 0;
+    for(size_t n=1;n<path.size();++n) {
+        auto rec=cell(path[n]);if(!rec) {result.turns=-1;return result;}
+        int terr=*(const uint32_t*)(rec+4)&31;
+        bool water=terr==7 || terr==8;
+        int weapon=*(const int*)(unit+8)==1 ? (water ? 9 : 0) : *(const int*)(unit+(water ? 0x50 : 0x48));
+        if(weapon<0 || weapon>11 || !(water ? sea : land)) {result.turns=-1;return result;}
+        auto cost=[&]() {return costForStep(unit,weapon,terr,*(const uint32_t*)rec,rec,path[n-1],budget,afloat ? land : sea,afloat);};
+        int c=cost();
+        if(used+c>budget || steps>=rangeCap(unit,afloat)) {
+            if(!steps) {result.turns=-1;return result;}
+            ++result.turns;used=steps=0;
+            int prev=*(const uint32_t*)(cell(path[n-1])+4)&31;
+            afloat=prev==7 || prev==8;budget=afloat ? sea : land;c=cost();
+        }
+        if(c<1 || c==255 || c>budget) {result.turns=-1;return result;}
+        used+=c;++steps;++result.steps;result.cost+=c;
+        if(water) ++result.water;else ++result.land;
+    }
+    return result;
 }
 
 // 0x56dd42: mov ecx, [edi]; shl eax, 5 (5 bytes) -> costThunk, which finishes the function (pop edi; pop esi;
@@ -356,7 +443,7 @@ __declspec(naked) static void transportThunk() {
 static void __cdecl setDepthCap(void* handle) {
     const uint8_t* u = unitOf(handle);
     int w = *(const int*)(u + 0xa8);                  // current weapon (0x496160: ship weapon on water)
-    g_depthCap = w >= 9 && w <= 11 ? g_capShip : LAND_CAP;
+    g_depthCap = rangeCap(u,w >= 9 && w <= 11);
 }
 
 // 0x5a47e0: sub esp, 0x10; push ebx; mov ebx, [esp+0x18] (8 bytes); [esp+4] = the unit handle
@@ -551,5 +638,6 @@ bool movementInstall(const wchar_t* dir, const wchar_t* section, bool write, Tra
         "range search depth ships %d / land %d, pool and visited list %d hexes (pool %p, visited %p)",
         g_steerCost[9][7], g_steerCost[9][8], g_steerCost[10][7], g_steerCost[10][8], g_steerCost[11][7], g_steerCost[11][8],
         g_transportWater, g_shoreScale, g_capShip, LAND_CAP, RANGE_CAP, g_pool, g_visited);
+    g_installed = true;
     return true;
 }

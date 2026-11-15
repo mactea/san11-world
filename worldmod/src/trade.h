@@ -21,8 +21,8 @@ struct TradeSetup {
 bool tradeInstall(const TradeSetup& s, TraceLogFn log);
 
 // 0x493BCE (world serializer, after every object): resets the trade state when a scenario or a save is read and
-// reads / writes the 'TRAD' block of saves. Does nothing unless installed.
-void tradeStream(uint8_t* stream);
+// reads / writes the TRAD block (opaque preservation when disabled). False aborts serialization.
+bool tradeStream(uint8_t* stream);
 
 // automation command line "trade ..." (command thread): dump / send / ai / tick
 void tradeCommand(const char* line, FILE* out);

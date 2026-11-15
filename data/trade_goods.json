@@ -2,6 +2,13 @@
   "version": 1,
   "about": "M13 trade goods (M13_TRADE.md). tools/trade_data.py turns this file into trade.bin: per city and good a base price (gold per load) and a producer level, plus city flags and market sizes. Prices: producer price * (1 + distance / per_hexes) ^ exp (capped at cap x), times the demand of the buyer's market group. Distance = hex distance to the nearest producer (cheaper producers count with their level factor).",
 
+  "inventory": {
+    "capacity_percent": 200,
+    "producer_initial_percent": 100,
+    "hub_initial_percent": 10,
+    "production_divisor": 30,
+    "consumption_divisor": 50
+  },
   "price_model": {
     "per_hexes": 100,
     "level_factor": { "1": 1.2, "2": 1.0, "3": 0.85 },
@@ -89,14 +96,62 @@
       "sources": "Han iron offices (鐵官) in 河北 and 南陽 宛; Pliny NH 34.145 ranks Seric iron first, Parthian second; Noric steel (維魯 / Virunum); south Indian wootz."
     },
     {
-      "key": "horse", "name": "馬", "base": 60, "exp": 1.00, "cap": 5,
+      "key": "horse",
+      "name": "馬",
+      "base": 220,
+      "exp": 0.65,
+      "cap": 2.5,
       "producers": [
-        { "city": 21, "level": 3 }, { "city": 20, "level": 2 }, { "city": 19, "level": 2 },
-        { "city": 110, "level": 3 }, { "city": 106, "level": 2 }, { "region": "匈奴", "level": 2 }, { "region": "鮮卑", "level": 2 },
-        { "city": 297, "level": 2 }, { "city": 298, "level": 2 }, { "region": "阿拉伯", "level": 1 }
+        {
+          "city": 21,
+          "level": 3
+        },
+        {
+          "city": 20,
+          "level": 2
+        },
+        {
+          "city": 19,
+          "level": 2
+        },
+        {
+          "city": 110,
+          "level": 3
+        },
+        {
+          "city": 106,
+          "level": 2
+        },
+        {
+          "region": "匈奴",
+          "level": 2
+        },
+        {
+          "region": "鮮卑",
+          "level": 2
+        },
+        {
+          "city": 297,
+          "level": 2
+        },
+        {
+          "city": 298,
+          "level": 2
+        },
+        {
+          "region": "阿拉伯",
+          "level": 1
+        }
       ],
-      "demand": { "中國": 1.6, "南海": 1.4, "天竺": 1.5, "羅馬": 0.9 },
-      "sources": "涼州 horses (涼州大馬，橫行天下); 大宛 汗血馬 (Shiji 123); 烏孫 天馬; Nisaean horses of Media."
+      "demand": {
+        "中國": 1.6,
+        "南海": 1.4,
+        "天竺": 1.5,
+        "羅馬": 0.9
+      },
+      "sources": "涼州 horses (涼州大馬，橫行天下); 大宛 汗血馬 (Shiji 123); 烏孫 天馬; Nisaean horses of Media.",
+      "native_units_per_lot": 100,
+      "min_value": 150
     },
     {
       "key": "jade", "name": "玉", "base": 40, "exp": 1.30, "cap": 25,
@@ -174,6 +229,1885 @@
       ],
       "demand": { "草原": 1.5 },
       "sources": "Han salt offices (鹽官): sea salt of 齊 / 渤海 and 吳會, well salt of 巴蜀 (江州 / 臨邛), lake salt of 河東 and 樓蘭 (Lop Nur)."
+    },
+    {
+      "key": "wheat",
+      "name": "小麥",
+      "base": 6,
+      "exp": 0.65,
+      "cap": 3,
+      "load_units": 2,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        },
+        {
+          "region": "西西里",
+          "level": 2
+        },
+        {
+          "region": "阿非利加",
+          "level": 2
+        },
+        {
+          "region": "兗州",
+          "level": 2
+        },
+        {
+          "region": "豫州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.25
+      },
+      "sources": "可储藏谷物；不自动兑换原生兵粮",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "小麥"
+    },
+    {
+      "key": "rice",
+      "name": "稻米",
+      "base": 7,
+      "exp": 0.65,
+      "cap": 3,
+      "load_units": 2,
+      "producers": [
+        {
+          "region": "揚州",
+          "level": 3
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "交州",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.3,
+        "安息": 1.15
+      },
+      "sources": "亚洲稻作区；不自动兑换原生兵粮",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "水稻"
+    },
+    {
+      "key": "soybean",
+      "name": "大豆",
+      "base": 7,
+      "exp": 0.65,
+      "cap": 4,
+      "load_units": 2,
+      "producers": [
+        {
+          "region": "冀州",
+          "level": 3
+        },
+        {
+          "region": "青州",
+          "level": 2
+        },
+        {
+          "region": "豫州",
+          "level": 2
+        },
+        {
+          "region": "徐州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.2,
+        "南海": 1.15
+      },
+      "sources": "汉代豆类粮食",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "大豆"
+    },
+    {
+      "key": "dried_fish",
+      "name": "魚乾",
+      "base": 9,
+      "exp": 0.7,
+      "cap": 4,
+      "load_units": 3,
+      "producers": [
+        {
+          "region": "青州",
+          "level": 3
+        },
+        {
+          "region": "揚州",
+          "level": 2
+        },
+        {
+          "region": "北歐",
+          "level": 2
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.25
+      },
+      "sources": "鱼肉按腌干保存形态交易，图片为鱼肉近似",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "魚肉"
+    },
+    {
+      "key": "beef",
+      "name": "牛肉",
+      "base": 14,
+      "exp": 0.75,
+      "cap": 4,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "匈奴",
+          "level": 3
+        },
+        {
+          "region": "鮮卑",
+          "level": 2
+        },
+        {
+          "region": "薩爾馬提亞",
+          "level": 2
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        },
+        {
+          "region": "亞美尼亞",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.15,
+        "安息": 1.15
+      },
+      "sources": "按腌制肉货抽象，不加入现代冷链",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "牛肉"
+    },
+    {
+      "key": "cheese",
+      "name": "乳酪",
+      "base": 16,
+      "exp": 0.8,
+      "cap": 5,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "意大利",
+          "level": 3
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        },
+        {
+          "region": "亞美尼亞",
+          "level": 2
+        },
+        {
+          "region": "康居",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "阿拉伯": 1.2,
+        "羅馬": 1.1
+      },
+      "sources": "乳制品，按耐储奶酪交易",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "乳酪"
+    },
+    {
+      "key": "raisins",
+      "name": "葡萄乾",
+      "base": 15,
+      "exp": 0.9,
+      "cap": 7,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "西班牙",
+          "level": 3
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        },
+        {
+          "region": "敘利亞",
+          "level": 2
+        },
+        {
+          "region": "亞美尼亞",
+          "level": 2
+        },
+        {
+          "region": "西域",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.3,
+        "北方": 1.2
+      },
+      "sources": "古代葡萄栽培与干果",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "葡萄乾"
+    },
+    {
+      "key": "honey",
+      "name": "蜂蜜",
+      "base": 18,
+      "exp": 0.8,
+      "cap": 6,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "希臘",
+          "level": 3
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.15,
+        "草原": 1.2
+      },
+      "sources": "古代蜂产品",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "蜂蜜"
+    },
+    {
+      "key": "cane_sugar",
+      "name": "蔗糖",
+      "base": 24,
+      "exp": 1.0,
+      "cap": 10,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "貴霜",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.3,
+        "安息": 1.2
+      },
+      "sources": "普林尼记载印度 saccharon；这里指早期蔗糖制品，不是现代精炼白砂糖",
+      "source_url": "https://penelope.uchicago.edu/holland/pliny12.html",
+      "image_name": "砂糖"
+    },
+    {
+      "key": "olive_oil",
+      "name": "橄欖油",
+      "base": 18,
+      "exp": 0.95,
+      "cap": 8,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "意大利",
+          "level": 3
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "敘利亞",
+          "level": 2
+        },
+        {
+          "region": "阿非利加",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "安息": 1.25,
+        "天竺": 1.15
+      },
+      "sources": "地中海油料；不按大航海时代后来的种植区布置",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "橄欖油"
+    },
+    {
+      "key": "coconut_oil",
+      "name": "椰子油",
+      "base": 14,
+      "exp": 0.85,
+      "cap": 7,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "阿拉伯": 1.25,
+        "中國": 1.1
+      },
+      "sources": "印度洋和南海植物油",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "椰子油"
+    },
+    {
+      "key": "ginger",
+      "name": "生薑",
+      "base": 12,
+      "exp": 0.9,
+      "cap": 8,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "荊州",
+          "level": 3
+        },
+        {
+          "region": "揚州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "交州",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.3,
+        "安息": 1.2
+      },
+      "sources": "古代亚洲香辛料",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "薑"
+    },
+    {
+      "key": "cinnamon",
+      "name": "肉桂",
+      "base": 22,
+      "exp": 1.15,
+      "cap": 15,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "交州",
+          "level": 3
+        },
+        {
+          "region": "南中",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.4,
+        "阿拉伯": 1.2
+      },
+      "sources": "古典文献 cinnamon/cassia 物种混称，按桂类商品合并",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "桂皮"
+    },
+    {
+      "key": "clove",
+      "name": "丁香",
+      "base": 28,
+      "exp": 1.2,
+      "cap": 18,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "南海",
+          "level": 3
+        }
+      ],
+      "demand": {
+        "中國": 1.3,
+        "天竺": 1.2,
+        "羅馬": 1.2
+      },
+      "sources": "以南海群岛为供应区；不将普林尼 caryophyllon 无条件等同丁香",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "丁香"
+    },
+    {
+      "key": "cardamom",
+      "name": "豆蔻",
+      "base": 24,
+      "exp": 1.15,
+      "cap": 15,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "安息": 1.3,
+        "羅馬": 1.25
+      },
+      "sources": "印度香辛料品类抽象",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "小豆蔻"
+    },
+    {
+      "key": "saffron",
+      "name": "藏紅花",
+      "base": 42,
+      "exp": 1.15,
+      "cap": 15,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "希臘",
+          "level": 3
+        },
+        {
+          "region": "奇里乞亞",
+          "level": 2
+        },
+        {
+          "region": "米底",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.3,
+        "安息": 1.1
+      },
+      "sources": "地中海和西亚芳香染材",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "番紅花"
+    },
+    {
+      "key": "musk",
+      "name": "麝香",
+      "base": 65,
+      "exp": 1.15,
+      "cap": 15,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "西羌",
+          "level": 3
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "南中",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "安息": 1.3,
+        "羅馬": 1.2
+      },
+      "sources": "古代中国药香材料，生产区为地理抽象",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "麝香"
+    },
+    {
+      "key": "sandalwood",
+      "name": "檀香",
+      "base": 32,
+      "exp": 1.1,
+      "cap": 15,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.35,
+        "安息": 1.2
+      },
+      "sources": "印度及南海香木",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "白檀"
+    },
+    {
+      "key": "wool",
+      "name": "羊毛",
+      "base": 10,
+      "exp": 0.75,
+      "cap": 5,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "不列顛",
+          "level": 3
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "亞美尼亞",
+          "level": 2
+        },
+        {
+          "region": "匈奴",
+          "level": 2
+        },
+        {
+          "region": "康居",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.15,
+        "南海": 1.15
+      },
+      "sources": "纺织原料，与皮毛分开",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "羊毛"
+    },
+    {
+      "key": "raw_cotton",
+      "name": "棉花",
+      "base": 9,
+      "exp": 0.85,
+      "cap": 7,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "貴霜",
+          "level": 2
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.2,
+        "安息": 1.15
+      },
+      "sources": "与现有印度棉布分开，不设汉地普遍棉田",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "棉花"
+    },
+    {
+      "key": "flax",
+      "name": "麻",
+      "base": 8,
+      "exp": 0.7,
+      "cap": 4,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        },
+        {
+          "region": "敘利亞",
+          "level": 2
+        },
+        {
+          "region": "冀州",
+          "level": 2
+        },
+        {
+          "region": "豫州",
+          "level": 2
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.15
+      },
+      "sources": "合并古代麻类纤维；亚麻图片近似",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "亞麻"
+    },
+    {
+      "key": "wool_cloth",
+      "name": "毛織品",
+      "base": 22,
+      "exp": 1.0,
+      "cap": 10,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "高盧",
+          "level": 3
+        },
+        {
+          "region": "不列顛",
+          "level": 2
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        },
+        {
+          "region": "亞美尼亞",
+          "level": 2
+        },
+        {
+          "region": "康居",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.2,
+        "阿拉伯": 1.15
+      },
+      "sources": "毛织物，不是皮毛",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "羊毛布料"
+    },
+    {
+      "key": "linen",
+      "name": "麻布",
+      "base": 15,
+      "exp": 0.85,
+      "cap": 7,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        },
+        {
+          "region": "敘利亞",
+          "level": 2
+        },
+        {
+          "region": "豫州",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "阿拉伯": 1.25,
+        "草原": 1.15
+      },
+      "sources": "古代麻织物",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "麻布料"
+    },
+    {
+      "key": "pile_cloth",
+      "name": "絨毯",
+      "base": 35,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "安息",
+          "level": 3
+        },
+        {
+          "region": "米底",
+          "level": 2
+        },
+        {
+          "region": "康居",
+          "level": 2
+        },
+        {
+          "region": "貴霜",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.3,
+        "中國": 1.2
+      },
+      "sources": "绒织品用古代已有的绒毯表示，不采用后世天鹅绒",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "波斯地毯"
+    },
+    {
+      "key": "wine",
+      "name": "葡萄酒",
+      "base": 20,
+      "exp": 1.0,
+      "cap": 9,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "意大利",
+          "level": 3
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "亞美尼亞",
+          "level": 2
+        },
+        {
+          "region": "西域",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.3,
+        "草原": 1.2
+      },
+      "sources": "古典地中海和中亚酒货",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "葡萄酒"
+    },
+    {
+      "key": "tea",
+      "name": "茶",
+      "base": 20,
+      "exp": 1.0,
+      "cap": 12,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "益州",
+          "level": 3
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "揚州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.15,
+        "草原": 1.15
+      },
+      "sources": "汉阳陵有实物证据；不提前复制近代全球茶叶贸易",
+      "source_url": "https://www.nature.com/articles/srep18955",
+      "image_name": "中國茶"
+    },
+    {
+      "key": "rice_wine",
+      "name": "米酒",
+      "base": 15,
+      "exp": 0.8,
+      "cap": 6,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "揚州",
+          "level": 3
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "倭",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.2
+      },
+      "sources": "采用古代谷物酿造酒，清酒图片为近似，不指现代精制清酒",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "清酒"
+    },
+    {
+      "key": "gold",
+      "name": "黃金",
+      "base": 180,
+      "exp": 0.65,
+      "cap": 3,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        },
+        {
+          "region": "努米底亞",
+          "level": 2
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "達契亞",
+          "level": 2
+        },
+        {
+          "region": "貴霜",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.2,
+        "羅馬": 1.1
+      },
+      "sources": "商品金锭，与城池货币分开；没有直接铸币兑换",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "金"
+    },
+    {
+      "key": "silver",
+      "name": "白銀",
+      "base": 85,
+      "exp": 0.75,
+      "cap": 4,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "西班牙",
+          "level": 3
+        },
+        {
+          "region": "亞細亞",
+          "level": 2
+        },
+        {
+          "region": "安息",
+          "level": 2
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.2,
+        "天竺": 1.15
+      },
+      "sources": "白银作为商品，不直接生成城池货币",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "銀"
+    },
+    {
+      "key": "amber",
+      "name": "琥珀",
+      "base": 40,
+      "exp": 1.15,
+      "cap": 16,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "波羅的",
+          "level": 3
+        },
+        {
+          "region": "北歐",
+          "level": 2
+        },
+        {
+          "region": "維斯瓦",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.35,
+        "中國": 1.25
+      },
+      "sources": "波罗的海琥珀路线",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "琥珀"
+    },
+    {
+      "key": "crystal",
+      "name": "水晶",
+      "base": 30,
+      "exp": 0.95,
+      "cap": 9,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "阿爾巴尼亞",
+          "level": 3
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.2,
+        "中國": 1.15
+      },
+      "sources": "石英晶体及简单加工，不使用现代合成水晶",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "水晶"
+    },
+    {
+      "key": "ruby",
+      "name": "紅寶石",
+      "base": 100,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        }
+      ],
+      "demand": {
+        "羅馬": 1.4,
+        "中國": 1.25,
+        "安息": 1.2
+      },
+      "sources": "印度洋宝石货；区域产地概括，不保证每城有矿山",
+      "source_url": "https://isaw.nyu.edu/exhibitions/berthouville/objects/ring-56-472",
+      "image_name": "紅寶石"
+    },
+    {
+      "key": "sapphire",
+      "name": "藍寶石",
+      "base": 95,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        }
+      ],
+      "demand": {
+        "羅馬": 1.4,
+        "安息": 1.2
+      },
+      "sources": "罗马时期首饰有蓝宝石，供应区概括印度洋",
+      "source_url": "https://isaw.nyu.edu/exhibitions/berthouville/objects/ring-56-472",
+      "image_name": "藍寶石"
+    },
+    {
+      "key": "emerald",
+      "name": "祖母綠",
+      "base": 110,
+      "exp": 1.15,
+      "cap": 15,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        }
+      ],
+      "demand": {
+        "羅馬": 1.4,
+        "安息": 1.25,
+        "天竺": 1.2
+      },
+      "sources": "罗马埃及东部沙漠绿宝石，不设美洲来源",
+      "source_url": "https://isaw.nyu.edu/exhibitions/berthouville/objects/ring-56-472",
+      "image_name": "祖母綠"
+    },
+    {
+      "key": "diamond",
+      "name": "金剛石",
+      "base": 150,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        }
+      ],
+      "demand": {
+        "羅馬": 1.35,
+        "安息": 1.25
+      },
+      "sources": "原石或早期简单加工；图片为现代切面近似",
+      "source_url": "https://isaw.nyu.edu/exhibitions/berthouville/objects/ring-56-472",
+      "image_name": "鑽石"
+    },
+    {
+      "key": "pottery",
+      "name": "陶器",
+      "base": 18,
+      "exp": 0.85,
+      "cap": 8,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "意大利",
+          "level": 3
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        },
+        {
+          "region": "亞細亞",
+          "level": 2
+        },
+        {
+          "region": "揚州",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.3,
+        "北方": 1.2
+      },
+      "sources": "陶器与早期青瓷类合并，不加入青花瓷",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "陶瓷器皿"
+    },
+    {
+      "key": "ivory",
+      "name": "象牙",
+      "base": 55,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "阿克蘇姆",
+          "level": 3
+        },
+        {
+          "region": "庫施",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        },
+        {
+          "region": "交州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.35,
+        "中國": 1.3
+      },
+      "sources": "古代象牙贸易",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "象牙"
+    },
+    {
+      "key": "ivory_carving",
+      "name": "象牙雕品",
+      "base": 85,
+      "exp": 1.15,
+      "cap": 15,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.25,
+        "中國": 1.2
+      },
+      "sources": "古代象牙梳、饰品等，与原牙分开",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "象牙精品"
+    },
+    {
+      "key": "goldwork",
+      "name": "金工藝品",
+      "base": 150,
+      "exp": 0.95,
+      "cap": 8,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "意大利",
+          "level": 3
+        },
+        {
+          "region": "埃及",
+          "level": 2
+        },
+        {
+          "region": "安息",
+          "level": 2
+        },
+        {
+          "region": "貴霜",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.25,
+        "羅馬": 1.15
+      },
+      "sources": "古代金工饰品，与黄金原料分开",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "金工藝品"
+    },
+    {
+      "key": "sculpture",
+      "name": "雕刻",
+      "base": 65,
+      "exp": 1.0,
+      "cap": 10,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "希臘",
+          "level": 3
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "埃及",
+          "level": 2
+        },
+        {
+          "region": "貴霜",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.3,
+        "安息": 1.2
+      },
+      "sources": "可运输雕像与小型雕刻，非整座纪念建筑",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "石像"
+    },
+    {
+      "key": "painting",
+      "name": "繪畫",
+      "base": 55,
+      "exp": 1.0,
+      "cap": 10,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "埃及",
+          "level": 3
+        },
+        {
+          "region": "希臘",
+          "level": 2
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "司隸",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.2,
+        "中國": 1.15
+      },
+      "sources": "木板画、帛画等可携带作品，非后世油画",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "美術品"
+    },
+    {
+      "key": "ginseng",
+      "name": "人參",
+      "base": 45,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "東夷",
+          "level": 3
+        },
+        {
+          "region": "幽州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.4
+      },
+      "sources": "古代药材用途，不添加现实疗效机制",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "人蔘"
+    },
+    {
+      "key": "rhubarb",
+      "name": "大黃",
+      "base": 18,
+      "exp": 0.95,
+      "cap": 10,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "西羌",
+          "level": 3
+        },
+        {
+          "region": "涼州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.25,
+        "安息": 1.15
+      },
+      "sources": "古代药材与染材",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "大黃"
+    },
+    {
+      "key": "indigo",
+      "name": "靛藍",
+      "base": 25,
+      "exp": 1.0,
+      "cap": 12,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "交州",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "揚州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.3,
+        "安息": 1.2
+      },
+      "sources": "植物蓝染料，不是工业合成染料",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "印度藍"
+    },
+    {
+      "key": "turmeric",
+      "name": "鬱金",
+      "base": 22,
+      "exp": 1.0,
+      "cap": 12,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "天竺",
+          "level": 3
+        },
+        {
+          "region": "南海",
+          "level": 2
+        },
+        {
+          "region": "交州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.2,
+        "安息": 1.2
+      },
+      "sources": "按姜黄属香染植物合并处理，名称并非严格植物分类",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "薑黃"
+    },
+    {
+      "key": "wood",
+      "name": "木材",
+      "base": 8,
+      "exp": 0.65,
+      "cap": 4,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "北歐",
+          "level": 3
+        },
+        {
+          "region": "日耳曼",
+          "level": 2
+        },
+        {
+          "region": "高盧",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "阿拉伯": 1.4,
+        "羅馬": 1.15
+      },
+      "sources": "普通木货，不直接兑换原生造船材料",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "木材"
+    },
+    {
+      "key": "wax",
+      "name": "蜂蠟",
+      "base": 18,
+      "exp": 0.9,
+      "cap": 8,
+      "load_units": 5,
+      "producers": [
+        {
+          "region": "高盧",
+          "level": 3
+        },
+        {
+          "region": "日耳曼",
+          "level": 2
+        },
+        {
+          "region": "波羅的",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.25,
+        "中國": 1.15
+      },
+      "sources": "蜂产品与铸造、照明用途",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "蜂蠟"
+    },
+    {
+      "key": "iron_ore",
+      "name": "鐵礦石",
+      "base": 9,
+      "exp": 0.75,
+      "cap": 5,
+      "load_units": 3,
+      "producers": [
+        {
+          "region": "冀州",
+          "level": 3
+        },
+        {
+          "region": "司隸",
+          "level": 2
+        },
+        {
+          "region": "諾里庫姆",
+          "level": 2
+        },
+        {
+          "region": "不列顛",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.3,
+        "南海": 1.2
+      },
+      "sources": "原矿，与现有铁器分开",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "鐵礦石"
+    },
+    {
+      "key": "copper_ore",
+      "name": "銅礦石",
+      "base": 14,
+      "exp": 0.8,
+      "cap": 6,
+      "load_units": 3,
+      "producers": [
+        {
+          "region": "塞浦路斯",
+          "level": 3
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        },
+        {
+          "region": "西域",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.2,
+        "羅馬": 1.15
+      },
+      "sources": "铜矿，不直接兑换钱币或兵装",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "銅礦石"
+    },
+    {
+      "key": "tin_ore",
+      "name": "錫礦石",
+      "base": 22,
+      "exp": 1.05,
+      "cap": 12,
+      "load_units": 3,
+      "producers": [
+        {
+          "region": "不列顛",
+          "level": 3
+        },
+        {
+          "region": "西班牙",
+          "level": 2
+        },
+        {
+          "region": "南中",
+          "level": 2
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.25,
+        "中國": 1.2
+      },
+      "sources": "青铜产业原料",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "錫礦石"
+    },
+    {
+      "key": "coal",
+      "name": "煤炭",
+      "base": 7,
+      "exp": 0.65,
+      "cap": 4,
+      "load_units": 3,
+      "producers": [
+        {
+          "region": "不列顛",
+          "level": 3
+        },
+        {
+          "region": "并州",
+          "level": 2
+        },
+        {
+          "region": "冀州",
+          "level": 2
+        },
+        {
+          "region": "豫州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.1,
+        "中國": 1.1
+      },
+      "sources": "有限区域燃料，不复制近代煤业需求",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "煤"
+    },
+    {
+      "key": "sulfur",
+      "name": "硫磺",
+      "base": 13,
+      "exp": 0.85,
+      "cap": 8,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "西西里",
+          "level": 3
+        },
+        {
+          "region": "倭",
+          "level": 2
+        },
+        {
+          "region": "南海",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "羅馬": 1.15,
+        "中國": 1.15
+      },
+      "sources": "矿物、药材和工艺原料，不自动解锁火药",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "硫磺"
+    },
+    {
+      "key": "mineral_nitre",
+      "name": "硝鹽",
+      "base": 12,
+      "exp": 0.8,
+      "cap": 7,
+      "load_units": 4,
+      "producers": [
+        {
+          "region": "涼州",
+          "level": 3
+        },
+        {
+          "region": "西羌",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "中國": 1.2,
+        "安息": 1.1
+      },
+      "sources": "古代硝类矿盐合并；早期名称混杂，不断言全为现代硝酸钾，不作火药",
+      "source_url": "https://www.baicao99.com/book/shennongbencaojing/667-53cb9.html",
+      "image_name": "硝石"
+    },
+    {
+      "key": "sword",
+      "name": "刀劍",
+      "base": 40,
+      "exp": 0.95,
+      "cap": 8,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "司隸",
+          "level": 3
+        },
+        {
+          "region": "冀州",
+          "level": 2
+        },
+        {
+          "region": "諾里庫姆",
+          "level": 2
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.4,
+        "東夷": 1.25,
+        "北方": 1.2
+      },
+      "sources": "古代冷兵器，图片为同类近似；不直接转换原生兵装",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "短劍"
+    },
+    {
+      "key": "armor",
+      "name": "甲胄",
+      "base": 60,
+      "exp": 0.95,
+      "cap": 8,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "冀州",
+          "level": 3
+        },
+        {
+          "region": "司隸",
+          "level": 2
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "安息",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.4,
+        "東夷": 1.25
+      },
+      "sources": "古代札甲、鳞甲、锁甲抽象，原作甲胄图非严格汉末式样",
+      "source_url": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+      "image_name": "西洋甲冑"
+    },
+    {
+      "key": "spear",
+      "name": "槍",
+      "base": 180,
+      "exp": 0.5,
+      "cap": 2,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "司隸",
+          "level": 3
+        },
+        {
+          "region": "冀州",
+          "level": 2
+        },
+        {
+          "region": "意大利",
+          "level": 2
+        },
+        {
+          "region": "天竺",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.3,
+        "東夷": 1.2,
+        "北方": 1.15
+      },
+      "sources": "基础冷兵器贸易货物；价格、区域供需和每批载量为玩法配置，不直接兑换原生兵装。",
+      "image_name": "槍",
+      "native_units_per_lot": 100,
+      "min_value": 150
+    },
+    {
+      "key": "halberd",
+      "name": "戟",
+      "base": 180,
+      "exp": 0.5,
+      "cap": 2,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "冀州",
+          "level": 3
+        },
+        {
+          "region": "司隸",
+          "level": 2
+        },
+        {
+          "region": "徐州",
+          "level": 2
+        },
+        {
+          "region": "益州",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.3,
+        "東夷": 1.2,
+        "北方": 1.15
+      },
+      "sources": "基础冷兵器贸易货物；价格、区域供需和每批载量为玩法配置，不直接兑换原生兵装。",
+      "image_name": "戟",
+      "native_units_per_lot": 100,
+      "min_value": 150
+    },
+    {
+      "key": "crossbow",
+      "name": "弩",
+      "base": 180,
+      "exp": 0.5,
+      "cap": 2,
+      "load_units": 10,
+      "producers": [
+        {
+          "region": "益州",
+          "level": 3
+        },
+        {
+          "region": "荊州",
+          "level": 2
+        },
+        {
+          "region": "徐州",
+          "level": 2
+        },
+        {
+          "region": "司隸",
+          "level": 2
+        }
+      ],
+      "demand": {
+        "草原": 1.3,
+        "東夷": 1.2,
+        "北方": 1.15
+      },
+      "sources": "基础冷兵器贸易货物；价格、区域供需和每批载量为玩法配置，不直接兑换原生兵装。",
+      "image_name": "硬弩",
+      "native_units_per_lot": 100,
+      "min_value": 150
     }
   ],
 

@@ -8,6 +8,22 @@
 
 namespace trade {
 
+constexpr int MAX_GOODS = 128; // Event IDs 254/255 remain reserved.
+
+// Nominal cash movements; remittances can remain pending when a city is full.
+// Losses are shown at purchase cost and are already included in purchases (never subtract twice).
+struct Ledger {
+    int64_t purchases = 0, receipts = 0, fees = 0, taxes = 0, losses = 0;
+    bool complete = true;
+    int64_t cashNet() const { return receipts - purchases - fees - taxes; }
+    int64_t profit(int64_t remainingCost) const { return cashNet() + remainingCost; }
+};
+struct ClosedVoyage {
+    uint32_t id = 0;
+    int force = -1, origin = -1, dest = -1, day = 0;
+    Ledger ledger;
+};
+
 enum : uint8_t { CITY_HUB = 1, CITY_PORT = 2, CITY_CHINA = 4 };
 
 // monsoon sea (trade.bin v2): a rectangle of world hexes and the season of each month
@@ -39,6 +55,11 @@ struct Data {
     std::vector<uint16_t> size;                    // market size in loads
     std::vector<uint32_t> price;                   // C x G: gold per load at price index 1000
     std::vector<uint8_t> supply;                   // C x G: producer level 0..3
+    std::vector<uint16_t> demand;                 // v4: C x G consumption multiplier (permille)
+    std::vector<uint8_t> cargoUnits;              // v5: tenths of a cargo slot per lot
+    std::vector<uint32_t> nativeUnits, minValue;  // v6: pricing lot size and minimum pre-spread value
+    int stockCap = 200, producerStock = 100, hubStock = 10; // % market size
+    int productionDiv = 30, consumptionDiv = 50;
     std::vector<std::string> groupName;            // v2: market group g (1..NG) is groupName[g - 1]
     std::vector<Sea> seas;                         // v2: monsoon seas
     std::vector<EventDef> events;                  // v2: market events
@@ -55,6 +76,11 @@ struct Data {
     bool canBuy(int c, int g) const { return supply[(size_t)c * G + g] || (flags[c] & CITY_HUB); }
     bool hub(int c) const { return (flags[c] & CITY_HUB) != 0; }
     bool port(int c) const { return (flags[c] & CITY_PORT) != 0; }
+    // Tenths of a cargo slot per trade lot; bulk lots share packing space.
+    int loadUnits(int g) const;
+    uint32_t unitsPerLot(int g) const { return g>=0 && g<(int)nativeUnits.size() ? nativeUnits[g] : 0; }
+    int militaryWeapon(int g) const;
+    int stockLimit(int c,int g) const { return size[c]*(militaryWeapon(g)>=0 ? 40 : stockCap)/100; }
 };
 
 // worldmod.ini trade_* values (percent unless noted)
@@ -64,8 +90,10 @@ struct Params {
     int revert = 10;            // share of the gap to 1000 a city's index recovers per month
     int revertHub = 25;         // the same at hubs
     int idxMin = 300, idxMax = 4000;
-    int capLand = 20, capSea = 60;   // loads per caravan (both ends ports: sea)
-    int fee = 300;              // gold per caravan (porters, animals) on top of the goods
+    int capLand = 20, capSea = 60;   // ordinary caravan / dedicated merchant ship base slots
+    int fee = 100;              // gold per caravan (porters, animals) on top of the goods
+    int legFee = 30;            // loading/dispatch charge for an existing caravan's next leg
+    int transitTax = 2, transitHub = 1, transitCap = 5; // cap: % departure cargo purchase cost per leg
     // phase 3
     int monsoon = 1;            // seasons on (0: every factor 100)
     int monWith = 70, monAgainst = 140, monStorm = 125;   // percent of the normal sea step cost
@@ -96,11 +124,15 @@ struct Market {
     Params p;
     std::vector<int32_t> idx;   // C x G price index, 1000 = the base price of trade.bin
     std::vector<uint16_t> mod;  // C x G permille factor of the active events (empty: none)
+    std::vector<int32_t> stock;
+    int available(int c, int g) const { return stock[(size_t)c * d->G + g]; }
+    int room(int c, int g) const { int n=d->stockLimit(c,g)-available(c,g); return n>0 ? n : 0; }
 
     int64_t base(int c, int g) const {
         int64_t b = d->price[(size_t)c * d->G + g];
         return mod.empty() ? b : b * mod[(size_t)c * d->G + g] / 1000;
     }
+    int64_t valueAt(int c, int g, int index) const; // gold x 1000, after event/index and before spread
 
     void reset();               // every index to 1000
     int32_t& at(int c, int g) { return idx[(size_t)c * d->G + g]; }
@@ -109,35 +141,74 @@ struct Market {
     int buyPrice(int c, int g) const;
     int sellPrice(int c, int g) const;
     // total gold for q loads with the price moving along (quote: index unchanged; buy / sell: index moved)
-    int64_t quoteBuy(int c, int g, int q) const { int32_t i = at(c, g); return walk(c, g, q, true, &i); }
-    int64_t quoteSell(int c, int g, int q) const { int32_t i = at(c, g); return walk(c, g, q, false, &i); }
-    int64_t buy(int c, int g, int q) { return walk(c, g, q, true, &at(c, g)); }
-    int64_t sell(int c, int g, int q) { return walk(c, g, q, false, &at(c, g)); }
-    void month();               // reversion towards 1000
+    int64_t quoteBuy(int c, int g, int q) const { return quote(c, g, q, true); }
+    int64_t quoteSell(int c, int g, int q) const { return quote(c, g, q, false); }
+    int64_t buy(int c, int g, int q, int pp = 0);
+    int64_t sell(int c, int g, int q, int pp = 0);
+    int64_t quote(int c, int g, int q, bool buying, int pp = 0) const;
+    void month(int phase=0);    // absolute month supplies a stable fractional-production phase
 
-    int64_t walk(int c, int g, int q, bool buying, int32_t* index) const;
+    int64_t walk(int c, int g, int q, bool buying, int32_t* index, int pp = 0) const;
 };
 
 // Caravan prices, shared by trade.cpp and the panel (trade_panel.cpp) so the panel shows what a caravan gets.
 // pp: the leader's price bonus in permille (politics - 50; + on sales, - on purchases); capPct: load (intelligence).
 const int TEMP_POL = 60, TEMP_INT = 50;          // the temporary 商 officer
 inline void leaderFactors(int pol, int intel, int* pp, int* capPct) { *pp = pol - 50; *capPct = 100 + (intel - 50) / 2; }
-inline int64_t purchase(const Market& m, int c, int g, int q, int pp) { return m.quoteBuy(c, g, q) * (1000 - pp) / 1000; }
-inline int64_t saleQuote(const Market& m, int c, int g, int q, int pp) { return m.quoteSell(c, g, q) * (1000 + pp) / 1000; }
-inline int capacity(const Data& d, const Params& p, int origin, int dest, int capPct) {
-    return (d.port(origin) && d.port(dest) ? p.capSea : p.capLand) * capPct / 100;
+inline int64_t purchase(const Market& m, int c, int g, int q, int pp) { return m.quote(c, g, q, true, pp); }
+inline int64_t saleQuote(const Market& m, int c, int g, int q, int pp) { return m.quote(c, g, q, false, pp); }
+enum TransportType : int32_t { CARAVAN = 0, MERCHANT_SHIP = 1 };
+inline bool validTransport(int type) { return type==CARAVAN || type==MERCHANT_SHIP; }
+inline const wchar_t* transportName(int type) { return type==MERCHANT_SHIP ? L"海運商隊" : L"陸路商隊"; }
+inline int transportFee(const Params& p,int type,bool nextLeg=false) {
+    return type==MERCHANT_SHIP ? (nextLeg ? 60 : 300) : (nextLeg ? p.legFee : p.fee);
+}
+inline int merchantFee(int fee,bool merchant) {
+    return merchant ? (int)(((int64_t)fee*80+99)/100) : fee; // 20% reduction, round up; no stacking.
+}
+inline int64_t merchantProfitBonus(int64_t net,int64_t cost,bool merchant) {
+    return merchant && net>cost ? (net-cost)/5 : 0; // 20% of positive after-tax goods margin, round down.
+}
+inline int capacity(const Data& d, const Params& p, int origin, int dest, int capPct, int type=CARAVAN) {
+    (void)d; (void)origin; (void)dest;
+    return (type==MERCHANT_SHIP ? p.capSea : p.capLand) * capPct / 100;
 }
 inline int taxPct(const Data& d, int c, int tax, int taxHub) { return d.hub(c) ? taxHub : tax; }
 // a tax of pct % on value, the merchant pays merchPct % of it (merchantBonus().taxPct; 100: phase 1's value * pct / 100)
 inline int64_t taxOf(int64_t value, int pct, int merchPct) { return value * pct * merchPct / 10000; }
+inline int64_t taxWithCarry(int64_t value, int pct, int merchPct, int* remainder) {
+    int64_t scaled = value * pct * merchPct + *remainder;
+    *remainder = (int)(scaled % 10000);
+    return scaled / 10000;
+}
 
 // The most profitable cargo from `origin` to one of `dests` (indices into Data cities) for at most `budget` gold
 // (fee included) and `cap` loads. Profit = sale - purchase - fee - tax% of the sale. Returns false if none gains
 // at least margin% of the outlay.
 // timePermille (optional, parallel to dests): travel time factor of each destination (monsoon); score = profit / time.
 struct Route { int origin = -1, dest = -1, good = -1, qty = 0; int64_t cost = 0, revenue = 0, profit = 0; int dist = 0; };
+struct CargoLot {
+    int32_t good = 0, origin = 0, qty = 0, initial = 0;
+    int64_t cost = 0;
+};
+struct Cargo {
+    std::vector<CargoLot> lots;
+    int count(int good = -1) const;
+    int64_t cost() const;
+    int64_t loadUnits(const Data& d) const;
+    void add(int good, int origin, int qty, int64_t cost);
+    // Removes exact quantities, returning their weighted cost and the eligible fraction of trip XP.
+    bool take(int good, int qty, int dest, int tripXp, int64_t* basis, int* xp);
+    int64_t saleBonus(int good,int qty,int dest,int64_t net,bool merchant) const;
+};
+struct OrderLine { int good = -1, qty = 0; };
+// Validates the complete order before any money, stock or unit is changed.
+bool quoteOrder(const Market& m, int city, const std::vector<OrderLine>& order,
+                int slots, int pp, int64_t budget, int fee, Cargo* cargo, int64_t* total);
+int64_t transitCharge(int64_t value, int rate, int merchantPct, int64_t limit, int64_t paid);
 bool bestRoute(const Market& m, int origin, const std::vector<int>& dests, int64_t budget, int cap, int taxPct,
-               int marginPct, Route* out, const std::vector<int>* timePermille = nullptr);
+               int marginPct, Route* out, const std::vector<int>* timePermille = nullptr,
+               int pp = 0, const std::vector<int>* duties = nullptr, int merchantTaxPct = 100, int departureFee = -1, bool merchant = false);
 
 // Deterministic rng (saved with the game so a reload repeats the same draws)
 struct Rng {
@@ -150,6 +221,8 @@ struct Rng {
 char season(const Data& d, int sea, int month0);
 // percent of the normal step cost on a sea hex of `sea` for a ship heading dir (+1 east, -1 west, 0 unknown)
 int seaCostPct(const Data& d, const Params& p, int sea, int month0, int dir);
+// Integer movement cost used by the native sea callback and offline route calibration.
+int seaStepCost(const Data& d, const Params& p, int sea, int month0, int dir, int cost);
 // travel time factor (permille) of a route between two ports: the seas at both ends and half-way; 1000 off the seas
 int routeTimePermille(const Data& d, const Params& p, int origin, int dest, int month0);
 // a storm month in the sea of this route (risk for a caravan at sea)
@@ -168,13 +241,15 @@ std::string describe(const Data& d, const ActiveEvent& e);       // "流行：�
 
 // ---- phase 3: information delay. A force knows a market as it was the month it last saw it.
 struct Info {
+    struct Observation { int16_t idx = 0; uint16_t mod = 1000; int32_t stock = 0; };
     int R = 0, C = 0, G = 0, H = 12;
     std::vector<uint8_t> age;       // R x C months since force f last saw city c (255: never)
     std::vector<int16_t> hist;      // H x C x G: the price index at the end of month m in slot m % H
+    std::vector<Observation> observed; // R x C x G, frozen at the actual observation
     int32_t histMonth = -1;         // the last month stored
     void reset(int r, const Data& d, int h);
     void endMonth(const Market& m, int month);      // store the month that ended, every age + 1
-    void see(int f, int c) { if (f >= 0 && f < R && c >= 0 && c < C) age[(size_t)f * C + c] = 0; }
+    void see(int f, int c, const Market* market = nullptr);
     int ageOf(int f, int c) const { return f >= 0 && f < R && c >= 0 && c < C ? age[(size_t)f * C + c] : 255; }
     // the index force f believes for (c, g); false = unknown (never seen, or longer ago than H months)
     bool believed(const Market& m, int f, int c, int g, int32_t* idx) const;

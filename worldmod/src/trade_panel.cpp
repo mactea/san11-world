@@ -47,7 +47,7 @@ static const Rc LEAD_LIST = { 0, LEAD_Y, PANEL_W, LEAD_ROWS * LEAD_H };
 static const int EST_Y = 372;
 static const Rc SEND = { 65, 446, 100, 24 };
 static const int MSG_Y = 476;
-static const int CAR_Y = 26, CAR_H = 50, CAR_ROWS = 7, DONE_Y = 394;
+static const int CAR_Y = 26, CAR_H = 50, CAR_ROWS = 3, DONE_Y = 394;
 static const Rc CAR_LIST = { 0, CAR_Y, PANEL_W, CAR_ROWS * CAR_H };
 static Rc autoBtn(int row) { return { PANEL_W - 44, CAR_Y + row * CAR_H + 17, 40, 15 }; }   // 自動 / 手動 of a caravan row
 
@@ -60,7 +60,7 @@ bool onToggle(const State& s, int x, int y) {
 static std::vector<int> originGoods(const Model& m, int origin) {
     std::vector<int> v;
     if (origin < 0) return v;
-    for (int g = 0; g < m.d->G; g++) if (m.d->canBuy(origin, g)) v.push_back(g);
+    for (int g = 0; g < m.d->G; g++) if (m.live.available(origin, g) > 0) v.push_back(g);
     return v;
 }
 // leader rows: -1 (無) then the officers
@@ -92,6 +92,7 @@ Plan plan(const Model& m, int origin, int dest, int good, int qty, int leader, b
     if (origin < 0 || origin >= d.C) { p.error = L"先在地圖上點選起點城市"; return p; }
     if (dest < 0 || dest >= d.C) { p.error = L"再點選終點城市"; return p; }
     if (origin == dest) { p.error = L"起點與終點相同"; return p; }
+    if (!transportRoute(m,origin,dest)) { p.error=L"海運兩端需有近岸水面，或20格陸路內的同勢力港口"; return p; }
     if (good < 0 || good >= d.G) { p.error = L"選擇商品"; return p; }
     int pol = TEMP_POL, intel = TEMP_INT, level = 0;
     if (leader >= 0) {
@@ -102,59 +103,169 @@ Plan plan(const Model& m, int origin, int dest, int good, int qty, int leader, b
     leaderFactors(pol, intel, &p.pricePermille, &capPct);
     MerchantBonus mb = merchantBonus(m.live.p, level);           // phase 4 (trade.cpp applies the same)
     p.pricePermille += mb.pp; capPct += mb.capPct; p.level = level;
-    p.cap = capacity(d, m.live.p, origin, dest, capPct);
+    p.cap = capacity(d, m.live.p, origin, dest, capPct,m.shipType)*10/d.loadUnits(good);
     p.qty = std::max(0, std::min(qty, p.cap));
     p.dist = hexDist(d.lo[origin], d.hi[origin], d.lo[dest], d.hi[dest]);
-    p.sea = d.port(origin) && d.port(dest);
-    p.timePermille = routeTimePermille(d, m.live.p, origin, dest, m.month % 12);
-    p.stormy = routeStormy(d, m.live.p, origin, dest, m.month % 12);
-    int speed = p.sea ? m.cfg.speedSea : m.cfg.speedLand;
-    p.eta = (int)((int64_t)p.dist * p.timePermille / 1000 + speed - 1) / std::max(1, speed);
+    // Before creation there is no native unit to query. This is only a geographic estimate.
+    int speed = m.shipType==MERCHANT_SHIP ? m.cfg.speedSea : m.cfg.speedLand;
+    p.eta = (p.dist + speed - 1) / std::max(1, speed);
+    p.eta += (transferSteps(m,origin)+9)/10+(transferSteps(m,dest)+9)/10;
+    p.provisions=provisionFood(m.escortNeeded,p.eta*2,m.foodNeeded);
     if (p.qty > 0) {
         p.goods = purchase(m.live, origin, good, p.qty, p.pricePermille);
-        p.cost = p.goods + m.live.p.fee;
+        p.cost = p.goods + quoteFee(m,origin,dest);
     }
     p.known = !m.known.empty() ? m.known[dest] != 0 : true;
     if (p.qty > 0 && p.known) {
         p.revenue = saleQuote(m.seen, dest, good, p.qty, p.pricePermille);
-        bool free = m.stance[dest] == 2;
-        p.duty = free ? 0 : taxOf(p.revenue, taxPct(d, dest, m.cfg.tax, m.cfg.taxHub), mb.taxPct);
-        if (withTransit) {
-            // the cities a caravan passes (trade.cpp: the nearest city within 30 hexes of its position, each once)
-            int steps = std::max(1, p.dist / 3), last = origin;
-            for (int i = 1; i < steps; i++) {
-                int lo = d.lo[origin] + (d.lo[dest] - d.lo[origin]) * i / steps;
-                int hi = d.hi[origin] + (d.hi[dest] - d.hi[origin]) * i / steps;
-                int c = nearestCity(d, lo, hi, 30);
-                if (c < 0 || c == last) continue;
-                last = c;
-                if (c == origin || c == dest || m.owner[c] < 0 || m.owner[c] == m.force) continue;
-                if (m.stance[c] == 1) {
-                    int64_t value = (int64_t)p.qty * m.seen.sellPrice(c, good);
-                    p.transit += (int)taxOf(value, taxPct(d, c, m.cfg.tax, m.cfg.taxHub), mb.taxPct);
-                    p.transitCities++;
-                } else if (m.stance[c] == 0) p.hostileCities++;
+        p.quoted = p.revenue >= 0 && p.goods >= 0;
+        if (p.quoted) {
+            bool free = m.stance[dest] == 2;
+            int remainder = m.saleTaxRemainder.empty() ? 0 : m.saleTaxRemainder[dest];
+            p.duty = free ? 0 : taxWithCarry(p.revenue, taxPct(d, dest, m.cfg.tax, m.cfg.taxHub), mb.taxPct, &remainder);
+            if (withTransit) {
+                // the cities a caravan passes (trade.cpp: the nearest city within 30 hexes of its position, each once)
+                int steps = std::max(1, p.dist / 3), last = origin;
+                std::vector<bool> visited(d.C,false);
+                for (int i = 1; i < steps; i++) {
+                    int lo = d.lo[origin] + (d.lo[dest] - d.lo[origin]) * i / steps;
+                    int hi = d.hi[origin] + (d.hi[dest] - d.hi[origin]) * i / steps;
+                    int c = nearestCity(d, lo, hi, 30);
+                    if (c < 0 || c == last || visited[c]) continue;
+                    visited[c]=true;
+                    last = c;
+                    if (c == origin || c == dest || m.owner[c] < 0 || m.owner[c] == m.force) continue;
+                    if (m.stance[c] == 1) {
+                        int64_t value = (int64_t)p.qty * m.seen.sellPrice(c, good);
+                        p.transit += transitCharge(value,d.hub(c) ? m.live.p.transitHub : m.live.p.transitTax,mb.taxPct,p.goods*m.live.p.transitCap/100,p.transit);
+                        p.transitCities++;
+                    } else if (m.stance[c] == 0) p.hostileCities++;
+                }
             }
+            p.merchantBonus=merchantProfitBonus(p.revenue-p.duty,p.goods,quoteMerchant(m,origin));
+            p.net = p.revenue + p.merchantBonus - p.duty - p.transit;
+            p.profit = p.net - p.cost;
         }
-        p.net = std::max<int64_t>(0, p.revenue - p.duty - p.transit);
-        p.profit = p.net - p.cost;
     }
     // what 「出發」 would say (trade.cpp createCaravan checks the same in the game)
     if (m.owner[origin] != m.force || m.force < 0) p.error = L"起點不是我方城市";
-    else if (!d.canBuy(origin, good)) p.error = cityW(m, origin) + L"不賣" + goodW(m, good);
+    else if (m.live.available(origin, good) <= 0) p.error = cityW(m, origin) + L"不賣" + goodW(m, good);
+    else if (m.stance[dest] <= 0) p.error = L"目的市場未開放交易";
     else if (qty <= 0 || p.qty <= 0) p.error = L"數量為零";
     else if (leader >= 0 && !officer(m, leader)) p.error = L"統領不在起點城市";
     else if (leader < 0 && m.tempLive >= m.cfg.tempMax) p.error = L"臨時商隊已達上限";
     else if (leader < 0 && m.freeSpecials - 1 < m.cfg.tempKeep) p.error = L"特殊武將空位不足";
+    else if (p.goods < 0) p.error = L"市場庫存不足";
+    else if (!m.troops.empty() && (m.troops[origin] < m.escortNeeded || p.provisions<0 || m.food[origin] < p.provisions)) p.error = L"護衛兵力或兵糧不足";
     else if (m.gold[origin] >= 0 && p.cost > m.gold[origin]) p.error = L"金不足（需 " + fmtGold(p.cost) + L"，城中 " + fmtGold(m.gold[origin]) + L"）";
     else p.ok = true;
     return p;
 }
 
+BasketPlan basketPlan(const Model& m,int origin,int dest,const std::vector<OrderLine>& order,int leader) {
+    BasketPlan out;
+    if(origin<0 || origin>=m.d->C || dest<0 || dest>=m.d->C || order.empty()) {out.error=L"請選擇目的市場並加入商品";return out;}
+    for(auto& l:order) if(l.good<0 || l.good>=m.d->G || l.qty<1) {out.error=L"商品或數量無效";return out;}
+    auto first=plan(m,origin,dest,order.front().good,order.front().qty,leader,false);
+    static_cast<Plan&>(out)=first;out.ok=false;
+    if(!first.ok) return out;
+    // Slot capacity is independent of the first commodity in the basket.
+    int pp,cp;int pol=TEMP_POL,intel=TEMP_INT;
+    if(auto o=officer(m,leader)) {pol=o->pol;intel=o->intel;}
+    leaderFactors(pol,intel,&pp,&cp);auto mb=merchantBonus(m.live.p,first.level);cp+=mb.capPct;
+    out.slots=capacity(*m.d,m.live.p,origin,dest,cp,m.shipType);
+    Cargo cargo;int64_t cost;
+    if(!quoteOrder(m.live,origin,order,out.slots,first.pricePermille,m.gold[origin],quoteFee(m,origin,dest),&cargo,&cost)) {
+        out.error=L"組合超過庫存、貨艙或可用金，請調整數量";return out;
+    }
+    out.used=cargo.loadUnits(*m.d);out.qty=cargo.count();out.goods=cargo.cost();out.cost=cost;
+    out.transitLimit=out.goods*m.live.p.transitCap/100;
+    out.revenue=out.duty=out.transit=out.merchantBonus=0;out.quoted=first.known;
+    int remainder=m.saleTaxRemainder.empty() ? 0 : m.saleTaxRemainder[dest];
+    for(auto& l:order) {
+        if(!out.quoted) break;
+        int64_t value=saleQuote(m.seen,dest,l.good,l.qty,out.pricePermille);
+        if(value<0) {out.quoted=false;break;}
+        out.revenue+=value;
+        int64_t duty=m.stance[dest]!=2 ? taxWithCarry(value,taxPct(*m.d,dest,m.cfg.tax,m.cfg.taxHub),mb.taxPct,&remainder) : 0;
+        out.duty+=duty;
+        out.merchantBonus+=cargo.saleBonus(l.good,l.qty,dest,value-duty,quoteMerchant(m,origin));
+    }
+    std::vector<bool> visited(m.d->C,false);
+    int steps=std::max(1,out.dist/3);
+    for(int i=1;i<steps;++i) {
+        int x=m.d->lo[origin]+(m.d->lo[dest]-m.d->lo[origin])*i/steps;
+        int y=m.d->hi[origin]+(m.d->hi[dest]-m.d->hi[origin])*i/steps;
+        int c=nearestCity(*m.d,x,y,30);
+        if(c<0 || c==origin || c==dest || visited[c]) continue;
+        visited[c]=true;
+        if(m.stance[c]==0) ++out.hostileCities;
+        if(m.stance[c]!=1) continue;
+        ++out.transitCities;
+        // An unknown intermediate price is bounded by the remaining tax allowance.
+        if(!m.known.empty() && !m.known[c]) {out.transit=out.transitLimit;continue;}
+        int64_t value=0;
+        for(auto& l:order) value+=(int64_t)l.qty*m.seen.sellPrice(c,l.good);
+        out.transit+=transitCharge(value,m.d->hub(c) ? m.live.p.transitHub : m.live.p.transitTax,mb.taxPct,out.transitLimit,out.transit);
+    }
+    out.net=out.revenue+out.merchantBonus-out.duty-out.transit;out.profit=out.net-out.cost;
+    out.ok=true;out.error.clear();return out;
+}
+int maxOrderQuantity(const Model& m,int origin,int dest,const std::vector<OrderLine>& order,int good,int leader) {
+    if(origin<0 || origin>=m.d->C || dest<0 || dest>=m.d->C || good<0 || good>=m.d->G) return 0;
+    auto p=plan(m,origin,dest,good,1,leader,false);
+    int pp,cp;
+    if(auto o=officer(m,leader)) leaderFactors(o->pol,o->intel,&pp,&cp);
+    else leaderFactors(TEMP_POL,TEMP_INT,&pp,&cp);
+    cp+=merchantBonus(m.live.p,p.level).capPct;
+    int slots=capacity(*m.d,m.live.p,origin,dest,cp,m.shipType)*10;
+    int64_t budget=m.gold[origin]-quoteFee(m,origin,dest);
+    for(auto& l:order) if(l.good!=good) {
+        slots-=l.qty*m.d->loadUnits(l.good);
+        auto cost=purchase(m.live,origin,l.good,l.qty,p.pricePermille);
+        if(cost<0) return 0;budget-=cost;
+    }
+    int hi=std::max(0,std::min(slots/m.d->loadUnits(good),m.live.available(origin,good))),lo=0;
+    while(lo<hi) {int n=(lo+hi+1)/2; if(purchase(m.live,origin,good,n,p.pricePermille)<=budget) lo=n;else hi=n-1;}
+    return lo;
+}
+std::vector<OrderLine> recommendOrder(const Model& m,int origin,int dest,int leader) {
+    std::vector<OrderLine> result;
+    if(origin<0 || origin>=m.d->C || dest<0 || dest>=m.d->C || (!m.known.empty() && !m.known[dest]) || m.stance[dest]<=0) return result;
+    if(!transportRoute(m,origin,dest)) return result;
+    // Greedy marginal profit per cargo slot; this is a suggestion, not an optimality claim.
+    int pp=0,cp=100,level=0;
+    if(auto o=officer(m,leader)) {leaderFactors(o->pol,o->intel,&pp,&cp);level=o->level;}
+    else leaderFactors(TEMP_POL,TEMP_INT,&pp,&cp);
+    auto mb=merchantBonus(m.live.p,level);pp+=mb.pp;cp+=mb.capPct;
+    int slots=capacity(*m.d,m.live.p,origin,dest,cp,m.shipType)*10;
+    int64_t money=m.gold[origin]-quoteFee(m,origin,dest);
+    std::vector<int> quantities(m.d->G,0);
+    std::vector<int32_t> buy(m.d->G),sell(m.d->G);
+    for(int g=0;g<m.d->G;++g) {buy[g]=m.live.at(origin,g);sell[g]=m.seen.at(dest,g);}
+    while(slots>0 && money>0) {
+        int best=-1;int64_t bestGain=0,bestCost=0;int32_t bi=0,si=0;
+        for(int g=0;g<m.d->G;++g) {
+            if(m.d->loadUnits(g)>slots || quantities[g]>=m.live.available(origin,g) || quantities[g]>=m.seen.room(dest,g)) continue;
+            int32_t b=buy[g],s=sell[g];auto cost=m.live.walk(origin,g,1,true,&b,pp);auto rev=m.seen.walk(dest,g,1,false,&s,pp);
+            // Conservatively reserve the full transit cap when ranking marginal goods.
+            auto margin=rev-cost-(m.stance[dest]==2 ? 0 : taxOf(rev,taxPct(*m.d,dest,m.cfg.tax,m.cfg.taxHub),mb.taxPct));
+            auto gain=margin+merchantProfitBonus(margin+cost,cost,quoteMerchant(m,origin))-cost*m.live.p.transitCap/100;
+            if(cost>money || gain<=0) continue;
+            if(best<0 || gain*m.d->loadUnits(best)>bestGain*m.d->loadUnits(g)) {best=g;bestGain=gain;bestCost=cost;bi=b;si=s;}
+        }
+        if(best<0) break;
+        ++quantities[best];money-=bestCost;slots-=m.d->loadUnits(best);buy[best]=bi;sell[best]=si;
+    }
+    for(int g=0;g<m.d->G;++g) if(quantities[g]) result.push_back({g,quantities[g]});
+    if(!result.empty()) {auto p=basketPlan(m,origin,dest,result,leader);if(!p.ok || !p.quoted || p.profit<=0) result.clear();}
+    return result;
+}
+
 bool cityProfit(const Model& m, const State& s, int city, int64_t* profit, int64_t* cost) {
     if (s.origin < 0 || s.good < 0 || city == s.origin || m.known.empty() || !m.known[city]) return false;
     Plan p = plan(m, s.origin, city, s.good, s.qty, s.leader, false);
-    if (p.qty <= 0) return false;
+    if (p.qty <= 0 || !p.quoted) return false;
     *profit = p.profit; *cost = p.cost;
     return true;
 }
@@ -197,7 +308,7 @@ void selectCity(Model& m, State& s, int city) {
     if (s.origin < 0 || s.dest >= 0) { s.origin = city; s.dest = -1; s.leader = -1; s.leaderScroll = 0; }
     else if (city == s.origin) s.origin = -1;
     else s.dest = city;
-    if (s.origin >= 0 && s.good >= 0 && s.tab == 1 && !m.d->canBuy(s.origin, s.good)) s.good = -1;
+    if (s.origin >= 0 && s.good >= 0 && s.tab == 1 && m.live.available(s.origin, s.good) <= 0) s.good = -1;
     s.msg.clear();
 }
 
@@ -208,14 +319,14 @@ Result click(Model& m, State& s, const Projector& proj, int x, int y) {
     if (!inPanel(s, x, y)) {                                    // on the map: a city near the click
         int c = cityAt(m, proj, x, y, 9);
         if (c < 0) return r;                                    // elsewhere: Koei's click (camera) and dragging
-        selectCity(m, s, c);
+        if (s.tab == 2) { s.dest = c; s.confirm = false; } else selectCity(m, s, c);
         r.consumed = true; r.repaint = REPAINT_MAP;
         return r;
     }
     r.consumed = true;
     int px = x - PANEL_X, py = y;
     if (CLOSE.in(px, py)) { s.on = false; r.repaint = REPAINT_MAP | REPAINT_LAYOUT; return r; }
-    for (int i = 0; i < 4; i++) if (tabRect(i).in(px, py)) { if (s.tab != i) { s.tab = i; r.repaint = REPAINT_PANEL; } return r; }
+    for (int i = 0; i < 4; i++) if (tabRect(i).in(px, py)) { s.confirm = false; if (s.tab != i) { s.tab = i; r.repaint = REPAINT_PANEL; } return r; }
     if (s.tab == 0) {
         for (int g = 0; g < m.d->G; g++)
             if (py >= ROW_Y + g * LINE && py < ROW_Y + (g + 1) * LINE) { s.good = s.good == g ? -1 : g; r.repaint = REPAINT_MAP; return r; }
@@ -243,7 +354,35 @@ Result click(Model& m, State& s, const Projector& proj, int x, int y) {
             return r;
         }
     } else if (s.tab == 2) {
+        if (py >= 580 && py < 599) { s.accounts = !s.accounts; s.confirm = false; r.repaint = REPAINT_PANEL; return r; }
+        if (s.accounts && py >= 180) return r;
         auto cars = playerCaravans(m);
+        if (!cars.empty() && s.carSel < (int)cars.size()) {
+            const auto& car = *cars[s.carSel];
+            if (py < 534 || py >= 558) s.confirm = false;
+            if (py >= 228 && py < 228 + std::min(14, m.d->G) * 15) { s.good = (py - 228) / 15; r.repaint = REPAINT_PANEL; return r; }
+            if (py >= 450 && py < 472) {
+                if (px < 45) s.qty = std::max(1, s.qty - 1);
+                else if (px >= PANEL_W - 45) s.qty = std::min(std::max(car.cargo.count(s.good),(int)std::max<int64_t>(1,((int64_t)car.maxLoad*10-car.cargo.loadUnits(*m.d))/m.d->loadUnits(s.good))), s.qty + 1);
+                r.repaint = REPAINT_PANEL; return r;
+            }
+            const char* action = nullptr;
+            if (py >= 478 && py < 502) action = px < PANEL_W / 2 ? "buy" : "sell";
+            if (py >= 506 && py < 530) action = px < PANEL_W / 2 ? "go" : "resupply";
+            if (py >= 534 && py < 558) action = "finish";
+            if (action) {
+                if (s.sendPending) return r;
+                std::string cmd = "trade " + std::string(action) + " " + std::to_string(car.id);
+                if (!strcmp(action, "buy") || !strcmp(action, "sell")) cmd += " " + std::to_string(s.good) + " " + std::to_string(s.qty);
+                if (!strcmp(action, "go")) cmd += " " + std::to_string(s.dest);
+                if (!strcmp(action, "finish") && car.qty) {
+                    if (!s.confirm) { s.confirm = true; s.msg = L"再次點結束：放棄餘貨並撤隊"; r.repaint = REPAINT_PANEL; return r; }
+                    cmd += " discard";
+                }
+                s.confirm = false; r.command = cmd; s.sendPending = true; m.lastResult.clear();
+                s.msg = L"等待執行（關閉中地圖後）"; r.repaint = REPAINT_PANEL; return r;
+            }
+        }
         for (int i = 0; i < CAR_ROWS; i++) {
             int k = s.carScroll + i;
             if (k >= (int)cars.size()) break;
@@ -285,10 +424,10 @@ Result key(Model& m, State& s, int vk, bool shift) {
     case VK_TAB:
         s.tab = (s.tab + (shift ? 3 : 1)) % 4; r.repaint = REPAINT_PANEL; return r;
     case VK_ADD: case VK_OEM_PLUS:
-        if (s.tab <= 1) changeQty(s.qty + (shift ? 10 : 1));
+        if (s.tab <= 2) changeQty(s.qty + (shift ? 10 : 1));
         return r;
     case VK_SUBTRACT: case VK_OEM_MINUS:
-        if (s.tab <= 1) changeQty(s.qty - (shift ? 10 : 1));
+        if (s.tab <= 2) changeQty(s.qty - (shift ? 10 : 1));
         return r;
     case VK_BACK:
         if (s.tab == 1) { s.qtyTyping = true; changeQty(std::max(1, s.qty / 10)); }
@@ -303,7 +442,7 @@ Result key(Model& m, State& s, int vk, bool shift) {
             if (!s.confirm) {
                 s.confirm = true; s.msgError = false;
                 s.msg = L"再按 Enter 出發（Esc 取消）：" + cityW(m, s.origin) + L"→" + cityW(m, s.dest) + L" " + goodW(m, s.good) + L" " +
-                        fmtGold(p.qty) + L"擔，成本 " + fmtGold(p.cost);
+                        fmtGold(p.qty) + L"批，成本 " + fmtGold(p.cost);
                 r.repaint = REPAINT_PANEL; return r;
             }
             s.confirm = false;
@@ -378,6 +517,10 @@ Result wheel(Model& m, State& s, int x, int y, int delta, bool shift) {
     } else if (s.tab == 1 && LEAD_LIST.in(px, py)) {
         int v = std::max(0, std::min(s.leaderScroll - notches, leaderRows(m) - LEAD_ROWS));
         if (v != s.leaderScroll) { s.leaderScroll = v; r.repaint = REPAINT_PANEL; }
+    } else if (s.tab == 2 && s.accounts && py >= 366 && py < 570) {
+        int& scroll = py < 455 ? s.closedScroll : s.doneScroll;
+        int count = py < 455 ? (int)m.closed.size() - 2 : (int)m.done.size() - 3;
+        scroll = std::max(0, std::min(scroll - notches, count)); r.repaint = REPAINT_PANEL;
     } else if (s.tab == 2 && CAR_LIST.in(px, py)) {
         int v = std::max(0, std::min(s.carScroll - notches, (int)playerCaravans(m).size() - CAR_ROWS));
         if (v != s.carScroll) { s.carScroll = v; r.repaint = REPAINT_PANEL; }
@@ -390,14 +533,15 @@ Result wheel(Model& m, State& s, int x, int y, int delta, bool shift) {
 
 // ---------------------------------------------------------------- drawing
 namespace {
-const uint32_t BG = 0xff1d1912, HEAD = 0xff3b3124, TAB_ON = 0xff6b5530, ROW_SEL = 0xff4f4228, ROW_ALT = 0xff242019,
-               TEXT = 0xffeee4cc, DIM = 0xff9c9280, GOLD = 0xffe8c060, GREEN = 0xff86d886, RED = 0xffec6a60,
-               BLUE = 0xff86b4ec, BTN = 0xff4a3e2a, BTN_HI = 0xff8a6a2c, FRAME = 0xff8a7650;
+// Match the native city menus: slate / jade panels, pale lettering and a raised rim.
+const uint32_t BG = 0xff243c40, HEAD = 0xff193b37, TAB_ON = 0xff376367, ROW_SEL = 0xff365b62, ROW_ALT = 0xff2c4549,
+               TEXT = 0xffe5e8df, DIM = 0xffa1b2ac, GOLD = 0xffe4d798, GREEN = 0xff9dd3ac, RED = 0xffff9b89,
+               BLUE = 0xff9fc9e2, BTN = 0xff254e50, BTN_HI = 0xff397078, FRAME = 0xff8daba6;
 
 const wchar_t* pickFace() {
     static const wchar_t* face = nullptr;
     if (face) return face;
-    static const wchar_t* const faces[] = { L"Microsoft JhengHei", L"MingLiU", L"PMingLiU", L"Microsoft YaHei", L"SimSun" };
+    static const wchar_t* const faces[] = { L"PMingLiU", L"MingLiU", L"SimSun", L"Microsoft JhengHei", L"Microsoft YaHei" };
     HDC dc = GetDC(nullptr);
     for (const wchar_t* f : faces) {
         LOGFONTW lf = {}; lf.lfCharSet = DEFAULT_CHARSET; wcscpy_s(lf.lfFaceName, f);
@@ -470,6 +614,8 @@ struct Canvas {
     void button(const Rc& r, const std::wstring& s, bool on, bool enabled = true) {
         fill(r.x, r.y, r.w, r.h, on ? BTN_HI : BTN);
         frame(r.x, r.y, r.w, r.h, FRAME);
+        fill(r.x + 1, r.y + 1, r.w - 2, 1, 0xffb3c1ad);
+        fill(r.x + 1, r.y + r.h - 2, r.w - 2, 1, 0xff132c30);
         text(r.x + r.w / 2, r.y + (r.h - 14) / 2, s, enabled ? TEXT : DIM, 2);
     }
     void copyTo(uint32_t* dst, int pitch) {
@@ -533,7 +679,7 @@ void drawInfo(Canvas& cv, const Model& m, const State& s) {
     std::wstring d = L"終：" + cityW(m, s.dest);
     if (s.origin >= 0 && s.dest >= 0) {
         Plan p = plan(m, s.origin, s.dest, s.good < 0 ? 0 : s.good, 1, s.leader, false);
-        wchar_t b[64]; swprintf_s(b, L"　%d格 約%d旬%s", p.dist, p.eta, p.sea ? L" 海路" : L"");
+        wchar_t b[64]; swprintf_s(b, L"　地理估算%d旬", p.eta);
         d += b;
     } else if (s.origin >= 0) d = L"終：再點一座城（比較價格）";
     cv.text(4, y + LINE, d, s.dest >= 0 ? TEXT : DIM);
@@ -543,14 +689,6 @@ void drawInfo(Canvas& cv, const Model& m, const State& s) {
         int a = m.age.empty() ? 0 : m.age[s.dest];
         i = L"終點行情：" + ageText(a);
         ic = a == 0 ? GREEN : a >= 255 ? RED : GOLD;
-        if (m.d->port(s.origin) && m.d->port(s.dest)) {
-            int tp = routeTimePermille(*m.d, m.live.p, s.origin, s.dest, m.month % 12);
-            if (tp != 1000) {
-                wchar_t b[48]; swprintf_s(b, L"　季風 航程×%d.%02d", tp / 1000, tp % 1000 / 10);
-                i += b;
-            }
-            if (routeStormy(*m.d, m.live.p, s.origin, s.dest, m.month % 12)) i += L" 風暴";
-        }
     }
     cv.text(4, y + 2 * LINE, i, ic);
     cv.fill(2, y + 3 * LINE + 2, PANEL_W - 4, 1, FRAME);
@@ -565,7 +703,7 @@ void drawMarket(Canvas& cv, const Model& m, const State& s) {
     cv.text(4, y, L"商品", DIM);
     cv.text(X_BUY, y, L"買", DIM, 1); cv.text(X_SELL, y, L"賣", DIM, 1); cv.text(X_IDX, y, L"行情", DIM, 1);
     cv.text(X_PROD + 6, y, L"產", DIM, 2);
-    if (route) { cv.text(X_DSELL, y, L"終賣", DIM, 1); cv.text(X_PROF, y, L"利/擔", DIM, 1); }
+    if (route) { cv.text(X_DSELL, y, L"終賣", DIM, 1); cv.text(X_PROF, y, L"利/批", DIM, 1); }
     for (int g = 0; g < d.G; g++) {
         int ry = ROW_Y + g * LINE;
         if (g == s.good) cv.fill(1, ry, PANEL_W - 2, LINE, ROW_SEL);
@@ -594,7 +732,7 @@ void drawMarket(Canvas& cv, const Model& m, const State& s) {
             cv.text(X_DSELL, ry + 1, fmtGold(m.seen.sellPrice(s.dest, g)), m.age.empty() || m.age[s.dest] == 0 ? TEXT : GOLD, 1);
             if (sells) {
                 Plan p = plan(m, s.origin, s.dest, g, s.qty, s.leader, false);
-                if (p.qty > 0) {
+                if (p.qty > 0 && p.quoted) {
                     int64_t per = p.profit / p.qty;
                     cv.text(X_PROF, ry + 1, fmtGold(per, true), per > 0 ? GREEN : RED, 1);
                 }
@@ -607,11 +745,12 @@ void drawMarket(Canvas& cv, const Model& m, const State& s) {
     if (route && s.good >= 0) {
         Plan p = plan(m, s.origin, s.dest, s.good, s.qty, s.leader);
         wchar_t b[128];
-        swprintf_s(b, L"%ls %d擔（上限 %d）　%ls", goodW(m, s.good).c_str(), p.qty, p.cap, s.leader < 0 ? L"商隊" : L"武將");
+        swprintf_s(b, L"%ls %d批（上限 %d）　%ls", goodW(m, s.good).c_str(), p.qty, p.cap, s.leader < 0 ? L"商隊" : L"武將");
         cv.text(4, y2, b, GOLD); y2 += LINE;
         if (p.qty > 0) {
-            cv.text(4, y2, L"購入 " + fmtGold(p.goods) + L" ＋手續費 " + fmtGold(m.live.p.fee), TEXT); y2 += LINE;
+            cv.text(4, y2, L"購入 " + fmtGold(p.goods) + L" ＋組隊費 " + fmtGold(quoteFee(m,s.origin,s.dest)), TEXT); y2 += LINE;
             if (!p.known) { cv.text(4, y2, L"終點行情不明（無情報）", RED); y2 += LINE; }
+            else if (!p.quoted) { cv.text(4,y2,L"庫存或庫容不足，暫無成交估價",RED); y2+=LINE; }
             else {
                 cv.text(4, y2, L"售出 " + fmtGold(p.revenue) + L"　關稅 " + fmtGold(p.duty), TEXT); y2 += LINE;
                 swprintf_s(b, L"過境稅 約 %lld（%d城）", (long long)p.transit, p.transitCities);
@@ -619,19 +758,20 @@ void drawMarket(Canvas& cv, const Model& m, const State& s) {
                 if (p.hostileCities) { swprintf_s(b, L"敵對 %d城：恐遭搶劫", p.hostileCities); cv.text(PANEL_W - 4, y2, b, RED, 1); }
                 y2 += LINE;
                 double pct = p.cost ? 100.0 * p.profit / p.cost : 0;
-                swprintf_s(b, L"淨利 約 %ls（%+.0f%%）", fmtGold(p.profit, true).c_str(), pct);
+                swprintf_s(b, L"交易收益 約 %ls（%+.0f%%）", fmtGold(p.profit, true).c_str(), pct);
                 cv.text(4, y2, b, p.profit > 0 ? GREEN : RED, 0, true); y2 += LINE;
                 if (!m.age.empty() && m.age[s.dest] > 0) { cv.text(4, y2, L"（按 " + ageText(m.age[s.dest]) + L"的行情估算）", GOLD); y2 += LINE; }
+                cv.text(4,y2,L"未含兵糧、貨損；過境稅為估算",DIM); y2+=LINE;
+                if (p.eta>0) { cv.text(4,y2,L"每旬約 " + fmtGold(p.profit/p.eta,true) + L"（地理估算）",DIM); y2+=LINE; }
             }
-            if (p.stormy) { cv.text(4, y2, L"轉季風暴：海上每旬有失貨風險", RED); y2 += LINE; }
         }
     } else if (s.origin >= 0) cv.text(4, y2, route ? L"點一行商品看這條路線的估算" : L"點地圖上第二座城比較價格", DIM);
     // legend
     int ly = MAP_H - 3 * LINE - 4;
     cv.fill(2, ly - 4, PANEL_W - 4, 1, FRAME);
-    cv.text(4, ly, L"● 產地　◇ 樞紐（各貨都賣）", DIM);
+    cv.text(4, ly, L"● 產地　◇ 樞紐（轉售現有庫存）", DIM);
     cv.text(4, ly + LINE, L"地圖：綠＝有利　黃＝持平　紅＝虧", DIM);
-    cv.text(4, ly + 2 * LINE, L"灰＝無情報；點城市：起點→終點", DIM);
+    cv.text(4, ly + 2 * LINE, L"灰＝無情報或無成交估價", DIM);
 }
 
 void drawForm(Canvas& cv, const Model& m, const State& s) {
@@ -648,14 +788,14 @@ void drawForm(Canvas& cv, const Model& m, const State& s) {
     }
     Plan p = plan(m, s.origin, s.dest, s.good, s.qty, s.leader);
     wchar_t b[128];
-    swprintf_s(b, L"數量（擔）　上限 %d　金 %ls", p.cap ? p.cap : 0, fmtGold(m.gold[s.origin]).c_str());
+    swprintf_s(b, L"數量（批）　上限 %d　金 %ls", p.cap ? p.cap : 0, fmtGold(m.gold[s.origin]).c_str());
     cv.text(4, QTY_LABEL_Y, b, DIM);
     static const wchar_t* const lab[6] = { L"-100", L"-10", L"-1", L"+1", L"+10", L"+100" };
     for (int i = 0; i < 6; i++) cv.button(qtyBtn(i), lab[i], false);
-    cv.fill(QTY_BOX.x, QTY_BOX.y, QTY_BOX.w, QTY_BOX.h, 0xff0e0c08);
+    cv.fill(QTY_BOX.x, QTY_BOX.y, QTY_BOX.w, QTY_BOX.h, 0xff182e32);
     cv.frame(QTY_BOX.x, QTY_BOX.y, QTY_BOX.w, QTY_BOX.h, FRAME);
     cv.text(QTY_BOX.x + QTY_BOX.w / 2, QTY_BOX.y + 3, fmtGold(s.qty), GOLD, 2, true);
-    cv.text(4, LEAD_LABEL_Y, L"統領　Lv 商人等級 ★商才", DIM);
+    cv.text(4, LEAD_LABEL_Y, L"統領　Lv 商人等級 ★經商天賦", DIM);
     for (int i = 0; i < LEAD_ROWS; i++) {
         int row = s.leaderScroll + i, id = leaderAt(m, row);
         if (id == -2) break;
@@ -678,12 +818,12 @@ void drawForm(Canvas& cv, const Model& m, const State& s) {
     }
     int y = EST_Y;
     if (p.qty > 0 && s.dest >= 0) {
-        cv.text(4, y, L"成本 " + fmtGold(p.cost) + L"（含手續費）", TEXT); y += LINE;
-        if (p.known) {
+        cv.text(4, y, L"成本 " + fmtGold(p.cost) + L"（含組隊費）", TEXT); y += LINE;
+        if (p.known && p.quoted) {
             cv.text(4, y, L"售出 " + fmtGold(p.revenue) + L"　稅 " + fmtGold(p.duty + p.transit), TEXT); y += LINE;
-            swprintf_s(b, L"淨利 約 %ls　約%d旬", fmtGold(p.profit, true).c_str(), p.eta);
+            swprintf_s(b, L"收益約 %ls（未含糧耗貨損）", fmtGold(p.profit, true).c_str());
             cv.text(4, y, b, p.profit > 0 ? GREEN : RED, 0, true); y += LINE;
-        } else { cv.text(4, y, L"終點行情不明", RED); y += LINE; }
+        } else { cv.text(4, y, p.known ? L"庫存或庫容不足，暫無成交估價" : L"終點行情不明", RED); y += LINE; }
         if (p.hostileCities) { cv.text(4, y, L"沿途有敵對城市，恐遭搶劫", RED); y += LINE; }
     } else if (s.dest < 0) cv.text(4, y, L"在地圖上點終點城市", DIM);
     cv.button(SEND, s.sendPending ? L"等待執行…" : L"出發", false, p.ok && !s.sendPending);
@@ -695,7 +835,7 @@ void drawCaravans(Canvas& cv, const Model& m, const State& s) {
     auto cars = playerCaravans(m);
     wchar_t b[160];
     if (cars.empty()) cv.text(4, CAR_Y, L"沒有我方商隊（在「組隊」派出）", DIM);
-    else cv.text(PANEL_W - 4, DONE_Y - 17, m.playerAuto ? L"自動＝回合末自動行軍（A 鍵切換）" : L"自動行軍已關（trade_player_auto=0）", DIM, 1);
+
     for (int i = 0; i < CAR_ROWS; i++) {
         int k = s.carScroll + i;
         if (k >= (int)cars.size()) break;
@@ -703,13 +843,16 @@ void drawCaravans(Canvas& cv, const Model& m, const State& s) {
         int y = CAR_Y + i * CAR_H;
         if (k == s.carSel) cv.fill(1, y, PANEL_W - 2, CAR_H, ROW_SEL);
         else if (i & 1) cv.fill(1, y, PANEL_W - 2, CAR_H, ROW_ALT);
-        swprintf_s(b, L"%ls→%ls  %ls %d擔", cityW(m, c.origin).c_str(), cityW(m, c.dest).c_str(), goodW(m, c.good).c_str(), c.qty);
+        swprintf_s(b, L"%ls→%ls  %ls %d批", cityW(m, c.origin).c_str(), cityW(m, c.dest).c_str(), c.cargo.lots.size()>1 ? L"組合" : goodW(m, c.good).c_str(), c.qty);
         cv.text(4, y + 1, b, c.temp ? TEXT : GOLD);
         int dist = hexDist(c.lo, c.hi, m.d->lo[c.dest], m.d->hi[c.dest]);
         int speed = c.atSea ? m.cfg.speedSea : m.cfg.speedLand;
         bool know = m.known.empty() || m.known[c.dest];
-        int64_t value = know ? (int64_t)c.qty * m.seen.sellPrice(c.dest, c.good) : -1;
-        swprintf_s(b, L"%d,%d 距%d格 約%d旬%ls", c.lo, c.hi, dist, (dist + speed - 1) / std::max(1, speed), c.atSea ? L" 海" : L"");
+        int64_t value = know ? 0 : -1;
+        if(know) for(auto& lot:c.cargo.lots) value+=(int64_t)lot.qty*m.seen.sellPrice(c.dest,lot.good);
+        if (c.routeTurns>=0) swprintf_s(b,L"路徑%d格 約%d旬",c.routeSteps,c.routeTurns);
+        else if (!c.route.empty()) swprintf_s(b,L"路徑%d格 耗時待計",c.routeSteps);
+        else swprintf_s(b, L"距%d格 地理估算%d旬", dist, (dist + speed - 1) / std::max(1, speed));
         cv.text(10, y + 17, b, DIM);
         Rc ab = autoBtn(i);
         bool autoOn = m.playerAuto && c.autoMarch;
@@ -720,21 +863,58 @@ void drawCaravans(Canvas& cv, const Model& m, const State& s) {
         if (!c.temp && c.level > 0) { wchar_t lv[16]; swprintf_s(lv, L" Lv%d", c.level); who += lv; }
         cv.text(PANEL_W - 4, y + 33, who, c.temp ? DIM : GOLD, 1);
     }
-    if ((int)cars.size() > CAR_ROWS) { swprintf_s(b, L"%d–%d / %zu", s.carScroll + 1, s.carScroll + CAR_ROWS, cars.size()); cv.text(PANEL_W - 4, DONE_Y, b, DIM, 1); }
-    cv.fill(2, DONE_Y - 4, PANEL_W - 4, 1, FRAME);
-    cv.text(4, DONE_Y, L"最近交易", GOLD, 0, true);
-    int y = DONE_Y + LINE + 2;
-    if (m.done.empty()) cv.text(4, y, L"（無）", DIM);
-    for (auto& t : m.done) {
-        if (y > MAP_H - LINE) break;
-        int mon = t.day / 30;
-        swprintf_s(b, L"%d年%d月 %ls→%ls %ls%d", mon / 12 + 1, mon % 12 + 1, cityW(m, t.origin).c_str(), cityW(m, t.dest).c_str(),
-                   goodW(m, t.good).c_str(), t.qty);
-        cv.text(4, y, b, TEXT);
-        std::wstring r = t.flags & DONE_INTERCEPTED ? L"被截" : t.flags & DONE_LOST ? L"失蹤" : t.flags & DONE_GAVE_UP ? L"放棄" : fmtGold(t.net - t.cost, true);
-        cv.text(PANEL_W - 4, y, r, t.flags || t.net < t.cost ? RED : GREEN, 1);
-        y += LINE;
+    cv.button({2,580,224,18}, s.accounts ? L"返回貨物操作" : L"行程帳本 / 歷史交易", s.accounts);
+    if (s.accounts) {
+        int y = 180;
+        if (!cars.empty() && s.carSel < (int)cars.size()) {
+            const auto& k = *cars[s.carSel]; const auto& a = k.ledger;
+            cv.text(4,y,L"行程 #" + fmtGold(k.id) + (a.complete ? L" 帳本" : L" 舊存檔：僅遷移後收支"),GOLD); y+=20;
+            auto row = [&](const wchar_t* label, int64_t value) { cv.text(4,y,label,DIM); cv.text(PANEL_W-4,y,fmtGold(value),TEXT,1); y+=17; };
+            row(L"採購支出", a.purchases); row(L"收入（含商才獎勵）", a.receipts);
+            row(L"組隊／續航費", a.fees); row(L"過境與銷售稅", a.taxes);
+            row(L"損失貨物成本（已含採購）", a.losses); row(L"剩餘貨物成本", k.cargo.cost());
+            row(L"現金淨流量", a.cashNet()); row(L"已實現損益", a.profit(k.cargo.cost()));
+        }
+        y = 344; cv.text(4,y,L"全勢力待入帳 " + fmtGold(m.pendingGold),GOLD); y+=22;
+        cv.text(4,y,L"最近結束行程（保留24筆）",DIM); y+=17;
+        for (size_t i=s.closedScroll; i<m.closed.size() && i<(size_t)s.closedScroll+2; i++) {
+            const auto& c=m.closed[i];
+            cv.text(4,y,L"#" + fmtGold(c.id) + L" " + cityW(m,c.origin) + L"→" + cityW(m,c.dest),TEXT); y+=16;
+            cv.text(4,y,(c.ledger.complete ? L"損益 " : L"遷移後損益 ") + fmtGold(c.ledger.cashNet(),true),GOLD); y+=18;
+        }
+        y = 455; cv.text(4,y,L"最近交易（稅後收入 / 成本）",DIM); y+=18;
+        for (size_t i=s.doneScroll; i<m.done.size() && i<(size_t)s.doneScroll+3; i++) {
+            const auto& d=m.done[i];
+            cv.text(4,y,cityW(m,d.dest) + L" " + goodW(m,d.good) + L" " + fmtGold(d.qty) + L"批",TEXT); y+=15;
+            cv.text(4,y,(d.flags ? L"損失 " : L"") + fmtGold(d.net) + L" / " + fmtGold(d.cost),GOLD); y+=18;
+        }
+        return;
     }
+    if (cars.empty() || s.carSel >= (int)cars.size()) return;
+    const auto& car = *cars[s.carSel];
+    const wchar_t* state = car.state == 1 ? L"停靠" : car.state == 2 ? L"等待" : L"航行";
+    cv.text(4, 180, L"#" + fmtGold(car.id) + L" " + state + L" " + cityW(m, car.port) + L" " + fmtGold(car.cargo.loadUnits(*m.d)) + L"/" + fmtGold(car.maxLoad*10)+L" 容量點", GOLD);
+    cv.text(4, 196, L"付款 " + cityW(m, car.payer) + L"　下一站 " + cityW(m, s.dest), DIM);
+    cv.text(4, 212, L"商品       攜帶 庫存  參考價", DIM);
+    for (int g = 0; g < std::min(14, m.d->G); g++) {
+        int y = 228 + g * 15;
+        if (s.good == g) cv.fill(1, y, PANEL_W - 2, 15, ROW_SEL);
+        cv.text(4, y, goodW(m, g), TEXT);
+        cv.text(86, y, fmtGold(car.cargo.count(g)), GOLD, 1);
+        if (car.port >= 0) {
+            cv.text(126, y, fmtGold(m.live.available(car.port, g)), TEXT, 1);
+            cv.text(PANEL_W - 4, y, fmtGold(m.live.buyPrice(car.port, g)) + L"/" + fmtGold(m.live.sellPrice(car.port, g)), DIM, 1);
+        }
+    }
+    cv.button({2,450,40,22}, L"−1", false); cv.button({PANEL_W-42,450,40,22}, L"+1", false);
+    cv.text(PANEL_W/2, 453, L"數量 " + fmtGold(s.qty), GOLD, 2);
+    cv.button({2,478,110,24}, L"買入", false, car.state == 1 && !s.sendPending);
+    cv.button({116,478,110,24}, L"賣出／匯款", false, car.state == 1 && !s.sendPending);
+    cv.button({2,506,110,24}, L"續航 " + fmtGold(transportFee(m.live.p,car.shipType,true)) + L"金", false, car.state != 0 && !s.sendPending);
+    cv.button({116,506,110,24}, L"補充兵糧", false, car.state == 1 && !s.sendPending);
+    cv.button({2,534,224,24}, s.confirm ? L"確認放棄餘貨並結束" : L"結束行程", false, car.state == 1 && !s.sendPending);
+    cv.text(4, 562, s.msg.empty() ? car.reason : s.msg, s.msgError ? RED : GOLD);
+
 }
 
 void drawNews(Canvas& cv, const Model& m, const State&) {
@@ -893,7 +1073,14 @@ void renderMap(const Model& m, const State& s, const Projector& proj, uint32_t* 
         proj(d.lo[k.dest], d.hi[k.dest], &dx, &dy);
         if (!here) continue;
         uint32_t c = k.player ? 0xffffc020 : 0xffb0b0b0;
-        px.line(x, y, dx, dy, c, 4, k.player ? 220 : 120);
+        if (k.route.size() > 1) {
+            for (size_t i=1; i<k.route.size(); i++) {
+                float ax,ay,bx,by;
+                proj((int16_t)k.route[i-1], (int16_t)(k.route[i-1]>>16), &ax,&ay);
+                proj((int16_t)k.route[i], (int16_t)(k.route[i]>>16), &bx,&by);
+                px.line(ax,ay,bx,by,c,0,220);
+            }
+        } else px.line(x, y, dx, dy, c, 4, k.player ? 220 : 120);
         px.diamond(x, y, k.player ? 5 : 4, c);
     }
     if (haveO) { px.ring(ox, oy, 11, 0xffffffff); px.ring(ox, oy, 12, 0xff000000); }

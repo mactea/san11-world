@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
         m.stance[c] = f < 0 ? -1 : f == PLAYER || f == 3 ? 2 : (f % 4 == 0 ? 0 : 1);   // force 3 allied, some hostile
     }
     m.owner[chengdu] = PLAYER; m.stance[chengdu] = 2; m.owner[panyu] = PLAYER; m.stance[panyu] = 2;
-    m.owner[luoyang] = 2; m.stance[luoyang] = 1;
+    m.owner[luoyang] = 2; m.stance[luoyang] = 1; m.stance[hepu] = 1;
     for (int c = 0; c < d.C; c++) if (m.owner[c] == PLAYER) m.gold[c] = 8000;
     m.gold[panyu] = 1500;
     m.officers = { { 1001, L"諸葛亮", 95, 100 }, { 1002, L"張飛", 22, 30 }, { 1003, L"糜竺", 80, 70 }, { 1004, L"簡雍", 70, 72 },
@@ -74,7 +74,8 @@ int main(int argc, char** argv) {
     Info info; info.reset(60, d, 12);
     m.live.p.infoRange = 40;
     for (int mo = 0; mo < 4; mo++) info.endMonth(m.live, m.month - 4 + mo);
-    for (int c = 0; c < 42; c++) info.see(PLAYER, c);
+    for (int c = 0; c < 42; c++) info.see(PLAYER, c, &m.live);
+    info.see(PLAYER, hepu, &m.live);
     info.age[(size_t)PLAYER * d.C + hepu] = 2;
     info.view(m.live, PLAYER, &m.seen, &m.known);
     m.age.resize(d.C); for (int c = 0; c < d.C; c++) m.age[c] = (uint8_t)info.ageOf(PLAYER, c);
@@ -131,8 +132,8 @@ int main(int argc, char** argv) {
         s.qty = 15;
         Plan p = plan(m, chengdu, luoyang, brocade, 15, -1);
         int pp, capPct; leaderFactors(TEMP_POL, TEMP_INT, &pp, &capPct);
-        int64_t goods = m.live.quoteBuy(chengdu, brocade, 15) * (1000 - pp) / 1000;
-        Market after = m.live; int64_t sold = after.sell(luoyang, brocade, 15) * (1000 + pp) / 1000;   // what caravanTurn gets (prices known now)
+        int64_t goods = purchase(m.live, chengdu, brocade, 15, pp);
+        Market after = m.live; int64_t sold = after.sell(luoyang, brocade, 15, pp);   // what caravanTurn gets (prices known now)
         int64_t duty = sold * 10 / 100;                                                                  // 洛陽: other force, not a hub? (hub: 5%)
         if (d.hub(luoyang)) duty = sold * 5 / 100;
         char b[200];
@@ -141,11 +142,32 @@ int main(int argc, char** argv) {
         sprintf_s(b, "sale %lld = Market::sell %lld, duty %lld = %lld (洛陽 hub %d)", (long long)p.revenue, (long long)sold, (long long)p.duty, (long long)duty, d.hub(luoyang));
         check(p.revenue == sold && p.duty == duty, b);
         check(p.net == p.revenue - p.duty - p.transit && p.profit == p.net - p.cost, "net = sale - duty - transit, profit = net - cost");
+        m.saleTaxRemainder.assign(d.C,9999);
+        auto carried=plan(m,chengdu,luoyang,brocade,15,-1);
+        int fraction=9999;
+        check(carried.duty==taxWithCarry(carried.revenue,taxPct(d,luoyang,m.cfg.tax,m.cfg.taxHub),100,&fraction) &&
+            m.saleTaxRemainder[luoyang]==9999,"preview includes fractional sales tax without consuming it");
+        m.saleTaxRemainder.clear();
+        int oldTax=m.cfg.tax, oldHubTax=m.cfg.taxHub;
+        auto oldStance=m.stance; auto oldOwner=m.owner;
+        for (int c=0;c<d.C;c++) if (c!=chengdu) { m.stance[c]=1; m.owner[c]=m.force+1; }
+        m.cfg.tax=m.cfg.taxHub=100;
+        auto loss=plan(m,chengdu,luoyang,brocade,15,-1);
+        check(loss.transit>0 && loss.net<0 && loss.profit==loss.revenue-loss.duty-loss.transit-loss.cost,
+            "transit costs exceeding proceeds remain visible in the loss estimate");
+        m.cfg.tax=oldTax; m.cfg.taxHub=oldHubTax;
+        m.stance=oldStance; m.owner=oldOwner;
+        int oldStock=m.seen.stock[luoyang*d.G+brocade]; m.seen.stock[luoyang*d.G+brocade]=d.size[luoyang]*d.stockCap/100;
+        auto full=plan(m,chengdu,luoyang,brocade,15,-1);
+        State fullState=s; fullState.origin=chengdu; fullState.good=brocade; fullState.qty=15;
+        int64_t profit=0,total=0;
+        check(full.known && !full.quoted && !cityProfit(m,fullState,luoyang,&profit,&total),"full destination has no executable quote or misleading profit colour");
+        m.seen.stock[luoyang*d.G+brocade]=oldStock;
         Plan q = plan(m, chengdu, luoyang, brocade, 15, 1001);                 // 諸葛亮: politics 95, intelligence 100
         sprintf_s(b, "officer 諸葛亮: pp 45, cap 20 * 125%% = %d, cheaper purchase (%lld < %lld)", q.cap, (long long)q.goods, (long long)p.goods);
         check(q.pricePermille == 45 && q.cap == 25 && q.goods < p.goods && q.revenue > p.revenue, b);
         Plan sea = plan(m, panyu, hepu, pearl, 100, -1);
-        check(sea.cap == m.live.p.capSea && sea.qty == m.live.p.capSea && sea.sea, "port to port: sea load (60), quantity clamped to the load");
+        check(sea.cap == m.live.p.capLand && sea.qty == m.live.p.capLand, "unverified port transfer cannot grant extra land capacity");
         // transit tax: a caravan from 成都 to 洛陽 passes other cities; the estimate charges each tax city once
         check(p.transitCities + p.hostileCities >= 0 && p.transit >= 0, "transit estimate present");
         // allied destination: no duty
@@ -160,9 +182,8 @@ int main(int argc, char** argv) {
         check(st.known && m.seen.at(hepu, pearl) == bi && st.revenue == saleQuote(m.seen, hepu, pearl, 10, 10), "stale destination (合浦, 2 months): the remembered index");
         // monsoon: 番禺 -> 穆濟 is westbound; June = south-west monsoon: against
         Plan mon = plan(m, panyu, muziris, silk, 10, -1);
-        sprintf_s(b, "monsoon June 番禺->穆濟 (west): time x%d/1000 > 1000; 穆濟->番禺 (east) < 1000", mon.timePermille);
         Plan mon2 = plan(m, muziris, panyu, silk, 10, -1);
-        check(mon.timePermille > 1000 && mon2.timePermille < 1000, b);
+        check(mon.eta == mon2.eta && mon.eta == (mon.dist + m.cfg.speedLand - 1) / m.cfg.speedLand, "port labels do not imply a verified sea route or apply speculative monsoon time");
         // the sea step cost the movement callback uses (trade.cpp seaCostHook): 南海 by month and heading
         int nanhai = d.seaOf(d.lo[panyu], d.hi[panyu] + 20);
         const Params& pr = m.live.p;
@@ -254,8 +275,8 @@ int main(int argc, char** argv) {
         // 糜竺: level 3 (商才 2 + 600 experience: level 1)
         for (auto& o : m.officers) if (o.id == 1003) { o.exp = 600; o.talent = 2; o.level = merchantEffective(pr, o.exp, o.talent); }
         Plan q = plan(m, chengdu, luoyang, brocade, 30, 1003);
-        int64_t goods = m.live.quoteBuy(chengdu, brocade, q.qty) * (1000 - 54) / 1000;
-        int64_t rev = m.seen.quoteSell(luoyang, brocade, q.qty) * (1000 + 54) / 1000;
+        int64_t goods = purchase(m.live, chengdu, brocade, q.qty, 54);
+        int64_t rev = saleQuote(m.seen, luoyang, brocade, q.qty, 54);
         int pct = d.hub(luoyang) ? 5 : 10;
         char b[200];
         sprintf_s(b, "糜竺 Lv3: pp 30 + 24 = %d, load 20 x 125%% = %d, goods %lld = %lld, duty %lld = %lld", q.pricePermille, q.cap,
@@ -314,8 +335,66 @@ int main(int argc, char** argv) {
         check(r.consumed && r.toggleUnit == 10 && !r.toggleAuto, "click 自動 of row 1: 自動行軍 off for unit 10");
     }
 
+    // A deterministic mixed basket, with an intermediate foreign market.
+    {
+        Data bd;bd.C=3;bd.G=2;bd.size={100,100,100};bd.flags={0,0,0};bd.supply={3,3,0,0,0,0};
+        bd.price={10,100,40,200,2000,2000};bd.goodName={"鹽","蜀錦"};bd.cityName={"起點","終點","過境"};
+        bd.lo={0,60,30};bd.hi={0,0,0};
+        Model bm;bm.d=&bd;bm.live.d=&bd;bm.live.reset();bm.live.p.impact=0;bm.seen=bm.live;
+        bm.force=0;bm.owner={0,1,2};bm.stance={2,1,1};bm.gold={10000,-1,-1};bm.known={1,1,1};bm.age={0,0,0};
+        std::vector<OrderLine> order={{0,50},{1,10}};
+        auto p=basketPlan(bm,0,1,order,-1);
+        check(p.ok && p.quoted && p.slots==20 && p.used==200 && p.qty==60,"basket preview uses shared weighted capacity");
+        check(p.cost==p.goods+100 && p.transit==p.transitLimit && p.transitLimit==p.goods*5/100 && p.profit==p.revenue-p.duty-p.transit-p.cost,
+              "basket net profit includes one setup fee, sales tax and capped transit tax");
+        check(maxOrderQuantity(bm,0,1,order,0,-1)==50 && maxOrderQuantity(bm,0,1,order,1,-1)==10,"max buy reserves space for the other commodity");
+        bm.gold[0]=(int)p.cost-1;
+        check(!basketPlan(bm,0,1,order,-1).ok && maxOrderQuantity(bm,0,1,order,0,-1)<50,"basket and quantity guidance enforce the same combined budget");
+        bm.gold[0]=10000;
+        auto suggested=recommendOrder(bm,0,1,-1);auto best=basketPlan(bm,0,1,suggested,-1);
+        check(!suggested.empty() && best.ok && best.quoted && best.profit>0 && best.used<=200 && best.cost<=10000,"suggested basket is profitable under displayed estimates and executable limits");
+        bm.known[1]=0;
+        check(basketPlan(bm,0,1,order,-1).ok && !basketPlan(bm,0,1,order,-1).quoted && recommendOrder(bm,0,1,-1).empty(),
+              "unknown destination allows manual cargo but never invents profit or recommendations");
+        bm.known[1]=1;bm.known[2]=0;
+        check(basketPlan(bm,0,1,order,-1).transit==p.transitLimit,"unknown transit market uses bounded conservative tax estimate");
+        bm.caravans.resize(1);auto& full=bm.caravans[0];full.player=true;full.maxLoad=20;full.cargo.add(0,0,100,1000);
+        State bs;bs.on=true;bs.tab=2;bs.good=0;bs.qty=50;
+        click(bm,bs,proj,PANEL_X+PANEL_W-20,460);
+        check(bs.qty==51,"full mixed-capacity hold still permits increasing sale quantity");
+    }
+
     // ---- renders
+    {
+        auto& c = m.caravans[0]; c.id = 71; c.state = 1; c.port = luoyang; c.payer = chengdu; c.maxLoad = 25;
+        c.cargo.add(brocade, chengdu, 18, 1700);
+        State t; t.on = true; t.tab = 2; t.carSel = 0; t.good = brocade; t.qty = 3; t.dest = changan;
+        auto a = click(m, t, proj, PANEL_X + 150, 485);
+        check(a.command == "trade sell 71 1 3" && t.sendPending, "partial sale uses stable voyage id and selected amount");
+        a = click(m, t, proj, PANEL_X + 150, 485);
+        check(a.command.empty(), "multi-stop command cannot be submitted twice while pending");
+        t.sendPending = false;
+        a = click(m, t, proj, PANEL_X + 40, 515);
+        check(a.command == "trade go 71 " + std::to_string(changan), "continue voyage to selected market");
+        t.sendPending = false;
+        a = click(m, t, proj, PANEL_X + 80, 540);
+        check(a.command.empty() && t.confirm, "discarding cargo requires explicit confirmation");
+        a = click(m, t, proj, PANEL_X + 80, 540);
+        check(a.command == "trade finish 71 discard", "confirmed end discards remaining cargo");
+    }
     printf("renders\n");
+    m.caravans[0].ledger.purchases=2400; m.caravans[0].ledger.receipts=1300;
+    m.caravans[0].ledger.fees=300; m.caravans[0].ledger.taxes=100; m.caravans[0].ledger.losses=100;
+    for (int i=0;i<4;i++) m.closed.push_back({(uint32_t)(70-i),0,chengdu,luoyang,100,m.caravans[0].ledger});
+    {
+        State a; a.on=true; a.tab=2;
+        auto r=click(m,a,proj,PANEL_X+90,588);
+        check(a.accounts && r.command.empty(), "account switch never submits a trade");
+        r=click(m,a,proj,PANEL_X+150,485);
+        check(r.command.empty(), "account page blocks hidden sell button");
+        wheel(m,a,PANEL_X+90,400,-120,false);
+        check(a.closedScroll==1, "account history scrolls independently of caravan selection");
+    }
     std::vector<uint32_t> full((size_t)MAP_W * MAP_H);
     auto background = [&]() {                                   // something map-like: parchment, city dots
         for (int y = 0; y < MAP_H; y++) for (int x = 0; x < MAP_W; x++) full[(size_t)y * MAP_W + x] = ((x / 40 + y / 40) & 1) ? 0xffcac4b7 : 0xffc2bba9;
@@ -332,7 +411,7 @@ int main(int argc, char** argv) {
     const char* names[4] = { "market", "form", "caravans", "news" };
     for (int t = 0; t < 4; t++) {
         s.tab = t;
-        if (t == 2) s.carSel = 1;
+        if (t == 2) { s.carSel = 0; s.msg.clear(); }
         if (t == 1) { s.leader = 1003; s.msg = L"已下令：遊戲等待指令時出發（關閉中地圖後）"; }
         background();
         renderMap(m, s, proj, full.data(), MAP_W);
@@ -341,6 +420,10 @@ int main(int argc, char** argv) {
         writeBmp(path, full.data(), MAP_W, MAP_H);
         printf("  %s\n", path.c_str());
     }
+    s.tab=2; s.accounts=true; s.carSel=0; background();
+    renderPanel(m,s,full.data()+PANEL_X,MAP_W);
+    writeBmp(out + "\\panel_accounts.bmp",full.data(),MAP_W,MAP_H);
+    s.accounts=false;
     s.on = false; background(); renderMap(m, s, proj, full.data(), MAP_W);
     writeBmp(out + "\\panel_closed.bmp", full.data(), MAP_W, MAP_H);
     // pixel checks: the panel paints exactly its rectangle, the map overlay never under the panel

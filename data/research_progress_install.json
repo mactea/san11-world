@@ -1,0 +1,47 @@
+{
+  "applied": true,
+  "date": "2026-11-08T20:20:30.768009",
+  "backup": "C:\\Games\\san11\\Romance Of Three Kingdom 11 PK\\skill_backups\\research-cities-100-20261108-201936",
+  "fixed_projects": 48,
+  "milestones": [
+    12,
+    24,
+    36,
+    48
+  ],
+  "hidden_slot_caps": [
+    5,
+    6,
+    7,
+    8,
+    10
+  ],
+  "final_teaching_caps": {
+    "S": 3,
+    "A": 10,
+    "B": 20,
+    "C": 30
+  },
+  "preserve_higher_native_caps": true,
+  "preserve_spent_counts": true,
+  "player_and_ai_same_rules": true,
+  "base_attributes_and_aptitude_unchanged": true,
+  "research_tree_prerequisites_unchanged": true,
+  "scenario_and_save_files_modified": false,
+  "existing_saves_supported_on_next_load": true,
+  "requires_game_restart": true,
+  "dll_sha256": "63865be1b7557b3bbdf22427a24bff4d551a4e3bee33490cace4c7c757ee4fa7",
+  "ini_sha256": "1820c115a568f3755e4ebdeefe31c952efc9aa2ee81d1992baca1794d27da243",
+  "runtime_fixture_failures": 0,
+  "teaching_trigger": "current_owned_cities",
+  "teaching_city_thresholds": [
+    20,
+    40,
+    80,
+    100
+  ],
+  "hidden_trigger": "completed_fixed_research",
+  "ports_and_gates_count": false,
+  "territory_loss_reduces_unspent_quota": true,
+  "spent_counts_survive_territory_loss_and_recapture": true
+}

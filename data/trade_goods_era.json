@@ -1,0 +1,439 @@
+{
+  "period": "汉末至三国，约公元二至三世纪；以此前列出的缺项为补齐范围；含用户指定的枪、戟、弩基础兵装商品",
+  "original_ids": "已发布的 0..71 保持商品编号、名称、供需与载重；马、枪、戟、弩的价格按生产成本重新校准",
+  "added_count": 58,
+  "total_count": 72,
+  "note": "产地、价格、载量及需求是游戏抽象，不是史料报价或每座城市的生产断言。图片来自大航海时代Online，时代外观可能仅近似。粮食、金银、兵器均为贸易货物，不直接兑换原生资源。",
+  "comparison_source": "https://tgbus.com/news/158196",
+  "sources": {
+    "general": "https://www.metmuseum.org/essays/trade-between-the-romans-and-the-empires-of-asia",
+    "luxury": "https://www.metmuseum.org/essays/luxury-arts-of-rome",
+    "tea": "https://www.nature.com/articles/srep18955",
+    "cane_sugar": "https://penelope.uchicago.edu/holland/pliny12.html",
+    "gems": "https://isaw.nyu.edu/exhibitions/berthouville/objects/ring-56-472",
+    "mineral_nitre": "https://www.baicao99.com/book/shennongbencaojing/667-53cb9.html"
+  },
+  "added": [
+    {
+      "id": 14,
+      "key": "wheat",
+      "name": "小麥",
+      "original_name": "小麥",
+      "adaptation": "可储藏谷物；不自动兑换原生兵粮"
+    },
+    {
+      "id": 15,
+      "key": "rice",
+      "name": "稻米",
+      "original_name": "稻米",
+      "adaptation": "亚洲稻作区；不自动兑换原生兵粮"
+    },
+    {
+      "id": 16,
+      "key": "soybean",
+      "name": "大豆",
+      "original_name": "大豆",
+      "adaptation": "汉代豆类粮食"
+    },
+    {
+      "id": 17,
+      "key": "dried_fish",
+      "name": "魚乾",
+      "original_name": "魚肉",
+      "adaptation": "鱼肉按腌干保存形态交易，图片为鱼肉近似"
+    },
+    {
+      "id": 18,
+      "key": "beef",
+      "name": "牛肉",
+      "original_name": "牛肉",
+      "adaptation": "按腌制肉货抽象，不加入现代冷链"
+    },
+    {
+      "id": 19,
+      "key": "cheese",
+      "name": "乳酪",
+      "original_name": "乳酪",
+      "adaptation": "乳制品，按耐储奶酪交易"
+    },
+    {
+      "id": 20,
+      "key": "raisins",
+      "name": "葡萄乾",
+      "original_name": "葡萄乾",
+      "adaptation": "古代葡萄栽培与干果"
+    },
+    {
+      "id": 21,
+      "key": "honey",
+      "name": "蜂蜜",
+      "original_name": "蜂蜜",
+      "adaptation": "古代蜂产品"
+    },
+    {
+      "id": 22,
+      "key": "cane_sugar",
+      "name": "蔗糖",
+      "original_name": "砂糖",
+      "adaptation": "普林尼记载印度 saccharon；这里指早期蔗糖制品，不是现代精炼白砂糖"
+    },
+    {
+      "id": 23,
+      "key": "olive_oil",
+      "name": "橄欖油",
+      "original_name": "橄欖油",
+      "adaptation": "地中海油料；不按大航海时代后来的种植区布置"
+    },
+    {
+      "id": 24,
+      "key": "coconut_oil",
+      "name": "椰子油",
+      "original_name": "椰子油",
+      "adaptation": "印度洋和南海植物油"
+    },
+    {
+      "id": 25,
+      "key": "ginger",
+      "name": "生薑",
+      "original_name": "生薑",
+      "adaptation": "古代亚洲香辛料"
+    },
+    {
+      "id": 26,
+      "key": "cinnamon",
+      "name": "肉桂",
+      "original_name": "肉桂",
+      "adaptation": "古典文献 cinnamon/cassia 物种混称，按桂类商品合并"
+    },
+    {
+      "id": 27,
+      "key": "clove",
+      "name": "丁香",
+      "original_name": "丁香",
+      "adaptation": "以南海群岛为供应区；不将普林尼 caryophyllon 无条件等同丁香"
+    },
+    {
+      "id": 28,
+      "key": "cardamom",
+      "name": "豆蔻",
+      "original_name": "豆蔻",
+      "adaptation": "印度香辛料品类抽象"
+    },
+    {
+      "id": 29,
+      "key": "saffron",
+      "name": "藏紅花",
+      "original_name": "藏紅花",
+      "adaptation": "地中海和西亚芳香染材"
+    },
+    {
+      "id": 30,
+      "key": "musk",
+      "name": "麝香",
+      "original_name": "麝香",
+      "adaptation": "古代中国药香材料，生产区为地理抽象"
+    },
+    {
+      "id": 31,
+      "key": "sandalwood",
+      "name": "檀香",
+      "original_name": "檀香",
+      "adaptation": "印度及南海香木"
+    },
+    {
+      "id": 32,
+      "key": "wool",
+      "name": "羊毛",
+      "original_name": "羊毛",
+      "adaptation": "纺织原料，与皮毛分开"
+    },
+    {
+      "id": 33,
+      "key": "raw_cotton",
+      "name": "棉花",
+      "original_name": "棉花",
+      "adaptation": "与现有印度棉布分开，不设汉地普遍棉田"
+    },
+    {
+      "id": 34,
+      "key": "flax",
+      "name": "麻",
+      "original_name": "亞麻",
+      "adaptation": "合并古代麻类纤维；亚麻图片近似"
+    },
+    {
+      "id": 35,
+      "key": "wool_cloth",
+      "name": "毛織品",
+      "original_name": "毛呢",
+      "adaptation": "毛织物，不是皮毛"
+    },
+    {
+      "id": 36,
+      "key": "linen",
+      "name": "麻布",
+      "original_name": "麻布料",
+      "adaptation": "古代麻织物"
+    },
+    {
+      "id": 37,
+      "key": "pile_cloth",
+      "name": "絨毯",
+      "original_name": "波斯地毯",
+      "adaptation": "绒织品用古代已有的绒毯表示，不采用后世天鹅绒"
+    },
+    {
+      "id": 38,
+      "key": "wine",
+      "name": "葡萄酒",
+      "original_name": "葡萄酒",
+      "adaptation": "古典地中海和中亚酒货"
+    },
+    {
+      "id": 39,
+      "key": "tea",
+      "name": "茶",
+      "original_name": "中國茶",
+      "adaptation": "汉阳陵有实物证据；不提前复制近代全球茶叶贸易"
+    },
+    {
+      "id": 40,
+      "key": "rice_wine",
+      "name": "米酒",
+      "original_name": "清酒",
+      "adaptation": "采用古代谷物酿造酒，清酒图片为近似，不指现代精制清酒"
+    },
+    {
+      "id": 41,
+      "key": "gold",
+      "name": "黃金",
+      "original_name": "黃金",
+      "adaptation": "商品金锭，与城池货币分开；没有直接铸币兑换"
+    },
+    {
+      "id": 42,
+      "key": "silver",
+      "name": "白銀",
+      "original_name": "銀",
+      "adaptation": "白银作为商品，不直接生成城池货币"
+    },
+    {
+      "id": 43,
+      "key": "amber",
+      "name": "琥珀",
+      "original_name": "琥珀",
+      "adaptation": "波罗的海琥珀路线"
+    },
+    {
+      "id": 44,
+      "key": "crystal",
+      "name": "水晶",
+      "original_name": "水晶",
+      "adaptation": "石英晶体及简单加工，不使用现代合成水晶"
+    },
+    {
+      "id": 45,
+      "key": "ruby",
+      "name": "紅寶石",
+      "original_name": "紅寶石",
+      "adaptation": "印度洋宝石货；区域产地概括，不保证每城有矿山"
+    },
+    {
+      "id": 46,
+      "key": "sapphire",
+      "name": "藍寶石",
+      "original_name": "藍寶石",
+      "adaptation": "罗马时期首饰有蓝宝石，供应区概括印度洋"
+    },
+    {
+      "id": 47,
+      "key": "emerald",
+      "name": "祖母綠",
+      "original_name": "祖母綠",
+      "adaptation": "罗马埃及东部沙漠绿宝石，不设美洲来源"
+    },
+    {
+      "id": 48,
+      "key": "diamond",
+      "name": "金剛石",
+      "original_name": "鑽石",
+      "adaptation": "原石或早期简单加工；图片为现代切面近似"
+    },
+    {
+      "id": 49,
+      "key": "pottery",
+      "name": "陶器",
+      "original_name": "陶器",
+      "adaptation": "陶器与早期青瓷类合并，不加入青花瓷"
+    },
+    {
+      "id": 50,
+      "key": "ivory",
+      "name": "象牙",
+      "original_name": "象牙",
+      "adaptation": "古代象牙贸易"
+    },
+    {
+      "id": 51,
+      "key": "ivory_carving",
+      "name": "象牙雕品",
+      "original_name": "象牙工藝品",
+      "adaptation": "古代象牙梳、饰品等，与原牙分开"
+    },
+    {
+      "id": 52,
+      "key": "goldwork",
+      "name": "金工藝品",
+      "original_name": "黃金工藝品",
+      "adaptation": "古代金工饰品，与黄金原料分开"
+    },
+    {
+      "id": 53,
+      "key": "sculpture",
+      "name": "雕刻",
+      "original_name": "雕像",
+      "adaptation": "可运输雕像与小型雕刻，非整座纪念建筑"
+    },
+    {
+      "id": 54,
+      "key": "painting",
+      "name": "繪畫",
+      "original_name": "美術品",
+      "adaptation": "木板画、帛画等可携带作品，非后世油画"
+    },
+    {
+      "id": 55,
+      "key": "ginseng",
+      "name": "人參",
+      "original_name": "朝鮮人參",
+      "adaptation": "古代药材用途，不添加现实疗效机制"
+    },
+    {
+      "id": 56,
+      "key": "rhubarb",
+      "name": "大黃",
+      "original_name": "大黃",
+      "adaptation": "古代药材与染材"
+    },
+    {
+      "id": 57,
+      "key": "indigo",
+      "name": "靛藍",
+      "original_name": "靛藍",
+      "adaptation": "植物蓝染料，不是工业合成染料"
+    },
+    {
+      "id": 58,
+      "key": "turmeric",
+      "name": "鬱金",
+      "original_name": "薑黃",
+      "adaptation": "按姜黄属香染植物合并处理，名称并非严格植物分类"
+    },
+    {
+      "id": 59,
+      "key": "wood",
+      "name": "木材",
+      "original_name": "木材",
+      "adaptation": "普通木货，不直接兑换原生造船材料"
+    },
+    {
+      "id": 60,
+      "key": "wax",
+      "name": "蜂蠟",
+      "original_name": "蜂蠟",
+      "adaptation": "蜂产品与铸造、照明用途"
+    },
+    {
+      "id": 61,
+      "key": "iron_ore",
+      "name": "鐵礦石",
+      "original_name": "鐵礦石",
+      "adaptation": "原矿，与现有铁器分开"
+    },
+    {
+      "id": 62,
+      "key": "copper_ore",
+      "name": "銅礦石",
+      "original_name": "銅礦石",
+      "adaptation": "铜矿，不直接兑换钱币或兵装"
+    },
+    {
+      "id": 63,
+      "key": "tin_ore",
+      "name": "錫礦石",
+      "original_name": "錫礦石",
+      "adaptation": "青铜产业原料"
+    },
+    {
+      "id": 64,
+      "key": "coal",
+      "name": "煤炭",
+      "original_name": "煤",
+      "adaptation": "有限区域燃料，不复制近代煤业需求"
+    },
+    {
+      "id": 65,
+      "key": "sulfur",
+      "name": "硫磺",
+      "original_name": "硫磺",
+      "adaptation": "矿物、药材和工艺原料，不自动解锁火药"
+    },
+    {
+      "id": 66,
+      "key": "mineral_nitre",
+      "name": "硝鹽",
+      "original_name": "硝石",
+      "adaptation": "古代硝类矿盐合并；早期名称混杂，不断言全为现代硝酸钾，不作火药"
+    },
+    {
+      "id": 67,
+      "key": "sword",
+      "name": "刀劍",
+      "original_name": "西洋長劍",
+      "adaptation": "古代冷兵器，图片为同类近似；不直接转换原生兵装"
+    },
+    {
+      "id": 68,
+      "key": "armor",
+      "name": "甲胄",
+      "original_name": "西洋甲冑",
+      "adaptation": "古代札甲、鳞甲、锁甲抽象，原作甲胄图非严格汉末式样"
+    },
+    {
+      "id": 69,
+      "key": "spear",
+      "name": "槍",
+      "original_name": "槍",
+      "adaptation": "汉末冷兵器贸易商品；不兑换原生兵装"
+    },
+    {
+      "id": 70,
+      "key": "halberd",
+      "name": "戟",
+      "original_name": "戟",
+      "adaptation": "汉末冷兵器贸易商品；不兑换原生兵装"
+    },
+    {
+      "id": 71,
+      "key": "crossbow",
+      "name": "弩",
+      "original_name": "弩",
+      "adaptation": "汉末冷兵器贸易商品；不兑换原生兵装"
+    }
+  ],
+  "excluded": {
+    "白蘭地": "蒸馏酒商品形态不适合汉末背景",
+    "朗姆酒": "后世蔗糖蒸馏酒体系",
+    "咖啡": "未采用后世饮用咖啡贸易",
+    "白金": "不在本地图汉末欧亚非已知商业冶金体系中",
+    "天鵝絨": "后世织物形态；绒织品改为古代绒毯",
+    "冬蟲夏草": "可靠药材文献远晚于汉末，暂不提前为成熟商品",
+    "龍涎香": "目前核实的明确贸易文献晚于汉末；缺乏可靠同期证据，暂缓",
+    "洋槍、大炮": "火器时代不符",
+    "玉米、馬鈴薯、番茄、辣椒、煙草、可可": "不引入美洲与旧大陆交换体系"
+  },
+  "exclusion_sources": [
+    "https://ncbi.nlm.nih.gov/books/NBK92758/",
+    "https://www.ecnu.edu.cn/info/1425/70866.htm"
+  ]
+}

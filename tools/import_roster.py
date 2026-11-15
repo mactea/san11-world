@@ -10,7 +10,8 @@ their records are inserted after record 849, so every later section shifts by (P
 
 Record (tools/roster/common.py): name fields, years, relations, stats, ... from the roster; bytes the roster does not
 describe come from its Koei template officer (raw.template) in the input file. Faces: 2000 (male) / 2100 (female),
-the generic portraits the game itself falls back to (0x48a450) and gives a reset new officer (0x485ff0).
+the generic portraits the game itself falls back to (0x48a450) and gives a reset new officer (0x485ff0),
+unless the roster supplies an installed face id. Extended ids require worldmod.ini faces= at least id+1.
 State relative to the scenario's start year Y (file offset 0x5B):
   death < Y            -> 8 死亡 (as Koei's historical scenarios store officers dead before the start)
   appear > Y           -> 6 未登場 (appears in year `appear` at city_id; 0x59e4b0 handles it like Koei's)
@@ -148,7 +149,12 @@ def build_record(o, tmpl, st, exists, PS, drops):
     r[5:10] = name_field(o['mei'], 'mei', oid)
     r[10:15] = name_field(o.get('azana', ''), 'azana', oid)
     r[15:53] = bytes(38)
-    struct.pack_into('<h', r, 53, FACE_FEMALE if o['sex'] == 1 else FACE_MALE)
+    face = o.get('face', -1)
+    if face < 0:
+        face = FACE_FEMALE if o['sex'] == 1 else FACE_MALE
+    if not 0 <= face < 32760:
+        raise ImportError_(f"officer {o['id']}: portrait {face} exceeds the supported portrait range")
+    struct.pack_into('<h', r, 53, face)
     r[55] = o['sex']
     struct.pack_into('<hhh', r, 56, o['appear'], o['birth'], o['death'])
     r[62] = o['death_type']

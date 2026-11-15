@@ -18,6 +18,13 @@ china_y=0
 ; width/height: multiples of 200 (width = columns, north-south; height = rows, west-east).
 ; china_x/china_y: where Koei's 200x200 China map sits (china_y even).
 [san11pk_world]
+; Fixed research completed 12/24/36/48: hidden slots 6/7/8/10.
+; Teaching quotas grow with owned cities at 20/40/80/100 (ports and gates excluded).
+research_progress=1
+; Skill event CSVs in skill_logs (UTF-8): requires successful skill_combos installation.
+; Queries are marked check_matched; actual effect records are marked applied. See docs/特技组合.md.
+; skill_combos=1
+; skill_telemetry=1
 ; world_terrain: whole-world 3D terrain (M4B.md)
 world_terrain=1
 ; data_dir: world data, inside the game directory (tools/editor or the tools in TUTORIAL.md section 10)
