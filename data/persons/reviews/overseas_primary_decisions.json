@@ -9,10 +9,10 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate.",
+      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "exact_birth_not_established"
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -20,6 +20,56 @@
           "citation": "RIB 688, edition and dating metadata",
           "url": "https://romaninscriptionsofbritain.org/inscriptions/688",
           "finding": "The epitaph explicitly gives age 50; the stone is dated to the third century by hairstyle. Neither calendar birth nor death year is inscribed. Existing game lifespan 142–217 is not an attested 75-year lifespan."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "RIB688 complete edition, translation and dating commentary",
+          "urls": [
+            "https://romaninscriptionsofbritain.org/inscriptions/688"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\rib688.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\rib688.txt": "a311e1a91eb4d19d40f32be648dc1d5091880e5dd3928b8fd75db024586d0cbd"
+          },
+          "finding": "Julia Velva named in York epitaph; Aurelius Mercurialis is her heir, not her husband by this text. Explicit age at death50 belongs to Julia. Third-century dating is editorial hairstyle assessment, not engraved death217. Game142–217 implies75years and conflicts with attested50.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. No calendar birth/death. No claim this was a military commander or empress; game role label is not verified. Named epitaph core closes independently of exact dates.",
+          "current_game_dates": {
+            "birth": 142,
+            "appear": 158,
+            "death": 217
+          },
+          "estimated_game_years": {
+            "birth": 142,
+            "appear": 158,
+            "death": 217
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "9493 Julia Velva",
+            "source_unit": "RIB688 complete edition, translation and dating commentary",
+            "short_original": "Iulie Velve ... vixit an(nos) L",
+            "identity_bridge": "Julia Velva named in York epitaph; Aurelius Mercurialis is her heir, not her husband by this text. Explicit age at death50 belongs to Julia. Third-century dating is editorial hairstyle assessment, not engraved death217. Game142–217 implies75years and conflicts with attested50.",
+            "date_handling": "No calendar birth/death. No claim this was a military commander or empress; game role label is not verified. Named epitaph core closes independently of exact dates.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          },
+          "conditional_game_estimate_recommendation": {
+            "condition": "If retaining old game death217 as one possible third-century estimate and treating engraved completed50years as the integer game lifespan convention",
+            "estimated_game_years": {
+              "birth": 167,
+              "appear": 183,
+              "death": 217
+            },
+            "apply": false,
+            "reasons": {
+              "birth": "217minus50=167, conditional integer arithmetic; unknown birthday within death year prevents exact historical birth inference",
+              "appear": "183=167plus16 under existing game birthplus16 convention; no attested historical first career",
+              "death": "Retain217 only as old estimate within editorial third century; not directly attested by epitaph"
+            }
+          }
         }
       ],
       "attested_age_at_death": 50,
@@ -31,7 +81,23 @@
         "relation": "range",
         "precision": "contextual_interval",
         "basis": "RIB editorial dating by hairstyle"
-      }
+      },
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. No calendar birth/death. No claim this was a military commander or empress; game role label is not verified. Named epitaph core closes independently of exact dates."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "exact_birth_not_established"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10143,
@@ -49,10 +115,10 @@
         "basis": "Severan persecution narrative; not an exact execution year."
       },
       "proposed_appear": null,
-      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate.",
-      "review_status": "primary_text_corroborated",
+      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
+      "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "exact_birth_not_established"
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -60,8 +126,68 @@
           "citation": "Eusebius, HE VI.5.1–4",
           "url": "https://www.newadvent.org/fathers/250106.htm",
           "finding": "Potamiaena executed by burning pitch; her mother Marcella also killed. The narrative supplies no exact year or age."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VI.5 complete chapter; input name/city/mother matched",
+          "urls": [
+            "https://www.newadvent.org/fathers/250106.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607"
+          },
+          "finding": "Potamiaena of Alexandria, mother Marcella and soldier Basilides match the game persona and existing primary evidence. Burning pitch from feet to head is explicitly narrated.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Core identity does not establish every game biography claim: owner/slavery details not established in this chapter. Previous202–211 contextual death interval remains untouched, not exact205. Dreams and chastity praise give no calendar birth or numerical age.",
+          "current_game_dates": {
+            "birth": 160,
+            "appear": 176,
+            "death": 205
+          },
+          "estimated_game_years": {
+            "birth": 160,
+            "appear": 176,
+            "death": 205
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": {
+            "year_range": [
+              202,
+              211
+            ],
+            "relation": "range",
+            "precision": "contextual_interval",
+            "basis": "Severan persecution narrative; not an exact execution year."
+          },
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10143 Potamiaina",
+            "source_unit": "HE VI.5 complete chapter; input name/city/mother matched",
+            "short_original": "with her mother, Marcella",
+            "identity_bridge": "Potamiaena of Alexandria, mother Marcella and soldier Basilides match the game persona and existing primary evidence. Burning pitch from feet to head is explicitly narrated.",
+            "date_handling": "Core identity does not establish every game biography claim: owner/slavery details not established in this chapter. Previous202–211 contextual death interval remains untouched, not exact205. Dreams and chastity praise give no calendar birth or numerical age.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Core identity does not establish every game biography claim: owner/slavery details not established in this chapter. Previous202–211 contextual death interval remains untouched, not exact205. Dreams and chastity praise give no calendar birth or numerical age."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "exact_birth_not_established"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10155,
@@ -691,10 +817,10 @@
         "precision": "approximate_regnal_chronology"
       },
       "proposed_appear": 189,
-      "appearance_basis": "Already bishop in Commodus year 10, conventionally 189; existing game appearance 193 is later than securely attested office. This is an attested office bound, not proven initial employment.",
-      "review_status": "primary_text_corroborated",
+      "appearance_basis": "Already bishop in Commodus year 10, conventionally 189; existing game appearance 193 is later than securely attested office. This is an attested office bound, not proven initial employment. Named-person core completion only; game dates and prior chronological decisions unchanged.",
+      "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "exact_birth_not_established"
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -708,9 +834,68 @@
           "citation": "Eusebius HE V.22",
           "url": "https://www.newadvent.org/fathers/250105.htm",
           "finding": "Demetrius succeeds Julian in Commodus year 10."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE V.22 and VI.26 complete chapters",
+          "urls": [
+            "https://www.newadvent.org/fathers/250106.htm",
+            "https://www.newadvent.org/fathers/250105.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius5.txt",
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius5.txt": "252c32379c457951bdfcc309c34ef3f05d36d6346dd5c2734e6772bc0aea1cc8",
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607"
+          },
+          "finding": "Demetrius succeeds Julian in Commodus tenth year; VI.26 gives43full episcopal years and Heraclas succession. Alexandria and exact succession sequence identify input Demetrius I.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve existing approximate death232 and proposed appearance189 through safe parent helper. Neither is newly inferred here. Commodus regnal conversion is not exact day; no birthday. Current game appearance193 later than old office bound189 remains a recorded calibration issue, not silently repaired.",
+          "current_game_dates": {
+            "birth": 177,
+            "appear": 193,
+            "death": 232
+          },
+          "estimated_game_years": {
+            "birth": 177,
+            "appear": 193,
+            "death": 232
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": {
+            "year": 232,
+            "relation": "circa",
+            "precision": "approximate_regnal_chronology"
+          },
+          "previous_proposed_appear_preserved_by_helper": 189,
+          "verification_steps": {
+            "person": "10152 Pope Demetrius I of Alexandria",
+            "source_unit": "HE V.22 and VI.26 complete chapters",
+            "short_original": "Demetrius received the charge ... at Alexandria",
+            "identity_bridge": "Demetrius succeeds Julian in Commodus tenth year; VI.26 gives43full episcopal years and Heraclas succession. Alexandria and exact succession sequence identify input Demetrius I.",
+            "date_handling": "Preserve existing approximate death232 and proposed appearance189 through safe parent helper. Neither is newly inferred here. Commodus regnal conversion is not exact day; no birthday. Current game appearance193 later than old office bound189 remains a recorded calibration issue, not silently repaired.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
-      "proven_activity_year": 189
+      "proven_activity_year": 189,
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve existing approximate death232 and proposed appearance189 through safe parent helper. Neither is newly inferred here. Commodus regnal conversion is not exact day; no birthday. Current game appearance193 later than old office bound189 remains a recorded calibration issue, not silently repaired."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "exact_birth_not_established"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10164,
@@ -727,10 +912,10 @@
         "precision": "source_chronology_conflict"
       },
       "proposed_appear": null,
-      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate.",
-      "review_status": "primary_text_corroborated",
+      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
+      "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "exact_birth_not_established"
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -738,8 +923,67 @@
           "citation": "Eusebius HE VI.3.2; VI.26; VI.35",
           "url": "https://www.newadvent.org/fathers/250106.htm",
           "finding": "Heraclas is already Origen’s pupil in the early Severan persecution; he succeeds Demetrius. VI.35 dates his death to Philip’s third year (246) after 16 years in office, whereas the received Alexandrian succession gives 248. Preserve this chronological contradiction; birth 193 is an unsupported game estimate."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VI.3.1–3; VI.26/35 complete chapters",
+          "urls": [
+            "https://www.newadvent.org/fathers/250106.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607"
+          },
+          "finding": "Origen pupil Heraclas, brother of Plutarch, succeeds Demetrius as Alexandria bishop and dies after16years in Philip third year. Same named succession proves one core persona despite dating inconsistency.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve previous historical death alternatives246/248. VI.3.3 eighteenth year is Origens age, not Heraclas age. Birth193 is unsupported. No choice between chronologies and no new game adjustment.",
+          "current_game_dates": {
+            "birth": 193,
+            "appear": 209,
+            "death": 248
+          },
+          "estimated_game_years": {
+            "birth": 193,
+            "appear": 209,
+            "death": 248
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": {
+            "year_alternatives": [
+              246,
+              248
+            ],
+            "relation": "disputed",
+            "precision": "source_chronology_conflict"
+          },
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10164 Pope Heraclas of Alexandria",
+            "source_unit": "HE VI.3.1–3; VI.26/35 complete chapters",
+            "short_original": "Heraclas, a brother of Plutarch",
+            "identity_bridge": "Origen pupil Heraclas, brother of Plutarch, succeeds Demetrius as Alexandria bishop and dies after16years in Philip third year. Same named succession proves one core persona despite dating inconsistency.",
+            "date_handling": "Preserve previous historical death alternatives246/248. VI.3.3 eighteenth year is Origens age, not Heraclas age. Birth193 is unsupported. No choice between chronologies and no new game adjustment.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve previous historical death alternatives246/248. VI.3.3 eighteenth year is Origens age, not Heraclas age. Birth193 is unsupported. No choice between chronologies and no new game adjustment."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "exact_birth_not_established"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10253,
@@ -2199,10 +2443,10 @@
         "basis": "Gallienus twelfth regnal year, not an exact modern calendar date."
       },
       "proposed_appear": null,
-      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate.",
-      "review_status": "primary_text_corroborated",
+      "appearance_basis": "Unknown first career date; preserve existing game appearance as an estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
+      "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "exact_birth_not_established"
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -2210,8 +2454,68 @@
           "citation": "Eusebius HE VII.28.3",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Dionysius of Alexandria dies in Gallienus year 12, after 17 years as bishop. Regnal conversion gives 264/265 depending on accession-year counting; exact birthday is absent."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VII.28 complete chapter, especially28.3",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740"
+          },
+          "finding": "Dionysius bishop of Alexandria dies after17episcopal years and is succeeded by Maximus; identifies input Alexandrian Dionysius, not Roman bishop addressed in30.2.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve old264–265 contextual death range; Gallienus regnal year conversion not exact modern date. Seventeen is tenure, not age; no calendar birth or first career established.",
+          "current_game_dates": {
+            "birth": 209,
+            "appear": 225,
+            "death": 264
+          },
+          "estimated_game_years": {
+            "birth": 209,
+            "appear": 225,
+            "death": 264
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": {
+            "year_range": [
+              264,
+              265
+            ],
+            "relation": "range",
+            "precision": "contextual_interval",
+            "basis": "Gallienus twelfth regnal year, not an exact modern calendar date."
+          },
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10192 Pope Dionysius of Alexandria",
+            "source_unit": "HE VII.28 complete chapter, especially28.3",
+            "short_original": "Dionysius died in the twelfth year ... Gallienus",
+            "identity_bridge": "Dionysius bishop of Alexandria dies after17episcopal years and is succeeded by Maximus; identifies input Alexandrian Dionysius, not Roman bishop addressed in30.2.",
+            "date_handling": "Preserve old264–265 contextual death range; Gallienus regnal year conversion not exact modern date. Seventeen is tenure, not age; no calendar birth or first career established.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve old264–265 contextual death range; Gallienus regnal year conversion not exact modern date. Seventeen is tenure, not age; no calendar birth or first career established."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "exact_birth_not_established"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 9520,
@@ -2448,19 +2752,71 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VII.14; VII.28",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Athenodorus is Gregory’s brother and bishop in Pontus; attends councils concerning Paul of Samosata. No birth, death, or first appointment date."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VII.14; VII.28.1–3, complete chapters",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740"
+          },
+          "finding": "Gregorys brother, Origens pupil and bishop in Pontus occurs again among the bishops examining Paul of Samosata; matching kinship and region establish the input persona.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. No personal age, birth, death or first appointment. Council context is not a lifespan.",
+          "current_game_dates": {
+            "birth": 246,
+            "appear": 262,
+            "death": 276
+          },
+          "estimated_game_years": {
+            "birth": 246,
+            "appear": 262,
+            "death": 276
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "9974 Athenodorus of Neocaesarea",
+            "source_unit": "HE VII.14; VII.28.1–3, complete chapters",
+            "short_original": "Gregory and his brother Athenodorus",
+            "identity_bridge": "Gregorys brother, Origens pupil and bishop in Pontus occurs again among the bishops examining Paul of Samosata; matching kinship and region establish the input persona.",
+            "date_handling": "No personal age, birth, death or first appointment. Council context is not a lifespan.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. No personal age, birth, death or first appointment. Council context is not a lifespan."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10205,
@@ -2470,19 +2826,71 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VII.24",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Nepos wrote the Refutation of Allegorists; Dionysius explicitly says Nepos had already died when writing On the Promises. This is a relative death bound, not death263."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VII.24, complete chapter",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740"
+          },
+          "finding": "Nepos is Egyptian bishop and author of Refutation of Allegorists. Dionysius praises his psalmody while disputing his millennium interpretation, and explicitly says he is already dead.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Relative death before Dionysius writes On the Promises is not calendrical death263; Coracion is another person. Three days describe the conference, not age.",
+          "current_game_dates": {
+            "birth": 232,
+            "appear": 248,
+            "death": 263
+          },
+          "estimated_game_years": {
+            "birth": 232,
+            "appear": 248,
+            "death": 263
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10205 Nepos (bishop)",
+            "source_unit": "HE VII.24, complete chapter",
+            "short_original": "he has gone to rest before us",
+            "identity_bridge": "Nepos is Egyptian bishop and author of Refutation of Allegorists. Dionysius praises his psalmody while disputing his millennium interpretation, and explicitly says he is already dead.",
+            "date_handling": "Relative death before Dionysius writes On the Promises is not calendrical death263; Coracion is another person. Three days describe the conference, not age.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Relative death before Dionysius writes On the Promises is not calendrical death263; Coracion is another person. Three days describe the conference, not age."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10206,
@@ -2539,19 +2947,71 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VI.46.2",
           "url": "https://www.newadvent.org/fathers/250106.htm",
           "finding": "Colon (rendered Conon in McGiffert) is bishop of Hermopolis and receives Dionysius’s private letter On Repentance. No birth, death or precise first office year."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VI.46, complete chapter",
+          "urls": [
+            "https://www.newadvent.org/fathers/250106.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607"
+          },
+          "finding": "Dionysius sends a private On Repentance letter to the bishop of Hermopolis; input Colon and edition Conon matched by unique see and letter, preserving the printed name difference.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. No exact personal dates or first office. Do not silently present Colon spelling as what this English edition prints.",
+          "current_game_dates": {
+            "birth": 233,
+            "appear": 249,
+            "death": 263
+          },
+          "estimated_game_years": {
+            "birth": 233,
+            "appear": 249,
+            "death": 263
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10210 Colon of Hermopolis",
+            "source_unit": "HE VI.46, complete chapter",
+            "short_original": "Conon, bishop of the parish of Hermopolis",
+            "identity_bridge": "Dionysius sends a private On Repentance letter to the bishop of Hermopolis; input Colon and edition Conon matched by unique see and letter, preserving the printed name difference.",
+            "date_handling": "No exact personal dates or first office. Do not silently present Colon spelling as what this English edition prints.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. No exact personal dates or first office. Do not silently present Colon spelling as what this English edition prints."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10212,
@@ -2561,19 +3021,73 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VII.11.3; VII.11.24",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Chaeremon is a deacon accompanying Dionysius before Aemilianus and is explicitly among survivors of plague. Not the bishop Chaeremon who disappears with his wife inVI42. No birth239 or death269 supplied."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VII.11 complete chapter; VI.42 complete comparison",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt",
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740",
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607"
+          },
+          "finding": "Chaeremon accompanies Dionysius before Aemilianus as deacon and is explicitly among the plague survivors. VI.42 instead describes the elderly bishop of Nilus fleeing with his wife and never found; the office, narrative and companions distinguish these source personas.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Surviving pestilence is not death269; no birth239 or initial career year supplied. Do not equate this deacon with the Nilus bishop based on name alone.",
+          "current_game_dates": {
+            "birth": 239,
+            "appear": 255,
+            "death": 269
+          },
+          "estimated_game_years": {
+            "birth": 239,
+            "appear": 255,
+            "death": 269
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10212 Chaeremon (deacon)",
+            "source_unit": "HE VII.11 complete chapter; VI.42 complete comparison",
+            "short_original": "the deacons ... Chæremon ... have survived",
+            "identity_bridge": "Chaeremon accompanies Dionysius before Aemilianus as deacon and is explicitly among the plague survivors. VI.42 instead describes the elderly bishop of Nilus fleeing with his wife and never found; the office, narrative and companions distinguish these source personas.",
+            "date_handling": "Surviving pestilence is not death269; no birth239 or initial career year supplied. Do not equate this deacon with the Nilus bishop based on name alone.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Surviving pestilence is not death269; no birth239 or initial career year supplied. Do not equate this deacon with the Nilus bishop based on name alone."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10213,
@@ -2583,19 +3097,71 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VII.11.1–2; VII.11.18–19",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Germanus is a contemporary bishop criticizing Dionysius and boasting of confessions. These charges give neither death nor birth dates."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VII.11 complete chapter, especially1–2/18–19",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740"
+          },
+          "finding": "Germanus is the bishop criticizing Dionysius, who answers his charges and boasting of many confessions; this matches the sole input even though its internal key has eus_06.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Dionysius suffering under Decius/Valerian is not proof Germanus suffered identically, nor a birth/death statement. Internal key numbering is not a source citation.",
+          "current_game_dates": {
+            "birth": 239,
+            "appear": 255,
+            "death": 269
+          },
+          "estimated_game_years": {
+            "birth": 239,
+            "appear": 255,
+            "death": 269
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10213 Germanus (bishop)",
+            "source_unit": "HE VII.11 complete chapter, especially1–2/18–19",
+            "short_original": "Germanus ... a contemporary bishop",
+            "identity_bridge": "Germanus is the bishop criticizing Dionysius, who answers his charges and boasting of many confessions; this matches the sole input even though its internal key has eus_06.",
+            "date_handling": "Dionysius suffering under Decius/Valerian is not proof Germanus suffered identically, nor a birth/death statement. Internal key numbering is not a source citation.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Dionysius suffering under Decius/Valerian is not proof Germanus suffered identically, nor a birth/death statement. Internal key numbering is not a source citation."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 10240,
@@ -2630,19 +3196,73 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VI.46.3; VII.5; VII.28; VII.30",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Helenus is explicitly bishop of Tarsus, involved in the baptism controversy and councils against Paul. No exact birth/death or first office year."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VI.46 complete; VII.5/28 complete; VII.30.1–5 letter opening",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt",
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607",
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740"
+          },
+          "finding": "Helenus named bishop of Tarsus in invitation, baptism controversy and anti-Paul council. VII.30 letter opening again names Helenus; identical see and council network support the named core.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Only VII.30 opening1–5 re-audited here, not whole chapter. No birth, death or first office; Firmilianus dies in30.5, not Helenus.",
+          "current_game_dates": {
+            "birth": 233,
+            "appear": 249,
+            "death": 276
+          },
+          "estimated_game_years": {
+            "birth": 233,
+            "appear": 249,
+            "death": 276
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "10577 Helenus of Tarsus",
+            "source_unit": "HE VI.46 complete; VII.5/28 complete; VII.30.1–5 letter opening",
+            "short_original": "Helenus in Tarsus",
+            "identity_bridge": "Helenus named bishop of Tarsus in invitation, baptism controversy and anti-Paul council. VII.30 letter opening again names Helenus; identical see and council network support the named core.",
+            "date_handling": "Only VII.30 opening1–5 re-audited here, not whole chapter. No birth, death or first office; Firmilianus dies in30.5, not Helenus.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Only VII.30 opening1–5 re-audited here, not whole chapter. No birth, death or first office; Firmilianus dies in30.5, not Helenus."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 11520,
@@ -2652,19 +3272,71 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VI.43.20",
           "url": "https://www.newadvent.org/fathers/250106.htm",
           "finding": "Cornelius says Moses, a Roman confessor, has recently died as a martyr and refused communion with Novatian while alive. It does not state calendar birth206 or exact death251."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VI.43.18–22, complete closing Cornelius letter unit",
+          "urls": [
+            "https://www.newadvent.org/fathers/250106.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group32_read_units\\eusebius6.txt": "52c2820853463ca4b839c530d44ffc472c6870ac74ee31cb26fee729001df607"
+          },
+          "finding": "Cornelius names Moses who has recently died a martyr and while alive refused communion with Novatian and his five separated presbyters; Rome and controversy identify the sole input.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Recently is relative to letter; no exact death251 or birth206. Five counts the separated presbyters, not years.",
+          "current_game_dates": {
+            "birth": 206,
+            "appear": 222,
+            "death": 251
+          },
+          "estimated_game_years": {
+            "birth": 206,
+            "appear": 222,
+            "death": 251
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "11520 Moses (Roman confessor)",
+            "source_unit": "HE VI.43.18–22, complete closing Cornelius letter unit",
+            "short_original": "Moses also, the blessed martyr",
+            "identity_bridge": "Cornelius names Moses who has recently died a martyr and while alive refused communion with Novatian and his five separated presbyters; Rome and controversy identify the sole input.",
+            "date_handling": "Recently is relative to letter; no exact death251 or birth206. Five counts the separated presbyters, not years.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Recently is relative to letter; no exact death251 or birth206. Five counts the separated presbyters, not years."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 11547,
@@ -2698,19 +3370,71 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "First career not dated in checked passage; retain original game estimate.",
+      "appearance_basis": "First career not dated in checked passage; retain original game estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "evidence": [
         {
           "kind": "individually_read_primary_passage",
           "citation": "Eusebius HE VII.13.2",
           "url": "https://www.newadvent.org/fathers/250107.htm",
           "finding": "Gallienus’s rescript instructs Aurelius Cyrenius, translated Quirinius in another edition, to observe the order. No birth or death; title is administrative, not an attested lifespan."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "HE VII.13 complete rescript and introduction",
+          "urls": [
+            "https://www.newadvent.org/fathers/250107.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\eusebius7.txt": "0b9762b4adc141c5bf73c9a34709d0817f28eaee69b511601234067289990740"
+          },
+          "finding": "Gallienus orders the named administrator to observe the rescript restoring Christian worship; input Quirinius corresponds to Cyrenius in this edition through exact rescript role and imperial context.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve translated name/title wording; not proof of a specific treasury office beyond this edition. No lifespan or first appointment year.",
+          "current_game_dates": {
+            "birth": 238,
+            "appear": 254,
+            "death": 269
+          },
+          "estimated_game_years": {
+            "birth": 238,
+            "appear": 254,
+            "death": 269
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "11652 Aurelius Quirinius",
+            "source_unit": "HE VII.13 complete rescript and introduction",
+            "short_original": "Aurelius Cyrenius ... chief administrator of affairs",
+            "identity_bridge": "Gallienus orders the named administrator to observe the rescript restoring Christian worship; input Quirinius corresponds to Cyrenius in this edition through exact rescript role and imperial context.",
+            "date_handling": "Preserve translated name/title wording; not proof of a specific treasury office beyond this edition. No lifespan or first appointment year.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates not established by the cited subject passages."
-      ]
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. Preserve translated name/title wording; not proof of a specific treasury office beyond this edition. No lifespan or first appointment year."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates not established by the cited subject passages."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 12333,
@@ -3450,10 +4174,10 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "Table gives an office attestation, not initial career; preserve original game appearance estimate.",
+      "appearance_basis": "Table gives an office attestation, not initial career; preserve original game appearance estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates absent in this table."
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -3465,11 +4189,63 @@
             282
           ],
           "finding": "Urban prefect. No birth, death, age or initial career year in this row."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "Chronography354 part10, complete282 row with281–284 context",
+          "urls": [
+            "https://www.tertullian.org/fathers/chronography_of_354_10_prefects_of_rome.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\chron354prefects.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\chron354prefects.txt": "b8acc972dbdbc5e40d10c3914fe360aae2a45495a1c0c618b849f87d2317ee88"
+          },
+          "finding": "Full named urban prefect is in the prefect column of282 row, distinct from consuls Probus and Victorinus in adjacent column.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. 282 is table activity year, not birth/death or start of all career. No age minimum is supplied.",
+          "current_game_dates": {
+            "birth": 260,
+            "appear": 276,
+            "death": 290
+          },
+          "estimated_game_years": {
+            "birth": 260,
+            "appear": 276,
+            "death": 290
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "11805 Pomponius Victorianus",
+            "source_unit": "Chronography354 part10, complete282 row with281–284 context",
+            "short_original": "Probo V et Victorino Pomponius Victorianus praefectus urbis",
+            "identity_bridge": "Full named urban prefect is in the prefect column of282 row, distinct from consuls Probus and Victorinus in adjacent column.",
+            "date_handling": "282 is table activity year, not birth/death or start of all career. No age minimum is supplied.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "attested_activity_years": [
         282
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. 282 is table activity year, not birth/death or start of all career. No age minimum is supplied."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates absent in this table."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 11818,
@@ -3479,10 +4255,10 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "Table gives an office attestation, not initial career; preserve original game appearance estimate.",
+      "appearance_basis": "Table gives an office attestation, not initial career; preserve original game appearance estimate. Named-person core completion only; game dates and prior chronological decisions unchanged.",
       "review_status": "source_checked_dates_unknown",
       "unresolved": [
-        "Exact life dates absent in this table."
+        "exact_personal_life_and_initial_career_dates_unknown_or_previous_regnal_chronology_conflict_retained"
       ],
       "evidence": [
         {
@@ -3494,11 +4270,63 @@
             283
           ],
           "finding": "Urban prefect. No birth, death, age or initial career year in this row."
+        },
+        {
+          "kind": "previous_original_reaudit_state_completion",
+          "citation": "Chronography354 part10, complete283 row with282–284 context",
+          "urls": [
+            "https://www.tertullian.org/fathers/chronography_of_354_10_prefects_of_rome.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\chron354prefects.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group33_read_units\\chron354prefects.txt": "b8acc972dbdbc5e40d10c3914fe360aae2a45495a1c0c618b849f87d2317ee88"
+          },
+          "finding": "Full named urban prefect is in283 prefect column, distinct from consuls Carus and Carinus; following284 row gives Ceionius Varus.",
+          "qualification": "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. 283 is office attestation, not exact personal dates or first career; no age is printed.",
+          "current_game_dates": {
+            "birth": 261,
+            "appear": 277,
+            "death": 291
+          },
+          "estimated_game_years": {
+            "birth": 261,
+            "appear": 277,
+            "death": 291
+          },
+          "previous_historical_birth_preserved_by_helper": null,
+          "previous_historical_death_preserved_by_helper": null,
+          "previous_proposed_appear_preserved_by_helper": null,
+          "verification_steps": {
+            "person": "11818 Titucius Roburrus",
+            "source_unit": "Chronography354 part10, complete283 row with282–284 context",
+            "short_original": "Caro et Carino Titucius Roburrus praefectus urbis",
+            "identity_bridge": "Full named urban prefect is in283 prefect column, distinct from consuls Carus and Carinus; following284 row gives Ceionius Varus.",
+            "date_handling": "283 is office attestation, not exact personal dates or first career; no age is printed.",
+            "remaining_gap": "Exact birth/death/initial career absent or old regnal chronology disputed; these do not create an unresolved named-person identity."
+          }
         }
       ],
       "attested_activity_years": [
         283
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_identities_all_adjudicated": true,
+      "identity_status": "previously_read_single_source_named_core_reaudited_dates_separate",
+      "source_limitations": [
+        "Old personal original re-audit and missing-state repair only; not new original acquisition. Core source persona completed; unknown dates remain separate. Existing evidence and all limitations retained. Published text/edition read, no physical inscription autopsy or full tradition exhaustion claimed. 283 is office attestation, not exact personal dates or first career; no age is printed."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_33_primary_only",
+          "candidate_sha256": "e41d2b8abae1b76b434a734ed75e0c1d8c83b7210c2ff3d6c73cd17b1760b564",
+          "prior_unresolved": [
+            "Exact life dates absent in this table."
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_33.json"
     },
     {
       "id": 11868,

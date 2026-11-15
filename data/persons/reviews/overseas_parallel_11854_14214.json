@@ -16569,7 +16569,7 @@
       "proposed_appear": null,
       "duplicate_of": null,
       "source_identities_all_adjudicated": false,
-      "identity_status": "multiple_unbridged_source_identities",
+      "identity_status": "specific_original_objects_overlap_Tiberius_core_modern_Titus_expansion_unproved_Aurelius215_bridge_still_open",
       "review_status": "identity_conflict",
       "review_batch": "overseas11854_batch48_20261111",
       "appearance_basis": "完整来源所见为未桥接的多个本人身份；活动日期在对应分支隔离，保留游戏估算。",
@@ -16577,7 +16577,10 @@
         "whole_row_identity_unresolved",
         "exact_birth_unknown",
         "exact_death_unknown",
-        "true_first_career_unknown"
+        "true_first_career_unknown",
+        "201_Titus_modern_heading_vs_published_Ti_Tiberius_reading_requires_cited_book_or_image_check",
+        "215_AureliusIuliusBalbillus_to199_201_TiIuliusBalbillus_direct_bridge_still_missing",
+        "review_partial_exact_object_overlap_before_any_full_source_key_redirect"
       ],
       "evidence": [
         {
@@ -16591,34 +16594,117 @@
           "citation": "Titus Julius Balbillus entire original biography revision 1184249982",
           "url": "https://en.wikipedia.org/wiki/Titus_Julius_Balbillus",
           "finding": "两QID全文生平均已读且互称related、another priest，不同praenomen祭司不能因共同Julia Domna和同祠合并。Tiberius215-04-04、Titus201-01-15/20献铭属于活动日期，不是生卒；after this no more known不是卒。未读Halsberghe原书/铭石，不冒称原铭已读。"
+        },
+        {
+          "kind": "new_individually_read_complete_original_epigraphic_units_correcting_modern_source_scope",
+          "citation": "CILVI708,1027,1603,2129,2130 BOTH units,2269,2270: seven complete records; current EDCS editions",
+          "short_original_evidence": "VI1603/2129 Ti(berius)Iul(ius)Balbillus;VI2269 Ti(berio)Iul<i=L>oBalbillo;VI2130 Aurel(ius)IuliusBalbillus",
+          "read_witnesses": [
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\17300850.json",
+              "source_sha256": "4599674ec4e246f5565d9471ae8f9bc3b9758ec00bfd23dd05de3527e826ef7d",
+              "url": "https://edcs.hist.uzh.ch/data/monument/173/17300850.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\17400025.json",
+              "source_sha256": "e27f52c649e9b45187d4d0957c7808b65c65806903d90871b9f372afce1864cd",
+              "url": "https://edcs.hist.uzh.ch/data/monument/174/17400025.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\18100414.json",
+              "source_sha256": "ff13e3b00889109e03f1db9a4291a3e63106384bd6a1e302cfc277c7db60b24e",
+              "url": "https://edcs.hist.uzh.ch/data/monument/181/18100414.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\18100846.json",
+              "source_sha256": "a1859229aa96381f577b3b3e6096af74c202992d28915806b67d5755b7b6843d",
+              "url": "https://edcs.hist.uzh.ch/data/monument/181/18100846.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\18100847.json",
+              "source_sha256": "10e0287b96bb1ab99deff96ae944f5e38ba6ccc30b6b2d1bfc45ff4f78cb7598",
+              "url": "https://edcs.hist.uzh.ch/data/monument/181/18100847.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\18200020.json",
+              "source_sha256": "885aee1a0bb4134aa3c568092a1528abc5047ba470fced23b5de06c28ac60791",
+              "url": "https://edcs.hist.uzh.ch/data/monument/182/18200020.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group31\\18200021.json",
+              "source_sha256": "589e889d1081d1578baa5e470c832f76c950013434ae1ab6986bed2327484209",
+              "url": "https://edcs.hist.uzh.ch/data/monument/182/18200021.json"
+            }
+          ],
+          "finding": "New complete VI1603 names the dedicator Ti(berius)IuliusBalbillus, sacerdosSolis, honoring annona-prefect ClaudiusJulianus, under the Fabianus/Mucianus consular pair andXIIIKalFeb. New complete VI2129 again names Ti(berius)IuliusBalbillus, sacerdosSolis, honoring chiefVestal NumisiaMaximilla under the SAME consular pair on IdJan. New complete VI2269 explicitly honors Ti(berio)IulioBalbillo, sacerdosSolisElagabali, by his freedman EUDAEMON. These are exactly the THREE distinctive events the owned Q15982239 modern TITUS article attributes to Titus (Jan15/Jan20,201 and Eudemon patron). Their currently published primary transcriptions instead explicitly read TI/TIBERIUS. New VI2270 additionally honors TiIulBalbillus on KalJan under AnullinusII/Fronto;VI1027 has the same199 consular pair and bare IuliusBalbillus dedicating to Severus. Thus the two modern QID scopes concretely overlap a named TIBERIUS priest-core; the prior Titus-vs-Tiberius split cannot be retained as if independently proved by these objects. New complete VI2130 instead names AURELIUSIULIUSBALBILLUS honoring TerentiaFlavola and dates its second face under LaetusII/Cerialis (catalogue215). That extra name/role correspondence is compatible with, but does not expressly prove, the modern article claim that the Tiberius priest added Aurelius after212. The remaining whole-source issue is now specifically this215 Aurelius link plus the modern two-article construction, rather than an assumed separate Titus201 attestation.",
+          "qualification": "Critical boundary: the readings/expansions TI/TIBERIUS are those of the actual complete EDCS original-text publication; no stone photograph or independent printed-CIL scan was inspected. The cited Halsberghe53–55/78 and Wacher697 books have not independently been read here, so the exact origin of the modern TITUS heading and the two-priest/kinship assertion remains a bibliographic gap. This candidate does not prove that no other TitusBalbillus ever existed; it says these specifically cited201/benefactor objects do not independently attest TITUS. The215 text literally has AureliusIulius, not TiIulius; adding Aurelius because of the212 citizenship grant is an interpretation, not stated on this object, and does not itself prove the same man or a father-son/adoption link. Shared uncommon name, Roman cult and city support overlap but are not silently promoted to an unconditional whole-row duplicate redirect. VI708 merely says IuliusBalbillus and does not repair the215 praenomen question. No inscription read establishes descent from AntiochusI, kinship to JuliaDomna or that the two modern article subjects are relatives. EDCS199/201/215 are catalogue conversions of the printed consular/day formulas: no new independent Fasti/calendar collation was performed. KalJan,IdJan,XIIIKalFeb andpridNonApr are dates of honors/dedications, not personal birthdays or deaths, and their earliest surviving attestation is not a first appointment. Final-after-this-no-more-known is not death. All old evidence/limits and unknown endpoints remain; no game change or full duplicate_of is proposed.",
+          "old_evidence_preserved": true,
+          "accounting": "One roster target newly read through seven complete inscription records (VI2130 has two units); positive partial-source overlap1, whole identity closure0. Modern page rereads and search hits are not new primary targets."
         }
       ],
       "source_identity_partitions": [
         {
           "keys": [
-            "wk:Q15982238"
-          ],
-          "identity": "Tiberius/Aurelius Julius Balbillus，215献铭祭司",
-          "historical_birth": null,
-          "historical_death": null,
-          "attested_activity_years": [
-            215
-          ],
-          "appearance_upper_bound": 215
-        },
-        {
-          "keys": [
+            "wk:Q15982238",
             "wk:Q15982239"
           ],
-          "identity": "Titus Julius Balbillus，201献铭祭司",
+          "identity": "Overlapping Roman Sol/Elagabalus priest source scopes: named Ti/TiberiusIuliusBalbillus199/201, modern Titus heading not supported by its listed original objects; AureliusIuliusBalbillus215 remains an internally unbridged name/career alternative",
           "historical_birth": null,
           "historical_death": null,
-          "attested_activity_years": [
-            201
+          "source_scope_notes": {
+            "wk:Q15982238": "Owned Tiberius article: already calls him Julius/AureliusJulius and assigns215TerentiaFlavola honor; new originals additionally establish Ti priest199/201 but215Aurelius equivalence remains inferred.",
+            "wk:Q15982239": "Owned Titus article: its NumisiaMaximilla201, ClaudiusJulianus201 and Eudemon patron events exactly match newly read objects currently printedTi/Tiberius. Do not retain the heading alone as proof of a separate Titus priest."
+          },
+          "internal_hypotheses": [
+            "One Tiberius priest with later added Aurelius name and modern mistaken article split",
+            "Ti199/201 and Aurelius215 could be separate individuals; direct bridge still required"
           ],
-          "appearance_upper_bound": 201
+          "positive_source_overlap_basis": "Same full publishedTi name, priest-title, dedicatees, consular/day dates and freedmanEud(a)emon in the concrete objects behind the Titus article"
         }
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_limitations": [
+        "Critical boundary: the readings/expansions TI/TIBERIUS are those of the actual complete EDCS original-text publication; no stone photograph or independent printed-CIL scan was inspected. The cited Halsberghe53–55/78 and Wacher697 books have not independently been read here, so the exact origin of the modern TITUS heading and the two-priest/kinship assertion remains a bibliographic gap. This candidate does not prove that no other TitusBalbillus ever existed; it says these specifically cited201/benefactor objects do not independently attest TITUS. The215 text literally has AureliusIulius, not TiIulius; adding Aurelius because of the212 citizenship grant is an interpretation, not stated on this object, and does not itself prove the same man or a father-son/adoption link. Shared uncommon name, Roman cult and city support overlap but are not silently promoted to an unconditional whole-row duplicate redirect. VI708 merely says IuliusBalbillus and does not repair the215 praenomen question. No inscription read establishes descent from AntiochusI, kinship to JuliaDomna or that the two modern article subjects are relatives. EDCS199/201/215 are catalogue conversions of the printed consular/day formulas: no new independent Fasti/calendar collation was performed. KalJan,IdJan,XIIIKalFeb andpridNonApr are dates of honors/dedications, not personal birthdays or deaths, and their earliest surviving attestation is not a first appointment. Final-after-this-no-more-known is not death. All old evidence/limits and unknown endpoints remain; no game change or full duplicate_of is proposed."
+      ],
+      "identity_split_recommendation": {
+        "action": "review_partial_source_overlap_and_modern_praenomen_expansion_before_any_whole_redirect",
+        "groups": [
+          {
+            "keys": [
+              "wk:Q15982238",
+              "wk:Q15982239"
+            ],
+            "identity": "Overlapping Roman Sol/Elagabalus priest source scopes: named Ti/TiberiusIuliusBalbillus199/201, modern Titus heading not supported by its listed original objects; AureliusIuliusBalbillus215 remains an internally unbridged name/career alternative",
+            "historical_birth": null,
+            "historical_death": null,
+            "source_scope_notes": {
+              "wk:Q15982238": "Owned Tiberius article: already calls him Julius/AureliusJulius and assigns215TerentiaFlavola honor; new originals additionally establish Ti priest199/201 but215Aurelius equivalence remains inferred.",
+              "wk:Q15982239": "Owned Titus article: its NumisiaMaximilla201, ClaudiusJulianus201 and Eudemon patron events exactly match newly read objects currently printedTi/Tiberius. Do not retain the heading alone as proof of a separate Titus priest."
+            },
+            "internal_hypotheses": [
+              "One Tiberius priest with later added Aurelius name and modern mistaken article split",
+              "Ti199/201 and Aurelius215 could be separate individuals; direct bridge still required"
+            ],
+            "positive_source_overlap_basis": "Same full publishedTi name, priest-title, dedicatees, consular/day dates and freedmanEud(a)emon in the concrete objects behind the Titus article"
+          }
+        ],
+        "confidence": "positive_exact_object_event_overlap_not_unconditional_biological_identity_of215Aurelius",
+        "reason": "New complete VI1603 names the dedicator Ti(berius)IuliusBalbillus, sacerdosSolis, honoring annona-prefect ClaudiusJulianus, under the Fabianus/Mucianus consular pair andXIIIKalFeb. New complete VI2129 again names Ti(berius)IuliusBalbillus, sacerdosSolis, honoring chiefVestal NumisiaMaximilla under the SAME consular pair on IdJan. New complete VI2269 explicitly honors Ti(berio)IulioBalbillo, sacerdosSolisElagabali, by his freedman EUDAEMON. These are exactly the THREE distinctive events the owned Q15982239 modern TITUS article attributes to Titus (Jan15/Jan20,201 and Eudemon patron). Their currently published primary transcriptions instead explicitly read TI/TIBERIUS. New VI2270 additionally honors TiIulBalbillus on KalJan under AnullinusII/Fronto;VI1027 has the same199 consular pair and bare IuliusBalbillus dedicating to Severus. Thus the two modern QID scopes concretely overlap a named TIBERIUS priest-core; the prior Titus-vs-Tiberius split cannot be retained as if independently proved by these objects. New complete VI2130 instead names AURELIUSIULIUSBALBILLUS honoring TerentiaFlavola and dates its second face under LaetusII/Cerialis (catalogue215). That extra name/role correspondence is compatible with, but does not expressly prove, the modern article claim that the Tiberius priest added Aurelius after212. The remaining whole-source issue is now specifically this215 Aurelius link plus the modern two-article construction, rather than an assumed separate Titus201 attestation.",
+        "qualification": "Critical boundary: the readings/expansions TI/TIBERIUS are those of the actual complete EDCS original-text publication; no stone photograph or independent printed-CIL scan was inspected. The cited Halsberghe53–55/78 and Wacher697 books have not independently been read here, so the exact origin of the modern TITUS heading and the two-priest/kinship assertion remains a bibliographic gap. This candidate does not prove that no other TitusBalbillus ever existed; it says these specifically cited201/benefactor objects do not independently attest TITUS. The215 text literally has AureliusIulius, not TiIulius; adding Aurelius because of the212 citizenship grant is an interpretation, not stated on this object, and does not itself prove the same man or a father-son/adoption link. Shared uncommon name, Roman cult and city support overlap but are not silently promoted to an unconditional whole-row duplicate redirect. VI708 merely says IuliusBalbillus and does not repair the215 praenomen question. No inscription read establishes descent from AntiochusI, kinship to JuliaDomna or that the two modern article subjects are relatives. EDCS199/201/215 are catalogue conversions of the printed consular/day formulas: no new independent Fasti/calendar collation was performed. KalJan,IdJan,XIIIKalFeb andpridNonApr are dates of honors/dedications, not personal birthdays or deaths, and their earliest surviving attestation is not a first appointment. Final-after-this-no-more-known is not death. All old evidence/limits and unknown endpoints remain; no game change or full duplicate_of is proposed.",
+        "apply_to_game": false
+      },
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "high_group_handoff_31.json",
+          "prior_unresolved": [
+            "whole_row_identity_unresolved",
+            "exact_birth_unknown",
+            "exact_death_unknown",
+            "true_first_career_unknown"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "high_group_handoff_31.json"
     },
     {
       "id": 12376,

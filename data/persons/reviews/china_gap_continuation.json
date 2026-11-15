@@ -130601,6 +130601,251 @@
       }
     },
     {
+      "id": 7008,
+      "keys": [
+        "js:js_10:269:熊遠",
+        "js:js_11:0:熊遠",
+        "tj:tj_12:466:熊遠",
+        "tj:tj_13:251:熊遠",
+        "cbdb:413456"
+      ],
+      "name": "熊遠",
+      "historical_birth": null,
+      "historical_death": null,
+      "proposed_appear": null,
+      "appearance_basis": "retain game estimate pending a justified first career year; source first mention is not initial service",
+      "duplicate_of": null,
+      "identity_status": "new_Qianlong1792_Shaoxing_Minghuan_biography_core_bridge_read_original1424_CBDB_citation_unretrieved",
+      "evidence": [
+        {
+          "source_key": "js:js_10:269:熊遠",
+          "citation": "晉書·卷七十一 熊遠傳",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_10.txt",
+          "offset": 37485,
+          "excerpt": "临南服，詹莅西州。政刑克举，威惠兼修。应嗟运促，甘毙疑留。望之徇义，处死为易。惟子惟臣，名节斯寄。钟刘入仕，忠贞攸履。竭其股肱，继之以死。 \n列传第四十一 \n　　　　　　　 孙惠　熊远　王鉴　陈𫖳　高崧 \n　　孙惠，字德施，吴国富阳人，吴豫章太守贲曾孙也。父祖并仕吴。惠口讷，好学有才识，州辟不就，寓居萧沛之间。永宁初，赴齐王冏义，讨赵王伦，以功封晋兴县侯，辟大司马户曹掾，转东曹属。冏骄矜僭侈，天下失望。惠献言于冏，讽以五难、四不可，劝令归籓，辞甚切至。冏不纳。惠惧罪，辞疾去。顷之，冏果败。成都王颖荐惠为大将军参军、领奋威将军、白沙督。是时，颖将征长沙王乂，以陆机为前锋都督。惠与机同乡里，忧其致祸，劝机让都督于王粹。及机兄弟被戮，惠甚伤恨之。时惠又擅杀颖牙门将梁俊，惧罪，因改姓名以遁。 \n　　后东海王越举兵下邳，惠乃诡称南岳逸士秦秘之，以书干越曰： \n　　天祸晋国，遘兹厄运。历观危亡，其萌有渐，枝叶先零，根株乃毙。伏惟明公资睿哲之才，应神武之略，承衰乱之余，当倾险之运，侧身昏谗之俗，局蹐凶",
+          "normalization": "OpenCC t2s",
+          "verification": "located_passage_not_individual_date_adjudication"
+        },
+        {
+          "source_key": "js:js_10:269:熊遠",
+          "citation": "晉書·卷七十一 熊遠傳",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_10.txt",
+          "offset": 39112,
+          "excerpt": "馥败走。庐江何锐为安丰太守，惠权留郡境。锐以他事收惠下人推之，惠既非南朝所授，常虑谗间，因此大惧，遂攻杀锐，奔入蛮中。寻病卒，时年四十七。丧还乡里，朝廷明其本心，追加吊赙。 \n　　熊远，字孝文，豫章南昌人也。祖翘，尝为石崇苍头，而性廉直，有士风。黄门郎潘岳见而称异，劝崇免之，乃还乡里。远有志尚，县召为功曹，不起，强与衣帻，扶之使谒。十余日荐于郡，由是辟为文学掾。远曰：“辞大不辞小也。”固请留县。太守察远孝廉。属太守讨氐羌，远遂不行，送至陇右而还。后太守会稽夏静辟为功曹。及静去职，远送至会稽以归。州辟主簿、别驾，举秀才，除监军华轶司马、领武昌太守、宁远护军。 \n　　元帝作相，引为主簿。时传北陵被发，帝将举哀，远上疏曰：“园陵既不亲行，承传言之者未可为定。且园陵非一，而直言侵犯，远近吊问，答之宜当有主。谓应更遣使摄河南尹案行，得审问，然后可发哀。即宜命将至洛，修复园陵，讨除逆类。昔宋杀无畏，庄王奋袂而起，衣冠相追于道，军成宋城之下。况此酷辱之大耻，臣子奔驰之日！夫修园陵，至孝也；讨逆叛，至顺",
+          "normalization": "OpenCC t2s",
+          "verification": "located_passage_not_individual_date_adjudication"
+        },
+        {
+          "source_key": "js:js_11:0:熊遠",
+          "citation": "晉書·卷七十一 熊遠傳",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_11.txt",
+          "offset": 5375,
+          "excerpt": "臣曰：昔张良拙说项氏，巧谋于沛公；孙惠沮计齐王，耀奇于东海，终而誓甘之旅炎运载昌，称狩之师金行不竞。岂遭时之会斯蹇，将谋国之道未通？迷于委质之贞，暗于所修之虑，本既颠矣，何以能终！熊远、王鉴有毗济之道，比之大厦，其榱桷之佐乎！崧之诋温，𫖳之距结，挫其劳役之策，申其汝颍之论，采郭嘉之风旨，挹朱育之余波，故桓温辍许攸之谋，解结钦王朗之迹。缉之时典，用此道欤！ \n　　赞曰：临湘游艺，才识英发。诡名违颖，陈书干越。孝文忠謇，嘉言斯践。茂高器鉴，雕章尤善。侯爵崧传，高门𫖳显。 \n列传第四十二 \n　　　　　　　 郭璞　葛洪 \n　　郭璞，字景纯，河东闻喜人也。父瑗，尚书都令史。时尚书杜预有所增损，瑗多驳正之，以公方著称。终于建平太守。璞好经术，博学有高才，而讷于言论，词赋为中兴之冠。好古文奇字，妙于阴阳算历。有郭公者，客居河东，精于卜筮，璞从之受业。公以《青囊中书》九卷与之，由是遂洞五行、天文、卜筮之术，攘灾转祸，通致无方，虽京房、管辂不能过也。璞门人赵载尝窃《青襄书》，未及读，而为火所焚。 \n　　惠",
+          "normalization": "OpenCC t2s",
+          "verification": "located_passage_not_individual_date_adjudication"
+        },
+        {
+          "source_key": "tj:tj_12:466:熊遠",
+          "citation": "資治通鑑·孝懷皇帝下建興元年",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_12.txt",
+          "offset": 26794,
+          "excerpt": "城刘隗为司直，邵陵内史广陵戴邈为军咨祭酒，参军丹杨张闿为从事中郎，尚书郎颍川钟雅为记室参军，谯国桓宣为舍人，豫章熊运为主簿，会稽孔愉为扌彖。刘隗雅习文史，善伺候睿意，故睿特亲爱之。熊远上书，以为：“军兴以来，处事不用律令，竞作新意，临事立制，朝作夕改，至于主者不敢任法，每辄关谘，非为政之体也。愚谓凡为驳议者，皆当引律令、经传，不得直以情言，无所依准，以亏旧典。若开塞随宜，权道制物，此是人君之所得行，非臣子所宜专用也。”睿以时方多事，不能从。\n　　初，范阳祖逖，少有大志，与刘琨俱为司州主簿。同寝，中夜闻鸡鸣，蹴琨觉曰：“此非恶声也！”因起舞。及渡江，左丞相睿以为军咨祭酒。逖居京口，纠合骁健，言于睿曰：“晋室之乱，非上无道而下怨叛也，由宗室争权，自相鱼肉，遂使戎狄乘隙，毒流中土。今遗民既遭残贼，人思自奋，大王诚能命将出师，使如逖者统之以复中原，郡国豪杰，必有望风响应者矣！”睿素无北伐之志，以逖为奋威将军、豫州刺史，给千人廪，布三千匹，不给铠仗，使自召募。逖将其部曲百馀家渡江，中流，击楫而誓曰",
+          "normalization": "OpenCC t2s",
+          "verification": "located_passage_not_individual_date_adjudication"
+        },
+        {
+          "source_key": "tj:tj_13:251:熊遠",
+          "citation": "資治通鑑·中宗元皇帝上太興元年",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_13.txt",
+          "offset": 17399,
+          "excerpt": "，百官皆陪列。帝命王导升御床共坐，导固辞曰：“若太阳下同万物，苍生何由仰照？”帝乃止。大赦，改元，文武增位二等。帝欲赐诸吏投刺劝进者加位一等，民投刺者皆除吏，凡二十馀万人。散骑常侍熊远曰：“陛下应天继统，率土归戴，岂独近者情重，远者情轻！不若依汉法遍赐天下爵，于恩为普，且可以息检核之烦，塞巧伪之端也。”帝不从。\n　　庚午，立王太子绍为皇太子。太子仁孝，喜文辞，善武艺，好贤礼士，容受规谏，与庾亮、温峤等为布衣之交。亮风格峻整，善谈老、庄，帝器重之，聘亮妹为太子妃。帝以贺循行太子太傅，周𫖮为少傅，庾亮以中书郎侍讲东宫。帝好刑名家，以《韩非》书赐太子。庾亮谏曰：“申、韩刻薄伤化，不足留圣心。”太子纳之。\n　　帝复遣使授慕容廆龙骧将军、大单于、昌黎公，廆辞公爵不受。廆以游邃为龙骧长史，刘翔为主簿，命邃创定府朝仪法。裴嶷言于廆曰：“晋室衰微，介居江表，威德不能及远，中原之乱，非明公不能拯也。今诸部虽各拥兵，然皆顽愚相聚，宜以渐并取，以为西讨之资。”廆曰：“君言大，非孤所及也。然君中朝名德，不以孤僻",
+          "normalization": "OpenCC t2s",
+          "verification": "located_passage_not_individual_date_adjudication"
+        },
+        {
+          "source_key": "tj:tj_13:251:熊遠",
+          "citation": "資治通鑑·中宗元皇帝上太興元年",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_13.txt",
+          "offset": 20843,
+          "excerpt": "、镇北将军刘策屯汾阴，与勒共讨准。\n　　十一月，乙卯，日夜出，高三丈。\n　　诏以王敦为荆州牧，加陶侃都督交州诸军事。敦固辞州牧，乃听为刺史。\n　　庚申，诏群公卿士各陈得失。御史中丞熊远上疏，以为：“胡贼猾夏，梓宫未返，而不能遣军进讨，一失也；群官不以仇贼未报为耻，务在调戏、酒食而已，二失也；选官用人，不料实德，惟在白望，不求才干，惟事请托，当官者以治事为俗吏，奉法为苛刻，尽礼为谄谀，从容为高妙，放荡为达士，骄蹇为简雅，三失也；世之所恶者，陆沈泥滓；时之所善者，翱翔云霄。是以万机未整，风俗伪薄。朝廷群司，以从顺为善，相违见贬，安得朝有辨争之臣，士无禄仕之志乎！古之取士，敷奏以言；今光禄不试，甚违古义。又举贤不出世族，用法不及权贵，是以才不济务，奸无所惩。若此道不改，求以救乱，难矣！”\n　　先是，帝以离乱之际，欲慰悦人心，州郡秀、孝至者，不试，普皆署吏。尚书陈𫖳亦上言：“宜渐循旧制，试以经策。”帝从之，仍诏：“不中科者，刺史、太守免官。”于是秀、孝皆不敢行，其有到者，亦皆托疾，比三年无就试者",
+          "normalization": "OpenCC t2s",
+          "verification": "located_passage_not_individual_date_adjudication"
+        },
+        {
+          "citation": "CBDB original BIOG_MAIN date fields",
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world\\out\\person_chronology\\original_source_evidence.jsonl",
+          "excerpt": "[{\"c_personid\": 413456, \"c_name_chn\": \"熊遠\", \"c_index_year\": null, \"c_index_year_type_code\": \"\", \"c_birthyear\": null, \"c_by_nh_code\": 0, \"c_by_nh_year\": null, \"c_by_range\": null, \"c_deathyear\": null, \"c_dy_nh_code\": 0, \"c_dy_nh_year\": null, \"c_dy_range\": null, \"c_death_age\": null, \"c_death_age_range\": null, \"c_fl_earliest_year\": null, \"c_fl_latest_year\": null, \"c_notes\": null, \"c_by_intercalary\": 0, \"c_dy_intercalary\": 0, \"c_by_month\": null, \"c_dy_month\": null, \"c_by_day\": null, \"c_dy_day\": null, \"c_by_day_gz\": null, \"c_dy_day_gz\": null, \"offices\": []}]",
+          "verification": "original_database_fields_individually_read; primary historical references not independently read here"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_11.txt",
+          "offset": 1539,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "数月病卒",
+          "excerpt_offset": 1439,
+          "excerpt": "！此官得其人之益也。 \n　　累迁侍中，出补会稽内史。时王敦作逆，沈充举兵应之，加远将军，距而不受，不输军资于充，保境安众为务。敦至石头，讽朝廷征远，乃拜太常卿，加散骑常侍。敦深惮其正而有谋，引为长史。数月病卒。 \n　　远弟缙，名亚于远，为王敦主簿，终于鄱阳太守。缙子鸣鹄，位至武昌太守。 \n　　王鉴，字茂高，堂邑人也。父濬，御史中丞。鉴少以文笔著称，初为元帝琅邪国侍郎。时杜弢作逆，江湘流弊，王敦不能制，朝廷深以为忧。鉴上疏劝帝征之，曰： \n　　天祸晋室，四海颠覆，丧乱之极，开辟未有。明公遭历运之厄，当阳九之会，圣躬负伊周之重",
+          "citation": "原書·本批已讀事迹段",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "熊遠傳接前卷：敦引為長史後數月病卒，沒有明列卒年；其餘來源尚未逐鍵核完"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_10.txt",
+          "offset": 39112,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "熊远，字孝文",
+          "excerpt_offset": 39012,
+          "excerpt": "寿阳，惠乃率众应卓，馥败走。庐江何锐为安丰太守，惠权留郡境。锐以他事收惠下人推之，惠既非南朝所授，常虑谗间，因此大惧，遂攻杀锐，奔入蛮中。寻病卒，时年四十七。丧还乡里，朝廷明其本心，追加吊赙。 \n　　熊远，字孝文，豫章南昌人也。祖翘，尝为石崇苍头，而性廉直，有士风。黄门郎潘岳见而称异，劝崇免之，乃还乡里。远有志尚，县召为功曹，不起，强与衣帻，扶之使谒。十余日荐于郡，由是辟为文学掾。远曰：“辞大不辞小也。”固请留县。太守察远孝廉。属太守讨氐羌，远遂不行，送至陇右而还。后太守会稽夏静辟为功曹。及静去职，远送至会稽以归。州辟主簿、别",
+          "citation": "早期多鍵逐鍵本人回補 js_10",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "本人原段已實讀，別字與省姓按字、父子、官職、同一事件橋合；無明年不填歷史生卒。"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\js_11.txt",
+          "offset": 1525,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "敦深惮其正而有谋，引为长史",
+          "excerpt_offset": 1425,
+          "excerpt": "迁乎有苗，何畏乎巧言令色孔壬！此官得其人之益也。 \n　　累迁侍中，出补会稽内史。时王敦作逆，沈充举兵应之，加远将军，距而不受，不输军资于充，保境安众为务。敦至石头，讽朝廷征远，乃拜太常卿，加散骑常侍。敦深惮其正而有谋，引为长史。数月病卒。 \n　　远弟缙，名亚于远，为王敦主簿，终于鄱阳太守。缙子鸣鹄，位至武昌太守。 \n　　王鉴，字茂高，堂邑人也。父濬，御史中丞。鉴少以文笔著称，初为元帝琅邪国侍郎。时杜弢作逆，江湘流弊，王敦不能制，朝廷深以为忧。鉴上疏劝帝征之，曰： \n　　天祸晋室，四海颠覆，丧乱之极，开辟未有。明公遭历运之厄，当阳九之会，圣躬",
+          "citation": "早期多鍵逐鍵本人回補 js_11",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "本人原段已實讀，別字與省姓按字、父子、官職、同一事件橋合；無明年不填歷史生卒。"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_12.txt",
+          "offset": 26794,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "熊远上书",
+          "excerpt_offset": 26694,
+          "excerpt": "相左长史，从事中郎彭城刘隗为司直，邵陵内史广陵戴邈为军咨祭酒，参军丹杨张闿为从事中郎，尚书郎颍川钟雅为记室参军，谯国桓宣为舍人，豫章熊运为主簿，会稽孔愉为扌彖。刘隗雅习文史，善伺候睿意，故睿特亲爱之。熊远上书，以为：“军兴以来，处事不用律令，竞作新意，临事立制，朝作夕改，至于主者不敢任法，每辄关谘，非为政之体也。愚谓凡为驳议者，皆当引律令、经传，不得直以情言，无所依准，以亏旧典。若开塞随宜，权道制物，此是人君之所得行，非臣子所宜专用也。”睿以时方多事，不能从。\n　　初，范阳祖逖，少有大志，与刘琨俱为司州主簿。同寝，中夜闻鸡",
+          "citation": "早期多鍵逐鍵本人回補 tj_12",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "本人原段已實讀，別字與省姓按字、父子、官職、同一事件橋合；無明年不填歷史生卒。"
+        },
+        {
+          "path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\chunks\\tj_13.txt",
+          "offset": 17395,
+          "offset_semantics": "matched_phrase_start",
+          "matched_phrase": "散骑常侍熊远",
+          "excerpt_offset": 17295,
+          "excerpt": "弟也。\n　　丙辰，王即皇帝位，百官皆陪列。帝命王导升御床共坐，导固辞曰：“若太阳下同万物，苍生何由仰照？”帝乃止。大赦，改元，文武增位二等。帝欲赐诸吏投刺劝进者加位一等，民投刺者皆除吏，凡二十馀万人。散骑常侍熊远曰：“陛下应天继统，率土归戴，岂独近者情重，远者情轻！不若依汉法遍赐天下爵，于恩为普，且可以息检核之烦，塞巧伪之端也。”帝不从。\n　　庚午，立王太子绍为皇太子。太子仁孝，喜文辞，善武艺，好贤礼士，容受规谏，与庾亮、温峤等为布衣之交。亮风格峻整，善谈老、庄，帝器重之，聘亮妹为太子妃。帝以贺循行太子太傅，周𫖮为少傅，庾亮以",
+          "citation": "早期多鍵逐鍵本人回補 tj_13",
+          "normalization": "OpenCC t2s; offsets in normalized text",
+          "interpretation": "本人原段已實讀，別字與省姓按字、父子、官職、同一事件橋合；無明年不填歷史生卒。"
+        },
+        {
+          "citation": "原CBDB413456熊遠來源限定",
+          "database_path": "C:\\Users\\garib\\Documents\\Work\\CMCode\\san11world-persons\\data\\persons\\_cache\\cbdb_20261017.sqlite3",
+          "excerpt": "生卒null、無KIN；source3689紹興府志(1424) section_id=62636、Q28414107、熊远。",
+          "interpretation": "名人可能同會稽內史但原志未讀，不假稱全文已核；JS完整本傳王敦至石頭後為敦長史數月病卒無明年，不硬鎖某年。"
+        },
+        {
+          "kind": "new_target_personal_gazetteer_biography_read_from_preexisting_cached_public_SSR",
+          "source": "C:\\Users\\garib\\.agent-reach\\china_gap\\shaoxing_minghuan.html",
+          "source_sha256": "45505c800335903c2669668b15156ae3eb010d3986041c99c0a525ed9ca6a9b9",
+          "citation": "[乾隆]绍兴府志·名宦，李亨特修、平恕等纂，1792；识典HY0168 chapter1kjnp9kzuy0bs",
+          "url": "https://www.shidianguji.com/zh/book/HY0168/chapter/1kjnp9kzuy0bs",
+          "source_key": "cbdb:413456",
+          "offset": 58653,
+          "excerpt_offset": 58653,
+          "read_ranges": [
+            {
+              "start": 58633,
+              "end": 58790,
+              "end_exclusive": true
+            }
+          ],
+          "excerpt": "熊遠字孝文，南昌人。元帝作相，引爲侍中，出補會稽内史。王敦作逆，沈充舉兵應之，加遠將軍，拒而不受，不輸軍。資千充保境安衆爲務。敦至石頭，諷朝廷徵遠，拜太常卿。",
+          "finding": "本人完整短条从熊远至太常卿，随后沈叔任为新主语，前王彪之居郡八年/归三万户不属于熊远。字孝文+南昌+会稽内史+拒沈充军号/军资+敦至石头征太常独事桥旧晋书；清志与晋书有承袭，非独立同时代两证。缓存侍中与旧晋书主簿异文待图校，資千充疑讹仍照存，不悄悄修源。",
+          "source_layer": "1792 Qing gazetteer transcription, alternative edition to original database reference1424",
+          "offset_convention": "Unicode character offsets of cached UTF8 HTML after Path.read_text newline normalization, not bytes or rendered browser text."
+        },
+        {
+          "kind": "old_Jinshu_primary_evidence_reconsulted_for_new_gazetteer_bridge_not_new_reading",
+          "source_key": "js:js_10:269:熊遠",
+          "finding": "正式原证39112后本人开头已记熊远字孝文豫章南昌及元帝作相引为主簿。与新清志同人桥依字籍/会稽任职/沈充独事，不因清志侍中转录就新立另一熊远，也不静改旧原文。既有主传数月病卒相对日期不足绝年，保持未知。"
+        }
+      ],
+      "review_status": "needs_further_research",
+      "unresolved": [
+        "birth_date_not_independently_corroborated",
+        "death_date_not_independently_corroborated",
+        "first_career_year_not_established",
+        "some_original_passages_missing_or_name_not_located",
+        "熊遠傳接前卷：敦引為長史後數月病卒，沒有明列卒年；其餘來源尚未逐鍵核完",
+        "四正史熊遠孝文主簿諫元帝、會稽內史拒沈充至敦長史同，無明生卒；CBDB紹興府志1424本原段未取wholehold，不能只因有同名會稽守就當五key已核。"
+      ],
+      "current_game": {
+        "birth": 291,
+        "appear": 307,
+        "death": 330
+      },
+      "source_birth_claims_unverified": [],
+      "source_death_claims_unverified": [],
+      "same_name_candidate_ids": [],
+      "missing_source_keys": [
+        "cbdb:413456"
+      ],
+      "source_identities_all_adjudicated": false,
+      "review_scope": "cached historical source passages; not an exhaustive search of all historical literature",
+      "unadjudicated_activity_candidate": 313,
+      "secondary_database_field_review": "original date fields/notes read; zero/NULL unknown; index year is never activity; range qualifiers retained",
+      "last_manual_review_batch": "round55b_early_multikey_reaudit",
+      "components": [
+        {
+          "keys": [
+            "js:js_10:269:熊遠",
+            "js:js_11:0:熊遠",
+            "tj:tj_12:466:熊遠",
+            "tj:tj_13:251:熊遠"
+          ],
+          "identity": "熊遠孝文豫章南昌、元帝主簿至會稽內史敦長史",
+          "historical_birth": null,
+          "historical_death": null
+        },
+        {
+          "keys": [
+            "cbdb:413456"
+          ],
+          "identity": "CBDB413456紹興府志熊遠原段尚未取",
+          "historical_birth": null,
+          "historical_death": null
+        }
+      ],
+      "game_year_policy": "Unknown historical dates remain unknown; retain game estimates except contradictions with individually corroborated chronology, as authorized by the user.",
+      "game_year_annotations": {
+        "birth": {
+          "value": 291,
+          "basis": "game_estimate; exact_historical_year_not_established_for_this_identity"
+        },
+        "death": {
+          "value": 330,
+          "basis": "game_estimate; exact_historical_year_not_established_for_this_identity"
+        },
+        "appear": {
+          "value": 307,
+          "basis": "retain game estimate pending a justified first career year; source first mention is not initial service"
+        }
+      },
+      "original_game_year_basis": "来源活动年份",
+      "merged_alias_reviews": [],
+      "source_limitations": [
+        "新读与旧核分开：清志本人短传1；晋书仅旧证对读，不计新读。新主语边界亲读，未将前王彪之八年/三万户或后沈叔任益州刺史套熊远。原历史BDnull，游戏日期不变；同题清版不冒充1424原库版本。"
+      ],
+      "batch_review_id": "china_fast_batch_25",
+      "review_resolution_note": "新读取既有清1792绍兴府志名宦本人传，非本批新下载。孝文/南昌/会稽内史/沈充授将军拒受拒军资/王敦石头征太常多重独事与旧晋书核心相应，建立替代版本明确身份桥。原CBDB3689/1424年及section62636原页仍未取得，不以清志冒充原版或宣称全key闭合；无新增生卒绝年。",
+      "current_unresolved": [
+        "birth_date_not_independently_corroborated",
+        "death_date_not_independently_corroborated",
+        "first_career_year_not_established",
+        "some_original_passages_missing_or_name_not_located",
+        "熊遠傳接前卷：敦引為長史後數月病卒，沒有明列卒年；其餘來源尚未逐鍵核完",
+        "四正史熊遠孝文主簿諫元帝、會稽內史拒沈充至敦長史同，無明生卒；CBDB紹興府志1424本原段未取wholehold，不能只因有同名會稽守就當五key已核。",
+        "新1792清志本人条已取得并有具体身份桥；原指定1424绍兴府志本人页/section62636仍未映射，不能消掉版本缺引。",
+        "清志SSR引为侍中/晋书引为主簿及資千充转录字形待原刻复核；本批未取得这段对应影像。",
+        "本人生卒和首次任官绝年仍不详，1792/1424是书版年代不是本人活动。"
+      ]
+    },
+    {
       "id": 7051,
       "keys": [
         "js:js_00:55:何充",
