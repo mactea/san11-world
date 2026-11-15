@@ -14,6 +14,9 @@ reference to an officer id >= PS moved up. This tool does that and nothing else:
   * trade block (TRAD, XPRESS_HUFF): caravan leaders and merchant records;
   * header: the officer count mark.
 
+SysSavePK.s11 (settings, kind 0x19) only carries the mark: the tool recognises it and
+changes nothing else, so the game does not reject it and fall back to default settings.
+
 Regions whose layout is not decoded (the AI block and the rest between the units
 and the hex map) are left byte-identical; every value there that could be an old
 id of an officer in use is listed in the report. Only reads IN and writes OUT.
@@ -248,7 +251,18 @@ def stray(data, ids, skip=()):
     return sorted(hits)
 
 
+def convert_system(data, add):
+    """SysSavePK.s11: no officer data, only the count mark in the header"""
+    if data[32] != 0 or data[33] not in SPECIALS:
+        raise ConvError(f'unsupported officer mark {data[32:36].hex()}')
+    PS = struct.unpack_from('<H', data, 34)[0]
+    result = data[:34] + struct.pack('<H', PS + add) + data[36:]
+    return result, dict(kind='system', PS=PS, add=add, input_sha256=sha(data), output_sha256=sha(result))
+
+
 def convert(data, C, U, cells, add):
+    if struct.unpack_from('<I', data, 4)[0] == 0x19:
+        return convert_system(data, add)
     head, raw = unpack(data)
     R, PS, PT = counts(head)
     if PT + add > 32000:
