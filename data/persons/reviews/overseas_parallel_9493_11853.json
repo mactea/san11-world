@@ -1955,7 +1955,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "Hold date changes on mixed source record; first careers require separate entities.",
+      "appearance_basis": "首次补齐此前仅存抬头尾款的两条法令全文：9.40.4致Theodorus阿拉伯省长，讨论重大刑案不得拖延处罚；11.36.8致Theodorus叙利亚Coele总督，讨论财政欠款不得上诉拖延，附Interpretatio完整。另首次读Enaton修士三则完整原文：为别人烤六批面包；与Lucius以冬夏推延离院五十年；祈祷/圣咏懈怠警语。没有Amoun门徒、渡河或Antioch受刑情节，未新造跨支同人桥。 Actual complete law clauses read, not inferred from addresses. CTh9.40.4 transmitsConstantiusIV/ConstansCaesar andIdesOctober; the web346[?] label is editorial and the subscription is not silently repaired. CTh11.36.8 hasVIIIIdesMarch,Ancyra,Rufinus/Eusebius consuls; even conventional347 dates only a Syrian official branch, not wholemixedrecord. The complete three Greek/English Enaton sayings are read; modern English introduction308arrival/364survival/Amoundiscipleship is separated from the three ancient sayings, which do not contain those calendar years or master name. Fiftyyears is a relative ascetic duration forTheodore/Lucius, not birth/death or an independently anchored firstservice. Neither law nor sayings identifies this monk withSozomensAmmon disciple, Antiochconfessor or AlexandrianDiodorus. All existing distinct branches/evidence preserved; globalBD/proposedAppear remainnull, gameintegers estimates only. Electronic texts not manuscript/printedcriticalapparatus autopsy; later collection attribution does not verify every saying as autobiographical fact.",
       "duplicate_of": null,
       "identity_status": "mixed_Diodorus_administrators_confessor_and_monks",
       "source_identities_all_adjudicated": false,
@@ -1964,7 +1964,8 @@
         "no_single_branch_dates_on_top_level",
         "Arabia_to_Syria_governor_career_bridge_unproved",
         "Amun_disciple_to_Enaton_monk_bridge_unproved",
-        "full_law_texts_and_original_Apophthegmata_still_pending"
+        "modern_Enaton308_364_not_calendar_dates_in_original_three_sayings",
+        "CTh9_40_4_subscription_vs_editorial346_uncertainty_preserved"
       ],
       "evidence": [
         {
@@ -2040,6 +2041,50 @@
           ],
           "url": "https://en.wikipedia.org/wiki/Theodore_of_Enaton",
           "finding": "Read Egyptian monk of Enaton, disciple of Abba Amoun and companion of Abba Or; 308 arrival is attributed to Ward1984. No original Sayings passage yet obtained, so not automatically identical to Sozomen's bare disciple and not a verified exact activity year."
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "CTh9.40.4 and11.36.8 complete operative clauses,address,subscription and latterInterpretatio;ApophthegmataAlphabetica TheodoreofEnaton complete1–3,Greek/English electronicreproduction",
+          "urls": [
+            "https://www.ancientrome.ru/ius/library/codex/theod/liber09.htm",
+            "https://www.ancientrome.ru/ius/library/codex/theod/liber11.htm",
+            "https://www.ldysinger.com/@texts/0400_apophth/greek_alph/02_delta-iota.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\cth9.txt",
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\cth11.txt",
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\theodore_pherme_enaton_browser.txt",
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\theodore_pherme_enaton_browser2.txt",
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\theodore_pherme_enaton_browser3.txt"
+          ],
+          "source_sha256": {
+            "cth9.txt": "b4109405b0549e0518d86d979e7c8caffb83468d83cb9b13f2a6b955ba5a67e1",
+            "cth11.txt": "a40709c86328ee8d450e0f15303caded2efca929bcf293f80da0d9c67b9b947d",
+            "theodore_pherme_enaton_browser.txt": "f4fe93c60009cff88c4c88999007b36716b0e4ca7dd2d75e14db755edf2060a7",
+            "theodore_pherme_enaton_browser2.txt": "da713562d2a4df920947925e2cf930f60b620cc387c06a572ea55c8a57a6fd24",
+            "theodore_pherme_enaton_browser3.txt": "2500ee2d253a294fe38073ed99fc332880302cfd5ecb06f1a9173a99fdd72e6d"
+          },
+          "finding": "首次补齐此前仅存抬头尾款的两条法令全文：9.40.4致Theodorus阿拉伯省长，讨论重大刑案不得拖延处罚；11.36.8致Theodorus叙利亚Coele总督，讨论财政欠款不得上诉拖延，附Interpretatio完整。另首次读Enaton修士三则完整原文：为别人烤六批面包；与Lucius以冬夏推延离院五十年；祈祷/圣咏懈怠警语。没有Amoun门徒、渡河或Antioch受刑情节，未新造跨支同人桥。",
+          "qualification": "Actual complete law clauses read, not inferred from addresses. CTh9.40.4 transmitsConstantiusIV/ConstansCaesar andIdesOctober; the web346[?] label is editorial and the subscription is not silently repaired. CTh11.36.8 hasVIIIIdesMarch,Ancyra,Rufinus/Eusebius consuls; even conventional347 dates only a Syrian official branch, not wholemixedrecord. The complete three Greek/English Enaton sayings are read; modern English introduction308arrival/364survival/Amoundiscipleship is separated from the three ancient sayings, which do not contain those calendar years or master name. Fiftyyears is a relative ascetic duration forTheodore/Lucius, not birth/death or an independently anchored firstservice. Neither law nor sayings identifies this monk withSozomensAmmon disciple, Antiochconfessor or AlexandrianDiodorus. All existing distinct branches/evidence preserved; globalBD/proposedAppear remainnull, gameintegers estimates only. Electronic texts not manuscript/printedcriticalapparatus autopsy; later collection attribution does not verify every saying as autobiographical fact.",
+          "verification_steps": {
+            "person": "10267 mixedDiodorus/Theodorus/Theodore branches",
+            "source_unit": "CTh9.40.4;11.36.8;TheodoreofEnaton1–3",
+            "short_original": "Theodoro ... praesidi Arabiae; Theodoro consulari Syriae Coeles; Θεόδωρος ὁ τοῦ Ἐννάτου",
+            "identity_bridge": "official titles and namedEnaton monk each clear; no cross-career orAmmon-disciple bridge",
+            "date_handling": "lawdates belong only tobranch;50years notage;308/364 modernintro excluded from original evidence",
+            "remaining_gap": "mixedrecord andmonkdisciple equation remain unresolved"
+          },
+          "current_game_dates": {
+            "birth": 281,
+            "appear": 297,
+            "death": 361
+          },
+          "estimated_game_years": {
+            "birth": 281,
+            "appear": 297,
+            "death": 361
+          },
+          "game_estimate_decision": "retain currentgame integers as estimates; no single-person chronology established on mixedrecord"
         }
       ],
       "source_branches": [
@@ -2082,7 +2127,22 @@
           ],
           "identity": "Theodore of Enaton, modern biographical entry"
         }
-      ]
+      ],
+      "source_limitations": [
+        "Actual complete law clauses read, not inferred from addresses. CTh9.40.4 transmitsConstantiusIV/ConstansCaesar andIdesOctober; the web346[?] label is editorial and the subscription is not silently repaired. CTh11.36.8 hasVIIIIdesMarch,Ancyra,Rufinus/Eusebius consuls; even conventional347 dates only a Syrian official branch, not wholemixedrecord. The complete three Greek/English Enaton sayings are read; modern English introduction308arrival/364survival/Amoundiscipleship is separated from the three ancient sayings, which do not contain those calendar years or master name. Fiftyyears is a relative ascetic duration forTheodore/Lucius, not birth/death or an independently anchored firstservice. Neither law nor sayings identifies this monk withSozomensAmmon disciple, Antiochconfessor or AlexandrianDiodorus. All existing distinct branches/evidence preserved; globalBD/proposedAppear remainnull, gameintegers estimates only. Electronic texts not manuscript/printedcriticalapparatus autopsy; later collection attribution does not verify every saying as autobiographical fact."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_30.json",
+          "prior_unresolved": [
+            "no_single_branch_dates_on_top_level",
+            "Arabia_to_Syria_governor_career_bridge_unproved",
+            "Amun_disciple_to_Enaton_monk_bridge_unproved",
+            "full_law_texts_and_original_Apophthegmata_still_pending"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_30.json"
     },
     {
       "id": 10334,
@@ -2407,14 +2467,16 @@
       "historical_death": null,
       "proposed_appear": null,
       "duplicate_of": null,
-      "appearance_basis": "Hold chronology on record combining governor, martyred cleric and Egyptian monk.",
+      "appearance_basis": "首次完整读Pherme修士29则：§1向Macarius问三本书去留；§2自称受修道服七十年，来访者八年；§10向先天阉人John谈Scetis修道；§25拒执事职；§26 Scetis荒废后赴Pherme并年老生病；§28接待来访comes。修士叙事核心明确，未将来访comes或希拉波利斯前总督Theodotus当修士本人。 Complete all29 sayings withGreekparallel/Englishtranslation read, not just editorial introductory biography ormodernWikipedia. Paragraph2 seventyyears refers to wearingmonastic habit, notdeathage; eightyears belongs to visitingbrother. Paragraph26 saysScetis laidwaste, thenPherme andoldage/illness; no408 orabsolute calendar year appears there, nor isfirstdevastation specified by the ancient clause. Macarius in1 is named buttheGreat identification inmodernintroduction is editorial. Paragraph25 deacon narrative doesnot supply ordinationyear;27 demontale andothers are transmitted ascetic narratives, notindependent historical-event certification. ThegovernorTheodotus andNicomedia80clergy/Theodore martyr branches remain distinct unresolved scopes atwhole-record level. No calendar death or firstactivity can be transferred fromanybranch. HistBD/proposedAppear null, currentgame integers retained as estimates. No manuscript autopsy; Greekelectronic text haswordbreak artifacts. OtherTheodore entries adjacent are not automatically thismonk.",
       "identity_status": "mixed_governor_martyr_and_ascetic",
       "source_identities_all_adjudicated": false,
       "review_status": "identity_conflict",
       "unresolved": [
         "no_top_dates_from_any_single_branch",
         "Sozomen_does_not_independently_name_Theodore_in_this_passage",
-        "Pherme_408_claim_still_only_secondary"
+        "Pherme_saying26_destruction_not_independently_dated408",
+        "governor_Theodotus_Nicomedia_martyr_and_Pherme_monk_not_one_proven_career",
+        "historical_birth_death_and_first_career_unknown"
       ],
       "evidence": [
         {
@@ -2454,6 +2516,44 @@
           ],
           "url": "https://en.wikipedia.org/wiki/Theodore_of_Pherme",
           "finding": "Read ascetic of Scetis/Pherme, Macarius/Pambo tentative teachers, declined diaconate and408 retreat claim. Distinct subject from condemned370 cleric and secular Theodotus; modern chronology not promoted to primary."
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "ApophthegmataAlphabetica,TheodoreofPherme1–29 complete Greek/English personal collection,electronicreproduction ofPG65/Ward translation;section08_01",
+          "urls": [
+            "https://www.ldysinger.com/@texts/0400_apophth/greek_alph/02_delta-iota.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\theodore_pherme_enaton_browser.txt",
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\theodore_pherme_enaton_browser2.txt",
+            "out\\person_chronology\\source_cache\\low_group30_read_units\\theodore_pherme_enaton_browser3.txt"
+          ],
+          "source_sha256": {
+            "theodore_pherme_enaton_browser.txt": "f4fe93c60009cff88c4c88999007b36716b0e4ca7dd2d75e14db755edf2060a7",
+            "theodore_pherme_enaton_browser2.txt": "da713562d2a4df920947925e2cf930f60b620cc387c06a572ea55c8a57a6fd24",
+            "theodore_pherme_enaton_browser3.txt": "2500ee2d253a294fe38073ed99fc332880302cfd5ecb06f1a9173a99fdd72e6d"
+          },
+          "finding": "首次完整读Pherme修士29则：§1向Macarius问三本书去留；§2自称受修道服七十年，来访者八年；§10向先天阉人John谈Scetis修道；§25拒执事职；§26 Scetis荒废后赴Pherme并年老生病；§28接待来访comes。修士叙事核心明确，未将来访comes或希拉波利斯前总督Theodotus当修士本人。",
+          "qualification": "Complete all29 sayings withGreekparallel/Englishtranslation read, not just editorial introductory biography ormodernWikipedia. Paragraph2 seventyyears refers to wearingmonastic habit, notdeathage; eightyears belongs to visitingbrother. Paragraph26 saysScetis laidwaste, thenPherme andoldage/illness; no408 orabsolute calendar year appears there, nor isfirstdevastation specified by the ancient clause. Macarius in1 is named buttheGreat identification inmodernintroduction is editorial. Paragraph25 deacon narrative doesnot supply ordinationyear;27 demontale andothers are transmitted ascetic narratives, notindependent historical-event certification. ThegovernorTheodotus andNicomedia80clergy/Theodore martyr branches remain distinct unresolved scopes atwhole-record level. No calendar death or firstactivity can be transferred fromanybranch. HistBD/proposedAppear null, currentgame integers retained as estimates. No manuscript autopsy; Greekelectronic text haswordbreak artifacts. OtherTheodore entries adjacent are not automatically thismonk.",
+          "verification_steps": {
+            "person": "10644 governorTheodotus / martyrTheodore / PhermeTheodore",
+            "source_unit": "TheodoreofPhermecomplete1–29",
+            "short_original": "ὡς ἠρημώθη ἡ Σκῆτις ... εἰς Φέρμην; ἑβδομήκοντα ἔτη",
+            "identity_bridge": "namedPherme ascetic and distinctiveScetis/deaconstory identify monkbranch only",
+            "date_handling": "70years monasticduration; visitor8years; no408/deathyear in originalunit",
+            "remaining_gap": "whole-record branchidentity unresolved; absolute life dates unknown"
+          },
+          "current_game_dates": {
+            "birth": 325,
+            "appear": 341,
+            "death": 370
+          },
+          "estimated_game_years": {
+            "birth": 325,
+            "appear": 341,
+            "death": 370
+          },
+          "game_estimate_decision": "retain currentgame integers as estimates; no single-person chronology established on mixedrecord"
         }
       ],
       "source_branches": [
@@ -2482,7 +2582,21 @@
           "historical_birth": null,
           "historical_death": null
         }
-      ]
+      ],
+      "source_limitations": [
+        "Complete all29 sayings withGreekparallel/Englishtranslation read, not just editorial introductory biography ormodernWikipedia. Paragraph2 seventyyears refers to wearingmonastic habit, notdeathage; eightyears belongs to visitingbrother. Paragraph26 saysScetis laidwaste, thenPherme andoldage/illness; no408 orabsolute calendar year appears there, nor isfirstdevastation specified by the ancient clause. Macarius in1 is named buttheGreat identification inmodernintroduction is editorial. Paragraph25 deacon narrative doesnot supply ordinationyear;27 demontale andothers are transmitted ascetic narratives, notindependent historical-event certification. ThegovernorTheodotus andNicomedia80clergy/Theodore martyr branches remain distinct unresolved scopes atwhole-record level. No calendar death or firstactivity can be transferred fromanybranch. HistBD/proposedAppear null, currentgame integers retained as estimates. No manuscript autopsy; Greekelectronic text haswordbreak artifacts. OtherTheodore entries adjacent are not automatically thismonk."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_30.json",
+          "prior_unresolved": [
+            "no_top_dates_from_any_single_branch",
+            "Sozomen_does_not_independently_name_Theodore_in_this_passage",
+            "Pherme_408_claim_still_only_secondary"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_30.json"
     },
     {
       "id": 10836,
@@ -13769,7 +13883,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "Historical unknowns kept null; game estimates not treated as dates.",
+      "appearance_basis": "首次实际读Moses1–13完整个人集：Isidore劝诫、漏罐不论人、黑肤修士受辱、受按立、Scetis居处与Petra迁居；§9预言荒废，§10袭击者入门杀众人，一人藏绳堆看七冠降下。正文没有405或任何公元年，也未称本人与Sozomen另一LibyanMoses必同。 Actual primary saying collection in published translation read, not secondary biography or search extract. Complete1–13 read; seveninstructions following were incidentally visible but are not counted as a second acquiredunit or used as deathproof. Theprefatory modernbiography is separated from numberedancientsayings. Paragraph10 says sevenbrothers were present andonehid, then sevencrowns; preserve that sequence rather than convert it to an uncontested count of sevencompanions killed. No age75,405year, namedraiders or calibratedraid date in1–13. Biblical allusions to dying andthreedays intomb in11–12 are spiritual comparisons, not chronological lifespan data. Sozomenspreviouslyread formerrobber75age remains only that branchs report, not numerically dated by this raid. No bridge toseparately introduced Libyan abbot/wellmiracle; wholeidentity false. Transmitted ascetic/martyrdom narrative is not independent authentication of every event; no manuscript/Greekcriticaledition autopsy. Keep allcurrentgameintegers as estimates.",
       "duplicate_of": null,
       "identity_status": "Moses_former_robber_and_Libyan_abbot_unbridged",
       "source_identities_all_adjudicated": false,
@@ -13780,12 +13894,61 @@
           "citation": "Sozomen6.29 entire formerrobberunit and later LibyanMoses/Piorwellunit read",
           "url": "https://www.newadvent.org/fathers/26026.htm",
           "finding": "FormerEthiopianslave/robberconverted, presbyterScetis, dies75; laterlistseparatelyintroducesStephenandMosesbothLibyan, Mosesgentleprayerhealer withPiorwellmiracle. Authorintroducesfreshprofile, noexplicitbridge.75belongsformerrobber,notLibyan. No330/405exactlifeproof in theseunits; holdwhole."
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "ApophthegmataAlphabetica,Moses1–13 complete personal sayings including9–10 raid/death narrative,Wardtranslation printed139–141;browserPDFtext",
+          "urls": [
+            "https://stmichaeltravis.org/wp-content/uploads/2023/02/Sayings-of-the-Desert-Fathers-Alphabetical.pdf"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group31_read_units\\moses_sayings_browser.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group31_read_units\\moses_sayings_browser.txt": "d97636f1f6d04fd2e2b99c0dbdf9fdaa11da6ab5a986b2e10016f4e1779f1053"
+          },
+          "finding": "首次实际读Moses1–13完整个人集：Isidore劝诫、漏罐不论人、黑肤修士受辱、受按立、Scetis居处与Petra迁居；§9预言荒废，§10袭击者入门杀众人，一人藏绳堆看七冠降下。正文没有405或任何公元年，也未称本人与Sozomen另一LibyanMoses必同。",
+          "qualification": "Actual primary saying collection in published translation read, not secondary biography or search extract. Complete1–13 read; seveninstructions following were incidentally visible but are not counted as a second acquiredunit or used as deathproof. Theprefatory modernbiography is separated from numberedancientsayings. Paragraph10 says sevenbrothers were present andonehid, then sevencrowns; preserve that sequence rather than convert it to an uncontested count of sevencompanions killed. No age75,405year, namedraiders or calibratedraid date in1–13. Biblical allusions to dying andthreedays intomb in11–12 are spiritual comparisons, not chronological lifespan data. Sozomenspreviouslyread formerrobber75age remains only that branchs report, not numerically dated by this raid. No bridge toseparately introduced Libyan abbot/wellmiracle; wholeidentity false. Transmitted ascetic/martyrdom narrative is not independent authentication of every event; no manuscript/Greekcriticaledition autopsy. Keep allcurrentgameintegers as estimates.",
+          "verification_steps": {
+            "person": "10354 Moses formerrobber / Libyanabbot",
+            "source_unit": "AlphabeticalMoses1–13,especially9–10",
+            "short_original": "barbarians ... coming to Scetis today; seven crowns",
+            "identity_bridge": "namedScetisMoses narrative clear; no LibyanMoses equation",
+            "date_handling": "no405or numericaldeathage in readcollection; wholeBDnull",
+            "remaining_gap": "cross-keybridge and historicalraid year unproved"
+          },
+          "current_game_dates": {
+            "birth": 330,
+            "appear": 346,
+            "death": 405
+          },
+          "estimated_game_years": {
+            "birth": 330,
+            "appear": 346,
+            "death": 405
+          },
+          "game_estimate_decision": "retain integers as estimates; no one chronology established across all inputkeys"
         }
       ],
       "unresolved": [
         "all_keys_not_one_person",
-        "405_barbarian_raid_original_account_pending"
-      ]
+        "Moses_raid_original_saying10_read_but405_absolute_year_unproved",
+        "former_robber_to_Libyan_abbot_identity_bridge_unproved",
+        "historical_birth_death_and_first_career_unknown"
+      ],
+      "source_limitations": [
+        "Actual primary saying collection in published translation read, not secondary biography or search extract. Complete1–13 read; seveninstructions following were incidentally visible but are not counted as a second acquiredunit or used as deathproof. Theprefatory modernbiography is separated from numberedancientsayings. Paragraph10 says sevenbrothers were present andonehid, then sevencrowns; preserve that sequence rather than convert it to an uncontested count of sevencompanions killed. No age75,405year, namedraiders or calibratedraid date in1–13. Biblical allusions to dying andthreedays intomb in11–12 are spiritual comparisons, not chronological lifespan data. Sozomenspreviouslyread formerrobber75age remains only that branchs report, not numerically dated by this raid. No bridge toseparately introduced Libyan abbot/wellmiracle; wholeidentity false. Transmitted ascetic/martyrdom narrative is not independent authentication of every event; no manuscript/Greekcriticaledition autopsy. Keep allcurrentgameintegers as estimates."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_31.json",
+          "prior_unresolved": [
+            "all_keys_not_one_person",
+            "405_barbarian_raid_original_account_pending"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_31.json"
     },
     {
       "id": 10355,
@@ -13797,7 +13960,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "Historical unknowns kept null; game estimates not treated as dates.",
+      "appearance_basis": "首次读埃德萨编年史§34与§37完整本人纪事及前后主教序：Eulogius于TheodosiusGreat即位年任主教，建MarDaniel/MarDemet堂；希腊纪年698的受难星期五去世。序明确按311年差换纪年，通常换387。原日期只归WK埃德萨主教支，不套Sozomen埃及司铎。 Complete named notices and contextual32–38 plus era discussion/notes read in public-domain scholarly translation, not contemporary archival or Syriacmanuscript autopsy. Author is later chronicler and attribution toarchives is an editorial argument. Preserve year698 andGoodFriday as original translated wording;387 is explicit modernera conversion, not the numeral written in the anciententry. Introductory309versus311 distinction and note33 calendar-placement doubt are retained, not silently harmonized. No month/day calculated. Notice34 supplies episcopal accession only relative toTheodosius, not firstcareer; council attendance inCowpersnote36 is editorial, not a separate text of council acts read here. No commonmiracle,kinship oroffice bridge toSozomensEgyptEucharisticpresbyter; possible common Egyptian residence remains insufficient, neither asserted necessarily different nor merged. WholeBD/proposedAppear null, gameestimates unchanged.",
       "duplicate_of": null,
       "identity_status": "Eulogius_Egypt_Eucharist_discerner_and_Edessa_exile_bishop_unbridged",
       "source_identities_all_adjudicated": false,
@@ -13808,13 +13971,74 @@
           "citation": "Sozomen6.28 complete Eulogius unit; Theodoret4.15 complete Eulogius/Protogenes episode read",
           "url": "https://www.newadvent.org/fathers/27024.htm",
           "finding": "SozEgyptpresbyter discernssinsatEucharist, excludesuntilrepentance. TheodEdessapresbyterexiledwithProtogenesAntinoe, prays/converts, returnsandbecomesEdessabishopafterBarses. Egyptianresidenceispossiblebridgebutnosharedmiracle/kin/officeyet; don'tassertdefinitelydifferent. No387death in readTheodepisode."
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "ChronicleofEdessa,Cowper1864,JSL5pp28–45:completeEulogius notices34/37 with32–38 episcopalsuccession context,era discussion inintroduction andnotes33–37",
+          "urls": [
+            "https://earlychristianwritings.com/fathers/chronicle_of_edessa.html"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group31_read_units\\edessa_chronicle.html",
+            "out\\person_chronology\\source_cache\\low_group31_read_units\\edessa_chronicle.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group31_read_units\\edessa_chronicle.html": "be815b293cae5b5b6212be10153ff26d2dac9c0c637f029a42a903f44d4cfe29",
+            "out\\person_chronology\\source_cache\\low_group31_read_units\\edessa_chronicle.txt": "ca24c2790106ee90ae44785303c37e6b0b5ea8345622579be2fe94581ba79560"
+          },
+          "finding": "首次读埃德萨编年史§34与§37完整本人纪事及前后主教序：Eulogius于TheodosiusGreat即位年任主教，建MarDaniel/MarDemet堂；希腊纪年698的受难星期五去世。序明确按311年差换纪年，通常换387。原日期只归WK埃德萨主教支，不套Sozomen埃及司铎。",
+          "qualification": "Complete named notices and contextual32–38 plus era discussion/notes read in public-domain scholarly translation, not contemporary archival or Syriacmanuscript autopsy. Author is later chronicler and attribution toarchives is an editorial argument. Preserve year698 andGoodFriday as original translated wording;387 is explicit modernera conversion, not the numeral written in the anciententry. Introductory309versus311 distinction and note33 calendar-placement doubt are retained, not silently harmonized. No month/day calculated. Notice34 supplies episcopal accession only relative toTheodosius, not firstcareer; council attendance inCowpersnote36 is editorial, not a separate text of council acts read here. No commonmiracle,kinship oroffice bridge toSozomensEgyptEucharisticpresbyter; possible common Egyptian residence remains insufficient, neither asserted necessarily different nor merged. WholeBD/proposedAppear null, gameestimates unchanged.",
+          "verification_steps": {
+            "person": "10355 Eulogius Egyptianpresbyter / Edessabishop",
+            "source_unit": "ChronicleEdessa34/37 with32–38context",
+            "short_original": "Mar Eulogius ... year698 ... Friday of the crucifixion",
+            "identity_bridge": "bishop/succession clear; no EgyptianEucharist-miracle bridge",
+            "date_handling": "698SE conventionally387 for bishopbranchonly; wholeBDnull",
+            "remaining_gap": "cross-sourceidentity and exactcalendarconversion details remain separate"
+          },
+          "current_game_dates": {
+            "birth": 330,
+            "appear": 346,
+            "death": 387
+          },
+          "estimated_game_years": {
+            "birth": 330,
+            "appear": 346,
+            "death": 387
+          },
+          "game_estimate_decision": "retain integers as estimates; no one chronology established across all inputkeys",
+          "branch_dated_statement": {
+            "keys": [
+              "wk:Q4173014"
+            ],
+            "source_year": "698SE",
+            "death_feast": "GoodFriday",
+            "conventional_CE_conversion": 387,
+            "scope": "Edessabishoponly;notwhole-recordhistorical_death",
+            "apply": false
+          }
         }
       ],
       "unresolved": [
         "Egyptian_residence_alone_not_identity_proof",
-        "Edessa_Chronicle_Good_Friday387_not_yet_read",
-        "whole_record_dates_unknown"
-      ]
+        "Eulogius_Edessa_death698SE_GoodFriday_only_bishopbranch_not_whole_record",
+        "whole_record_dates_unknown",
+        "Syriac_manuscript_and_calendar_variants_not_autopsied"
+      ],
+      "source_limitations": [
+        "Complete named notices and contextual32–38 plus era discussion/notes read in public-domain scholarly translation, not contemporary archival or Syriacmanuscript autopsy. Author is later chronicler and attribution toarchives is an editorial argument. Preserve year698 andGoodFriday as original translated wording;387 is explicit modernera conversion, not the numeral written in the anciententry. Introductory309versus311 distinction and note33 calendar-placement doubt are retained, not silently harmonized. No month/day calculated. Notice34 supplies episcopal accession only relative toTheodosius, not firstcareer; council attendance inCowpersnote36 is editorial, not a separate text of council acts read here. No commonmiracle,kinship oroffice bridge toSozomensEgyptEucharisticpresbyter; possible common Egyptian residence remains insufficient, neither asserted necessarily different nor merged. WholeBD/proposedAppear null, gameestimates unchanged."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_31.json",
+          "prior_unresolved": [
+            "Egyptian_residence_alone_not_identity_proof",
+            "Edessa_Chronicle_Good_Friday387_not_yet_read",
+            "whole_record_dates_unknown"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_31.json"
     },
     {
       "id": 10357,
@@ -23347,7 +23571,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "原文确年不足或身份冲突；保留游戏估算，禁止把在位终点当死亡。",
+      "appearance_basis": "诚实复用第29批已读Paikuli全文段，新增10728人物裁定而非新原文：§3前代Warahran去世、§4/6 Wahnam给Sakas王Warahran戴冠；§33两人具名，§47–51王收到Narseh书信后弃大冠，§60降位。对应BahramIII/Sakas分支，不能与Shapur名单Gilan王BahramI合并。 Source acquisition and actual reading were batch29; this is a distinct new person/branch adjudication using that existing full cache. Scholarly translation with restoredwords and2014variants, notstoneautopsy. Thetwo modernQscopes are not made one person. NPi3 deceasedWarahran is the prior king, not automaticdeath of the still-activeSakas king; namesakeBahramI inShapurGilanlist is a different dynastic scope. NPi51 resignation/restoredwording gives no exact293death; subsequentcapture ofWahnam anddamagedpunishmentfuture in61–62 cannot be transferred toWarahranIII. No276death toIII; maintainTabarifatherHormuz versusinscriptionfamily discrepancy, not a harmonized pedigree. AlltopBD/proposedAppear null. No newcurrentinteger gamescenario while wholeidentitymixed.",
       "duplicate_of": null,
       "identity_status": "BahramI与BahramIII王系/事件不同的混并",
       "source_identities_all_adjudicated": false,
@@ -23370,13 +23594,65 @@
           "location": "Paikuli §§4/51及王位争夺完整研究讨论实际读",
           "excerpt": "Bahrām III ... renounced the throne ... remains unknown whether ... died",
           "qualification": "编辑研究而非原刻文亲读；推翻非死亡，不得把293当III卒。"
+        },
+        {
+          "kind": "previous_original_new_person_ruling",
+          "citation": "PreviouslyreadPaikuliNPi1–62 andE1;new ruling on WarahranKingofSakas branch ofmixedBahramI/BahramIII record,not anew acquiredinscription",
+          "urls": [
+            "https://www.dr-ursula-weber.de/Prosopographie/web/files/Wahnam_Sohn_des_Tatrus.pdf"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\wahnam_weber.pdf",
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\wahnam_weber.txt"
+          ],
+          "source_sha256": {
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\wahnam_weber.pdf": "d7b3ce18d6054313566f2a3bd78d92a8864735c47658ed2341bcdd4a30f13921",
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\wahnam_weber.txt": "e602de8e77451311e4d3c6820cfd0cc3aaabd4d21dfcf2976eccd411b8d49e92"
+          },
+          "finding": "诚实复用第29批已读Paikuli全文段，新增10728人物裁定而非新原文：§3前代Warahran去世、§4/6 Wahnam给Sakas王Warahran戴冠；§33两人具名，§47–51王收到Narseh书信后弃大冠，§60降位。对应BahramIII/Sakas分支，不能与Shapur名单Gilan王BahramI合并。",
+          "qualification": "Source acquisition and actual reading were batch29; this is a distinct new person/branch adjudication using that existing full cache. Scholarly translation with restoredwords and2014variants, notstoneautopsy. Thetwo modernQscopes are not made one person. NPi3 deceasedWarahran is the prior king, not automaticdeath of the still-activeSakas king; namesakeBahramI inShapurGilanlist is a different dynastic scope. NPi51 resignation/restoredwording gives no exact293death; subsequentcapture ofWahnam anddamagedpunishmentfuture in61–62 cannot be transferred toWarahranIII. No276death toIII; maintainTabarifatherHormuz versusinscriptionfamily discrepancy, not a harmonized pedigree. AlltopBD/proposedAppear null. No newcurrentinteger gamescenario while wholeidentitymixed.",
+          "verification_steps": {
+            "person": "10728 mixedBahramI/BahramIII",
+            "source_unit": "Paikuli3–6,33,47–51,60 within previouslyread1–62",
+            "short_original": "Warahrān, King of Sakas; diadem",
+            "identity_bridge": "Sakas kingmaker/deposition story identifiesIIIbranch,notGilanI",
+            "date_handling": "priorWarahran death notIII; no276/293wholedeath; gameestimates retain",
+            "remaining_gap": "mixedrecord anddynastic/date discrepancies remain"
+          },
+          "current_game_dates": {
+            "birth": 213,
+            "appear": 254,
+            "death": 276
+          },
+          "estimated_game_years": {
+            "birth": 213,
+            "appear": 254,
+            "death": 276
+          },
+          "game_estimate_decision": "retain integers as estimates; no one chronology established across all inputkeys",
+          "previous_original_reading_handoff": "low_group_handoff_29.json#10750"
         }
       ],
       "unresolved": [
-        "Paikuli完整本人原刻段尚未取得；wholefalse。",
-        "276卒仅第一支二手说不能套第三支；全部历史B/D hold。"
+        "BahramI_Gilan_and_BahramIII_Sakas_distinct_dynastic_scopes_not_merged",
+        "historical_birth_death_and_first_career_unknown",
+        "Paikuli_resignation_not_BahramIII_death_or293_obituary",
+        "Tabari_parentage_vs_inscription_family_variant_preserved"
       ],
-      "candidate_scope_checked": true
+      "candidate_scope_checked": true,
+      "source_limitations": [
+        "Source acquisition and actual reading were batch29; this is a distinct new person/branch adjudication using that existing full cache. Scholarly translation with restoredwords and2014variants, notstoneautopsy. Thetwo modernQscopes are not made one person. NPi3 deceasedWarahran is the prior king, not automaticdeath of the still-activeSakas king; namesakeBahramI inShapurGilanlist is a different dynastic scope. NPi51 resignation/restoredwording gives no exact293death; subsequentcapture ofWahnam anddamagedpunishmentfuture in61–62 cannot be transferred toWarahranIII. No276death toIII; maintainTabarifatherHormuz versusinscriptionfamily discrepancy, not a harmonized pedigree. AlltopBD/proposedAppear null. No newcurrentinteger gamescenario while wholeidentitymixed."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_31.json",
+          "prior_unresolved": [
+            "Paikuli完整本人原刻段尚未取得；wholefalse。",
+            "276卒仅第一支二手说不能套第三支；全部历史B/D hold。"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_31.json"
     },
     {
       "id": 10729,
@@ -24019,11 +24295,11 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "缺独立本人纪年或身份仍hold；不将估年、纪念日或后继者年误作生卒。",
+      "appearance_basis": "首次实际读帕伊库利连续原文译§1–62及E1六行转录/译文，非仅现代叙述。§4、§33两次具父名Tatrus，Wahnam拥WarahranSakasking、反Narseh、争取Meshan王帮助、失势、被BayShabur拘押。§58–59明言捆绑骑瘸驴押至王廷；§61–62残缺惩罚/将杀命令，不能当已经执行死亡记录。具名反叛贵族核心可闭。 Read the complete continuous personal historical sequence1–62 and completeE1 transliteration/translation as reproduced in a scholarly source dossier, not just a search index or secondary biography. The PDF is a paginated digital print of Webers dossier, not a facsimile of ancient stones or the1983edition. Restorations, question marks and2014alternate readings remain explicitly distinguished; no stone autopsy or complete bilingual critical apparatus claimed. Paragraphs63–95 are subsequent royal correspondence/supporter lists and were not fully read forWahnam; do not label the whole inscription read. Royal victory rhetoric including falsehood/sorcery is the narrators hostile representation. Contemporary named identity does not prove every allegation. Birth/death/firstoffice unknown;293 derives from modern accession chronology, not a calendar date in these personal lines. Future punishment/kill language in damaged61–62 does not establish execution, exact death year, or WarahranIII sharing his fate. OtherWohnam/Wahnam court officials not merged by name. Game integers retained as estimates.",
       "duplicate_of": null,
-      "identity_status": "Wahnam，拥BahramIII反Narseh之贵族：铭文完整本人段仍待取",
-      "source_identities_all_adjudicated": false,
-      "review_status": "needs_further_research",
+      "identity_status": "Wahnam_sonTatrus_Paikuli_personal_core_read_dates_unknown",
+      "source_identities_all_adjudicated": true,
+      "review_status": "source_checked_dates_unknown",
       "evidence": [
         {
           "source": "https://www.iranicaonline.org/articles/narseh-sasanian-king/",
@@ -24036,13 +24312,64 @@
           "location": "PDF8/印189王权结构论Wahnam/Tatrus完整研究单位实际读",
           "excerpt": "wicked Wahnam ... son of ... Tatrus",
           "qualification": "论文分析碑文修辞，不是直接阅读全部Paikuli本人原段；后次请求连接重置，不虚记已读前5页。"
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "Paikuli NPi complete continuous§§1–62, cited scholarly translation1983 with explicitly distinguished2014 updates, reproduced byWeber2025 source dossier printedpp3–7/PDF4–15;completeBlockE1 six-line transliteration/translation PDF21",
+          "urls": [
+            "https://www.dr-ursula-weber.de/Prosopographie/web/files/Wahnam_Sohn_des_Tatrus.pdf"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\wahnam_weber.pdf",
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\wahnam_weber.txt"
+          ],
+          "source_sha256": {
+            "wahnam_weber.pdf": "d7b3ce18d6054313566f2a3bd78d92a8864735c47658ed2341bcdd4a30f13921",
+            "wahnam_weber.txt": "e602de8e77451311e4d3c6820cfd0cc3aaabd4d21dfcf2976eccd411b8d49e92"
+          },
+          "finding": "首次实际读帕伊库利连续原文译§1–62及E1六行转录/译文，非仅现代叙述。§4、§33两次具父名Tatrus，Wahnam拥WarahranSakasking、反Narseh、争取Meshan王帮助、失势、被BayShabur拘押。§58–59明言捆绑骑瘸驴押至王廷；§61–62残缺惩罚/将杀命令，不能当已经执行死亡记录。具名反叛贵族核心可闭。",
+          "qualification": "Read the complete continuous personal historical sequence1–62 and completeE1 transliteration/translation as reproduced in a scholarly source dossier, not just a search index or secondary biography. The PDF is a paginated digital print of Webers dossier, not a facsimile of ancient stones or the1983edition. Restorations, question marks and2014alternate readings remain explicitly distinguished; no stone autopsy or complete bilingual critical apparatus claimed. Paragraphs63–95 are subsequent royal correspondence/supporter lists and were not fully read forWahnam; do not label the whole inscription read. Royal victory rhetoric including falsehood/sorcery is the narrators hostile representation. Contemporary named identity does not prove every allegation. Birth/death/firstoffice unknown;293 derives from modern accession chronology, not a calendar date in these personal lines. Future punishment/kill language in damaged61–62 does not establish execution, exact death year, or WarahranIII sharing his fate. OtherWohnam/Wahnam court officials not merged by name. Game integers retained as estimates.",
+          "verification_steps": {
+            "person": "10750 Wahnam son of Tatrus",
+            "source_unit": "Paikuli1–62;E1sixlines",
+            "short_original": "Seize Wahnām and bind him; Wahnām, son of Tatrus",
+            "identity_bridge": "two patronymics and continuous kingmaker/capture story identify the named core; namesake officials excluded",
+            "date_handling": "no birth/death or first-office year;293execution remains inference; game estimates retained",
+            "remaining_gap": "exact fate and life dates unknown; physical stone/apparatus not autopsied"
+          },
+          "current_game_dates": {
+            "birth": 248,
+            "appear": 264,
+            "death": 293
+          },
+          "estimated_game_years": {
+            "birth": 248,
+            "appear": 264,
+            "death": 293
+          },
+          "game_estimate_decision": "retain game integer years explicitly as estimates; neither royal accession chronology nor deposition narrative verifies a personal death year"
         }
       ],
       "unresolved": [
-        "Paikuli完整个人原文仍缺，wholefalse；293死亡仅现代重建未作本次strict史实。",
-        "III命运未知，不因同降自动同死。"
+        "historical_birth_death_and_first_career_unknown",
+        "Paikuli61_62_punishment_future_and_fragmentary_not_verified_execution_or293death",
+        "hostile_royal_rhetoric_and_restored_readings_preserved",
+        "stone_images_and_complete_bilingual_apparatus_not_read_optional"
       ],
-      "candidate_scope_checked": true
+      "candidate_scope_checked": true,
+      "source_limitations": [
+        "Read the complete continuous personal historical sequence1–62 and completeE1 transliteration/translation as reproduced in a scholarly source dossier, not just a search index or secondary biography. The PDF is a paginated digital print of Webers dossier, not a facsimile of ancient stones or the1983edition. Restorations, question marks and2014alternate readings remain explicitly distinguished; no stone autopsy or complete bilingual critical apparatus claimed. Paragraphs63–95 are subsequent royal correspondence/supporter lists and were not fully read forWahnam; do not label the whole inscription read. Royal victory rhetoric including falsehood/sorcery is the narrators hostile representation. Contemporary named identity does not prove every allegation. Birth/death/firstoffice unknown;293 derives from modern accession chronology, not a calendar date in these personal lines. Future punishment/kill language in damaged61–62 does not establish execution, exact death year, or WarahranIII sharing his fate. OtherWohnam/Wahnam court officials not merged by name. Game integers retained as estimates."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_29.json",
+          "prior_unresolved": [
+            "Paikuli完整个人原文仍缺，wholefalse；293死亡仅现代重建未作本次strict史实。",
+            "III命运未知，不因同降自动同死。"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_29.json"
     },
     {
       "id": 10751,
@@ -24450,7 +24777,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "出生死亡与始仕无独立确年；保留游戏估算，不把现代代次/在位推年当原文纪年。",
+      "appearance_basis": "首次实际读具名Ἀδαρνάρσης原段：Narses的正妻有三子，长子Adarnarses承位，因残酷被废；幼年人皮帐篷逸事用于说明残酷。接段Shapur替位、另一兄弟被盲、Hormisdas被囚并逃罗马。补上此前Zosimus/Tabari均未点名的关键文学见证，但Zonaras父系Narses与现代HormizdII父系仍有传统差异，未强行填平。 Read the complete named Greek personal unit, not merely the English search snippet. Cached electronicGreek has OCR/mixed-script defects; printed critical edition and manuscript not autopsied. The sites parallel English changes the first genealogy sentence toHormizd whereas the visibleGreek saysNarses; therefore English is not used as an independent witness and the discrepant name is preserved. Greek wording states loss of kingship, not death; infant/child anecdote is qualitative, not a numerical age. No309 or exact reign length occurs in this unit. The order of narration underConstantius is a retrospective digression, not proof of contemporary living activity350. The identification of the modernAdurNarseh with this named successor is a conventional contextual bridge, but father/generation and conflict withTabaris no-son tradition require reconstruction; retain wholefalse rather than force a proven family or corpse. Do not infer nonexistence or autoexclude from game. HistoricalBD/proposedAppear null; game estimates retained.",
       "duplicate_of": null,
       "identity_status": "AdurNarseh名与HormizdII长子废立故事的桥待原始拜占庭段确认",
       "source_identities_all_adjudicated": false,
@@ -24467,13 +24794,62 @@
           "location": "2/53–54 HormuzII完整传及Shapur胎中继任开段实际读",
           "excerpt": "ثم هلك ولا ولد له ... بعضهن حبلى",
           "qualification": "Tabari另一传说称死时无子、妻孕，未列本候选，形成来源传统差异，不能混称全源共同证实。"
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "Zonaras,EpitomeHistoriarum13.5:complete namedAdarnarses succession/deposition/tent-anecdote unit plus succeedingShapur/Hormisdas paragraph;Greek electronic transcription,site blocks19–20/lines196–205",
+          "urls": [
+            "https://deltoi.com/grc/john-zonaras/epitome-historiarum/chapter-13"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group29_read_units\\zonaras13_personal_browser.txt"
+          ],
+          "source_sha256": {
+            "zonaras13_personal_browser.txt": "86b4223c4a5fc1e30fa529b1d69f3000059ee91eee81d728be6ec9bc125c349d"
+          },
+          "finding": "首次实际读具名Ἀδαρνάρσης原段：Narses的正妻有三子，长子Adarnarses承位，因残酷被废；幼年人皮帐篷逸事用于说明残酷。接段Shapur替位、另一兄弟被盲、Hormisdas被囚并逃罗马。补上此前Zosimus/Tabari均未点名的关键文学见证，但Zonaras父系Narses与现代HormizdII父系仍有传统差异，未强行填平。",
+          "qualification": "Read the complete named Greek personal unit, not merely the English search snippet. Cached electronicGreek has OCR/mixed-script defects; printed critical edition and manuscript not autopsied. The sites parallel English changes the first genealogy sentence toHormizd whereas the visibleGreek saysNarses; therefore English is not used as an independent witness and the discrepant name is preserved. Greek wording states loss of kingship, not death; infant/child anecdote is qualitative, not a numerical age. No309 or exact reign length occurs in this unit. The order of narration underConstantius is a retrospective digression, not proof of contemporary living activity350. The identification of the modernAdurNarseh with this named successor is a conventional contextual bridge, but father/generation and conflict withTabaris no-son tradition require reconstruction; retain wholefalse rather than force a proven family or corpse. Do not infer nonexistence or autoexclude from game. HistoricalBD/proposedAppear null; game estimates retained.",
+          "verification_steps": {
+            "person": "10763 AdurNarseh / GreekAdarnarses",
+            "source_unit": "Zonaras13.5 named succession and deposition unit,siteblocks19–20",
+            "short_original": "Ἀδαρνάρσης; τῆς βασιλείας ἐκπέπτωκεν",
+            "identity_bridge": "named eldest successor displaced byShapur; father-generation discrepancy left unresolved",
+            "date_handling": "deposed is not killed; no309 or numerical age; no date imported from narrative placement",
+            "remaining_gap": "family reconstruction and criticalGreek edition still pending"
+          },
+          "current_game_dates": {
+            "birth": 264,
+            "appear": 280,
+            "death": 309
+          },
+          "estimated_game_years": {
+            "birth": 264,
+            "appear": 280,
+            "death": 309
+          },
+          "game_estimate_decision": "retain game integer years explicitly as estimates; neither royal accession chronology nor deposition narrative verifies a personal death year"
         }
       ],
       "unresolved": [
-        "Zonaras等点名原段尚未取全；309死亡为现代重建，未晋升原证。",
-        "未以查无名字断此人不存在或排除游戏。"
+        "Adarnarses_named_successor_to_modern_AdurNarseh_genealogy_reconstruction_pending",
+        "Zonaras_Narses_father_vs_modern_HormizdII_and_Tabari_tradition_difference",
+        "historical_birth_death_and_first_career_unknown",
+        "Greek_electronic_OCR_not_critical_edition_autopsy"
       ],
-      "candidate_scope_checked": true
+      "candidate_scope_checked": true,
+      "source_limitations": [
+        "Read the complete named Greek personal unit, not merely the English search snippet. Cached electronicGreek has OCR/mixed-script defects; printed critical edition and manuscript not autopsied. The sites parallel English changes the first genealogy sentence toHormizd whereas the visibleGreek saysNarses; therefore English is not used as an independent witness and the discrepant name is preserved. Greek wording states loss of kingship, not death; infant/child anecdote is qualitative, not a numerical age. No309 or exact reign length occurs in this unit. The order of narration underConstantius is a retrospective digression, not proof of contemporary living activity350. The identification of the modernAdurNarseh with this named successor is a conventional contextual bridge, but father/generation and conflict withTabaris no-son tradition require reconstruction; retain wholefalse rather than force a proven family or corpse. Do not infer nonexistence or autoexclude from game. HistoricalBD/proposedAppear null; game estimates retained."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_29.json",
+          "prior_unresolved": [
+            "Zonaras等点名原段尚未取全；309死亡为现代重建，未晋升原证。",
+            "未以查无名字断此人不存在或排除游戏。"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_29.json"
     },
     {
       "id": 10764,
@@ -27928,7 +28304,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "生卒不详则留空；具体活动与游戏估算另分，待身份闭合后才可校准。",
+      "appearance_basis": "《Irrisio》此前只读1–4，今补齐1–10：结尾说明所列各学派彼此抵牾，无作者生平。另首次完整读Comana受难拉丁译§1–9及编者序：本人是Antoninus下的士兵，Sebastianus审讯，白发者，毒药师先被杀，本人后斩首、葬Cappadocia的Comana；并非百科误写的PonticComana或刽子手先后次序。两key的作者与老兵仍无同一桥。 Full English primary literary work and complete Latin Passion read; Greek parallel is cached but not claimed as independently collated manuscript text. Irrisio rhetorically mentions wife/children/home in§9 while mocking Pythagorean cosmic measurement; this is not securely autobiographical family evidence. Passion§3 mentions white hair, not numerical age; Antoninus is not independently numbered or assigned an exact death year. Greek ending has three-before-April kalends whereas Latin prints fourth-before-April kalends, and both end martyrdom at completion ofMay; preserve variant, not an exact historical death date. Modern90–170 and author second/third-century or later hypotheses remain unsupported as a single lifespan. Genre/later transmission do not prove historical existence independently. No merge, split execution, or game calibration while identity bridge is unresolved.",
       "duplicate_of": null,
       "identity_status": "护教论作者Hermias与Comana老兵殉道圣Hermias缺同一桥，暂隔两分支",
       "source_identities_all_adjudicated": false,
@@ -27945,13 +28321,67 @@
           "location": "编辑导论身份限定实际读",
           "excerpt": "cannot be identified with any other figure",
           "qualification": "编辑明确作者身份未能与其他古人连接；圣Hermias受难原传仍缺实际读，不冒然在无专属桥时整并。"
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "Hermias,Irrisio/Derision of Gentile Philosophers complete1–10,Giles1857pp193–199;AASMayVII,31May,Commentary1–3 and BHG744 complete Latin translation1–9 with parallelGreek",
+          "urls": [
+            "https://www.earlychristianwritings.com/fathers/hermias_1_satire.html",
+            "https://www.heiligenlexikon.de/ActaSanctorum/31.Mai.html"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group28_read_units\\hermias.html",
+            "out\\person_chronology\\source_cache\\low_group28_read_units\\hermias.txt",
+            "out\\person_chronology\\source_cache\\low_group28_read_units\\hermias_passio.txt"
+          ],
+          "source_sha256": {
+            "hermias.html": "dd59c345857d4baa3011f7658be97f10ac2e46d5f5387976177000d2e6f35fb8",
+            "hermias.txt": "769b5df3ef24f262fee793d91afc5834da3535f2e6e569d68d720f3fbb4028ea",
+            "hermias_passio.txt": "4de527e1c0e32cf72e1102af78fdd42fcb79f11a887d4dd96424236bb3777b4f"
+          },
+          "finding": "《Irrisio》此前只读1–4，今补齐1–10：结尾说明所列各学派彼此抵牾，无作者生平。另首次完整读Comana受难拉丁译§1–9及编者序：本人是Antoninus下的士兵，Sebastianus审讯，白发者，毒药师先被杀，本人后斩首、葬Cappadocia的Comana；并非百科误写的PonticComana或刽子手先后次序。两key的作者与老兵仍无同一桥。",
+          "qualification": "Full English primary literary work and complete Latin Passion read; Greek parallel is cached but not claimed as independently collated manuscript text. Irrisio rhetorically mentions wife/children/home in§9 while mocking Pythagorean cosmic measurement; this is not securely autobiographical family evidence. Passion§3 mentions white hair, not numerical age; Antoninus is not independently numbered or assigned an exact death year. Greek ending has three-before-April kalends whereas Latin prints fourth-before-April kalends, and both end martyrdom at completion ofMay; preserve variant, not an exact historical death date. Modern90–170 and author second/third-century or later hypotheses remain unsupported as a single lifespan. Genre/later transmission do not prove historical existence independently. No merge, split execution, or game calibration while identity bridge is unresolved.",
+          "verification_steps": {
+            "person": "10896 Hermias: philosopher-author versus Comana soldier",
+            "source_unit": "Irrisio1–10;BHG744Latin1–9 andpreface1–3",
+            "short_original": "Contemplor canitiem; in Comanis ... militem, Hermiam nomine",
+            "identity_bridge": "each textual persona identifiable; no author-soldier equation supplied",
+            "date_handling": "no numerical age or verified life year; game retained only as estimate",
+            "remaining_gap": "cross-key identity bridge remains unresolved"
+          },
+          "current_game_dates": {
+            "birth": 90,
+            "appear": 106,
+            "death": 170
+          },
+          "estimated_game_years": {
+            "birth": 90,
+            "appear": 106,
+            "death": 170
+          },
+          "game_estimate_decision": "retain current game integers explicitly as estimates; no securely anchored personal date or identity justifies change"
         }
       ],
       "unresolved": [
-        "两个key身份同一未证，整体BDnull/wholefalse。",
-        "圣徒90出生/170卒未原证；作者年代二三世纪或更晚争论亦不能拼一条。"
+        "author_Hermias_to_Comana_soldier_Hermias_identity_bridge_unproved",
+        "historical_birth_death_and_first_career_unknown",
+        "Passion_Antoninus_not_exact_year_and_Greek_Latin_March_day_variant",
+        "Irrisio_rhetorical_family_not_secure_autobiography"
       ],
-      "candidate_scope_checked": true
+      "candidate_scope_checked": true,
+      "source_limitations": [
+        "Full English primary literary work and complete Latin Passion read; Greek parallel is cached but not claimed as independently collated manuscript text. Irrisio rhetorically mentions wife/children/home in§9 while mocking Pythagorean cosmic measurement; this is not securely autobiographical family evidence. Passion§3 mentions white hair, not numerical age; Antoninus is not independently numbered or assigned an exact death year. Greek ending has three-before-April kalends whereas Latin prints fourth-before-April kalends, and both end martyrdom at completion ofMay; preserve variant, not an exact historical death date. Modern90–170 and author second/third-century or later hypotheses remain unsupported as a single lifespan. Genre/later transmission do not prove historical existence independently. No merge, split execution, or game calibration while identity bridge is unresolved."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_28.json",
+          "prior_unresolved": [
+            "两个key身份同一未证，整体BDnull/wholefalse。",
+            "圣徒90出生/170卒未原证；作者年代二三世纪或更晚争论亦不能拼一条。"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_28.json"
     },
     {
       "id": 10897,
@@ -33722,11 +34152,11 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "史实生卒未知不补齐；游戏年仍标估算，确证活动年只是最迟已活动界。",
+      "appearance_basis": "三传全文及各注实际核读，GL/WK同Q936653均指Perugia主教Constantius。第一传有Crescentius/Charisius/Lucius、Monticellus逃亡、Fulgineatum被杀、Leuianus归葬；第二传约30岁任主教、三年后迫害，直接赴Assisi遇兵；第三传由Palatius编合重述两线。具名崇奉人物核心与版本归属可闭，不等于殉道叙事全部史实确证。 Newly completed three full primary Lives, not another reading of only the previously read first-Life ending. No manuscript autopsy. BHL1938 names Antoninus; Marcus identification appears in editorial margins. BHL1939 says about30 at election and three completed years before persecution, but supplies no independently dated year. BHL1940 calls the birth setting AntoninusPius and persecution Marcus, explains30 symbolically through Ezekiel/Christ/Trinity, and ends with erroneous Marcus accession163. Therefore119birth/178death/about170 and Baronius175 are not verified life dates; neither the age motif nor January29 can supply exact historical birth/death. Gothic/Herculanus conflation rejected by editors remains preserved as a rejected transmission branch. Textual core closure does not authenticate Barzi genealogy, miracles or chronology; retain existing game estimates.",
       "duplicate_of": null,
-      "identity_status": "source_identity_not_fully_adjudicated",
-      "source_identities_all_adjudicated": false,
-      "review_status": "needs_further_research",
+      "identity_status": "named_textual_core_recensions_adjudicated_historical_dates_unknown",
+      "source_identities_all_adjudicated": true,
+      "review_status": "source_checked_dates_unknown",
       "candidate_scope_checked": true,
       "evidence": [
         {
@@ -33742,12 +34172,63 @@
           "qualification": "实际读本人编者序§1–4及第一传死亡葬运尾§17–20，序已指出与Herculanus混淆造成哥特时代误判，Baronius175只是编排。尚未全读三长传，不算全来源充分核完；1月29是纪念日。",
           "verification": "individually_read_source_personal_unit",
           "excerpt_type": "locator_summary_not_verbatim"
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "AAS January II,29January:complete editorial preface1–4;BHL1938 sections1–20;BHL1939 sections1–29;BHL1940 sections1–36 including variant notes",
+          "urls": [
+            "https://www.heiligenlexikon.de/ActaSanctorum/29.Januar.html"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group28_read_units\\constantius.html",
+            "out\\person_chronology\\source_cache\\low_group28_read_units\\constantius.txt"
+          ],
+          "source_sha256": {
+            "constantius.html": "de49abd0d5a099357e2cd52c84ee196019bedee56a99b6f375297e705a41c1c0",
+            "constantius.txt": "6a9a7f09db9bc0a3ce7087b95367014626519bdb87140e593e431d1066783ea3"
+          },
+          "finding": "三传全文及各注实际核读，GL/WK同Q936653均指Perugia主教Constantius。第一传有Crescentius/Charisius/Lucius、Monticellus逃亡、Fulgineatum被杀、Leuianus归葬；第二传约30岁任主教、三年后迫害，直接赴Assisi遇兵；第三传由Palatius编合重述两线。具名崇奉人物核心与版本归属可闭，不等于殉道叙事全部史实确证。",
+          "qualification": "Newly completed three full primary Lives, not another reading of only the previously read first-Life ending. No manuscript autopsy. BHL1938 names Antoninus; Marcus identification appears in editorial margins. BHL1939 says about30 at election and three completed years before persecution, but supplies no independently dated year. BHL1940 calls the birth setting AntoninusPius and persecution Marcus, explains30 symbolically through Ezekiel/Christ/Trinity, and ends with erroneous Marcus accession163. Therefore119birth/178death/about170 and Baronius175 are not verified life dates; neither the age motif nor January29 can supply exact historical birth/death. Gothic/Herculanus conflation rejected by editors remains preserved as a rejected transmission branch. Textual core closure does not authenticate Barzi genealogy, miracles or chronology; retain existing game estimates.",
+          "verification_steps": {
+            "person": "11044 Constantius of Perugia",
+            "source_unit": "BHL1938§1–20;1939§1–29;1940§1–36",
+            "short_original": "circiter triginta annorum; tribus annis exactis",
+            "identity_bridge": "same named Perugia bishop across three explicitly collated recensions; sameQ GL/WK",
+            "date_handling": "all life dates unknown; approximate symbolic age and faulty accession do not produce a year",
+            "remaining_gap": "historicity, genealogy and absolute life dates remain unknown"
+          },
+          "current_game_dates": {
+            "birth": 119,
+            "appear": 135,
+            "death": 178
+          },
+          "estimated_game_years": {
+            "birth": 119,
+            "appear": 135,
+            "death": 178
+          },
+          "game_estimate_decision": "retain current game integers explicitly as estimates; no securely anchored personal date or identity justifies change"
         }
       ],
       "unresolved": [
-        "生卒日期未证，119/178/170不填历史字段。",
-        "尚需三传年代语境完整读校；不能把编者‘subM.Aurelio’或纪念日当卒年日。"
-      ]
+        "historical_birth_death_and_first_career_unknown",
+        "three_hagiographic_recensions_variant_routes_and_chronology_not_contemporary_biography",
+        "Barzi_genealogy_and_symbolic_age30_not_independent_birth_evidence",
+        "January29_cult_day_not_proved_historical_death_day"
+      ],
+      "source_limitations": [
+        "Newly completed three full primary Lives, not another reading of only the previously read first-Life ending. No manuscript autopsy. BHL1938 names Antoninus; Marcus identification appears in editorial margins. BHL1939 says about30 at election and three completed years before persecution, but supplies no independently dated year. BHL1940 calls the birth setting AntoninusPius and persecution Marcus, explains30 symbolically through Ezekiel/Christ/Trinity, and ends with erroneous Marcus accession163. Therefore119birth/178death/about170 and Baronius175 are not verified life dates; neither the age motif nor January29 can supply exact historical birth/death. Gothic/Herculanus conflation rejected by editors remains preserved as a rejected transmission branch. Textual core closure does not authenticate Barzi genealogy, miracles or chronology; retain existing game estimates."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_28.json",
+          "prior_unresolved": [
+            "生卒日期未证，119/178/170不填历史字段。",
+            "尚需三传年代语境完整读校；不能把编者‘subM.Aurelio’或纪念日当卒年日。"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_28.json"
     },
     {
       "id": 11045,
@@ -44380,7 +44861,7 @@
       "historical_birth": null,
       "historical_death": null,
       "proposed_appear": null,
-      "appearance_basis": "未知生卒留空；已证纪年活动与原文享年分别记录，不据估算补史实。",
+      "appearance_basis": "首次实际读FV204完整本人法条：在罗马专修法律者可因学业免除监护责任，文本接“Imperator Antoninus Augustus Cereali a censibus et aliis rescripsit”。可证文本中的收敕户籍官Cerealis；未写MarcusMunatiusSulla，也未给独立公元纪年、出生或卒年。邻条203的Pertinax/Aelianus执政纪年属于另一敕答，不移套204。 Complete204 actually read in a modern plain-Latin transcription of the ancient legal fragment, not palimpsest autopsy or full critical apparatus. The transcription visibly has a lacuna after etita; absence of a joint emperor cannot securely distinguish soleCaracalla from a damaged joint-reign formula. This unit explicitly says a censibus, not a libellis; adding the latter requires separate proof. Modern SullaCerialis consul215/Cappadocia/execution219 branch is preserved but not independently bridged here. Likewise ManiliusCerealis in236 is a differently specified addressee, not silently identified. No dated event may be imported from neighboring fragments. Unknown historicalB/D and first appearance remain null; keep game estimates until person equation is resolved.",
       "duplicate_of": null,
       "identity_status": "identity_not_fully_verified",
       "source_identities_all_adjudicated": false,
@@ -44398,11 +44879,60 @@
           "excerpt": "Cerialis a censibus",
           "qualification": "完整本人嵌条实际读，是Antoninus致户籍官FV204；前559Pliny通信Cerialis另人，不误当本文。",
           "verification": "individually_read_source_personal_unit"
+        },
+        {
+          "kind": "new_personal_original_unit_reading",
+          "citation": "Fragmenta Vaticana204 complete personal legal fragment, with203/205 context in public Latin transcription",
+          "urls": [
+            "https://ancientrome.ru/ius/library/vatican/FragVat.htm"
+          ],
+          "local_paths": [
+            "out\\person_chronology\\source_cache\\low_group28_read_units\\fragmenta_vaticana.txt"
+          ],
+          "source_sha256": {
+            "fragmenta_vaticana.txt": "aa54bde307da509c9a25634b119f1cd88ad81aa3e869594a31da7c92289be1f3"
+          },
+          "finding": "首次实际读FV204完整本人法条：在罗马专修法律者可因学业免除监护责任，文本接“Imperator Antoninus Augustus Cereali a censibus et aliis rescripsit”。可证文本中的收敕户籍官Cerealis；未写MarcusMunatiusSulla，也未给独立公元纪年、出生或卒年。邻条203的Pertinax/Aelianus执政纪年属于另一敕答，不移套204。",
+          "qualification": "Complete204 actually read in a modern plain-Latin transcription of the ancient legal fragment, not palimpsest autopsy or full critical apparatus. The transcription visibly has a lacuna after etita; absence of a joint emperor cannot securely distinguish soleCaracalla from a damaged joint-reign formula. This unit explicitly says a censibus, not a libellis; adding the latter requires separate proof. Modern SullaCerialis consul215/Cappadocia/execution219 branch is preserved but not independently bridged here. Likewise ManiliusCerealis in236 is a differently specified addressee, not silently identified. No dated event may be imported from neighboring fragments. Unknown historicalB/D and first appearance remain null; keep game estimates until person equation is resolved.",
+          "verification_steps": {
+            "person": "11328 Sulla Cerialis / Cerealis a censibus",
+            "source_unit": "FragmentaVaticana204 entireparagraph",
+            "short_original": "Imperator Antoninus Augustus Cereali a censibus et aliis rescripsit",
+            "identity_bridge": "a censibus addressee clear; full-name/consular-career bridge absent",
+            "date_handling": "neighbor203 consuls excluded; no exact life or first-office year",
+            "remaining_gap": "equation with consul215 and execution219 branch remains unproved"
+          },
+          "current_game_dates": {
+            "birth": 174,
+            "appear": 190,
+            "death": 219
+          },
+          "estimated_game_years": {
+            "birth": 174,
+            "appear": 190,
+            "death": 219
+          },
+          "game_estimate_decision": "retain current game integers explicitly as estimates; no securely anchored personal date or identity justifies change"
         }
       ],
       "unresolved": [
-        "总督/执政与户籍官跨源身份未闭，不能共享219卒；原FV204及独立编年原证待取。"
-      ]
+        "Sulla_Cerialis_to_Cerealis_a_censibus_identity_bridge_unproved",
+        "historical_birth_death_and_first_career_unknown",
+        "FV204_lacuna_and_Antoninus_reign_scope_unresolved",
+        "a_libellis_office_not_in_this_primary_unit"
+      ],
+      "source_limitations": [
+        "Complete204 actually read in a modern plain-Latin transcription of the ancient legal fragment, not palimpsest autopsy or full critical apparatus. The transcription visibly has a lacuna after etita; absence of a joint emperor cannot securely distinguish soleCaracalla from a damaged joint-reign formula. This unit explicitly says a censibus, not a libellis; adding the latter requires separate proof. Modern SullaCerialis consul215/Cappadocia/execution219 branch is preserved but not independently bridged here. Likewise ManiliusCerealis in236 is a differently specified addressee, not silently identified. No dated event may be imported from neighboring fragments. Unknown historicalB/D and first appearance remain null; keep game estimates until person equation is resolved."
+      ],
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "low_group_handoff_28.json",
+          "prior_unresolved": [
+            "总督/执政与户籍官跨源身份未闭，不能共享219卒；原FV204及独立编年原证待取。"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "low_group_handoff_28.json"
     },
     {
       "id": 11329,

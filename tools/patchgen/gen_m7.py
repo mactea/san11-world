@@ -462,6 +462,8 @@ open(f'{out_dir}/worldmod_bases.txt', 'w', encoding='utf-8').write(
 sys.path.insert(0, f'{PROJ}/tools')
 from patch_zoc_null import cave_records
 records.extend(cave_records())
+from patch_guidance_research import cave_records as guidance_research_caves
+records.extend(guidance_research_caves())
 open(f'{out_dir}/worldmod_bases_caves.txt', 'w', encoding='utf-8').write('\n'.join(records) + '\n')
 json.dump([{k: r[k] for k in ('va', 'struct', 'expr', 'phase', 'note')} for r in allocs],
           open(f'{out_dir}/bases_allocs.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

@@ -127,7 +127,7 @@ class NativeFixture:
         assert stopped in stops, hex(stopped)
         return stopped
 
-    def shipment(self, troops=10000, food=10000, gold=0, n=0,
+    def shipment(self, troops=10000, food=10000, gold=0, n=3,
                  target_troops=0, target_capacity=100000, officers=1, ap=10):
         self.write(SOURCE + 4, troops)
         self.write(TARGET + 4, target_troops)
@@ -173,6 +173,27 @@ class AITransportPolicyTest(unittest.TestCase):
     def test_original_rejects_poor_rear_city(self):
         self.assertIsNone(NativeFixture(self.pe, []).shipment(troops=10000, gold=0))
 
+    def test_native_rear_demand_three_can_ship_with_one_officer(self):
+        self.assertIsNone(NativeFixture(self.pe, []).shipment(
+            troops=15000, food=100000, gold=1000, n=3, officers=1))
+        for name, records in self.variants():
+            for n in (0, 1, 2, 3):
+                with self.subTest(variant=name, n=n):
+                    fixture = NativeFixture(self.pe, records)
+                    result = fixture.shipment(troops=15000, food=100000, n=n)
+                    self.assertIsNotNone(result)
+                    self.assertEqual((result['reserve'], result['troops']), (3000, 12000))
+                    self.assertEqual(fixture.read(AI + 410 * 0x34 + 0x4a) & 0xffff, n)
+
+    def test_rear_priority_supply_also_uses_available_officer(self):
+        for name, records in self.variants():
+            with self.subTest(variant=name):
+                fixture = NativeFixture(self.pe, records)
+                fixture.write(STACK + 0x14, 1)
+                result = fixture.shipment(troops=15000, food=100000, n=3, officers=1)
+                self.assertIsNotNone(result)
+                self.assertEqual((result['reserve'], result['troops']), (3000, 12000))
+
     def test_rear_surplus_and_no_required_gold_or_weapons(self):
         for name, records in self.variants():
             for cities in (530, 1000):
@@ -200,7 +221,7 @@ class AITransportPolicyTest(unittest.TestCase):
 
     def test_frontline_reserve_and_native_formation_are_preserved(self):
         for name, records in self.variants():
-            for n in (3, 5, 7, 9):
+            for n in (5, 7, 9):
                 with self.subTest(variant=name, n=n):
                     fixture = NativeFixture(self.pe, records)
                     result = fixture.shipment(troops=n * 7500 + 5000, food=300000,
@@ -255,7 +276,7 @@ class AITransportPolicyTest(unittest.TestCase):
 
     def test_port_supply_preserves_rear_floor(self):
         for name, records in self.variants():
-            for n in (0, 5):
+            for n in (0, 3, 5):
                 for troops in (2999, 3000, 5999, 6000):
                     with self.subTest(variant=name, n=n, troops=troops):
                         fixture = NativeFixture(self.pe, records)
@@ -263,7 +284,7 @@ class AITransportPolicyTest(unittest.TestCase):
                         fixture.cpu.reg_write(UC_X86_REG_EDI, SOURCE)
                         fixture.cpu.reg_write(UC_X86_REG_EAX, troops)
                         result = fixture.run(0x5f4c23, {0x5f4c2e, 0x5f4e0a})
-                        self.assertEqual(result == 0x5f4c2e, troops >= (6000 if n == 0 else 3000))
+                        self.assertEqual(result == 0x5f4c2e, troops >= (6000 if n <= 3 else 3000))
                         self.assertEqual(fixture.cpu.reg_read(UC_X86_REG_ESP), STACK)
 
     def test_permission_safety_and_food_before_dispatch(self):
@@ -284,6 +305,8 @@ class AITransportPolicyTest(unittest.TestCase):
     def test_relay_strictly_approaches_valid_same_corps_destination(self):
         for name, records in self.variants():
             for n, dest, same_corps, distance, expected in [
+                (3, 500, True, (4, 3), True), (3, 500, True, (4, 4), False),
+                (3, 500, True, (4, 5), False), (3, 410, True, (0, 1), False),
                 (0, 500, True, (4, 3), True), (0, 500, True, (4, 4), False),
                 (0, 500, True, (4, 5), False), (0, 410, True, (0, 1), False),
                 (0, 500, True, (4, -1), False),
@@ -317,12 +340,13 @@ class AITransportPolicyTest(unittest.TestCase):
                         result = fixture.run(0x5e4e1e, {0x5e4e2e, 0x5e4e38})
                         self.assertEqual(result == 0x5e4e2e, expected)
                         self.assertEqual(fixture.cpu.reg_read(UC_X86_REG_ESP), STACK)
-                        if n == 0 and dest >= 0 and same_corps:
+                        if n <= 3 and dest >= 0 and same_corps:
                             self.assertIn(0x4795f0 if technology else 0x4795c0, fixture.calls)
 
     def test_rear_relay_can_receive_without_native_supply_flag(self):
         for name, records in self.variants():
-            for troops, n, expected in [(0, 0, True), (89000, 0, True),
+            for troops, n, expected in [(0, 3, True), (89000, 3, True),
+                                        (89500, 3, False), (0, 0, True), (89000, 0, True),
                                         (89500, 0, False), (0, 5, False)]:
                 with self.subTest(variant=name, troops=troops, n=n):
                     fixture = NativeFixture(self.pe, records)
@@ -336,7 +360,7 @@ class AITransportPolicyTest(unittest.TestCase):
                     # Detect insertion without depending on the C++ list allocator.
                     result = fixture.run(0x5f0bc1, {0x491f50, 0x5f0c1c})
                     self.assertEqual(result == 0x491f50, expected)
-                    if n == 0:
+                    if n <= 3:
                         self.assertEqual(fixture.cpu.reg_read(UC_X86_REG_EBX), 0x12345678)
 
     def test_shared_target_helper_keeps_other_callers_native(self):

@@ -34,6 +34,7 @@ for site, comment in [
     (0x5f5b2b, 'AI all-corps actions'),
     (0x5f5c88, 'AI delegated corps actions'),
     (0x603928, 'native corps dialog validation'),
+    (0x618d2e, 'delegation details dialog validation'),
     (0x675f64, 'force-wide corps merge'),
 ]:
     field(site, 8, LIMIT, comment)

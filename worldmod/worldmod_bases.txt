@@ -2813,3 +2813,4 @@
 0074d980 1 4 b9d80e1b09 UISCR_E ; [imm] UISCR_E static UI screen object relocated
 0074d990 1 4 b978691b09 UISCR_A ; [imm] UISCR_A static UI screen object relocated
 0074daa0 1 4 b9a8789c09 AIRT ; [imm] AI runtime object 0x99c78a8 (AIRT; ctor 0x5e1590, 
+00618d2e 2 1 83f808 16 ; 16 corps: delegation details dialog validation

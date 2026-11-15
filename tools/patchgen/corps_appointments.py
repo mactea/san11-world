@@ -1,4 +1,4 @@
-"""Native corps-menu companion loader and delegated governor AP contribution."""
+"""Native corps appointments, governor retention and delegated AP contribution."""
 
 
 def _stack_string(text, offset):
@@ -30,7 +30,27 @@ CAVE_TEXT = [(0x6034a0, 'push -1',
      'movzx ecx, byte ptr [esi+0x174]; lea eax, [eax+ecx*4]; '
      'xor edx, edx; mov ecx, 50; div ecx; cmp eax, 6; jge A; '
      'mov eax, 6; A: mov esi, eax; jmp 0x598774; '
-     'N: call 0x4890b0')]
+     'N: call 0x4890b0'),
+    # Native personnel refresh always sorts the corps and replaces its governor.
+    # Keep a player delegated corps' incumbent while still serving in that corps.
+    # Read the existing saved governor ID, so this also works before opening the
+    # appointment dialog and requires no new save fields or per-session registry.
+    # ESI = corps, EBX = incumbent, [EAX] = native replacement candidate.
+    (0x4be5b0, 'mov ebp, dword ptr [eax]',
+     'mov ebp, [eax]; pushfd; pushad; '
+     'cmp dword ptr [esi+8], 2; jl E; '
+     'cmp dword ptr [esi+8], 16; jg E; '
+     'push ebx; call 0x47a630; add esp, 4; test eax, eax; jz E; '
+     'cmp dword ptr [ebx+0xa0], 1; jl E; '
+     'cmp dword ptr [ebx+0xa0], 3; jg E; '
+     'push esi; mov ecx, 0x7201958; call 0x4912c0; '
+     'cmp dword ptr [ebx+0x94], eax; jne E; '
+     'mov ecx, esi; mov eax, [ecx]; call dword ptr [eax+0x40]; '
+     'push eax; mov ecx, 0x7201958; call 0x490aa0; '
+     'mov edi, eax; push eax; call 0x47a630; add esp, 4; '
+     'test eax, eax; jz E; mov ecx, edi; mov eax, [ecx]; '
+     'call dword ptr [eax+0x48]; test eax, eax; jz E; '
+     'mov dword ptr [esp+8], ebx; E: popad; popfd')]
 
 
 def build_records(exe):
@@ -53,8 +73,11 @@ def build_records(exe):
             size += len(insn.bytes)
             if size >= 5:
                 break
-        comment = ('Native corps governor appointment menu companion' if site == 0x6034a0 else
-                   'Delegated governor AP: leadership 60% + politics 40% + charm 40%, minimum 6')
+        comment = {
+            0x6034a0: 'Native corps governor appointment menu companion',
+            0x598700: 'Delegated governor AP: leadership 60% + politics 40% + charm 40%, minimum 6',
+            0x4be5b0: 'Player delegated governor: retain eligible incumbent during personnel refresh',
+        }[site]
         builder.detour(site, {site: replacement}, comment)
     return builder.records
 

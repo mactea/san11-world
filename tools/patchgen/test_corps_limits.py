@@ -200,6 +200,29 @@ class CorpsLimitTest(unittest.TestCase):
             self.assertEqual(game.call(0x481240, number, this=FORCE), 200-number)
         self.assertEqual(game.call(0x481240, 17, this=FORCE), 0xffffffff)
 
+    def test_delegation_details_accept_all_sixteen_corps(self):
+        game = Native()
+        dialog, settings = 0x20005000, 0x20006000
+        values = list(range(101, 113))
+        for index, value in enumerate(values):
+            game.put(settings + index*4, value)
+        # Stop before constructing graphics, after the native dialog validates
+        # its corps number and copies the settings it will display.
+        game.callbacks[0x4ec880] = lambda fixture, argument: fixture.return_value(0)
+        for number in range(18):
+            with self.subTest(number=number):
+                game.uc.mem_write(dialog + 0x18c, b'\xa5' * 0x3c)
+                self.assertEqual(game.call(0x618cf0, FORCE, number, settings, 23, 0,
+                                           this=dialog), 0)
+                if 1 <= number <= 16:
+                    self.assertEqual(game.word(dialog + 0x18c), FORCE)
+                    self.assertEqual(game.word(dialog + 0x190), number)
+                    self.assertEqual([game.word(dialog + 0x194 + i*4) for i in range(12)], values)
+                    self.assertEqual(game.word(dialog + 0x1c4), 23)
+                else:
+                    self.assertEqual(bytes(game.uc.mem_read(dialog + 0x18c, 0x3c)), b'\xa5' * 0x3c)
+                self.assertEqual(game.uc.reg_read(UC_X86_REG_ESP), STACK + 24)
+
     def test_allocation_fills_holes_and_stops_at_sixteen(self):
         for numbers, expected in [(range(1, 9), 9), (range(1, 16), 16),
                 (range(1, 17), 0), ([1, 2, 4, 9, 16], 3)]:

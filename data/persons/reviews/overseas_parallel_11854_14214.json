@@ -6825,7 +6825,7 @@
       "proposed_appear": null,
       "duplicate_of": null,
       "source_identities_all_adjudicated": true,
-      "review_status": "source_checked_dates_unknown",
+      "review_status": "primary_text_corroborated",
       "appearance_upper_bound": 371,
       "attested_activity_years": [
         371,
@@ -6867,10 +6867,64 @@
           "source_path": "../san11world-persons/data/persons/_cache/texts/theod/theod04.shtml",
           "excerpt": "ad probum praefectum praetorio ... gratiano a. iii et equitio v. c. conss. (374 dec. 3)",
           "finding": "全条实际读。374官纪对齐Amm30.3Gratian/Aequitius；Probus为收件人，非仅同名署年，符合SextusProbus已核368–375该职生涯。"
+        },
+        {
+          "kind": "new_individually_read_complete_primary_personal_named_or_genealogical_unit",
+          "citation": "CILV3344=ILS1266 and VI1752=ILS1268, both complete original honorific texts",
+          "short_original_evidence": "Sexto Petronio Probo ... Anicius Probinus ... et Anicius Probus ... filii",
+          "read_witnesses": [
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group27\\04202390.json",
+              "source_sha256": "c973896ac8994fdc110561f86f2e33b8130257f38ad15cda80f41b13fa41767c",
+              "url": "https://edcs.hist.uzh.ch/data/monument/042/04202390.json"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group27\\18100571.json",
+              "source_sha256": "1abac51e056c3001d579633938bfb84405b27bd3c2d960a677db19bcb70e5e67",
+              "url": "https://edcs.hist.uzh.ch/data/monument/181/18100571.json"
+            }
+          ],
+          "finding": "These new full originals independently corroborate the already-closed Q1542092 identity: Petronius Probus African proconsul, praetorian prefect over Illyricum/Gaul/Italy/Africa and ordinary consul. Verona explicitly names grandfather Probianus and father Probinus, both urban prefects/consuls. Rome spells Sextus Petronius Probus and explicitly names his sons Anicius Probinus ordinary consul and Anicius Probus quaestor-candidate as dedicators. This is a new original family/career bridge supporting the existing identity, not another newly closed mixed person.",
+          "qualification": "VI1752 says FOUR praetorian prefectures, while V3344 arranges separate regional/iterated titles; do not casually count every regional title as another chronological office term or read the serial numerals as ages. Father-of-consuls is a parentage/honorific statement, not a death date. The395 catalogue date and filial dedication do not themselves prove Probus alive or dead that year, and do not replace old uncertain390 chronology. The younger AniciusProbus being quaestor-candidate does not mean he was already consul in395. Original transcriptions read; no stone-image autopsy.",
+          "old_evidence_preserved": true,
+          "accounting": "Newly read original target1; already-closed identity primary corroboration1, whole closure0"
         }
       ],
       "last_attested_activity": 374,
-      "identity_status": "identity_adjudication_recorded_in_evidence"
+      "identity_status": "owned_identity_core_corroborated_by_new_direct_named_or_genealogical_original",
+      "individual_primary_passage_checked": true,
+      "source_identity_partitions": [
+        {
+          "keys": [
+            "gl:Q1542092"
+          ],
+          "identity": "owned_identity_core_corroborated_by_new_direct_named_or_genealogical_original",
+          "historical_birth": null,
+          "historical_death": null
+        }
+      ],
+      "source_limitations": [
+        "VI1752 says FOUR praetorian prefectures, while V3344 arranges separate regional/iterated titles; do not casually count every regional title as another chronological office term or read the serial numerals as ages. Father-of-consuls is a parentage/honorific statement, not a death date. The395 catalogue date and filial dedication do not themselves prove Probus alive or dead that year, and do not replace old uncertain390 chronology. The younger AniciusProbus being quaestor-candidate does not mean he was already consul in395. Original transcriptions read; no stone-image autopsy."
+      ],
+      "superseded_identity_partitions": [
+        {
+          "batch": "high_group_handoff_27_parallel.json",
+          "field": "source_identity_partitions",
+          "prior": [
+            {
+              "keys": [
+                "gl:Q1542092"
+              ],
+              "identity": "Sextus Petronius Probus, praetorian prefect/consul, explicitly linked to his ancestors and sons",
+              "historical_birth": null,
+              "historical_death": null,
+              "identity_bridge_basis": "These new full originals independently corroborate the already-closed Q1542092 identity: Petronius Probus African proconsul, praetorian prefect over Illyricum/Gaul/Italy/Africa and ordinary consul. Verona explicitly names grandfather Probianus and father Probinus, both urban prefects/consuls. Rome spells Sextus Petronius Probus and explicitly names his sons Anicius Probinus ordinary consul and Anicius Probus quaestor-candidate as dedicators. This is a new original family/career bridge supporting the existing identity, not another newly closed mixed person."
+            }
+          ]
+        }
+      ],
+      "superseded_unresolved_handoffs": [],
+      "latest_integrated_handoff": "high_group_handoff_27_parallel.json"
     },
     {
       "id": 12037,
@@ -11557,14 +11611,15 @@
       "proposed_appear": null,
       "duplicate_of": null,
       "source_identities_all_adjudicated": false,
-      "identity_status": "multiple_unbridged_source_identities",
+      "identity_status": "positive_distinct_persons_in_mixed_record_with_role_and_death_survival_exclusion",
       "review_status": "identity_conflict",
       "review_batch": "overseas11854_batch133_20261111",
       "appearance_basis": "全部key完整本人段或准确Q全页已实际读；异人或缺桥wholefalse，分支隔离，整条BD/appear/duplicate为null。",
       "unresolved": [
         "exact_birth_unknown",
         "exact_death_unknown",
-        "true_first_career_unknown"
+        "true_first_career_unknown",
+        "positive_two_person_split_established_but_exact_biological_son_nephew_relation_not_stated_in_read_original_units"
       ],
       "evidence": [
         {
@@ -11573,6 +11628,32 @@
           "url": "https://de.wikipedia.org/wiki/Claudius_Pompeianus_Quintianus",
           "source_path": "../san11world-persons/data/persons/_cache/chunks and texts; original_source_evidence.jsonl; src/qxz.json",
           "finding": "准确Q947726法语完整原页全部本人段至家族影视及参考，准确Q353938完整实体和德语全传实际读。元老将军Lucilla夫与其侄/继女婿Quintianus行刺者不同，法页一处说其子参与另一处说侄不能不加辨析当本人；wholefalse。元老约125/193之后未独证，193退隐非确卒；侄181或182处死不是叔父卒，两keyBD不合并。"
+        },
+        {
+          "kind": "new_individually_read_complete_primary_personal_role_and_chronological_exclusion",
+          "citation": "Herodian1.8.1–8 all eight sections; Dio73.4.1–7 complete chapter and74.3.1 entire Pompeianus eyewitness/honor unit (alternative72.4/73.3 numbering)",
+          "short_original_evidence": "Herodian: she told him nothing about her plans; Dio74: I myself saw Pompeianus present in the senate",
+          "read_witnesses": [
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group29\\Dio73.html",
+              "source_sha256": "2244ccfb9788f8979c9913e116e94fb6c9a6e8ffb5651f0bd338881221e0d5c0",
+              "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/73*.html"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group29\\Dio74.html",
+              "source_sha256": "e0d846a9a45b9ae61a2da9538afa8174712d118c017f7afee75a4a3749b54231",
+              "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/74*.html"
+            },
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group29\\Herodian1_8.html",
+              "source_sha256": "682402ee1238afbf428676cefb80640094c11f0306056ec99d819ea91a1e4002",
+              "url": "https://www.livius.org/sources/content/herodian-s-roman-history/herodian-1.8/"
+            }
+          ],
+          "finding": "New complete Herodian1.8.1–8 explicitly distinguishes Lucilla HUSBAND POMPEIANUS, loyal to Commodus and not told of her plot, from the YOUNG SENATOR QUINTIANUS recruited through Quadratus to stab the emperor. The latter announces that the senate sent him, is seized before striking and DIES after the attempt. New complete Dio73.4 likewise names Claudius Pompeianus as the sword-bearing attacker betrothed to Lucilla daughter, separately calls Lucilla husband Pompeianus, and places the attacker destruction in the plot aftermath. Matching the unique entrance/weapon/senate-announcement event bridges Dio attacker ClaudiusPompeianus to Herodian named Quintianus, rather than treating two name forms as two separate assassins. New Dio74.3.1 then directly identifies the OLDER CLAUDIUS POMPEIANUS as Pertinax former military patron and says the author himself saw him alive participating in the senate UNDER PERTINAX. Thus the already-dead attempted assassin under Commodus and the senior Pompeianus alive under his successor Pertinax are positively different men. This gives both an explicit role/relationship discriminator and an incompatible death-versus-survival chronology for the exact two owned QID scopes.",
+          "qualification": "Do not invent a precise paternal relationship from these chapters: Herodian calls the attacker Quintianus and Lucilla husband Pompeianus but does not call the attacker that husbands biological son; Dio describes betrothal to Lucilla daughter, not nephewship of the husband. Modern son/nephew/stepson identifications therefore remain source-critical questions, preserved from the old biographies. The attacker fuller ClaudiusPompeianusQuintianus is a cross-source event identification, not the exact full name printed in every original. The Livius bracketed181 is EDITORIAL and differs from received182/183 dating; no exact-year death patch is made. The hard exclusion rests on original narrative sequence (attacker already executed under Commodus; older husband alive under Pertinax), not on silently selecting one CE date. Dio73/74 correspond to alternative book numbering72/73 in other editions; preserve edition identity. Original published translations were personally read; no Greek manuscript collation. Dio73.4 is complete, Dio74.3.1 entire named old-Pompeianus personal unit and adjacent honor context are complete, Herodian1.8 all eight sections complete; other unrelated portions of both Dio books are not claimed as newly checked people. None of this supplies whole-record birth/death or authorizes a game mutation. The shared input remains a mixed row pending an actual record split, so whole staysfalse even though the source separation is now strongly evidenced.",
+          "old_evidence_preserved": true,
+          "accounting": "One newly read roster target, two positively separated internal people; whole mixed-row closures0. Scope/count audit has new-reading credit0."
         }
       ],
       "source_identity_partitions": [
@@ -11580,19 +11661,63 @@
           "keys": [
             "gl:Q947726"
           ],
-          "identity": "TiberiusClaudiusPompeianusLucillahusband",
+          "identity": "Senior Tiberius Claudius Pompeianus, husband of Lucilla and military patron of Pertinax, explicitly alive in the senate under Pertinax",
           "historical_birth": null,
-          "historical_death": null
+          "historical_death": null,
+          "positive_discriminator": "Herodian1.8 loyal husband excluded from plot; Dio74.3 eyewitness living-senator report after Commodus reign"
         },
         {
           "keys": [
             "gl:Q353938"
           ],
-          "identity": "ClaudiusPompeianusQuintianusLucilladaughterhusband",
+          "identity": "Young Quintianus/Claudius Pompeianus, senate-sword attempted assassin of Commodus, distinct from Lucilla husband",
           "historical_birth": null,
-          "historical_death": null
+          "historical_death": null,
+          "positive_discriminator": "Herodian1.8.5–6 and Dio73.4.4–5 identify unique attack and ensuing death before the older husband later appears alive; detailed son/nephew genealogy unproved in these units"
         }
-      ]
+      ],
+      "individual_primary_passage_checked": true,
+      "source_limitations": [
+        "Do not invent a precise paternal relationship from these chapters: Herodian calls the attacker Quintianus and Lucilla husband Pompeianus but does not call the attacker that husbands biological son; Dio describes betrothal to Lucilla daughter, not nephewship of the husband. Modern son/nephew/stepson identifications therefore remain source-critical questions, preserved from the old biographies. The attacker fuller ClaudiusPompeianusQuintianus is a cross-source event identification, not the exact full name printed in every original. The Livius bracketed181 is EDITORIAL and differs from received182/183 dating; no exact-year death patch is made. The hard exclusion rests on original narrative sequence (attacker already executed under Commodus; older husband alive under Pertinax), not on silently selecting one CE date. Dio73/74 correspond to alternative book numbering72/73 in other editions; preserve edition identity. Original published translations were personally read; no Greek manuscript collation. Dio73.4 is complete, Dio74.3.1 entire named old-Pompeianus personal unit and adjacent honor context are complete, Herodian1.8 all eight sections complete; other unrelated portions of both Dio books are not claimed as newly checked people. None of this supplies whole-record birth/death or authorizes a game mutation. The shared input remains a mixed row pending an actual record split, so whole staysfalse even though the source separation is now strongly evidenced."
+      ],
+      "identity_split_recommendation": {
+        "action": "split_two_owned_QID_scopes_for_review_not_game_mutation",
+        "groups": [
+          {
+            "keys": [
+              "gl:Q947726"
+            ],
+            "identity": "Senior Tiberius Claudius Pompeianus, husband of Lucilla and military patron of Pertinax, explicitly alive in the senate under Pertinax",
+            "historical_birth": null,
+            "historical_death": null,
+            "positive_discriminator": "Herodian1.8 loyal husband excluded from plot; Dio74.3 eyewitness living-senator report after Commodus reign"
+          },
+          {
+            "keys": [
+              "gl:Q353938"
+            ],
+            "identity": "Young Quintianus/Claudius Pompeianus, senate-sword attempted assassin of Commodus, distinct from Lucilla husband",
+            "historical_birth": null,
+            "historical_death": null,
+            "positive_discriminator": "Herodian1.8.5–6 and Dio73.4.4–5 identify unique attack and ensuing death before the older husband later appears alive; detailed son/nephew genealogy unproved in these units"
+          }
+        ],
+        "confidence": "positive_explicit_loyal_husband_vs_executed_attacker_and_later_eyewitness_survival",
+        "reason": "New complete Herodian1.8.1–8 explicitly distinguishes Lucilla HUSBAND POMPEIANUS, loyal to Commodus and not told of her plot, from the YOUNG SENATOR QUINTIANUS recruited through Quadratus to stab the emperor. The latter announces that the senate sent him, is seized before striking and DIES after the attempt. New complete Dio73.4 likewise names Claudius Pompeianus as the sword-bearing attacker betrothed to Lucilla daughter, separately calls Lucilla husband Pompeianus, and places the attacker destruction in the plot aftermath. Matching the unique entrance/weapon/senate-announcement event bridges Dio attacker ClaudiusPompeianus to Herodian named Quintianus, rather than treating two name forms as two separate assassins. New Dio74.3.1 then directly identifies the OLDER CLAUDIUS POMPEIANUS as Pertinax former military patron and says the author himself saw him alive participating in the senate UNDER PERTINAX. Thus the already-dead attempted assassin under Commodus and the senior Pompeianus alive under his successor Pertinax are positively different men. This gives both an explicit role/relationship discriminator and an incompatible death-versus-survival chronology for the exact two owned QID scopes.",
+        "qualification": "Do not invent a precise paternal relationship from these chapters: Herodian calls the attacker Quintianus and Lucilla husband Pompeianus but does not call the attacker that husbands biological son; Dio describes betrothal to Lucilla daughter, not nephewship of the husband. Modern son/nephew/stepson identifications therefore remain source-critical questions, preserved from the old biographies. The attacker fuller ClaudiusPompeianusQuintianus is a cross-source event identification, not the exact full name printed in every original. The Livius bracketed181 is EDITORIAL and differs from received182/183 dating; no exact-year death patch is made. The hard exclusion rests on original narrative sequence (attacker already executed under Commodus; older husband alive under Pertinax), not on silently selecting one CE date. Dio73/74 correspond to alternative book numbering72/73 in other editions; preserve edition identity. Original published translations were personally read; no Greek manuscript collation. Dio73.4 is complete, Dio74.3.1 entire named old-Pompeianus personal unit and adjacent honor context are complete, Herodian1.8 all eight sections complete; other unrelated portions of both Dio books are not claimed as newly checked people. None of this supplies whole-record birth/death or authorizes a game mutation. The shared input remains a mixed row pending an actual record split, so whole staysfalse even though the source separation is now strongly evidenced.",
+        "apply_to_game": false
+      },
+      "superseded_unresolved_handoffs": [
+        {
+          "batch": "high_group_handoff_29.json",
+          "prior_unresolved": [
+            "exact_birth_unknown",
+            "exact_death_unknown",
+            "true_first_career_unknown"
+          ]
+        }
+      ],
+      "latest_integrated_handoff": "high_group_handoff_29.json"
     },
     {
       "id": 12235,
@@ -57854,7 +57979,7 @@
       "proposed_appear": null,
       "duplicate_of": null,
       "source_identities_all_adjudicated": true,
-      "review_status": "source_checked_dates_unknown",
+      "review_status": "primary_text_corroborated",
       "attested_activity_years": [
         322,
         329,
@@ -57883,9 +58008,58 @@
           "qid": "Q654123",
           "revision_id": 1359684253,
           "finding": "原传全文与两原官列实读，同年同僚及全名城市长官身份闭合，floruit315–331非生卒。"
+        },
+        {
+          "kind": "new_individually_read_complete_primary_personal_named_or_genealogical_unit",
+          "citation": "CILV3344=ILS1266 complete cursus and final ancestral-office clause",
+          "short_original_evidence": "nepoti Probiani / filio Probini",
+          "read_witnesses": [
+            {
+              "source_path": "out\\person_chronology\\source_cache\\high_group27\\04202390.json",
+              "source_sha256": "c973896ac8994fdc110561f86f2e33b8130257f38ad15cda80f41b13fa41767c",
+              "url": "https://edcs.hist.uzh.ch/data/monument/042/04202390.json"
+            }
+          ],
+          "finding": "The newly read Verona honor directly makes the distinguished Petronius Probus GRANDSON OF PROBIANUS and SON OF PROBINUS, then describes those two ancestors as urban prefects and consuls. This corroborates the already-closed Q654123 earlier Probianus office identity and gives the original three-generation bridge, additional to the old Chronography322 fasti and329–331 prefect table. The differently named Probinus is the intermediate generation, not another spelling of Probianus.",
+          "qualification": "This is a new original genealogical corroboration for an ALREADY closed person, not a new whole-source closure. Grandfather and father are distinct named men. No original inscription here supplies Probianus birth, death or survival to the371–383 honor. Those are the monument editors dating of the grandson honor, not the ancestor life. Keep the old315–331 activity span separate from biological endpoints and do not shift the322 consulship to the341 father.",
+          "old_evidence_preserved": true,
+          "accounting": "Newly read original target1; already-closed identity primary corroboration1, whole closure0"
         }
       ],
-      "identity_status": "identity_adjudication_recorded_in_evidence"
+      "identity_status": "owned_identity_core_corroborated_by_new_direct_named_or_genealogical_original",
+      "individual_primary_passage_checked": true,
+      "source_identity_partitions": [
+        {
+          "keys": [
+            "gl:Q654123"
+          ],
+          "identity": "owned_identity_core_corroborated_by_new_direct_named_or_genealogical_original",
+          "historical_birth": null,
+          "historical_death": null
+        }
+      ],
+      "source_limitations": [
+        "This is a new original genealogical corroboration for an ALREADY closed person, not a new whole-source closure. Grandfather and father are distinct named men. No original inscription here supplies Probianus birth, death or survival to the371–383 honor. Those are the monument editors dating of the grandson honor, not the ancestor life. Keep the old315–331 activity span separate from biological endpoints and do not shift the322 consulship to the341 father."
+      ],
+      "superseded_identity_partitions": [
+        {
+          "batch": "high_group_handoff_27_parallel.json",
+          "field": "source_identity_partitions",
+          "prior": [
+            {
+              "keys": [
+                "gl:Q654123"
+              ],
+              "identity": "Petronius Probianus, earlier urban prefect/consul and explicitly grandfather of Probus",
+              "historical_birth": null,
+              "historical_death": null,
+              "identity_bridge_basis": "The newly read Verona honor directly makes the distinguished Petronius Probus GRANDSON OF PROBIANUS and SON OF PROBINUS, then describes those two ancestors as urban prefects and consuls. This corroborates the already-closed Q654123 earlier Probianus office identity and gives the original three-generation bridge, additional to the old Chronography322 fasti and329–331 prefect table. The differently named Probinus is the intermediate generation, not another spelling of Probianus."
+            }
+          ]
+        }
+      ],
+      "superseded_unresolved_handoffs": [],
+      "latest_integrated_handoff": "high_group_handoff_27_parallel.json"
     },
     {
       "id": 13851,

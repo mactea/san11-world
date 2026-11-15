@@ -6,16 +6,26 @@ shared combat formation, pathfinding or domestic-readiness helpers.
 """
 
 CAVE_TEXT = [
-    # The relief branch already retains >= 3,000 in cities. Give ordinary
-    # redistribution the same rear-city floor, without lowering frontline N.
+    # Native safe-rear demand is 3, not zero. Keep the shared demand record
+    # intact: only ordinary transport may use its officers and 3,000 troop floor.
+    # Unsigned comparisons leave invalid negative values on the native path.
+    (0x5f0d62, 'cmp cx, word ptr [edi + 0x4a]',
+     'cmp word ptr [edi+0x4a], 3; ja F; cmp cx, 0; jmp D; '
+     'F: cmp cx, word ptr [edi+0x4a]; D: nop'),
+    (0x5f0d7b, 'movsx edx, word ptr [edi + 0x4a]',
+     'xor edx, edx; cmp word ptr [edi+0x4a], 3; jbe D; '
+     'movsx edx, word ptr [edi+0x4a]; D: nop'),
+
+    # Give safe rear redistribution the 3,000 floor without changing frontline N.
     (0x5f0de5, 'imul edi, edi, 0x1d4c',
-     'imul edi, edi, 0x1d4c; test edi, edi; jnz D; mov edi, 3000; D: nop'),
+     'cmp edi, 3; ja F; mov edi, 3000; jmp D; '
+     'F: imul edi, edi, 0x1d4c; D: nop'),
 
     # City -> affiliated port transfers carry 3,000. Rear sources therefore
     # need 6,000 before using that earlier branch of the dispatcher.
     (0x5f4c23, 'cmp eax, 0xbb8',
      'push ecx; push edx; push eax; push edi; mov ecx, 0x7201958; call 0x491770; '
-     'imul eax, eax, 0x34; cmp word ptr [eax+esi+0x4a], 0; jne F; '
+     'imul eax, eax, 0x34; cmp word ptr [eax+esi+0x4a], 3; ja F; '
      'pop eax; pop edx; pop ecx; cmp eax, 6000; jmp D; '
      'F: pop eax; pop edx; pop ecx; cmp eax, 3000; D: nop'),
 
@@ -31,7 +41,7 @@ CAVE_TEXT = [
     # Without a valid configured city, retain the native frontline gradient.
     (0x5e4e1e, 'mov al, byte ptr [ebx + 0x20]',
      'pushad; sub esp, 16; cmp dword ptr [esp+0x4c], 0x5f0b33; jne O; '
-     'cmp word ptr [ebx+0x4a], 0; jne O; '
+     'cmp word ptr [ebx+0x4a], 3; ja O; '
      'push dword ptr [esp+0x54]; mov ecx, 0x7201958; call 0x490ad0; '
      'test eax, eax; jz O; mov eax, dword ptr [eax+0x20]; '
      'test eax, eax; js O; cmp eax, {C}; jge O; mov dword ptr [esp+4], eax; '
@@ -54,7 +64,7 @@ CAVE_TEXT = [
     # Earlier filters still enforce reachability, corps and safe target state.
     (0x5f0bc1, 'mov ecx, ebp',
      'pushad; mov eax, dword ptr [esp+0x3c]; imul eax, eax, 0x34; '
-     'cmp word ptr [eax+esi+0x4a], 0; jne O; '
+     'cmp word ptr [eax+esi+0x4a], 3; ja O; '
      'test ebp, ebp; js O; cmp ebp, {C}; jge O; '
      'mov ecx, edi; call 0x486bc0; imul eax, eax, 9; xor edx, edx; '
      'mov ecx, 10; div ecx; mov ebp, eax; mov ecx, edi; '
