@@ -112,6 +112,7 @@ const WeaponFn baseWeapon=(WeaponFn)0x486950, weaponCapacity=(WeaponFn)0x486a30;
 const AddWeaponFn addWeapon=(AddWeaponFn)0x4ae430;
 bool g_militaryReady=false;
 TRADE_CALL_CONST SetIntFn unitFoodSet = (SetIntFn)0x496280, unitTroopsSet = (SetIntFn)0x4961f0;
+TRADE_CALL_CONST SetIntFn unitGoldSet = (SetIntFn)0x496250;   // unit +0x1c, clamped natively (10000 / transport 100000)
 const TempNewFn tempNew = (TempNewFn)0x4aa610;
 const PersonFn tempFree = (PersonFn)0x4acae0;
 const PersonIntFn setCorps = (PersonIntFn)0x4a32f0, setStatus = (PersonIntFn)0x4a5af0;
@@ -142,7 +143,7 @@ struct Cfg {
     int on = 0;
     int tempMax = 30, tempKeep = 30, tmpl = 745;
     int ai = 1, aiHook = 1, aiMonth = 6, aiRange = 80, aiMinGold = 6000, aiInvest = 4000, aiReserve = 2000, aiMargin = 25;
-    int tax = 10, taxHub = 5, relTax = 40, rob = 15, robLoss = 50, loot = 60;
+    int tax = 10, taxHub = 5, relTax = 40, rob = 15, robLoss = 50, loot = 60, spoilMin = 5, spoilMax = 49;
     int escort = 500, food = 3000, arrive = 3, maxTurns = 90, playerAuto = 1;
     int ui = 1, uiAi = 1, monsoonAll = 1, PT = 1100, specials = 100;        // phase 2 panel, AI caravans on the map; monsoon for all ships; officer records
     int keys = 1, aiOfficers = 1, aiOfficerMin = 4, aiShips = 1, aiShipRange = 200;         // phase 4: panel keys; the AI's merchant officers
@@ -1370,6 +1371,18 @@ int __fastcall planHook(void* ai, void* edx, uint8_t* unit) {
     return g_planOrig(ai, edx, unit);
 }
 
+// The game's own "captured gold / provisions" number over a unit or base, as its defeat routine shows it at
+// 0x4bed14 / 0x4bed91: (amount, 3 gold | 4 food, recipient, packed hex). A hex outside the original 200x200
+// map makes it use the recipient's own position.
+typedef void (__thiscall* SpoilPopupFn)(uint32_t, int amount, int kind, uint8_t* recipient, uint32_t hex);
+const SpoilPopupFn spoilPopup = (SpoilPopupFn)0x589210;
+const uint32_t SPOIL_UI = 0x96a59d8;
+void showSpoils(int amount, int kind, uint8_t* recipient) {
+#ifndef TRADE_UI_TEST
+    __try { spoilPopup(SPOIL_UI, amount, kind, recipient, 0xffffffffu); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { if (g_log) g_log("trade: ERROR: exception %08lx in the spoils animation", GetExceptionCode()); }
+#endif
+}
 typedef int (__fastcall* AnnihilateFn)(void* proc, void* edx, uint8_t* unit, uint8_t* attacker, int a3, int a4);
 AnnihilateFn g_annOrig = nullptr;
 int __fastcall annihilateHook(void* proc, void* edx, uint8_t* unit, uint8_t* attacker, int a3, int a4) {
@@ -1382,18 +1395,37 @@ int __fastcall annihilateHook(void* proc, void* edx, uint8_t* unit, uint8_t* att
             temp = (k.flags & F_TEMP) != 0;
             const int16_t* up = posOf(unit);
             int c = nearestCity(up[0], up[1], 1 << 20);
-            int64_t value = cargoValue(k, c) * g_cfg.loot / 100;
+            // The victor takes a random share below 50% of the cargo's local value, as gold or as provisions.
+            int share = g_cfg.spoilMin + (int)(g_rng.next() % (uint32_t)(g_cfg.spoilMax - g_cfg.spoilMin + 1));
+            int64_t value = cargoValue(k, c) * share / 100;
             int winner = -1, home = c;
             if (attacker && objValid(attacker) && (isUnitPtr(attacker) || isBasePtr(attacker))) {
                 winner = vcall(attacker, 0x40);
                 if (isUnitPtr(attacker)) { int h = unitHome(attacker); if (h >= 0 && h < g_data.C) home = h; }
             }
             // Resolve the recipient by the attacker's force even if its home was captured.
-            bool awarded = winner >= 0 && winner < g_s.R && value > 0;
-            if (awarded) credit(winner, home, value);
-            g_log("trade: caravan %s -> %s (%d x %s) destroyed; %lld gold awarded to force %d (overflow retained)%s", cityName(k.origin),
-                  cityName(k.dest), k.qty, k.cargo.lots.size()>1 ? "mixed cargo" : goodName(k.good), (long long)(awarded ? value : 0), winner,
-                  temp ? ", 商 leader released" : "");
+            // Barbarian and bandit forces (ids >= R) have no city account but their unit still carries the spoils.
+            bool awarded = winner >= 0 && winner < g_s.R + 5 && value > 0;
+            bool asFood = false;
+            if (awarded) {
+                uint8_t* city = c >= 0 && c < g_data.C ? cityRec(WORLD, c) : nullptr;
+                int rate = objValid(city) ? city[0x7c] : 0;
+                asFood = rate > 0 && (g_rng.next() & 1);
+                // Same native grain quote the automatic planner values provisions with.
+                if (asFood) value = value * rate * 400 / ((450 - TEMP_POL) * 10);
+                int64_t left = value;
+                if (isUnitPtr(attacker)) {
+                    int before = *(int*)(attacker + (asFood ? 0x20 : 0x1c));
+                    (asFood ? unitFoodSet : unitGoldSet)(attacker, (int)std::min<int64_t>(INT_MAX, before + value));
+                    left -= *(int*)(attacker + (asFood ? 0x20 : 0x1c)) - before;
+                }
+                // A base that shot it down, or what the unit could not carry, goes to the victor's city.
+                if (left > 0 && winner < g_s.R) credit(winner, home, asFood ? 0 : left, 0, asFood ? left : 0);
+                showSpoils((int)std::min<int64_t>(INT_MAX, value), asFood ? 4 : 3, attacker);
+            }
+            g_log("trade: caravan %s -> %s (%d x %s) destroyed; %d%% of the cargo: %lld %s to the victor (force %d)%s", cityName(k.origin),
+                  cityName(k.dest), k.qty, k.cargo.lots.size()>1 ? "mixed cargo" : goodName(k.good), awarded ? share : 0, (long long)(awarded ? value : 0),
+                  asFood ? "food" : "gold", winner, temp ? ", 商 leader released" : "");
             recordDone(k, 0, tradeui::DONE_INTERCEPTED);
             closeLedger(k);
             rebuildDirs();
@@ -2725,6 +2757,7 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     g_cfg.aiInvest = I(L"trade_ai_invest", 4000); g_cfg.aiReserve = I(L"trade_ai_reserve", 2000); g_cfg.aiMargin = I(L"trade_ai_margin", 25);
     g_cfg.tax = I(L"trade_tax", 10); g_cfg.taxHub = I(L"trade_tax_hub", 5); g_cfg.relTax = I(L"trade_rel_tax", 40);
     g_cfg.rob = I(L"trade_rob", 15); g_cfg.robLoss = I(L"trade_rob_loss", 50); g_cfg.loot = I(L"trade_loot", 60);
+    g_cfg.spoilMin = I(L"trade_spoil_min", 5); g_cfg.spoilMax = I(L"trade_spoil_max", 49);
     g_cfg.escort = I(L"trade_escort", 500); g_cfg.food = I(L"trade_food", 3000); g_cfg.arrive = I(L"trade_arrive", 3);
     g_cfg.maxTurns = I(L"trade_max_turns", 90); g_cfg.playerAuto = I(L"trade_player_auto", 1);
     g_cfg.ui = I(L"trade_ui", 1); g_cfg.uiAi = I(L"trade_ui_ai_caravans", 1); g_cfg.monsoonAll = I(L"trade_monsoon_all", 1);
@@ -2754,7 +2787,7 @@ bool tradeInstall(const TradeSetup& s, TraceLogFn log) {
     p.merchPP = I(L"trade_merchant_price", 8); p.merchCap = I(L"trade_merchant_load", 5);
     p.merchTax = I(L"trade_merchant_tax", 8); p.merchRob = I(L"trade_merchant_rob", 12);
     if (p.transitTax<0 || p.transitTax>100 || p.transitHub<0 || p.transitHub>100 || p.transitCap<0 || p.transitCap>100 || g_cfg.food < 1 || g_cfg.food > 500000 || p.fee < 0 || p.fee > 100000 || p.legFee < 0 || p.legFee > 100000 || p.capLand > 10000 || p.capSea > 30000 ||
-        g_cfg.tax < 0 || g_cfg.tax > 100 || g_cfg.taxHub < 0 || g_cfg.taxHub > 100 || g_cfg.loot < 0 || g_cfg.loot > 100 ||
+        g_cfg.tax < 0 || g_cfg.tax > 100 || g_cfg.taxHub < 0 || g_cfg.taxHub > 100 || g_cfg.loot < 0 || g_cfg.loot > 100 || g_cfg.spoilMin < 0 || g_cfg.spoilMax < g_cfg.spoilMin || g_cfg.spoilMax > 49 ||
         g_cfg.rob < 0 || g_cfg.rob > 100 || g_cfg.robLoss < 0 || g_cfg.robLoss > 100 ||
         g_cfg.tempMax < 0 || g_cfg.tempMax > g_cfg.specials || g_cfg.tempKeep < 0 || g_cfg.tempKeep > g_cfg.specials || g_cfg.escort < 1 || g_cfg.escort > 60000 ||
         p.capLand < 1 || p.capSea < 1 || p.impact < 0 || p.impact > 1000 || p.spread < 0 || p.spread > 100 || p.revert < 0 || p.revert > 100 ||

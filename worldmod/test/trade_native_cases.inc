@@ -310,7 +310,8 @@ bool nativeEconomyCases(int origin,int port,uint8_t* u,int leader,std::string& r
     err=tradeCargo(k,good,5,true);
     if (!err.empty()) { check(false,"prepare interception cargo"); return false; }
     const int16_t* pos=posOf(u); int nearby=nearestCity(pos[0],pos[1],1<<20);
-    int64_t reward=cargoValue(k,nearby)*g_cfg.loot/100, basis=k.cargo.cost();
+    g_cfg.spoilMin=g_cfg.spoilMax=49;auto rngBefore=g_rng;rngBefore.next();bool food=rngBefore.next()&1;(void)food;
+    int64_t reward=cargoValue(k,nearby)*49/100, basis=k.cargo.cost();
     int fg=baseGold(market);
     annihilateHook((void*)(uintptr_t)PROC,nullptr,u,market,0,0);
     report+="loot expected "+std::to_string(reward)+" credited "+std::to_string(pending(foreign))+"\n";
